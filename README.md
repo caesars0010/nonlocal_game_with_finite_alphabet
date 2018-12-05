@@ -1,0 +1,1 @@
+# nonlocal_game_with_finite_alphabet
