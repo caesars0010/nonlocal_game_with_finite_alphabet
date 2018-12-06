@@ -1,0 +1,1095 @@
+%\pdfoutput=1
+\documentclass[11pt,letterpaper]{article}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                      {1ex \@plus1ex \@minus.2ex}%
+                                      {-1em}%
+                                      {\normalfont\normalsize\bfseries}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%
+%  P A C K A G E S  %
+%%%%%%%%%%%%%%%%%%%%%
+
+% Authors
+\usepackage{authblk}
+
+% Page margins
+\usepackage[margin=1in]{geometry}
+
+% Nicer math font
+\usepackage{mathpazo}
+
+% More fancy lists
+\usepackage{enumerate}
+
+% Microtype
+\usepackage{microtype}
+
+% TikZ
+\usepackage{tikz}
+%\usetikzlibrary{calc,shapes.geometric}
+\usetikzlibrary{backgrounds,fit,decorations.pathreplacing,calc}
+
+% Highlights
+\usepackage{soul}
+
+% Young Tableaux
+\usepackage{ytableau}
+
+% Figure
+\usepackage{float}
+
+% Hypertext package
+\usepackage[colorlinks = true]{hyperref}
+% Title and authors
+%\hypersetup{
+%  pdftitle = {},
+%  pdfauthor = {}
+%}
+% Color definitions
+\definecolor{darkred}  {rgb}{0.5,0,0}
+\definecolor{darkblue} {rgb}{0,0,0.5}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+% Color links
+\hypersetup{
+  urlcolor   = blue,         % color of external links
+  linkcolor  = darkblue,     % color of internal links
+  citecolor  = darkgreen,    % color of links to bibliography
+  filecolor  = darkred       % color of file links
+}
+
+% AMS
+\usepackage{amsmath,amssymb,amsfonts,amsthm,amstext}
+
+%% Restating theorems
+%\usepackage{thm-restate}
+
+% Powerful macros
+\usepackage{etoolbox}
+
+% Fixes for amsmath
+\usepackage{mathtools}
+\mathtoolsset{centercolon}
+\makeatletter
+\protected\def\tikz@nonactivecolon{\ifmmode\mathrel{\mathop\ordinarycolon}\else:\fi}
+\makeatother
+
+% Daw boxes
+\usepackage{tcolorbox}
+
+% Code
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
+
+% Clever references
+\usepackage{cleveref}%[nameinlink]
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{definition}{Definition}{Definitions}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{claim}{Claim}{Claims}
+\crefname{section}{Section}{Sections}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{figure}{Fig.}{Figs.}
+\crefname{table}{Table}{Tables}
+% \crefname{algorithm}{Algorithm}{Algorithms}
+
+% IEEE tools
+\usepackage[retainorgcmds]{IEEEtrantools}
+
+% table of contents
+\usepackage{tocloft}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  N E W C O M M A N D  %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Standard quantum notation
+
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\bra}[1]{\langle#1|}
+\newcommand{\braket}[2]{\langle#1|#2\rangle}
+\newcommand{\ketbra}[2]{|#1\rangle\langle#2|}
+\newcommand{\proj}[1]{|#1\rangle\langle#1|}
+
+\newcommand{\x}{\otimes}
+\newcommand{\xp}[1]{^{\otimes #1}}
+\newcommand{\op}{\oplus}
+
+\newcommand{\ct}{^{\dagger}}
+\newcommand{\tp}{^{\mathsf{T}}}
+
+% Linear algebra
+
+%\newcommand{\1}{\mathbb{1}} % identity matrix
+%\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+%\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Lin}{L} % all linear maps
+\newcommand{\Mat}[1]{\mathrm{M}(#1)} % all matrices
+%\newcommand{\Mat}[1]{\mathrm{M}_{#1}(\C)}
+
+% Paired delimiters
+
+\DeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\of}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\sof}{\lbrack}{\rbrack}
+\DeclarePairedDelimiter{\ip}{\langle}{\rangle}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+% Operators
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\vc}{vec}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\hook}{hook}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\supp}{supp}
+
+% Matrices
+
+\newcommand{\mx}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\smx}[1]{\bigl(\begin{smallmatrix}#1\end{smallmatrix}\bigr)}
+
+% Sets
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\calH}{\mathcal{H}}
+
+% Identity operator
+\newcommand{\1}{\mathbb{1}}
+
+% Pauli Group
+\newcommand{\Pg}{\mathcal{P}}
+\newcommand{\J}{\mathcal{J}}
+
+% Special notation
+
+\newcommand{\CHSH}{CHSH^{(d)}}
+\newcommand{\MS}{MS}
+\newcommand{\SVT}{SVT}
+
+% Commands for highlighting text and notes
+
+\usepackage{color}
+\newcommand{\marked}[1]{{\fboxsep0pt\colorbox{yellow}{#1}}}
+\usepackage[
+  bordercolor = white,
+  backgroundcolor = gray!30,
+  linecolor = black,
+  colorinlistoftodos]{todonotes}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  N E W T H E O R E M  %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{problem}{Problem}
+\newtheorem*{example}{Example}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
+%%%%%%%%%%%%%%%%%%%
+%  F I G U R E S  %
+%%%%%%%%%%%%%%%%%%%
+
+%\input{Tableau.tex}
+
+
+%%%%%%%%%%%%%%%%
+%   Document   %
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Special nonlocal game with constant alphabet}
+
+\author[1]{Honghao Fu}
+
+
+\renewcommand\Affilfont{\itshape\small}
+
+
+\affil[1]{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA}
+\maketitle
+
+%This note is based on results in \cite{slofstra2017} and \cite{coladan2017}.
+%==========================================
+\section{Components of the new game}
+\label{sec:comp}
+%==========================================
+%----------------------------------------------------------------
+\subsection{The linear system game}
+%----------------------------------------------------------------
+Following ideas from Ref.~\cite{coladan2017}, we would like to embed the qudit Pauli group in a solution group and
+make the $d$-dependence implicit. The qudit Pauli group is defined as
+\begin{align}
+	\Pg_d = \langle x, z, \J : x^d = z^d = \J^d = e, zxz^{-1}x^{-1} = \J, x\J x^{-1}\J^{-1}= z\J z^{-1}\J^{-1} = e\rangle. 
+\end{align}
+Firstly, we would like to replace the relation $x^d = z^d = e$ by the following relations
+\begin{align}
+\label{eq:sim}
+	u_x x u_x = x^2 \\
+	u_z z u_z = z^2.
+\end{align}
+With constraints imposed by other components of the whole game, the two conditions above 
+imply that the eigenvalues of $x$ and $z$ are $\{\omega_d^k = e^{ik\pi/d}\}_{k=1}^d$ with $d$ odd, prime and
+$\Z/(d\Z)$ has primitive root $2$ and the eigenspaces for different eigenvalues are of the same dimension.
+\hl{Later we will set the exponent to be $a \in \{2, 3, 5\}$ which is the primitive root of infinitely many prime numbers and
+construct a nonlocal game that can self-test infinitely many maximally entangled state.}
+\footnote{Figuring out what $a$ is will take us one step closer to resolving Artin's Conjecture\cite{murty1988}.}
+
+Secondly, we drop the relation $\J^d = e$ and make the value of $\J$ determined by $x$ and $z$ in the 
+relation $xzx^{-1}z^{-1} = \J$.
+
+It can be easily checked that the qudit Pauli-x and Pauli-z operators of dimension $d$ satisfy the new relations 
+above, where Pauli-x and Pauli-z operators are defined by
+\begin{align}
+	\sigma_x = \sum_{i=0}^{d-1} \ketbra{i+1 \pmod{d} }{i}  \quad \quad
+	\sigma_z = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i}.
+\end{align}
+%The eigen-decomposition of $\sigma_z$ is clear and we give the eigen-decomposition of $\sigma_x$ below
+%\begin{align}
+%	\sigma_x = \sum_{l=0}^{d-1} \omega_d^l \ketbra{s_{-l}}{s_{-l}}
+%\end{align}
+%where
+%$
+%\ket{s_{-l}} = \frac{1}{\sqrt{d}} \sum_{i=0}^{d-1} \omega_d^{-il} \ket{i}.
+%$
+%We can also calculate unitaries $U_x$ and $U_z$ satisfying \cref{eq:sim}, which are
+%\begin{align}
+%	U_z = \sum_{i=0}^{d-1} \ketbra{ i/2 \pmod{d}}{i}  \quad \quad
+%	U_x = \sum_{l=0}^{d-1} \ketbra{s_{-l/2 \pmod{d}}}{s_{-l \pmod{d}}}.
+%\end{align}
+%In the case that $d = 3$, we have $U_zU_x = \1 = U_xU_z$. 
+%In general we have
+%\begin{align}
+%	U_zU_x = &\sum_{i=0}^{d-1} \sum_{j=0}^{d-1} \ketbra{i/2}{i}\ketbra{s_{-j/2}}{s_{-j}} \\
+%	= &\sum_{i=0}^{d-1} \sum_{k = 0}^{(d-1)/2}\ketbra{i/2}{i}\ketbra{s_{-k}}{s_{-2k}} + 
+%	\sum_{i=0}^{d-1} \sum_{k = 0}^{(d-3)/2}\ketbra{i/2}{i}\ketbra{s_{-k-\frac{d+1}{2}}}{s_{-2k-1}} \\
+%	= &\frac{1}{\sqrt{d}} \sum_{i=0}^{d-1} \sum_{k = 0}^{(d-1)/2}\omega_d^{-ik} \ketbra{i/2}{s_{-2k}}
+%	+ \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1} \sum_{k = 0}^{(d-3)/2}\omega_d^{-ik - i\frac{d+1}{2}} \ketbra{i/2}{s_{-2k-1}}\\
+%\end{align}
+%Now we focus on 
+%\begin{align}
+%	&\frac{1}{\sqrt{d}}\sum_{i=0}^{d-1}\omega_d^{-ik} \ketbra{i/2}{s_{-2k}}\\
+%	= &\frac{1}{\sqrt{d}} \sum_{l= 0}^{(d-1)/2} \omega_d^{-l \cdot 2k}\ketbra{l}{s_{-2k}} +
+%	\frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(2l+1)k}\ketbra{l + \frac{d+1}{2}}{s_{-2k}}\\
+%	=&\frac{1}{\sqrt{d}} \sum_{l= 0}^{(d-1)/2} \omega_d^{-l \cdot 2k}\ketbra{l}{s_{-2k}} +
+%	\frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(l+(d+1)/2)\cdot 2k}\ketbra{l + \frac{d+1}{2}}{s_{-2k}}\\
+%	=&\ketbra{s_{-2k}}{s_{-2k}}
+%\end{align}
+%and
+%\begin{align}
+%	&\frac{1}{\sqrt{d}}\sum_{i=0}^{d-1}\omega_d^{-ik- i\frac{d+1}{2}} \ketbra{i/2}{s_{-2k-1}}\\
+%	=& \frac{1}{\sqrt{d}} \sum_{l= 0}^{(d-1)/2} \omega_d^{-2lk- l(d+1)} \ketbra{l}{s_{-2k-1]}}
+%	+ \frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(2l+1)k-(2l+1)(d+1)/2} \ketbra{l+\frac{d+1}{2}}{s_{-2k-1}} \\
+%	=& \frac{1}{\sqrt{d}} \sum_{i=0}^{(d-1)/2} \omega_d^{-(2k+1)l}\ketbra{l}{s_{-2k-1}} 
+%	+  \frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(2k+1)(l+ (d+1)/2)} \ketbra{l+\frac{d+1}{2}}{s_{-2k-1}} \\
+%	=& \ketbra{s_{-2k-1}}{s_{-2k-1}}
+%\end{align}
+Moreover, if $U_x\sigma_xU_x^\dagger = \sigma_x^2$ and $U_z\sigma_zU_z^\dagger = \sigma_z^2$,
+we can verify that 
+\begin{align}
+	U_xU_z = \1 = U_zU_x,
+\end{align}
+Hence, we define the new group by
+\begin{equation}
+\begin{aligned}
+	\Pg =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
+	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
+\end{aligned}
+\end{equation}
+\hl{Since $\Pg_d$'s relations satisfy the relations of $\Pg$, can we say $\Pg_d$ is a subgroup of $\Pg$?}
+This group will be embedded in a solution group, $\Gamma_\Pg$, following Slofstra's embedding techniques.
+See Appendix~\ref{sec:construct} for details.
+%\textbf{Now there are two questions:}
+%\begin{itemize}
+%	\item How do we make $\J^d = e$ implicit?
+%	\item If we add $u_xu_z = e$ to the relations, what would be the consequences?
+%	(It seems now the group is not finite.)
+%\end{itemize}
+
+
+
+%\begin{align}
+%	K = \langle x, y: xyx^{-1} = y^2\rangle.
+%\end{align}
+%We first introduce $z,w$ such that $z^2=w^2=e$, $y=zw$ and $xz=zx$ then
+%\begin{align}
+%	K_1 = \langle z,w,z',x: z^2=w^2=z'^2=e,
+%	wzw=z', xwx^{-1}=z', xzx^{-1} =z \rangle.
+%\end{align}
+%Next, we introduce $u,v$ such that $u^2=v^2=e$ and $x=uv$, then
+%\begin{align}
+%	K_2 =  \langle z,w,z',u,v,z_v,w_v: \text{all elements are order $2$},\notag\\
+%	wzw=z', vwv=w_v, vzv =z_v, uw_vu = z', uz_vu =z \rangle.
+%\end{align}	
+%Now we relabel the variables as
+%\begin{align}
+%	z &= x_1\quad w = x_2\quad u = x_3\quad v = x_4\\
+%	z' &= x_5 \quad z_v = x_6 \quad w_v = x_7,
+%\end{align}
+%and the group $K_2$ is relabelled as 
+%\begin{align}
+%	K_2 = \langle \{x_i\}_{i=1}^7 : &x_i^2 = e, \notag\\
+%	&x_2x_1x_2=x_5,\quad x_4x_2x_4 = x_7,\quad x_4x_1x_4=x_6,\quad x_3x_7x_3 = x_5,\quad x_3x_6x_3=x_1\rangle
+%\end{align}
+%We collect the subscript of $x_i$'s in the conjugacy relations and define
+%\begin{align}
+%	C= \{ &(2,1,5), (3,7,5), (3,6,1), (4,2,7), (4,1,6)\}.
+%\end{align}
+%Then we embed $K_2$ into $K_3$ to make $x_j$ and $x_k$ commute if $(i,j,k) \in C$.
+%The group $K_3$ is defined as 
+%\begin{equation}
+%\begin{split}
+%K_3 = \langle \{x_i, w_i, y_i, j_i\}_{i=1}^{7},f : &f^2 = x_i^2 =w_i^2=y_i^2=j_i^2= e, \\
+%	&x_i = y_iz_i = fw_i,\; fy_if =z_i \quad\text{where } 1 \leq i \leq 7 \\
+%	&y_j z_k = z_ky_j,\; w_iy_jw_i = z_k \quad\text{for all } (i,j,k)\in C \rangle.
+%\end{split}
+%\end{equation}
+%To summarize the linear relations, we first introduce variable $g_{jk} = y_j z_k$ for all $(i,j,k) \in C$
+%such that $g_{jk}^2 = e$. Now the group has $34$ variables.
+%The linear relations are
+%\begin{align}
+%	&x_i y_i z_i = e \quad \text{for} \quad i =1\dots 7 \\
+%	&x_i f w_i = e  \quad \text{for} \quad i =1\dots 7\\
+%	&g_{jk}y_jz_k =e \quad \text{for all}\quad (i,j,k) \in C.
+%\end{align}
+%There are $19$ of such relations.
+%The conjugacy relations are 
+%\begin{align}
+%	&fy_if = z_i\quad \text{for} \quad i =1\dots 7\\
+%	&w_iy_j w_i = z_k \quad\text{for all } (i,j,k)\in C
+%\end{align}
+%There are $12$ such conjugacy relations.
+%In the last step, we will embed all the conjugacy relations in linear relations.
+%This is done by introduce $7$ new variables and $6$ linear relations for each
+%conjugacy relations. In the end we will embed $K_3$ in the solution group of 
+%a linear system game with $118$ variables and $91$ equations.
+
+%------------------------------------------------------------------------
+\subsection{The extended weighted CHSH game}
+%------------------------------------------------------------------------
+We want to force Alice and Bob to reuse observables 
+from the linear system game developed above so that we can make sure that the observables have
+eigenvalues $\omega_d$ and $\omega_d^{d-1}$, and the corresponding eigen-spaces are 
+of dimension $1$. The modified weighted CHSH game to force the structure of observable $U$ will be
+denoted by $\CHSH_U$, where the superscript $d$ means that the rules of this game depends on $d$.
+Intuitively, we want to combine $\CHSH_X$ and the fact that $X \sim X^2$ to achieve the same effect as 
+$(X)^d = \1$.
+
+Assume Bob use observable $B_1$ and $B_2$, such that $B_1B_2 = U$. 
+The special condition $B_1, B_2$ satisfy is that the eigenvalues for 
+$U$ are $\{\omega_d^i\}_{i=0}^{d-1}$. Let $\ket{v_1}$ and $\ket{v_{d-1}}$ be the 
+eigenvectors for eigenvalues $\omega_d$ and $\omega_d^{d-1}$. 
+\hl{In our case, we can show that when $U = \sigma_x$ or $\sigma_z$, such $B_1$, $B_2$ exists. I am not sure if such decomposition exists in general.}
+
+In another note, I have shown that $B_1$, $B_2$ with shared state $\frac{1}{\sqrt{2}} (\ket{u_1}\ket{u_1} + \ket{u_{d-1}}\ket{u_{d-1}})$ 
+can maximize $\langle I_{-\cot(\pi/2d)}\rangle$ where $\ket{u_1}, \ket{u_{d-1}} \in \spn\{\ket{v_1}, \ket{v_{d-1}}\}$.
+
+So Alice and Bob will each get a symbol $x$,$y \in \{ 0, 1, \ast\}$ respectively and they answer with $a,b \in \{0,1,\diamond,\perp\}$. 
+The scoring rules are
+\begin{itemize}
+	\item \textbf{Case 1:} $x = y = \ast$, Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
+	they score only if $a = b$;
+	\item \textbf{Case 2a:} $x,y \in \{0,1\}$ and they answer with $a,b \in \{0,1\}$, then
+	their answers are scored according to $I_{-\cot(\pi/2d)}$
+	\item \textbf{Case 2b:} $x,y \in \{0,1\}$ and Alice answer with $\perp$, then all possible outputs from Bob
+	are discarded;
+	\item \textbf{Case 3:} $x \in {0,1}, y = \ast$, when Bob answers $\diamond$, Alice should answer with $\{0.1\}$ but not $\perp$,
+	when Bob answers $\perp$ Alice should answer $\perp$ too;
+	\item \textbf{Case 4:} other combination of inputs are not scored.
+\end{itemize}
+In the ideal strategy Alice and Bob share the state $\ket{\psi} =1/\sqrt{d} \sum_{i=0}^{d-1} \ket{u_i}\ket{u_i}$.
+We define two subspaces $V = \spn\{\ket{u_1}, \ket{u_{d-1}}\}$ and $V^\perp = \C^d \setminus\spn\{\ket{u_1}, \ket{u_{d-1}}\}$ amd
+define $\Pi_V$ and $\Pi_{V}^\perp$ to be the corresponding projectors. Note that $V$ is the subspace on which they should play the 
+$\CHSH_U$ to maximaize $\langle I_{-\cot(\pi/2d)} \rangle$.
+
+We present the measurements along with the ideal correlation.
+The correlation for the first test
+\begin{align}
+	&P(\diamond \diamond| \ast \ast) = \bra{\psi} \Pi_V \otimes \Pi_V \ket{\psi} = \frac{2}{d}\\
+	&P(\perp \perp| \ast \ast) = \bra{\psi} \Pi_V^\perp \otimes \Pi_V^\perp \ket{\psi} = \frac{d-2}{d}\\
+	&P(\diamond \perp| \ast \ast) = \bra{\psi} \Pi_V \otimes \Pi_V^\perp \ket{\psi} = 0\\
+	&P(\perp \diamond| \ast \ast) = \bra{\psi} \Pi_V^\perp \otimes \Pi_V \ket{\psi} = 0
+\end{align}
+CHSH-type correlations
+\begin{align}
+	&P(00|00) = \bra{\psi}  \left[\ketbra{u_1}{u_1}\otimes \ketbra{u_1^{(0)}}{u_1^{(0)}}\right]\ket{\psi} = \frac{\cos^2(\pi/4d)}{d}\\
+	&P(01|00) = \bra{\psi}  \left[\ketbra{u_1}{u_1}\otimes \ketbra{u_{d-1}^{(0)}}{u_{d-1}^{(0)}}\right]\ket{\psi} = \frac{\sin^2(\pi/4d)}{d}\\
+	&P(10|00) = \bra{\psi}  \left[\ketbra{u_{d-1}}{u_{d-1}}\otimes \ketbra{u_1^{(0)}}{u_1^{(0)}}\right]\ket{\psi} = \frac{\sin^2(\pi/4d)}{d}\\
+	&P(11|00) = \bra{\psi}  \left[\ketbra{u_{d-1}}{u_{d-1}}\otimes \ketbra{u_{d-1}^{(0)}}{u_{d-1}^{(0)}}\right]\ket{\psi} = \frac{\cos^2(\pi/4d)}{d}\\
+	&P(00|01) = \bra{\psi}  \left[\ketbra{u_1}{u_1}\otimes \ketbra{u_1^{(1)}}{u_1^{(1)}}\right]\ket{\psi} = \frac{\cos^2(\pi/4d)}{d}\\
+	&P(01|01) = \bra{\psi}  \left[\ketbra{u_1}{u_1}\otimes \ketbra{u_{d-1}^{(1)}}{u_{d-1}^{(1)}}\right]\ket{\psi} = \frac{\sin^2(\pi/4d)}{d}\\
+	&P(10|01) = \bra{\psi}  \left[\ketbra{u_{d-1}}{u_{d-1}}\otimes \ketbra{u_1^{(1)}}{u_1^{(1)}}\right]\ket{\psi} = \frac{\sin^2(\pi/4d)}{d}\\
+	&P(11|01) = \bra{\psi}  \left[\ketbra{u_{d-1}}{u_{d-1}}\otimes \ketbra{u_{d-1}^{(1)}}{u_{d-1}^{(1)}}\right]\ket{\psi} = \frac{\cos^2(\pi/4d)}{d}\\
+	&P(00|10) = \bra{\psi}  \left[\ketbra{u_1^{(+)}}{u_1^{(+)}}\otimes \ketbra{u_1^{(0)}}{u_1^{(0)}}\right]\ket{\psi} = \frac{1+\sin(\pi/2d)}{2d}\\
+	&P(01|10) = \bra{\psi}  \left[\ketbra{u_1^{(+)}}{u_1^{(+)}}\otimes \ketbra{u_{d-1}^{(0)}}{u_{d-1}^{(0)}}\right]\ket{\psi} = \frac{1-\sin(\pi/2d)}{2d}\\
+	&P(10|10) = \bra{\psi}  \left[\ketbra{u_{d-1}^{(+)}}{u_{d-1}^{(+)}}\otimes \ketbra{u_1^{(0)}}{u_1^{(0)}}\right]\ket{\psi} = \frac{1-\sin(\pi/2d)}{2d}\\
+	&P(11|10) = \bra{\psi}  \left[\ketbra{u_{d-1}^{(+)}}{u_{d-1}^{(+)}}\otimes \ketbra{u_{d-1}^{(0)}}{u_{d-1}^{(0)}}\right]\ket{\psi} = \frac{1+\sin(\pi/2d)}{2d}\\
+	&P(00|11) = \bra{\psi}  \left[\ketbra{u_1^{(+)}}{u_1^{(+)}}\otimes \ketbra{u_1^{(1)}}{u_1^{(1)}}\right]\ket{\psi} = \frac{1-\sin(\pi/2d)}{2d}\\
+	&P(01|11) = \bra{\psi}  \left[\ketbra{u_1^{(+)}}{u_1^{(+)}}\otimes \ketbra{u_{d-1}^{(1)}}{u_{d-1}^{(1)}}\right]\ket{\psi} = \frac{1+\sin(\pi/2d)}{2d}\\
+	&P(10|11) = \bra{\psi}  \left[\ketbra{u_{d-1}^{(+)}}{u_{d-1}^{(+)}}\otimes \ketbra{u_1^{(1)}}{u_1^{(1)}}\right]\ket{\psi} = \frac{1+\sin(\pi/2d)}{2d}\\
+	&P(11|11) = \bra{\psi}  \left[\ketbra{u_{d-1}^{(+)}}{u_{d-1}^{(+)}}\otimes \ketbra{u_{d-1}^{(1)}}{u_{d-1}^{(1)}}\right]\ket{\psi} = \frac{1-\sin(\pi/2d)}{2d}.
+\end{align}
+Other correlations
+\begin{align}
+	&P(\perp|0)_A = P(\perp|1)_A = \bra{\psi} \Pi_V^\perp \otimes \1\ket{\psi} = \frac{d-2}{d}\\
+	&P(0\diamond|0\ast) = \bra{\psi}\left[\ketbra{u_1}{u_1}\otimes\Pi_V\right]\ket{\psi} = \frac{1}{d}\\
+	&P(1\diamond|0\ast)= \bra{\psi}\left[\ketbra{u_{d-1}}{u_{d-1}}\otimes\Pi_V\right]\ket{\psi} = \frac{1}{d}\\
+	&P(0\perp|0\ast) = \bra{\psi}\left[\ketbra{u_{1}}{u_{1}}\otimes\Pi_V^\perp\right]\ket{\psi} = 0\\
+	&P(1\perp|0\ast)= \bra{\psi}\left[\ketbra{u_{d-1}}{u_{d-1}}\otimes\Pi_V^\perp\right]\ket{\psi} = 0\\
+	&P(\perp \diamond | 0 \ast) = \bra{\psi} \Pi_V^\perp \otimes \Pi_V \ket{\psi} = 0\\
+	&P(\perp \perp | 0 \ast) =  \bra{\psi} \Pi_V^\perp \otimes \Pi_V^\perp \ket{\psi} = \frac{d-2}{d}.
+\end{align}
+when the input is $(1, \ast)$, the correlation is similar as above.
+We define the states for the measurements as follows
+\begin{align}
+	&\ket{u_1^{(0)}} = \cos(\pi/4d)\ket{u_1} + \sin(\pi/4d)\ket{u_{d-1}}\\
+	&\ket{u_{d-1}^{(0)}} = \sin(\pi/4d)\ket{u_1} - \cos(\pi/4d)\ket{u_{d-1}}\\
+	&\ket{u_1^{(1)}} = \cos(\pi/4d)\ket{u_1} - \sin(\pi/4d)\ket{u_{d-1}}\\
+	&\ket{u_{d-1}^{(1)}} = \sin(\pi/4d)\ket{u_1} + \cos(\pi/4d)\ket{u_{d-1}}\\
+	&\ket{u_1^{(+)}} = \frac{1}{\sqrt{2}}\ket{u_1} + \frac{1}{\sqrt{2}}\ket{u_{d-1}}\\
+	&\ket{u_{d-1}^{(+)}} = \frac{1}{\sqrt{2}}\ket{u_1} - \frac{1}{\sqrt{2}}\ket{u_{d-1}}.
+\end{align}
+\textbf{Observation 1.} We have some orthogonality requirements as follows,
+\begin{align}
+	&\bra{\psi}A_\ast^\perp B_\ast^\diamond \ket{\psi}= \bra{\psi}A_\ast^\diamond B_\ast^\perp \ket{\psi} = 0,\\
+	&\bra{\psi}A_0^0 B_\ast^\perp \ket{\psi} = \bra{\psi}A_0^1 B_\ast^\perp \ket{\psi} = 0\\
+	&\bra{\psi}A_1^0 B_\ast^\perp \ket{\psi} = \bra{\psi}A_1^1 B_\ast^\perp \ket{\psi} = 0.
+\end{align}
+We know $A_\ast^\perp B_\ast^\diamond \ket{\psi}$, $A_\ast^\diamond B_\ast^\perp \ket{\psi}$,  $A_0^0 B_\ast^\perp \ket{\psi}$,
+$A_0^1 B_\ast^\perp \ket{\psi}$, $A_1^0 B_\ast^\perp \ket{\psi}$ and $A_1^1 B_\ast^\perp \ket{\psi}$are orthogonal to $\ket{\psi}$.
+We also know that $A_0^0\ket{\psi}$,$A_0^1\ket{\psi}$,$A_1^0\ket{\psi}$,$A_1^1\ket{\psi}$ and $A_\ast^\diamond\ket{\psi}$ are
+orthogonal to $B_\ast^\perp \ket{\psi}$. The last orthogonality relation is that $A_\ast^\perp\ket{\psi} \perp B_\ast^\diamond \ket{\psi}.$
+
+
+\textbf{Observation 2}. We can also observe that
+\begin{align}
+	&\bra{\psi}A_\ast^\diamond B_\ast^\diamond\ket{\psi}\\
+	=&\bra{\psi} (A_0^0+A_0^1)(B_0^0+B_0^1) \ket{\psi} =\bra{\psi} (A_0^0+A_0^1)(B_1^0+B_1^1) \ket{\psi}\\
+	=&\bra{\psi} (A_1^0+A_1^1)(B_0^0+B_0^1) \ket{\psi} =\bra{\psi} (A_1^0+A_1^1)(B_1^0+B_1^1) \ket{\psi}\\
+	=& \bra{\psi} (A_0^0+A_0^1)B_\ast^\diamond \ket{\psi} = \bra{\psi} (A_1^0+A_1^1)B_\ast^\diamond \ket{\psi}\\
+	= &2/d.
+\end{align}
+Since we know $\| B_\ast^\diamond \ket{\psi} \| = \| (A_0^0+A_0^1) \ket{\psi}\| = \sqrt{2/d}$,
+combining with the relation, we find that 
+\begin{align}
+	\frac{\bra{\psi}B_\ast^\diamond (A_0^0+A_0^1) B_\ast^\diamond\ket{\psi}}{ \| B_\ast^\diamond \ket{\psi} \|^2} = 1,
+\end{align}
+which means that 
+\begin{align}
+	(A_0^0+A_0^1)B_\ast^\diamond \ket{\psi} = B_\ast^\diamond \ket{\psi}.
+\end{align}
+Since the projective measurement $(A_0^0+A_0^1)$ commute with $B_\ast^\diamond$, we can get
+\begin{align}
+	\frac{\bra{\psi} (A_0^0+A_0^1) B_\ast^\diamond(A_0^0+A_0^1)\ket{\psi}}{ \| (A_0^0+A_0^1) \ket{\psi} \|^2} = 1,
+\end{align}
+with similar argument we get 
+\begin{align}
+	B_\ast^\diamond (A_0^0+A_0^1) \ket{\psi} = (A_0^0+A_0^1)\ket{\psi}.
+\end{align}
+The two conclusions above can be chained by commutativity to reach the conclusion that 
+\begin{align}
+	(A_0^0+A_0^1)\ket{\psi} = B_\ast^\diamond \ket{\psi}.
+\end{align}
+Following the same line of argument, we can conclude that
+\begin{align}
+	B_\ast^\diamond \ket{\psi} = A_\ast^\diamond \ket{\psi} = (A_0^0+A_0^1)\ket{\psi} = (A_1^0+A_1^1)\ket{\psi}.
+\end{align}
+
+Another conclusion we can draw is that $B_\ast^\diamond = A_\ast^\diamond$ and $B_\ast^\perp = A_\ast^\perp$.
+We can assume the Schmidt decomposition of $\ket{\psi}$ is
+\begin{align}
+	\ket{\psi} = \sum_{i=1}^d \lambda_i \ket{i}\ket{i}.
+\end{align}
+If $\supp{A_\ast^\diamond} \neq \supp{B_\ast^\diamond}$, then $B_\ast^\diamond\ket{\psi} \neq A_\ast^\diamond\ket{\psi}$. Since $B_\ast^\diamond$ and $A_\ast^\diamond$ are projectors,
+By the orthogonality relations, we can also conclude that $A_\ast^\perp = B_\ast^\perp$.
+
+
+%Maybe we can first conclude that $\spn(A_0^0+A_0^1) = \spn(A_1^0+A_1^1) = \spn(A_\ast^\diamond)$.
+\textbf{Observation 3}. We can also observe that
+\begin{align}
+	&\bra{\psi}A_0^\perp\ket{\psi} = \bra{\psi}A_1^\perp\ket{\psi} \\
+	= &\bra{\psi}A_0^\perp B_\ast^\perp\ket{\psi} = \bra{\psi}A_1^\perp B_\ast^\perp\ket{\psi} \\
+	=& \bra{\psi} A_\ast^\perp B_\ast^\perp \ket{\psi}\\
+	=& \frac{d-2}{d}.
+\end{align}
+By similar argument as in Observation 2, we conclude that 
+\begin{align}
+	B_\ast^\perp \ket{\psi} = A_\ast^\perp \ket{\psi} = A_0^\perp \ket{\psi} = A_1^\perp \ket{\psi}.
+\end{align}
+Now we re-examine the CHSH-type correlation
+\begin{align}
+	   &\bra{\psi} A_0^0B_0^0 \ket{\psi} \\
+	= &\bra{\psi}(A_\ast^\diamond + A_\ast^\perp) A_0^0B_0^0 (A_\ast^\diamond + A_\ast^\perp)\ket{\psi} \\
+	= & \bra{\psi}A_\ast^\diamond A_0^0B_0^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\diamond A_0^0B_0^0 A_\ast^\perp\ket{\psi} \\
+	&+\bra{\psi}A_\ast^\perp A_0^0B_0^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\perp A_0^0B_0^0 A_\ast^\perp\ket{\psi}\\
+	= & \bra{\psi}B_\ast^\diamond A_0^0B_0^0 B_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\diamond A_0^0B_0^0 A_0^\perp\ket{\psi} \\
+	&+\bra{\psi}A_0^\perp A_0^0B_0^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_0^\perp A_0^0B_0^0 A_0^\perp\ket{\psi}\\
+	=&\bra{\psi}B_\ast^\diamond A_0^0B_0^0 B_\ast^\diamond\ket{\psi},
+\end{align}
+where we use the facts that $B_\ast^\diamond \ket{\psi} = A_\ast^\diamond \ket{\psi}$, $A_\ast^\perp \ket{\psi} = A_0^\perp \ket{\psi}$ and that 
+$\spn(A_0^0) \cap \spn(A_0^\perp) = \emptyset$. This means that if Alice and Bob share state $B_\ast^\diamond \ket{\psi}/\|B_\ast^\diamond \ket{\psi}\|$ and apply $A_0^0B_0^0$
+we get conditional probability
+\begin{align}
+	\frac{\bra{\psi}B_\ast^\diamond A_0^0B_0^0 B_\ast^\diamond\ket{\psi}}{\bra{\psi} B_\ast^\diamond B_\ast^\diamond \ket{\psi}} = \frac{\cos^2(\pi/4d)}{2}.
+\end{align} 
+We can rewrite the other correlations in a similar way and get a new set of correlation which match exactly with the optimal correlation of $\langle \1_{-\cot(\pi/2d)}\rangle$ and use the self-testing argument on $\{A_0^0-A_0^1, B_0^0-B_0^1, A_1^0-A_1^1, B_1^0-B_1^1\}$ and $B_\ast^\diamond \ket{\psi}/\|B_\ast^\diamond \ket{\psi}\|$.
+
+%[Optional orthogonal correlation].
+%The orthogonality deduced are 
+%\begin{align}
+%	\bra{\psi} A_0^\perp(\1-B_\ast^\perp)\ket{\psi} = \bra{\psi}A_0^\perp B_\ast^\diamond \ket{\psi} = 0\\
+%	\bra{\psi} A_1^\perp(\1-B_\ast^\perp)\ket{\psi} = \bra{\psi}A_1^\perp B_\ast^\diamond \ket{\psi} = 0.
+%\end{align}
+%In summary, we have 
+%\begin{align}
+%	&B_\ast^\diamond\ket{\psi} \perp \{A_0^\perp\ket{\psi}, A_\ast^\perp\ket{\psi}\}\\
+%	&B_\ast^\perp\ket{\psi} \perp \{A_0^0\ket{\psi}, A_0^1\ket{\psi},A_\ast^\diamond\ket{\psi}\}.
+%\end{align}
+%However, such orthogonality relation is not sufficient to conclude that $\spn\{A_0^0+A_0^1\} = \spn\{A_\ast^\diamond\}$.
+%------------------------------------------------------------------------
+\subsection{The single value test}
+%------------------------------------------------------------------------
+By the following test, we want to make sure that $B_1B_2$ has eigenvalue $1$.
+The key observation is that $B_1B_2\ket{psi} = \ket{\psi}$ implies that 
+\begin{align}
+	\ket{\psi} = B_1\ket{\psi} = B_2 \ket{\psi}.
+\end{align}
+Alice and Bob will each get a symbol $x$,$y \in \{ 0, 1, \ast\}$ respectively and they answer with $a,b \in \{0,1,\diamond,\perp\}$. 
+The scoring rules are
+\begin{itemize}
+	\item \textbf{Case 1:} $x = y = \ast$, Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
+	they score only if $a = b$;
+	\item \textbf{Case 2a:} $x =\ast$ and $y = 1$,  when Alice answer $\diamond$, Bob should answer $0$, when 
+	Alice answer$\perp$ all answers of Bob are accepted;
+	\item \textbf{Case 2b:} $x = \ast$ and $y = 2$,  when Alice answer $\diamond$, Bob should answer $0$, when 
+	Alice answer$\perp$ all answers of Bob are accepted.
+\end{itemize}
+
+The ideal strategy has projective measurement 
+\begin{align}
+&A_\ast^\diamond = B_\ast^\diamond= \ketbra{u_0}{u_0}, 
+&A_\ast^\perp = B_\ast^\perp = \1 - \ketbra{u_0}{u_0},
+\end{align}
+and Bob will reuse $B_1$ $B_2$ from his strategy to win the linear system game.
+The shared state is 
+\begin{align}
+	\ket{\psi} = \frac{1}{d} \sum_{i \in [d]} \ket{u_i}\ket{u_i}.
+\end{align}
+So in the ideal correlation, we have
+\begin{align}
+&P(\diamond \diamond| \ast \ast) = \bra{\psi} A_\ast^\diamond \otimes  B_\ast^\diamond \ket{\psi} = \frac{1}{d}\\
+	&P(\perp \perp| \ast \ast) = \bra{\psi} A_\ast^\perp \otimes B_\ast^\perp \ket{\psi} = \frac{d-1}{d}\\
+	&P(\diamond \perp| \ast \ast) = \bra{\psi} A_\ast^\diamond \otimes B_\ast^\perp \ket{\psi} = 0\\
+	&P(\perp \diamond| \ast \ast) = \bra{\psi} A_\ast^\perp \otimes B_\ast^\diamond \ket{\psi} = 0\\
+	&P(\diamond 0|\ast 1) = \bra{\psi} A_\ast^\diamond \otimes  B_1^0 \ket{\psi} = \frac{1}{d}\\
+	&P(\diamond 0|\ast 2) = \bra{\psi} A_\ast^\diamond \otimes  B_2^0 \ket{\psi} = \frac{1}{d}
+\end{align}
+By the marginal distribution we know that $\| A_\ast^\diamond \ket{\psi}\| = \frac{1}{\sqrt{d}}$.
+From the condition that $P(\diamond 0|\ast 1) = 1/d$, we know
+\begin{align}
+	\frac{  \bra{\psi} A_\ast^\diamond  B_1^0 \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|^2} = 1,
+\end{align}
+which implies that 
+\begin{align}
+ B_1^0 \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|} = \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|}.
+\end{align}
+With similar reasoning, we get
+\begin{align}
+ B_2^0 \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|} = \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|}.
+\end{align}
+Hence $ \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|} $ is in the intersection of $\supp(B_1^0)$ and $\supp(B_2^0)$.
+Since $\supp(B_x^0)$ and $\supp(B_x^1)$ are disjoint, we know
+\begin{align}
+	B_x  \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|}  =  \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|} 
+\end{align}
+for $x = 1,2$.
+Therefor, we know $ \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|} $ is an eigenvector of $B_1B_2$ with eigenvalue $1$ because
+\begin{align}
+	B_1B_2 \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|} = B_1 \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|} =  \frac{A_\ast^\diamond \ket{\psi}}{\| A_\ast^\diamond \ket{\psi}\|}.
+\end{align}
+In the later section, when we apply this test to make sure some unitary $U$ has eigenvalue $1$ with one-dimensional eigen-space, we denote the test by $\SVT_U$.
+%====================================
+\section{The new game} 
+\label{sec:main}
+%=====================================
+Assume the linear system game has $n$ variables and $m$ equations.
+Alice receives $x \in \{1,\dots m+8 \}$ and Bob receives
+$y \in \{1,\dots,n+4\}$. The scoring rules are the following:
+\begin{itemize}
+	\item when $x \in \{1,\dots m\}$ and $y \in \{1, \dots n\}$, they are scored according to the 
+	linear system game;
+	\item when $x \in \{m+1, m+2, m+3\}$ and $y \in \{1, 2, n+1\}$, they are scored according to $\CHSH_{\sigma_x}$,
+	where 
+	\begin{align}
+		&\ast_A = m+1, \quad 0_A = m+2,\quad 1_A = m+3,\\
+		&\ast_B = n+1,\quad 0_B = 1, \quad 1_A = 2,
+	\end{align}
+	are the inputs for the game $\CHSH_{\sigma_x}$
+	(The intuition behind is that $B_1B_2 = \sigma_x$.);
+	\item when $x \in \{m+4, m+5, m+6\}$ and $y \in \{3, 4, n+2\}$, they are scored according to $\CHSH_{\sigma_z}$,
+	where 
+	\begin{align}
+		&\ast_A = m+4,\quad 0_A = m+5,\quad 1_A = m+6,\\
+		&\ast_B = n+2, \quad 0_B = 3, \quad 1_A = 4,
+	\end{align}
+	are the inputs for the game $\CHSH_{\sigma_z}$
+	(The intuition behind is that $B_3B_4 = \sigma_z$.);
+	\item when $x = m+7$ and  $y \in \{1,2,n+3\}$, they are scored according to $\SVT_{\sigma_x}$, where
+	\begin{align}
+		& \ast_A = m+7 \\
+		& \ast_B = n+3, \quad 1_B = 1,\quad 2_B = 2
+	\end{align}
+	are the inputs for the game $\SVT_{\sigma_x}$
+	(The intuition behind is that $B_1B_2 = \sigma_x$.);
+	\item when $x = m+8$ and $y \in \{3,4,n+4\}$, they are scored according to $\SVT_{\sigma_z}$, where
+	\begin{align}
+		& \ast_A = m+8 \\
+		& \ast_B = n+4, \quad 3_B = 3,\quad 4_B = 4
+	\end{align}
+	are the inputs for the game $\SVT_{\sigma_z}$
+	(The intuition behind is that $B_3B_4 = \sigma_z$.);
+	\item otherwise, they score $0$.
+\end{itemize}
+Note that the dimension $d$ is defined in the rules of $\CHSH_{\sigma_z}$ and $\CHSH_{\sigma_x}$.
+Next we are going to prove that the strategy winning this game optimally can self-test $d$-dimensional EPR pair and 
+$d$-dimensional $\sigma_x$ and $\sigma_z$.
+%-----------------------------------------------
+\subsection{Proof Sketch}
+%-----------------------------------------------
+Now we examine the implications of Alice and Bob winning the linear constraint game perfectly.
+By Lemma~$4.3$ of \cite{coladan2017}, we can extract an operator solution from the perfect winning strategy 
+of the linear system game: 
+For each variable $\{ x_i \}_{i=1}^n$, Alice and Bob has operators $A_i$ and $B_i$ respectively and 
+$\J$ is mapped to $\sigma_A(\J)$ in Alice's solution and $\sigma_B(\J)$ in Bob's solution.
+The condition that they agree with assignment to variables means that 
+\begin{align}
+	\bra{\psi} A_i \otimes \overline{B_i} \ket{\psi} = 1 \Rightarrow A_i \otimes \overline{B_i} \ket{\psi} = \ket{\psi}
+\end{align}
+and the condition that Alice's assignments satisfy the constraint means that 
+\begin{align}
+	\Tr(\rho_A \Pi_{i:H(l,i) \neq 0} A_i) = \Tr(\rho_A \sigma_A(\J)^{b(l)}).
+\end{align}
+where $\rho_A =  \Tr_B(\ketbra{\psi}{\psi})$, $l$ is an equation label and $H(l,i)$ is the coefficient of $x_i$ in equation $l$.
+For any $\ket{v} \in \supp(\rho_A)$,
+we have 
+\begin{align}
+\Pi_{i:H(l,i) \neq 0} A_i \ket{v} = \sigma_A(\J)^{b(l)} \ket{v}.
+\end{align}
+Since the relation $u^{-1}xu = x^2$ is embedded in this linear system game, we know
+\begin{align}
+	\sigma_A(u)^\dagger A_1A_2 \sigma_A(u) \ket{v}= (A_1A_2)^2 \ket{v} \text{ for all } \ket{v} \in \supp(\rho_A).
+\end{align}
+So when $A_1A_2$ is restricted to $\supp(\rho_A)$, it is similar to $(A_1A_2)^2$. From now on,
+by $A_1A_2$ we mean $A_1A_2|_{\supp(\rho_A)}$.
+We will come back to the implication of the condition $A_1A_2 \sim (A_1A_2)^2$ later.
+
+Next we look at the implication of winning the $\CHSH_{\sigma_x}$ game optimally.
+It means that there exists isometris $V_A$ on Alice side and $V_B$ on Bob's side such that 
+\begin{align}
+	&(V_A\otimes V_B)  \frac{A_\ast^\diamond \otimes B_\ast^\diamond \ket{\psi}}{\|A_\ast^\diamond \otimes B_\ast^\diamond \ket{\psi}\|}
+	= \frac{1}{\sqrt{2}} (\ket{00} + \ket{11}) \otimes \ket{extra} \\
+	&(V_A\otimes V_B) \frac{B_1 + B_2}{2\cos(\pi/2d)} \frac{A_\ast^\diamond \otimes B_\ast^\diamond \ket{\psi}}{\|A_\ast^\diamond \otimes B_\ast^\diamond \ket{\psi}\|}
+	= (\1 \otimes \sigma_z)\frac{1}{\sqrt{2}} (\ket{00} + \ket{11}) \otimes \ket{extra}\\
+	&(V_A\otimes V_B) \frac{B_1 - B_2}{-2\sin(\pi/2d)} \frac{A_\ast^\diamond \otimes B_\ast^\diamond \ket{\psi}}{\|A_\ast^\diamond \otimes B_\ast^\diamond \ket{\psi}\|}
+	= (\1 \otimes \sigma_x)\frac{1}{\sqrt{2}} (\ket{00} + \ket{11}) \otimes \ket{extra}.
+\end{align}
+Suppose $A_\ast^\diamond$ measures states $\ket{u_0}$ and $\ket{u_1}$. Then we know
+\begin{align}
+	&(B_1 + B_2) \ket{u_0} = 2\cos(\pi/2d) \ket{u_0} \\
+	&(B_1 + B_2) \ket{u_1} = -2\cos(\pi/2d) \ket{u_1}\\
+	&(B_1 - B_2) \ket{u_0} = -2\sin(\pi/2d) \ket{u_1} \\
+	&(B_1 - B_2) \ket{u_1} = -2\sin(\pi/2d) \ket{u_0}
+\end{align}
+which implies that 
+\begin{align*}
+	B_1 \ket{u_0} &= \cos(\pi/2d) \ket{u_0} - \sin(\pi/2d) \ket{u_1} \\
+	B_2 \ket{u_0} &= \cos(\pi/2d) \ket{u_0} + \sin(\pi/2d) \ket{u_1} \\
+	B_1 \ket{u_1} &= -\sin(\pi/2d) \ket{u_0}-\cos(\pi/2d) \ket{u_1} \\
+	B_2 \ket{u_1} &= \sin(\pi/2d) \ket{u_0}-\cos(\pi/2d) \ket{u_1} \\
+	B_1B_2 \ket{u_0} &= \cos(\pi/2d) B_1\ket{u_0} + \sin(\pi/2d) B_1\ket{u_1} \\
+	&=\cos(\pi/2d) (\cos(\pi/2d) \ket{u_0} - \sin(\pi/2d) \ket{u_1}) -\sin(\pi/2d)(\sin(\pi/2d) \ket{u_0} + \cos(\pi/2d)\ket{u_1})\\
+	&=\cos(\pi/d) \ket{u_0} -\sin(\pi/d) \ket{u_1}\\
+	B_1B_2\ket{u_1} &= \sin(\pi/2d) B_1\ket{u_0}-\cos(\pi/2d) B_1\ket{u_1} \\
+	&= \sin(\pi/2d) (\cos(\pi/2d) \ket{u_0} - \sin(\pi/2d) \ket{u_1}) + \cos(\pi/2d)(\sin(\pi/2d) \ket{u_0}+\cos(\pi/2d) \ket{u_1})\\
+	&= \sin(\pi/d)\ket{u_0} + \cos(\pi/d) \ket{u_1}.
+\end{align*}
+We can conclude that 
+\begin{align}
+	&B_1B_2(\ket{u_0} + i\ket{u_1}) = e^{i \frac{\pi}{d}} (\ket{u_0} + i\ket{u_1})\\
+	&B_1B_2(\ket{u_0} - i\ket{u_1}) = e^{-i \frac{\pi}{d}} (\ket{u_0} - i\ket{u_1}).
+\end{align}
+Define $\ket{x_1} = 1/\sqrt{2}(\ket{u_0} + i\ket{u_1})$, then it is the eigenvector of $B_1B_2$ with eigenvalue $e^{i\pi/d} = \omega_d$.
+Similarly, we define $\ket{x_{d-1}} = 1/\sqrt{2} (\ket{u_0} - i\ket{u_1})$ and it is the eigenvector of $B_1B_2$ with eigenvalue $\omega_d^{d-1}$.
+Moreover, from the self-testing derivation, we know 
+\begin{align}
+ \|(\ketbra{x_1}{x_1} + \ketbra{x_{d-1}}{x_{d-1}})\ket{\psi}\|^2 = 2/d.
+\end{align}
+The condition that $B_1B_2 \sim (B_1B_2)^2$ implies that $\omega_d, \omega_d^2, \omega_d^4 \dots $ are all the eigenvalues of $B_1B_2$ and the eigen-space of each eigenvalue are of dimension $1$. 
+Since $2$ is a primitive root of $d$, we know $\omega_d^i = \omega_d^{2^{k_i}}$ for some $k_i$ and $i \in \{1,2 \dots, d-1\}$, or equivalently, $2^{k_i} \equiv i \pmod{d}$, which means that $B_1B_2$ is finite-dimensional and we have states $\ket{x_i}$ for $i = 1 \dots d-1$ such that 
+\begin{align}
+	B_1B_2 \ket{x_i} = \omega_d^i \ket{x_i}
+\end{align}
+and 
+\begin{align}
+	 \|(\sum_{i=1}^{d-1} \ketbra{x_i}{x_i})\ket{\psi}\|^2 = \frac{d-1}{d}.
+\end{align}
+
+The implication of the $\SVT_{\sigma_x}$ is that there exists state $\ket{x_0}$ such that 
+\begin{align}
+	B_1B_2 \ket{x_0} = \ket{x_0} \text{ and } \| \ketbra{x_0}{x_0} \ket{\psi} \|^2 = 1/d.
+\end{align}
+Hence $\sum_{i=0}^{d-1} \ketbra{x_i}{x_i}$ is the projector onto $\supp(\rho_B)$ which means the 
+dimension of $\supp(\rho_B)$ is $d$ and the same as the rank of $B_1B_2$. 
+So far, we have recovered the full eigen-decompostion of $B_1B_2$ as 
+\begin{align}
+	B_1B_2 = \sum_{i \in [d]} \omega_d^i \ketbra{x_i}{x_i}.
+\end{align}
+
+Similarly, $\CHSH_{\sigma_z}$ and $\SVT_{\sigma_z}$ give us the full eigen-decomposition of $B_3B_4$ as 
+\begin{align}
+	B_3B_4 = \sum_{i \in [d]} \omega_d^i \ketbra{z_i}{z_i}.
+\end{align}
+The reasoning above also holds for $A_1, A_2, A_3, A_4$ because $B_1, B_2, B_3, B_4$ are the conjugate operator solution.
+In the rest of the proof, we will work with $A_1, A_2, A_3, A_4$ since they are the operator solution.
+
+
+Thm.~4 of Ref.~\cite{cleve2017} states that when we have a perfect strategy, $\J \neq e$ in the solution group $\Gamma_\Pg$ and 
+$x$ doesn't commute with $z$.
+Since $\J$ is in the center of $\Gamma_\Pg$ and both $A_1A_2$ and $A_3A_4$ have full rank, we know $\sigma_A(\J) = \alpha\1$ with $\alpha \neq 1$.
+The relation $zx = \J xz$ implies that in the operator solution
+\begin{equation}
+\begin{aligned}
+\label{eq:ladder}
+	A_3A_4 A_1A_2 \ket{z_1} =& \sigma(\J) A_1A_2 A_3A_4 \ket{z_1} \\
+	=& \alpha \omega_d A_1A_2 \ket{z_1}
+\end{aligned}
+\end{equation}
+where we use the fact that $\ket{z_1} \in \supp(\rho_A)$.
+
+Then by induction, we can show that $(A_1A_2)^i \ket{z_1}$ is the eigenvector of $A_3A_4$ with eigenvalue $\alpha^{-i}\omega_d$,
+which gives us another set of eigenvalues, $\{\omega_d\alpha^{i}\}_{i \in [d]} = \{ \omega_d^i\}_{i \in [d]}$.
+If we assume $\alpha \omega_d = \omega_d^l$ for some $l$, then we know $\alpha^d = 1$.
+
+Hence, $\{ (A_1A_2), (A_3A_4), \sigma_A(\J)\}$ is a finite-dimensional representation of $\Pg_d$ and it 
+can be extended to a finite-dimensional representation of $\Pg_d^{\otimes 2}$, which gives
+an operator solution of the $d$-dimensional Magic Square game.
+Then Lemma $4.3$ of \cite{coladan2017} tells us that $\alpha = \omega_d$. 
+Going back to \cref{eq:ladder}, we can conclude that 
+on the basis $\{(A_1A_2)^i\ket{z_1}\}_{i \in [d]}$, $A_1A_2$ acts as the $\sigma_x$ operator and $A_3A_4$ acts as the $\sigma_z$ operator.
+
+%Steps going forward:
+%\begin{itemize}
+%	\item Use $\CHSH_{\sigma_x}$ and $\CHSH_{\sigma_z}$ to argue that $(A_1A_2)^d = (A_3A_4)^d = e$;
+%	\item \hl{[TODO]} Need to argue $A_1A_2 = X_A$ and $A_3A_4 = Z_A$.
+%\end{itemize}
+Built on the results so far, the consistency criterion tells us that 
+\begin{align}
+	A_1A_2 \otimes \overline{B_1B_2} \ket{\psi} = \ket{\psi} \Rightarrow X_A \otimes \overline{X_B} \ket{\psi} = \ket{\psi}, \\
+	A_3A_4 \otimes B_3B_4 \ket{\psi} = \ket{\psi} \Rightarrow Z_A \otimes \overline{Z_B} \ket{\psi} = \ket{\psi}.
+\end{align}
+Considering all $i,j \in [d]$, we have
+\begin{align}
+	&X_A^i Z_A^j \otimes \overline{X_B}^i\overline{Z_B}^j \ket{\psi} = \ket{\psi} \\
+	\Rightarrow &\exists \text{ isometries } V_A', V_B' \text{ such that }
+	V_A'\otimes V_B'\ket{\psi} = \frac{1}{\sqrt{d}} \sum_{i \in [d]} \ket{ii}
+\end{align}
+which is a standard result from Ref.~\cite{gottesman1999}.
+
+
+\bibliographystyle{alphaurl}
+\bibliography{quantum_correlation}
+
+\appendix
+%=====================================
+\section{The linear system game}
+\label{sec:construct}
+%=====================================
+In this section, we are going to embed the group $\Pg$ into a solution group $\Gamma_\Pg$ of a linear system game.
+
+We first embed the relation $xzx^{-1}z^{-1} = \J$ in a linear system game by ideas from the Magic Square game.
+It has been shown that the following relations embeds $xzx^{-1}z^{-1} = \J$ \footnote{For example, Fig.~$11$ of Ref.~\cite{coladan2017}
+proves it in a group picture.}. Let $y_3 = z$ and $y_7 = x$ and the linear relations are 
+\begin{align}
+	&y_1y_2y_3 = e,
+	y_4y_5y_6 = e,
+	y_7y_8y_9 = e,\\
+	&y_1^{-1}y_4^{-1}y_7^{-1} = e,
+	y_2^{-1}y_5^{-1}y_8^{-1} = \J,
+	y_3^{-1}y_6^{-1}y_9^{-1} = e.
+\end{align}
+We refer to these set of linear relations as the $\MS_l$ relations.
+The magic square game also introduces some commutation relations:
+\begin{align}
+	&[y_1, y_2] = [y_1, y_3] = [y_1, y_4] = [y_1,y_7] = e,\\
+	&[y_2, y_3] = [y_2, y_5] = [y_2, y_8] = e,\\
+	&[y_3, y_6] = [y_3, y_9] = e,\\
+	&[y_4, y_7] = [y_4,y_5] =  [y_4,y_6] = e, \\
+	& [y_5,y_6] =  [y_5,y_8] = e,\\
+	& [y_6,y_9] = e,\\
+	& [y_7,y_8] =  [y_7,y_9] = e,\\
+	&[y_8,y_9] = e,
+\end{align}
+which will be referred as $\MS_c$.
+So we define $\Pg$ as 
+\begin{align}
+	\Pg = \langle \{y_i\}_{i=1}^9,u,\J: \MS_l \cup \MS_c \cup \{ [\J, y_i] = [\J, u] = e,
+					uy_7u^{-1} = y_7^2, u^{-1}y_3u = y_3^2\}	 \rangle.
+\end{align}
+Then we can start to use a procedure similar to the ones developed in Ref.~\cite{slofstra2017} to embed $\Pg$ into the solution group of a linear system game.
+
+The first step is to embed $\Pg$ into a group which almost satisfy the definition of homogeneous-linear-plus-conjugacy group
+\cite{slofstra2017}.
+
+\textbf{Replacing $y_3$.} We start by introducing $y_{3,1}$ and $y_{3,2}$ of order $2$ such that $y_3 = y_{3,1}y_{3,2}$ 
+and $y_{3,1}$ commutes with $y_i,u$ and $\J$ for $ i \neq 3$.
+Then the relation $uy_3u^{-1} = y_3^2$ is rewritten as $uy_{3,2}u^{-1} = y_{3,2}y_{3,1}y_{3,2}$ so we introduce $y_{3,3} = y_{3,2}y_{3,1}y_{3,2}$.
+The group $\Pg$ is embedded in
+\begin{equation}
+\begin{aligned}
+	\Pg = \langle y_{3,1}, y_{3,2}, y_{3,3}, x, u, \{y_i\}_{i \neq 3} \J: &y_{3,1},y_{3,2},y_{3,3} \text{ of order 2};\\
+	&\J \text{ commute with  all the generators, } [y_i,y_{3,1}] = [u,y_{3,1}] =  e \text{ for } i \neq 3,\\
+	&\MS_c \text{ with $y_3$ replaced by $y_{3,2}$},
+	\MS_l \text{ with $y_3$ replaced by $y_{3,1}y_{3,2}$},\\
+	& u^{-1}y_7u = y_7^2, 
+	y_{3,3} = y_{3,2}y_{3,1}y_{3,2}, uy_{3,2}u^{-1} = y_{3,3}\rangle
+\end{aligned}
+\end{equation}
+\textbf{Replace $y_7$.} We introduce $y_{7,1}$ and $y_{7,2}$ of order $2$ such that $y_7 = y_{7,1}y_{7,2}$ and 
+$y_{7,1}$ commutes with $u$, $\J$ and $y_i$ for $i \neq 3,7$.
+Then the relation $u^{-1}y_7u = y_7^2$ is rewritten as $u^{-1}y_{7,2}u = y_{7,2}y_{7,1}y_{7,2}$ so we introduce $y_{7,3} = y_{7,2}y_{7,1}y_{7,2}$.
+The relation $y_7y_{3,1}y_7^{-1} = y_{3,1}$ is rewritten as $y_{7,2}y_{3,1}y_{7,2} = y_{7,1}y_{3,1}y_{7,1}$ so we introduce $y_{7,4} = y_{7,1}y_{3,1}y_{7,1}$.
+The group $\Pg$ is embedded as
+\begin{equation}
+\begin{aligned}
+	\Pg = \langle \{y_{3,i}\}_{i=1}^3, \{ y_{7,i} \}_{i=1}^4, \{y_i\}_{i\neq 3, 7}, u, \J: &\{y_{3,i}\}_{i=1}^3 \{y_{7,i}\}_{i=1}^4 \text{ of order } 2;\\
+	&\J \text{ commutes with all the generators, } [u, y_{3,1}] = [u, y_{7,1}] = e,\\
+	&y_{3,1}, y_{7,1} \text{ commute with } y_i,\; i \neq 3,7,\\
+	& \MS_c \text{ with $y_3, y_7$ replaced by $y_{3,2}, y_{7,2}$},\\
+	& \MS_l \text{ with $y_3$, $y_7$ replaced by $y_{3,1}y_{3,2}$ and $y_{7,1}y_{7,2}$} \\
+	&y_{3,3} = y_{3,2}y_{3,1}y_{3,2}, uy_{3,2}u^{-1} = y_{3,3}, \\
+	&y_{7,3} = y_{7,2}y_{7,1}y_{7,2}, u^{-1}y_{7,2}u = y_{7,3},\\
+	&y_{7,4} = y_{7,1}y_{3,1}y_{7,1}, y_{7,2}y_{3,1}y_{7,2} = y_{7,4} \rangle
+\end{aligned}
+\end{equation}
+\textbf{Replacing $u$.} We introduce $u_1, u_2$ of order $2$ such that $u = u_1u_2$ and $u_1$ commutes with
+$y_i$ for $i \neq 3,7$ and $\J$.
+The conjugacy relations involving $u$ are $uy_{3,2}u^{-1} = y_{3,3}$, $u^{-1}y_{7,2}u = y_{7,3}$,
+$uy_{3,1}u^{-1} = y_{3,1}$ and $uy_{7,1}u^{-1} = y_{7,1}$. So we need to introduce $u_3,u_4,u_5,u_6$ such that 
+\begin{align}
+	u_3 = u_2y_{3,2}u_2 = u_1y_{3,3}u_1, \\
+	u_4 = u_1y_{7,2}u_1 = u_2y_{7,3}u_2,\\
+	u_5 = u_2y_{3,1}u_2 = u_1y_{3,1}u_1,\\
+	u_6 = u_2y_{7,1}u_2 = u_1y_{7,1}u_1.
+\end{align}
+At this stage $\Pg$ has generators $\{y_{3,i}\}_{i=1}^3, \{ y_{7,i} \}_{i=1}^4, \{y_i\}_{i\neq 3, 7}, \{u_i\}_{i=1}^6$ with $6$ linear relations and $44$ conjugacy relations. 
+
+\textbf{Replacing $y_i$ for $i \neq 3,7$.} The conjugacy relations involving $y_1$ are 
+\begin{align}
+	y_{1}y_{3,1} y_1^{-1} = y_{3,1},
+	y_{1}y_{7,1}y_1^{-1} = y_{7,1}.
+\end{align}
+and $4$ commutation relations from $\MS_c$.
+So we need to introduce $y_{1,i}$ for $i = 1, 2 \dots 8$ such that they all are of order $2$ and
+\begin{align}
+&y_1= y_{1,1} y_{1,2}\\
+&y_{1,3} = y_{1,2} y_{3,1}y_{1,2} = y_{1,1} y_{3,1}y_{1,1},\\
+&y_{1,4} = y_{1,2} y_{7,1}y_{1,2} = y_{1,1} y_{7,1}y_{1,1},\\
+&y_{1,5} = y_{1,2} y_{2}y_{1,2} = y_{1,1} y_{2}y_{1,1},\\
+&y_{1,6} = y_{1,2} y_{3,2}y_{1,2} = y_{1,1} y_{3,2}y_{1,1},\\
+&y_{1,7} = y_{1,2} y_{4}y_{1,2} = y_{1,1} y_{4}y_{1,1},\\
+&y_{1,8} = y_{1,2} y_{7,2}y_{1,2} = y_{1,1} y_{7,2}y_{1,1}.
+\end{align}
+The new commutation relations are $y_{1,1}$ commutes with all the remaining $y_j$'s
+and commutation relations from $\MS_c$ involving $y_1$ with $y_1$ replaced by $y_{1,2}$.
+Then we repeat this process with $y_2$.
+In summary, replacing $y_1,y_2,y_4,y_5,y_6,y_8,y_9$ introduces $8+9+10+11+12+13+14 = 77$ new variables 
+and $12+14+16+18+20+22+24 = 126$ new conjugacy relations. 
+In total $\Pg$ has $90$ variables excluding $\J$, $6$ linear relations and $170$ conjugacy relations.
+
+Then following the recipe given in Proposition~$4.2$ and Lemma~$4.4$ of Ref.~\cite{slofstra2017}, we embed $\Pg$ into the solution 
+group of a linear system game having $2351$ variables and $1916$ linear relations. 
+Alice's output alphabet is of size $64$ and of size $2$ for Bob.
+
+Such linear system game has at the biggest size when $a = 5$ or the special relation is $uxu^{-1} = x^5$.
+The biggest game has $2465$ variables and $2006$ equations. We leave the derivation for curious readers.
+%==========================================
+\section{Slofstra's Binary Constraint game}
+%==========================================
+We start with an extended homogeneous-linear-plus-conjugacy group
+\begin{align}
+	K = \langle x,y,a,b,c: a^2=b^2=c^2=e, abc=e, yay^{-1} = a, yby^{-1}=c, xyx^{-1}=y^2\rangle
+\end{align}
+and construct a solution group corresponding to a nonlocal game.
+
+We first embed $K$ into another homogeneous-linear-plus-conjugacy group, $K'$, 
+with $x,y$ replaced by elements of order $2$. By Proposition~4.8 of \cite{slofstra2017},
+we first introduce $z,w$ such that $z^2=w^2=e$, $y=zw$ and $xz=zx$ then
+\begin{align}
+	K' = \langle a,b,c,z,w,a',b',z',x: &abc = e,\\
+	&waw=a', wbw=b', wz'w=z \\
+	&za'z=a,zb'z=c,\\
+	&xwx^{-1}=z', xzx^{-1} =z \rangle.
+\end{align}
+Next, we introduce $u,v$ such that $u^2=v^2=e$ and $x=uv$, then
+\begin{align*}
+	K' = \langle a,b,c,z,w,a',b',z',u,v,z_v: &abc = e, \\
+	&waw=a', wbw=b', wz'w=z \\
+	&za'z=a,zb'z=c,\\
+	&vwv=w', vzv=z_v,\\
+	&uw'u=z', uz_vu = z\rangle
+\end{align*}
+Note that we skipped the relations that all elements are of order $2$.
+To easier introduce new elements in the following construction, we relabel the elements as
+\begin{align*}
+	&x_1 = w,\; x_2 = a,\; x_3 = a',\; x_4 =b, \;x_5 = b', \;x_6 = z, \;x_7 = z'\\
+	&x_8 = c,\;x_9=v,\,x_{10} =u,\;x_{11} = w',\;x_{12} = z_v,
+\end{align*}
+so $K'$ can also be written as
+\begin{equation}
+\begin{split}
+	K'=\langle \{x_i\}_{i=1}^{12}: &x_i^2 = e, x_2x_4x_8 = e,\\
+	&x_1x_2x_1 =x_3, \;x_1x_4x_1 =x_5,\; x_1x_7x_1 =x_6,\\
+	&x_6x_3x_6 =x_2, \;x_6x_5x_6 =x_8,\\
+	&x_9x_1x_9 = x_{11},x_9x_6x_9 = x_{12}\\
+	&x_{10}x_{11}x_{10} = x_7, x_{10}x_{12}x_{10} = x_6\rangle.
+\end{split}
+\end{equation}
+Here the special element is $x_2 = a$.
+Then we add another two order-$2$ element, $t$ $Z$, to add a linear relation to it
+\begin{align}
+	\hat{K} = \langle K', t ,Z: t^2=Z^2 = e,\; tx_2t = Z.\; Zx_2 = J\rangle_{\mathbb{Z}_2}.
+\end{align}
+We rename $t = x_{13}$ and $Z = x_{14}$, then $\hat{K}$ contains linear relations
+\begin{align*}
+	x_2x_4x_8 = e,\; x_{14}x_{2} = J
+\end{align*}
+and conjugacy relations
+\begin{align*}
+	&x_1x_2x_1 =x_3, \;x_1x_4x_1 =x_5,\; x_1x_7x_1 =x_6,\\
+	&x_6x_3x_6 =x_2, \;x_6x_5x_6 =x_8,\\
+	&x_9x_1x_9 = x_{11},x_9x_6x_9 = x_{12}\\
+	&x_{10}x_{11}x_{10} = x_7,x_{10}x_{12}x_{10} = x_6\\
+	&x_{13}x_2x_{13} = x_{14}.
+\end{align*}
+We collect the subscript of $x_i$'s in the conjugacy relations and define
+\begin{align}
+	C= \{ &(1,2,3), (1,4,5), (1,7,6), (6,3,2), (6,5,8),\\
+	&(9,1,11),(9,6,12),(10,11,7),(10,12,6),(13,2,14)\}
+\end{align}
+such that
+\begin{align*}
+	(i,j,k) \in C \Longleftrightarrow x_ix_jx_i = x_k.
+\end{align*}
+We also define 
+\begin{align}
+	\Gamma = \langle \{x_i\}_{i=1}^{14} : x_i^2 = e, x_2x_4x_8 = e,\; x_{14}x_{2} = J \rangle.
+\end{align}
+
+In the next part, we are going to convert the conjugacy relations to linear relations
+and make $\Gamma$ the solution group we want.
+So we embed $\hat{K}$ in $\overline{K}$ where 
+\begin{align*}
+	\overline{K} = \langle \Gamma, \{w_i, y_i, j_i\}_{i=1}^{14}, f:&\text{all elements are order $2$},\\
+	&x_i = y_iz_i = fw_i,\; fy_if =z_i \quad\text{where } 1 \leq i \leq 14 \\
+	&y_j z_k = z_ky_j,\; w_iy_jw_i = z_k \quad\text{for all } (i,j,k)\in C \rangle.
+\end{align*}
+We convert new relations in $\overline{K}$ to linear relation or conjugacy relation by introduce 
+element $g_{jk}$ for all $(i,j,k) \in C$, such that $g_{jk}^2 = e$ and $g_{jk} = y_j z_k$.
+The new form of $\overline{K}$ is 
+\begin{equation}
+\begin{split}
+	\overline{K} = \langle \Gamma, \{w_i, y_i, j_i\}_{i=1}^{14}, f, \{g_{jk}\}_{(i,j,k) \in C} :&\text{all elements are order $2$},\\
+	&x_iy_iz_i = e,\; x_ifw_i = e\text{ for all } 1 \leq i \leq 14\\
+	&g_{jk} y_j z_k = e \text{ for all } (i,j,k) \in C\\
+	&fy_if = z_i \text{ for all } 1 \leq i \leq 14 \\
+	&w_iy_jw_i = z_k  \text{ for all } (i,j,k) \in C \rangle
+\end{split}
+\end{equation}
+The last step is to convert the conjugacy relations in $\overline{K}$to linear relations.
+
+We let $\Gamma$ absorb the new elements and new linear relations by first relabelling
+\begin{align*}
+	x_{i+14} = w_i, \quad x_{i+28} = y_i,\quad &x_{i+42} = z_i\quad 1 \leq i \leq 14\\
+	&x_{57} = f,\\
+	x_{58} = g_{23},\quad x_{59} = g_{45},\quad &x_{60} = g_{76},\quad x_{61} = g_{32},\quad x_{62} = g_{58},\\
+	x_{63} = g_{1,11},\quad x_{64} =g_{8,12},\quad &x_{65} = g_{11,7},\quad x_{66} =g_{12,6},\quad x_{67} = g_{2,13}.
+\end{align*}
+then
+\begin{align*}
+	\Gamma = \langle \{x_i\}_1^{67} :&x_i^2 = e, x_2x_4x_8 = e,\; x_{14}x_{2} = J,\\
+	&x_ix_{i+28}x_{i+42} =e;\ x_ix_{57}x_{i+14} =e\;\text{ for } 1 \leq i \leq 14,\\
+	&x_{58}x_{30}x_{45} = e,
+	x_{59}x_{32}x_{47} = e,
+	x_{60}x_{35}x_{48} = e,\\
+	&x_{61}x_{31}x_{44} = e,
+	x_{62}x_{33}x_{50} = e,
+	x_{63}x_{29}x_{53} = e,\\
+	&x_{64}x_{34}x_{54} = e,
+	x_{65}x_{39}x_{49} = e,
+	x_{66}x_{40}x_{48} = e,
+	x_{67}x_{30}x_{56} = e\rangle
+\end{align*}
+We also change $C$ to cover new conjugacy relations
+\begin{align*}
+	C = &\{(57, i+28, i+42)\}_{i=1}^{14} \cup\\
+	 &\{(15,30,45),(15,32,47),(15,35,48),(20,31,44),(20,33,50),(23,29,53),\\
+	 &(23, 34, 54),(24,39,49),(24,40,48),(27,30,56)\}.
+\end{align*}
+For each $I = (i,j,k) \in C$, we introduce seven new variables $\{y_{Ii}\}_{i=1}^7$ such that 
+\begin{align*}
+	x_iy_{I1}y_{I2} = x_iy_{I5}y_{I6} =x_jy_{I2}y_{I3}=x_ky_{I6}y_{I7}=y_{I3}y_{I4}y_{I5}=y_{I1}y_{I4}y_{I7}=e.
+\end{align*}
+We add such relations to $\Gamma$ and get the final form of $\Gamma$ which is
+\begin{equation}
+	\begin{split}
+	\Gamma = \langle \{x_i\}_{i=1}^{67}\cup\{\{y_{Ii}\}_{i=1}^7\}_{I \in C} :&\{x_i^2 = y_{Ij}^2=e, x_2x_4x_8 = e,\; x_{14}x_{2} = J,\\
+	&x_ix_{i+26}x_{i+39} =e;\ x_ix_{53}x_{i+13} =e\;\text{ for } 1 \leq i \leq 14,\\
+	&x_{58}x_{30}x_{45} = e,
+	x_{59}x_{32}x_{47} = e,
+	x_{60}x_{35}x_{48} = e,\\
+	&x_{61}x_{31}x_{44} = e,
+	x_{62}x_{33}x_{50} = e,
+	x_{63}x_{29}x_{53} = e,\\
+	&x_{64}x_{34}x_{54} = e,
+	x_{65}x_{39}x_{49} = e,
+	x_{66}x_{40}x_{48} = e,
+	x_{67}x_{30}x_{56} = e\}\\
+	&\cup \{x_iy_{I1}y_{I2} = x_iy_{I5}y_{I6} =x_jy_{I2}y_{I3}=x_ky_{I6}y_{I7}=e\}_{I=(i,j,k) \in C} \\
+	&\cup \{y_{I3}y_{I4}y_{I5}=y_{I1}y_{I4}y_{I7} =e\}_{I \in C}\rangle.
+	\end{split}
+\end{equation}
+The solution group $\Gamma$ has $235$ variables and $184$ equations, which match what is given in
+\cite{slofstra2017}.
+
+\end{document}
