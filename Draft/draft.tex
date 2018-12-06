@@ -1,0 +1,243 @@
+\documentclass[11pt,letterpaper]{article}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                      {1ex \@plus1ex \@minus.2ex}%
+                                      {-1em}%
+                                      {\normalfont\normalsize\bfseries}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%
+%  P A C K A G E S  %
+%%%%%%%%%%%%%%%%%%%%%
+
+% Authors
+\usepackage{authblk}
+
+% Page margins
+\usepackage[margin=1in]{geometry}
+
+% Nicer math font
+\usepackage{mathpazo}
+
+% More fancy lists
+\usepackage{enumerate}
+
+% Microtype
+\usepackage{microtype}
+
+% TikZ
+\usepackage{tikz}
+%\usetikzlibrary{calc,shapes.geometric}
+\usetikzlibrary{backgrounds,fit,decorations.pathreplacing,calc}
+
+% Highlights
+\usepackage{soul}
+
+% Young Tableaux
+\usepackage{ytableau}
+
+% Figure
+\usepackage{float}
+
+% Hypertext package
+\usepackage[colorlinks = true]{hyperref}
+% Title and authors
+%\hypersetup{
+%  pdftitle = {},
+%  pdfauthor = {}
+%}
+% Color definitions
+\definecolor{darkred}  {rgb}{0.5,0,0}
+\definecolor{darkblue} {rgb}{0,0,0.5}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+% Color links
+\hypersetup{
+  urlcolor   = blue,         % color of external links
+  linkcolor  = darkblue,     % color of internal links
+  citecolor  = darkgreen,    % color of links to bibliography
+  filecolor  = darkred       % color of file links
+}
+
+% AMS
+\usepackage{amsmath,amssymb,amsfonts,amsthm,amstext}
+
+%% Restating theorems
+%\usepackage{thm-restate}
+
+% Powerful macros
+\usepackage{etoolbox}
+
+% Fixes for amsmath
+\usepackage{mathtools}
+\mathtoolsset{centercolon}
+\makeatletter
+\protected\def\tikz@nonactivecolon{\ifmmode\mathrel{\mathop\ordinarycolon}\else:\fi}
+\makeatother
+
+% Daw boxes
+\usepackage{tcolorbox}
+
+% Code
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
+
+% Clever references
+\usepackage{cleveref}%[nameinlink]
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{definition}{Definition}{Definitions}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{claim}{Claim}{Claims}
+\crefname{section}{Section}{Sections}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{figure}{Fig.}{Figs.}
+\crefname{table}{Table}{Tables}
+% \crefname{algorithm}{Algorithm}{Algorithms}
+
+% IEEE tools
+\usepackage[retainorgcmds]{IEEEtrantools}
+
+% table of contents
+\usepackage{tocloft}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  N E W C O M M A N D  %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Standard quantum notation
+
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\bra}[1]{\langle#1|}
+\newcommand{\braket}[2]{\langle#1|#2\rangle}
+\newcommand{\ketbra}[2]{|#1\rangle\langle#2|}
+\newcommand{\proj}[1]{|#1\rangle\langle#1|}
+
+\newcommand{\x}{\otimes}
+\newcommand{\xp}[1]{^{\otimes #1}}
+\newcommand{\op}{\oplus}
+
+\newcommand{\ct}{^{\dagger}}
+\newcommand{\tp}{^{\mathsf{T}}}
+
+% Linear algebra
+
+%\newcommand{\1}{\mathbb{1}} % identity matrix
+%\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+%\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Lin}{L} % all linear maps
+\newcommand{\Mat}[1]{\mathrm{M}(#1)} % all matrices
+%\newcommand{\Mat}[1]{\mathrm{M}_{#1}(\C)}
+
+% Paired delimiters
+
+\DeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\of}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\sof}{\lbrack}{\rbrack}
+\DeclarePairedDelimiter{\ip}{\langle}{\rangle}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+% Operators
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\vc}{vec}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\hook}{hook}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\supp}{supp}
+
+% Matrices
+
+\newcommand{\mx}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\smx}[1]{\bigl(\begin{smallmatrix}#1\end{smallmatrix}\bigr)}
+
+% Sets
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\calH}{\mathcal{H}}
+
+% Identity operator
+\newcommand{\1}{\mathbb{1}}
+
+% Pauli Group
+\newcommand{\Pg}{\mathcal{P}}
+\newcommand{\J}{\mathcal{J}}
+
+% Special notation
+
+\newcommand{\CHSH}{CHSH^{(d)}}
+\newcommand{\MS}{MS}
+\newcommand{\SVT}{SVT}
+
+% Commands for highlighting text and notes
+
+\usepackage{color}
+\newcommand{\marked}[1]{{\fboxsep0pt\colorbox{yellow}{#1}}}
+\usepackage[
+  bordercolor = white,
+  backgroundcolor = gray!30,
+  linecolor = black,
+  colorinlistoftodos]{todonotes}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  N E W T H E O R E M  %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{problem}{Problem}
+\newtheorem*{example}{Example}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
+%%%%%%%%%%%%%%%%%%%
+%  F I G U R E S  %
+%%%%%%%%%%%%%%%%%%%
+
+%\input{Tableau.tex}
+
+
+%%%%%%%%%%%%%%%%
+%   Document   %
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Self-test EPR pair with constant alphabet}
+
+\author[1]{Honghao Fu}
+\author[1,2]{Carl Miller}
+
+\renewcommand\Affilfont{\itshape\small}
+
+
+\affil[1]{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA}
+\affil[2]{National Institute of Standards and Technology, 100 Bureau Dr., Gaithersbug, MD 20899, USA}
+\maketitle
+
+\end{document}
