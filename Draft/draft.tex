@@ -158,10 +158,6 @@
 \DeclareMathOperator{\E}{\mathbb{E}}
 \DeclareMathOperator{\supp}{supp}
 
-% Matrices
-
-\newcommand{\mx}[1]{\begin{pmatrix}#1\end{pmatrix}}
-\newcommand{\smx}[1]{\bigl(\begin{smallmatrix}#1\end{smallmatrix}\bigr)}
 
 % Sets
 
@@ -183,16 +179,19 @@
 \newcommand{\CHSH}{CHSH^{(d)}}
 \newcommand{\MS}{MS}
 \newcommand{\SVT}{SVT}
+\newcommand{\EPR}[1]{EPR^{(#1)}}
+\newcommand{\paulix}[1]{\sigma_x^{(#1)}}
+\newcommand{\pauliz}[1]{\sigma_z^{(#1)}}
+\newcommand{\G}[1]{G^{(#1)}}
+\newcommand{\LS}{LS}
 
-% Commands for highlighting text and notes
+% Probabilities
+\newcommand{\pr}[2]{P(#1|#2)}
+\newcommand{\pa}[2]{P_A(#1|#2)}
+\newcommand{\pb}[2]{P_B(#1|#2)}
 
-\usepackage{color}
-\newcommand{\marked}[1]{{\fboxsep0pt\colorbox{yellow}{#1}}}
-\usepackage[
-  bordercolor = white,
-  backgroundcolor = gray!30,
-  linecolor = black,
-  colorinlistoftodos]{todonotes}
+% Bell Ineqaulities
+\newcommand{\I}{\mathcal{I}}
 
 
 
@@ -215,12 +214,6 @@
 \newtheorem*{remark}{Remark}
 
 
-%%%%%%%%%%%%%%%%%%%
-%  F I G U R E S  %
-%%%%%%%%%%%%%%%%%%%
-
-%\input{Tableau.tex}
-
 
 %%%%%%%%%%%%%%%%
 %   Document   %
@@ -239,5 +232,276 @@
 \affil[1]{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA}
 \affil[2]{National Institute of Standards and Technology, 100 Bureau Dr., Gaithersbug, MD 20899, USA}
 \maketitle
+%========================================
+\section{Preliminaries and notations}
+%========================================
+We use $[n]$ to denote the set $\{0,1 \dots n-1\}$.
+We denote the group commutator of $A$ and $B$, i.e. $ABA^{-1}B^{-1}$, by $[A,B]$.
 
+\textbf{The EPR pair.} Our goal is to self-test maximally entangled state of local dimension $d$, denoted by 
+\begin{align}
+\ket{\EPR{d}} = \frac{1}{\sqrt{d}} \sum_{i = 0}^{d-1} \ket{ii}.
+\end{align}
+The superscript $(d)$ is to stress the local dimension and we follow this convention through this paper.
+
+\textbf{The Pauli operators.} 
+We self-test $\ket{\EPR{d}}$ by verify that Alice and Bob has operators behave like 
+the $d$-dimensional Pauli operators which are defined by
+\begin{align}
+	\paulix{d} = \sum_{i=0}^{d-1} \ketbra{i+1}{i} \quad \pauliz{d} = \sum_{i=0}^{d-1} \omega_d^i\ketbra{i}{i}
+\end{align}
+where $\omega_d = e^{i\pi/d}$ is the primitive $d$th root of unity and the addition is taken modulo $d$.
+
+\textbf{The weighted CHSH inequality \cite{acin2012}.}
+The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
+The weighted CHSH operator is defined as 
+\begin{align}
+	\label{eq:chsh_op}
+	\I_\alpha = \alpha(A_0B_0+A_0B_1) + A_1B_0 - A_1B_1,
+\end{align}
+where $A_x,B_y$ for $x,y = 0,1$ are Binary observables on Hilbert space $\calH_A$ and $\calH_B$ respcetively.
+If Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$, we have 
+\begin{align}
+	\bra{\phi} \I_\alpha \ket{\phi} \leq 2\alpha.
+\end{align}
+However, If they share entangled state $\ket{\psi}$, the maximal violation is 
+\begin{align}
+\label{eq:chsh_max}
+\bra{\psi} \I_\alpha \ket{\psi} \leq 2\sqrt{1+\alpha^2}.
+\end{align}
+\begin{definition}[Ideal strategy for $\I_\alpha$]
+	Define $\mu = \arctan(1/\alpha)$.
+	The ideal strategy for weighted CHSH with parameter $\alpha$ (i.e. achieving maximal violation of \cref{eq:chsh_max})
+	consists of the joint state $\ket{\EPR{2}}$ and observables $A_0 = \pauliz{2}$, $A_1 = \paulix{2}$,
+	$B_0 = \cos(\mu) \pauliz{2} + \sin(\mu) \paulix{2}$ and $B_1 = \cos(\mu) \pauliz{2} - \sin(\mu) \paulix{2}$.
+\end{definition}
+We take an approach introduced in Ref.~\cite{bamps2015} and prove the following robust self-testing result.
+\begin{theorem}
+\label{thm:selftest}
+	Suppose the quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ satisfies that
+	\begin{align}
+		\bra{\psi} \I_\alpha \ket{\psi} \geq 2\sqrt{1+\alpha^2} - \epsilon
+	\end{align}
+	for some $\alpha$, then
+	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{aux}$  such that
+	\begin{align}
+		\| \Phi( \tilde{A}_x \x \tilde{B}_y \ket{\psi}) -\ket{aux} \x (A_x \x B_y) \ket{\EPR{2}}  \| = O(\sqrt{\epsilon})
+	\end{align}
+	for $x,y \in \{-1, 0, 1\}$ where the subscript $-1$ refers to the identity operator and where $A_x, B_y$ are from the 
+	ideal strategy.
+\end{theorem}
+We defer the proof of \cref{thm:selftest} till Appendix~\ref{sec:selftest}.
+After proving the robust the self-testing result, we take one step further and observed some interesting behaviour of the 
+observable $\tilde{B}_0\tilde{B}_1$.
+\begin{proposition}
+\label{prop:2d-subspace}
+	Suppose a quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the maximal 
+	value of  $\bra{\psi}\I_{-\cot(\pi/2d)} \ket{\psi}$, then there exists a $2$-dimensional Hilbert space which is spanned by eigenvectors of 
+	$\tilde{B}_0\tilde{B}_1$ of eigenvalue $\omega_d$ and $\omega_d^{-1}$.
+\end{proposition}
+\begin{proof}[Proof of \cref{prop:2d-subspace}]
+	By \cref{thm:selftest}, the condition that the strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the  
+	maximal value of $\bra{\psi}  \I_\alpha \ket{\psi} $ implies that there exists state $\ket{u_0}, \ket{u_1}$ such that 
+	\begin{align*}
+	&(\tilde{B}_0 + \tilde{B}_1) \ket{u_0} = 2\cos(\pi/2d) \ket{u_0} \\
+	&(\tilde{B}_0 + \tilde{B}_1) \ket{u_1} = -2\cos(\pi/2d) \ket{u_1}\\
+	&(\tilde{B}_0 - \tilde{B}_1) \ket{u_0} = -2\sin(\pi/2d) \ket{u_1} \\
+	&(\tilde{B}_0 - \tilde{B}_1) \ket{u_1} = -2\sin(\pi/2d) \ket{u_0}.
+	\end{align*}
+	It is straightforward to calculate that 
+	\begin{align}
+		\tilde{B}_0\tilde{B}_1 \ket{u_0} &= \cos(\pi/d) \ket{u_0} -\sin(\pi/d) \ket{u_1}\\
+		\tilde{B}_0\tilde{B}_1\ket{u_1} &= \sin(\pi/d)\ket{u_0} + \cos(\pi/d) \ket{u_1}.
+	\end{align}
+	We can conclude that 
+	\begin{align}
+		&\tilde{B}_0\tilde{B}_1(\ket{u_0} + i\ket{u_1}) = e^{i \frac{\pi}{d}} (\ket{u_0} + i\ket{u_1})\\
+		&\tilde{B}_0\tilde{B}_1(\ket{u_0} - i\ket{u_1}) = e^{-i \frac{\pi}{d}} (\ket{u_0} - i\ket{u_1}).
+	\end{align}
+\end{proof}
+
+\textbf{Nonlocal game}. The two players of a nonlocal game are Alice and Bob. Each of them is requested
+to give answer for a chosen question. We denote Alice's question set by $X$ and answer set by $A$. Similarly,
+Bob's question set is denoted by $Y$ and his answer set is denoted by $B$. The nonlocal game also
+comes with two functions: $\pi: X \times Y \rightarrow [0,1]$, which is the probability distribution over the questions,
+and $V: A \times B \times X \times Y \rightarrow \R$, which is the scoring function. Such games are nonlocal
+because Alice and Bob cannot communicate after getting their questions but they may share some strategy before 
+the start of the game. Note that in the literature, the typical scoring function of a nonlocal game maps the input-output
+pair to $\{0.1\}$ which corresponds to losing and winning. Allowing the score to be any real number is the key ingredient 
+to our new nonlocal game. 
+
+The quantum strategy of a game $G$ consists of projective measurements $\{\{A_x^a\}_a\}$ on Alice's side and 
+$\{\{B_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$. Then the behaviour of Alice and Bob is described 
+by the conditional probability
+\begin{align}
+	\pr{ab}{xy} = \bra{\psi} A_x^a \x B_y^b \ket{\psi} \text{ for } (a,b,x,y) \in A \times B \times X \times Y,
+\end{align}
+where $(A_x^a)^2 = A_x^a = (A_x^a)^\dagger$ and $(B_y^b)^2 = B_y^b = (B_y^b)^\dagger$.
+The \emph{value} of a strategy is given by
+\begin{align}
+	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
+\end{align} 
+
+The main contribution of our work is the construction of a nonlocal game $\G{d}$ that can be used to self-test $\ket{\EPR{d}}$where $d$ is an arbitrary odd prime number. 
+In fact, our nonlocal game self-tests $\paulix{d}$ and $\pauliz{d}$ too, just implicitly.
+The nonlocal game is a linear system game with modifications. 
+We introduce the definition of self-testing first and then the definition of linear system game, 
+which come from Ref.~\cite{coladan2017, slofstra2017}.
+\begin{definition}[Self-testing]
+	We say that a nonlocal game self-tests a quantum state $\ket{\Psi}$ if 
+	any quantum strategy $S$ that achieves the optimal quantum value uses a shared state equivalent up to local isometry to $\ket{\Psi}$.
+\end{definition}
+\begin{definition}[Linear system game]
+ Let $Ax = b$ be an $m \times n$ linear system over $\Z_d$. The associated linear system game has two
+ players Alice and Bob, where Alice is given a equation number $1 \leq x \leq m$ and replies with $a \in \Z_d^{\times n}$
+ ,and Bob is given a variable $y$ and replies with an assignment $y \in \Z_d$. The winning condition is 
+ \begin{align*}
+ 	a(y) &= b && \text{(Consistency)} \\
+	\sum_{y = 1}^n A_{xy} a(y) &\equiv b(x) \pmod d. &&\text{(Constraint satisfaction)}
+ \end{align*}
+\end{definition}
+The scoring function of linear system games always maps an input-output pair to $\{0,1\}$, 
+so later when we say a quantum strategy wins a linear system game perfectly, we mean that 
+$V(a,b,x,y) =0$ implies that $\pr{ab}{xy} = 0$.
+
+The main tool to understand linear system game is through its solution group over $\Z_d$.
+\begin{definition}[Solution group over $\Z_d$ \cite{coladan2017}]
+	For the linear system game associated with $Ax = b$ over $\Z_d$, its solution group $\Gamma(A,b,\Z_d)$ has 
+	one generator for each variable and one relation for each equation and relations enforcing that the variables in the same
+	equation commutes. The set of local commutativity relations is denoted by $R_c$ and defined by
+	\begin{align}
+		R_c := \set{ [x_i, x_j] |  A_{li} \neq 0 \neq A_{lj} \text{ for some } 1 \leq l \leq m}.
+	\end{align}
+	The set of constraint satisfaction relations is denoted by $R_{eq}$ and defined by.
+	\begin{align}
+		R_{eq} := \set{ \J^{-b(l)} \Pi_{i=1}^n  x_i^{A_{li}} | 1\leq l\leq m}
+	\end{align}
+	Then the solution group has presentation 
+	\begin{align}
+	\Gamma(A,b,\Z_d) := \ip{ \{x_i\}_{i=1}^n \cup \{\J\} : R_c \cup R_{eq} \cup \{ (x_i)^d, \J^d| 1 \leq i \leq n\}}. 
+	\end{align}
+\end{definition}
+Note that the relations $(x_i)^d$ and $\J^d$ ensure that we have solutions over $\Z_d$.
+Then the operator solution of $\Gamma(A,b,\Z_d)$ is given below.
+\begin{definition}[Operator solution]
+	An operator solution for the linear system game associated with $Ax =b$ over $\Z_d$ is a unitary representation
+	$\tau$ of $\Gamma(A,b,\Z_d)$ such that $\tau(\J) = \omega_d\1$. A conjugate operator solution is a unitary 
+	representation mapping $\J$ to $\overline{\omega_d}\1$.
+\end{definition}
+What has been established in Ref.\cite{cleve2017,coladan2017} is that we can construct a perfect strategy of a
+linear system game from its operator solution and vice versa.
+%========================================
+\section{Components of $\G{d}$}
+%========================================
+%----------------------------------------------------------------
+\subsection{The linear system game}
+%----------------------------------------------------------------
+The main component of $\G{d}$ is a linear system game $\LS$, whose solution group is an embedding of the qudit Pauli group,
+which is defined as
+\begin{align}
+	\Pg_d = \langle x, z, \J : x^d = z^d = \J^d = e, zxz^{-1}x^{-1} = \J, x\J x^{-1}\J^{-1}= z\J z^{-1}\J^{-1} = e\rangle. 
+\end{align}
+To construct $\LS$, we introduce new generators $u_x$ and $u_z$ to $\Pg_d$, and replace the relation $x^d = z^d = e$ 
+by the following relations
+\begin{align}
+\label{eq:sim}
+	u_x x u_x = x^2, \quad
+	u_z z u_z = z^2.
+\end{align}
+Such relations give us the freedom to use the same solution group to embed different $\Pg_d$.
+
+With constraints imposed by other components of the whole game, the two conditions above 
+imply that the eigenvalues of $x$ and $z$ are $\{\omega_d^k = e^{ik\pi/d}\}_{k=1}^d$ with $d$ odd, prime and
+$\Z/(d\Z)$ has primitive root $2$ and the eigenspaces for different eigenvalues are of the same dimension.
+\hl{Later we will set the exponent to be $a \in \{2, 3, 5\}$ which is the primitive root of infinitely many prime numbers and
+construct a nonlocal game that can self-test infinitely many maximally entangled state.}
+\footnote{Figuring out what $a$ is will take us one step closer to resolving Artin's Conjecture\cite{murty1988}.}
+
+Secondly, we drop the relation $\J^d = e$ and make the value of $\J$ determined by $x$ and $z$ in the 
+relation $xzx^{-1}z^{-1} = \J$.
+
+It can be easily checked that the qudit Pauli-x and Pauli-z operators of dimension $d$ satisfy the new relations 
+above, where Pauli-x and Pauli-z operators are defined by
+\begin{align}
+	\sigma_x = \sum_{i=0}^{d-1} \ketbra{i+1 \pmod{d} }{i}  \quad \quad
+	\sigma_z = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i}.
+\end{align}
+Moreover, if $U_x\sigma_xU_x^\dagger = \sigma_x^2$ and $U_z\sigma_zU_z^\dagger = \sigma_z^2$,
+we can verify that 
+\begin{align}
+	U_xU_z = \1 = U_zU_x,
+\end{align}
+Hence, we define the new group by
+\begin{equation}
+\begin{aligned}
+	\Pg =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
+	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
+\end{aligned}
+\end{equation}
+\hl{Since $\Pg_d$'s relations satisfy the relations of $\Pg$, can we say $\Pg_d$ is a subgroup of $\Pg$?}
+This group will be embedded in a solution group, $\Gamma_\Pg$, following Slofstra's embedding techniques.
+See Appendix~\ref{sec:construct} for details.
+\bibliographystyle{alphaurl}
+\bibliography{quantum_correlation}
+\appendix
+%========================================
+\section{Proof of \cref{thm:selftest} }
+\label{sec:selftest}
+%========================================
+\begin{proof}
+Following the techniques developed in Ref.~\cite{bamps2015}, the first step is to find a sum-of-square decomposition of 
+\begin{align}
+	\bar{\I}_\alpha = 2\sqrt{\alpha^2+1} \1 - \I_\alpha
+	= \frac{2}{\sin(\mu)} \1 - \frac{\cos(\mu)}{\sin(\mu)}(A_0B_0+A_0B_1) -  A_1B_0 + A_1B_1.
+\end{align} 
+With the following notation
+\begin{align*}
+	Z_A = A_0 &\quad X_A = A_1\\
+	Z_B = \frac{B_0+B_1}{2\cos(\mu)} &\quad X_B = \frac{B_0-B_1}{2\sin(\mu)},
+\end{align*}
+the two SOS decompositions that we use are
+\begin{align}
+	\label{eq:sos1}&\bar{\I}_\alpha = \frac{\sin(\mu)\bar{\I}_\alpha^2 + 4\sin(\mu)\cos(\mu)^2(Z_AX_B+X_AZ_B)^2}{4},\\
+	\label{eq:sos2}&\bar{\I}_\alpha = \frac{\cos^2(\mu)}{\sin(\mu)}(Z_A-Z_B)^2 + \sin(\mu) (X_A-X_B)^2.
+\end{align}
+The verification is omitted here.
+
+Suppose the quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_{y in [2]}\}$ achieves that 
+$\bra{\psi} \bar{\I}_\alpha \ket{\psi} \leq \epsilon$.
+The second step is to establish bounds of the following form
+\begin{align}
+	&\|(\tilde{Z}_A-\tilde{Z}_B)\ket{\psi}\| \leq c_1 \sqrt{\epsilon}\\
+	&\|(\tilde{X}_A(\1+\tilde{Z}_B)-\tilde{X}_B(\1-\tilde{Z}_A))\ket{\psi}\| \leq c_2 \sqrt{\epsilon}\\
+	&\|(\tilde{X}_A-\tilde{X}_B)\ket{\psi}\| \leq c_3 \sqrt{\epsilon}\\
+	&\|(\tilde{Z}_A\tilde{X}_A+\tilde{X}_A\tilde{Z}_A)\ket{\psi}\| \leq c_4 \sqrt{\epsilon}.
+\end{align}
+Now we write $s = \sin(\mu)$, $c = \cos(\mu)$ and define
+\begin{align*}
+	S_1 &= \frac{\sqrt{s}}{2} \bar{\I}_\alpha, \quad
+	S_2 = \sqrt{s}c(\tilde{Z}_A\tilde{X}_B+\tilde{X}_A\tilde{Z}_B),\\
+	S_3 &= \frac{c}{\sqrt{s}}(\tilde{Z}_A-\tilde{Z}_B),\quad
+	S_4 = \sqrt{s}(\tilde{X}_A-\tilde{X}_B)
+\end{align*}
+then $\bar{\I}_\alpha = S_1^2 + S_2^2 = S_3^2 + S_4^2$ and $\bra{\psi}\bar{\I}_\alpha \ket{\psi} \leq \epsilon$ implies that 
+$\bra{\psi}S^2_i \ket{\psi} \leq \epsilon$ and $\|S_i \ket{\psi} \| \leq \sqrt{\epsilon}$ for $i = 1,2,3,4$.
+We can easily check that 
+\begin{align*}
+	c_1 = \frac{\sqrt{s}}{c}, \quad
+	c_2 = \frac{1}{\sqrt{s}} + \frac{1}{c\sqrt{s}}, \quad
+	c_3 = \frac{1}{\sqrt{s}}.
+\end{align*}
+where we use the relation that $\tilde{X}_A(\1+\tilde{Z}_B)-\tilde{X}_B(\1-\tilde{Z}_A) = S_4/s^{1/2} + S_2/(cs^{1/2})$.
+To calculate $c_4$, we use the relation
+\begin{align}
+	\tilde{Z}_A\tilde{X}_A + \tilde{X}_A\tilde{Z}_A = \frac{S_2}{c\sqrt{s}} + \frac{\sqrt{s}\tilde{X}_AS_3}{c} + \frac{\tilde{Z}_AS_4}{\sqrt{s}}
+\end{align}
+and reach the conclusion that  
+\begin{align}
+	c_4 = \frac{1+c+s}{c\sqrt{s}}
+\end{align}
+where we use that fact that $\tilde{Z}_A, \tilde{X}_A$ are unitaries.
+
+With appropriate substitutions, the rest of the proof follows the same derivation as that in Appendix A of Ref.~\cite{bamps2015},
+so we omit it here.
+\end{proof}
 \end{document}
