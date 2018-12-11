@@ -104,6 +104,9 @@
 % table of contents
 \usepackage{tocloft}
 
+% Table with multi-row
+\usepackage{multirow}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %  N E W C O M M A N D  %
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -184,6 +187,10 @@
 \newcommand{\pauliz}[1]{\sigma_z^{(#1)}}
 \newcommand{\G}[1]{G^{(#1)}}
 \newcommand{\LS}{LS}
+\newcommand{\tA}{\tilde{A}}
+\newcommand{\tB}{\tilde{B}}
+\newcommand{\tpsi}{\tilde{\psi}}
+
 
 % Probabilities
 \newcommand{\pr}[2]{P(#1|#2)}
@@ -393,54 +400,344 @@ linear system game from its operator solution and vice versa.
 %========================================
 \section{Components of $\G{d}$}
 %========================================
+Suppose we would like to self-test $\ket{\EPR{d}}$ with $\G{d}$, where $d$ is prime and has primitive root $2$.
+Later we will see how to deal with general prime numbers and why there are infinitely many prime dimensional EPR pairs 
+that can be self-tested by a variant of $\G{d}$.
 %----------------------------------------------------------------
 \subsection{The linear system game}
 %----------------------------------------------------------------
-The main component of $\G{d}$ is a linear system game $\LS$, whose solution group is an embedding of the qudit Pauli group,
+The main component of $\G{d}$ is a linear system game $\LS$, whose solution group is derived from the qudit Pauli group,
 which is defined as
 \begin{align}
 	\Pg_d = \langle x, z, \J : x^d = z^d = \J^d = e, zxz^{-1}x^{-1} = \J, x\J x^{-1}\J^{-1}= z\J z^{-1}\J^{-1} = e\rangle. 
 \end{align}
-To construct $\LS$, we introduce new generators $u_x$ and $u_z$ to $\Pg_d$, and replace the relation $x^d = z^d = e$ 
+The goal of our modification is to construct $\Pg_{\LS}$ which has implicit $d$-dependence.
+We first introduce new generators $u_x$ and $u_z$ to $\Pg_d$, and replace the relation $x^d = z^d = e$ 
 by the following relations
 \begin{align}
 \label{eq:sim}
 	u_x x u_x = x^2, \quad
 	u_z z u_z = z^2.
 \end{align}
-Such relations give us the freedom to use the same solution group to embed different $\Pg_d$.
-
-With constraints imposed by other components of the whole game, the two conditions above 
-imply that the eigenvalues of $x$ and $z$ are $\{\omega_d^k = e^{ik\pi/d}\}_{k=1}^d$ with $d$ odd, prime and
-$\Z/(d\Z)$ has primitive root $2$ and the eigenspaces for different eigenvalues are of the same dimension.
-\hl{Later we will set the exponent to be $a \in \{2, 3, 5\}$ which is the primitive root of infinitely many prime numbers and
-construct a nonlocal game that can self-test infinitely many maximally entangled state.}
+Consequently, the $d$ dependency of $\G{d}$ comes from constraints imposed by other components of the game,
 \footnote{Figuring out what $a$ is will take us one step closer to resolving Artin's Conjecture\cite{murty1988}.}
-
-Secondly, we drop the relation $\J^d = e$ and make the value of $\J$ determined by $x$ and $z$ in the 
+but the alphabet sizes are determined by $\Pg_{\LS}$ and we will see why they are constant.
+Next, we drop the relation $\J^d = e$ and make the value of $\J$ determined by $x$ and $z$ in the 
 relation $xzx^{-1}z^{-1} = \J$.
 
-It can be easily checked that the qudit Pauli-x and Pauli-z operators of dimension $d$ satisfy the new relations 
-above, where Pauli-x and Pauli-z operators are defined by
+It can be easily checked that $\paulix{d}$ and $\pauliz{d}$ can be extended to a representation of $\Pg_{\LS}$ 
+where  $\paulix{d}$ and $\pauliz{d}$ are defined by
 \begin{align}
-	\sigma_x = \sum_{i=0}^{d-1} \ketbra{i+1 \pmod{d} }{i}  \quad \quad
-	\sigma_z = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i}.
+	\paulix{d} = \sum_{i=0}^{d-1} \ketbra{i+1 \pmod{d} }{i}  \quad \quad
+	\pauliz{d} = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i}.
 \end{align}
-Moreover, if $U_x\sigma_xU_x^\dagger = \sigma_x^2$ and $U_z\sigma_zU_z^\dagger = \sigma_z^2$,
+Moreover, if $U_x\paulix{d}U_x^\dagger = (\paulix{d})^2$ and $U_z\pauliz{d}U_z^\dagger = (\pauliz{d})^2$,
 we can verify that 
 \begin{align}
 	U_xU_z = \1 = U_zU_x,
 \end{align}
-Hence, we define the new group by
+Hence, we do not need both $u_x$ and $u_z$ as generators and we just need one of them.
+In the end, we define $\Pg_{\LS}$ by
 \begin{equation}
 \begin{aligned}
-	\Pg =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
+	\Pg_{\LS} =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
 	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
 \end{aligned}
 \end{equation}
-\hl{Since $\Pg_d$'s relations satisfy the relations of $\Pg$, can we say $\Pg_d$ is a subgroup of $\Pg$?}
-This group will be embedded in a solution group, $\Gamma_\Pg$, following Slofstra's embedding techniques.
+This group will be embedded in a solution group, $\Gamma(\LS)$, following Slofstra's embedding techniques.
+The corresponding game $\LS$ has $n = 2351$ variables and $m= 1916$ equations.
 See Appendix~\ref{sec:construct} for details.
+%------------------------------------------------------------------------
+\subsection{The extended weighted CHSH game}
+%------------------------------------------------------------------------
+The extended weighted CHSH game is added to make sure that some of Alice and Bob's observables have
+eigenvalues $\omega_d$ and $\omega_d^{d-1}$.
+The notation for the extended weighted CHSH game that enforces the eigenvalues of the observable $U$ is 
+$\CHSH_U$, where the superscript $d$ means that the rules of this game depends on $d$.
+Intuitively, this is one step towards verifying Alice and Bob use $\paulix{d}$ and $\pauliz{d}$ in their operator solution.
+
+
+In this game, Alice and Bob each gets a question $x$,$y \in \{ 0, 1, \ast\}$ and 
+they answer with $a,b \in \{0,1,\diamond,\perp\}$. 
+The scoring rules are
+\begin{itemize}
+	\item \textbf{Case 1:} $x = y = \ast$, Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
+	they score only if $a = b$;
+	\item \textbf{Case 2a:} $x,y \in \{0,1\}$ and they answer with $a,b \in \{0,1\}$, then
+	their answers are scored according to $I_{-\cot(\pi/2d)}$
+	\item \textbf{Case 2b:} $x,y \in \{0,1\}$ and Alice answer with $\perp$, then all possible outputs from Bob
+	are discarded;
+	\item \textbf{Case 3:} $x \in {0,1}, y = \ast$, when Bob answers $\diamond$, Alice should answer with $\{0.1\}$ but not $\perp$,
+	when Bob answers $\perp$ Alice should answer $\perp$ too;
+	\item \textbf{Case 4:} other combination of inputs are not scored.
+\end{itemize}
+In the ideal strategy, Alice and Bob share the state $\ket{\psi} =1/\sqrt{d} \sum_{i=0}^{d-1} \ket{u_i}\ket{u_i}$.
+We define two subspaces $V = \spn\{\ket{u_1}, \ket{u_{d-1}}\}$ and $V^\perp = \C^d \setminus\spn\{\ket{u_1}, \ket{u_{d-1}}\}$ amd
+define $\Pi_V$ and $\Pi_{V}^\perp$ to be the corresponding projectors. Note that $V$ is the subspace on which they should
+ maximaize $\langle I_{-\cot(\pi/2d)} \rangle$.
+
+We summarize the projectors of the ideal strategy and the ideal correlation in the following two charts.
+Note that we don't explicitly calculate the conditional probabilities of the form $\pr{\perp 0}{xy}$ because they are irrelevant
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{2}{|c|}{$x=\ast$}\\
+\cline{3-4}
+\multicolumn{2}{|c|}{} &$a = \diamond$ & $a = \perp$ \\
+\hline
+\hline
+\multirow{2}{*}{$y = \ast$} & $b=\diamond$ & 2/d & 0 \\
+\cline{2-4}
+&$b=\perp$ & 0 & (d-2)/d \\
+\hline
+\end{tabular}
+\caption{Alice and Bob's behaviour when $x=y=\ast$.}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{3}{|c|}{$x=0$}&
+\multicolumn{3}{|c|}{$x=1$} \\
+\cline{3-8}
+\multicolumn{2}{|c|}{} &
+$a = 0$ & $a=1$ & $a=\perp$ &
+$a = 0$ & $a=1$ & $a=\perp$\\
+\hline
+\hline
+\multirow{2}{*}{$y = 0$} & $b=0$ & $\frac{\cos^2(\pi/4d)}{d}$ & $\frac{\sin^2(\pi/4d)}{d}$ & \small $\pr{\perp0}{00}$ 
+& $\frac{1+\sin(\pi/2d)}{2d}$ & $\frac{1-\sin(\pi/2d)}{2d}$ & \small  $\pr{\perp0}{10}$ \\
+\cline{2-8}
+&$b=1$ & $\frac{\sin^2(\pi/4d)}{d}$ & $\frac{\cos^2(\pi/4d)}{d}$ & $\frac{d-2}{d}-\pr{\perp0}{00}$ 
+&  $\frac{1-\sin(\pi/2d)}{2d}$ & $\frac{1+\sin(\pi/2d)}{2d}$ & \small $\frac{d-2}{d} - \pr{\perp0}{10}$  \\
+\hline
+\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/4d)}{d}$ & $\frac{\sin^2(\pi/4d)}{d}$ & \small $\pr{\perp0}{01}$ & 
+$ \frac{1-\sin(\pi/2d)}{2d}$ & $ \frac{1+\sin(\pi/2d)}{2d}$ & \small $\pr{\perp 0}{11}$  \\
+\cline{2-8}
+&$b=1$ & $\frac{\sin^2(\pi/4d)}{d}$ & $\frac{\cos^2(\pi/4d)}{d}$ & \small $\frac{d-2}{d}-\pr{\perp0}{01}$ &  
+$ \frac{1+\sin(\pi/2d)}{2d}$ & $ \frac{1-\sin(\pi/2d)}{2d}$ & \small $\frac{d-2}{d}- \pr{\perp 0}{11}$ \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Alice and Bob's behaviour when $x,y \in [2]$.}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{3}{|c|}{$x=0$}&
+\multicolumn{3}{|c|}{$x=1$} \\
+\cline{3-8}
+\multicolumn{2}{|c|}{} &
+$a = 0$ & $a=1$ & $a=\perp$ &
+$a = 0$ & $a=1$ & $a=\perp$\\
+\hline
+\hline
+\multirow{2}{*}{$y = \ast$} & $b=\diamond$ & $1/d$ & $1/d$ & 0 
+& $1/d$ & $1/d$ & 0 \\
+\cline{2-8}
+&$b=\perp$ & 0 & 0 & $\frac{d-2}{d}$ 
+&  0 & 0 & \small $\frac{d-2}{d} $  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Alice and Bob's behaviour when $x\in [2]$ and $y = \ast$.}
+\end{table}
+Alice's projectors are 
+\begin{align*}
+	&A_\ast^\diamond = \Pi_V, A_\ast^\perp = \Pi_V^\perp \\
+	&A_0^0 = \ketbra{u_1}{u_1}, A_0^1 = \ketbra{u_{d-1}}{u_{d-1}}, A_0^\perp = \Pi_V^\perp\\
+	&A_1^0 = \frac{1}{2}(\ket{u_1}+\ket{u_{d-1}})(\bra{u_1}+\bra{u_{d-1}}), 
+	A_0^1 = \frac{1}{2}(\ket{u_1}-\ket{u_{d-1}})(\bra{u_1}-\bra{u_{d-1}}),A_0^\perp = \Pi_V^\perp
+\end{align*}
+Bob's projectors are 
+\begin{align*}
+	&B_\ast^\diamond = \Pi_V, B_\ast^\perp = \Pi_V^\perp \\
+	&B_0^0|_V = \left( \cos(\frac{\pi}{4d})\ket{u_1} + \sin(\frac{\pi}{4d})\ket{u_{d-1}}\right)
+	\left( \cos(\frac{\pi}{4d})\bra{u_1} + \sin(\frac{\pi}{4d})\bra{u_{d-1}}\right)\\
+	&B_0^1|_V = \left( \sin(\frac{\pi}{4d})\ket{u_1} - \cos(\frac{\pi}{4d})\ket{u_{d-1}}\right)
+	\left( \sin(\frac{\pi}{4d})\bra{u_1} - \cos(\frac{\pi}{4d})\bra{u_{d-1}}\right)\\
+	&B_1^0|_V = \left( \cos(\frac{\pi}{4d})\ket{u_1} - \sin(\frac{\pi}{4d})\ket{u_{d-1}}\right)
+	\left( \cos(\frac{\pi}{4d})\bra{u_1} - \sin(\frac{\pi}{4d})\bra{u_{d-1}}\right)\\
+	&B_0^1|_V = \left( \sin(\frac{\pi}{4d})\ket{u_1} + \cos(\frac{\pi}{4d})\ket{u_{d-1}}\right)
+	\left( \sin(\frac{\pi}{4d})\bra{u_1} + \cos(\frac{\pi}{4d})\bra{u_{d-1}}\right).
+\end{align*}
+About Bob's projectors for input $y \in [2]$, we are only interested in their actions when restricted 
+to the subspace $V$. Their actions on the subspace $V^\perp$ is irrelevant in this game.
+
+The importance of this game is summarized in the following lemma.
+\begin{lemma}
+	\label{lm:chsh_comp}
+	Suppose a quantum strategy $\left(\{\{\tA_x^a\}_a\}_x, \{\{\tB_y^b\}_b\}_y, \ket{\tpsi}\right)$
+	achieves the optimal correlation of $\CHSH$, then there exists unitaries $U_A$ and $U_B$ 
+	such that 
+	\begin{align*}
+		&U_A\x U_B \left(\tA_\ast^\diamond \x \tB_\ast^\diamond \ket{\tpsi}\right) = \ket{\EPR{2}} \\
+		&U_A\x U_B \left[\left(\1 \x  \frac{\tB_0 + \tB_1}{2\cos(\pi/2d)}\right)\left(\tA_\ast^\diamond \x \tB_\ast^\diamond \ket{\tpsi}\right) \right]
+		=\1 \x \pauliz{2} \ket{\EPR{2}} \\
+		&U_A\x U_B \left[\left(\1 \x  \frac{\tB_0 - \tB_1}{-2\sin(\pi/2d)}\right)\left(\tA_\ast^\diamond \x \tB_\ast^\diamond \ket{\tpsi}\right) \right]
+		=\1 \x \paulix{2} \ket{\EPR{2}} 
+	\end{align*}
+	where $\tB_0 = \tB_0^0 - \tB_0^1$ and $\tB_1 = \tB_1^0 - \tB_1^1$.
+\end{lemma}
+\begin{proof}
+Note that $\tA_x^a \tB_y^b$ means $\tA_x^a \x \tB_y^b$ in the following proof.
+
+From the marginal distribution $\pb{\diamond}{\ast} = \pa{0}{0}+\pa{1}{0} = 2/d$,
+we know $\| \tB_\ast^\diamond \ket{\tpsi} \| = \| (\tA_0^0+\tA_0^1) \ket{\tpsi}\| = \sqrt{2/d}$.
+Since $\pr{0\diamond}{0\ast} + \pr{1\diamond}{0\ast} = 2/d$, we find that 
+\begin{align*}
+	\frac{\bra{\tpsi}\tB_\ast^\diamond (\tA_0^0+\tA_0^1) \tB_\ast^\diamond\ket{\tpsi}}{ \| \tB_\ast^\diamond \ket{\tpsi} \|^2} = 1,
+\end{align*}
+which means that 
+\begin{align}
+	(\tA_0^0+\tA_0^1)\tB_\ast^\diamond \ket{\tpsi} = \tB_\ast^\diamond \ket{\tpsi}.
+\end{align}
+Using the commutation relation between $(\tA_0^0+\tA_0^1)$ and $\tB_\ast^\diamond$, we get
+\begin{align*}
+	\frac{\bra{\tpsi} (\tA_0^0+\tA_0^1) \tB_\ast^\diamond(\tA_0^0+\tA_0^1)\ket{\tpsi}}{ \| (\tA_0^0+\tA_0^1) \ket{\tpsi} \|^2} = 1,
+\end{align*}
+Similar argument gives us that 
+\begin{align}
+	\tB_\ast^\diamond (\tA_0^0+\tA_0^1) \ket{\tpsi} = (\tA_0^0+\tA_0^1)\ket{\tpsi}.
+\end{align}
+The two equations above can be chained by commutativity to reach the conclusion that 
+\begin{align}
+	(\tA_0^0+\tA_0^1)\ket{\tpsi} = \tB_\ast^\diamond \ket{\tpsi}.
+\end{align}
+Following the same line of argument, we can conclude that
+\begin{align}
+	\tB_\ast^\diamond \ket{\tpsi} = \tA_\ast^\diamond \ket{\tpsi} = (\tA_0^0+\tA_0^1)\ket{\tpsi} = (\tA_1^0+\tA_1^1)\ket{\tpsi}.
+\end{align}
+Looking at the marginal distribution when Alice and Bob output $\perp$, we conclude that 
+\begin{align}
+	\tB_\ast^\perp \ket{\tpsi} = \tA_\ast^\perp \ket{\tpsi} = \tA_0^\perp \ket{\tpsi} = \tA_1^\perp \ket{\tpsi},
+\end{align}
+with similar arguments.
+
+Next we examine the CHSH-type correlation when $x,y \in [2]$,
+\begin{align*}
+	   \bra{\tpsi} \tA_0^0\tB_0^0 \ket{\tpsi} 
+	= &\bra{\tpsi}(\tA_\ast^\diamond + \tA_\ast^\perp) \tA_0^0\tB_0^0 (\tA_\ast^\diamond + \tA_\ast^\perp)\ket{\tpsi} \\
+	= & \bra{\tpsi}\tA_\ast^\diamond \tA_0^0\tB_0^0 \tA_\ast^\diamond\ket{\tpsi} + \bra{\tpsi}\tA_\ast^\diamond \tA_0^0\tB_0^0 \tA_\ast^\perp\ket{\tpsi} \\
+	&+\bra{\tpsi}\tA_\ast^\perp \tA_0^0\tB_0^0 \tA_\ast^\diamond\ket{\tpsi} + \bra{\tpsi}\tA_\ast^\perp \tA_0^0\tB_0^0 \tA_\ast^\perp\ket{\tpsi}\\
+	= & \bra{\tpsi}\tB_\ast^\diamond \tA_0^0\tB_0^0 \tB_\ast^\diamond\ket{\tpsi} + \bra{\tpsi}\tA_\ast^\diamond \tA_0^0\tB_0^0 \tA_0^\perp\ket{\tpsi} \\
+	&+\bra{\tpsi}\tA_0^\perp \tA_0^0\tB_0^0 \tA_\ast^\diamond\ket{\tpsi} + \bra{\tpsi}\tA_0^\perp \tA_0^0\tB_0^0 \tA_0^\perp\ket{\tpsi}\\
+	=&\bra{\tpsi}\tB_\ast^\diamond \tA_0^0\tB_0^0 \tB_\ast^\diamond\ket{\tpsi},
+\end{align*}
+where we use the facts that $\tB_\ast^\diamond \ket{\tpsi} = \tA_\ast^\diamond \ket{\tpsi}$, $\tA_\ast^\perp \ket{\tpsi} = \tA_0^\perp \ket{\tpsi}$ and that 
+$\spn(\tA_0^0) \cap \spn(\tA_0^\perp) = \emptyset$. 
+This means that if Alice and Bob share the state $\tB_\ast^\diamond \ket{\tpsi}/\|\tB_\ast^\diamond \ket{\tpsi}\|$ and apply 
+$\tA_0^0\tB_0^0$, the conditional probability is
+\begin{align}
+	\frac{\bra{\tpsi}\tB_\ast^\diamond \tA_0^0\tB_0^0 \tB_\ast^\diamond\ket{\tpsi}}{\bra{\tpsi} \tB_\ast^\diamond \tB_\ast^\diamond \ket{\tpsi}} = \frac{\cos^2(\pi/4d)}{2}.
+\end{align} 
+We can re-normalize the other correlations of $a,b \in [2]$ when $x,y \in [2]$ similarly and get a new set of correlations 
+which achieves the maximal value of $\langle \1_{-\cot(\pi/2d)}\rangle$. 
+The conclusion of \cref{lm:chsh_comp} follows the application of \cref{thm:selftest} on the state $\tA_\ast^\diamond\tB_\ast^\diamond \ket{\tpsi}/\|\tA_\ast^\diamond\tB_\ast^\diamond \ket{\tpsi}\|$ as $\tA_\ast^\diamond\tB_\ast^\diamond \ket{\tpsi} = \tB_\ast^\diamond \ket{\tpsi}$.
+\end{proof}
+Note that the combination of \cref{lm:chsh_comp} with \cref{prop:2d-subspace} gives us that 
+$\tB_0\tB_1$ has eigenvalues $\omega_d$ and $\omega_d^{-1}$.
+
+%------------------------------------------------------------------------
+\subsection{The single value test}
+%------------------------------------------------------------------------
+By the following test, we want to make sure that some unitary $U$ has eigenvalue $1$.
+In this test $X = \{\ast\}$, $Y = \{0,1,\ast\}$, $A = \{\diamond, \perp\}$ and $B = \{0,1, \diamond, \perp\}$.
+The scoring rules are
+\begin{itemize}
+	\item \textbf{Case 1} $x = y = \ast$: Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
+	they score only if $a = b$;
+	\item \textbf{Case 2} $x =\ast$ and $y = 0$: when Alice answer $\diamond$, Bob should answer $0$, when 
+	Alice answer$\perp$ all answers of Bob are accepted;
+	\item \textbf{Case 3} $x = \ast$ and $y = 1$: when Alice answer $\diamond$, Bob should answer $0$, when 
+	Alice answer$\perp$ all answers of Bob are accepted.
+\end{itemize}
+
+Define the subspace $V = \spn\{ \ket{u_0} \}$.
+The ideal strategy has projective measurement 
+\begin{align*}
+&A_\ast^\diamond = B_\ast^\diamond= \ketbra{u_0}{u_0}, 
+&&A_\ast^\perp = B_\ast^\perp = \1 - \ketbra{u_0}{u_0},\\
+&B_0^0|_V = B_1^0|_V = \ketbra{u_0}{u_0}, 
+&&B_0^1|_V = B_1^1|_V = 0.
+\end{align*}
+The shared state is 
+\begin{align}
+	\ket{\psi} = \frac{1}{\sqrt{d}} \sum_{i \in [d]} \ket{u_i}\ket{u_i}.
+\end{align}
+Note that the shared state is the same as the one used in the extended weighted CHSH game.
+So are the observables $B_0$ and $B_1$.
+
+It is easy to calculate the ideal correlation, which is
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{2}{|c|}{$y=\ast$} &
+\multicolumn{2}{|c|}{$y=0$} &
+\multicolumn{2}{|c|}{$y=1$}\\
+\cline{3-8}
+\multicolumn{2}{|c|}{} &$b = \diamond$ & $b = \perp$ & $b = 0$ & $b = 1$ & $b = 0$ & $b = 1$\\
+\hline
+\hline
+\multirow{2}{*}{$x = \ast$} & $a=\diamond$ & $1/d$ & 0 & $1/d$ & 0 & $1/d$ & 0 \\
+\cline{2-8}
+&$a=\perp$ & 0 & $(d-1)/d$ & \small $\pr{\perp0}{\ast0}$ & \small $\frac{d-1}{d} -\pr{\perp0}{\ast0}$  
+& \small $\pr{\perp0}{\ast1}$ & \small $\frac{d-1}{d}- \pr{\perp0}{\ast0}$  \\
+\hline
+\end{tabular}
+\caption{Ideal correlation of the single value test.}
+\end{center}
+\end{table}
+The reason we have $y=0$ or $y=1$ is that we want Bob to reuse operators from $\LS$ and we want to
+conclude that $B_0B_1$ has eigenvalue $1$.
+
+\begin{lemma}
+	\label{lm:svt_comp}
+	If a quantum strategy$(\{\tA_\ast^a\}_a, \{\{\tB_y^b\}_b\}_y, \ket{\tpsi}$ has the same behaviour as
+	the optimal one, then $(\tB_0^0 - \tB_0^1)(\tB_1^0-\tB_1^1)$ has eigenvalue $1$.
+\end{lemma}
+\begin{proof}
+By the marginal distribution we know that $\| A_\ast^\diamond \ket{\psi}\| = \frac{1}{\sqrt{d}}$.
+From the condition that $P(\diamond 0|\ast 0) = 1/d$, we know
+\begin{align}
+	\frac{  \bra{\psi} \tA_\ast^\diamond  \tB_0^0 \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|^2} = 1,
+\end{align}
+which implies that 
+\begin{align}
+ \tB_0^0 \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} = \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|}.
+\end{align}
+With similar reasoning, we get
+\begin{align}
+ \tB_1^0 \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} = \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|}.
+\end{align}
+Hence $ \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} $ is in the intersection of $\supp(\tB_0^0)$ and $\supp(\tB_1^0)$.
+Since $\supp(\tB_y^0)$ and $\supp(\tB_y^1)$ are disjoint, we know
+\begin{align*}
+	(\tB_y^0 - \tB_y^1)  \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|}  =  \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} - 0 = \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} 
+\end{align*}
+for $y = 0,1$.
+Therefor, we know $ \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} $ is an eigenvector of $\tB_0\tB_1$ with eigenvalue $1$ because
+\begin{align}
+	\tB_0\tB_1 \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} = \tB_0 \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} =  \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|}.
+\end{align}
+\end{proof}
+In the later section, when we apply this test to make sure some unitary $U$ has eigenvalue $1$, 
+we denote the test by $\SVT_U$.
+
+
+
+
+
 \bibliographystyle{alphaurl}
 \bibliography{quantum_correlation}
 \appendix
@@ -504,4 +801,120 @@ where we use that fact that $\tilde{Z}_A, \tilde{X}_A$ are unitaries.
 With appropriate substitutions, the rest of the proof follows the same derivation as that in Appendix A of Ref.~\cite{bamps2015},
 so we omit it here.
 \end{proof}
+%=====================================
+\section{Construction of $\Gamma(\LS)$}
+\label{sec:construct}
+%=====================================
+In this section, we are going to embed the group $\Pg_{\LS}$ into a solution group $\Gamma(\LS)$ of a linear system game.
+What we do is to write any generator with arbitrary order as a product of new order-$2$ generators and rewrite all
+the relations with the new generators. In the end, we can get rid of the generators $y_i$ and $u$ and all 
+the remaining generators are order-$2$.
+
+We first embed the relation $xzx^{-1}z^{-1} = \J$ in a linear system game very similar to the Magic Square game.
+It has been shown that the following relations embeds $xzx^{-1}z^{-1} = \J$ \footnote{For example, Fig.~$11$ of Ref.~\cite{coladan2017}
+proves it in a group picture.}. Let $y_3 = z$ and $y_7 = x$ and the linear relations are 
+\begin{align*}
+	&y_1y_2y_3 = e,
+	&&y_4y_5y_6 = e,
+	&&y_7y_8y_9 = e,\\
+	&y_1^{-1}y_4^{-1}y_7^{-1} = e,
+	&&y_2^{-1}y_5^{-1}y_8^{-1} = \J,
+	&&y_3^{-1}y_6^{-1}y_9^{-1} = e.
+\end{align*}
+We refer to these set of linear relations as the $\MS_l$ relations.
+The magic square game also introduces some commutation relations:
+\begin{align*}
+	&[y_1, y_2] = [y_1, y_3] = [y_1, y_4] = [y_1,y_7] = e,\\
+	&[y_2, y_3] = [y_2, y_5] = [y_2, y_8] = e,\\
+	&[y_3, y_6] = [y_3, y_9] = e,\\
+	&[y_4, y_7] = [y_4,y_5] =  [y_4,y_6] = e, \\
+	& [y_5,y_6] =  [y_5,y_8] = e,\\
+	& [y_6,y_9] = e,\\
+	& [y_7,y_8] =  [y_7,y_9] = e,\\
+	&[y_8,y_9] = e.
+\end{align*}
+The set of the commutation relations above is denoted by $\MS_c$.
+So we redefine $\Pg_{\LS}$ as 
+\begin{align}
+	\Pg_{\LS} = \langle \{y_i\}_{i=1}^9,u,\J: \MS_l \cup \MS_c \cup \{ [\J, y_i] = [\J, u] = e,
+					uy_7u^{-1} = y_7^2, u^{-1}y_3u = y_3^2\}	 \rangle.
+\end{align}
+Then we can use a procedure similar to the one used in the proof of Proposition~$4.8$ of Ref.~\cite{slofstra2017} to 
+embed $\Pg_{\LS}$ into a group with only order-$2$ generators except for $\J$, whose order is implicit.
+
+We start by introducing $y_{3,1}$ and $y_{3,2}$ of order $2$ such that $y_3 = y_{3,1}y_{3,2}$ 
+and $y_{3,1}$ commutes with $u$, $\J$ and $y_i$ for $ i \neq 3$.
+Then the relation $uy_3u^{-1} = y_3^2$ is rewritten as $uy_{3,2}u^{-1} = y_{3,2}y_{3,1}y_{3,2}$ so we introduce $y_{3,3} = y_{3,2}y_{3,1}y_{3,2}$.
+The group $\Pg_{\LS}$ becomes
+\begin{equation}
+\begin{aligned}
+	\Pg_{\LS} = \langle y_{3,1}, y_{3,2}, y_{3,3}, u, \{y_i\}_{i \neq 3} \J: &y_{3,1}^2 = y_{3,2}^2 = y_{3,3}^2 =e,\\
+	&\J \text{ commute with  all the generators, } [y_i,y_{3,1}] = [u,y_{3,1}] =  e \text{ for } i \neq 3,\\
+	&\MS_c \text{ with $y_3$ replaced by $y_{3,2}$},
+	\MS_l \text{ with $y_3$ replaced by $y_{3,1}y_{3,2}$},\\
+	& u^{-1}y_7u = y_7^2, 
+	y_{3,3} = y_{3,2}y_{3,1}y_{3,2}, uy_{3,2}u^{-1} = y_{3,3}\rangle.
+\end{aligned}
+\end{equation}
+Next, we introduce $y_{7,1}$ and $y_{7,2}$ of order $2$ such that $y_7 = y_{7,1}y_{7,2}$ and 
+$y_{7,1}$ commutes with $u$, $\J$ and $y_i$ for $i \neq 3,7$.
+Then the relation $u^{-1}y_7u = y_7^2$ is rewritten as $u^{-1}y_{7,2}u = y_{7,2}y_{7,1}y_{7,2}$ so we introduce $y_{7,3} = y_{7,2}y_{7,1}y_{7,2}$.
+The relation $y_7y_{3,1}y_7^{-1} = y_{3,1}$ is rewritten as $y_{7,2}y_{3,1}y_{7,2} = y_{7,1}y_{3,1}y_{7,1}$ so we introduce $y_{7,4} = y_{7,1}y_{3,1}y_{7,1}$.
+The group $\Pg_{\LS}$ becomes
+\begin{equation}
+\begin{aligned}
+	\Pg_{\LS} = \langle \{y_{3,i}\}_{i=1}^3, \{ y_{7,i} \}_{i=1}^4, \{y_i\}_{i\neq 3, 7}, u, \J: &\{y_{3,i}\}_{i=1}^3 \{y_{7,i}\}_{i=1}^4 \text{ of order } 2;\\
+	&\J \text{ commutes with all the generators, } [u, y_{3,1}] = [u, y_{7,1}] = e,\\
+	&y_{3,1}, y_{7,1} \text{ commute with } y_i,\; i \neq 3,7,\\
+	& \MS_c \text{ with $y_3, y_7$ replaced by $y_{3,2}, y_{7,2}$},\\
+	& \MS_l \text{ with $y_3$, $y_7$ replaced by $y_{3,1}y_{3,2}$ and $y_{7,1}y_{7,2}$} \\
+	&y_{3,3} = y_{3,2}y_{3,1}y_{3,2}, uy_{3,2}u^{-1} = y_{3,3}, \\
+	&y_{7,3} = y_{7,2}y_{7,1}y_{7,2}, u^{-1}y_{7,2}u = y_{7,3},\\
+	&y_{7,4} = y_{7,1}y_{3,1}y_{7,1}, y_{7,2}y_{3,1}y_{7,2} = y_{7,4} \rangle
+\end{aligned}
+\end{equation}
+To replace $u$, we introduce $u_1, u_2$ of order $2$ such that $u = u_1u_2$ and $u_1$ commutes with
+$y_i$ for $i \neq 3,7$ and $\J$.
+The conjugacy relations involving $u$ are $uy_{3,2}u^{-1} = y_{3,3}$, $u^{-1}y_{7,2}u = y_{7,3}$,
+$uy_{3,1}u^{-1} = y_{3,1}$ and $uy_{7,1}u^{-1} = y_{7,1}$. So we need to introduce $u_3,u_4,u_5,u_6$ such that 
+\begin{align*}
+	u_3 = u_2y_{3,2}u_2 = u_1y_{3,3}u_1, \\
+	u_4 = u_1y_{7,2}u_1 = u_2y_{7,3}u_2,\\
+	u_5 = u_2y_{3,1}u_2 = u_1y_{3,1}u_1,\\
+	u_6 = u_2y_{7,1}u_2 = u_1y_{7,1}u_1.
+\end{align*}
+At this stage $\Pg_{\LS}$ has generators $\{y_{3,i}\}_{i=1}^3, \{ y_{7,i} \}_{i=1}^4, \{y_i\}_{i\neq 3, 7}, \{u_i\}_{i=1}^6$ with $6$ linear relations and $44$ conjugacy relations. 
+
+For the remaining $y_i$'s, we use $y_1$ as an example and the same steps apply to the other $y_i$'s.
+The conjugacy relations involving $y_1$ are 
+\begin{align*}
+	y_{1}y_{3,1} y_1^{-1} = y_{3,1},
+	&&y_{1}y_{7,1}y_1^{-1} = y_{7,1}.
+\end{align*}
+and $4$ commutation relations from $\MS_c$.
+So we need to introduce $y_{1,i}$ for $i = 1, 2 \dots 8$ such that they all are of order $2$ and
+\begin{align*}
+&y_1= y_{1,1} y_{1,2}\\
+&y_{1,3} = y_{1,2} y_{3,1}y_{1,2} = y_{1,1} y_{3,1}y_{1,1},\\
+&y_{1,4} = y_{1,2} y_{7,1}y_{1,2} = y_{1,1} y_{7,1}y_{1,1},\\
+&y_{1,5} = y_{1,2} y_{2}y_{1,2} = y_{1,1} y_{2}y_{1,1},\\
+&y_{1,6} = y_{1,2} y_{3,2}y_{1,2} = y_{1,1} y_{3,2}y_{1,1},\\
+&y_{1,7} = y_{1,2} y_{4}y_{1,2} = y_{1,1} y_{4}y_{1,1},\\
+&y_{1,8} = y_{1,2} y_{7,2}y_{1,2} = y_{1,1} y_{7,2}y_{1,1}.
+\end{align*}
+The new commutation relations are $y_{1,1}$ commutes with all the remaining $y_j$'s
+and commutation relations from $\MS_c$ involving $y_1$ with $y_1$ replaced by $y_{1,2}$.
+Then we repeat this process with $y_2$.
+In summary, replacing $y_1,y_2,y_4,y_5,y_6,y_8,y_9$ introduces $8+9+10+11+12+13+14 = 77$ new variables 
+and $12+14+16+18+20+22+24 = 126$ new conjugacy relations. 
+In total $\Pg_{\LS}$ has $90$ variables excluding $\J$, $6$ linear relations and $170$ conjugacy relations.
+
+Then following the recipe given in the proofs of Proposition~$4.2$ and Lemma~$4.4$ in Ref.~\cite{slofstra2017}, 
+we embed $\Pg_{\LS}$ into the solution 
+group $\Gamma(\LS)$ with $2351$ variables and $1916$ linear relations. 
+Alice's output alphabet is of size $64$ and of size $2$ for Bob.
+
+Such linear system game has at the biggest size when $a = 5$ or the special relation is $uxu^{-1} = x^5$.
+The biggest game has $2465$ variables and $2006$ equations. We leave the derivation for curious readers.
+
 \end{document}
