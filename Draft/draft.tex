@@ -190,7 +190,7 @@
 \newcommand{\tA}{\tilde{A}}
 \newcommand{\tB}{\tilde{B}}
 \newcommand{\tpsi}{\tilde{\psi}}
-
+\newcommand{\tri}{\Delta}
 
 % Probabilities
 \newcommand{\pr}[2]{P(#1|#2)}
@@ -228,7 +228,7 @@
 
 \begin{document}
 
-\title{Self-test EPR pair with constant alphabet}
+\title{Self-test prime dimensional EPR pairs with constant alphabet}
 
 \author[1]{Honghao Fu}
 \author[1,2]{Carl Miller}
@@ -406,46 +406,49 @@ that can be self-tested by a variant of $\G{d}$.
 %----------------------------------------------------------------
 \subsection{The linear system game}
 %----------------------------------------------------------------
-The main component of $\G{d}$ is a linear system game $\LS$, whose solution group is derived from the qudit Pauli group,
-which is defined as
+The main component of $\G{d}$ is a linear system game $\LS$, whose solution group is derived from the 
+following group
 \begin{align}
-	\Pg_d = \langle x, z, \J : x^d = z^d = \J^d = e, zxz^{-1}x^{-1} = \J, x\J x^{-1}\J^{-1}= z\J z^{-1}\J^{-1} = e\rangle. 
+	\Pg_{\LS} = \langle u, x : uxu^{-1} = x^2 \rangle.
 \end{align}
-The goal of our modification is to construct $\Pg_{\LS}$ which has implicit $d$-dependence.
-We first introduce new generators $u_x$ and $u_z$ to $\Pg_d$, and replace the relation $x^d = z^d = e$ 
-by the following relations
-\begin{align}
-\label{eq:sim}
-	u_x x u_x = x^2, \quad
-	u_z z u_z = z^2.
-\end{align}
-Consequently, the $d$ dependency of $\G{d}$ comes from constraints imposed by other components of the game,
-\footnote{Figuring out what $a$ is will take us one step closer to resolving Artin's Conjecture\cite{murty1988}.}
-but the alphabet sizes are determined by $\Pg_{\LS}$ and we will see why they are constant.
-Next, we drop the relation $\J^d = e$ and make the value of $\J$ determined by $x$ and $z$ in the 
-relation $xzx^{-1}z^{-1} = \J$.
-
-It can be easily checked that $\paulix{d}$ and $\pauliz{d}$ can be extended to a representation of $\Pg_{\LS}$ 
-where  $\paulix{d}$ and $\pauliz{d}$ are defined by
-\begin{align}
-	\paulix{d} = \sum_{i=0}^{d-1} \ketbra{i+1 \pmod{d} }{i}  \quad \quad
-	\pauliz{d} = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i}.
-\end{align}
-Moreover, if $U_x\paulix{d}U_x^\dagger = (\paulix{d})^2$ and $U_z\pauliz{d}U_z^\dagger = (\pauliz{d})^2$,
-we can verify that 
-\begin{align}
-	U_xU_z = \1 = U_zU_x,
-\end{align}
-Hence, we do not need both $u_x$ and $u_z$ as generators and we just need one of them.
-In the end, we define $\Pg_{\LS}$ by
-\begin{equation}
-\begin{aligned}
-	\Pg_{\LS} =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
-	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
-\end{aligned}
-\end{equation}
-This group will be embedded in a solution group, $\Gamma(\LS)$, following Slofstra's embedding techniques.
-The corresponding game $\LS$ has $n = 2351$ variables and $m= 1916$ equations.
+%\begin{align}
+%	\Pg_d = \langle x, z, \J : x^d = z^d = \J^d = e, zxz^{-1}x^{-1} = \J, x\J x^{-1}\J^{-1}= z\J z^{-1}\J^{-1} = e\rangle. 
+%\end{align}
+%The goal of our modification is to construct $\Pg_{\LS}$ which has implicit $d$-dependence.
+%We first introduce new generators $u_x$ and $u_z$ to $\Pg_d$, and replace the relation $x^d = z^d = e$ 
+%by the following relations
+%\begin{align}
+%\label{eq:sim}
+%	u_x x u_x = x^2, \quad
+%	u_z z u_z = z^2.
+%\end{align}
+%Consequently, the $d$ dependency of $\G{d}$ comes from constraints imposed by other components of the game,
+%\footnote{Figuring out what $a$ is will take us one step closer to resolving Artin's Conjecture\cite{murty1988}.}
+%but the alphabet sizes are determined by $\Pg_{\LS}$ and we will see why they are constant.
+%Next, we drop the relation $\J^d = e$ and make the value of $\J$ determined by $x$ and $z$ in the 
+%relation $xzx^{-1}z^{-1} = \J$.
+%
+%It can be easily checked that $\paulix{d}$ and $\pauliz{d}$ can be extended to a representation of $\Pg_{\LS}$ 
+%where  $\paulix{d}$ and $\pauliz{d}$ are defined by
+%\begin{align}
+%	\paulix{d} = \sum_{i=0}^{d-1} \ketbra{i+1 \pmod{d} }{i}  \quad \quad
+%	\pauliz{d} = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i}.
+%\end{align}
+%Moreover, if $U_x\paulix{d}U_x^\dagger = (\paulix{d})^2$ and $U_z\pauliz{d}U_z^\dagger = (\pauliz{d})^2$,
+%we can verify that 
+%\begin{align}
+%	U_xU_z = \1 = U_zU_x,
+%\end{align}
+%Hence, we do not need both $u_x$ and $u_z$ as generators and we just need one of them.
+%In the end, we define $\Pg_{\LS}$ by
+%\begin{equation}
+%\begin{aligned}
+%	\Pg_{\LS} =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
+%	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
+%\end{aligned}
+%\end{equation}
+%This group will be embedded in a solution group, $\Gamma(\LS)$, following Slofstra's embedding techniques.
+%The corresponding game $\LS$ has $n = 2351$ variables and $m= 1916$ equations.
 See Appendix~\ref{sec:construct} for details.
 %------------------------------------------------------------------------
 \subsection{The extended weighted CHSH game}
@@ -650,22 +653,22 @@ $\tB_0\tB_1$ has eigenvalues $\omega_d$ and $\omega_d^{-1}$.
 \subsection{The single value test}
 %------------------------------------------------------------------------
 By the following test, we want to make sure that some unitary $U$ has eigenvalue $1$.
-In this test $X = \{\ast\}$, $Y = \{0,1,\ast\}$, $A = \{\diamond, \perp\}$ and $B = \{0,1, \diamond, \perp\}$.
+In this test $X = \{\tri \}$, $Y = \{0,1,\tri\}$, $A = \{\diamond, \perp\}$ and $B = \{0,1, \diamond, \perp\}$.
 The scoring rules are
 \begin{itemize}
-	\item \textbf{Case 1} $x = y = \ast$: Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
+	\item \textbf{Case 1} $x = y = \tri$: Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
 	they score only if $a = b$;
-	\item \textbf{Case 2} $x =\ast$ and $y = 0$: when Alice answer $\diamond$, Bob should answer $0$, when 
+	\item \textbf{Case 2} $x =\tri$ and $y = 0$: when Alice answer $\diamond$, Bob should answer $0$, when 
 	Alice answer$\perp$ all answers of Bob are accepted;
-	\item \textbf{Case 3} $x = \ast$ and $y = 1$: when Alice answer $\diamond$, Bob should answer $0$, when 
+	\item \textbf{Case 3} $x = \tri$ and $y = 1$: when Alice answer $\diamond$, Bob should answer $0$, when 
 	Alice answer$\perp$ all answers of Bob are accepted.
 \end{itemize}
 
 Define the subspace $V = \spn\{ \ket{u_0} \}$.
 The ideal strategy has projective measurement 
 \begin{align*}
-&A_\ast^\diamond = B_\ast^\diamond= \ketbra{u_0}{u_0}, 
-&&A_\ast^\perp = B_\ast^\perp = \1 - \ketbra{u_0}{u_0},\\
+&A_\tri^\diamond = B_\tri^\diamond= \ketbra{u_0}{u_0}, 
+&&A_\tri^\perp = B_\tri^\perp = \1 - \ketbra{u_0}{u_0},\\
 &B_0^0|_V = B_1^0|_V = \ketbra{u_0}{u_0}, 
 &&B_0^1|_V = B_1^1|_V = 0.
 \end{align*}
@@ -682,17 +685,17 @@ It is easy to calculate the ideal correlation, which is
 \begin{tabular}{|c|c||c|c|c|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{} &
-\multicolumn{2}{|c|}{$y=\ast$} &
+\multicolumn{2}{|c|}{$y=\tri$} &
 \multicolumn{2}{|c|}{$y=0$} &
 \multicolumn{2}{|c|}{$y=1$}\\
 \cline{3-8}
 \multicolumn{2}{|c|}{} &$b = \diamond$ & $b = \perp$ & $b = 0$ & $b = 1$ & $b = 0$ & $b = 1$\\
 \hline
 \hline
-\multirow{2}{*}{$x = \ast$} & $a=\diamond$ & $1/d$ & 0 & $1/d$ & 0 & $1/d$ & 0 \\
+\multirow{2}{*}{$x = \tri$} & $a=\diamond$ & $1/d$ & 0 & $1/d$ & 0 & $1/d$ & 0 \\
 \cline{2-8}
-&$a=\perp$ & 0 & $(d-1)/d$ & \small $\pr{\perp0}{\ast0}$ & \small $\frac{d-1}{d} -\pr{\perp0}{\ast0}$  
-& \small $\pr{\perp0}{\ast1}$ & \small $\frac{d-1}{d}- \pr{\perp0}{\ast0}$  \\
+&$a=\perp$ & 0 & $(d-1)/d$ & \small $\pr{\perp0}{\tri0}$ & \small $\frac{d-1}{d} -\pr{\perp0}{\tri0}$  
+& \small $\pr{\perp0}{\tri1}$ & \small $\frac{d-1}{d}- \pr{\perp0}{\tri0}$  \\
 \hline
 \end{tabular}
 \caption{Ideal correlation of the single value test.}
@@ -703,37 +706,158 @@ conclude that $B_0B_1$ has eigenvalue $1$.
 
 \begin{lemma}
 	\label{lm:svt_comp}
-	If a quantum strategy$(\{\tA_\ast^a\}_a, \{\{\tB_y^b\}_b\}_y, \ket{\tpsi}$ has the same behaviour as
+	If a quantum strategy$(\{\tA_\tri^a\}_a, \{\{\tB_y^b\}_b\}_y, \ket{\tpsi}$ has the same behaviour as
 	the optimal one, then $(\tB_0^0 - \tB_0^1)(\tB_1^0-\tB_1^1)$ has eigenvalue $1$.
 \end{lemma}
 \begin{proof}
-By the marginal distribution we know that $\| A_\ast^\diamond \ket{\psi}\| = \frac{1}{\sqrt{d}}$.
-From the condition that $P(\diamond 0|\ast 0) = 1/d$, we know
+By the marginal distribution we know that $\| A_\tri^\diamond \ket{\psi}\| = \frac{1}{\sqrt{d}}$.
+From the condition that $P(\diamond 0|\tri 0) = 1/d$, we know
 \begin{align}
-	\frac{  \bra{\psi} \tA_\ast^\diamond  \tB_0^0 \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|^2} = 1,
+	\frac{  \bra{\psi} \tA_\tri^\diamond  \tB_0^0 \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|^2} = 1,
 \end{align}
 which implies that 
 \begin{align}
- \tB_0^0 \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} = \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|}.
+ \tB_0^0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
 \end{align}
 With similar reasoning, we get
 \begin{align}
- \tB_1^0 \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} = \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|}.
+ \tB_1^0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
 \end{align}
-Hence $ \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} $ is in the intersection of $\supp(\tB_0^0)$ and $\supp(\tB_1^0)$.
+Hence $ \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} $ is in the intersection of $\supp(\tB_0^0)$ and $\supp(\tB_1^0)$.
 Since $\supp(\tB_y^0)$ and $\supp(\tB_y^1)$ are disjoint, we know
 \begin{align*}
-	(\tB_y^0 - \tB_y^1)  \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|}  =  \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} - 0 = \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} 
+	(\tB_y^0 - \tB_y^1)  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}  =  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} - 0 = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} 
 \end{align*}
 for $y = 0,1$.
-Therefor, we know $ \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} $ is an eigenvector of $\tB_0\tB_1$ with eigenvalue $1$ because
+Therefor, we know $ \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} $ is an eigenvector of $\tB_0\tB_1$ with eigenvalue $1$ because
 \begin{align}
-	\tB_0\tB_1 \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} = \tB_0 \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|} =  \frac{\tA_\ast^\diamond \ket{\psi}}{\| \tA_\ast^\diamond \ket{\psi}\|}.
+	\tB_0\tB_1 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \tB_0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} =  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
 \end{align}
 \end{proof}
 In the later section, when we apply this test to make sure some unitary $U$ has eigenvalue $1$, 
 we denote the test by $\SVT_U$.
 
+%=====================================
+\section{Main result}
+\label{sec:main}
+%=====================================
+%-----------------------------------------------------------------
+\subsection{The game $\G{d}$}
+%-----------------------------------------------------------------
+Assume the linear system game has $n$ variables and $m$ equations.
+Alice receives $x \in \{1,\dots m+4 \}$ and Bob receives
+$y \in \{1,\dots,n+2\}$. The scoring rules are the following:
+\begin{itemize}
+	\item when $x \in \{1,\dots m\}$ and $y \in \{1, \dots n\}$, they are scored according to the 
+	linear system game, $\LS$;
+	\item when $x \in \{m+1, m+2, m+3\}$ and $y \in \{1, 2, n+1\}$, they are scored according to $\CHSH_X$,
+	where 
+	\begin{align}
+		&\ast_A = m+1, \quad 0_A = m+2,\quad 1_A = m+3,\\
+		&\ast_B = n+1,\quad 0_B = 1, \quad 1_A = 2,
+	\end{align}
+	are the inputs for the game $\CHSH_X$
+	(The intuition behind is that $B_1B_2 = X$.);
+	\item when $x = m+4$ and  $y \in \{1,2,n+2\}$, they are scored according to $\SVT_X$, where
+	\begin{align}
+		& \tri_A = m+4 \\
+		& \tri_B = n+2, \quad 1_B = 1,\quad 2_B = 2
+	\end{align}
+	are the inputs for the game $\SVT_X$;
+	\item otherwise, they score $0$.
+\end{itemize}
+Note that the dimension $d$ is defined in the rules of $\CHSH_X$.
+Next we are going to prove that the strategy winning this game optimally can self-test $d$-dimensional EPR pair.
+
+%-----------------------------------------------------------------
+\subsection{Proof}
+%-----------------------------------------------------------------
+\hl{This subsection needs to be formalized.}
+By Lemma~$4.3$ of \cite{coladan2017}, we can extract an operator solution from the perfect winning strategy 
+of the linear system game: 
+For each variable $\{ x_i \}_{i=1}^n$, Alice and Bob has operators $A_i$ and $B_i$ respectively.
+The condition that they agree with assignment to variables means that 
+\begin{align}
+	\bra{\psi} A_i \otimes \overline{B_i} \ket{\psi} = 1 \Rightarrow A_i \otimes \overline{B_i} \ket{\psi} = \ket{\psi}
+\end{align}
+and the condition that Alice's assignments satisfy the constraint means that 
+\begin{align}
+	\Tr(\rho_A \Pi_{j: A_{ij} \neq 0} A_j) = \Tr(\rho_A) \text{ for all } 1 \leq i \leq m
+\end{align}
+where $\rho_A =  \Tr_B(\ketbra{\psi}{\psi})$, so for  any $\ket{v} \in \supp(\rho_A)$,
+we have 
+\begin{align}
+\Pi_{j:A_{ij} \neq 0} A_j \ket{v} = \ket{v} \text{ for all } 1 \leq i \leq m.
+\end{align}
+Since the relation $u^{-1}xu = x^2$ is embedded in this linear system game, we know
+\begin{align}
+	\sigma_A(u)^\dagger A_1A_2 \sigma_A(u) \ket{v}= (A_1A_2)^2 \ket{v} \text{ for all } \ket{v} \in \supp(\rho_A).
+\end{align}
+For simplicity, we define $X = A_1A_2$ and $U = \sigma_A(u)$.
+For simplicity, we define $X = A_1A_2$ and $U = \sigma_A(u)$.
+The condition becomes
+\begin{align}
+	UXU^\dagger \ket{v} = X^2 \ket{v} \text{ for all } \ket{v} \in \supp(\rho_A).
+\end{align}
+On the subspace $\supp(\rho_A)$, we have the equality
+\begin{align}
+	\label{eq:sim}
+	UXU^\dagger X^{-2} = \1.
+\end{align}
+We will come back to the implication of this condition later.
+
+Suppose the support of $\tA_\ast^\diamond$ is spanned by $\ket{u_0}$ and $\ket{u_1}$ and 
+define $\ket{x_1} = 1/\sqrt{2}(\ket{u_0} + i\ket{u_1})$. 
+The test $\CHSH_X$ tells that $\ket{x_1}$ is the eigenvector of $X$ with eigenvalue $e^{i\pi/d} = \omega_d$.
+Similarly, define $\ket{x_{d-1}} = 1/\sqrt{2}(\ket{u_0} - i\ket{u_1})$ such that $X \ket{x_{d-1}} = \omega_d^{d-1}\ket{x_{d-1}}$.
+We know 
+\begin{align}
+	\tA_\ast^\diamond \ket{\tpsi} = \tA_\ast^\diamond \x \tB_\ast^\diamond \ket{\tpsi} = \frac{1}{\sqrt{d}} (\ket{u_0}\ket{u_0} + \ket{u_1}\ket{u_1}).
+\end{align}
+If we restrict to Alice's system, we get 
+\begin{align}
+	\Tr_B(\tA_\ast^\diamond \ketbra{\tpsi}{\tpsi} \tA_\ast^\diamond) =\tA_\ast^\diamond \rho_A \tA_\ast^\diamond = 
+ \frac{1}{d} \ketbra{u_0}{u_0} + \ketbra{u_1}{u_1} = \frac{1}{d} \tA_\ast^\diamond.
+\end{align}
+Hence $\rho_A$ acts as $\1$ on $\supp(\tA_\ast^\diamond)$.
+We also know that there exists local unitary $U_A$ such that 
+\begin{align}
+U_A \tA_\ast^\diamond U_A^\dagger = \ketbra{x_1}{x_1}+\ketbra{x_{d-1}}{x_{d-1}}
+\end{align}
+and 
+\begin{align}
+\Tr(\ketbra{x_1}{x_1} \rho_A)
+=\Tr(U_A \ketbra{u_0}{u_0} U_A^\dagger \rho_A) 
+= \frac{1}{d} \Tr(U_A\ketbra{u_0}{u_0} U_A^\dagger) 
+= \frac{1}{d},
+\end{align}
+and similarly $\Tr( \ketbra{x_{d-1}}{x_{d-1}}\rho_A) = 1/d$.
+
+Next, we calculate the eigen-decomposition of $X$ in $\supp(\rho_A)$.
+Based on \cref{eq:sim}, we know
+\begin{align}
+\label{eq:ladder}
+ XU^\dagger \ket{x_1} = U^\dagger X^2 \ket{x_1} = \omega_d^2 U^\dagger \ket{x_1},
+\end{align}
+so $U^\dagger \ket{x_1}$ is an eigenvector of $X$ with eigenvalue $\omega_d^2$.
+By induction, we know $X (U^\dagger)^i \ket{x_1} = \omega_d^{2^i} (U^\dagger)^i\ket{x_1}$. 
+From the set $\{(U^\dagger)^i \ket{x_1}\}_{i=0}^{d-2}$, we can identify $\ket{x_i}$ for $i = 1 \dots  d-1$
+such that $X \ket{x_i} = \omega_d^i \ket{x_i}$.
+From the single value test, we know 
+\begin{align}
+	\tA_\triangle^\diamond \ket{\tpsi} = \tA_\triangle^\diamond \x \tB_\triangle^\diamond \ket{\tpsi} = \frac{1}{\sqrt{d}}
+	\ket{x_0}\ket{x_0}
+\end{align}
+where $X \ket{x_0} = \ket{x_0}$. 
+The effect of $\CHSH_X$ and $\SVT_X$ is that we have a set $\{ \ket{x_i} \}_{i \in [d]} \in \supp(\rho_A)$ such that
+\begin{align}
+	X \ket{x_i} = \omega_d^i \ket{x_i}.
+\end{align}
+The other effect of $\SVT_X$ is that we know 
+\begin{align}
+	\tA_\triangle^\diamond \rho_A \tA_\triangle^\diamond = \frac{1}{d} \ketbra{x_0}{x_0} = \frac{1}{d} \tA_\triangle^\diamond.
+\end{align}
+\hl{\textbf{Question}: Can we show $\Tr(\ketbra{x_2}{x_2} \rho_A) = 1/d$?}
 
 
 
@@ -805,116 +929,116 @@ so we omit it here.
 \section{Construction of $\Gamma(\LS)$}
 \label{sec:construct}
 %=====================================
-In this section, we are going to embed the group $\Pg_{\LS}$ into a solution group $\Gamma(\LS)$ of a linear system game.
-What we do is to write any generator with arbitrary order as a product of new order-$2$ generators and rewrite all
-the relations with the new generators. In the end, we can get rid of the generators $y_i$ and $u$ and all 
-the remaining generators are order-$2$.
-
-We first embed the relation $xzx^{-1}z^{-1} = \J$ in a linear system game very similar to the Magic Square game.
-It has been shown that the following relations embeds $xzx^{-1}z^{-1} = \J$ \footnote{For example, Fig.~$11$ of Ref.~\cite{coladan2017}
-proves it in a group picture.}. Let $y_3 = z$ and $y_7 = x$ and the linear relations are 
-\begin{align*}
-	&y_1y_2y_3 = e,
-	&&y_4y_5y_6 = e,
-	&&y_7y_8y_9 = e,\\
-	&y_1^{-1}y_4^{-1}y_7^{-1} = e,
-	&&y_2^{-1}y_5^{-1}y_8^{-1} = \J,
-	&&y_3^{-1}y_6^{-1}y_9^{-1} = e.
-\end{align*}
-We refer to these set of linear relations as the $\MS_l$ relations.
-The magic square game also introduces some commutation relations:
-\begin{align*}
-	&[y_1, y_2] = [y_1, y_3] = [y_1, y_4] = [y_1,y_7] = e,\\
-	&[y_2, y_3] = [y_2, y_5] = [y_2, y_8] = e,\\
-	&[y_3, y_6] = [y_3, y_9] = e,\\
-	&[y_4, y_7] = [y_4,y_5] =  [y_4,y_6] = e, \\
-	& [y_5,y_6] =  [y_5,y_8] = e,\\
-	& [y_6,y_9] = e,\\
-	& [y_7,y_8] =  [y_7,y_9] = e,\\
-	&[y_8,y_9] = e.
-\end{align*}
-The set of the commutation relations above is denoted by $\MS_c$.
-So we redefine $\Pg_{\LS}$ as 
-\begin{align}
-	\Pg_{\LS} = \langle \{y_i\}_{i=1}^9,u,\J: \MS_l \cup \MS_c \cup \{ [\J, y_i] = [\J, u] = e,
-					uy_7u^{-1} = y_7^2, u^{-1}y_3u = y_3^2\}	 \rangle.
-\end{align}
-Then we can use a procedure similar to the one used in the proof of Proposition~$4.8$ of Ref.~\cite{slofstra2017} to 
-embed $\Pg_{\LS}$ into a group with only order-$2$ generators except for $\J$, whose order is implicit.
-
-We start by introducing $y_{3,1}$ and $y_{3,2}$ of order $2$ such that $y_3 = y_{3,1}y_{3,2}$ 
-and $y_{3,1}$ commutes with $u$, $\J$ and $y_i$ for $ i \neq 3$.
-Then the relation $uy_3u^{-1} = y_3^2$ is rewritten as $uy_{3,2}u^{-1} = y_{3,2}y_{3,1}y_{3,2}$ so we introduce $y_{3,3} = y_{3,2}y_{3,1}y_{3,2}$.
-The group $\Pg_{\LS}$ becomes
-\begin{equation}
-\begin{aligned}
-	\Pg_{\LS} = \langle y_{3,1}, y_{3,2}, y_{3,3}, u, \{y_i\}_{i \neq 3} \J: &y_{3,1}^2 = y_{3,2}^2 = y_{3,3}^2 =e,\\
-	&\J \text{ commute with  all the generators, } [y_i,y_{3,1}] = [u,y_{3,1}] =  e \text{ for } i \neq 3,\\
-	&\MS_c \text{ with $y_3$ replaced by $y_{3,2}$},
-	\MS_l \text{ with $y_3$ replaced by $y_{3,1}y_{3,2}$},\\
-	& u^{-1}y_7u = y_7^2, 
-	y_{3,3} = y_{3,2}y_{3,1}y_{3,2}, uy_{3,2}u^{-1} = y_{3,3}\rangle.
-\end{aligned}
-\end{equation}
-Next, we introduce $y_{7,1}$ and $y_{7,2}$ of order $2$ such that $y_7 = y_{7,1}y_{7,2}$ and 
-$y_{7,1}$ commutes with $u$, $\J$ and $y_i$ for $i \neq 3,7$.
-Then the relation $u^{-1}y_7u = y_7^2$ is rewritten as $u^{-1}y_{7,2}u = y_{7,2}y_{7,1}y_{7,2}$ so we introduce $y_{7,3} = y_{7,2}y_{7,1}y_{7,2}$.
-The relation $y_7y_{3,1}y_7^{-1} = y_{3,1}$ is rewritten as $y_{7,2}y_{3,1}y_{7,2} = y_{7,1}y_{3,1}y_{7,1}$ so we introduce $y_{7,4} = y_{7,1}y_{3,1}y_{7,1}$.
-The group $\Pg_{\LS}$ becomes
-\begin{equation}
-\begin{aligned}
-	\Pg_{\LS} = \langle \{y_{3,i}\}_{i=1}^3, \{ y_{7,i} \}_{i=1}^4, \{y_i\}_{i\neq 3, 7}, u, \J: &\{y_{3,i}\}_{i=1}^3 \{y_{7,i}\}_{i=1}^4 \text{ of order } 2;\\
-	&\J \text{ commutes with all the generators, } [u, y_{3,1}] = [u, y_{7,1}] = e,\\
-	&y_{3,1}, y_{7,1} \text{ commute with } y_i,\; i \neq 3,7,\\
-	& \MS_c \text{ with $y_3, y_7$ replaced by $y_{3,2}, y_{7,2}$},\\
-	& \MS_l \text{ with $y_3$, $y_7$ replaced by $y_{3,1}y_{3,2}$ and $y_{7,1}y_{7,2}$} \\
-	&y_{3,3} = y_{3,2}y_{3,1}y_{3,2}, uy_{3,2}u^{-1} = y_{3,3}, \\
-	&y_{7,3} = y_{7,2}y_{7,1}y_{7,2}, u^{-1}y_{7,2}u = y_{7,3},\\
-	&y_{7,4} = y_{7,1}y_{3,1}y_{7,1}, y_{7,2}y_{3,1}y_{7,2} = y_{7,4} \rangle
-\end{aligned}
-\end{equation}
-To replace $u$, we introduce $u_1, u_2$ of order $2$ such that $u = u_1u_2$ and $u_1$ commutes with
-$y_i$ for $i \neq 3,7$ and $\J$.
-The conjugacy relations involving $u$ are $uy_{3,2}u^{-1} = y_{3,3}$, $u^{-1}y_{7,2}u = y_{7,3}$,
-$uy_{3,1}u^{-1} = y_{3,1}$ and $uy_{7,1}u^{-1} = y_{7,1}$. So we need to introduce $u_3,u_4,u_5,u_6$ such that 
-\begin{align*}
-	u_3 = u_2y_{3,2}u_2 = u_1y_{3,3}u_1, \\
-	u_4 = u_1y_{7,2}u_1 = u_2y_{7,3}u_2,\\
-	u_5 = u_2y_{3,1}u_2 = u_1y_{3,1}u_1,\\
-	u_6 = u_2y_{7,1}u_2 = u_1y_{7,1}u_1.
-\end{align*}
-At this stage $\Pg_{\LS}$ has generators $\{y_{3,i}\}_{i=1}^3, \{ y_{7,i} \}_{i=1}^4, \{y_i\}_{i\neq 3, 7}, \{u_i\}_{i=1}^6$ with $6$ linear relations and $44$ conjugacy relations. 
-
-For the remaining $y_i$'s, we use $y_1$ as an example and the same steps apply to the other $y_i$'s.
-The conjugacy relations involving $y_1$ are 
-\begin{align*}
-	y_{1}y_{3,1} y_1^{-1} = y_{3,1},
-	&&y_{1}y_{7,1}y_1^{-1} = y_{7,1}.
-\end{align*}
-and $4$ commutation relations from $\MS_c$.
-So we need to introduce $y_{1,i}$ for $i = 1, 2 \dots 8$ such that they all are of order $2$ and
-\begin{align*}
-&y_1= y_{1,1} y_{1,2}\\
-&y_{1,3} = y_{1,2} y_{3,1}y_{1,2} = y_{1,1} y_{3,1}y_{1,1},\\
-&y_{1,4} = y_{1,2} y_{7,1}y_{1,2} = y_{1,1} y_{7,1}y_{1,1},\\
-&y_{1,5} = y_{1,2} y_{2}y_{1,2} = y_{1,1} y_{2}y_{1,1},\\
-&y_{1,6} = y_{1,2} y_{3,2}y_{1,2} = y_{1,1} y_{3,2}y_{1,1},\\
-&y_{1,7} = y_{1,2} y_{4}y_{1,2} = y_{1,1} y_{4}y_{1,1},\\
-&y_{1,8} = y_{1,2} y_{7,2}y_{1,2} = y_{1,1} y_{7,2}y_{1,1}.
-\end{align*}
-The new commutation relations are $y_{1,1}$ commutes with all the remaining $y_j$'s
-and commutation relations from $\MS_c$ involving $y_1$ with $y_1$ replaced by $y_{1,2}$.
-Then we repeat this process with $y_2$.
-In summary, replacing $y_1,y_2,y_4,y_5,y_6,y_8,y_9$ introduces $8+9+10+11+12+13+14 = 77$ new variables 
-and $12+14+16+18+20+22+24 = 126$ new conjugacy relations. 
-In total $\Pg_{\LS}$ has $90$ variables excluding $\J$, $6$ linear relations and $170$ conjugacy relations.
-
-Then following the recipe given in the proofs of Proposition~$4.2$ and Lemma~$4.4$ in Ref.~\cite{slofstra2017}, 
-we embed $\Pg_{\LS}$ into the solution 
-group $\Gamma(\LS)$ with $2351$ variables and $1916$ linear relations. 
-Alice's output alphabet is of size $64$ and of size $2$ for Bob.
-
-Such linear system game has at the biggest size when $a = 5$ or the special relation is $uxu^{-1} = x^5$.
-The biggest game has $2465$ variables and $2006$ equations. We leave the derivation for curious readers.
+%In this section, we are going to embed the group $\Pg_{\LS}$ into a solution group $\Gamma(\LS)$ of a linear system game.
+%What we do is to write any generator with arbitrary order as a product of new order-$2$ generators and rewrite all
+%the relations with the new generators. In the end, we can get rid of the generators $y_i$ and $u$ and all 
+%the remaining generators are order-$2$.
+%
+%We first embed the relation $xzx^{-1}z^{-1} = \J$ in a linear system game very similar to the Magic Square game.
+%It has been shown that the following relations embeds $xzx^{-1}z^{-1} = \J$ \footnote{For example, Fig.~$11$ of Ref.~\cite{coladan2017}
+%proves it in a group picture.}. Let $y_3 = z$ and $y_7 = x$ and the linear relations are 
+%\begin{align*}
+%	&y_1y_2y_3 = e,
+%	&&y_4y_5y_6 = e,
+%	&&y_7y_8y_9 = e,\\
+%	&y_1^{-1}y_4^{-1}y_7^{-1} = e,
+%	&&y_2^{-1}y_5^{-1}y_8^{-1} = \J,
+%	&&y_3^{-1}y_6^{-1}y_9^{-1} = e.
+%\end{align*}
+%We refer to these set of linear relations as the $\MS_l$ relations.
+%The magic square game also introduces some commutation relations:
+%\begin{align*}
+%	&[y_1, y_2] = [y_1, y_3] = [y_1, y_4] = [y_1,y_7] = e,\\
+%	&[y_2, y_3] = [y_2, y_5] = [y_2, y_8] = e,\\
+%	&[y_3, y_6] = [y_3, y_9] = e,\\
+%	&[y_4, y_7] = [y_4,y_5] =  [y_4,y_6] = e, \\
+%	& [y_5,y_6] =  [y_5,y_8] = e,\\
+%	& [y_6,y_9] = e,\\
+%	& [y_7,y_8] =  [y_7,y_9] = e,\\
+%	&[y_8,y_9] = e.
+%\end{align*}
+%The set of the commutation relations above is denoted by $\MS_c$.
+%So we redefine $\Pg_{\LS}$ as 
+%\begin{align}
+%	\Pg_{\LS} = \langle \{y_i\}_{i=1}^9,u,\J: \MS_l \cup \MS_c \cup \{ [\J, y_i] = [\J, u] = e,
+%					uy_7u^{-1} = y_7^2, u^{-1}y_3u = y_3^2\}	 \rangle.
+%\end{align}
+%Then we can use a procedure similar to the one used in the proof of Proposition~$4.8$ of Ref.~\cite{slofstra2017} to 
+%embed $\Pg_{\LS}$ into a group with only order-$2$ generators except for $\J$, whose order is implicit.
+%
+%We start by introducing $y_{3,1}$ and $y_{3,2}$ of order $2$ such that $y_3 = y_{3,1}y_{3,2}$ 
+%and $y_{3,1}$ commutes with $u$, $\J$ and $y_i$ for $ i \neq 3$.
+%Then the relation $uy_3u^{-1} = y_3^2$ is rewritten as $uy_{3,2}u^{-1} = y_{3,2}y_{3,1}y_{3,2}$ so we introduce $y_{3,3} = y_{3,2}y_{3,1}y_{3,2}$.
+%The group $\Pg_{\LS}$ becomes
+%\begin{equation}
+%\begin{aligned}
+%	\Pg_{\LS} = \langle y_{3,1}, y_{3,2}, y_{3,3}, u, \{y_i\}_{i \neq 3} \J: &y_{3,1}^2 = y_{3,2}^2 = y_{3,3}^2 =e,\\
+%	&\J \text{ commute with  all the generators, } [y_i,y_{3,1}] = [u,y_{3,1}] =  e \text{ for } i \neq 3,\\
+%	&\MS_c \text{ with $y_3$ replaced by $y_{3,2}$},
+%	\MS_l \text{ with $y_3$ replaced by $y_{3,1}y_{3,2}$},\\
+%	& u^{-1}y_7u = y_7^2, 
+%	y_{3,3} = y_{3,2}y_{3,1}y_{3,2}, uy_{3,2}u^{-1} = y_{3,3}\rangle.
+%\end{aligned}
+%\end{equation}
+%Next, we introduce $y_{7,1}$ and $y_{7,2}$ of order $2$ such that $y_7 = y_{7,1}y_{7,2}$ and 
+%$y_{7,1}$ commutes with $u$, $\J$ and $y_i$ for $i \neq 3,7$.
+%Then the relation $u^{-1}y_7u = y_7^2$ is rewritten as $u^{-1}y_{7,2}u = y_{7,2}y_{7,1}y_{7,2}$ so we introduce $y_{7,3} = y_{7,2}y_{7,1}y_{7,2}$.
+%The relation $y_7y_{3,1}y_7^{-1} = y_{3,1}$ is rewritten as $y_{7,2}y_{3,1}y_{7,2} = y_{7,1}y_{3,1}y_{7,1}$ so we introduce $y_{7,4} = y_{7,1}y_{3,1}y_{7,1}$.
+%The group $\Pg_{\LS}$ becomes
+%\begin{equation}
+%\begin{aligned}
+%	\Pg_{\LS} = \langle \{y_{3,i}\}_{i=1}^3, \{ y_{7,i} \}_{i=1}^4, \{y_i\}_{i\neq 3, 7}, u, \J: &\{y_{3,i}\}_{i=1}^3 \{y_{7,i}\}_{i=1}^4 \text{ of order } 2;\\
+%	&\J \text{ commutes with all the generators, } [u, y_{3,1}] = [u, y_{7,1}] = e,\\
+%	&y_{3,1}, y_{7,1} \text{ commute with } y_i,\; i \neq 3,7,\\
+%	& \MS_c \text{ with $y_3, y_7$ replaced by $y_{3,2}, y_{7,2}$},\\
+%	& \MS_l \text{ with $y_3$, $y_7$ replaced by $y_{3,1}y_{3,2}$ and $y_{7,1}y_{7,2}$} \\
+%	&y_{3,3} = y_{3,2}y_{3,1}y_{3,2}, uy_{3,2}u^{-1} = y_{3,3}, \\
+%	&y_{7,3} = y_{7,2}y_{7,1}y_{7,2}, u^{-1}y_{7,2}u = y_{7,3},\\
+%	&y_{7,4} = y_{7,1}y_{3,1}y_{7,1}, y_{7,2}y_{3,1}y_{7,2} = y_{7,4} \rangle
+%\end{aligned}
+%\end{equation}
+%To replace $u$, we introduce $u_1, u_2$ of order $2$ such that $u = u_1u_2$ and $u_1$ commutes with
+%$y_i$ for $i \neq 3,7$ and $\J$.
+%The conjugacy relations involving $u$ are $uy_{3,2}u^{-1} = y_{3,3}$, $u^{-1}y_{7,2}u = y_{7,3}$,
+%$uy_{3,1}u^{-1} = y_{3,1}$ and $uy_{7,1}u^{-1} = y_{7,1}$. So we need to introduce $u_3,u_4,u_5,u_6$ such that 
+%\begin{align*}
+%	u_3 = u_2y_{3,2}u_2 = u_1y_{3,3}u_1, \\
+%	u_4 = u_1y_{7,2}u_1 = u_2y_{7,3}u_2,\\
+%	u_5 = u_2y_{3,1}u_2 = u_1y_{3,1}u_1,\\
+%	u_6 = u_2y_{7,1}u_2 = u_1y_{7,1}u_1.
+%\end{align*}
+%At this stage $\Pg_{\LS}$ has generators $\{y_{3,i}\}_{i=1}^3, \{ y_{7,i} \}_{i=1}^4, \{y_i\}_{i\neq 3, 7}, \{u_i\}_{i=1}^6$ with $6$ linear relations and $44$ conjugacy relations. 
+%
+%For the remaining $y_i$'s, we use $y_1$ as an example and the same steps apply to the other $y_i$'s.
+%The conjugacy relations involving $y_1$ are 
+%\begin{align*}
+%	y_{1}y_{3,1} y_1^{-1} = y_{3,1},
+%	&&y_{1}y_{7,1}y_1^{-1} = y_{7,1}.
+%\end{align*}
+%and $4$ commutation relations from $\MS_c$.
+%So we need to introduce $y_{1,i}$ for $i = 1, 2 \dots 8$ such that they all are of order $2$ and
+%\begin{align*}
+%&y_1= y_{1,1} y_{1,2}\\
+%&y_{1,3} = y_{1,2} y_{3,1}y_{1,2} = y_{1,1} y_{3,1}y_{1,1},\\
+%&y_{1,4} = y_{1,2} y_{7,1}y_{1,2} = y_{1,1} y_{7,1}y_{1,1},\\
+%&y_{1,5} = y_{1,2} y_{2}y_{1,2} = y_{1,1} y_{2}y_{1,1},\\
+%&y_{1,6} = y_{1,2} y_{3,2}y_{1,2} = y_{1,1} y_{3,2}y_{1,1},\\
+%&y_{1,7} = y_{1,2} y_{4}y_{1,2} = y_{1,1} y_{4}y_{1,1},\\
+%&y_{1,8} = y_{1,2} y_{7,2}y_{1,2} = y_{1,1} y_{7,2}y_{1,1}.
+%\end{align*}
+%The new commutation relations are $y_{1,1}$ commutes with all the remaining $y_j$'s
+%and commutation relations from $\MS_c$ involving $y_1$ with $y_1$ replaced by $y_{1,2}$.
+%Then we repeat this process with $y_2$.
+%In summary, replacing $y_1,y_2,y_4,y_5,y_6,y_8,y_9$ introduces $8+9+10+11+12+13+14 = 77$ new variables 
+%and $12+14+16+18+20+22+24 = 126$ new conjugacy relations. 
+%In total $\Pg_{\LS}$ has $90$ variables excluding $\J$, $6$ linear relations and $170$ conjugacy relations.
+%
+%Then following the recipe given in the proofs of Proposition~$4.2$ and Lemma~$4.4$ in Ref.~\cite{slofstra2017}, 
+%we embed $\Pg_{\LS}$ into the solution 
+%group $\Gamma(\LS)$ with $2351$ variables and $1916$ linear relations. 
+%Alice's output alphabet is of size $64$ and of size $2$ for Bob.
+%
+%Such linear system game has at the biggest size when $a = 5$ or the special relation is $uxu^{-1} = x^5$.
+%The biggest game has $2465$ variables and $2006$ equations. We leave the derivation for curious readers.
 
 \end{document}
