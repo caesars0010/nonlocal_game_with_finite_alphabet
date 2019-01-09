@@ -318,21 +318,21 @@ above, where Pauli-x and Pauli-z operators are defined by
 %	+  \frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(2k+1)(l+ (d+1)/2)} \ketbra{l+\frac{d+1}{2}}{s_{-2k-1}} \\
 %	=& \ketbra{s_{-2k-1}}{s_{-2k-1}}
 %\end{align}
-Moreover, if $U_x\sigma_xU_x^\dagger = \sigma_x^2$ and $U_z\sigma_zU_z^\dagger = \sigma_z^2$,
-we can verify that 
-\begin{align}
-	U_xU_z = \1 = U_zU_x,
-\end{align}
-Hence, we define the new group by
-\begin{equation}
-\begin{aligned}
-	\Pg =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
-	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
-\end{aligned}
-\end{equation}
-\hl{Since $\Pg_d$'s relations satisfy the relations of $\Pg$, can we say $\Pg_d$ is a subgroup of $\Pg$?}
-This group will be embedded in a solution group, $\Gamma_\Pg$, following Slofstra's embedding techniques.
-See Appendix~\ref{sec:construct} for details.
+%Moreover, if $U_x\sigma_xU_x^\dagger = \sigma_x^2$ and $U_z\sigma_zU_z^\dagger = \sigma_z^2$,
+%we can verify that 
+%\begin{align}
+%	U_xU_z = \1 = U_zU_x,
+%\end{align}
+%Hence, we define the new group by
+%\begin{equation}
+%\begin{aligned}
+%	\Pg =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
+%	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
+%\end{aligned}
+%\end{equation}
+%\hl{Since $\Pg_d$'s relations satisfy the relations of $\Pg$, can we say $\Pg_d$ is a subgroup of $\Pg$?}
+%This group will be embedded in a solution group, $\Gamma_\Pg$, following Slofstra's embedding techniques.
+%See Appendix~\ref{sec:construct} for details.
 %\textbf{Now there are two questions:}
 %\begin{itemize}
 %	\item How do we make $\J^d = e$ implicit?
@@ -397,7 +397,96 @@ See Appendix~\ref{sec:construct} for details.
 %This is done by introduce $7$ new variables and $6$ linear relations for each
 %conjugacy relations. In the end we will embed $K_3$ in the solution group of 
 %a linear system game with $118$ variables and $91$ equations.
+%--------------------------------------------------------------------------------------------
+\subsection{$U$ and $X$ generate all the $(d-1)\times(d-1)$ matrices}
+%--------------------------------------------------------------------------------------------
+Suppose $U$ and $X$ satisfies the relation $UXU^\dagger = X^2$. Moreover, we know the eigen-decomposition
+of $X$ is 
+\begin{align}
+	X = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i},
+\end{align}
+and the form of $U$ is
+\begin{align}
+	U =\sum_{i=0}^{d-1} \ketbra{i/2}{i}.
+\end{align}
+Note that all the operations on the eigenvector label $i$ is taken modulo $d$.
+We are going to prove that $\{ U^k X^l \}$ for $k=0,1\dots d-2$ and $l = 1,2\dots d-1$ is linearly independent,
+when the action of $U$ and $X$ are restricted to the basis $\{\ket{i}\}_{i=1}^{d-1}$ such that 
+\begin{align}
+	U^kX^l  = \sum_{i=1}^{d-1} \omega_d^{il} \ketbra{i/2^k}{i}.
+\end{align}
+From now on, $U$ and $X$ mean their actions restricted to the subset $\spn(\{\ket{i}\}_{i=1}^{d-1})$.
 
+Suppose there exists a set of complex numbers $\{ x_{k,l} \}$ for $k=0,1\dots d-2$ and $l = 1,2\dots d-1$
+such that 
+\begin{align}
+	M = \sum_{k=0}^{d-2} \sum_{l=1}^{d-1} x_{k,l} U^k X^l = 0. 
+\end{align}
+We further assume that we have $2^{k_i} \equiv i \pmod{d}$ for $i = 1,2\dots d-1$.
+The fact that $2$ is a primitive root of $d$ guarantees that $k_i$'s are distinct.
+Then we can group $\{x_{k,l}\}$ into vectors: $\ket{x_{k_1}}, \ket{x_{k_2}} \dots \ket{x_{k_{d-1}}}$,
+where $\ket{x_{k_i}}= (x_{k_i, 1}, x_{k_i, 2} \dots x_{k_i, d-1})^\intercal$.
+We are going to prove that $\ket{x_{k_i}} = 0$ for all $i$.
+
+Starting with $\ket{x_{k_1}}$.
+Let's look at the entry $\bra{1}M\ket{1}$ where 
+\begin{align}
+	\bra{1}M\ket{1} = \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{1}{i/2^k}\braket{i}{1}.
+\end{align}
+For the term $\braket{1}{i/2^k}\braket{i}{1} \neq 0$ we must have $i = 1$ and $2^k \equiv 1 \pmod{d}$, or equivalently,
+$k = k_1$. Hence, we can conclude that 
+\begin{align}
+	\bra{1}M\ket{1} = \sum_{l = 1}^{d-1} x_{k_1,l}\omega_d^l = 0. 
+\end{align}
+Similarly we can determine that for all $j = 1,2\dots d-1$,
+\begin{align}
+	\bra{j}M\ket{j} 
+	=  \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{j}{i/2^k}\braket{i}{j} 
+	= \sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl} = 0.
+\end{align}
+Hence we get $d-1$ equations with $d-1$ variables, and the linear system
+can be represented by 
+\begin{align}
+	W \ket{x_{k_1}} = 0,
+\end{align}
+where $W_{m,n} = \omega_d^{mn}$. Then we define
+\begin{align}
+	\tilde{W} = 
+	\begin{pmatrix}
+	1 & 1 \\
+	1 & W
+	\end{pmatrix},
+\end{align}
+and we will use the fact that $\tilde{W}$ is non-singular to prove that $\ket{x_{k_1}} = 0$.
+
+First observe that $\tilde{W}$ is a Vandermonde matrix, hence it is non-singular.
+Now we define $\ket{\tilde{x}_{k_1}} = (0, x_{k_1,1}, \dots x_{k_1,d-1})^\intercal$ 
+and prove that it satisfies the condition
+that 
+\begin{align}
+	\tilde{W} \ket{\tilde{x}_{k_1}} = 0,
+\end{align}
+which involves $d$ equations. The last $d-1$ equations come from $M$.
+We only need to prove that $\sum_{l=1}^d x_{k_1, l} = 0$.
+It can be seen from
+\begin{align}
+	0=\sum_{j = 1}^{d-1} \bra{j}M\ket{j}  
+	=  \sum_{j=1}^{d-1}\sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl}
+	=\sum_{l = 1}^{d-1}x_{k_1,l} (\sum_{j=1}^{d-1} \omega_d^{jl})
+	= \sum_{l = 1}^{d-1}- x_{k_1,l}
+\end{align}
+where we have used the fact that $\sum_{j=1}^{d-1} \omega_d^{jl} =-1$ for all $l = 1,2\dots d-1$.
+Since $\tilde{W}$ is non-singluar, we know $\ket{\tilde{x}_{k_1}} = 0$ which implies that $\ket{x_{k_1}} = 0$.
+
+For $\ket{x_{k_a}}$, we look at entries $\{\bra{j}M\ket{aj}\}_{j=1}^{d-1}$ for $a = 2 \dots d-1$ and get equations
+\begin{align}
+	0 = \bra{j}M\ket{aj} = \sum_{l=1}^{d-1} x_{k_a, l} \omega_d^{ajl} 
+\end{align}
+The corresponding $W$ matrix has value $\omega_d^{amn}$ at coordinate $m,n$,
+so it is also a submatrix of a Vandermonde matrix. Similar argument gives us that $\ket{x_{k_a}} = 0$.
+
+To summarize, we have proven that $x_{k,l} = 0$ for all $k$ and $l$, which implies that the elements of the set
+$\{ U^k X^l \}$ are linearly independent and forms a basis for all the $(d-1)\times(d-1)$ matrices.
 %------------------------------------------------------------------------
 \subsection{The extended weighted CHSH game}
 %------------------------------------------------------------------------
