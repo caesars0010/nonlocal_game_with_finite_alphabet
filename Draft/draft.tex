@@ -190,7 +190,7 @@
 \newcommand{\EPR}[1]{EPR^{(#1)}}
 \newcommand{\paulix}{\sigma_x}
 \newcommand{\pauliz}{\sigma_z}
-\newcommand{\G}[1]{G^{(#1)}}
+\newcommand{\G}{G}
 \newcommand{\LS}{LS}
 \newcommand{\tA}{\tilde{A}}
 \newcommand{\tB}{\tilde{B}}
@@ -258,8 +258,8 @@ delegated computation \cite{ruv2013,cgsv2017} and device independent quantum cry
 \cite{qkd2011,qkd2014,miller2016,fu2018,eat2018}.
 
 The case of self-testing $2$-dimensional EPR pair is fully understood. One can robustly self-test
-one copy of it by the CHSH inequality \cite{bamps2015}. Many copies of the $2$-dimensional EPR
-pair can be self-tested in parallel \cite{mckague2016, coladan2017parallel}. 
+one copy of it by the CHSH inequality \cite{bamps2015}. and self-test many copies of the $2$-dimensional EPR
+pair in parallel \cite{mckague2016, coladan2017parallel}. 
 Self-testing general $d$-dimensional EPR pairs is a harder task.
 Recently, a remarkable result by Coladangelo \textit{et al}.\cite{cgs2017} 
 has shown that the maximally entangled state with arbitrary local dimension 
@@ -271,7 +271,7 @@ $N$ copies of the maximally entangled state with local dimension $d$ for any $d,
 Both the Magic Square game and the Magic Pentagram game have constant question alphabet
 but growing answer alphabet.
 
-So far, general $d$-dimensional maximally entangled states are self-tested by
+In summary, general $d$-dimensional maximally entangled states are self-tested by
 modifying the correlation and enlarging the size of the correlation.
 A natural question to ask is whether maximally entangled state with large local dimension
 can be self-tested with fixed-sized correlation. 
@@ -280,29 +280,42 @@ entangled state more efficiently, with constant question and answer set.
 In this report, we give an affirmative answer to this question by proving the following theorem.
 \begin{theorem}
 \label{thm:inf}
-	There exists a set $D$ of odd prime numbers such that for any $d \in D$, 
-	the maximally entangled state of local dimension $d$ can be self-tested 
-	with constant question and answer sets.
+	There exists an infinite-sized set $D$ of odd prime numbers such that, for any $d \in D$, 
+	the maximally entangled state of local dimension $d-1$ can be self-tested 
+	with constant-sized question and answer alphabets.
 \end{theorem}
 
 The set $D$ is easily characterizable as it contains all the odd prime numbers with 
-primitive root $2$, $3$ or $5$. To prove \cref{thm:inf}, we give explicit self-testing proof of 
-the maximally entangled state with local dimension $d$ whose primitive root is $2$ by explicitly giving the 
+primitive root $2$, $3$ or $5$. It has been shown that there are infinitely many prime numbers
+with primitive root in the set $\{2,3,5\}$ \cite{murty1988}, so the set $D$ has infinitely many elements.
+To prove \cref{thm:inf}, we give explicit self-testing proof of 
+the maximally entangled state with local dimension $d-1$ where the primitive root of $d$ is $2$ by explicitly giving the 
 correlation that achieves this goal. Then the self-testing property of this correlation is 
 given in the following theorem.
 \begin{theorem}
 \label{thm:pr_2}
-	All maximally entangled state with local dimension $d$, where $d$ is prime and has
+	All maximally entangled state with local dimension $d-1$, where $d$ is prime and has
 	primitive root $2$, can be self-tested by a constant-sized correlation.
 \end{theorem}
 Note that although the sizes of the question and answer
 sets do not depend on $d$, the optimal correlation does.
 This correlation can be easily converted to work for dimensions with primitive $3$ or $5$.
 
+In order to accomplish our goal, we introduce new techniques for self-testing.
+First of all, we use a different variant of the weighted CHSH inequality to enforce the eigenvalue of
+some unknown operator which is decomposed into two binary observables, which is not done before.
+Secondly, we give a new way to decompose unitaries of arbitrary order into binary observables which maintain
+certain commutation relations. Such decomposition is different from what Slofstra used in his work \cite{slofstra2017}.
+Intuitively, such decomposition can be seen as the inverse of the decomposition used in the proof of Jordan's lemma.
+The third contribution is that we prove self-testing without using anti-commutation relations between Pauli operators, 
+which is the core idea in all the previous self-testing results. 
+Instead, we find a new pair of operators that can generate the ring of matrices over complex numbers.
+
+
 \textbf{Structure of the paper}.
 We start with notations and background information in \cref{sec:prelim}.
-Since the game we designed consists of several sub-tests, we introduce the individual
-sub-tests and their implications in \cref{sec:comp}. Our main result is based the combination
+Since the game we designed consists of two sub-tests, we introduce one test
+in \cref{sec:lsg} and one in \cref{sec:chsh}. Our main result is based the combination
 of the sub-tests and presented in \cref{sec:main}. In \cref{sec:extend}, we show how to adapt
 our nonlocal game to self-test maximally entangled state of different dimensions.
 
@@ -312,8 +325,7 @@ our nonlocal game to self-test maximally entangled state of different dimensions
 %========================================
 We use $[n]$ to denote the set $\{0,1 \dots n-1\}$ and $[n]+1$ for the set $\{1,2 \dots n\}$.
 %We denote the group commutator of $A$ and $B$, i.e. $ABA^{-1}B^{-1}$, by $[A,B]$.
-
-\textbf{The EPR pair.} Our goal is to self-test maximally entangled state of local dimension $d$, 
+The EPR pair of local dimension $d$ for $d \geq 2$ is the maximally entangled state and is denoted by
 \begin{align}
 \ket{\EPR{d}} = \frac{1}{\sqrt{d}} \sum_{i = 0}^{d-1} \ket{ii}.
 \end{align}
@@ -322,11 +334,11 @@ The superscript $(d)$ stresses the local dimension and we follow this convention
 We self-test $\ket{\EPR{d}}$ by verify that Alice and Bob has operators 
 which have operators of the similar form
 \begin{align}
-	X = \sum_{i=0}^{d-1} \omega_d^i\ketbra{i}{i} && U = \sum_{i=0}^{d-1} \ketbra{i/2}{i},
+	X = \sum_{k=1}^{d-1} \omega_d^k\ketbra{k}{k} && U = \sum_{k=1}^{d-1} \ketbra{k/2}{k},
 \end{align}
 where $\omega_d = e^{i2\pi/d}$ is the primitive $d$th root of unity.
-Through out this paper, any operation on the label of the eigenvector $i$ is taken modulo $d$.
-for example, the $i/2$ above.
+Through out this paper, any operation on the label of the eigenvector $k$ is taken modulo $d$,
+unless otherwise specified, for example, the $i/2$ above.
 
 \textbf{The weighted CHSH inequality \cite{acin2012}.}
 The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
@@ -355,7 +367,7 @@ We take an approach introduced in Ref.~\cite{bamps2015} and prove the following 
 \label{thm:selftest}
 	Suppose the quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the violation
 	at least $2\sqrt{1+\alpha^2} - \epsilon$
-	for some $\alpha$, then
+	for some $\epsilon$, then
 	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{aux}$  such that
 	\begin{align}
 		\| \Phi( \tilde{A}_x \x \tilde{B}_y \ket{\psi}) -\ket{aux} \x (A_x \x B_y) \ket{\EPR{2}}  \| = O(\sqrt{\epsilon})
@@ -364,7 +376,7 @@ We take an approach introduced in Ref.~\cite{bamps2015} and prove the following 
 	defined in \cref{def:ideal}.
 \end{theorem}
 We defer the proof of \cref{thm:selftest} till Appendix~\ref{sec:selftest}.
-After proving the robust the self-testing result, we take one step further and observe some interesting behaviour of the 
+After proving the robust self-testing result, we take one step further and observe an interesting property of the 
 observable $\tilde{B}_0\tilde{B}_1$.
 \begin{proposition}
 \label{prop:2d-subspace}
@@ -374,7 +386,7 @@ observable $\tilde{B}_0\tilde{B}_1$.
 \end{proposition}
 \begin{proof}[Proof of \cref{prop:2d-subspace}]
 	By \cref{thm:selftest}, the condition that the strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the  
-	maximal value of $\I_{\cot(-\pi/2d)} $ implies that there exist states $\ket{u_0}, \ket{u_1} \in \supp(\Tr_B(\ketbra{\tpsi}{\tpsi}))$ such that 
+	maximal value of $\I_{\cot(-\pi/2d)} $ implies that there exist states $\ket{u_0}, \ket{u_1} \in \supp(\Tr_A(\ketbra{\tpsi}{\tpsi}))$ such that 
 	\begin{align*}
 	(\tilde{B}_0 + \tilde{B}_1) \ket{u_0} = 2\cos(-\pi/2d) \ket{u_0} 
 	&&(\tilde{B}_0 + \tilde{B}_1) \ket{u_1} = -2\cos(-\pi/2d) \ket{u_1}\\
@@ -404,8 +416,8 @@ observable $\tilde{B}_0\tilde{B}_1$.
 	which is important for the whole embedding argument to work in \cref{sec:comp}.
 \end{proof}
 
-\textbf{Nonlocal game}. The two players of a nonlocal game are Alice and Bob. Each of them is requested
-to give ananswer for a chosen question. We denote Alice's question set by $\calX$ and answer set by $\calA$. Similarly,
+\textbf{Nonlocal games}. The two players of a nonlocal game are Alice and Bob. Each of them is requested
+to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and answer set by $\calA$. Similarly,
 Bob's question set is denoted by $\calY$ and his answer set is denoted by $\calB$. The nonlocal game also
 comes with two functions: $\pi: \calX \times \calY \rightarrow [0,1]$, which is the probability distribution over the questions,
 and $V: \calA \times \calB \times \calX \times \calY \rightarrow \R$, which is the scoring function. Such games are nonlocal
@@ -426,11 +438,11 @@ The \emph{value} of a strategy is given by
 	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
 \end{align} 
 
-The main contribution of our work is the construction of a nonlocal game $\G{d}$ with constant-sized $X$,$Y$,$A$ and $B$
-that can be used to self-test $\ket{\EPR{d}}$ for arbitrary odd prime $d$. 
-The nonlocal game is a linear system game with modifications or further enforcements. 
+The main contribution of our work is the construction of a nonlocal game $\G$ with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
+such that its optimal correlation can self-test $\ket{\EPR{d}}$ for arbitrary $d \in D$. 
+The nonlocal game is a linear system game with modifications and strict enforcements. 
 We introduce the definition of self-testing first and then the definition of linear system game, 
-which come from Ref.~\cite{coladan2017, slofstra2017}.
+following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
 \begin{definition}[Self-testing]
 	We say that a nonlocal game self-tests a quantum state $\ket{\Psi}$ if 
 	any quantum strategy $S$ that achieves the optimal quantum value uses a shared state equivalent up to local isometry to $\ket{\Psi}$.
@@ -474,24 +486,28 @@ $V(a,b,x,y) =0$ implies that $\pr{ab}{xy} = 0$.
 %\end{definition}
 %What has been established in Ref.\cite{cleve2017,coladan2017} is that we can construct a perfect strategy of a
 %linear system game from its operator solution and vice versa.
-%========================================
-\section{Components of $\G{d}$}
-\label{sec:comp}
-%========================================
-The goal of this section and the next section is to 
-present a nonlocal game that can self-test $\ket{\EPR{d}}$, 
-where $d$ is prime and has primitive root $2$\footnote{By $d$ has primitive root $2$,
-we mean that $2$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$.
-When $d$ is prime, $\Z_d^\times = \{1,2\dots d-1\}$.}
-The game we constructed is denoted by $\G{d}$, which is the combination of several tasks.
-In this section, we introduce such tests and their implications.
-In \cref{sec:main}, we show how the implications can be combined to give a full self-test of $\ket{\EPR{d}}$. 
-%----------------------------------------------------------------
-\subsection{The linear system game}
-%----------------------------------------------------------------
+
+
+%=======================================
+\section{The linear system game}
+\label{sec:lsg}
+%=======================================
+The goal of this section and the following two sections is to 
+present a correlation that can self-test $\ket{\EPR{d-1}}$, 
+where $d$ is prime and has primitive root $2$. 
+If $d$ has primitive root $2$,
+then $2$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$.
+When $d$ is prime, $\Z_d^\times = \{1,2\dots d-1\}$.
+The correlation we constructed is the optimal correlation for a game $\G$, which is the combination of two tests.
+In this section, we introduce the linear system game which tests a relation that should be satisfied by 
+Alice and Bob's observables.
+
 Slofstra's seminal work~\cite{slofstra2017} draws our attention to the relation $xyx^{-1} = y^2$, which
-is included in the group $K$.
-The main component of $\G{d}$ is a linear system game $\LS$, whose solution group is the embedding of the 
+is included in the group $K$, which has presentation
+\begin{align*}
+	K = \langle a,b,c,x,y: a^2=b^2=c^2 = e, c=ab, yay^{-1} = a, yby^{-1}= c, xyx^{-1} = y^2\rangle.
+\end{align*}
+The main component of $\G$ is a linear system game $\LS$, whose solution group is the embedding of the 
 following group
 \begin{align}
 	\Pg= \langle u, x : uxu^{-1} = x^2 \rangle.
@@ -546,7 +562,7 @@ so that a simpler form of the group $\Pg''$ is
 \end{equation}
 We collect the subscript of $x_i$'s in the conjugacy relations and define
 \begin{align}
-	C= \{ &(1,2,5), (3,5,7), (4,1,7), (4,2,6), (3,2,6)\},
+	C= \{ (1,2,5), (3,5,7), (4,1,7), (4,2,6), (3,2,6)\},
 \end{align}
 so that $(i,j,k) \in C$ if and only if $x_ix_jx_i = x_k$ in $\Pg''$.
 
@@ -692,7 +708,7 @@ $\{ U^k X^l \}$ are linearly independent and forms a basis for the ring of all t
 %	u_x x u_x = x^2, \quad
 %	u_z z u_z = z^2.
 %\end{align}
-%Consequently, the $d$ dependency of $\G{d}$ comes from constraints imposed by other components of the game,
+%Consequently, the $d$ dependency of $\G$ comes from constraints imposed by other components of the game,
 %\footnote{Figuring out what $a$ is will take us one step closer to resolving Artin's Conjecture\cite{murty1988}.}
 %but the alphabet sizes are determined by $\Pg_{\LS}$ and we will see why they are constant.
 %Next, we drop the relation $\J^d = e$ and make the value of $\J$ determined by $x$ and $z$ in the 
@@ -720,9 +736,10 @@ $\{ U^k X^l \}$ are linearly independent and forms a basis for the ring of all t
 %This group will be embedded in a solution group, $\Gamma(\LS)$, following Slofstra's embedding techniques.
 %The corresponding game $\LS$ has $n = 2351$ variables and $m= 1916$ equations.
 
-%------------------------------------------------------------------------
-\subsection{The extended weighted CHSH game}
-%------------------------------------------------------------------------
+%======================================
+\section{The extended weighted CHSH game}
+\label{sec:chsh}
+%======================================
 The extended weighted CHSH game is added to make sure that the operator $X$ extracted from 
 Alice and Bob's operator solution have eigenvalues $\omega_d$ and $\omega_d^{d-1}$.
 In \cref{sec:main}, we will reason why showing these two eigenvalues is enough to guarantee that 
@@ -739,17 +756,16 @@ Before presenting the optimal correlation, we give intuitions about how the play
 	\item \textbf{Case 1:} when $x = y = \ast$, Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
 	their answer should agree;
 	\item \textbf{Case 2a:} when $x,y \in \{0,1\}$ and if they answer with $a,b \in \{0,1\}$, then
-	their answers are scored according to $I_{-\cot(\pi/2d)}$;
+	their answers are scored according to $I_{\cot(-\pi/2d)}$;
 	\item \textbf{Case 2b:} when $x,y \in \{0,1\}$ and if Alice answers with $\perp$, then all Bob's answers are irrelevant;
 	\item \textbf{Case 3:} when $x \in {0,1}, y = \ast$, if Bob answers $\diamond$, 
 	Alice should answer with $\{0.1\}$ but not $\perp$,
 	if Bob answers $\perp$, Alice should answer $\perp$ too.
 \end{itemize}
-\textbf{The ideal strategy and ideal correlation}. Alice and Bob share the state $\ket{\psi} =\frac{1}{\sqrt{d}} \sum_{i=0}^{d-1} \ket{u_i}\ket{u_i}
-\sim \ket{\EPR{d}}$.
+\textbf{The ideal strategy and ideal correlation}. Alice and Bob share the state $\ket{\psi} =\frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1} \ket{u_i}\ket{u_i}$.
 We define two subspaces $V = \spn\{\ket{u_1}, \ket{u_{d-1}}\}$ and $V^\perp = \C^d \setminus\spn\{\ket{u_1}, \ket{u_{d-1}}\}$ and
 define $\Pi_V$ and $\Pi_{V}^\perp$ to be the corresponding projectors. Note that $V$ is the subspace on which they should
-maximize $\langle I_{-\cot(\pi/2d)} \rangle$.
+maximize $\langle I_{\cot(-\pi/2d)} \rangle$.
 
 For completeness, we show the ideal correlation in the following three charts and then give the projectors. 
 Note that we don't explicitly calculate the conditional probabilities of the form $\pr{\perp 0}{xy}$ for all possible $x$,$y$ 
@@ -764,9 +780,9 @@ because they are irrelevant.
 \multicolumn{2}{|c|}{} &$a = \diamond$ & $a = \perp$ \\
 \hline
 \hline
-\multirow{2}{*}{$y = \ast$} & $b=\diamond$ & 2/d & 0 \\
+\multirow{2}{*}{$y = \ast$} & $b=\diamond$ & 2/(d-1) & 0 \\
 \cline{2-4}
-&$b=\perp$ & 0 & (d-2)/d \\
+&$b=\perp$ & 0 & (d-3)/(d-1) \\
 \hline
 \end{tabular}
 \caption{Alice and Bob's behaviour when $x=y=\ast$.}
@@ -786,17 +802,17 @@ $a = 0$ & $a=1$ & $a=\perp$ &
 $a = 0$ & $a=1$ & $a=\perp$\\
 \hline
 \hline
-\multirow{2}{*}{$y = 0$} & $b=0$ & $\frac{\cos^2(\pi/4d)}{d}$ & $\frac{\sin^2(\pi/4d)}{d}$ & \small $\pr{\perp0}{00}$ 
-& $\frac{1+\sin(\pi/2d)}{2d}$ & $\frac{1-\sin(\pi/2d)}{2d}$ & \small  $\pr{\perp0}{10}$ \\
+\multirow{2}{*}{$y = 0$} & $b=0$ & $\frac{\cos^2(\pi/4d)}{d-1}$ & $\frac{\sin^2(\pi/4d)}{d-1}$ & \small $\pr{\perp0}{00}$ 
+& $\frac{1+\sin(\pi/2d)}{2(d-1)}$ & $\frac{1-\sin(\pi/2d)}{2(d-1)}$ & \small  $\pr{\perp0}{10}$ \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/4d)}{d}$ & $\frac{\cos^2(\pi/4d)}{d}$ & $\frac{d-2}{d}-\pr{\perp0}{00}$ 
-&  $\frac{1-\sin(\pi/2d)}{2d}$ & $\frac{1+\sin(\pi/2d)}{2d}$ & \small $\frac{d-2}{d} - \pr{\perp0}{10}$  \\
+&$b=1$ & $\frac{\sin^2(\pi/4d)}{d-1}$ & $\frac{\cos^2(\pi/4d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{\perp0}{00}$ 
+&  $\frac{1-\sin(\pi/2d)}{2(d-1)}$ & $\frac{1+\sin(\pi/2d)}{2(d-1)}$ & \small $\frac{d-3}{d-1} - \pr{\perp0}{10}$  \\
 \hline
-\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/4d)}{d}$ & $\frac{\sin^2(\pi/4d)}{d}$ & \small $\pr{\perp0}{01}$ & 
-$ \frac{1-\sin(\pi/2d)}{2d}$ & $ \frac{1+\sin(\pi/2d)}{2d}$ & \small $\pr{\perp 0}{11}$  \\
+\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/4d)}{d-1}$ & $\frac{\sin^2(\pi/4d)}{d-1}$ & \small $\pr{\perp0}{01}$ & 
+$ \frac{1-\sin(\pi/2d)}{2(d-1)}$ & $ \frac{1+\sin(\pi/2d)}{2(d-1)}$ & \small $\pr{\perp 0}{11}$  \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/4d)}{d}$ & $\frac{\cos^2(\pi/4d)}{d}$ & \small $\frac{d-2}{d}-\pr{\perp0}{01}$ &  
-$ \frac{1+\sin(\pi/2d)}{2d}$ & $ \frac{1-\sin(\pi/2d)}{2d}$ & \small $\frac{d-2}{d}- \pr{\perp 0}{11}$ \\
+&$b=1$ & $\frac{\sin^2(\pi/4d)}{d-1}$ & $\frac{\cos^2(\pi/4d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{\perp0}{01}$ &  
+$ \frac{1+\sin(\pi/2d)}{2(d-1)}$ & $ \frac{1-\sin(\pi/2d)}{2(d-1)}$ & \small $\frac{d-3}{d-1}- \pr{\perp 0}{11}$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -816,11 +832,11 @@ $a = 0$ & $a=1$ & $a=\perp$ &
 $a = 0$ & $a=1$ & $a=\perp$\\
 \hline
 \hline
-\multirow{2}{*}{$y = \ast$} & $b=\diamond$ & $1/d$ & $1/d$ & 0 
-& $1/d$ & $1/d$ & 0 \\
+\multirow{2}{*}{$y = \ast$} & $b=\diamond$ & $1/(d-1)$ & $1/(d-1)$ & 0 
+& $1/(d-1)$ & $1/(d-1)$ & 0 \\
 \cline{2-8}
-&$b=\perp$ & 0 & 0 & $\frac{d-2}{d}$ 
-&  0 & 0 & \small $\frac{d-2}{d} $  \\
+&$b=\perp$ & 0 & 0 & $\frac{d-3}{d-1}$ 
+&  0 & 0 & \small $\frac{d-3}{d-1} $  \\
 \hline
 \end{tabular}
 \end{center}
@@ -867,11 +883,11 @@ The self-testing property of this correlation is summarized in the following lem
 	where $\tB_0 = \tB_0^0 - \tB_0^1$ and $\tB_1 = \tB_1^0 - \tB_1^1$.
 \end{lemma}
 \begin{proof}
-Note that $\tA_x^a \tB_y^b$ means $\tA_x^a \tB_y^b$ in the following proof.
+Note that $\tA_x^a \tB_y^b$ means $\tA_x^a \x\tB_y^b$ in the following proof.
 
-From the marginal distribution $\pb{\diamond}{\ast} = \pa{0}{0}+\pa{1}{0} = 2/d$,
-we know $\| \tB_\ast^\diamond \ket{\tpsi} \| = \| (\tA_0^0+\tA_0^1) \ket{\tpsi}\| = \sqrt{2/d}$.
-Since $\pr{0\diamond}{0\ast} + \pr{1\diamond}{0\ast} = 2/d$, we find that 
+From the marginal distribution $\pb{\diamond}{\ast} = \pa{0}{0}+\pa{1}{0} = 2/d-1$,
+we know $\| \tB_\ast^\diamond \ket{\tpsi} \| = \| (\tA_0^0+\tA_0^1) \ket{\tpsi}\| = \sqrt{2/d-1}$.
+Since $\pr{0\diamond}{0\ast} + \pr{1\diamond}{0\ast} = 2/d-1$, we find that 
 \begin{align*}
 	\frac{\bra{\tpsi}\tB_\ast^\diamond (\tA_0^0+\tA_0^1) \tB_\ast^\diamond\ket{\tpsi}}{ \| \tB_\ast^\diamond \ket{\tpsi} \|^2} = 1,
 \end{align*}
@@ -925,107 +941,21 @@ The conclusion of \cref{lm:chsh_comp} follows the application of \cref{thm:selft
 Note that the combination of \cref{lm:chsh_comp} with \cref{prop:2d-subspace} gives us that 
 $\tB_0\tB_1$ has eigenvalues $\omega_d$ and $\omega_d^{-1}$.
 
-%------------------------------------------------------------------------
-\subsection{The single value test}
-%------------------------------------------------------------------------
-By the following test, we want to make sure that the operator $X$ has eigenvalue $1$.
-In this test $\calX = \{\tri \}$, $\calY = \{0,1,\tri\}$, $\calA = \{\diamond, \perp\}$ and $\calB = \{0,1, \diamond, \perp\}$.
-As before, we first give intuitions about how Alice and Bob should behave to achieve the optimal correlation, then
-we give the optimal correlation and the corresponding optimal strategy.
-\begin{itemize}
-	\item \textbf{Case 1}: when $x = y = \tri$, Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
-	their answers should agree;
-	\item \textbf{Case 2}: when $x =\tri$ and $y = 0$, if Alice answers with $\diamond$, Bob should answer $0$, and if 
-	Alice answers $\perp$, Bob can answer with any $b \in \calB$;
-	\item \textbf{Case 3}: when $x = \tri$ and $y = 1$, if Alice answers with $\diamond$, Bob should answer $0$, and if  
-	Alice answers with $\perp$, Bob can answer with any $b \in \calB$.
-\end{itemize}
 
-\textbf{The optimal correlation and strategy}.
-As in the previous test, Alice and Bob should share the entangled state
-$\ket{\psi} = \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1} \ket{u_i}\ket{u_i} \sim \ket{\EPR{d}}$.
-Define the subspace $V = \spn\{ \ket{u_0} \}$.
-The ideal strategy has projective measurement 
-\begin{align*}
-&A_\tri^\diamond = B_\tri^\diamond= \ketbra{u_0}{u_0}, 
-&&A_\tri^\perp = B_\tri^\perp = \1 - \ketbra{u_0}{u_0},\\
-&B_0^0|_V = B_1^0|_V = \ketbra{u_0}{u_0}, 
-&&B_0^1|_V = B_1^1|_V = 0.
-\end{align*}
-Note that it is possible to construct observables $B_0$ and $B_1$ from $\LS$
-that can be used in both the extended weighted CHSH test and the single value test.
-Then we can conclude that $B_0B_1$ has eigenvalue $1$.
-
-
-It is easy to calculate the ideal correlation, which is
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{|c|c||c|c|c|c|c|c|}
-\hline
-\multicolumn{2}{|c|}{} &
-\multicolumn{2}{|c|}{$y=\tri$} &
-\multicolumn{2}{|c|}{$y=0$} &
-\multicolumn{2}{|c|}{$y=1$}\\
-\cline{3-8}
-\multicolumn{2}{|c|}{} &$b = \diamond$ & $b = \perp$ & $b = 0$ & $b = 1$ & $b = 0$ & $b = 1$\\
-\hline
-\hline
-\multirow{2}{*}{$x = \tri$} & $a=\diamond$ & $1/d$ & 0 & $1/d$ & 0 & $1/d$ & 0 \\
-\cline{2-8}
-&$a=\perp$ & 0 & $(d-1)/d$ & \small $\pr{\perp0}{\tri0}$ & \small $\frac{d-1}{d} -\pr{\perp0}{\tri0}$  
-& \small $\pr{\perp0}{\tri1}$ & \small $\frac{d-1}{d}- \pr{\perp0}{\tri0}$  \\
-\hline
-\end{tabular}
-\caption{Ideal correlation of the single value test.}
-\end{center}
-\end{table}
-
-The enforcement imposed by the single value test is summarized in the following lemma.
-\begin{lemma}
-	\label{lm:svt_comp}
-	If a quantum strategy$(\{\tA_\tri^a\}_a, \{\{\tB_y^b\}_b\}_y, \ket{\tpsi}$ has the same behaviour as
-	the optimal one, then $(\tB_0^0 - \tB_0^1)(\tB_1^0-\tB_1^1)$ has eigenvalue $1$.
-\end{lemma}
-\begin{proof}
-By the marginal distribution we know that $\| A_\tri^\diamond \ket{\psi}\| = \frac{1}{\sqrt{d}}$.
-From the condition that $P(\diamond 0|\tri 0) = 1/d$, we know
-\begin{align}
-	\frac{  \bra{\psi} \tA_\tri^\diamond  \tB_0^0 \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|^2} = 1,
-\end{align}
-which implies that 
-\begin{align}
- \tB_0^0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
-\end{align}
-With similar reasoning, we get
-\begin{align}
- \tB_1^0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
-\end{align}
-Hence $ \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} $ is in the intersection of $\supp(\tB_0^0)$ and $\supp(\tB_1^0)$.
-Since for any $y \in [2]$, $\supp(\tB_y^0)$ and $\supp(\tB_y^1)$ are disjoint, we know
-\begin{align*}
-	(\tB_y^0 - \tB_y^1)  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}  =  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} - 0 = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}. 
-\end{align*}
-Therefor, we know $ \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} $ is an eigenvector of $\tB_0\tB_1$ with eigenvalue $1$ because
-\begin{align}
-	\tB_0\tB_1 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \tB_0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} =  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
-\end{align}
-\end{proof}
-In the next section, when we apply this test to make sure the operator $X$ has eigenvalue $1$, and 
-we denote the test by $\SVT_X$.
 
 %=====================================
 \section{Main result}
 \label{sec:main}
 %=====================================
-In this section, we introduce the combined game $\G{d}$ and then
-prove that it can self-test the state $\ket{\EPR{d}}$.
+In this section, we introduce the combined game $\G{d-1}$ and then
+prove that it can self-test the state $\ket{\EPR{d-1}}$.
 
 %-----------------------------------------------------------------
-\subsection{The game $\G{d}$}
+\subsection{The correlation for the game $\G$}
 %-----------------------------------------------------------------
 Assume the linear system game has $n=118$ variables and $m=91$ equations.
-Alice receives $x \in \{1,\dots m+4 \}$ and Bob receives
-$y \in \{1,\dots,n+2\}$. We follow the previous structure by first give intuition about how they should
+Alice receives $x \in \{1,\dots m+3 \}$ and Bob receives
+$y \in \{1,\dots,n+1\}$. We follow the previous structure by first give intuition about how they should
 behave in this game. The correlation can be easily extracted from the behaviour list below.
 \begin{itemize}
 	\item When $x \in \{1,\dots m\}$ and $y \in \{1, \dots n\}$, they should win the 
@@ -1038,19 +968,12 @@ behave in this game. The correlation can be easily extracted from the behaviour 
 	\end{align}
 	are the inputs for the game $\CHSH_X$
 	(The intuition behind is that $B_1B_2 = X$.);
-	\item when $x = m+4$ and  $y \in \{1,2,n+2\}$, they should follow the optimal behaviour 
-	of the test $\SVT_X$, where
-	\begin{align}
-		& \tri_A = m+4 \\
-		& \tri_B = n+2, \quad 1_B = 1,\quad 2_B = 2
-	\end{align}
-	are the inputs for the game $\SVT_X$;
-	\item otherwise, their behaviour is irrelavent.
+	\item otherwise, their behaviour is irrelavant.
 \end{itemize}
 Note that the dimension $d$ is defined in the rules of $\CHSH_X$.
 
 \begin{proposition}
-	The game $\G{d}$ can be won perfectly by a quantum strategy.
+	The game $\G{d-1}$ can be won perfectly by a quantum strategy.
 \end{proposition}
 We prove this proposition by giving the optimal strategy.
 \begin{proof}
@@ -1138,11 +1061,11 @@ $\1 \oplus B_1 \oplus \1 \oplus B_1$, so effectively, $x_1$ is mapped to $B_1^{\
 \footnote{Details of this step of embedding can be found in proof of Proposition~$4.2$ in Ref.~\cite{slofstra2017}.}
 
 In the end, we determine the shared state.
-The optimal strategies for $\CHSH_X$ and $\SVT_X$ use state 
-$\ket{\psi} = \frac{1}{\sqrt{d}} \sum_{i=0}^{d-1} \ket{u_i}\ket{u_i}$, 
-so the shared state for $\G{d}$ is $\frac{1}{2}( \ket{\psi}^{\oplus 4})$.
+The optimal correlation for $\CHSH_X$ uses state 
+$\ket{\psi} = \frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1} \ket{u_i}\ket{u_i}$, 
+so the shared state for $\G$ is $\frac{1}{2}( \ket{\psi}^{\oplus 4})$.
 \end{proof}
-Next we are going to prove that the strategy winning this game optimally can self-test $d$-dimensional EPR pair.
+Next we are going to prove that the strategy winning this game optimally can self-test $d-1$-dimensional EPR pair.
 
 %-----------------------------------------------------------------
 \subsection{Proof of \cref{thm:pr_2}}
@@ -1158,6 +1081,7 @@ For each variable $\{ x_i \}_{i=1}^n$, Alice and Bob has operators $A_i$ and $B_
 The condition that they agree with assignment to variables means that 
 \begin{align}
 	\bra{\psi} A_i \otimes \overline{B_i} \ket{\psi} = 1 \Rightarrow A_i \otimes \overline{B_i} \ket{\psi} = \ket{\psi}
+	\text{ for } 1 \leq i \leq n
 \end{align}
 and the condition that Alice's assignments satisfy the constraint means that 
 \begin{align}
@@ -1183,36 +1107,61 @@ the condition is equivalent to
 \end{align}
 We will come back to the implication of this condition later.
 
-By \cref{lm:chsh_comp}, we can extract states $\ket{u_0}$ and $\ket{u_1}$ from the support $+1$-eigenspace of 
-$A_{m+1} = A_\ast^\diamond- A_\ast^\perp$,   
-and define $\ket{x_{A,1}} = 1/\sqrt{2}(\ket{u_0} + i\ket{u_1})$. 
-\cref{prop:2d-subspace} implies that $\ket{x_{A,1}}$ is the eigenvector of $X_A$ with eigenvalue $\omega_d$.
-Similarly, define $\ket{x_{A,d-1}} = 1/\sqrt{2}(\ket{u_0} - i\ket{u_1})$ such that $X_A \ket{x_{A,d-1}} = \omega_d^{d-1}\ket{x_{A,d-1}}$.
+Suppose $A_{m+1} = A_\ast^\diamond- A_\ast^\perp = \Pi_{V_A} - \Pi_{V_A^\perp}$m, where $V_A$ is a
+$2m$-dimensional vector space and $\Pi_{V_A}$ is the projector onto it. The reason why it has dimension $2m$
+will be clear shortly. On Bob's side, we also have $B_{n+1} = B_\ast^\diamond- B_\ast^\perp = \Pi_{V_B} - \Pi_{V_B^\perp}$.
+Recall that from the extended weighted CHSH test, we know
+\begin{align}
+	A_\ast^\diamond \ket{\psi} = B_\ast^\diamond \ket{\psi} = A_\ast^\diamond \x B_\ast^\diamond \ket{\psi},
+\end{align}
+which implies that with an appropriate change of basis, we can get $V_A = V_B$, so in the rest of the proof
+we drop the subscript of $V$.
+By \cref{lm:chsh_comp} and \cref{prop:2d-subspace}, we know $V$ consists of $\omega_d$-eigenvectors and $\omega_d^{-1}$ eigenvectors of 
+$X_A$, so we can write 
+\begin{align}
+	\Pi_{V} = \Pi_{V_1} + \Pi_{V_{d-1}},
+\end{align}
+where $\Pi_{V_{1}}$ is the projector onto the $\omega_d$-eigenspace of $X_A$ and $\Pi_{V_{d-1}}$ is the projector 
+onto the $\omega_d^{-1}$-eigenspace of $X_A$.
+Suppose $\ket{x_{1}} \in V_{1}$, then $X_A \ket{x_{1}} = \omega_d \ket{x_{1}}$.
 Hence, by \cref{eq:ux_relation} we can calculate the eigen-decomposition of $X_A$ in $\supp(\rho_A)$.
 as follows
 \begin{align}
 \label{eq:ladder}
- X_AU_A^\dagger \ket{x_{A,1}} = U_A^\dagger X_A^2 \ket{x_{A,1}} = \omega_d^2 U_A^\dagger \ket{x_{A,1}},
+ X_AU_A^\dagger \ket{x_{1}} = U_A^\dagger X_A^2 \ket{x_{1}} = \omega_d^2 U_A^\dagger \ket{x_{1}},
 \end{align}
-so $U_A^\dagger \ket{x_{A,1}}$ is an eigenvector of $X_A$ with eigenvalue $\omega_d^2$.
-By induction, we know $X_A (U_A^\dagger)^i \ket{x_{A,1}} = \omega_d^{2^i} (U_A^\dagger)^i\ket{x_{A,1}}$. 
-From the set $\{(U_A^\dagger)^i \ket{x_{A,1}}\}_{i=0}^{d-2}$, we can identify $\ket{x_{A,i}}$ for $i = 1 \dots  d-1$
-such that $X_A \ket{x_{A,i}} = \omega_d^i \ket{x_{A,i}}$ and 
+so $U_A^\dagger \ket{x_{1}}$ is an eigenvector of $X_A$ with eigenvalue $\omega_d^2$.
+By induction, we know $X_A (U_A^\dagger)^i \ket{x_{1}} = \omega_d^{2^i} (U_A^\dagger)^i\ket{x_{A,1}}$. 
+From the set $\{(U_A^\dagger)^i \Pi_{V_1} (U_A)^i \}_{i=0}^{d-2}$, we can identify $\Pi_{V_i}$ for $i = 1 \dots  d-1$
+such that $\Pi_{V_i}$ is the projector onto the $\omega_d^i$-eigenspace of $X_A$,
+and 
 \begin{align}
-S_A = \spn \{ \ket{x_{A,1}}, \ket{x_{A,2}} \dots  \ket{x_{A,d-1}} \} \subset \supp(\rho_A).
+ \cup_{i \in [d-1]+1} V_i \subset \supp(\rho_A).
 \end{align}
-On the other hand, by \cref{eq:ux_relation} we also know that $U_A \ket{x_{A,i}} = \ket{x_{A,i/2}}$ for $i = 1,2 \dots d-1$.
-Now we get $U_A$ and $X_A$ that satisfy the condition of \cref{lm:ux_independ} when their actions are 
-restricted to $\spn(S_A)$.
+Since unitary transformation does not change the rank of a matrix, we know $\rank(\Pi_{V_1}) = \rank(\Pi_{V_{i}}) =m$
+for $ i =1 \dots d-1$,
+and we assume 
+\begin{align}
+ \Pi_{V_i} = \sum_{j=1}^m \ketbra{x_{i,j}}{x_{i,j}}.
+\end{align}
+By \cref{eq:ux_relation} we also know that $U_A \ket{x_{i,j}} = \ket{x_{i/2,j}}$ for $i = 1,2 \dots d-1$.
+In order to apply \cref{lm:ux_independ}, we construct $m$ subspaces $\{W_j\}_{j=1}^m$ where 
+\begin{align}
+	W_j = \spn( \{ \ket{x_{i,j}} \}_{i=1}^{d-1} )
+\end{align}
+The subspace $W_j$ is orthogonal to $W_{j'}$ for $j \neq j'$, and
+$U_A$ and $X_A$ satisfy the condition of \cref{lm:ux_independ} when their actions are 
+restricted to each $W_j$.
+Similar argument also applies to operator $X_B$ and $U_B$ on Bob's side.
 
-Similar argument applies to Bob's operators. We can identify $X_B = B_1B_2$, 
-$U_B=B_3B_4$ and a vector space $S_B =\spn\{ \ket{x_{B,1}}, \ket{x_{B,2}} \dots  \ket{x_{B,d-1}} \} \subset \supp(\rho_B)$,
-such that 
-\begin{align}
-	X_B = \sum_{i=1}^{d-1} \omega_d^i \ketbra{x_{B,i}}{x_{B,i}} && U_B = \sum_{i=1}^{d-1} \ketbra{x_{B,i/2}}{x_{B,i}},
-\end{align}
-when their actions are restricted to $S_B$. Moreover, we can define a unitary $V: \supp{\rho_B} \to \supp(\rho_A)$,
-which maps $\ket{x_{B,i}}$ to $\ket{x_{A,i}}$ for $i=1\dots d-1$.
+%Similar argument applies to Bob's operators. We can identify $X_B = B_1B_2$, 
+%$U_B=B_3B_4$ and a vector space $S_B =\spn\{ \ket{x_{B,1}}, \ket{x_{B,2}} \dots  \ket{x_{B,d-1}} \} \subset \supp(\rho_B)$,
+%such that 
+%\begin{align}
+%	X_B = \sum_{i=1}^{d-1} \omega_d^i \ketbra{x_{B,i}}{x_{B,i}} && U_B = \sum_{i=1}^{d-1} \ketbra{x_{B,i/2}}{x_{B,i}},
+%\end{align}
+%when their actions are restricted to $S_B$. Moreover, we can define a unitary $V: \supp{\rho_B} \to \supp(\rho_A)$,
+%which maps $\ket{x_{B,i}}$ to $\ket{x_{A,i}}$ for $i=1\dots d-1$.
 
 
 %and projectors $\Pi_{S_A}$ and $\Pi_{S_B}$ to be the projectors onto $S_A$ and $S_B$ respectively.
@@ -1221,7 +1170,8 @@ which maps $\ket{x_{B,i}}$ to $\ket{x_{A,i}}$ for $i=1\dots d-1$.
 %	\ket{\psi_S} = (\Pi_{S_A} \x (V\Pi_{S_B}))\ket{\psi} = \vc(\tau) 
 %\end{align}
 %for some $\tau \in L(S_A)$.
-Assume that $\ket{\psi} = \vc(\tau)$ for some $\tau \in L(\supp(\rho_B), \supp(\rho_A))$
+With an appropriate change of basis, we 
+assume that $\ket{\psi} = \vc(\tau)$ for some $\tau \in L(\supp(\rho_A))$
 The consistency condition is equivalent to
 \begin{align}
 \label{eq:con_tau}
@@ -1229,51 +1179,43 @@ The consistency condition is equivalent to
 \end{align}
 Substituting $i=1,2$ into \cref{eq:con_tau}, we get 
 \begin{align}
-	X_A \tau X_B^\dagger = A_1A_2\tau B_2^\dagger B_1^\dagger = A_1\tau B_1^\dagger = \tau.
+	X_A \tau X_A^\dagger = A_1A_2\tau B_2^\dagger B_1^\dagger = A_1\tau B_1^\dagger = \tau.
 \end{align}
-Inserting $V^\dagger V$ between $\tau$ and $X_B$ and multiplying $V^\dagger$ to the right on both sides yield that 
-\begin{align}
-	X_A \tau V^\dagger X_A^\dagger = X_A \tau V^\dagger VX_B^\dagger V^\dagger = \tau V^\dagger,
-\end{align}
-where we use the relation $VX_B^\dagger V^\dagger = X_A$.
 Similar argument gives us that 
 \begin{align}
-	U_A \tau V^\dagger  U_A^\dagger = \tau V^\dagger.
+	U_A \tau U_A^\dagger = \tau.
 \end{align}
 Then we can conclude that for any $k \in \{0,1 \dots d-2\}$ and $l \in \{1,2\dots d-1\}$
 \begin{align}
-	U_A^kX_A^l \tau V^\dagger (U_A^kX_A^l)^\dagger = \tau V^\dagger.
+	U_A^kX_A^l \tau (U_A^kX_A^l)^\dagger = \tau.
 \end{align}
-By \cref{lm:ux_independ}, $\tau V^\dagger$ projected onto $L(S_A)$ commutes with all the $(d-1) \times (d-1)$ matrices, which means that 
+Let $\Pi_{W_j}$ be the projector onto $W_j$. 
+By \cref{lm:ux_independ}, $\Pi_{W_j} \tau \Pi_{W_j}$ commutes with all the $(d-1) \times (d-1)$ matrices, which means that 
 \begin{align}
 	\label{eq:d-1}
-	\tau V^\dagger|_{S_A}  \propto \1_{S_A}.
+	\Pi_{W_j} \tau \Pi_{W_j}  = c_j \1_{S_A} \text{ for } j = 1\dots m.
 \end{align}
-
-In the end, we turn our attention back to the single value test. 
-The implication of the single value test is that there
-exists $\ket{x_{B,0}} \in \supp(\rho_B)$ such that $X_B \ket{x_{B,0}} = \ket{x_{B,0}}$,
-and similarly, there exists $\ket{x_{A,0}} \in supp(\rho_A)$ such that $X_A \ket{x_{A,0}} = \ket{x_{A,0}}$.
-We can further restrict $V$ so that $V\ket{x_{B,0}} = \ket{x_{A,0}}$.
-Define $S_A^\perp = \{ \ket{x_{A,0}}\}$.
-Since 
+In the vector form, we know
 \begin{align}
-	A_\triangle^\diamond \tau B_\triangle^\diamond =A_\triangle^\diamond \tau = \tau B_\triangle^\diamond,
+	\sum_{j =1}^m \Pi_{W_j} \ket{\psi} =\sum_{i=1}^{d-1} \sum_{j=1}^m c_j \ket{x_{i,j}}\ket{x_{i,j}}. 
 \end{align}
-and $\ket{x_{A,0}} \in \supp(A_\triangle^\diamond)$, $\ket{x_{B,0}} \in \supp(B_\triangle^\diamond)$, 
-we know that 
+Recalling the fact that 
 \begin{align}
-\tau V^\dagger|_{S_A^\perp}  \propto \1_{S_A^\perp}.
-\end{align}
-%\begin{align}
-%	A_\triangle^\diamond \ket{\psi} = A_\triangle^\diamond \x B_\triangle^\diamond \ket{\psi} = \frac{1}{\sqrt{d}}
-%	\ket{x_{A,0}}\ket{x_{B,0}}
-%\end{align}
-By the orthogonality between $S_A$ and $S_A^\perp$, we can conclude that there exists local isometries 
-$V_A$ and $V_B$ such that
-\begin{align}
-	V_A \x V_B \ket{\psi} = \ket{\EPR{d}}.
-\end{align}
+\norm{ \Pi_{V_1} + \Pi_{V_{d-1}} \ket{\psi}}^2 = \norm{\Pi_{V_1} \ket{\psi}}^2 + \norm{\Pi_{V_{d-1}} \ket{\psi}}^2 = \frac{2}{d-1},
+ \end{align}
+ it means that 
+ \begin{align}
+ 	2 \sum_{j=1}^m \norm{c_j}^2 = \frac{2}{d-1}.
+ \end{align}
+ Then we can calculate the norm of $\sum_{j =1}^m \Pi_{W_j} \ket{\psi}$, which is
+ \begin{align}
+ \norm{\sum_{j =1}^m \Pi_{W_j} \ket{\psi}}^2 = \sum_{i=1}^{d-1} \sum_{j=1}^m \norm{c_j}^2 = 1 = \norm{\ket{\psi}}^2.
+ \end{align}
+ In the end, we can conclude that $\supp{\rho_A} = \cup_{i=1}^{d-1} V_i$ and there exist local isometries $\Phi_A$ and $\Phi_B$
+ such that 
+ \begin{align}
+ 	\Phi_A\x\Phi_B  \ket{\psi} =  (\frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1} \ket{ii}) \x \ket{junk}.
+ \end{align}
  
 %The effect of $\CHSH_X$ and $\SVT_X$ is that we have a set $\{ \ket{x_i} \}_{i \in [d]} \in \supp(\rho_A)$ such that
 %\begin{align}
@@ -1285,7 +1227,7 @@ $V_A$ and $V_B$ such that
 %\end{align}
 %\hl{\textbf{Question}: Can we show $\Tr(\ketbra{x_2}{x_2} \rho_A) = 1/d$?}
 %========================================
-\section{Extending $\G{d}$ for general prime numbers }
+\section{Extending $\G$ for general prime numbers }
 \label{sec:extend}
 %========================================
 
@@ -1316,7 +1258,7 @@ the two SOS decompositions that we use are
 \end{align}
 The verification is omitted here.
 
-Suppose the quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_{y in [2]}\}$ achieves that 
+Suppose the quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_{y \in [2]}\}$ achieves that 
 $\bra{\psi} \bar{\I}_\alpha \ket{\psi} \leq \epsilon$.
 The second step is to establish bounds of the following form
 \begin{align}
@@ -1355,10 +1297,21 @@ With appropriate substitutions, the rest of the proof follows the same derivatio
 so we omit it here.
 \end{proof}
 %%=====================================
-%\section{Construction of $\Gamma(\LS)$}
-%\label{sec:construct}
+\section{Equations to embed $uxu^{-1} = x^2$}
+\label{sec:power2}
 %%=====================================
+\input{power2_equations}
 
+%%=====================================
+\section{Equations to embed $uxu^{-1} = x^3$}
+\label{sec:power3}
+%%=====================================
+\input{power3_equations}
 
+%%=====================================
+\section{Equations to embed $uxu^{-1} = x^5$}
+\label{sec:power5}
+%%=====================================
+\input{power5_equations}
 
 \end{document}

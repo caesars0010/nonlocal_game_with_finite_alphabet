@@ -104,7 +104,8 @@
 
 % table of contents
 \usepackage{tocloft}
-
+% Table with multi-row
+\usepackage{multirow}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %  N E W C O M M A N D  %
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -171,6 +172,11 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\calH}{\mathcal{H}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\tri}{\Delta}
 
 % Identity operator
 \newcommand{\1}{\mathbb{1}}
@@ -188,6 +194,13 @@
 \newcommand{\tB}{\tilde{B}}
 \newcommand{\tpsi}{\tilde{\psi}}
 
+% Probabilities
+\newcommand{\pr}[2]{P(#1|#2)}
+\newcommand{\pa}[2]{P_A(#1|#2)}
+\newcommand{\pb}[2]{P_B(#1|#2)}
+
+% Bell Ineqaulities
+\newcommand{\I}{\mathcal{I}}
 % Commands for highlighting text and notes
 
 \usepackage{color}
@@ -1302,4 +1315,91 @@ We add such relations to $\Gamma$ and get the final form of $\Gamma$ which is
 The solution group $\Gamma$ has $235$ variables and $184$ equations, which match what is given in
 \cite{slofstra2017}.
 
+%------------------------------------------------------------------------
+\subsection{The single value test}
+%------------------------------------------------------------------------
+By the following test, we want to make sure that the operator $X$ has eigenvalue $1$.
+In this test $\calX = \{\tri \}$, $\calY = \{0,1,\tri\}$, $\calA = \{\diamond, \perp\}$ and $\calB = \{0,1, \diamond, \perp\}$.
+As before, we first give intuitions about how Alice and Bob should behave to achieve the optimal correlation, then
+we give the optimal correlation and the corresponding optimal strategy.
+\begin{itemize}
+	\item \textbf{Case 1}: when $x = y = \tri$, Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
+	their answers should agree;
+	\item \textbf{Case 2}: when $x =\tri$ and $y = 0$, if Alice answers with $\diamond$, Bob should answer $0$, and if 
+	Alice answers $\perp$, Bob can answer with any $b \in \calB$;
+	\item \textbf{Case 3}: when $x = \tri$ and $y = 1$, if Alice answers with $\diamond$, Bob should answer $0$, and if  
+	Alice answers with $\perp$, Bob can answer with any $b \in \calB$.
+\end{itemize}
+
+\textbf{The optimal correlation and strategy}.
+As in the previous test, Alice and Bob should share the entangled state
+$\ket{\psi} = \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1} \ket{u_i}\ket{u_i} \sim \ket{EPR(d)}$.
+Define the subspace $V = \spn\{ \ket{u_0} \}$.
+The ideal strategy has projective measurement 
+\begin{align*}
+&A_\tri^\diamond = B_\tri^\diamond= \ketbra{u_0}{u_0}, 
+&&A_\tri^\perp = B_\tri^\perp = \1 - \ketbra{u_0}{u_0},\\
+&B_0^0|_V = B_1^0|_V = \ketbra{u_0}{u_0}, 
+&&B_0^1|_V = B_1^1|_V = 0.
+\end{align*}
+Note that it is possible to construct observables $B_0$ and $B_1$ from $LS$
+that can be used in both the extended weighted CHSH test and the single value test.
+Then we can conclude that $B_0B_1$ has eigenvalue $1$.
+
+
+It is easy to calculate the ideal correlation, which is
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{2}{|c|}{$y=\tri$} &
+\multicolumn{2}{|c|}{$y=0$} &
+\multicolumn{2}{|c|}{$y=1$}\\
+\cline{3-8}
+\multicolumn{2}{|c|}{} &$b = \diamond$ & $b = \perp$ & $b = 0$ & $b = 1$ & $b = 0$ & $b = 1$\\
+\hline
+\hline
+\multirow{2}{*}{$x = \tri$} & $a=\diamond$ & $1/d$ & 0 & $1/d$ & 0 & $1/d$ & 0 \\
+\cline{2-8}
+&$a=\perp$ & 0 & $(d-1)/d$ & \small $\pr{\perp0}{\tri0}$ & \small $\frac{d-1}{d} -\pr{\perp0}{\tri0}$  
+& \small $\pr{\perp0}{\tri1}$ & \small $\frac{d-1}{d}- \pr{\perp0}{\tri0}$  \\
+\hline
+\end{tabular}
+\caption{Ideal correlation of the single value test.}
+\end{center}
+\end{table}
+
+The enforcement imposed by the single value test is summarized in the following lemma.
+\begin{lemma}
+	\label{lm:svt_comp}
+	If a quantum strategy$(\{\tA_\tri^a\}_a, \{\{\tB_y^b\}_b\}_y, \ket{\tpsi}$ has the same behaviour as
+	the optimal one, then $(\tB_0^0 - \tB_0^1)(\tB_1^0-\tB_1^1)$ has eigenvalue $1$.
+\end{lemma}
+\begin{proof}
+By the marginal distribution we know that $\| A_\tri^\diamond \ket{\psi}\| = \frac{1}{\sqrt{d}}$.
+From the condition that $P(\diamond 0|\tri 0) = 1/d$, we know
+\begin{align}
+	\frac{  \bra{\psi} \tA_\tri^\diamond  \tB_0^0 \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|^2} = 1,
+\end{align}
+which implies that 
+\begin{align}
+ \tB_0^0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
+\end{align}
+With similar reasoning, we get
+\begin{align}
+ \tB_1^0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
+\end{align}
+Hence $ \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} $ is in the intersection of $\supp(\tB_0^0)$ and $\supp(\tB_1^0)$.
+Since for any $y \in [2]$, $\supp(\tB_y^0)$ and $\supp(\tB_y^1)$ are disjoint, we know
+\begin{align*}
+	(\tB_y^0 - \tB_y^1)  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}  =  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} - 0 = \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}. 
+\end{align*}
+Therefor, we know $ \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} $ is an eigenvector of $\tB_0\tB_1$ with eigenvalue $1$ because
+\begin{align}
+	\tB_0\tB_1 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} = \tB_0 \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|} =  \frac{\tA_\tri^\diamond \ket{\psi}}{\| \tA_\tri^\diamond \ket{\psi}\|}.
+\end{align}
+\end{proof}
+In the next section, when we apply this test to make sure the operator $X$ has eigenvalue $1$, and 
+we denote the test by $\SVT_X$.
 \end{document}

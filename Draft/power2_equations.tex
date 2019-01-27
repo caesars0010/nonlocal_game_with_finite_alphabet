@@ -1,0 +1,88 @@
+We have order-$2$ generators $\{x_i, w_i, y_i, j_i\}_{i=1}^{7} \cup \{f\} \cup \{g_{I_i}\}_{i=1}^5$,
+where each $I_i$ represent a tuple of the form $(i,j,k)$ and it means that $x_ix_jx_i = x_k$.
+We have 
+\begin{align}
+	I_1 = (1,2,5), 
+	&&I_2 = (3,5,7), 
+	&&I_3 = (4,1,7), 
+	&&I_4 = (4,2,6), 
+	&&I_5 = (3,2,6)
+\end{align} 
+and we denote $C = \{I_i\}_{i=1}^5$.
+The linear relations involving the generators listed above are
+\begin{align}
+	\label{eq:xyz} &x_i y_i z_i = e  &&\text{for} \quad i =1\dots 7 \\
+	\label{eq:xfw} &x_i f w_i = e   &&\text{for} \quad i =1\dots 7 \\
+	&g_{I_1} y_2z_5 =e \\
+	&g_{I_2} y_5z_7 =e \\
+	&g_{I_3} y_1z_7 =e \\
+	&g_{I_4} y_2z_6 =e \\
+	&g_{I_5} y_2z_6 =e 
+\end{align}
+
+For $j =1 \dots 7$ we introduce a set of order-$2$ generators 
+$\{ y_{F_j,k}\}_{k=1}^6$ and
+a group of linear relations of the form
+\begin{align}
+	f y_{F_j,1} y _{F_j,2} = e, && f y_{F_j,5} y_{F_j,6} = e \\
+	y_j y_{F_j,2} y _{F_j,3} = e, && z_j y_{F_j,6} y_{F_j,7} = e \\
+	y_{F_j,1} y_{F_j,4} y _{F_j,7} = e, && y_{F_j,3} y_{F_j,4} y_{F_j,5} = e.
+\end{align}
+We refer to each group of linear relations of the from above as $(F_j)$.
+
+In the end, for each $K \in C$, 
+we introduce a set of order-$2$ generators $\{y_{K,k}\}_{k=1}^6$ and
+linear relations.
+Suppose $K = (k_1,k_2,k_3)$, then the group of linear relations are
+\begin{align}
+	w_{k_1} y_{K,1} y _{K,2} = e, && w_{k_1} y_{K,5} y_{K,6} = e \\
+	y_{k_2} y_{K,2} y _{K,3} = e, && z_{k_3} y_{K,6} y_{K,7} = e \\
+	y_{K,1} y_{K,4} y _{K,7} = e, && y_{K,3} y_{K,4} y_{K,5} = e,
+\end{align}
+We refer to each group of linear relations as $(K)$.
+In summary, we have $118$ binary generators, which are
+\begin{align}
+\{x_i, w_i, y_i, j_i\}_{i=1}^{7} \cup \{f\} \cup \{g_{I_i}\}_{i=1}^5\cup\{\{y_{F_j,k}\}_{k=1}^6\}_{j=1}^7
+\cup \{\{y_{K,k}\}_{k=1}^6\}_{K \in C}.
+\end{align}
+In total, there are $91$ linear relations.
+Converting a linear relation to a linear equation is trivial, so we omit it here.
+
+From the group of linear relations $(F_j)$, we can deduce that for $j = 1 \dots 7$
+\begin{align}
+	f y_j f =& (y_{F_j,1} y _{F_j,2})(y_{F_j,2} y _{F_j,3})(y_{F_j,5} y_{F_j,6}) \\
+	=&y_{F_j,1} (y_{F_j,3} y_{F_j,5}) y_{F_j,6} \\
+	=& (y_{F_j,1} y_{F_j,4}) y_{F_j,6} \\
+	=& y_{F_j,7} y_{F_j,6}\\
+	=&z_j.
+\end{align}
+The immediate implication of the group of linear relations $(K)$ is that 
+\begin{align}
+	w_{k_1} y_{k_2} w_{k_1} =& (y_{K,1} y _{K,2})(y_{K,2} y _{K,3})(y_{K,5} y_{K,6}) \\
+	=&y_{K,1} (y_{K,3} y_{K,5}) y_{K,6} \\
+	=& (y_{K,1} y_{K,4}) y_{K,6} \\
+	=& y_{K,7} y_{K,6}\\
+	=&z_{k_3}.
+\end{align}
+From the conjugacy relation above, we can first deduce that 
+\begin{align}
+	w_{k_1}z_{k_2}w_{k_1} = w_{k_1}(f y_{k_2} f) w_{k_1} = f(w_{k_1}y_{k_2}w_{k_1}) f = fz_{k_3}f = y_{k_3}
+\end{align}
+where we use the fact that $(fw_{k_1})^2 = x_{k_1}^2 = e$ from \cref{eq:xfw}.
+Then we can reason the relation between $x_{k_1}$, $x_{k_2}$ and $x_{k_3}$ as
+follows
+\begin{align}
+	x_{k_1}x_{k_2}x_{k_1} = fw_{k_1}y_{k_2}z_{k_2}fw_{k_1} = (fw_{k_1}y_{k_2}w_{k_1}f)(fw_{k_1}z_{k_2}w_{k_1}f)
+	=(fz_{k_3}f)(fy_{k_3}f) = y_{k_3}z_{k_3} = x_{k_3},
+\end{align}
+where we repeated use \cref{eq:xyz} and \cref{eq:xfw}.
+In the end, we show why $I_1$,$I_2$,$I_3$,$I_4$ and $I_5$ imply that 
+\begin{align}
+	x_3 x_4 x_1x_2 x_4 x_3 =& x_3 (x_4 x_1x_4) (x_4x_2 x_4) x_3 \\
+	=& (x_3 x_7 x_3) (x_3 x_6 x_3)\\
+	=& x_5 x_2\\
+	=& x_1x_2x_1 x_2
+\end{align}
+where we used the fact that $x_i$'s are of order-$2$.
+If we treat $x_3x_4$ as $u$ and $x_1x_2$ as $x$, then we have derived that $uxu^{-1} = x^2$.
+

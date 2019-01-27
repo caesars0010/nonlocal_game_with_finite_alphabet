@@ -1,0 +1,68 @@
+We have order-$2$ generators $\{x_i, w_i, y_i, j_i\}_{i=1}^{8} \cup \{f\} \cup \{g_{I_i}\}_{i=1}^6$,
+where each $I_i$ represent a tuple of the form $(i,j,k)$ and it means that $x_ix_jx_i = x_k$.
+We have 
+\begin{align*}
+	&I_1 = (2,1,5), 
+	&&I_2 = (1,3,6), 
+	&&I_3 = (4,2,7), \\
+	&I_4 = (3,2,7), 
+	&&I_5 = (4,1,8),
+	&&I_6 = (3,6,8)
+\end{align*}
+and we collect them in a set $C = \{ I_i \}_{i=1}^6$. 
+The linear relations involving the generators listed above are
+\begin{align}
+	\label{eq:xyz} &x_i y_i z_i = e  &&\text{for} \quad i =1\dots 8 \\
+	\label{eq:xfw} &x_i f w_i = e   &&\text{for} \quad i =1\dots 8 \\
+	&g_{I_1} y_1z_5 =e \\
+	&g_{I_2} y_3z_6 =e \\
+	&g_{I_3} y_2z_7 =e \\
+	&g_{I_4} y_2z_7 =e \\
+	&g_{I_5} y_1z_8 =e \\
+	&g_{I_6} y_6z_8 = e
+\end{align}
+
+To introduce the following linear relations, we introduce another set of 
+generators $\{\{y_{F_j,k}\}_{k=1}^6\}_{j=1}^8$.
+For $j =1 \dots 8$ we have a group of linear relations of the form
+\begin{align}
+	f y_{F_j,1} y _{F_j,2} = e, && f y_{F_j,5} y_{F_j,6} = e \\
+	y_j y_{F_j,2} y _{F_j,3} = e, && z_j y_{F_j,6} y_{F_j,7} = e \\
+	y_{F_j,1} y_{F_j,4} y _{F_j,7} = e, && y_{F_j,3} y_{F_j,4} y_{F_j,5} = e,
+\end{align}
+We refer to each group of linear relations of the from above as $(F_j)$.
+
+The last set of linear relations comes from each $K \in C$, 
+so we introduce another set of generators $\{\{y_{K,k}\}_{k=1}^6\}_{K \in C}$.
+We have a group of linear relations for each $K \in C$.
+Suppose $K = (k_1,k_2,k_3)$, then the group of linear relations are
+\begin{align}
+	w_{k_1} y_{K,1} y _{K,2} = e, && w_{k_1} y_{K,5} y_{K,6} = e \\
+	y_{k_2} y_{K,2} y _{K,3} = e, && z_{k_3} y_{K,6} y_{K,7} = e \\
+	y_{K,1} y_{K,4} y _{K,7} = e, && y_{K,3} y_{K,4} y_{K,5} = e,
+\end{align}
+We refer to each group of linear relations as $(K)$.
+In summary, we have $123$ binary generators, which are
+\begin{align}
+\{x_i, w_i, y_i, j_i\}_{i=1}^{8} \cup \{f\} \cup \{g_{I_i}\}_{i=1}^6\cup\{\{y_{F_j,k}\}_{k=1}^6\}_{j=1}^8
+\cup \{\{y_{K,k}\}_{k=1}^6\}_{K \in C}.
+\end{align}
+There are $106$ linear relations.
+Converting a linear relation to a linear equation is trivial, so we omit it here.
+
+The derivation of $fy_jf=z_j$ from the group of linear relations $(F_j)$for $j = 1 \dots 8$
+is the same as the previous case, so we omit it here.
+We also omit the derivation of $x_{k_1} x_{k_2} x_{k_1} = x_{k_3}$, 
+from the group of linear relations $(K)$,
+for each $K \in C$.
+In the end, we show the implication of the conjugacy relations in $C$ as follows 
+\begin{align*}
+	x_3 x_4 x_1x_2 x_4 x_3 =& x_3 (x_4 x_1x_4) (x_4x_2 x_4) x_3 \\
+	=& (x_3 x_8 x_3) (x_3 x_7 x_3)\\
+	=& x_6 x_2\\
+	=& x_1x_5x_1 x_2\\
+	=&x_1x_2x_1x_2x_1x_2
+\end{align*}
+where we used the fact that $x_i$'s are of order-$2$.
+If we treat $x_3x_4$ as $u$ and $x_1x_2$ as $x$, then we have derived that $uxu^{-1} = x^3$.
+
