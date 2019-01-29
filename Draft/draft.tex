@@ -325,29 +325,37 @@ our nonlocal game to self-test maximally entangled state of different dimensions
 %========================================
 We use $[n]$ to denote the set $\{0,1 \dots n-1\}$ and $[n]+1$ for the set $\{1,2 \dots n\}$.
 %We denote the group commutator of $A$ and $B$, i.e. $ABA^{-1}B^{-1}$, by $[A,B]$.
-The EPR pair of local dimension $d$ for $d \geq 2$ is the maximally entangled state and is denoted by
-\begin{align}
-\ket{\EPR{d}} = \frac{1}{\sqrt{d}} \sum_{i = 0}^{d-1} \ket{ii}.
-\end{align}
-The superscript $(d)$ stresses the local dimension and we follow this convention through this paper.
 
-We self-test $\ket{\EPR{d}}$ by verify that Alice and Bob has operators 
-which have operators of the similar form
+We use some basic number theory concepts in our work. A primitive root of a prime number
+$d$ is an integer $r$ such that $r \pmod{d}$ has multiplicative order $d-1$. Equivalently,
+$r$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$ where
+$\Z_d^\times = \{1,2\dots d-1\}$.
+The EPR pair of local dimension $d-1$ for some prime $d$, which has primitive root $2$, 
+is denoted by
+\begin{align}
+\ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{i = 0}^{d-2} \ket{ii}.
+\end{align}
+The superscript $(d-1)$ stresses the local dimension and we follow this convention through this paper.
+
+We self-test $\ket{\EPR{d-1}}$ by verify that Alice and Bob has operators
 \begin{align}
 	X = \sum_{k=1}^{d-1} \omega_d^k\ketbra{k}{k} && U = \sum_{k=1}^{d-1} \ketbra{k/2}{k},
 \end{align}
-where $\omega_d = e^{i2\pi/d}$ is the primitive $d$th root of unity.
-Through out this paper, any operation on the label of the eigenvector $k$ is taken modulo $d$,
+where $\omega_d = e^{i2\pi/d}$ is the primitive $d$-th root of unity.
+Through out this paper, any operation on the label of the eigenvector $\ket{i}$ is taken modulo $d$,
 unless otherwise specified, for example, the $i/2$ above.
 
 \textbf{The weighted CHSH inequality \cite{acin2012}.}
 The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
-The weighted CHSH inequality is given below 
+In the CHSH scenario, Alice and Bob has binary observables $A_x,B_y$ for $x,y = 0,1$ 
+on Hilbert space $\calH_A$ and $\calH_B$ respectively.
+A binary observable is a Hermitian matrix whose eigenvalues are either $+1$ or $-1$.
+The weighted CHSH inequality is given by 
 \begin{align}
 	\label{eq:chsh_op}
 	\I_\alpha = \alpha\ip{A_0B_0}+\alpha\ip{A_0B_1} + \ip{A_1B_0} - \ip{A_1B_1}\leq 2\alpha,
 \end{align}
-where $A_x,B_y$ for $x,y = 0,1$ are Binary observables on Hilbert space $\calH_A$ and $\calH_B$ respectively.
+where $\ip{A_xB_y}$ is the expectation value of of the observables.
 If Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$, they cannot violate
 the weighted CHSH inequality.
 However, If they share entangled state $\ket{\psi}$, the maximal violation is 
@@ -362,59 +370,8 @@ However, If they share entangled state $\ket{\psi}$, the maximal violation is
 	consists of the joint state $\ket{\EPR{2}}$ and observables $A_0 = \pauliz$, $A_1 = \paulix$,
 	$B_0 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $B_1 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
 \end{definition}
-We take an approach introduced in Ref.~\cite{bamps2015} and prove the following robust self-testing result.
-\begin{theorem}
-\label{thm:selftest}
-	Suppose the quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the violation
-	at least $2\sqrt{1+\alpha^2} - \epsilon$
-	for some $\epsilon$, then
-	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{aux}$  such that
-	\begin{align}
-		\| \Phi( \tilde{A}_x \x \tilde{B}_y \ket{\psi}) -\ket{aux} \x (A_x \x B_y) \ket{\EPR{2}}  \| = O(\sqrt{\epsilon})
-	\end{align}
-	for $x,y \in \{-1, 0, 1\}$ where the subscript $-1$ refers to the identity operator and $A_x, B_y$ are 
-	defined in \cref{def:ideal}.
-\end{theorem}
-We defer the proof of \cref{thm:selftest} till Appendix~\ref{sec:selftest}.
-After proving the robust self-testing result, we take one step further and observe an interesting property of the 
-observable $\tilde{B}_0\tilde{B}_1$.
-\begin{proposition}
-\label{prop:2d-subspace}
-	Suppose a quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the maximal 
-	violation of  $\I_{\cot(-\pi/2d)}$, then there exists a $2$-dimensional Hilbert space which is spanned by eigenvectors of 
-	$\tilde{B}_0\tilde{B}_1$ of eigenvalue $\omega_d$ and $\omega_d^{-1}$.
-\end{proposition}
-\begin{proof}[Proof of \cref{prop:2d-subspace}]
-	By \cref{thm:selftest}, the condition that the strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the  
-	maximal value of $\I_{\cot(-\pi/2d)} $ implies that there exist states $\ket{u_0}, \ket{u_1} \in \supp(\Tr_A(\ketbra{\tpsi}{\tpsi}))$ such that 
-	\begin{align*}
-	(\tilde{B}_0 + \tilde{B}_1) \ket{u_0} = 2\cos(-\pi/2d) \ket{u_0} 
-	&&(\tilde{B}_0 + \tilde{B}_1) \ket{u_1} = -2\cos(-\pi/2d) \ket{u_1}\\
-	(\tilde{B}_0 - \tilde{B}_1) \ket{u_0} = 2\sin(-\pi/2d) \ket{u_1} 
-	&&(\tilde{B}_0 - \tilde{B}_1) \ket{u_1} = 2\sin(-\pi/2d) \ket{u_0}.
-	\end{align*}
-	It is straightforward to calculate that 
-	\begin{align*}
-		\tilde{B}_0\tilde{B}_1 \ket{u_0} = \cos(\pi/d) \ket{u_0} -\sin(\pi/d) \ket{u_1},&&
-		\tilde{B}_0\tilde{B}_1\ket{u_1} = \sin(\pi/d)\ket{u_0} + \cos(\pi/d) \ket{u_1},
-	\end{align*}
-	so we can conclude that 
-	\begin{align*}
-		&\tilde{B}_0\tilde{B}_1(\ket{u_0} + i\ket{u_1}) = e^{i \frac{\pi}{d}} (\ket{u_0} + i\ket{u_1}), &&
-		&\tilde{B}_0\tilde{B}_1(\ket{u_0} - i\ket{u_1}) = e^{-i \frac{\pi}{d}} (\ket{u_0} - i\ket{u_1}).
-	\end{align*}
-	The actual eigenbasis we use is 
-	\begin{align}
-		\ket{x_1} = \frac{-1}{\sqrt{2}}(\ket{u_0} + i\ket{u_1}), &&
-		\ket{x_{d-1}} = \frac{-e^{i\pi/2d}}{\sqrt{2}}(\ket{u_0} - i\ket{u_1})
-	\end{align}
-	so that 
-	\begin{align}
-		&B_0 = \omega_d\ketbra{x_1}{x_{d-1}} + \omega_d^{-1} \ketbra{x_{d-1}}{x_1},\\
-		&B_1 =\ketbra{x_1}{x_{d-1}}  + \ketbra{x_{d-1}}{x_1},
-	\end{align}
-	which is important for the whole embedding argument to work in \cref{sec:comp}.
-\end{proof}
+An interesting observation of the weighted CHSH inequality is that its maximal violation can certify the shared states and the 
+measurements, which is the phenomenon of self-test. We give formal statement of this self-test result in \cref{sec:chsh}.
 
 \textbf{Nonlocal games}. The two players of a nonlocal game are Alice and Bob. Each of them is requested
 to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and answer set by $\calA$. Similarly,
@@ -433,32 +390,106 @@ by the conditional probability
 	\pr{ab}{xy} = \bra{\psi} A_x^a \x B_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
 \end{align}
 where $(A_x^a)^2 = A_x^a = (A_x^a)^\dagger$ and $(B_y^b)^2 = B_y^b = (B_y^b)^\dagger$.
+Note that we may use the term behaviour and correlation interchangeably.
 The \emph{value} of a strategy is given by
 \begin{align}
 	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
 \end{align} 
 
-The main contribution of our work is the construction of a nonlocal game $\G$ with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
-such that its optimal correlation can self-test $\ket{\EPR{d}}$ for arbitrary $d \in D$. 
-The nonlocal game is a linear system game with modifications and strict enforcements. 
-We introduce the definition of self-testing first and then the definition of linear system game, 
+The main contribution of our work is the construction of a correlation, which is the optimal correlation of a game $\G$ with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
+such that this correlation can self-test $\ket{\EPR{d-1}}$ for arbitrary $d \in D$. 
+The nonlocal game $\G$ is a linear system game with strict enforcements. 
+We introduce the definition of self-testing first, the definition of linear system game, 
+and its operator solution, 
 following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
 \begin{definition}[Self-testing]
-	We say that a nonlocal game self-tests a quantum state $\ket{\Psi}$ if 
-	any quantum strategy $S$ that achieves the optimal quantum value uses a shared state equivalent up to local isometry to $\ket{\Psi}$.
+	We say that a correlation self-tests a quantum state $\ket{\psi}$, if 
+	the correlation is produced by a strategy with shared state $\ket{\psi}$, and 
+	for any quantum strategy $S = ( \{\tA_x\}, \{\tB_y\}, \ket{\tpsi})$ that produces the same correlation,
+	there exists local isometries $\Phi_A$ and $\Phi_B$ on Alice and Bob's side and a state $\ket{junk}$ 
+	such that 	
+	\begin{align*}
+		\Phi_A \x \Phi_B \ket{\tpsi} =  \ket{\psi} \x \ket{junk}.
+	\end{align*}
 \end{definition}
 \begin{definition}[Linear system game]
- Let $Hx = b$ be an $m \times n$ linear system over $\Z_2$. The associated linear system game involves two
- players Alice and Bob, where Alice is given an equation number $1 \leq x \leq m$ and replies with $a \in \Z_2^{\times n}$,
- and Bob is given a variable number $y$ and replies with an assignment $b \in \Z_2$. The winning condition is 
+ Let $Hx = c$ be an $m \times n$ system of linear equations over $\Z_2$,
+ where $H$ is an $m$-by-$n$ matrix with entries in $\Z_2 = \{0,1\}$ and 
+ $c$ is a length-$n$ vector with entries in $\Z_2$ too. 
+ The associated linear system game involves two
+ players Alice and Bob, where Alice is given an equation number $i \in \calX = [m]+1$ and replies with $a \in \calA = \Z_2^{\times n}$,
+ and Bob is given a variable number $j \in \calY = [n]+1$ and replies with an assignment $b \in \calB = \Z_2$. The winning condition is 
+ that Alice's assignment to the variables should satisfy equation $i$ and Alice's $j$-th assignment $a(j)$ should match $b$.
+ Formally, the winning condition is 
  \begin{align*}
- 	a(y) &= b && \text{(Consistency)} \\
-	\sum_{y = 1}^n H_{xy} a(y) &\equiv b(x) \pmod 2. &&\text{(Constraint satisfaction)}
+ 	a(j) &= b && \text{(Consistency)} \\
+	\sum_{k= 1}^n H(i,k) a(k) &\equiv c(i) \pmod 2. &&\text{(Constraint satisfaction)},
  \end{align*}
+ for all $(i,j) \in \calX \times \calY$.
 \end{definition}
 The scoring function of linear system games always maps an input-output pair to $\{0,1\}$, 
 so later when we say a quantum strategy wins a linear system game perfectly, we mean that 
 $V(a,b,x,y) =0$ implies that $\pr{ab}{xy} = 0$.
+We focus on quantum strategies for the linear system game presented in terms of binary observables.
+\begin{definition}[Quantum strategy of a linear system game]
+\label{def:q_strat}
+A quantum strategy for the linear system game $(Hx = c)$ consists of 
+\begin{enumerate}
+	\item a pair of finite Hilbert spaces $\calH_A$ and $\calH_B$;
+	\item a collection of binary observables $B_j$, $1 \leq j \leq n$, on $\calH_B$
+	such that $B_j^2 = \1$ for every $1 \leq j \leq n$;
+	\item a collection of binary observables $A_{ij}$, $1\leq i \leq m$, $1\leq j\leq n$ 
+	on $\calH_A$ such that 
+	\begin{enumerate}
+		\item $A_{ij}^2 = \1$ for every $i,j$,
+		\item $\Pi_j A_{ij}^{H(i,j)} = (-\1)^{c(i)}$ for every $i$, and
+		\item $A_{il}A_{ik} = A_{ik}A_{il}$ for every $i$ and $H(i,l) = H(i,k) =1$;
+	\end{enumerate} 
+	and
+	\item a quantum state $\ket{\psi} \in \calH_A \x \calH_B$.
+\end{enumerate}
+\end{definition}
+Note that any quantum strategy presented in terms of binary observables can be 
+converted to a quantum strategy presented in terms of projective measurement, and
+vice versa.
+
+It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
+satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
+operator solution in the following sense.
+\begin{definition}[Operator solution of a linear system]
+\label{def:op_sol}
+	An operator solution to a linear system $Hx =c$ over $\Z_2$ is a sequence of bounded Hermitian 
+	operators $A_1, A_2, \dots A_n$ on a Hilbert space $\calH$ such that 
+	\begin{enumerate}
+		\item $A_i^2 = \1$, i.e. $A_i$ is a binary observable, for all $1 \leq i \leq n$;
+		\item If $x_l$ and $x_k$ appear in the same equation, then $A_l$ and $A_k$ commute;
+		\item for all $1 \leq i \leq m$,
+		\begin{align*}
+			\Pi_{k=1}^n A_k^{H(i,k)} = (-1)^{c(i)}\1.
+		\end{align*}
+	\end{enumerate}
+	A finite dimensional operator solution to a linear system $Hx = c$ over $\Z_2$ is an operator
+	solution in which the Hilbert space is finite-dimensional.
+\end{definition}
+Perfect quantum strategies can be extracted from operator solutions and vice versa.
+
+Another angle to look at the linear system game ($Hx = c$) is a finitely presented group
+over $\Z_2$, which is called the solution group.
+\begin{definition}[Solution group of a linear system game]
+	\label{def:presentation}
+	Let $Hx = c$ be an $m \times n$  linear system. The solution group of this system
+	is the group
+	\begin{align*}
+		\Gamma(H,c) := \ip{
+		x_1,\dots x_n, J: &J^2 = x_i^2 = e \text{ for all }1 \leq i \leq n, \\
+				& \Pi_{j=1}^n x_j^{H(i,j)} = J^{c(i)} \text{ for all } 1 \leq i \leq m, \text{ and } \\
+				& x_l x_k = x_k x_l \text{ if } H(i,k) = H(i,l) = 1 \text{ for some } i
+				} .
+	\end{align*}
+\end{definition}
+For concepts about group presentation, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
+Combining \cref{def:op_sol} and \cref{def:presentation}, we know that an operator solution associated to $Hx =c$ is 
+a finite-dimensional representation of $\Gamma(H,c)$ that maps $J$ to $-\1$.
 
 %The main tool to understand linear system game is through its solution group over $\Z_d$.
 %\begin{definition}[Solution group over $\Z_d$ \cite{coladan2017}]
@@ -495,124 +526,41 @@ $V(a,b,x,y) =0$ implies that $\pr{ab}{xy} = 0$.
 The goal of this section and the following two sections is to 
 present a correlation that can self-test $\ket{\EPR{d-1}}$, 
 where $d$ is prime and has primitive root $2$. 
-If $d$ has primitive root $2$,
-then $2$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$.
-When $d$ is prime, $\Z_d^\times = \{1,2\dots d-1\}$.
 The correlation we constructed is the optimal correlation for a game $\G$, which is the combination of two tests.
 In this section, we introduce the linear system game which tests a relation that should be satisfied by 
 Alice and Bob's observables.
 
-Slofstra's seminal work~\cite{slofstra2017} draws our attention to the relation $xyx^{-1} = y^2$, which
-is included in the group $K$, which has presentation
-\begin{align*}
-	K = \langle a,b,c,x,y: a^2=b^2=c^2 = e, c=ab, yay^{-1} = a, yby^{-1}= c, xyx^{-1} = y^2\rangle.
-\end{align*}
+Slofstra's seminal work~\cite{slofstra2017} draws our attention to the relation $xyx^{-1} = y^2$.
 The main component of $\G$ is a linear system game $\LS$, whose solution group is the embedding of the 
 following group
 \begin{align}
 	\Pg= \langle u, x : uxu^{-1} = x^2 \rangle.
 \end{align}
-
+In other words, relations in the presentation of the solution group of $\LS$ can be combined to derive the
+relation $uxu^{-1} = x^2$.
 \begin{proposition}
 	\label{prop:embed}
-	The group $\Pg$ can be embedded into a linear system game, $\LS$, over $\Z_2$,
+	The group $\Pg$ can be embedded into a linear system game $\LS$ over $\Z_2$,
 	with $118$ variables and $91$ equations, where each equation involves $3$ variables.
 \end{proposition}
-The process of embedding $\Pg$
-into the solution group of $\LS$ follows the recipe given in the proofs of
+The process of embedding $\Pg$ into the solution group of $\LS$ follows the recipe given in the proofs of
 Proposition~$4.8$, Lemma~$4.4$ and Proposition $4.2$ of Slofstra's seminal work \cite{slofstra2017}.
-The order of applying the results is the reverse of the order they are presented in Ref.~\cite{slofstra2017}..
-\begin{proof}
-The first step is to embed $\Pg$ into a linear-plus-conjugacy group $\Pg''$ where
-all the generators are of order $2$, following the instructions given in the proof of  
-Proposition~$4.8$ of the Ref.~\cite{slofstra2017}.
-We first introduce $x_1,x_2$ such that $x_1^2=x_2^2=e$, $x=x_1x_2$ and $u x_2 u^{-1}=x_2$.
-We also introduce $x' = ux_1u^{-1}$, 
-then we embed $\Pg$ in $\Pg'$ as
-\begin{align}
-	\Pg' = \langle x_1,x_2,x',u: x_1^2=x_2^2=x'^2=e,
-	x_1x_2x_1=x', ux_1u^{-1}=x', ux_2u^{-1} =x_2 \rangle.
-\end{align}
-Next, we introduce $u_1,u_2$ such that $u_1^2=u_2^2=e$ and $u=u_1u_2$, 
-and also $u_3.u_4$ of order $2$ such that the conjugacy relations involving them are 
-\begin{align*}
-u_2x_2u_2 = u_3, && u_1u_3u_1 = x_2\\
-u_2x_1u_2 = u_4, && u_1u_4u_1 = x',
-\end{align*}
-then
-$\Pg'$ is further embedded in $\Pg''$ as
-\begin{equation}
-\begin{aligned}
-	\Pg'' =  \langle &x_1,x_2,x',u_1,u_2,u_3,u_4: \text{all elements are of order $2$},\notag\\
-	 &u_2x_2u_2 = u_3, u_1u_3u_1 = x_2,
-u_2x_1u_2 = u_4, u_1u_4u_1 = x',x_1x_2x_1=x' \rangle.
-\end{aligned}
-\end{equation}	
-To represent the conjugacy relations by a tuple, we relabel the some of the generators as
-\begin{align*}
-	u_1 = x_3, && u_2 = x_4, && x' = x_5, && u_3 = x_6, && u_4 = x_7,
-\end{align*}
-so that a simpler form of the group $\Pg''$ is 
-\begin{equation}
-\begin{aligned}
-	\Pg'' = \langle \{x_i\}_{i=1}^7 : x_i^2 = e \; \forall i, 
-	x_1x_2x_1=x_5, x_4x_2x_4 = x_6,
-	 x_4x_1x_4=x_7, x_3x_2x_3 = x_6, x_3x_5x_3=x_7\rangle
-\end{aligned}
-\end{equation}
-We collect the subscript of $x_i$'s in the conjugacy relations and define
-\begin{align}
-	C= \{ (1,2,5), (3,5,7), (4,1,7), (4,2,6), (3,2,6)\},
-\end{align}
-so that $(i,j,k) \in C$ if and only if $x_ix_jx_i = x_k$ in $\Pg''$.
+The order of applying the results is the reverse of the order they are presented in Ref.~\cite{slofstra2017}.
+We give details of this embedding process in \cref{sec:power2}.
 
-Next we embed $\Pg''$ into $\Pg_{NLC}$ to make $x_j$ and $x_k$ commute if $(i,j,k) \in C$,
-where $\Pg_{NLS}$ is a nice linear-plus-conjugacy group.
-This steps are given in the proof of Lemma~$4.4$ of the Ref.~\cite{slofstra2017}.
-The group $\Pg_{NLS}$ is defined as 
-\begin{equation}
-\begin{split}
-\Pg_{NLS} = \langle \{x_i, w_i, y_i, j_i\}_{i=1}^{7},f : &f^2 = x_i^2 =w_i^2=y_i^2=j_i^2= e, \\
-	&x_i = y_iz_i = fw_i,\; fy_if =z_i \quad\text{where } 1 \leq i \leq 7 \\
-	&y_j z_k = z_ky_j,\; w_iy_jw_i = z_k \quad\text{for all } (i,j,k)\in C \rangle.
-\end{split}
-\end{equation}
-To summarize the linear relations, we first introduce generator $g_{jk} = y_j z_k$ for all $(i,j,k) \in C$
-such that $g_{jk}^2 = e$. Now the group has $34$ generator.
-The $19$ linear relations are
-\begin{align*}
-	&x_i y_i z_i = e \quad \text{for} \quad i =1\dots 7 \\
-	&x_i f w_i = e  \quad \text{for} \quad i =1\dots 7\\
-	&g_{jk}y_jz_k =e \quad \text{for all}\quad (i,j,k) \in C.
-\end{align*}
-The $12$ conjugacy relations are 
-\begin{align*}
-	&fy_if = z_i\quad \text{for} \quad i =1\dots 7\\
-	&w_iy_j w_i = z_k \quad\text{for all } (i,j,k)\in C.
-\end{align*}
-We can standardise the generators by relabeling the generators all as $x_i$.
-There are $29$ generators in $\Pg_{NLS}$.
-
-The last step is given in the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017}, which
-embeds all the conjugacy relations in linear relations.
-This is done by introduce $7$ new variables and $6$ linear relations for each
-conjugacy relations. For example, If $I = (i,j,k)$ is a conjugacy relation, then we introduce
-generators $y_{Ii}$ for $i=1 \dots 6$. Note that $y_{Ii}$ shall not be confused with the $y_i$'s
-in the previous step. The new linear relations are
-\begin{align*}
-	x_i y_{I1} y_{I2} = e && x_j y_{I2} y_{I3} = e && y_{I3}y_{I4}y_{I5} = e\\
-	x_i y_{I5} y_{I6} = e && x_k y_{I6} y_{I7} = e && y_{I1}y_{I4}y_{I7} = e.
-\end{align*}
-In the end, the solution group of $\LS$, $\Pg_{\LS}$,  
-has $118$ variables and $91$ equations.
-\end{proof}
 In the later parts of the paper, we use $n = 118$ and $m = 91$ to refer to the size of $\LS$.
 The key feature of this embedding is that $\LS$ has constant-sized input-output alphabet
 even if the generators $u$ and $x$ can have arbitrary order. 
-
 We denote the special operators in the operator solution of $\LS$ that correpsond to generators 
-$u = x_3x_4$ and $x = x_1x_2$ by $U$ and $S$.
-The special property of $U$ and $S$ is summarized in the following lemma. 
+$u = x_3x_4$ and $x = x_1x_2$ by $U$ and $X$.
+The key relation that we will use in the later section is that 
+\begin{align}
+	(A_3A_4) (A_1A_2)(A_4A_3) \ket{\psi} = (A_1A_2)^2\ket{\psi}, 
+\end{align}
+where $\ket{\psi}$ is the state shared between Alice and Bob and $A_i$ is 
+Alice's observable for $1 \leq i \leq n$.
+
+The special property of $U$ and $X$ is summarized in the following lemma. 
 \begin{lemma}
 	\label{lm:ux_independ}
 	Suppose there exist unitaries $U$ and $X$ which have the following forms
@@ -737,20 +685,84 @@ $\{ U^k X^l \}$ are linearly independent and forms a basis for the ring of all t
 %The corresponding game $\LS$ has $n = 2351$ variables and $m= 1916$ equations.
 
 %======================================
-\section{The extended weighted CHSH game}
+\section{The extended weighted CHSH test}
 \label{sec:chsh}
 %======================================
-The extended weighted CHSH game is added to make sure that the operator $X$ extracted from 
+Before introducing the extended weighted CHSH test, we fill in some background about the weighted CHSH inequality,
+namely, that its maximal violation can self-test $2$-dimensional EPR pair and rotated Pauli operators.
+The robust self-testing result is summarized in the following theorem.
+\begin{theorem}
+\label{thm:selftest}
+	Suppose the quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the violation
+	at least $2\sqrt{1+\alpha^2} - \epsilon$
+	for some $\epsilon$, then
+	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{aux}$  such that
+	\begin{align}
+		\| \Phi( \tilde{A}_x \x \tilde{B}_y \ket{\psi}) -\ket{aux} \x (A_x \x B_y) \ket{\EPR{2}}  \| = O(\sqrt{\epsilon})
+	\end{align}
+	for $x,y \in \{-1, 0, 1\}$ where the subscript $-1$ refers to the identity operator and $A_x, B_y$ are 
+	defined in \cref{def:ideal}. \hl{Error term depend on $\alpha$.}
+\end{theorem}
+Our approach is very similar to the one used in Ref.~\cite{bamps2015} so we 
+defer the proof of \cref{thm:selftest} till \cref{sec:selftest}.
+After proving the robust self-testing result, we take one step further and observe an interesting property of the 
+product of Bob's observables.
+\begin{proposition}
+\label{prop:2d-subspace}
+	Suppose a quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the maximal 
+	violation of  $\I_{\cot(-\pi/2d)}$, then $\supp(\Tr_A(\ketbra{\psi}{\psi}))$ is spanned by $\omega_d$-eigenvectors 
+	and $\omega_d^{-1}$ -eigenvectors of $\tilde{B}_0\tilde{B}_1$.
+\end{proposition}
+\begin{proof}[Proof of \cref{prop:2d-subspace}]
+	By \cref{thm:selftest}, the condition that the strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_y\}_{y \in [2]})$ achieves the  
+	maximal value of $\I_{\cot(-\pi/2d)} $ implies that 
+	\begin{align}
+		\ket{\tpsi} = \sum_{i=1}^m \frac{c_i}{\sqrt{2}} (\ket{u_{i,0}}\ket{u_{i,0}}+\ket{u_{i,1}}\ket{u_{i,1}}),
+	\end{align}
+	where $c_i$'s are coefficients such that $\sum_{i=1}^m \norm{c_i}^2 = 1$.
+	The special property of the subspace $V_i = \spn( \ket{u_{i,0}}, \ket{u_{i,1}})$ is that 
+	\begin{align*}
+	(\tilde{B}_0 + \tilde{B}_1) \ket{u_{i,0}} = 2\cos(-\pi/2d) \ket{u_{i,0}} 
+	&&(\tilde{B}_0 + \tilde{B}_1) \ket{u_{i,1}} = -2\cos(-\pi/2d) \ket{u_{i,1}}\\
+	(\tilde{B}_0 - \tilde{B}_1) \ket{u_{i,0}} = 2\sin(-\pi/2d) \ket{u_{i,1}} 
+	&&(\tilde{B}_0 - \tilde{B}_1) \ket{u_{i,1}} = 2\sin(-\pi/2d) \ket{u_{i,0}}.
+	\end{align*}
+	It is straightforward to calculate that 
+	\begin{align*}
+		\tilde{B}_0\tilde{B}_1 \ket{u_{i,0}} = \cos(\pi/d) \ket{u_{i,0}} -\sin(\pi/d) \ket{u_{i,1}},&&
+		\tilde{B}_0\tilde{B}_1\ket{u_{i,1}} = \sin(\pi/d)\ket{u_{i,0}} + \cos(\pi/d) \ket{u_{i,1}},
+	\end{align*}
+	so we can conclude that 
+	\begin{align*}
+		&\tilde{B}_0\tilde{B}_1(\ket{u_{i,0}} + i\ket{u_{i,1}}) = e^{i \frac{\pi}{d}} (\ket{u_{i,0}} + i\ket{u_{i,1}}), &&
+		&\tilde{B}_0\tilde{B}_1(\ket{u_{i,0}} - i\ket{u_{i,1}}) = e^{-i \frac{\pi}{d}} (\ket{u_{i,0}} - i\ket{u_{i,1}}).
+	\end{align*}
+	Hence each $V_i$ is spanned by $\omega_d$-eigenvector and $\omega_d^{-1}$-eigenvector of $\tB_0\tB_1$.
+\end{proof}
+Suppose the subspace $V = \spn(\ket{u_0}, \ket{u_1})$, then
+the actual eigenbasis of $X = B_0B_1$ that we use is 
+\begin{align}
+	\ket{x_1} = \frac{-1}{\sqrt{2}}(\ket{u_0} + i\ket{u_1}), &&
+	\ket{x_{d-1}} = \frac{-e^{i\pi/2d}}{\sqrt{2}}(\ket{u_0} - i\ket{u_1}),
+\end{align}
+such that 
+\begin{align}
+	&B_0 = \omega_d\ketbra{x_1}{x_{d-1}} + \omega_d^{-1} \ketbra{x_{d-1}}{x_1},\\
+	&B_1 =\ketbra{x_1}{x_{d-1}}  + \ketbra{x_{d-1}}{x_1}.
+\end{align}
+The form of $B_1$ is important for the whole embedding argument to work in \cref{sec:main}.
+
+The extended weighted CHSH test is added to make sure that the operator $X$ extracted from 
 Alice and Bob's operator solution have eigenvalues $\omega_d$ and $\omega_d^{d-1}$.
 In \cref{sec:main}, we will reason why showing these two eigenvalues is enough to guarantee that 
 $U$ and $X$ has the eigen-structure required by \cref{lm:ux_independ}.
-We denote this game that enforces the eigenvalues of the observable $U$ by
-$\CHSH_U$, where the superscript $d$ emphasizes that the scoring rules of this game depend on $d$.
+We denote this game that enforces the eigenvalues of the observable $X$ by
+$\CHSH_X$, where the superscript $d$ emphasizes that the scoring rules of this game depend on $d$.
 
 
-In this game, Alice and Bob each gets a question $x$,$y \in \{ 0, 1, \ast\}$ and 
+In this test, Alice and Bob each gets a question $x$,$y \in \{ 0, 1, \ast\}$ and 
 they answer with $a,b \in \{0,1,\diamond,\perp\}$. 
-Our self-test result follows the optimal behaviour in this game,
+Our self-test result follows the optimal correlation of this test.
 Before presenting the optimal correlation, we give intuitions about how the players should behave.
 \begin{itemize}
 	\item \textbf{Case 1:} when $x = y = \ast$, Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
@@ -947,7 +959,7 @@ $\tB_0\tB_1$ has eigenvalues $\omega_d$ and $\omega_d^{-1}$.
 \section{Main result}
 \label{sec:main}
 %=====================================
-In this section, we introduce the combined game $\G{d-1}$ and then
+In this section, we introduce the combined game $\G$ and then
 prove that it can self-test the state $\ket{\EPR{d-1}}$.
 
 %-----------------------------------------------------------------
