@@ -266,17 +266,17 @@ has shown that the maximally entangled state with arbitrary local dimension
 can be self-tested with constant question alphabet but answer alphabet growing with
 the local dimension. 
 Then Coladangelo and Stark \cite{coladan2017} further showed that by playing many instances
-of the generalized Magic Square game and Magic Pentagram game, one can self-test
+of the generalized Magic Square game and Magic Pentagram game, one can robustly self-test
 $N$ copies of the maximally entangled state with local dimension $d$ for any $d, N \geq 2$.
 Both the Magic Square game and the Magic Pentagram game have constant question alphabet
-but growing answer alphabet.
+but answer alphabet of size $d$.
 
-In summary, general $d$-dimensional maximally entangled states are self-tested by
+At a high level, general $d$-dimensional maximally entangled states are self-tested by
 modifying the correlation and enlarging the size of the correlation.
 A natural question to ask is whether maximally entangled state with large local dimension
 can be self-tested with fixed-sized correlation. 
 An equivalent question to ask is whether it is possible to self-test maximally
-entangled state more efficiently, with constant question and answer set. 
+entangled state of some local dimension more efficiently, with constant correlation size. 
 In this report, we give an affirmative answer to this question by proving the following theorem.
 \begin{theorem}[Informal]
 \label{thm:inf}
@@ -285,12 +285,12 @@ In this report, we give an affirmative answer to this question by proving the fo
 	with constant-sized question and answer alphabets.
 \end{theorem}
 
-The set $D$ is easily characterizable as it contains all the odd prime numbers with 
+The set $D$ is easily characterizable as it contains all the odd prime numbers with smallest
 primitive root $2$, $3$ or $5$. It has been shown that there are infinitely many prime numbers
-with primitive root in the set $\{2,3,5\}$ \cite{murty1988}, so the set $D$ has infinitely many elements.
+with smallest primitive root in the set $\{2,3,5\}$ \cite{murty1988}, so the set $D$ has infinitely many elements.
 To prove \cref{thm:inf}, we give explicit self-testing proof of 
 the maximally entangled state with local dimension $d-1$ where the primitive root of $d$ is $2$,$3$, or $5$, 
-by explicitly giving the correlation that achieves self-testin. 
+by explicitly giving the correlation that achieves self-testing. 
 %Then the self-testing property of this correlation is 
 %given in the following theorem.
 %\begin{theorem}[Informal]
@@ -305,11 +305,11 @@ Note that although the size of $C(\dr{r})$ does not depend on $d$, the optimal c
 
 In order to accomplish our goal, we introduce new techniques for self-testing.
 First of all, we use a different variant of the weighted CHSH inequality to enforce the eigenvalue of
-some unknown operator which is decomposed into two binary observables.
-The variant of the CHSH inequality that we use is not used in the self-testing literature befor.
-Secondly, we give a new way to decompose unitaries of arbitrary order into binary observables which maintain
+some unknown operator which is the product of two binary observables used in the weighted CHSH test.
+The variant of the CHSH inequality that we use is not used in the self-testing literature before.
+Secondly, we give a new way to decompose unitaries of arbitrary order into binary observables which maintains
 certain commutation relations. Such decomposition is different from what Slofstra used in his work \cite{slofstra2017}.
-Intuitively, such decomposition can be seen as the inverse of the decomposition used in the proof of Jordan's lemma.
+Intuitively, such decomposition can be seen as the inverse of the Jordan's lemma decomposition.
 The third contribution is that we prove self-testing without using anti-commutation relations between Pauli operators, 
 which is the core idea in all the previous self-testing results. 
 Instead, we find a new pair of operators that can generate the ring of matrices over complex numbers.
@@ -317,9 +317,10 @@ Instead, we find a new pair of operators that can generate the ring of matrices 
 
 \textbf{Structure of the paper}.
 We start with notations and background information in \cref{sec:prelim}.
-Since the correlation we designed satisfies two sub-tests, we introduce one test
-in \cref{sec:lsg} and the other one in \cref{sec:chsh}. Our main result is based on the combination
-of the sub-tests and presented in \cref{sec:main}. 
+Since the correlation we designed can win a special linear system game and satisfy
+an extended weighted CHSH test, we introduce the linear system game
+in \cref{sec:lsg} and the extended weighted CHSH test in \cref{sec:chsh}. 
+Our main result is based on the combination of the two tests and presented in \cref{sec:main}. 
 
 %========================================
 \section{Preliminaries and notations}
@@ -328,10 +329,12 @@ of the sub-tests and presented in \cref{sec:main}.
 We use $[n]$ to denote the set $\{0,1 \dots n-1\}$ and $[n]+1$ for the set $\{1,2 \dots n\}$.
 %We denote the group commutator of $A$ and $B$, i.e. $ABA^{-1}B^{-1}$, by $[A,B]$.
 
-We use some basic number theory concepts in our work. A primitive root of a prime number
+We use some basic number theory in our work. A primitive root of a prime number
 $d$ is an integer $r$ such that $r \pmod{d}$ has multiplicative order $d-1$. Equivalently,
 $r$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$ where
-$\Z_d^\times = \{1,2\dots d-1\}$.
+$\Z_d^\times = \{1,2\dots d-1\}$. When we say $d$ has primitive root $r$, we always mean
+that $r$ is the smallest primitive root.
+
 The EPR pair of local dimension $d-1$ for some prime $d$ is denoted by
 \begin{align}
 \ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{i = 0}^{d-2} \ket{ii}.
@@ -373,7 +376,8 @@ However, If they share entangled state $\ket{\psi}$, the maximal violation is
 	$B_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $B_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
 \end{definition}
 An interesting observation of the weighted CHSH inequality is that its maximal violation can certify the shared states and the 
-measurements, which is a phenomenon referred as a self-test. We give formal statement of this self-testing result in \cref{sec:chsh}.
+measurements up to isometry, 
+which is a phenomenon referred as a self-test. We give formal statement of this self-testing result in \cref{sec:chsh}.
 
 \textbf{Nonlocal games}. The two players of a nonlocal game are Alice and Bob. Each of them is requested
 to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and answer set by $\calA$. Similarly,
@@ -399,10 +403,12 @@ where $(A_x^a)^2 = A_x^a = (A_x^a)^\dagger$ and $(B_y^b)^2 = B_y^b = (B_y^b)^\da
 %	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
 %\end{align} 
 
-The main contribution of our work is the construction of a correlation, which is the optimal correlation of a nonlocal game $\G$ with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
-such that this correlation can self-test $\ket{\EPR{d-1}}$ for arbitrary $d \in D$. 
-The nonlocal game $\G$ is a linear system game with strict enforcements. 
-We introduce the definition of self-testing, the definition of linear system game, 
+The main contribution of our work is the construction of a correlation, which is the combination of 
+the optimal correlation of a linear system game with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
+and the optimal correlation to violate the weighted CHSH inequality.
+The special property of the correlation is that it can self-test $\ket{\EPR{d-1}}$ for arbitrary $d$ with certain 
+primitive root. 
+In the next part, we introduce the definition of self-testing, the definition of linear system game, 
 and its operator solution, 
 following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
 \begin{definition}[Self-testing]
@@ -475,7 +481,6 @@ operator solution in the following sense.
 	solution in which the Hilbert space is finite-dimensional.
 \end{definition}
 Perfect quantum strategies can be extracted from operator solutions and vice versa.
-
 Another angle to look at the linear system game ($Hx = c$) is a finitely presented group
 over $\Z_2$, which is called the solution group.
 \begin{definition}[Solution group of a linear system game]
@@ -490,7 +495,7 @@ over $\Z_2$, which is called the solution group.
 				} .
 	\end{align*}
 \end{definition}
-For concepts about group presentation, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
+For concepts about group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
 Combining \cref{def:op_sol} and \cref{def:presentation}, we know that an operator solution associated to $Hx =c$ is 
 a finite-dimensional representation of $\Gamma(H,c)$ that maps $J$ to $-\1$.
 
