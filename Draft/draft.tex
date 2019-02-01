@@ -289,22 +289,24 @@ The set $D$ is easily characterizable as it contains all the odd prime numbers w
 primitive root $2$, $3$ or $5$. It has been shown that there are infinitely many prime numbers
 with primitive root in the set $\{2,3,5\}$ \cite{murty1988}, so the set $D$ has infinitely many elements.
 To prove \cref{thm:inf}, we give explicit self-testing proof of 
-the maximally entangled state with local dimension $d-1$ where the primitive root of $d$ is $2$ by explicitly giving the 
-correlation that achieves this goal. Then the self-testing property of this correlation is 
-given in the following theorem.
-\begin{theorem}[Informal]
-\label{thm:pr_2}
-	All maximally entangled state with local dimension $d-1$, where $d$ is prime and has
-	primitive root $r \in \{2, 3, 5\}$, can be self-tested by a constant-sized correlation.
-\end{theorem}
-The correlation that we use to prove \cref{thm:pr_2} is denoted by $C(\dr{r})$.
+the maximally entangled state with local dimension $d-1$ where the primitive root of $d$ is $2$,$3$, or $5$, 
+by explicitly giving the correlation that achieves self-testin. 
+%Then the self-testing property of this correlation is 
+%given in the following theorem.
+%\begin{theorem}[Informal]
+%\label{thm:pr_2}
+%	All maximally entangled state with local dimension $d-1$, where $d$ is prime and has
+%	primitive root $r \in \{2, 3, 5\}$, can be self-tested by a constant-sized correlation.
+%\end{theorem}
+Our correlation is denoted by $C(\dr{r})$ for prime $d$.
 We use the superscript $(r)$ to denote the primitive root of $d$.
 Note that although the size of $C(\dr{r})$ does not depend on $d$, the optimal correlation does.
 
 
 In order to accomplish our goal, we introduce new techniques for self-testing.
 First of all, we use a different variant of the weighted CHSH inequality to enforce the eigenvalue of
-some unknown operator which is decomposed into two binary observables, which is not done before.
+some unknown operator which is decomposed into two binary observables.
+The variant of the CHSH inequality that we use is not used in the self-testing literature befor.
 Secondly, we give a new way to decompose unitaries of arbitrary order into binary observables which maintain
 certain commutation relations. Such decomposition is different from what Slofstra used in his work \cite{slofstra2017}.
 Intuitively, such decomposition can be seen as the inverse of the decomposition used in the proof of Jordan's lemma.
@@ -315,10 +317,9 @@ Instead, we find a new pair of operators that can generate the ring of matrices 
 
 \textbf{Structure of the paper}.
 We start with notations and background information in \cref{sec:prelim}.
-Since the game we designed consists of two sub-tests, we introduce one test
-in \cref{sec:lsg} and one in \cref{sec:chsh}. Our main result is based the combination
-of the sub-tests and presented in \cref{sec:main}. In \cref{sec:extend}, we show how to adapt
-our nonlocal game to self-test maximally entangled state of different dimensions.
+Since the correlation we designed satisfies two sub-tests, we introduce one test
+in \cref{sec:lsg} and the other one in \cref{sec:chsh}. Our main result is based on the combination
+of the sub-tests and presented in \cref{sec:main}. 
 
 %========================================
 \section{Preliminaries and notations}
@@ -331,8 +332,7 @@ We use some basic number theory concepts in our work. A primitive root of a prim
 $d$ is an integer $r$ such that $r \pmod{d}$ has multiplicative order $d-1$. Equivalently,
 $r$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$ where
 $\Z_d^\times = \{1,2\dots d-1\}$.
-The EPR pair of local dimension $d-1$ for some prime $d$, which has primitive root $2$, 
-is denoted by
+The EPR pair of local dimension $d-1$ for some prime $d$ is denoted by
 \begin{align}
 \ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{i = 0}^{d-2} \ket{ii}.
 \end{align}
@@ -344,14 +344,14 @@ We self-test $\ket{\EPR{d-1}}$ by verify that Alice and Bob has operators
 \end{align}
 where $\omega_d = e^{i2\pi/d}$ is the primitive $d$-th root of unity,
 and $r$ is the primitive root of $d$.
-Through out this paper, any operation on the label of the eigenvector $\ket{i}$ is taken modulo $d$,
-unless otherwise specified, for example, the $i/r$ above.
+Through out this paper, any operation on the label of the eigenvector $\ket{k}$ is taken modulo $d$,
+unless otherwise specified, for example, the $k/r$ above.
 
 \textbf{The weighted CHSH inequality \cite{acin2012}.}
 The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
 In the CHSH scenario, Alice and Bob has binary observables $A_x,B_y$ for $x,y = 1,2$ 
 on Hilbert space $\calH_A$ and $\calH_B$ respectively.
-A binary observable is a Hermitian matrix whose eigenvalues are either $+1$ or $-1$.
+A binary observable is a Hermitian matrix whose only eigenvalues are either $+1$ or $-1$.
 The weighted CHSH inequality is given by 
 \begin{align}
 	\label{eq:chsh_op}
@@ -373,7 +373,7 @@ However, If they share entangled state $\ket{\psi}$, the maximal violation is
 	$B_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $B_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
 \end{definition}
 An interesting observation of the weighted CHSH inequality is that its maximal violation can certify the shared states and the 
-measurements, which is the phenomenon of self-test. We give formal statement of this self-test result in \cref{sec:chsh}.
+measurements, which is a phenomenon referred as a self-test. We give formal statement of this self-testing result in \cref{sec:chsh}.
 
 \textbf{Nonlocal games}. The two players of a nonlocal game are Alice and Bob. Each of them is requested
 to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and answer set by $\calA$. Similarly,
@@ -383,25 +383,26 @@ and $V: \calA \times \calB \times \calX \times \calY \rightarrow \R$, which is t
 because Alice and Bob cannot communicate after getting their questions but they may share some strategy before 
 the start of the game. Note that in the literature, the typical scoring function of a nonlocal game maps the input-output
 pair to $\{0.1\}$ which corresponds to losing and winning. Allowing the score to be any real number is the key ingredient 
-to our new nonlocal game. 
+to our new result. 
 
-The quantum strategy of a game $G$ consists of projective measurements $\{\{A_x^a\}_a\}$ on Alice's side and 
-$\{\{B_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$. Then the behaviour of Alice and Bob is described 
-by the conditional probability
+A quantum strategy of a game $G$ consists of projective measurements $\{\{A_x^a\}_a\}$ on Alice's side, 
+$\{\{B_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$, where a projective measurement $P$ satisfies
+the condition that $P^2 = P = P\ct$.
+Then Alice and Bob's quantum strategy produces the correlation
 \begin{align}
 	\pr{ab}{xy} = \bra{\psi} A_x^a \x B_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
 \end{align}
 where $(A_x^a)^2 = A_x^a = (A_x^a)^\dagger$ and $(B_y^b)^2 = B_y^b = (B_y^b)^\dagger$.
-Note that we may use the term behaviour and correlation interchangeably.
-The \emph{value} of a strategy is given by
-\begin{align}
-	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
-\end{align} 
+%Note that we may use the term behaviour and correlation interchangeably.
+%The value of a strategy is given by
+%\begin{align}
+%	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
+%\end{align} 
 
-The main contribution of our work is the construction of a correlation, which is the optimal correlation of a game $\G$ with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
+The main contribution of our work is the construction of a correlation, which is the optimal correlation of a nonlocal game $\G$ with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
 such that this correlation can self-test $\ket{\EPR{d-1}}$ for arbitrary $d \in D$. 
 The nonlocal game $\G$ is a linear system game with strict enforcements. 
-We introduce the definition of self-testing first, the definition of linear system game, 
+We introduce the definition of self-testing, the definition of linear system game, 
 and its operator solution, 
 following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
 \begin{definition}[Self-testing]
@@ -417,7 +418,7 @@ following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
 \begin{definition}[Linear system game]
  Let $Hx = c$ be an $m \times n$ system of linear equations over $\Z_2$,
  where $H$ is an $m$-by-$n$ matrix with entries in $\Z_2 = \{0,1\}$ and 
- $c$ is a length-$n$ vector with entries in $\Z_2$ too. 
+ $c$ is a length-$n$ vector with entries in $\Z_2$. 
  The associated linear system game involves two
  players Alice and Bob, where Alice is given an equation number $i \in \calX = [m]+1$ and replies with $a \in \calA = \Z_2^{\times n}$,
  and Bob is given a variable number $j \in \calY = [n]+1$ and replies with an assignment $b \in \calB = \Z_2$. The winning condition is 
@@ -539,15 +540,15 @@ following group
 \begin{align}
 	\Pg_r= \langle u, x : uxu^{-1} = x^r \rangle, \text{ for } r \in \{2, 3,5\}.
 \end{align}
-In other words, relations in the presentation of the solution group of $\LS$ can be combined to derive the
+In other words, relations in the presentation of the solution group of $\LS_r$ can be combined to derive the
 relation $uxu^{-1} = x^r$.
 \begin{proposition}
 	\label{prop:embed}
-	The group $\Pg_r$ can be embedded into a linear system game $\LS$ over $\Z_2$,
+	The group $\Pg_r$ can be embedded into a linear system game $\LS_r$ over $\Z_2$,
 	with constant numbers of variables and equations, where each equation involves $3$ variables.
 \end{proposition}
 The process of embedding $\Pg_r$ into the solution group of $\LS$ follows the recipe given in the proofs of
-Proposition~$4.8$, Lemma~$4.4$ and Proposition $4.2$ of Slofstra's seminal work \cite{slofstra2017}.
+Proposition~$4.8$, Lemma~$4.4$ and Proposition $4.2$ of Ref.~\cite{slofstra2017}.
 The order of applying the results is the reverse of the order they are presented in Ref.~\cite{slofstra2017}.
 We give details of this embedding process in \cref{sec:power2} for $r = 2$, \cref{sec:power3} for $r = 3$, 
 and \cref{sec:power5} for $r = 5$. 
@@ -606,7 +607,7 @@ The entry $\bra{1}M\ket{1}$ can be expressed as
 	\bra{1}M\ket{1} = \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{1}{i/r^k}\braket{i}{1}.
 \end{align}
 For the term $\braket{1}{i/r^k}\braket{i}{1} \neq 0$ we must have $i = 1$ and $r^k \equiv 1 \pmod{d}$, or equivalently,
-$k = k_1$. Hence, we can conclude that 
+$k = k_1$. We can conclude that 
 \begin{align}
 	\bra{1}M\ket{1} = \sum_{l = 1}^{d-1} x_{k_1,l}\omega_d^l = 0. 
 \end{align}
@@ -620,7 +621,7 @@ Hence we get $d-1$ equations with $d-1$ variables, and the linear system is
 \begin{align}
 	W \ket{x_{k_1}} = 0,
 \end{align}
-where $W_{m,n} = \omega_d^{mn}$. Then we define
+where $W(m,n) = \omega_d^{mn}$. Then we define
 \begin{align}
 	\tW = 
 	\begin{pmatrix}
@@ -1361,7 +1362,9 @@ We remark that our proof works for any odd prime number with primitive root $r$.
 However, since there is no upper-bound of $r$ for a general prime number $d$, we 
 cannot claim the corresponding correlation $C(d)$ is constant-sized. On the other
 hand, since $r$ is usually much smaller than $d$, our result implies a more efficient
-way to test EPR pairs of certain size than the one proposed in Ref.~\cite{cgs2017}.
+way to test EPR pairs of prime local dimension than the one proposed in Ref.~\cite{cgs2017}.
+The size of our correlation grows linearly in $r$ whereas the Coladangelo \textit{et. al.}'s
+method uses correlation grows linearly in $d$.
 
 \bibliographystyle{alphaurl}
 \bibliography{quantum_correlation}
