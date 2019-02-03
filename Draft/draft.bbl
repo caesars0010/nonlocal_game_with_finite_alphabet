@@ -1,0 +1,87 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{AFDF{\etalchar{+}}18}
+
+\bibitem[AFDF{\etalchar{+}}18]{eat2018}
+Rotem Arnon-Friedman, Fr{\'e}d{\'e}ric Dupuis, Omar Fawzi, Renato Renner, and
+  Thomas Vidick.
+\newblock Practical device-independent quantum cryptography via entropy
+  accumulation.
+\newblock {\em Nature communications}, 9(1):459, 2018.
+
+\bibitem[AMP12]{acin2012}
+Antonio Ac{\'\i}n, Serge Massar, and Stefano Pironio.
+\newblock Randomness versus nonlocality and entanglement.
+\newblock {\em Physical review letters}, 108(10):100402, 2012.
+
+\bibitem[BP15]{bamps2015}
+C{\'e}dric Bamps and Stefano Pironio.
+\newblock Sum-of-squares decompositions for a family of
+  clauser-horne-shimony-holt-like inequalities and their application to
+  self-testing.
+\newblock {\em Physical Review A}, 91(5):052111, 2015.
+
+\bibitem[CGJV17]{cgsv2017}
+Andrea Coladangelo, Alex Grilo, Stacey Jeffery, and Thomas Vidick.
+\newblock Verifier-on-a-leash: new schemes for verifiable delegated quantum
+  computation, with quasilinear resources.
+\newblock {\em arXiv preprint arXiv:1708.07359}, 2017.
+
+\bibitem[CGS17]{cgs2017}
+Andrea Coladangelo, Koon~Tong Goh, and Valerio Scarani.
+\newblock All pure bipartite entangled states can be self-tested.
+\newblock {\em Nature communications}, 8:15485, 2017.
+
+\bibitem[Col17]{coladan2017parallel}
+Andrea Coladangelo.
+\newblock Parallel self-testing of (tilted) epr pairs via copies of (tilted)
+  chsh and the magic square game.
+\newblock {\em Quantum Information and Computation}, 17(9-10):831--865, 2017.
+
+\bibitem[CS17]{coladan2017}
+Andrea Coladangelo and Jalex Stark.
+\newblock Robust self-testing for linear constraint system games.
+\newblock {\em arXiv preprint arXiv:1709.09267}, 2017.
+
+\bibitem[FM18]{fu2018}
+Honghao Fu and Carl~A Miller.
+\newblock Local randomness: Examples and application.
+\newblock {\em Physical Review A}, 97(3):032324, 2018.
+
+\bibitem[McK16]{mckague2016}
+Matthew McKague.
+\newblock Self-testing in parallel.
+\newblock {\em New Journal of Physics}, 18(4):045013, 2016.
+
+\bibitem[MPA11]{qkd2011}
+Llu{\'\i}s Masanes, Stefano Pironio, and Antonio Ac{\'\i}n.
+\newblock Secure device-independent quantum key distribution with causally
+  independent measurement devices.
+\newblock {\em Nature communications}, 2:238, 2011.
+
+\bibitem[MS16]{miller2016}
+Carl~A Miller and Yaoyun Shi.
+\newblock Robust protocols for securely expanding randomness and distributing
+  keys using untrusted quantum devices.
+\newblock {\em Journal of the ACM (JACM)}, 63(4):33, 2016.
+
+\bibitem[Mur88]{murty1988}
+M~Ram Murty.
+\newblock Artin's conjecture for primitive roots.
+\newblock {\em The Mathematical Intelligencer}, 10(4):59--67, 1988.
+
+\bibitem[RUV13]{ruv2013}
+Ben~W Reichardt, Falk Unger, and Umesh Vazirani.
+\newblock Classical command of quantum systems.
+\newblock {\em Nature}, 496(7446):456, 2013.
+
+\bibitem[Slo17]{slofstra2017}
+William Slofstra.
+\newblock The set of quantum correlations is not closed.
+\newblock {\em arXiv preprint arXiv:1703.08618}, 2017.
+
+\bibitem[VV14]{qkd2014}
+Umesh Vazirani and Thomas Vidick.
+\newblock Fully device-independent quantum key distribution.
+\newblock {\em Physical review letters}, 113(14):140501, 2014.
+
+\end{thebibliography}

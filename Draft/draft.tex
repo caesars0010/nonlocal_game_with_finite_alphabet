@@ -244,6 +244,7 @@
 
 \renewcommand\Affilfont{\itshape\small}
 
+\def\carl#1{{\color{blue} #1 -Carl}}
 
 \affil[1]{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA}
 \affil[2]{National Institute of Standards and Technology, 100 Bureau Dr., Gaithersbug, MD 20899, USA}
@@ -306,12 +307,15 @@ Note that although the size of $C(\dr{r})$ does not depend on $d$, the optimal c
 In order to accomplish our goal, we introduce new techniques for self-testing.
 First of all, we use a different variant of the weighted CHSH inequality to enforce the eigenvalue of
 some unknown operator which is the product of two binary observables used in the weighted CHSH test.
+\carl{I think this game might have been defined in APM12, and if so we need to cite it.}
 The variant of the CHSH inequality that we use is not used in the self-testing literature before.
 Secondly, we give a new way to decompose unitaries of arbitrary order into binary observables which maintains
 certain commutation relations. Such decomposition is different from what Slofstra used in his work \cite{slofstra2017}.
+\carl{Our work is heavily based on \cite{slofstra2017}, and we need to make that clearer.}
 Intuitively, such decomposition can be seen as the inverse of the Jordan's lemma decomposition.
 The third contribution is that we prove self-testing without using anti-commutation relations between Pauli operators, 
-which is the core idea in all the previous self-testing results. 
+which is the core idea in all the previous self-testing results.
+\carl{Are we sure about that ("all")?}
 Instead, we find a new pair of operators that can generate the ring of matrices over complex numbers.
 
 
@@ -333,7 +337,8 @@ We use some basic number theory in our work. A primitive root of a prime number
 $d$ is an integer $r$ such that $r \pmod{d}$ has multiplicative order $d-1$. Equivalently,
 $r$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$ where
 $\Z_d^\times = \{1,2\dots d-1\}$. When we say $d$ has primitive root $r$, we always mean
-that $r$ is the smallest primitive root.
+that $r$ is the smallest primitive root.  \carl{I'm not clear on what that last sentence means.  You just defined what a primitive root
+is --- are you changing the definition now?}
 
 The EPR pair of local dimension $d-1$ for some prime $d$ is denoted by
 \begin{align}
@@ -346,21 +351,24 @@ We self-test $\ket{\EPR{d-1}}$ by verify that Alice and Bob has operators
 	X = \sum_{k=1}^{d-1} \omega_d^k\ketbra{k}{k} && U = \sum_{k=1}^{d-1} \ketbra{k/r}{k},
 \end{align}
 where $\omega_d = e^{i2\pi/d}$ is the primitive $d$-th root of unity,
-and $r$ is the primitive root of $d$.
+and $r$ is the primitive root of $d$.  \carl{That sentence is jumping ahead --- you should just stick to
+definitions and notation for now.}
 Through out this paper, any operation on the label of the eigenvector $\ket{k}$ is taken modulo $d$,
 unless otherwise specified, for example, the $k/r$ above.
 
 \textbf{The weighted CHSH inequality \cite{acin2012}.}
 The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
 In the CHSH scenario, Alice and Bob has binary observables $A_x,B_y$ for $x,y = 1,2$ 
-on Hilbert space $\calH_A$ and $\calH_B$ respectively.
+on Hilbert space $\calH_A$ and $\calH_B$ respectively.  \carl{It needs to be clearer who Alice and Bob
+are --- perhaps you should put this subsection after the ``Nonlocal games'' subsection.}
 A binary observable is a Hermitian matrix whose only eigenvalues are either $+1$ or $-1$.
 The weighted CHSH inequality is given by 
 \begin{align}
 	\label{eq:chsh_op}
 	\I_\alpha = \alpha\ip{A_1B_1}+\alpha\ip{A_1B_2} + \ip{A_2B_1} - \ip{A_2B_2}\leq 2\alpha,
 \end{align}
-where $\ip{A_xB_y}$ is the expectation value of of the observables.
+where $\ip{A_xB_y}$ is the expectation value of of the observables.  \carl{Same here -- it's not clear enough
+what this means until the reader has seen the ``Nonlocal games'' subsection.}
 If Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$, they cannot violate
 the weighted CHSH inequality.
 However, If they share entangled state $\ket{\psi}$, the maximal violation is 
@@ -375,6 +383,7 @@ However, If they share entangled state $\ket{\psi}$, the maximal violation is
 	consists of the joint state $\ket{\EPR{2}}$ and observables $A_1 = \pauliz$, $A_2 = \paulix$,
 	$B_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $B_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
 \end{definition}
+\carl{Just to be complete, you should say what $\pauliz$ and $\paulix$ denote.}
 An interesting observation of the weighted CHSH inequality is that its maximal violation can certify the shared states and the 
 measurements up to isometry, 
 which is a phenomenon referred as a self-test. We give formal statement of this self-testing result in \cref{sec:chsh}.
@@ -386,12 +395,14 @@ comes with two functions: $\pi: \calX \times \calY \rightarrow [0,1]$, which is 
 and $V: \calA \times \calB \times \calX \times \calY \rightarrow \R$, which is the scoring function. Such games are nonlocal
 because Alice and Bob cannot communicate after getting their questions but they may share some strategy before 
 the start of the game. Note that in the literature, the typical scoring function of a nonlocal game maps the input-output
-pair to $\{0.1\}$ which corresponds to losing and winning. Allowing the score to be any real number is the key ingredient 
+pair to $\{0,1\}$ which corresponds to losing and winning. Allowing the score to be any real number is the key ingredient 
 to our new result. 
 
 A quantum strategy of a game $G$ consists of projective measurements $\{\{A_x^a\}_a\}$ on Alice's side, 
 $\{\{B_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$, where a projective measurement $P$ satisfies
-the condition that $P^2 = P = P\ct$.
+the condition that $P^2 = P = P\ct$.  \carl{You need to put explicit labels on the quantum systems used by
+Alice and Bob.  (Later on you seem to use ``$A$'' and ``$B$'' to refer to those systems, but those are also
+the same letters you use for Alice's and Bob's measurements.  That's confusing.)}
 Then Alice and Bob's quantum strategy produces the correlation
 \begin{align}
 	\pr{ab}{xy} = \bra{\psi} A_x^a \x B_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
@@ -405,12 +416,15 @@ where $(A_x^a)^2 = A_x^a = (A_x^a)^\dagger$ and $(B_y^b)^2 = B_y^b = (B_y^b)^\da
 
 The main contribution of our work is the construction of a correlation, which is the combination of 
 the optimal correlation of a linear system game with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
-and the optimal correlation to violate the weighted CHSH inequality.
+and the optimal correlation to violate the weighted CHSH inequality.  \carl{The reader does not 
+know yet what a linear system game is, so this comment is more confusing than helpful.}
 The special property of the correlation is that it can self-test $\ket{\EPR{d-1}}$ for arbitrary $d$ with certain 
 primitive root. 
 In the next part, we introduce the definition of self-testing, the definition of linear system game, 
 and its operator solution, 
 following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
+
+\carl{Before the next definition, you should define what a ``correlation'' is.}
 \begin{definition}[Self-testing]
 	We say that a correlation self-tests a quantum state $\ket{\psi}$, if 
 	the correlation is produced by a strategy with shared state $\ket{\psi}$, and 
@@ -434,11 +448,11 @@ following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
  	a(j) &= b && \text{(Consistency)} \\
 	\sum_{k= 1}^n H(i,k) a(k) &\equiv c(i) \pmod 2. &&\text{(Constraint satisfaction)},
  \end{align*}
- for all $(i,j) \in \calX \times \calY$.
+ for all $(i,j) \in \calX \times \calY$. 
 \end{definition}
 The scoring function of linear system games always maps an input-output pair to $\{0,1\}$, 
 so later when we say a quantum strategy wins a linear system game perfectly, we mean that 
-$V(a,b,x,y) =0$ implies that $\pr{ab}{xy} = 0$.
+$V(a,b,x,y) =0$ implies that $\pr{ab}{xy} = 0$.  \carl{Make this clear in the definition itself.}
 We focus on quantum strategies for the linear system game presented in terms of binary observables.
 \begin{definition}[Quantum strategy of a linear system game]
 \label{def:q_strat}
@@ -460,15 +474,18 @@ A quantum strategy for the linear system game $(Hx = c)$ consists of
 \end{definition}
 Note that any quantum strategy presented in terms of binary observables can be 
 converted to a quantum strategy presented in terms of projective measurement, and
-vice versa.
+vice versa.  \carl{This is not entirely true.  A ``quantum strategy presented in terms of projective measurement'' allows
+Alice to give answers that violate the ``Constraint satisfaction'' condition, while a ``quantum strategy presented 
+in terms of binary observables'' does not.}
 
 It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
 satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
-operator solution in the following sense.
+operator solution in the following sense.  \carl{There's a missing reference here?}
 \begin{definition}[Operator solution of a linear system]
 \label{def:op_sol}
 	An operator solution to a linear system $Hx =c$ over $\Z_2$ is a sequence of bounded Hermitian 
-	operators $A_1, A_2, \dots A_n$ on a Hilbert space $\calH$ such that 
+	operators $A_1, A_2, \dots A_n$ on a Hilbert space $\calH$ such that \carl{(What does the word ``bounded'' mean here?  It might
+	be best to just state the definition for finite dimensions only.)}
 	\begin{enumerate}
 		\item $A_i^2 = \1$, i.e. $A_i$ is a binary observable, for all $1 \leq i \leq n$;
 		\item If $x_l$ and $x_k$ appear in the same equation, then $A_l$ and $A_k$ commute;
@@ -495,9 +512,13 @@ over $\Z_2$, which is called the solution group.
 				} .
 	\end{align*}
 \end{definition}
+\carl{Don't you also need a commutativity condition for $J$ with $\{ x_i \}$?}
 For concepts about group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
 Combining \cref{def:op_sol} and \cref{def:presentation}, we know that an operator solution associated to $Hx =c$ is 
 a finite-dimensional representation of $\Gamma(H,c)$ that maps $J$ to $-\1$.
+
+\carl{Section 2 needs to be cleaned up in some places, but overall it is pretty good.}
+
 
 %The main tool to understand linear system game is through its solution group over $\Z_d$.
 %\begin{definition}[Solution group over $\Z_d$ \cite{coladan2017}]
@@ -534,23 +555,27 @@ a finite-dimensional representation of $\Gamma(H,c)$ that maps $J$ to $-\1$.
 The goal of this section and the following two sections is to 
 present a correlation that can self-test $\ket{\EPR{d-1}}$, 
 where $d$ is prime and has primitive root $r \in \{2, 3, 5\}$,
-and this correlation is denoted by $C(\dr{r})$.
+and this correlation is denoted by $C(\dr{r})$.  \carl{Be more precise --- we are constructing
+such a correlation for any $d$ which has $2, 3,$ or $5$ as a primitive root.}
 The correlation we constructed is the optimal correlation for a game $\G(\dr{r})$, which is the combination of two tests.
 In this section, we introduce the linear system game which tests a relation that should be satisfied by 
 Alice and Bob's observables.
 
-Slofstra's seminal work~\cite{slofstra2017} draws our attention to the relation $xyx^{-1} = y^2$.
+Slofstra's seminal work~\cite{slofstra2017} draws our attention to the relation $xyx^{-1} = y^2$.  \carl{That sentence
+is too vague -- either make it a rigorous statement or leave it out.}
 The main component of $\G(\dr{r})$ is a linear system game $\LS$, whose solution group is the embedding of the 
 following group
 \begin{align}
 	\Pg_r= \langle u, x : uxu^{-1} = x^r \rangle, \text{ for } r \in \{2, 3,5\}.
 \end{align}
 In other words, relations in the presentation of the solution group of $\LS_r$ can be combined to derive the
-relation $uxu^{-1} = x^r$.
+relation $uxu^{-1} = x^r$.  
 \begin{proposition}
 	\label{prop:embed}
 	The group $\Pg_r$ can be embedded into a linear system game $\LS_r$ over $\Z_2$,
 	with constant numbers of variables and equations, where each equation involves $3$ variables.
+	\carl{You need to make this a more precise statement.  (It sounds as if you're saying 
+	that the numbers of variables and equations is independent of $r$, which I'm pretty sure is not true.)}
 \end{proposition}
 The process of embedding $\Pg_r$ into the solution group of $\LS$ follows the recipe given in the proofs of
 Proposition~$4.8$, Lemma~$4.4$ and Proposition $4.2$ of Ref.~\cite{slofstra2017}.
@@ -563,7 +588,11 @@ The key feature of this embedding is that $\LS_r$ has constant-sized input-outpu
 even if the generators $u$ and $x$ have arbitrary order. 
 The product of the generators $x_1$ and $x_2$ from the solution group of $\LS_r$ plays the role 
 of the generator $x$ in $\Pg_r$ and the product of the generators $x_3$ and $x_4$ plays the role
-of the generator $u$ in $\Pg_r$. As shown in \cref{sec:power2}, \cref{sec:power3} and \cref{sec:power5}, 
+of the generator $u$ in $\Pg_r$.   \carl{It's reasonable to make a couple informal statements
+at the beginning of a section, but you shouldn't be making
+such vague statements at this point.  Everything said at this point in the section should have a precise mathematical
+meaning.}
+As shown in \cref{sec:power2}, \cref{sec:power3} and \cref{sec:power5}, 
 $x_1$,$x_2$,$x_3$ and $x_4$ satisfy the relation
 \begin{align}
 	(x_3x_4)(x_1x_2)(x_4x_3) = (x_1x_2)^r.
@@ -599,6 +628,8 @@ such that
 	M = \sum_{k=0}^{d-2} \sum_{l=1}^{d-1} x_{k,l} U^k X^l = 0. 
 \end{align}
 We further assume that there exists a set of integers $\{ k_i \}_{i=1}^{d-1}$ such that $r^{k_i} \equiv i \pmod{d}$.
+\carl{We shouldn't be making extra assumptions that are not stated in the lemma.  This looks to me more like
+a definition of the variables $\{ k_i \}$, rather than an assumption.}
 The fact that $r$ is a primitive root of $d$ guarantees that $k_i$'s are distinct.
 Then we can group $\{x_{k,l}\}$ into vectors: $\ket{x_{k_1}}, \ket{x_{k_2}} \dots \ket{x_{k_{d-1}}}$,
 where $\ket{x_{k_i}}= (x_{k_i, 1}, x_{k_i, 2} \dots x_{k_i, d-1})^\intercal$.
