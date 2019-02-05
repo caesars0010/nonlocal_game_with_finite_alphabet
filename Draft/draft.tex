@@ -694,6 +694,7 @@ so it is also a submatrix of a Vandermonde matrix. Similar argument gives us tha
 
 To summarize, we have proven that $x_{k,l} = 0$ for all $k$ and $l$, which implies that the elements of the set
 $\{ U^k X^l \}$ are linearly independent and forms a basis for the ring of all the $(d-1)\times(d-1)$ matrices over $\C$.
+\carl{Nice proof.  I like the use of the Vandermonde matrix.  We can think a little about possible simplifications.}
 \end{proof}
 Note that the primitive root $r$ in the lemma is not restricted to the set $\{2,3,5\}$, so this lemma works for any 
 odd prime number $d$.
@@ -754,7 +755,8 @@ The robust self-testing result is summarized in the following theorem.
 		\| \Phi( \tilde{A}_x \x \tilde{B}_y \ket{\psi}) -\ket{junk} \x (A_x \x B_y) \ket{\EPR{2}}  \| = O((\alpha+\frac{1}{\alpha}) \sqrt{\epsilon})
 	\end{align}
 	for $x,y \in \{0, 1, 2\}$ where the subscript $0$ refers to the identity operator and $A_x, B_y$ are 
-	defined in \cref{def:ideal}.
+	defined in \cref{def:ideal}.  \carl{You're using both ``aux'' and ``junk'' for the auxilliary state.  Also you need
+	to be clearer about what label you are using for Alice's and Bob's systems (see my previous comment on this).}
 \end{theorem}
 Our approach is very similar to the one used in Ref.~\cite{bamps2015} so we 
 defer the proof of \cref{thm:selftest} till \cref{sec:selftest}.
@@ -764,11 +766,13 @@ product of Bob's observables.
 \label{prop:2d-subspace}
 	Let $\mu = \arctan(1/\alpha)$ for some $\alpha$.
 	Suppose a quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]+1}, \{\tilde{B}_y\}_{y \in [2]+1})$ achieves the maximal 
-	violation of  $\I_{\alpha}$, then $\tilde{B}_0\tilde{B}_1$ has eigenvalues $e^{i2\mu}$ and $e^{-i2\mu}$.
+	violation of  $\I_{\alpha}$, then $\tilde{B}_0\tilde{B}_1$ has eigenvalues $e^{i2\mu}$ and $e^{-i2\mu}$.  \carl{Make clear
+	that we mean that these are the only eigenvalues.}
 \end{proposition}
 \begin{proof}[Proof of \cref{prop:2d-subspace}]
 	Following the argument in the proof of \cref{thm:selftest} in \cref{sec:selftest}, we know
-	$\tilde{Z}_B = (\tB_1+\tB_2)/2\cos(\mu)$ is a binary observable. \textcolor{red}{HF: Do we need to justify it?}
+	$\tilde{Z}_B = (\tB_1+\tB_2)/2\cos(\mu)$ is a binary observable. \textcolor{red}{HF: Do we need to justify it?}  \carl{Yes,
+	you should say more specifically where that is proved.}
 	Expanding $\tilde{Z}_B^2$ we get
 	\begin{align*}
 		\1 = \tilde{Z}_B^2 = \frac{\tB_1^2 + \tB_1\tB_2 + \tB_2\tB_1 + \tB_2^2}{4\cos(\mu)^2}
@@ -780,7 +784,8 @@ product of Bob's observables.
 		\tB_1\tB_2 + \tB_2\tB_1 = 2(2\cos^2(\mu)-1)\1 = 2 \cos(2\mu) \1.
 	\end{align}
 	Observe that $(\tB_1\tB_2)^\dagger = \tB_2\tB_1$ and 
-	$(\tB_2\tB_1)(\tB_1\tB_2) = \tB_2\1\tB_2 = \1$, then we can conclude that $\tB_1\tB_2$ is unitary.
+	$(\tB_2\tB_1)(\tB_1\tB_2) = \tB_2\1\tB_2 = \1$, then we can conclude that $\tB_1\tB_2$ is unitary.  \carl{(It's a product
+	of unitaries, so that step is immediate.)}
 	Suppose the eigen-decomposition of $\tB_1\tB_2$ is
 	\begin{align}
 		\tB_1\tB_2 = \sum_{i=1}^m \lambda_i \ketbra{i}{i}
@@ -791,7 +796,8 @@ product of Bob's observables.
 	\begin{align*}
 		\lambda_i + \lambda_i^{-1} = 2\Re(\lambda_i) = 2 \cos(2\mu),
 	\end{align*}
-	so we can conclude that $\lambda_i = e^{i 2\mu}$ or $e^{-i 2\mu}$.
+	so we can conclude that $\lambda_i = e^{i 2\mu}$ or $e^{-i 2\mu}$.  \carl{Good proof (if you fill in the step at
+	the beginning).}
 	
 %	\begin{align}
 %		\ket{\tpsi} = \sum_{i=1}^m \frac{c_i}{\sqrt{2}} (\ket{u_{i,0}}\ket{u_{i,0}}+\ket{u_{i,1}}\ket{u_{i,1}}),
@@ -825,7 +831,7 @@ We denote this game that enforces the eigenvalues of the observable $X$ by
 $\CHSH_X$, where the superscript $d$ emphasizes that the scoring rules of this game depend on $d$.
 We remark that for the extended weighted CHSH test, the primitive root of $d$ is irrelevant,
 so we drop the superscript $(r)$.
-
+\carl{You need to be more clear --- after reading this, I am still not sure what mathematical object ``$\CHSH_X$'' refers to.}
 
 In this test, Alice and Bob each gets a question $x$,$y \in \{ 1, 2, \ast\}$ and 
 they answer with $a,b \in \{0,1,\diamond,\perp\}$. 
@@ -842,7 +848,8 @@ Before presenting the optimal correlation, we give intuitions about how the play
 	if Bob answers $\perp$, Alice should answer $\perp$ too.
 \end{itemize}
 \textbf{The ideal strategy and ideal correlation}. Alice and Bob share the state $\ket{\psi} =\frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1} \ket{u_i}\ket{u_i}$.
-We define two subspaces $V = \spn\{\ket{u_1}, \ket{u_{d-1}}\}$ and $V^\perp = \C^d \setminus\spn\{\ket{u_1}, \ket{u_{d-1}}\}$ and
+We define two subspaces $V = \spn\{\ket{u_1}, \ket{u_{d-1}}\}$ and $V^\perp = \C^d \setminus\spn\{\ket{u_1}, \ket{u_{d-1}}\}$ \carl{(That's not 
+the way I usually see the $\setminus$ symbol used.)} and
 define $\Pi_V$ and $\Pi_{V}^\perp$ to be the corresponding projectors. Note that $V$ is the subspace on which they should
 maximize $\langle I_{\cot(-\pi/d)} \rangle$.
 
@@ -942,6 +949,9 @@ Bob's projectors are
 \end{align*}
 About Bob's projectors for input $y \in [2]+1$, we are only interested in their actions when restricted 
 to the subspace $V$. Their actions on the subspace $V^\perp$ is irrelevant in this game.
+
+\carl{This good, but I imagine a reader being a little confused about what you are doing
+with these correlations (since the previous subsection wasn't very clear).}
 
 The self-testing property of this correlation is summarized in the following lemma.
 \begin{lemma}
