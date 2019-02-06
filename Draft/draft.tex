@@ -336,8 +336,9 @@ We use $[n]$ to denote the set $\{0,1 \dots n-1\}$ and $[n]+1$ for the set $\{1,
 We use some basic number theory in our work. A primitive root of a prime number
 $d$ is an integer $r$ such that $r \pmod{d}$ has multiplicative order $d-1$. Equivalently,
 $r$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$ where
-$\Z_d^\times = \{1,2\dots d-1\}$. When we say $d$ has primitive root $r$, we always mean
-that $r$ is the smallest primitive root.  \carl{I'm not clear on what that last sentence means.  You just defined what a primitive root
+$\Z_d^\times = \{1,2\dots d-1\}$. \textcolor{red}{When the prime number $d$ has multiple primitive roots,
+we always work with the smallest one.}
+\carl{I'm not clear on what that last sentence means.  You just defined what a primitive root
 is --- are you changing the definition now?}
 
 The EPR pair of local dimension $d-1$ for some prime $d$ is denoted by
@@ -1044,8 +1045,8 @@ behave in this game. The correlation can be easily extracted from the behaviour 
 	\item when $x \in \{m_r+1, m_r+2, m_r+3\}$ and $y \in \{1, 2, n_r+1\}$, they should follow the
 	optimal correlation of the test $\CHSH_X$, where 
 	\begin{align}
-		&\ast_A = m_r+1, \quad 0_A = m_r+2,\quad 1_A = m_r+3,\\
-		&\ast_B = n_r+1,\quad 0_B = 1, \quad 1_A = 2,
+		&\ast_A = m_r+1, \quad 1_A = m_r+2,\quad 2_A = m_r+3,\\
+		&\ast_B = n_r+1,\quad 1_B = 1, \quad 2_A = 2,
 	\end{align}
 	are the inputs for the game $\CHSH_X$
 	(The intuition behind is that $B_1B_2 = X$.);
@@ -1059,33 +1060,51 @@ Note that the dimension $\dr{r}$ is defined in the rules of $\CHSH_X$.
 \end{proposition}
 We prove this proposition by giving the ideal strategy.
 \begin{proof}
-The construction start with the ideal strategy for the weighted $\CHSH_X$ test.
-We choose $\ket{\psi} = \frac{1}{\sqrt{d-1}}\sum_{i=1}^{d-1} \ket{ii}$ and $V = \spn(\ket{1} ,\ket{d-1})$.
+We give the ideal strategy for the extended weighted $\CHSH_X$ test first and then based on it we give a representation of 
+group $\Gamma(\LS)$, $\Psi$, which can be converted to an ideal strategy for $\LS$. 
+The ideal strategy for $C(\dr{r})$ is the combination of the two ideal strategies for the two tests.
+
+\textbf{The ideal strategy for the weighted $\CHSH_X$ test}.
+Alice and Bob share state $\ket{\psi} = \frac{1}{\sqrt{d-1}}\sum_{i=1}^{d-1} \ket{ii}$ and choose the special subspace to be 
+$V = \spn(\ket{1} ,\ket{d-1})$.
 Alice's projectors and observables for the weighted $\CHSH_X$ test are
 \begin{align*}
-	&A_\ast^\diamond = \ketbra{1}{1} + \ketbra{d-1}{d-1}, &&A_\ast^\perp = \1 - A_\ast^\diamond, \\
-	&A_1 = A_1^0-A_1^1 = \ketbra{1}{1} - \ketbra{d-1}{d-1}, &&A_1^\perp = A_\ast^\perp,\\
-	&A_2 = A_2^0-A_2^1 = \ketbra{1}{d-1} + \ketbra{d-1}{1} ,&&A_2^\perp = A_\ast^\perp.
+	&A_0^\diamond = \ketbra{1}{1} + \ketbra{d-1}{d-1}, &&A_0^\perp = \1 - A_\ast^\diamond, \\
+	&A_{m_r+2} = A_{m_r+2}^0-A_{m_r+2}^1 = \ketbra{1}{1} - \ketbra{d-1}{d-1}, &&A_{m_r+2}^\perp = A_\ast^\perp,\\
+	&A_{m_r+3} = A_{m_r+3}^0-A_{m_r+3}^1 = \ketbra{1}{d-1} + \ketbra{d-1}{1} ,&&A_{m_r+3}^\perp = A_\ast^\perp.
 \end{align*}
-Bob's observables restricted to the subspace $V$ is
+Recall that in the extended weighted $\CHSH_X$ test, what matters is the 
+Bob's observables restricted to the subspace $V$, which are given by
 \begin{align*}
 	B_1|_V = \cos(\frac{\pi}{d})(\ketbra{1}{1} - \ketbra{d-1}{d-1}) - \sin(\frac{\pi}{d})(\ketbra{1}{d-1} + \ketbra{d-1}{1}),\\
 	B_2|_V = \cos(\frac{\pi}{d})(\ketbra{1}{1} - \ketbra{d-1}{d-1}) +\sin(\frac{\pi}{d})(\ketbra{1}{d-1} + \ketbra{d-1}{1}).
 \end{align*}
-To make sure operator $B_2$ commutes with the operator $U$ that we will construct later, we pick a 
-special basis of $X =B_1B_2$, which is
+To make sure operator $B_2$ commutes with the operator $U = \Psi(x_3x_4) = \Psi(u)$ that we will construct later, we pick a 
+special basis of $X|_V =B_1|_VB_2|_V$, which is
 \begin{align}
 	\ket{x_1} = \frac{-1}{\sqrt{2}}(\ket{1} + i\ket{d-1}), &&
 	\ket{x_{d-1}} = \frac{-e^{i\pi/d}}{\sqrt{2}}(\ket{1} - i\ket{d-1}).
 \end{align}
 It can be checked that $X\ket{x_1} = \omega_d \ket{x_1}$ and $X\ket{x_{d-1}} = \omega_d^{d-1} \ket{x_{d-1}}$.
-In this basis, $B_1$ and $B_2$ are expressed as 
+In this basis, $B_1|_V$ and $B_2|_V$ are expressed as 
 \begin{align}
 	&B_1|_V = \omega_d\ketbra{x_1}{x_{d-1}} + \omega_d^{-1} \ketbra{x_{d-1}}{x_1},\\
 	&B_2|_V =\ketbra{x_1}{x_{d-1}}  + \ketbra{x_{d-1}}{x_1}.
 \end{align}
+
+\textbf{The ideal strategy for $\LS_r$}.
+We denote the number of generators labelled by $x_i$ in $\LS_r$ by $n_r(x)$.
+In order to construct a representation of $\Gamma(\LS_r)$, we first construct a representation, $\Psi_{G(x)}$ for the group 
+\begin{align}
+	G(x) = \ip{ \{x_i\}_{i=1}^{n_r(x)}: x_i^2 = e, x_i x_j x_i = x_k \text{ for all } (i,j,k) \in C_r},
+\end{align}
+where details of $C_r$ can be found in the appendices. 
+Note that the relation $uxu^{-1} = x^2$ is embedded in the conjugation relations in $C_r$.
+Building on $\Psi_{G(x)}$, we can construct
+the representation $\Psi_{\Gamma(\LS_r)}$ for the solution group $\Gamma(\LS_r)$.
+
 Since Bob gets the same symbols $1$ and $2$ in different sub-tests, 
-the observables $B_1$ and $B_2$ are extended from $B_1|_V$ and $B_2|_V$ as follows
+the observables $A_1 = B_1 = \Psi_{G(x)}(x_1)$ and $A_2 = B_2 = \Psi_{G(x)}(x_2)$ are extended from $B_1|_V$ and $B_2|_V$ as follows
 %\begin{align}
 %	B_1 = \ketbra{x_0}{x_0} + 
 %	\sum_{k=1}^{(d-1)/2}\left( e^{ik\pi/2d}\ketbra{x_k}{x_{d-k}} + e^{-ik\pi/2d}\ketbra{x_{d-k}}{x_k}\right)\\
@@ -1093,15 +1112,18 @@ the observables $B_1$ and $B_2$ are extended from $B_1|_V$ and $B_2|_V$ as follo
 %	\sum_{k=1}^{(d-1)/2}\left( e^{ik\pi/2d}\ketbra{x_{d-k}}{x_k} + e^{-ik\pi/2d}\ketbra{x_{k}}{x_{d-k}}\right)
 %\end{align}
 \begin{align}
-	B_1 &= \sum_{k=1}^{(d-1)/2}\left( \omega_d^k\ketbra{x_k}{x_{d-k}} + \omega_d^{-k}\ketbra{x_{d-k}}{x_k}\right)\\
-	B_2 &= \sum_{k=1}^{(d-1)/2}\left(\ketbra{x_{d-k}}{x_k} + \ketbra{x_k}{x_{d-k}}\right).
+	A_1 = B_1 = \Psi_{G(x)}(x_1) &= \sum_{k=1}^{(d-1)/2}\left( \omega_d^k\ketbra{x_k}{x_{d-k}} + \omega_d^{-k}\ketbra{x_{d-k}}{x_k}\right)\\
+	A_2 = B_2 = \Psi_{G(x)}(x_2) &= \sum_{k=1}^{(d-1)/2}\left(\ketbra{x_{d-k}}{x_k} + \ketbra{x_k}{x_{d-k}}\right).
 \end{align}
-It can be checked that $B_1B_2 = \sum_{i=1}^{d-1} \omega_d^i \ketbra{x_i}{x_i}$ and the operator $U$ is
+It can be checked that $X = \Psi_{G(x)}(x_1x_2) = \sum_{i=1}^{d-1} \omega_d^i \ketbra{x_i}{x_i}$ 
+The relation $uxu^{-1} = x^r$ and $X$ determine that 
 \begin{align}
-	U = \sum_{i=1}^{d-1} \ketbra{x_{i/r \pmod{d}}}{x_i}.
+	U =\Psi_{G(x)}(u) = \Psi_{G(x)}(x_3x_4) =  \sum_{i=1}^{d-1} \ketbra{x_{i/r \pmod{d}}}{x_i}.
 \end{align}
 The first step of the embedding procedure in the proof of \cref{prop:embed} requires
-the commutativity between $U$ and $B_2$, which can be verified as follows,
+the commutativity between $U$ and $B_2$, so we prove the commutation relation first and
+then give $\Psi_{G(x)}(x_3)$ and $\Psi_{G(x)}(x_4)$.
+The commutation relation can be checked as follows,
 \begin{align}
 	UB_2U\ct = \sum_{i=1}^{d-1} U\ketbra{x_i}{x_{d-i}}U\ct = \sum_{i=1}^{d-1} \ketbra{x_{i/r \pmod{d}}}{x_{(d-i)/r \pmod{d}}}.
 \end{align}
@@ -1136,17 +1158,26 @@ To conclude, conjugation by $U$ only permutes the terms of $B_2$, so
 %	=& \sum_{i=1}^{(d-1)/2}\ketbra{x_i}{x_{d-i}} + \sum_{i=(d+1)/2}^{d-1} \ketbra{x_i}{x_{d-i}}\\
 %	=&\sum_{i=1}^{d-1} \ketbra{x_i}{x_{d-i}}.
 %\end{align}
-The decomposition of $U$ into $B_3$ and $B_4$ is similar to the decomposition of $X$.
-Suppose the eigen-decomposition of $U$ is
+The decomposition of $U$ into $\Psi_{G(x)}(x_3)$ and $\Psi_{G(x)}(x_4)$ is similar to the decomposition of $X$.
+Since $u$ has order $d-1$, we can find an eigenbasis $\{ \ket{u_i} \}_{i=0}^{d-2}$ such that the eigen-decomposition of $U$ is
 \begin{align}
-	U = \sum_{i=0}^{d-1} \omega_{d-1}^i \ketbra{u_i}{u_i},
+	U = \sum_{i=0}^{d-2} \omega_{d-1}^i \ketbra{u_i}{u_i},
 \end{align} 
-then the decomposition is the following 
+then $\Psi_{G(x)}(x_3)$ and $\Psi_{G(x)}(x_4)$ are  
+\begin{align*}
+	A_3 = B_3 =\Psi_{G(x)}(x_3) = &\ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}}\\ + 
+	&\sum_{k=1}^{(d-3)/2}\left( \omega_{d-1}^k\ketbra{u_k}{u_{d-1-k}} + \omega_{d-1}^{-k}\ketbra{x_{d-1-k}}{x_k}\right)\\ 
+	A_4 = B_4  =\Psi_{G(x)}(x_4) = &\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\+
+	 &\sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right).
+\end{align*}
+The conjugation relations in $C_r$ determines the representations of 
+the rest of the $x_i$'s from $x_1,x_2,x_3$ and $x_4$. 
+For example, if $x_5 = x_1x_2x_1 \in C_r$, then
 \begin{align}
-	B_3 =& \ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} + \sum_{k=1}^{(d-3)/2}\left( \omega_d^k\ketbra{u_k}{u_{d-1-k}} + \omega_d^{-k}\ketbra{x_{d-1-k}}{x_k}\right)\\
-	B_4 &= \ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} + \sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right).
+	\Psi_{G(x)}(x_5) = \Psi_{G(x)}(x_1)\Psi_{G(x)}(x_2) \Psi_{G(x)}(x_1).
 \end{align}
 
+Next, we consider the representation $\Psi_{G(x,y,z,w)}$.
 In the next step of embedding, for each $x_i$, we find $y_i$ ,$z_i$, $w_i$ and $f$ such that
 $x_i = y_iz_i = fw_i$. We demonstrate how this splitting is done by pick $x_1$ as an example, 
 which is mapped to $B_1$ in the previous step. Now we map $x_1$ to $B_1'$ which is
