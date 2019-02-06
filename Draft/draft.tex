@@ -210,6 +210,9 @@
 \newcommand{\I}{\mathcal{I}}
 
 
+% Comments
+\def\carl#1{{\color{blue} #1 -Carl}}
+\newcommand{\hf}[1]{\textcolor{red}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %  N E W T H E O R E M  %
@@ -244,7 +247,7 @@
 
 \renewcommand\Affilfont{\itshape\small}
 
-\def\carl#1{{\color{blue} #1 -Carl}}
+
 
 \affil[1]{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA}
 \affil[2]{National Institute of Standards and Technology, 100 Bureau Dr., Gaithersbug, MD 20899, USA}
@@ -1104,17 +1107,17 @@ In this basis, $B_1|_V$ and $B_2|_V$ are expressed as
 
 \textbf{The ideal strategy for $\LS_r$}.
 We denote the number of generators labelled by $x_i$ in $\LS_r$ by $n_r(x)$.
-In order to construct a representation of $\Gamma(\LS_r)$, we first construct a representation, $\Psi_{G(x)}$ for the group 
+In order to construct a representation of $\Gamma(\LS_r)$, we first construct a representation, $\Psi_1$ for the group 
 \begin{align}
-	G(x) = \ip{ \{x_i\}_{i=1}^{n_r(x)}: x_i^2 = e, x_i x_j x_i = x_k \text{ for all } (i,j,k) \in C_r},
+	G_r(x) = \ip{ \{x_i\}_{i=1}^{n_r(x)}: x_i^2 = e, x_i x_j x_i = x_k \text{ for all } (i,j,k) \in C_r},
 \end{align}
 where details of $C_r$ can be found in the appendices. 
-Note that the relation $uxu^{-1} = x^2$ is embedded in the conjugation relations in $C_r$.
-Building on $\Psi_{G(x)}$, we can construct
-the representation $\Psi_{\Gamma(\LS_r)}$ for the solution group $\Gamma(\LS_r)$.
+Note that the relation $uxu^{-1} = x^r$ is embedded in the conjugation relations in $C_r$.
+Building on $\Psi_1$, we can construct 
+the representation $\Psi_{\LS_r}$ for the solution group $\Gamma(\LS_r)$.
 
 Since Bob gets the same symbols $1$ and $2$ in different sub-tests, 
-the observables $A_1 = B_1 = \Psi_{G(x)}(x_1)$ and $A_2 = B_2 = \Psi_{G(x)}(x_2)$ are extended from $B_1|_V$ and $B_2|_V$ as follows
+the observables $A_1 = B_1 = \Psi_1(x_1)$ and $A_2 = B_2 = \Psi_1(x_2)$ are extended from $B_1|_V$ and $B_2|_V$ as follows
 %\begin{align}
 %	B_1 = \ketbra{x_0}{x_0} + 
 %	\sum_{k=1}^{(d-1)/2}\left( e^{ik\pi/2d}\ketbra{x_k}{x_{d-k}} + e^{-ik\pi/2d}\ketbra{x_{d-k}}{x_k}\right)\\
@@ -1122,17 +1125,17 @@ the observables $A_1 = B_1 = \Psi_{G(x)}(x_1)$ and $A_2 = B_2 = \Psi_{G(x)}(x_2)
 %	\sum_{k=1}^{(d-1)/2}\left( e^{ik\pi/2d}\ketbra{x_{d-k}}{x_k} + e^{-ik\pi/2d}\ketbra{x_{k}}{x_{d-k}}\right)
 %\end{align}
 \begin{align}
-	A_1 = B_1 = \Psi_{G(x)}(x_1) &= \sum_{k=1}^{(d-1)/2}\left( \omega_d^k\ketbra{x_k}{x_{d-k}} + \omega_d^{-k}\ketbra{x_{d-k}}{x_k}\right)\\
-	A_2 = B_2 = \Psi_{G(x)}(x_2) &= \sum_{k=1}^{(d-1)/2}\left(\ketbra{x_{d-k}}{x_k} + \ketbra{x_k}{x_{d-k}}\right).
+	A_1 = B_1 = \Psi_1(x_1) &= \sum_{k=1}^{(d-1)/2}\left( \omega_d^k\ketbra{x_k}{x_{d-k}} + \omega_d^{-k}\ketbra{x_{d-k}}{x_k}\right)\\
+	A_2 = B_2 = \Psi_1(x_2) &= \sum_{k=1}^{(d-1)/2}\left(\ketbra{x_{d-k}}{x_k} + \ketbra{x_k}{x_{d-k}}\right).
 \end{align}
-It can be checked that $X = \Psi_{G(x)}(x_1x_2) = \sum_{i=1}^{d-1} \omega_d^i \ketbra{x_i}{x_i}$ 
+It can be checked that $X = \Psi_1(x_1x_2) = \sum_{i=1}^{d-1} \omega_d^i \ketbra{x_i}{x_i}$ 
 The relation $uxu^{-1} = x^r$ and $X$ determine that 
 \begin{align}
-	U =\Psi_{G(x)}(u) = \Psi_{G(x)}(x_3x_4) =  \sum_{i=1}^{d-1} \ketbra{x_{i/r \pmod{d}}}{x_i}.
+	U =\Psi_1(u) = \Psi_1(x_3x_4) =  \sum_{i=1}^{d-1} \ketbra{x_{i/r \pmod{d}}}{x_i}.
 \end{align}
 The first step of the embedding procedure in the proof of \cref{prop:embed} requires
 the commutativity between $U$ and $B_2$, so we prove the commutation relation first and
-then give $\Psi_{G(x)}(x_3)$ and $\Psi_{G(x)}(x_4)$.
+then give $\Psi_1(x_3)$ and $\Psi_1(x_4)$.
 The commutation relation can be checked as follows,
 \begin{align}
 	UB_2U\ct = \sum_{i=1}^{d-1} U\ketbra{x_i}{x_{d-i}}U\ct = \sum_{i=1}^{d-1} \ketbra{x_{i/r \pmod{d}}}{x_{(d-i)/r \pmod{d}}}.
@@ -1168,71 +1171,160 @@ To conclude, conjugation by $U$ only permutes the terms of $B_2$, so
 %	=& \sum_{i=1}^{(d-1)/2}\ketbra{x_i}{x_{d-i}} + \sum_{i=(d+1)/2}^{d-1} \ketbra{x_i}{x_{d-i}}\\
 %	=&\sum_{i=1}^{d-1} \ketbra{x_i}{x_{d-i}}.
 %\end{align}
-The decomposition of $U$ into $\Psi_{G(x)}(x_3)$ and $\Psi_{G(x)}(x_4)$ is similar to the decomposition of $X$.
+The decomposition of $U$ into $\Psi_1(x_3)$ and $\Psi_1(x_4)$ is similar to the decomposition of $X$.
 Since $u$ has order $d-1$, we can find an eigenbasis $\{ \ket{u_i} \}_{i=0}^{d-2}$ such that the eigen-decomposition of $U$ is
 \begin{align}
 	U = \sum_{i=0}^{d-2} \omega_{d-1}^i \ketbra{u_i}{u_i},
 \end{align} 
-then $\Psi_{G(x)}(x_3)$ and $\Psi_{G(x)}(x_4)$ are  
+then $\Psi_1(x_3)$ and $\Psi_1(x_4)$ are  
 \begin{align*}
-	A_3 = B_3 =\Psi_{G(x)}(x_3) = &\ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}}\\ + 
+	A_3 = B_3 =\Psi_1(x_3) = &\ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}}\\ + 
 	&\sum_{k=1}^{(d-3)/2}\left( \omega_{d-1}^k\ketbra{u_k}{u_{d-1-k}} + \omega_{d-1}^{-k}\ketbra{x_{d-1-k}}{x_k}\right)\\ 
-	A_4 = B_4  =\Psi_{G(x)}(x_4) = &\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\+
+	A_4 = B_4  =\Psi_1(x_4) = &\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\+
 	 &\sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right).
 \end{align*}
 The conjugation relations in $C_r$ determines the representations of 
 the rest of the $x_i$'s from $x_1,x_2,x_3$ and $x_4$. 
 For example, if $x_5 = x_1x_2x_1 \in C_r$, then
 \begin{align}
-	\Psi_{G(x)}(x_5) = \Psi_{G(x)}(x_1)\Psi_{G(x)}(x_2) \Psi_{G(x)}(x_1).
+	\Psi_1(x_5) = \Psi_1(x_1)\Psi_1(x_2) \Psi_1(x_1).
 \end{align}
 
-Next, we consider the representation $\Psi_{G(x,y,z,w)}$.
-In the next step of embedding, for each $x_i$, we find $y_i$ ,$z_i$, $w_i$ and $f$ such that
-$x_i = y_iz_i = fw_i$. We demonstrate how this splitting is done by pick $x_1$ as an example, 
-which is mapped to $B_1$ in the previous step. Now we map $x_1$ to $B_1'$ which is
-\begin{align}
-	B_1' = \begin{pmatrix}
-	B_1 & 0 \\
-	0 & B_1
-	\end{pmatrix},
-\end{align}
-then $y_1$, $z_1$, $w_1$ and $f$ are mapped to
-\begin{align}
-y_1 \to 
+Next, we consider the representation $\Psi_2$ for the group 
+\begin{align*}
+	G(x,y,z,w) = \ip{ \{x_i, w_i, y_i, z_i\}_{i=1}^{n_r(x)}, f, \{g_{jk}\}_{(i,j,k) \in C_r} :&\text{all elements are of order $2$},\\
+	&x_i = y_iz_i = fw_i,\; fy_if =z_i \text{ for } i= 1 \dots n_r(x) \\
+	&g_{jk}y_j z_k = e,\; w_iy_jw_i = z_k \text{ for all } (i,j,k)\in C_r}.
+\end{align*}
+The representation $\Psi_2$ of $G(x,y,z,w)$ should satisfy the condition that for each $x_i$, 
+$\Psi_2(x_i) = \Psi_2(y_i)\Psi_2(z_i) = \Psi_2(f)\Psi_2(w_i)$. We demonstrate how this representation is constructed 
+for $x_i$, $y_i$, $z_i$, $w_i$ and $f$ where $i = 1 \dots n_r(x)$.
+Building on $\Psi_1$, we have $\Psi_2(x_i) = \Psi_1(x_i) \oplus \Psi_1(x_i)$, then
+$y_i$, $z_i$, $w_i$ and $f$ are mapped to
+\begin{align*}
+\Psi_2(y_i) = 
 \begin{pmatrix}
-B_1 & 0\\
+\Psi_1(x_i) & 0\\
 0 & \1
 \end{pmatrix},
 &&
-z_1 \to
+\Psi_2(z_i) \to
 \begin{pmatrix}
 \1 & 0\\
-0 & B_1
+0 & \Psi_1(x_i)
 \end{pmatrix},
 \\
-w_1 \to 
+\Psi_2(w_i) = 
 \begin{pmatrix}
-0 & B_1\\
-B_1 & 0
+0 & \Psi_1(x_i)\\
+\Psi_1(x_i) & 0
 \end{pmatrix},
 &&
-f \to
+\Psi_2(f) \to
 \begin{pmatrix}
 0 & \1\\
 \1 & 0
 \end{pmatrix}.
+\end{align*}
+It can be easily checked that the order-$2$ generators are mapped to order-$2$ operators and
+the relations satisfied by the generators are preserved.
+For each $g_{jk}$ where $(i,j,k) \in C_r$, $\Psi_2(g_{jk}) = \Psi_2(y_j)\Psi_2(z_k)$ following
+their defining relations. 
+
+The group $G_r(x,y,z,w)$ is embedded in $\Gamma(\LS_r)$ by replacing the conjugacy relations 
+by linear relations. The new generators are $\{\{y_{F_j,k}\}_{k=1}^6\}_{j=1}^{n_r(x)}
+\cup \{\{y_{K,k}\}_{k=1}^7\}_{K \in C_r}$. How the new linear relations can embed the conjugacy relations 
+in $G_r(x,y,z,w)$ can be found in the appendices. Now we define the representation $\Psi_{\LS_r}$ of
+$\Gamma(\LS_r)$. For any generator $a \in \{x_i, w_i, y_i, z_i\}_{i=1}^{n_r(x)}, f, \{g_{jk}\}_{(i,j,k) \in C_r}$,
+\begin{align}
+	\Psi_{\LS_r}(a) = \Psi_2(a) \oplus \Psi_2(a) = \Psi_1(a)^{\oplus 4}.
 \end{align}
+For generators $\{y_{F_j,k}\}_{k=1}^7\}_{j=1}^{n_r(x)}$,
+\begin{align*}
+	\Psi_{\LS_r}(y_{F_j,1}) = 
+	\begin{pmatrix}
+		0 & \Psi_2(f) \\
+		\Psi_2(f) & 0
+	\end{pmatrix},
+	&&
+	\Psi_{\LS_r}(y_{F_j,2}) = 
+	\begin{pmatrix}
+		0 & \1\\
+		\1 & 0
+	\end{pmatrix},\\
+	\Psi_{\LS_r}(y_{F_j,3}) = 
+	\begin{pmatrix}
+		0 & \Psi_2(y_j) \\
+		\Psi_2(y_j) & 0
+	\end{pmatrix},
+	&&
+	\Psi_{\LS_r}(y_{F_j,4}) = 
+	\begin{pmatrix}
+		0 & \Psi_2(y_jf) \\
+		\Psi_2(fy_j) & 0
+	\end{pmatrix},\\
+	\Psi_{\LS_r}(y_{F_j,5}) = 
+	\begin{pmatrix}
+		 \Psi_2(fy_jf) & 0\\
+		  0 & \Psi_2(f)
+	\end{pmatrix},
+	&&
+	\Psi_{\LS_r}(y_{F_j,6}) = 
+	\begin{pmatrix}
+		 \Psi_2(y_jz_j) & 0\\
+		 0 & \1
+	\end{pmatrix},\\
+	\Psi_{\LS_r}(y_{F_j,7}) = 
+	\begin{pmatrix}
+		 \Psi_2(y_j) & 0\\
+		 0 & \Psi_2(z_j)
+	\end{pmatrix}.
+\end{align*}
+For generators $\{\{y_{K,k}\}_{k=1}^7\}_{K=(k_1,k_2,k_3) \in C_r}$,
+\begin{align*}
+	\Psi_{\LS_r}(y_{K,1}) = 
+	\begin{pmatrix}
+		0 & \Psi_2(w_{k_1}) \\
+		\Psi_2(w_{k_1}) & 0
+	\end{pmatrix},
+	&&
+	\Psi_{\LS_r}(y_{F_j,2}) = 
+	\begin{pmatrix}
+		0 & \1\\
+		\1 & 0
+	\end{pmatrix},\\
+	\Psi_{\LS_r}(y_{F_j,3}) = 
+	\begin{pmatrix}
+		0 & \Psi_2(y_{k_2}) \\
+		\Psi_2(y_{k_2}) & 0
+	\end{pmatrix},
+	&&
+	\Psi_{\LS_r}(y_{F_j,4}) = 
+	\begin{pmatrix}
+		0 & \Psi_2(y_{k_2}w_{k_1}) \\
+		\Psi_2(w_{k_1}y_{k_2}) & 0
+	\end{pmatrix},\\
+	\Psi_{\LS_r}(y_{F_j,5}) = 
+	\begin{pmatrix}
+		 \Psi_2(w_{k_1}y_{k_2}w_{k_1}) & 0\\
+		  0 & \Psi_2(w_{k_1})
+	\end{pmatrix},
+	&&
+	\Psi_{\LS_r}(y_{F_j,6}) = 
+	\begin{pmatrix}
+		 \Psi_2(y_{k_2}z_{k_3}) & 0\\
+		 0 & \1
+	\end{pmatrix},\\
+	\Psi_{\LS_r}(y_{F_j,7}) = 
+	\begin{pmatrix}
+		 \Psi_2(y_{k_2}) & 0\\
+		 0 & \Psi_2(z_{k_3})
+	\end{pmatrix}.
+\end{align*}
 
-The last step of embedding follows the same manner as we double the dimension of the operators again.
-For example, $y_1$ is mapped to $B_1 \oplus \1 \oplus B_1 \oplus \1$ and $z_1$ is mapped to 
-$\1 \oplus B_1 \oplus \1 \oplus B_1$, so effectively, $x_1$ is mapped to $B_1^{\oplus 4}$.
-\footnote{Details of this step of embedding can be found in proof of Proposition~$4.2$ in Ref.~\cite{slofstra2017}.}
-
-In the end, we determine the shared state.
-The optimal correlation for $\CHSH_X$ uses state 
-$\ket{\psi} = \frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1} \ket{u_i}\ket{u_i}$, 
-so the shared state for $\G$ is $\frac{1}{2}( \ket{\psi}^{\oplus 4})$.
+In the end, to compensate the enlarged Hilbert space, the shared state is $\frac{1}{2}( \ket{\psi}^{\oplus 4})$,
+where $\ket{\psi} = \frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1} \ket{i}\ket{i}$.
+At the same time, the observables for the extended weighted CHSH test are mapped to four copies of themselves. 
 \end{proof}
 Next we are going to prove that the correlation $C(\dr{r})$, which is produced by the 
 strategy winning this game optimally, can self-test $d-1$-dimensional EPR pair.
