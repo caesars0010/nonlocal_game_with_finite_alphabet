@@ -174,6 +174,9 @@
 \newcommand{\calA}{\mathcal{A}}
 \newcommand{\calB}{\mathcal{B}}
 
+% Group
+\newcommand{\Zd}{\Z_d^{\times}}
+
 
 % Identity operator
 \newcommand{\1}{\mathbb{1}}
@@ -194,12 +197,14 @@
 \newcommand{\LS}{LS}
 \newcommand{\tA}{\tilde{A}}
 \newcommand{\tB}{\tilde{B}}
+\newcommand{\tZ}{\tilde{Z}}
 \newcommand{\tW}{\tilde{W}}
 \newcommand{\tx}{\tilde{x}}
 \newcommand{\tpsi}{\tilde{\psi}}
 \newcommand{\tri}{\Delta}
 \newcommand{\lB}{\overline{B}}
 \newcommand{\dr}[1]{d^{(#1)}}
+
 
 % Probabilities
 \newcommand{\pr}[2]{P(#1|#2)}
@@ -338,8 +343,8 @@ We use $[n]$ to denote the set $\{0,1 \dots n-1\}$ and $[n]+1$ for the set $\{1,
 
 We use some basic number theory in our work. A primitive root of a prime number
 $d$ is an integer $r$ such that $r \pmod{d}$ has multiplicative order $d-1$. Equivalently,
-$r$ is the generator of the multiplicative group of integers modulo $d$, $\Z_d^\times$ where
-$\Z_d^\times = \{1,2\dots d-1\}$. \textcolor{red}{When the prime number $d$ has multiple primitive roots,
+$r$ is the generator of the multiplicative group of integers modulo $d$, $\Zd$ where
+$\Zd = \{1,2\dots d-1\}$. \textcolor{red}{When the prime number $d$ has multiple primitive roots,
 we always work with the smallest one.}
 \carl{I'm not clear on what that last sentence means.  You just defined what a primitive root
 is --- are you changing the definition now?}
@@ -769,14 +774,28 @@ product of Bob's observables.
 \begin{proposition}
 \label{prop:2d-subspace}
 	Let $\mu = \arctan(1/\alpha)$ for some $\alpha$.
-	Suppose a quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]+1}, \{\tilde{B}_y\}_{y \in [2]+1})$ achieves the maximal 
-	violation of  $\I_{\alpha}$, then $\tilde{B}_0\tilde{B}_1$ has eigenvalues $e^{i2\mu}$ and $e^{-i2\mu}$.  \carl{Make clear
+	If a quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]+1}, \{\tilde{B}_y\}_{y \in [2]+1})$ achieves the maximal 
+	violation of  $\I_{\alpha}$, then \hf{the only eigenvalues of $\tilde{B}_0\tilde{B}_1$ on the support of 
+	$\tilde{\rho}_B = \Tr_A(\ketbra{\tpsi}{\tpsi})$
+	are $e^{i2\mu}$ and $e^{-i2\mu}$.}  \carl{Make clear
 	that we mean that these are the only eigenvalues.}
 \end{proposition}
 \begin{proof}[Proof of \cref{prop:2d-subspace}]
-	Following the argument in the proof of \cref{thm:selftest} in \cref{sec:selftest}, we know
-	$\tilde{Z}_B = (\tB_1+\tB_2)/2\cos(\mu)$ is a binary observable. \textcolor{red}{HF: Do we need to justify it?}  \carl{Yes,
-	you should say more specifically where that is proved.}
+	Following the argument in the proof of \cref{thm:selftest} in \cref{sec:selftest}, we define
+	\begin{align*}	
+	\tilde{Z}_A = \tA_1, &&
+	\tilde{Z}_B = (\tB_1+\tB_2)/2\cos(\mu).
+	\end{align*}
+	Substituting $\epsilon = 0$ into \cref{eq:zazb} we know that 
+	\begin{align}
+		\tZ_B \ket{\tpsi} = \tZ_A \ket{\psi}.
+	\end{align}
+	Using this relation, we get
+	\begin{align}
+		\tZ_B^2\ket{\tpsi} = \tZ_B \tZ_A\ket{\tpsi} = \tZ_A \tZ_B \ket{\tpsi} = \tZ_A^2 \ket{\tpsi} = \ket{\tpsi},
+	\end{align}
+	where we also use the facts that $\tZ_A$ and $\tZ_B$ commute and $\tZ_A^2 = A_1^2 = \1$.
+	Hence we can conclude that $\tZ_B^2 =\1$ on $\supp(\tilde{\rho}_B)$.
 	Expanding $\tilde{Z}_B^2$ we get
 	\begin{align*}
 		\1 = \tilde{Z}_B^2 = \frac{\tB_1^2 + \tB_1\tB_2 + \tB_2\tB_1 + \tB_2^2}{4\cos(\mu)^2}
@@ -787,10 +806,8 @@ product of Bob's observables.
 	\label{eq:eig_v}
 		\tB_1\tB_2 + \tB_2\tB_1 = 2(2\cos^2(\mu)-1)\1 = 2 \cos(2\mu) \1.
 	\end{align}
-	Observe that $(\tB_1\tB_2)^\dagger = \tB_2\tB_1$ and 
-	$(\tB_2\tB_1)(\tB_1\tB_2) = \tB_2\1\tB_2 = \1$, then we can conclude that $\tB_1\tB_2$ is unitary.  \carl{(It's a product
-	of unitaries, so that step is immediate.)}
-	Suppose the eigen-decomposition of $\tB_1\tB_2$ is
+	\hf{Since $\tB_1\tB_2$ is the product of two unitaries,}
+	we can assume the eigen-decomposition of $\tB_1\tB_2$ is
 	\begin{align}
 		\tB_1\tB_2 = \sum_{i=1}^m \lambda_i \ketbra{i}{i}
 	\end{align}
@@ -800,9 +817,7 @@ product of Bob's observables.
 	\begin{align*}
 		\lambda_i + \lambda_i^{-1} = 2\Re(\lambda_i) = 2 \cos(2\mu),
 	\end{align*}
-	so we can conclude that $\lambda_i = e^{i 2\mu}$ or $e^{-i 2\mu}$.  \carl{Good proof (if you fill in the step at
-	the beginning).}
-	
+	so we can conclude that $\lambda_i = e^{i 2\mu}$ or $e^{-i 2\mu}$.	
 %	\begin{align}
 %		\ket{\tpsi} = \sum_{i=1}^m \frac{c_i}{\sqrt{2}} (\ket{u_{i,0}}\ket{u_{i,0}}+\ket{u_{i,1}}\ket{u_{i,1}}),
 %	\end{align}
@@ -1128,33 +1143,33 @@ the observables $A_1 = B_1 = \Psi_1(x_1)$ and $A_2 = B_2 = \Psi_1(x_2)$ are exte
 	A_1 = B_1 = \Psi_1(x_1) &= \sum_{k=1}^{(d-1)/2}\left( \omega_d^k\ketbra{x_k}{x_{d-k}} + \omega_d^{-k}\ketbra{x_{d-k}}{x_k}\right)\\
 	A_2 = B_2 = \Psi_1(x_2) &= \sum_{k=1}^{(d-1)/2}\left(\ketbra{x_{d-k}}{x_k} + \ketbra{x_k}{x_{d-k}}\right).
 \end{align}
-It can be checked that $X = \Psi_1(x_1x_2) = \sum_{i=1}^{d-1} \omega_d^i \ketbra{x_i}{x_i}$ 
+It can be checked that $X = \Psi_1(x_1x_2) = \sum_{i \in \Zd} \omega_d^i \ketbra{x_i}{x_i}$ 
 The relation $uxu^{-1} = x^r$ and $X$ determine that 
 \begin{align}
-	U =\Psi_1(u) = \Psi_1(x_3x_4) =  \sum_{i=1}^{d-1} \ketbra{x_{i/r \pmod{d}}}{x_i}.
+	U =\Psi_1(u) = \Psi_1(x_3x_4) =  \sum_{i \in \Zd} \ketbra{x_{r^{-1}i}}{x_i},
 \end{align}
+\hf{where $r^{-1}$ is the multiplicative inverse of $r$ in $\Zd$.
+All the multiplications done on the label $i$ of the state $\ket{x_i}$ are within the group $\Zd$.}
 The first step of the embedding procedure in the proof of \cref{prop:embed} requires
 the commutativity between $U$ and $B_2$, so we prove the commutation relation first and
 then give $\Psi_1(x_3)$ and $\Psi_1(x_4)$.
 The commutation relation can be checked as follows,
 \begin{align}
-	UB_2U\ct = \sum_{i=1}^{d-1} U\ketbra{x_i}{x_{d-i}}U\ct = \sum_{i=1}^{d-1} \ketbra{x_{i/r \pmod{d}}}{x_{(d-i)/r \pmod{d}}}.
+	UB_2U\ct = \sum_{i=1}^{d-1} U\ketbra{x_i}{x_{d-i}}U\ct = \sum_{i=1}^{d-1} \ketbra{x_{r^{-1} i}}{x_{r^{-1}(d-i)}}.
 \end{align}
-Let $i_1 = i/r \pmod{d}$ and $i_2  = (d-i)/r \pmod{d}$, then
+Let $i_1 = i r^{-1} \in \Zd$ and $i_2  = r^{-1} (d-i) \in \Zd$, then
 \begin{align*}
-	i_1 + i_2 \equiv& \frac{i}{r} + \frac{d-i}{r} \pmod{d} \\
-	\equiv& \frac{d}{r} \pmod{d}.
+	r(i_1 + i_2) \equiv  i + (d-i) \equiv d \pmod{d} .
 \end{align*}
-Suppose $d/r \pmod{d} \equiv x$ for some integer $x$, then
+Let $i_1 + i_2= x \in \{2, 3 \dots 2d-2\}$, then
 \begin{align}
-	rx \equiv d \pmod{d}.
+	rx \equiv d \pmod{d}
 \end{align}
-Since $d$ is a odd prime number and $r < d$, then $r$ cannot divide $d$, so $x = 0$ or $d$.
-Considering the fact that $1 \leq i_1 \leq d-1$ and $1 \leq i_2 \leq d-1$, we know $x = i_1+i_2 = d$.
+Since $d$ is an odd prime number and $r < d$, then $r$ cannot divide $d$ and the only valid value of $x$ is $d$.
 Hence, conjugation by $U$ will transform $\ketbra{x_i}{x_{d-i}}$ into another term of the same form.
-Now suppose for $1 \leq i < i' \leq d-1$ and $U\ketbra{x_i}{x_{d-i}}U\ct = U\ketbra{x_i'}{x_{d-i'}}U\ct$,
-it means that $i/r \equiv i'/r \pmod{d}$, which further implies that $i = i'$.
-To conclude, conjugation by $U$ only permutes the terms of $B_2$, so
+Now suppose for some $1 \leq i < i' \leq d-1$ and $U\ketbra{x_i}{x_{d-i}}U\ct = U\ketbra{x_{i'}}{x_{d-i'}}U\ct$,
+it means that in $\Zd$, $i r^{-1} = i' r^{-1}$ and $i = i'$, which contradicts the fact that $i \neq i'$.
+What we have shown so far is that conjugation by $U$ only permutes the terms of $B_2$, so
 \begin{align}
 	UB_2U\ct = B_2.
 \end{align}
@@ -1564,7 +1579,7 @@ Suppose the quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde
 $\bra{\psi} \bar{\I}_\alpha \ket{\psi} \leq \epsilon$.
 The second step is to establish bounds of the following form
 \begin{align}
-	&\|(\tilde{Z}_A-\tilde{Z}_B)\ket{\psi}\| \leq c_1 \sqrt{\epsilon}\\
+	\label{eq:zazb} &\|(\tilde{Z}_A-\tilde{Z}_B)\ket{\psi}\| \leq c_1 \sqrt{\epsilon}\\
 	&\|(\tilde{X}_A(\1+\tilde{Z}_B)-\tilde{X}_B(\1-\tilde{Z}_A))\ket{\psi}\| \leq c_2 \sqrt{\epsilon}\\
 	&\|(\tilde{X}_A-\tilde{X}_B)\ket{\psi}\| \leq c_3 \sqrt{\epsilon}\\
 	&\|(\tilde{Z}_A\tilde{X}_A+\tilde{X}_A\tilde{Z}_A)\ket{\psi}\| \leq c_4 \sqrt{\epsilon}.
