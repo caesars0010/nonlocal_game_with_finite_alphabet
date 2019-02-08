@@ -107,6 +107,10 @@
 % Table with multi-row
 \usepackage{multirow}
 
+% TikZ
+\usepackage{tikz}	
+\usetikzlibrary{backgrounds,fit,decorations.pathreplacing}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %  N E W C O M M A N D  %
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -197,6 +201,7 @@
 \newcommand{\LS}{LS}
 \newcommand{\tA}{\tilde{A}}
 \newcommand{\tB}{\tilde{B}}
+\newcommand{\tX}{\tilde{X}}
 \newcommand{\tZ}{\tilde{Z}}
 \newcommand{\tW}{\tilde{W}}
 \newcommand{\tx}{\tilde{x}}
@@ -761,7 +766,7 @@ The robust self-testing result is summarized in the following theorem.
 	for some $\epsilon$, then
 	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{aux}$  such that
 	\begin{align}
-		\| \Phi( \tilde{A}_x \x \tilde{B}_y \ket{\psi}) -\ket{junk} \x (A_x \x B_y) \ket{\EPR{2}}  \| = O((\alpha+\frac{1}{\alpha}) \sqrt{\epsilon})
+		\| \Phi( \tilde{A}_x \x \tilde{B}_y \ket{\psi}) -\ket{junk} \x (A_x \x B_y) \ket{\EPR{2}}  \| = O((\alpha^2+\frac{1}{\alpha}) \sqrt{\epsilon})
 	\end{align}
 	for $x,y \in \{0, 1, 2\}$ where the subscript $0$ refers to the identity operator and $A_x, B_y$ are 
 	defined in \cref{def:ideal}.  \carl{You're using both ``aux'' and ``junk'' for the auxilliary state.  Also you need
@@ -1557,8 +1562,14 @@ method uses correlation grows linearly in $d$.
 \section{Proof of \cref{thm:selftest} }
 \label{sec:selftest}
 %========================================
+This proof follows the same line of argument in Appendix A of Ref.~\cite{bamps2015}.
+We first find two sum-of-square decompositions of $2\sqrt{\alpha^2+1} \1 - \I_\alpha$.
+The decompositions allow us to determine some key relations between Alice and Bob's observables
+and their shared state, which will be used to draw the closeness conclusion.
+
 \begin{proof}
-Following the techniques developed in Ref.~\cite{bamps2015}, the first step is to find a sum-of-square decomposition of 
+The first step is to find a sum-of-square decomposition of 
+the following Bell expression
 \begin{align}
 	\bar{\I}_\alpha = 2\sqrt{\alpha^2+1} \1 - \I_\alpha
 	= \frac{2}{\sin(\mu)} \1 - \frac{\cos(\mu)}{\sin(\mu)}(A_1B_1+A_1B_2) -  A_2B_1 + A_2B_2.
@@ -1575,25 +1586,30 @@ the two SOS decompositions that we use are
 \end{align}
 The verification is omitted here.
 
-Suppose the quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x \in [2]}, \{\tilde{B}_{y \in [2]}\}$ achieves that 
-$\bra{\psi} \bar{\I}_\alpha \ket{\psi} \leq \epsilon$.
+Suppose the quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x=1,2}, \{\tilde{B}_{y }\}_{y=1,2}$ achieves that 
+$\bra{\psi} \bar{\I}_\alpha \ket{\psi} \leq \epsilon$ where
+$\bar{\I}_\alpha$ is expressed with $\tA_x$ and $\tB_y$.
 The second step is to establish bounds of the following form
 \begin{align}
 	\label{eq:zazb} &\|(\tilde{Z}_A-\tilde{Z}_B)\ket{\psi}\| \leq c_1 \sqrt{\epsilon}\\
-	&\|(\tilde{X}_A(\1+\tilde{Z}_B)-\tilde{X}_B(\1-\tilde{Z}_A))\ket{\psi}\| \leq c_2 \sqrt{\epsilon}\\
-	&\|(\tilde{X}_A-\tilde{X}_B)\ket{\psi}\| \leq c_3 \sqrt{\epsilon}\\
-	&\|(\tilde{Z}_A\tilde{X}_A+\tilde{X}_A\tilde{Z}_A)\ket{\psi}\| \leq c_4 \sqrt{\epsilon}.
+	\label{eq:xzxz}&\|(\tilde{X}_A(\1+\tilde{Z}_B)-\tilde{X}_B(\1-\tilde{Z}_A))\ket{\psi}\| \leq c_2 \sqrt{\epsilon}\\
+	\label{eq:xaxb}&\|(\tilde{X}_A-\tilde{X}_B)\ket{\psi}\| \leq c_3 \sqrt{\epsilon}\\
+	\label{eq:anticom} &\|(\tilde{Z}_A\tilde{X}_A+\tilde{X}_A\tilde{Z}_A)\ket{\psi}\| \leq c_4 \sqrt{\epsilon}.
 \end{align}
-Now we write $s = \sin(\mu)$, $c = \cos(\mu)$ and define
+Going back to the sum-of-square decomposition, we write $s = \sin(\mu)$, $c = \cos(\mu)$ and define
 \begin{align*}
-	S_1 &= \frac{\sqrt{s}}{2} \bar{\I}_\alpha, \quad
+	S_1 = \frac{\sqrt{s}}{2} \bar{\I}_\alpha, &&
 	S_2 = \sqrt{s}c(\tilde{Z}_A\tilde{X}_B+\tilde{X}_A\tilde{Z}_B),\\
-	S_3 &= \frac{c}{\sqrt{s}}(\tilde{Z}_A-\tilde{Z}_B),\quad
+	S_3 = \frac{c}{\sqrt{s}}(\tilde{Z}_A-\tilde{Z}_B), &&
 	S_4 = \sqrt{s}(\tilde{X}_A-\tilde{X}_B)
 \end{align*}
-then $\bar{\I}_\alpha = S_1^2 + S_2^2 = S_3^2 + S_4^2$ and $\bra{\psi}\bar{\I}_\alpha \ket{\psi} \leq \epsilon$ implies that 
+then 
+\begin{align}
+\bar{\I}_\alpha = S_1^2 + S_2^2 = S_3^2 + S_4^2
+\end{align}
+ and $\bra{\psi}\bar{\I}_\alpha \ket{\psi} \leq \epsilon$ implies that 
 $\bra{\psi}S^2_i \ket{\psi} \leq \epsilon$ and $\|S_i \ket{\psi} \| \leq \sqrt{\epsilon}$ for $i = 1,2,3,4$.
-We can easily check that 
+The coefficients $c_1$, $c_2$ and $c_3$ in \cref{eq:zazb,eq:xzxz,eq:xaxb} can be determined from $S_1$,$S_2$ and $S_3$ as
 \begin{align*}
 	c_1 = \frac{\sqrt{s}}{c}, \quad
 	c_2 = \frac{1}{\sqrt{s}} + \frac{1}{c\sqrt{s}}, \quad
@@ -1610,12 +1626,119 @@ and reach the conclusion that
 \end{align}
 where we use that fact that $\tilde{Z}_A, \tilde{X}_A$ are unitaries.
 
-With appropriate substitutions, the rest of the proof follows the same derivation as that in Appendix A of Ref.~\cite{bamps2015},
-so we omit it here. The dependence of the error term on $\alpha$ comes from the fact that 
+Now we introduce the isometries $\Phi_A$ and $\Phi_B$ mentioned in the statement of the theorem.
+They are the same as the ones used in Ref.~\cite{bamps2015}.
+To construct $\Phi_A$ and $\Phi_B$ we need to regularize $\tZ_B$ and $\tX_B$ to make sure the corresponding operations 
+are unitaries in the isometries. We define $\tZ_B^\ast$ to be the operator obtained from $\tZ_B$ by changing all the $0$-eigenvalues
+to $1$ and 
+\begin{align*}
+\tZ_B' = \tZ_B^\ast |\tZ_B|^{-1}.
+\end{align*}
+In a similar way, we define $\tX_B^\ast$ and $\tX_B'$.
+On Alice's side, since $\tZ_A$ and $\tX_A$ are unitaries already,
+we define
 \begin{align}
-\frac{1}{\cos(\arctan(1/\alpha)) \sin^{1/2}(\arctan(1/\alpha))} = \frac{1}{\alpha}+\frac{3}{4}\alpha - O(\alpha^3).
+	\tZ_A' = \tZ_A, && \tX_A' = \tX_A.
 \end{align}
-
+The isometries are illustrated in the figure below.
+\begin{figure}[H]
+\center
+        \begin{tikzpicture}[thick]
+        %
+        % `operator' will only be used by Hadamard (H) gates here.
+        % `phase' is used for controlled phase gates (dots).
+        % `surround' is used for the background box.
+        \tikzstyle{operator} = [draw,fill=white,minimum size=1.5em] 
+        \tikzstyle{phase} = [fill,shape=circle,minimum size=5pt,inner sep=0pt]
+        \tikzstyle{surround} = [fill=blue!10,thick,draw=black,rounded corners=2mm]
+        %
+        % Bracket
+        \draw[decorate,decoration={brace,mirror},thick] (0,-1) to
+    	node[midway,left] (bracket1) {$\ket{\tpsi}$}
+    	(0,-2);
+        % Qubits
+        \node at (0,0) (q1) {$\ket{0}$};
+        \node at (0,-1) (q2) {};
+        \node at (0,-2) (q3) {};
+        \node at (0,-3) (q4) {$\ket{0}$};
+        %
+        % Column 1
+        \node[operator] (op11) at (1,0) {H} edge [-] (q1);
+        \node[operator] (op14) at (1,-3) {H} edge [-] (q4);
+        %
+        % Column 3
+        \node[phase] (phase11) at (2,0) {} edge [-] (op11);
+	\node[operator] (op22) at (2,-1) {$\tZ_A'$} edge [-] (q2);
+	\node[operator] (op23) at (2, -2) {$\tZ_B'$} edge[-] (q3);
+        \node[phase] (phase14) at (2,-3) {} edge [-] (op14);
+        \draw[-] (phase11) -- (op22);
+        \draw[-] (phase14) -- (op23);
+        %
+        % Column 4
+        \node[operator] (op31) at (3,0) {H} edge [-] (phase11);
+        \node[operator] (op34) at (3,-3) {H} edge [-] (phase14);
+        %
+        % Column 5
+        \node[phase] (phase21) at (4,0) {} edge [-] (op31);
+	\node[operator] (op42) at (4,-1) {$\tX_A'$} edge [-] (op22);
+	\node[operator] (op43) at (4, -2) {$\tX_B'$} edge[-] (op23);
+        \node[phase] (phase24) at (4,-3) {} edge [-] (op34);
+        \draw[-] (phase21) -- (op42);
+        \draw[-] (phase24) -- (op43);
+        %
+        % Column 6
+        \node (end2) at (5,-1) {} edge [-] (op42);
+        \node (end3) at (5,-2) {} edge [-] (op43);
+        %
+        % Bracket
+        \draw[decorate,decoration={brace},thick] (5,-1) to
+    	node[midway,right] (bracket) {$\ket{junk}$}
+    	(5,-2);
+        %
+        % Column 7
+        \node (end1) at (6.5,-0.5) {} edge [-] (phase21);
+        \node (end4) at (6.5,-2.5) {} edge [-] (phase24);
+        % Dashed line
+        \draw[loosely dotted] (0,-1.5) -- (5,-1.5);
+        % Bracket
+        \draw[decorate,decoration={brace},thick,] (6.5,-0.5) to
+    	node[midway,right] (bracket2) {$\frac{\ket{00}+\ket{11}}{\sqrt{2}}$}
+    	(6.5,-2.5);
+        %
+        % Background Box
+        \begin{pgfonlayer}{background} 
+        \node[surround] (background) [fit = (q1) (op14) (bracket1)(bracket2)] {};
+        \end{pgfonlayer}
+        %
+        \end{tikzpicture}
+	\caption{The isometries $\Phi_A$ and $\Phi_B$.}
+\end{figure}
+To bound $e_{xy} := \norm{ (\Phi_A\x\Phi_B) (\tA_x \x \tB_y) \ket{\tpsi} - \ket{junk} \x (A_x\x B_y) \ket{\EPR{2}}}$,
+there are some intermediate steps. Since the derivations are the same as in Ref.~\cite{bamps2015}, 
+we only record the key relations here.
+\begin{align}
+	&\norm{(\tZ_B' - \tZ_B) \ket{\tpsi}} \leq c_1 \sqrt{\epsilon},\\
+	&\norm{(\tZ_B' - \tZ_A') \ket{\tpsi}} \leq 2c_1 \sqrt{\epsilon}, \\
+	&\norm{(\tX_B' - \tX_B) \ket{\tpsi}} \leq \frac{c+1}{s^{3/2}} \sqrt{\epsilon} := c_5\sqrt{\epsilon},\\
+	&\norm{(\tX_B'\tZ_B'+ \tZ_B'\tX_B')\ket{\tpsi}} \leq [2c_1 + 2c_3 + 2c_5 + (\sqrt{2}+1/c)(2c_1+c_4)]\sqrt{\epsilon}
+	:= c_6 \sqrt{\epsilon}.
+\end{align}
+Then we can calculate that 
+\begin{align}
+	&e_{00} = e_{10} = 2c_6 \sqrt{\epsilon}\\
+	&e_{20} = 2(c_4 + c_6) \sqrt{\epsilon}\\
+	&e_{01} = e_{02} = e_{11} = e_{12} = [c(c_1)+s(2c_4 + c_5) + 2c_6]\sqrt{\epsilon}\\
+	&e_{21} = e_{22} = [2c_4 + c(c_1)+s(2c_4 + c_5) + 2c_6]\sqrt{\epsilon},
+\end{align}
+so an upper bound of the error is that
+\begin{align}
+	\forall x,y \in \{0,1,2\}, e_{xy} \in O((\frac{1}{cs^{1/2}} + \frac{1}{s^{3/2}})\sqrt{\epsilon}).
+\end{align}
+The dependence of the error term on $\alpha$ comes from the fact that 
+\begin{align}
+&\frac{1}{\cos(\arctan(1/\alpha)) \sin^{1/2}(\arctan(1/\alpha))} = \frac{1}{\alpha}+\frac{3}{4}\alpha - O(\alpha^3),\\
+&\frac{1}{\sin^{3/2}(\arctan(1/\alpha))} = 1 + \frac{3}{4}\alpha^2 - O(\alpha^4).
+\end{align}
 \end{proof}
 %%=====================================
 \section{Equations to embed $uxu^{-1} = x^2$}
