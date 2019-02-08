@@ -192,6 +192,8 @@
 \newcommand{\SVT}{SVT}
 \newcommand{\tA}{\tilde{A}}
 \newcommand{\tB}{\tilde{B}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\tX}{\tilde{X}}
 \newcommand{\tpsi}{\tilde{\psi}}
 
 % Probabilities
@@ -201,6 +203,7 @@
 
 % Bell Ineqaulities
 \newcommand{\I}{\mathcal{I}}
+
 % Commands for highlighting text and notes
 
 \usepackage{color}
@@ -211,7 +214,8 @@
   linecolor = black,
   colorinlistoftodos]{todonotes}
 
-
+% Approximately equatli
+\newcommand{\appd}[1]{\simeq_{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %  N E W T H E O R E M  %
@@ -500,6 +504,116 @@ so it is also a submatrix of a Vandermonde matrix. Similar argument gives us tha
 
 To summarize, we have proven that $x_{k,l} = 0$ for all $k$ and $l$, which implies that the elements of the set
 $\{ U^k X^l \}$ are linearly independent and forms a basis for all the $(d-1)\times(d-1)$ matrices.
+%------------------------------------------------------------------------
+\subsection{Robustness of $\I_\alpha$}
+%------------------------------------------------------------------------
+\begin{proposition}
+\label{prop:2d-subspace}
+	Let $\mu = \arctan(1/\alpha)$ for some $\alpha$.
+	If a quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]+1}, \{\tilde{B}_y\}_{y \in [2]+1})$ 
+	satisfies the condition that $\ip{\I_\alpha} = 2\sqrt{1+\alpha^2}-\epsilon$, where 
+	$\ip{\I_\alpha}$ is expressed in terms of $\tA_x$,  $\tB_x$ and $\ket{\tpsi}$,
+	then all the eigenvalues of $\tilde{B}_0\tilde{B}_1$ on the support of 
+	$\tilde{\rho}_B = \Tr_A(\ketbra{\tpsi}{\tpsi})$
+	are within distance $O(\sqrt{\epsilon})$ to either $e^{i2\mu}$ or $e^{-i2\mu}$.
+\end{proposition}
+\begin{proof}[Proof of \cref{prop:2d-subspace}]
+	For simplicity, we write $c = \cos(\mu)$ and $s = \sin(\mu)$.
+	Hence, the typical value of $\mu$ is $\pi/d$ for some large $d$, we assume both $c$ and $s$ are between $0$ and $1$.
+	
+	Following the argument in the proof of \cref{thm:selftest} in \cref{sec:selftest}, we define
+	\begin{align*}	
+	\tilde{Z}_A = \tA_1, && \tX_A = \tA_2\\
+	\tilde{Z}_B = (\tB_1+\tB_2)/2c, && \tX_B = (\tB_1-\tB_2)/2s.
+	\end{align*}
+	A simple observation is that $c^2 \tZ_B^2 + s^2 \tX_B^2 = \1$, which implies that 
+	$ \tZ_B^2 \leq \1/c^2$ and 
+	\begin{align}
+		\label{eq:bnd_zb}
+		\norm{\tZ_B} \leq \frac{1}{c}.
+	\end{align}
+	We would like to know how close $\tZ_B^2\ket{\tpsi}$ and $\tZ_A^2\ket{\tpsi}$ are,
+	and we start with the condition 
+	\begin{align}
+		\label{eq:zazb}
+		\tZ_B \ket{\tpsi} \appd{\frac{\sqrt{s}}{c}\sqrt{\epsilon}} \tZ_A \ket{\psi},
+	\end{align}
+	which means that $\norm{ (\tZ_B-\tZ_A)\ket{\tpsi}} \leq \frac{\sqrt{s}}{c}\sqrt{\epsilon}$.
+	Using \cref{eq:bnd_zb,eq:zazb}, we get
+	\begin{align}
+		\norm{ (\tZ_B^2 - \tZ_A^2)\ket{\tpsi}} \leq& \norm{ (\tZ_B^2 - \tZ_A\tZ_B)\ket{\tpsi}} + \norm{ (\tZ_A\tZ_B - \tZ_A^2)\ket{\tpsi}}\\
+		=&\norm{\tZ_B}\norm{ (\tZ_B - \tZ_A)\ket{\tpsi}} + \norm{\tZ_A}\norm{ (\tZ_B - \tZ_A)\ket{\tpsi}}\\
+		\leq&(\frac{\sqrt{s}}{c^2}+ \frac{\sqrt{s}}{c})\sqrt{\epsilon},
+	\end{align}
+	where we also use the facts that $\tZ_A$ and $\tZ_B$ commute and $\tZ_A$ is a unitary.
+	Since $\tZ_A^2 = \1$, what we have shown is equivalent to 
+	\begin{align}
+		\tZ_B^2 \ket{\tpsi} \appd{(\frac{\sqrt{s}}{c^2}+ \frac{\sqrt{s}}{c})\sqrt{\epsilon}} \ket{\tpsi}.
+	\end{align}
+	Hence we can conclude that 
+	\begin{align}
+	\norm{\tZ_B^2  -\1} \leq (\frac{\sqrt{s}}{c^2}+ \frac{\sqrt{s}}{c})\sqrt{\epsilon} \quad\text{ on }  \supp(\tilde{\rho}_B).
+	\end{align}
+	Expanding $\tilde{Z}_B^2$ we get
+	\begin{align*}
+		 \tilde{Z}_B^2 = \frac{\tB_1^2 + \tB_1\tB_2 + \tB_2\tB_1 + \tB_2^2}{4c^2}
+		=\frac{2\1 + \tB_1\tB_2 + \tB_2\tB_1}{4c^2},
+	\end{align*}
+	so we can derive that 
+	\begin{align*}
+		&\norm{\tB_1\tB_2 + \tB_2\tB_1 - 2(2\cos^2(\mu)-1)\1} \\
+		=& \norm{ \tB_1\tB_2 + \tB_2\tB_1 - 2 \cos(2\mu) \1} \\
+		\leq& 4c^2(\frac{\sqrt{s}}{c^2}+ \frac{\sqrt{s}}{c})\sqrt{\epsilon} \\
+		=& (4\sqrt{s} + 4c\sqrt{s})\sqrt{\epsilon}.
+	\end{align*}
+	Since $\tB_1\tB_2$ is the product of two unitaries,
+	we can assume the eigen-decomposition of $\tB_1\tB_2$ is
+	\begin{align}
+		\tB_1\tB_2 = \sum_{i=1}^m \lambda_i \ketbra{i}{i}
+	\end{align}
+	for some orthonormal set of eigenvectors $\{ \ket{i} \}_{i=1}^m$
+	and $\norm{\lambda_i} =1$ for $1 \leq i \leq m$.
+	The fact that 
+	\begin{align}
+	\norm{ \tB_1\tB_2 + \tB_2\tB_1 - 2 \cos(2\mu) \1} \leq (4\sqrt{s} + 4c\sqrt{s})\sqrt{\epsilon}
+	\end{align}
+	tells us that for each $1 \leq i \leq m$
+	\begin{align*}
+		\norm{\lambda_i + \lambda_i^{-1}-2 \cos(2\mu)} = 2|\Re(\lambda_i)- \cos(2\mu)| \leq (4\sqrt{s} + 4c\sqrt{s})\sqrt{\epsilon}.
+	\end{align*}
+	Since both $s$ and $c$ are between $0$ and $1$, we use $O(\sqrt{\epsilon})$ to replace the term 
+	$(4\sqrt{s} + 4c\sqrt{s})\sqrt{\epsilon}$.
+	Observe that $\norm{\lambda_i} = 1$, then $| \Re(\lambda_i) - \cos(2\mu)| \in O(\sqrt{\epsilon})$ implies that 
+	\begin{align}
+		|\Im(\lambda_i) - |\sin(2\mu)|| \in O(\sqrt{\epsilon}).
+	\end{align}
+	Thus, when $\Im(\lambda_i) > 0$, $\norm{\lambda_i - e^{i 2\mu}} \in O(\sqrt{\epsilon})$, and
+	when $\Im(\lambda_i) < 0$, $\norm{\lambda_i - e^{-i 2\mu}} \in O(\sqrt{\epsilon})$
+%	\begin{align}
+%		\ket{\tpsi} = \sum_{i=1}^m \frac{c_i}{\sqrt{2}} (\ket{u_{i,0}}\ket{u_{i,0}}+\ket{u_{i,1}}\ket{u_{i,1}}),
+%	\end{align}
+%	where $c_i$'s are coefficients such that $\sum_{i=1}^m \norm{c_i}^2 = 1$.
+%	The special property of the subspace $V_i = \spn( \ket{u_{i,0}}, \ket{u_{i,1}})$ is that 
+%	\begin{align*}
+%	(\tilde{B}_0 + \tilde{B}_1) \ket{u_{i,0}} = 2\cos(-\pi/2d) \ket{u_{i,0}} 
+%	&&(\tilde{B}_0 + \tilde{B}_1) \ket{u_{i,1}} = -2\cos(-\pi/2d) \ket{u_{i,1}}\\
+%	(\tilde{B}_0 - \tilde{B}_1) \ket{u_{i,0}} = 2\sin(-\pi/2d) \ket{u_{i,1}} 
+%	&&(\tilde{B}_0 - \tilde{B}_1) \ket{u_{i,1}} = 2\sin(-\pi/2d) \ket{u_{i,0}}.
+%	\end{align*}
+%	It is straightforward to calculate that 
+%	\begin{align*}
+%		\tilde{B}_0\tilde{B}_1 \ket{u_{i,0}} = \cos(\pi/d) \ket{u_{i,0}} -\sin(\pi/d) \ket{u_{i,1}},&&
+%		\tilde{B}_0\tilde{B}_1\ket{u_{i,1}} = \sin(\pi/d)\ket{u_{i,0}} + \cos(\pi/d) \ket{u_{i,1}},
+%	\end{align*}
+%	so we can conclude that 
+%	\begin{align*}
+%		&\tilde{B}_0\tilde{B}_1(\ket{u_{i,0}} + i\ket{u_{i,1}}) = e^{i \frac{\pi}{d}} (\ket{u_{i,0}} + i\ket{u_{i,1}}), &&
+%		&\tilde{B}_0\tilde{B}_1(\ket{u_{i,0}} - i\ket{u_{i,1}}) = e^{-i \frac{\pi}{d}} (\ket{u_{i,0}} - i\ket{u_{i,1}}).
+%	\end{align*}
+%	Hence each $V_i$ is spanned by $\omega_d$-eigenvector and $\omega_d^{-1}$-eigenvector of $\tB_0\tB_1$.
+\end{proof}
+
+
 %------------------------------------------------------------------------
 \subsection{The extended weighted CHSH game}
 %------------------------------------------------------------------------
