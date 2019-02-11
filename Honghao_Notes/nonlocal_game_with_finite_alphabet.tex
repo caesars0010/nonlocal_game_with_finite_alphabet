@@ -612,7 +612,30 @@ $\{ U^k X^l \}$ are linearly independent and forms a basis for all the $(d-1)\ti
 %	\end{align*}
 %	Hence each $V_i$ is spanned by $\omega_d$-eigenvector and $\omega_d^{-1}$-eigenvector of $\tB_0\tB_1$.
 \end{proof}
-
+%------------------------------------------------------------------------
+\subsection{Robustness of the linear system game}
+%------------------------------------------------------------------------
+When the players win the linear system game with probability $1-\epsilon$,
+we know that for each $i \in [m_r]+1$,
+\begin{align}
+\bra{\psi} \Pi_{j:H(i,j) \neq 0} A_j \ket{\psi} \geq 1- m_r \epsilon,
+\end{align}
+which means that 
+\begin{align}
+	\Pi_{j:H(i,j) \neq 0} A_j \ket{\psi} \appd{\sqrt{r\epsilon}} \ket{\psi},
+\end{align}
+where we use the fact that $m_r \in O(r)$.
+Following the steps of the embedding of $x_3x_4x_1x_2x_4x_3 = (x_1x_2)^r$ into the linear system game,
+we can conclude that 
+\begin{align}
+	A_3A_4 A_1A_2 (A_3A_4)^\dagger \ket{\psi}\appd{O(r\sqrt{r\epsilon})} (A_1A_2)^r \ket{\psi}.
+\end{align}
+For simplicity, we define $X_A = A_1A_2$ and $U_A=A_3A_4$ such that
+the condition is equivalent to
+\begin{align}
+	\label{eq:ux_relation}
+	U_AX_AU_A^\dagger \ket{v} \appd{O(r\sqrt{r\epsilon})} X_A^r \ket{v} \text{ for all } \ket{v} \in \supp(\rho_A).
+\end{align}
 
 %------------------------------------------------------------------------
 \subsection{The extended weighted CHSH game}
