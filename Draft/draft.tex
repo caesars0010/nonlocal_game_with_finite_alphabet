@@ -912,16 +912,16 @@ $a = 0$ & $a=1$ & $a=\perp$ &
 $a = 0$ & $a=1$ & $a=\perp$\\
 \hline
 \hline
-\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{\perp0}{00}$ 
+\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{\sin^2(\pi/d)}{d-1}$ & \small $\pr{\perp0}{00}$ 
 & $\frac{1+\sin(\pi/d)}{2(d-1)}$ & $\frac{1-\sin(\pi/d)}{2(d-1)}$ & \small  $\pr{\perp0}{10}$ \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{\perp0}{00}$ 
+&$b=1$ & $\frac{\sin^2(\pi/d)}{d-1}$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{\perp0}{00}$ 
 &  $\frac{1-\sin(\pi/d)}{2(d-1)}$ & $\frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1} - \pr{\perp0}{10}$  \\
 \hline
-\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{\perp0}{01}$ & 
+\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{\sin^2(\pi/d)}{d-1}$ & \small $\pr{\perp0}{01}$ & 
 $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\pr{\perp 0}{11}$  \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{\perp0}{01}$ &  
+&$b=1$ & $\frac{\sin^2(\pi/d)}{d-1}$ & $\frac{\cos^2(\pi/d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{\perp0}{01}$ &  
 $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1}- \pr{\perp 0}{11}$ \\
 \hline
 \end{tabular}
@@ -962,14 +962,14 @@ Alice's projectors are
 Bob's projectors are 
 \begin{align*}
 	&B_\ast^\diamond = \Pi_V, B_\ast^\perp = \Pi_V^\perp \\
-	&B_1^0|_V = \left( \cos(\frac{\pi}{2d})\ket{u_1} + \sin(\frac{\pi}{2d})\ket{u_{d-1}}\right)
-	\left( \cos(\frac{\pi}{2d})\bra{u_1} + \sin(\frac{\pi}{2d})\bra{u_{d-1}}\right)\\
-	&B_1^1|_V = \left( \sin(\frac{\pi}{2d})\ket{u_1} - \cos(\frac{\pi}{2d})\ket{u_{d-1}}\right)
-	\left( \sin(\frac{\pi}{2d})\bra{u_1} - \cos(\frac{\pi}{2d})\bra{u_{d-1}}\right)\\
-	&B_2^0|_V = \left( \cos(\frac{\pi}{2d})\ket{u_1} - \sin(\frac{\pi}{2d})\ket{u_{d-1}}\right)
-	\left( \cos(\frac{\pi}{2d})\bra{u_1} - \sin(\frac{\pi}{2d})\bra{u_{d-1}}\right)\\
-	&B_2^1|_V = \left( \sin(\frac{\pi}{2d})\ket{u_1} + \cos(\frac{\pi}{2d})\ket{u_{d-1}}\right)
-	\left( \sin(\frac{\pi}{2d})\bra{u_1} + \cos(\frac{\pi}{2d})\bra{u_{d-1}}\right).
+	&B_1^0|_V = \left( \cos(\frac{\pi}{d})\ket{u_1} + \sin(\frac{\pi}{d})\ket{u_{d-1}}\right)
+	\left( \cos(\frac{\pi}{d})\bra{u_1} + \sin(\frac{\pi}{d})\bra{u_{d-1}}\right)\\
+	&B_1^1|_V = \left( \sin(\frac{\pi}{d})\ket{u_1} - \cos(\frac{\pi}{d})\ket{u_{d-1}}\right)
+	\left( \sin(\frac{\pi}{d})\bra{u_1} - \cos(\frac{\pi}{d})\bra{u_{d-1}}\right)\\
+	&B_2^0|_V = \left( \cos(\frac{\pi}{d})\ket{u_1} - \sin(\frac{\pi}{d})\ket{u_{d-1}}\right)
+	\left( \cos(\frac{\pi}{d})\bra{u_1} - \sin(\frac{\pi}{d})\bra{u_{d-1}}\right)\\
+	&B_2^1|_V = \left( \sin(\frac{\pi}{d})\ket{u_1} + \cos(\frac{\pi}{d})\ket{u_{d-1}}\right)
+	\left( \sin(\frac{\pi}{d})\bra{u_1} + \cos(\frac{\pi}{d})\bra{u_{d-1}}\right).
 \end{align*}
 About Bob's projectors for input $y \in [2]+1$, we are only interested in their actions when restricted 
 to the subspace $V$. Their actions on the subspace $V^\perp$ is irrelevant in this game.
