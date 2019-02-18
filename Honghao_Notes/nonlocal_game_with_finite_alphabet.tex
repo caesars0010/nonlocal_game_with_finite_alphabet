@@ -515,7 +515,7 @@ $\{ U^k X^l \}$ are linearly independent and forms a basis for all the $(d-1)\ti
 	$\ip{\I_\alpha}$ is expressed in terms of $\tA_x$,  $\tB_x$ and $\ket{\tpsi}$,
 	then  
 	\begin{align}
-		[(\tB_0\tB_1)^r + (\tB_1\tB_0)^r] \ket{\tpsi} \appd{O(2^{r-1}\sqrt{\epsilon})} 2\cos((r+1)\mu)\ket{\tpsi},
+		[(\tB_0\tB_1)^r + (\tB_1\tB_0)^r] \ket{\tpsi} \appd{O(2^{r-1}\sqrt{\epsilon})} 2\cos(2r\mu)\ket{\tpsi},
 	\end{align}
 	for all $r \geq 1$.
 \end{proposition}
@@ -567,13 +567,13 @@ $\{ U^k X^l \}$ are linearly independent and forms a basis for all the $(d-1)\ti
 	\end{align*}
 	We take one step further and assume that 
 	\begin{align}
-		[(\tB_1\tB_2)^j + (\tB_2\tB_1)^j]\ket{\tpsi} \appd{O(2^{j-1}\sqrt{\epsilon})} 2\cos((j+1)\mu) \ket{\tpsi},
+		[(\tB_1\tB_2)^j + (\tB_2\tB_1)^j]\ket{\tpsi} \appd{O(2^{j-1}\sqrt{\epsilon})} 2\cos(2j\mu) \ket{\tpsi},
 	\end{align}
 	for all $j =1\dots n-1$.
 	When $j=n$, we have
 	\begin{align}
-		&\norm{ (\tB_1\tB_2+\tB_2\tB_1)[(\tB_1\tB_2)^{n-1} + (\tB_2\tB_1)^{n-1}]\ket{\tpsi} - 2\cos(n\mu)(\tB_1\tB_2+\tB_2\tB_1)\ket{\tpsi}}\\
-		\leq& \norm{(\tB_1\tB_2+\tB_2\tB_1)} \norm{ [(\tB_1\tB_2)^{n-1} + (\tB_2\tB_1)^{n-1}]\ket{\tpsi} - 2\cos(n\mu)\ket{\tpsi}}\\
+		&\norm{ (\tB_1\tB_2+\tB_2\tB_1)[(\tB_1\tB_2)^{n-1} + (\tB_2\tB_1)^{n-1}]\ket{\tpsi} - 2\cos(2(n-1)\mu)(\tB_1\tB_2+\tB_2\tB_1)\ket{\tpsi}}\\
+		\leq& \norm{(\tB_1\tB_2+\tB_2\tB_1)} \norm{ [(\tB_1\tB_2)^{n-1} + (\tB_2\tB_1)^{n-1}]\ket{\tpsi} - 2\cos(2(n-1)\mu)\ket{\tpsi}}\\
 		\leq & 2 O(2^{n-2} \sqrt{\epsilon}) = O(2^{n-1} \sqrt{\epsilon}).
 	\end{align}
 	On the other hand,
@@ -583,15 +583,15 @@ $\{ U^k X^l \}$ are linearly independent and forms a basis for all the $(d-1)\ti
 	\end{align}
 	By the induction hypothesis we have 
 	\begin{align}
-		[(\tB_1\tB_2)^{n-2} + (\tB_2\tB_1)^{n-2}] \ket{\tpsi} \appd{O(2^{n-3} \sqrt{\epsilon})} 2\cos((n-1)\mu) \ket{\tpsi}.
+		[(\tB_1\tB_2)^{n-2} + (\tB_2\tB_1)^{n-2}] \ket{\tpsi} \appd{O(2^{n-3} \sqrt{\epsilon})} 2\cos(2(n-2)\mu) \ket{\tpsi}.
 	\end{align}
 	The derivation so far gives us that
 	\begin{align}
 		&\qquad[(\tB_1\tB_2)^{n} + (\tB_2\tB_1)^{n}] \ket{\tpsi} \\
-		&\appd{O((2^{n-1}+2^{n-3})\sqrt{\epsilon})} 2\cos(n\mu)(\tB_1\tB_2+\tB_2\tB_1)\ket{\tpsi} - 2\cos((n-1)\mu) \ket{\tpsi}\\
-		&\appd{O(2\sqrt{\epsilon})} [4\cos(n\mu)\cos(\mu) - 2\cos((n-1)\mu)]\ket{\tpsi}\\
-		&= (2\cos((n+1)\mu) + 2\cos((n-1)\mu) - 2\cos((n-1)\mu))\ket{\tpsi}\\
-		&=2\cos((n+1)\mu) \ket{\tpsi}.
+		&\appd{O((2^{n-1}+2^{n-3})\sqrt{\epsilon})} 2\cos(2(n-1)\mu)(\tB_1\tB_2+\tB_2\tB_1)\ket{\tpsi} - 2\cos(2(n-2)\mu) \ket{\tpsi}\\
+		&\appd{O(2\sqrt{\epsilon})} [4\cos(2(n-1)\mu)\cos(2\mu) - 2\cos(2(n-2)\mu)]\ket{\tpsi}\\
+		&= (2\cos(2n\mu) + 2\cos(2(n-2)\mu) - 2\cos(2(n-2)\mu))\ket{\tpsi}\\
+		&=2\cos(2n\mu) \ket{\tpsi}.
 	\end{align}
 	
 %	Since $\tB_1\tB_2$ is the product of two unitaries,
@@ -1049,17 +1049,17 @@ It means that the quantum strategy $\{ \{A_{m_r+2}^a, A_{m_r+3}^a\}_{a=0,1},\{B_
 From \cref{prop:2d-subspace}, we know that 
 \begin{align}
 	[(B_1B_2)^r + (B_2B_1)^r] B_{n_r+1}^\diamond \ket{\psi} \appd{O(2^{r-1}\sqrt{\epsilon})} 
-	2\cos(\frac{(r+1)\pi}{d}) B_{n_r+1}^\diamond \ket{\psi},
+	2\cos(\frac{2r\pi}{d}) B_{n_r+1}^\diamond \ket{\psi},
 \end{align}
 Or equivalently,
 \begin{align}
 \label{eq:b_to_cos}
 	[X_B^r + (X_B\ct)^r] B_{n_r+1}^\diamond \ket{\psi} \appd{O(2^{r-1}\sqrt{\epsilon})} 
-	2\cos(\frac{(r+1)\pi}{d}) B_{n_r+1}^\diamond \ket{\psi}.
+	2\cos(\frac{2r\pi}{d}) B_{n_r+1}^\diamond \ket{\psi}.
 \end{align}
 
 In the next step, we would like to 
-relate $U_B(X_B+X_B\ct)U_B\ct B_{n_r+1}^\diamond \ket{\psi}$ to $2\cos(\frac{(r+1)\pi}{d}) B_{n_r+1}^\diamond \ket{\psi}$.
+relate $U_B(X_B+X_B\ct)U_B\ct B_{n_r+1}^\diamond \ket{\psi}$ to $2\cos(\frac{2r\pi}{d}) B_{n_r+1}^\diamond \ket{\psi}$.
 Since $\ket{\psi} = B_{n_r+1}^\diamond \ket{\psi} + B_{n_r+1}^\perp \ket{\psi}$, we start with
 \begin{align*}
 	&\norm{[U_B(X_B+X_B\ct)U_B\ct - ((X_B\ct)^r+(X_B)^r)]\ket{\psi}}^2\\
@@ -1111,15 +1111,15 @@ which means that
 Juxtaposing the relation above with \cref{eq:b_to_cos}, we get
 \begin{align}
 	(U_B(X_B+X_B\ct)U_B\ct) B_{n_r+1}^\diamond \ket{\psi} 
-	\appd{O(2^{r+1}\epsilon^{1/4})} \cos(\frac{(r+1)\pi}{d}) B_{n_r+1}^\diamond\ket{\psi},
+	\appd{O(2^{r+1}\epsilon^{1/4})} \cos(\frac{2r\pi}{d}) B_{n_r+1}^\diamond\ket{\psi},
 \end{align}
 or equivalently,
 \begin{align}
 	(X_B + X_B\ct) U_B\ct B_{n_r+1}^\diamond \ket{\psi} \appd{O(2^{r+1}\epsilon^{1/4})}  
-	2\cos(\frac{(r+1)\pi}{d}) U_B\ct B_{n_r+1}^\diamond \ket{\psi}.
+	2\cos(\frac{2r\pi}{d}) U_B\ct B_{n_r+1}^\diamond \ket{\psi}.
 \end{align}
 Intuitively, it says that $U_B\ct B_{n_r+1}^\diamond \ket{\psi}$ is close to an eigenvector of 
-the Hermitian matrix $X_B +X_B\ct$ with eigenvalue $2\cos(\frac{(r+1)\pi}{d})$.
+the Hermitian matrix $X_B +X_B\ct$ with eigenvalue $2\cos(\frac{2r\pi}{d})$.
 Comparing it with the fact that
 \begin{align}
 (X_B + X_B\ct) B_{n_r+1}^\diamond \ket{\psi} \appd{O(\sqrt{\epsilon})}  
@@ -1157,7 +1157,7 @@ by the following proposition.
 Following \cref{prop:orthog} and the 
 and the fact that $(X_B|_V + X_B|_V\ct)$ is Hermitian, we can conclude that
 \begin{align}
-\bra{\psi}B_{n_r+1}^\diamond U_B\ct B_{n_r+1}^\diamond \ket{\psi} = O(\frac{2^{r+1}\epsilon^{1/4}}{\cos(2\pi/d) - \cos((r+1)\pi/d)}).
+\bra{\psi}B_{n_r+1}^\diamond U_B\ct B_{n_r+1}^\diamond \ket{\psi} = O(\frac{2^{r+1}\epsilon^{1/4}}{\cos(2\pi/d) - \cos(2r\pi/d)}).
 \end{align}
 %It means that there exists isometris $V_A$ on Alice side and $V_B$ on Bob's side such that 
 %\begin{align}
