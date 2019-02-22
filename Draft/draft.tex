@@ -1509,22 +1509,159 @@ Recalling the fact that
  \end{align}
  
 The last step is to construct the local isometries $\Phi_A$ and $\Phi_B$ that can produce $\ket{\EPR{d-1}}$ from $\ket{\psi}$.
-We give steps about how $\Phi_A$ and $\Phi_B$ works.
-Since the subspaces $W_j$'s are orthogonal, Alice and Bob can map state $\ket{\psi}$ to the state 
+To help understanding, we draw a diagram to demonstrate the isometry first and then show
+how this isometry works.
+\begin{figure}[H]
+\center
+        \begin{tikzpicture}[thick]
+        %
+        % `operator' will only be used by Hadamard (H) gates here.
+        % `phase' is used for controlled phase gates (dots).
+        % `surround' is used for the background box.
+        \tikzstyle{operator} = [draw,fill=white,minimum size=1.5em] 
+        \tikzstyle{phase} = [fill,shape=circle,minimum size=5pt,inner sep=0pt]
+        \tikzstyle{surround} = [fill=blue!10,thick,draw=black,rounded corners=2mm]
+        %
+        % Bracket
+        \draw[decorate,decoration={brace,mirror},thick] (0,-1) to
+    	node[midway,left] (bracket1) {$\ket{\psi}$}
+    	(0,-2);
+        % Qubits
+        \node at (0,0) (q1) {$\ket{0}$};
+        \node at (0,-1) (q2) {};
+        \node at (0,-2) (q3) {};
+        \node at (0,-3) (q4) {$\ket{0}$};
+        %
+        % Column 1
+        \node[operator] (op11) at (1,0) {$QFT_d$} edge [-] (q1);
+        \node[operator] (op14) at (1,-3) {$QFT_d$} edge [-] (q4);
+        %
+        % Column 3
+        \node[phase] (phase11) at (2,0) {} edge [-] (op11);
+	\node[operator] (op22) at (2,-1) {$X_A$} edge [-] (q2);
+	\node[operator] (op23) at (2, -2) {$X_B$} edge[-] (q3);
+        \node[phase] (phase14) at (2,-3) {} edge [-] (op14);
+        \draw[-] (phase11) -- (op22);
+        \draw[-] (phase14) -- (op23);
+        %
+        % Column 4
+        \node[operator] (op31) at (3,0) {$QFT_d^{-1}$} edge [-] (phase11);
+        \node[operator] (op34) at (3,-3) {$QFT_d^{-1}$} edge [-] (phase14);
+        %
+        % Column 5
+        \node[phase] (phase21) at (4,0) {} edge [-] (op31);
+	\node[operator] (op42) at (4,-1) {$U_A$} edge [-] (op22);
+	\node[operator] (op43) at (4, -2) {$U_B$} edge[-] (op23);
+        \node[phase] (phase24) at (4,-3) {} edge [-] (op34);
+        \draw[-] (phase21) -- (op42);
+        \draw[-] (phase24) -- (op43);
+        %
+        % Column 6
+        \node (end2) at (5,-1) {} edge [-] (op42);
+        \node (end3) at (5,-2) {} edge [-] (op43);
+        %
+        % Bracket
+        \draw[decorate,decoration={brace},thick] (5,-1) to
+    	node[midway,right] (bracket) {$\ket{junk}$}
+    	(5,-2);
+        %
+        % Column 7
+        \node (end1) at (6.5,-0.5) {} edge [-] (phase21);
+        \node (end4) at (6.5,-2.5) {} edge [-] (phase24);
+        % Dashed line
+        \draw[loosely dotted] (0,-1.5) -- (5,-1.5);
+        % Bracket
+        \draw[decorate,decoration={brace},thick,] (6.5,-0.5) to
+    	node[midway,right] (bracket2) {$\ket{\EPR{d-1}}$}
+    	(6.5,-2.5);
+        %
+        % Background Box
+        \begin{pgfonlayer}{background} 
+        \node[surround] (background) [fit = (q1) (op14) (bracket1)(bracket2)] {};
+        \end{pgfonlayer}
+        %
+        \end{tikzpicture}
+	\caption{The isometries $\Phi_A$ and $\Phi_B$.}
+\end{figure}
+The isometry maps the state $\ket{\psi}$ in the following steps:
+\begin{enumerate}
+	\item Append $\ket{0}_A$ on Alice's side and $\ket{0}_B$ on Bob's side as control registers, and
+	the state becomes $\ket{\psi} \ket{0}_A \ket{0}_B$;
+	\item Apply $QFT_d$ to the control registers, and the state becomes
+	\begin{align}
+		\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} \ket{\psi} \ket{k_1}_A \ket{k_2}_B;
+	\end{align}
+	\item Apply $X_A^{k_1}$ to Alice's share of $\ket{\psi}$ and $X_B^{k_2}$ to Bob's share controlled
+	by the control registers, and the state becomes
+	\begin{align}
+		&\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1}X_A^{k_1} X_B^{k_2}\ket{\psi} \ket{k_1}_A \ket{k_2}_B\\
+		=&\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j X_A^{k_1}\ket{x_{i,j}}_A X_B^{k_2}\ket{x_{i,j}}_B
+		\ket{k_1}_A \ket{k_2}_B\\
+		=&\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^{k_1i+k_2i} \ket{x_{i,j}}_A\ket{x_{i,j}}_B
+		\ket{k_1}_A \ket{k_2}_B;
+	\end{align}
+	\item Apply $QFT_d^{-1}$ to the control registers, and the state becomes
+	\begin{align}
+		&\frac{1}{d^2} \sum_{l_1,l_2 =0}^{d-1}\sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^{k_1(i-l_1)+k_2(i-l_2)} \ket{x_{i,j}}_A\ket{x_{i,j}}_B
+		\ket{l_1}_A \ket{l_2}_B\\
+		=& \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \ket{x_{i,j}}_A\ket{x_{i,j}}_B \ket{i}_A \ket{i}_B;
+	\end{align}
+	\item Let $n_i$ satisfy the condition $r^{n_i} \equiv i \pmod{d}$, apply $U_A^{(i)} = U_A^{n_i}$ to Alice's share of $\ket{\psi}$ and $U_B^{(i)} = U_B^{n_i}$ to Bob's share controlled
+	by the control registers, and the state becomes
+	\begin{align}
+		&\sum_{i=1}^{d-1}\sum_{j=1}^m c_j U_A^{(i)}\ket{x_{i,j}}_A U_B^{(i)}\ket{x_{i,j}}_B \ket{i}_A\ket{i}_B \\
+		=&\sum_{i=1}^{d-1} \sum_{j=1}^m c_j \ket{x_{i r^{-n_i} ,j}}_A \ket{x_{i r^{-n_i},j}}_B \ket{i}_A\ket{i}_B\\
+		=& \sum_{i=1}^{d-1} \sum_{j=1}^m c_j \ket{x_{i i^{-1},j}}_A \ket{x_{i i^{-1},j}}_B \ket{i}_A\ket{i}_B\\
+		= &\left(\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B\right) \x \sum_{i=1}^{d-1} \ket{i}_A\ket{i}_B\\
+		=&\sqrt{d-1} \left(\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B\right) \x 
+		\frac{1}{\sqrt{d-1}}\sum_{i=1}^{d-1}\ket{i}_A\ket{i}_B\\
+		=&\sqrt{d-1} \left(\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B\right) \x \ket{\EPR{d-1}},
+	\end{align}
+	where in the last line we used the fact that $\norm{\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B} = 1/\sqrt{d-1}$.
+\end{enumerate}
+
+If the initial state is $X_A\ket{\psi}$, the isometry maps the state as following
 \begin{align}
-	\ket{\psi'} = \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \ket{x_{i,j}}_A\ket{x_{i,j}}_B \ket{j}_A\ket{j}_B.
+	X_A\ket{\psi} \to &X_A\ket{\psi}\ket{0}_A\ket{0}_B\\
+	\to &\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} X_A\ket{\psi} \ket{k_1}_A \ket{k_2}_B \\
+	\to &\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} X_A^{k_1+1} X_B^{k_2}\ket{\psi} \ket{k_1}_A \ket{k_2}_B \\
+	=&\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^i\omega_d^{(k_1+k_2)i} \ket{x_{i,j}}_A\ket{x_{i,j}}_B
+		\ket{k_1}_A \ket{k_2}_B\\
+	\to &\frac{1}{d^2}\sum_{k_1,k_2 =0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^i\omega_d^{(k_1-l_1)i+(k_2-l_2)i} \ket{x_{i,j}}_A\ket{x_{i,j}}_B
+		\ket{l_1}_A \ket{l_2}_B\\
+	=&\sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^i \ket{x_{i,j}}_A\ket{x_{i,j}}_B \ket{i}_A \ket{i}_B\\
+	\to& \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^i U_A^{(i)}\ket{x_{i,j}}_A U_B^{(i)}\ket{x_{i,j}}_B \ket{i}_A\ket{i}_B\\
+	=&\sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^i \ket{x_{1,j}}_A \ket{x_{1,j}}_B \ket{i}_A\ket{i}_B\\
+	=&\sqrt{d-1} \left(\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B\right) \x 
+		\frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1}\omega_d^i \ket{i}_A\ket{i}_B\\
+	=& \sqrt{d-1} \left(\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B\right) \x \tX_A \ket{\EPR{d-1}},
 \end{align}
-Note that we added subscript $A$ and $B$ to stress the subsystems holden by Alice and Bob respectively.
-Since $\ket{x_{i,j}}$ is orthogonal to $\ket{x_{i',j'}}$ for $i\neq i'$ or $j \neq j'$, we further assume that there exists 
-a unitary $O$ such that $O\ket{x_{i,j}} = O\ket{x_{i,j+1}}$ for all $i$ and $j$, but when $j = N$, $O\ket{x_{i,N}} = \ket{x_{i,1}}$.
-Then controlled by the appended register, Alice and Bob can apply $(O\ct)^j$ to the original system
-and $\ket{\psi'}$ is mapped to
+where $\tX_A$ is the ideal $X$ operator.
+The case of $X_B\ket{\psi}$ is similar, so we omit it here. 
+
+If the initial state is $U_A\ket{\psi}$, the isometry maps the state as following
 \begin{align}
-	 &\sum_{i=1}^{d-1}\sum_{j=1}^m c_j [(O\ct)^j\ket{x_{i,j}}_A] \x [(O\ct)^j\ket{x_{i,j}}_B] \x \ket{j}_A\ket{j}_B\\
-	 = &\sum_{i=1}^{d-1}\sum_{j=1}^m c_j \ket{x_{i,1}}_A\ket{x_{i,1}}_B \ket{j}_A\ket{j}_B\\
-	 =  &\frac{1}{\sqrt{d}} \sum_{i=1}^{d-1} \ket{x_{i,1}}_A\ket{x_{i,1}}_B \x \sum_{j=1}^m \sqrt{d}c_j \ket{j}_A\ket{j}_B
+	U_A\ket{\psi} \to &U_A\ket{\psi}\ket{0}_A\ket{0}_B\\
+	\to &\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} U_A\ket{\psi} \ket{k_1}_A \ket{k_2}_B \\
+	= &\frac{1}{d} \sum_{k_1,k_2=0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j U_A\ket{x_{i,j}}_A\ket{x_{i,j}}_B
+		\ket{k_1}_A \ket{k_2}_B\\
+	= & \frac{1}{d} \sum_{k_1,k_2=0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \ket{x_{i r^{-1} ,j}}_A\ket{x_{i,j}}_B
+		\ket{k_1}_A \ket{k_2}_B\\
+	\to &\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j X_A^{k_1} \ket{x_{i r^{-1} ,j}}_A
+	X_B^{k_2}\ket{x_{i,j}}_B  \ket{k_1}_A \ket{k_2}_B \\
+	=&\frac{1}{d} \sum_{k_1,k_2 =0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^{k_1 i/r}\omega_d^{k_2i} \ket{x_{ir^{-1},j}}_A\ket{x_{i,j}}_B
+		\ket{k_1}_A \ket{k_2}_B\\
+	\to &\frac{1}{d^2}\sum_{k_1,k_2 =0}^{d-1} \sum_{i=1}^{d-1}\sum_{j=1}^m c_j \omega_d^{k_1(i/r-l_1)}\omega_d^{(k_2(i-l_2)} \ket{x_{ir^{-1},j}}_A\ket{x_{i,j}}_B
+		\ket{l_1}_A \ket{l_2}_B\\
+	=&\sum_{i=1}^{d-1}\sum_{j=1}^m c_j  \ket{x_{ir^{-1},j}}_A\ket{x_{i,j}}_B \ket{ir^{-1}}_A \ket{i}_B\\
+	\to& \sum_{i=1}^{d-1}\sum_{j=1}^m c_j U_A^{(ir^{-1})}\ket{x_{ir^{-1},j}}_A U_B^{(i)}\ket{x_{i,j}}_B \ket{i}_A\ket{i}_B\\
+	=&\sum_{i=1}^{d-1}\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B \ket{ir^{-1}}_A\ket{i}_B\\
+	=&\sqrt{d-1} \left(\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B\right) \x 
+		\frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1}\ket{ir^{-1}}_A\ket{i}_B\\
+	=& \sqrt{d-1} \left(\sum_{j=1}^m c_j \ket{x_{1,j}}_A \ket{x_{1,j}}_B\right) \x \tU_A \ket{\EPR{d-1}},
 \end{align}
-After relabelling $\ket{x_{i,1}}$ as $\ket{i}$, we factor $\ket{\EPR{d-1}}$ out of $\Phi_A \x \Phi_B \ket{\psi}$.
+where $\tU_A$ is the ideal $U$ operator on Alice's side.
+The derivation is similar when $U_B$ is applied, so we omit it here.
 \end{proof}
 %The effect of $\CHSH_X$ and $\SVT_X$ is that we have a set $\{ \ket{x_i} \}_{i \in [d]} \in \supp(\rho_A)$ such that
 %\begin{align}

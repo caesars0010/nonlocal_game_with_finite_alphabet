@@ -106,6 +106,11 @@
 \usepackage{tocloft}
 % Table with multi-row
 \usepackage{multirow}
+
+% TikZ
+\usepackage{tikz}	
+\usetikzlibrary{backgrounds,fit,decorations.pathreplacing}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %  N E W C O M M A N D  %
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -200,6 +205,7 @@
 \newcommand{\pr}[2]{P(#1|#2)}
 \newcommand{\pa}[2]{P_A(#1|#2)}
 \newcommand{\pb}[2]{P_B(#1|#2)}
+\newcommand{\EPR}[1]{EPR^{(#1)}}
 
 % Bell Ineqaulities
 \newcommand{\I}{\mathcal{I}}
@@ -974,69 +980,223 @@ $d$-dimensional $\sigma_x$ and $\sigma_z$.
 %-----------------------------------------------
 \subsection{An isometry}
 %-----------------------------------------------
-We first build the isometry out of $U_A, X_A$ and $U_B$, $X_B$. 
-Later we may build $X_A$ out of $A_{m_r+2}^0$ and $U_A$
-and build $X_B$ out of $B_1$, $B_2$, $B_{n_r+1}$ and $U_B$.
-
-In the ideal case, Alice and Bob share state $\ket{\psi} = \frac{1}{d-1} \sum_{i=1}^{d-1}\ket{ii}$.
-They first append control register $\ket{0}$ to their own share of $\ket{\psi}$.
-then apply $QFT_d$ to the control register, which evolves the state as
+We first build the isometry out of $U_A, X_A$ and $U_B$, $X_B$
+as shown in the diagram below.
+Then we list the key relations needed for this isometry to work.
+In the end, we prove this isometry works.
+\begin{figure}[H]
+\center
+        \begin{tikzpicture}[thick]
+        %
+        % `operator' will only be used by Hadamard (H) gates here.
+        % `phase' is used for controlled phase gates (dots).
+        % `surround' is used for the background box.
+        \tikzstyle{operator} = [draw,fill=white,minimum size=1.5em] 
+        \tikzstyle{phase} = [fill,shape=circle,minimum size=5pt,inner sep=0pt]
+        \tikzstyle{surround} = [fill=blue!10,thick,draw=black,rounded corners=2mm]
+        %
+        % Bracket
+        \draw[decorate,decoration={brace,mirror},thick] (0,-1) to
+    	node[midway,left] (bracket1) {$\ket{\psi}$}
+    	(0,-2);
+        % Qubits
+        \node at (0,0) (q1) {$\ket{0}$};
+        \node at (0,-1) (q2) {};
+        \node at (0,-2) (q3) {};
+        \node at (0,-3) (q4) {$\ket{0}$};
+        %
+        % Column 1
+        \node[operator] (op11) at (1,0) {$QFT_d$} edge [-] (q1);
+        \node[operator] (op14) at (1,-3) {$QFT_d$} edge [-] (q4);
+        %
+        % Column 3
+        \node[phase] (phase11) at (2,0) {} edge [-] (op11);
+	\node[operator] (op22) at (2,-1) {$X_A$} edge [-] (q2);
+	\node[operator] (op23) at (2, -2) {$X_B$} edge[-] (q3);
+        \node[phase] (phase14) at (2,-3) {} edge [-] (op14);
+        \draw[-] (phase11) -- (op22);
+        \draw[-] (phase14) -- (op23);
+        %
+        % Column 4
+        \node[operator] (op31) at (3,0) {$QFT_d^{-1}$} edge [-] (phase11);
+        \node[operator] (op34) at (3,-3) {$QFT_d^{-1}$} edge [-] (phase14);
+        %
+        % Column 5
+        \node[phase] (phase21) at (4,0) {} edge [-] (op31);
+	\node[operator] (op42) at (4,-1) {$U_A$} edge [-] (op22);
+	\node[operator] (op43) at (4, -2) {$U_B$} edge[-] (op23);
+        \node[phase] (phase24) at (4,-3) {} edge [-] (op34);
+        \draw[-] (phase21) -- (op42);
+        \draw[-] (phase24) -- (op43);
+        %
+        % Column 6
+        \node (end2) at (5,-1) {} edge [-] (op42);
+        \node (end3) at (5,-2) {} edge [-] (op43);
+        %
+        % Bracket
+        \draw[decorate,decoration={brace},thick] (5,-1) to
+    	node[midway,right] (bracket) {$\ket{junk}$}
+    	(5,-2);
+        %
+        % Column 7
+        \node (end1) at (6.5,-0.5) {} edge [-] (phase21);
+        \node (end4) at (6.5,-2.5) {} edge [-] (phase24);
+        % Dashed line
+        \draw[loosely dotted] (0,-1.5) -- (5,-1.5);
+        % Bracket
+        \draw[decorate,decoration={brace},thick,] (6.5,-0.5) to
+    	node[midway,right] (bracket2) {$\ket{\EPR{d-1}}$}
+    	(6.5,-2.5);
+        %
+        % Background Box
+        \begin{pgfonlayer}{background} 
+        \node[surround] (background) [fit = (q1) (op14) (bracket1)(bracket2)] {};
+        \end{pgfonlayer}
+        %
+        \end{tikzpicture}
+	\caption{The isometries $\Phi_A$ and $\Phi_B$.}
+\end{figure}
+\hl{We need to find projectors $\Pi_A$ (out of $A_{m_r+2}^0, A_{m_r+2}^1, A_{m_r+3}^0$ and $A_{m_r+3}^1$) and $\Pi_B$ 
+(out of $B_1^0, B_1^1, B_2^0$ and $B_2^1$) such that}
 \begin{align}
-	\ket{\psi} \ket{0}_A\ket{0}_B \to \frac{1}{d} \sum_{k_1, k_2 =  0}^{d-1} \ket{\psi}\ket{k_1}_A\ket{k_2}_B.
+	\label{eq:piapib}&\Pi_A \ket{\psi} \appd{\sqrt{\epsilon}} \Pi_B \ket{\psi} \appd{\sqrt{\epsilon}} \Pi_A \Pi_B \ket{\psi} \\
+	\label{eq:xa_eig} &X_A \Pi_A \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d \Pi_A \ket{\psi} \\
+	\label{eq:xb_eig} &X_B \Pi_B \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d \Pi_B \ket{\psi} \\
+	\label{eq:norm} &\norm{\Pi_A \ket{\psi}} \appd{\sqrt{\epsilon}} \norm{\Pi_B \ket{\psi}}  \appd{\sqrt{\epsilon}} \frac{1}{\sqrt{d-1}}.
 \end{align}
-Controlled by the control register $X_A^{k_1}$ and $X_B^{k_2}$ are applied and the state becomes
+Then the key relations that we can derive are
+\begin{enumerate}
+	\item From \cref{eq:norm} and the weighted $CHSH$ correlation we can derive that 
+	\begin{align}
+	\norm{(U_A\ct)^j \Pi_A \ket{\psi}} \appd{\sqrt{\epsilon}} \frac{1}{\sqrt{d-1}} \text{ for all } j \in [d-1];
+	\end{align}
+	\item Using relation $U_AX_AU_A\ct = X_A^r$ and \cref{eq:xa_eig}, we can derive
+	\begin{align}
+	X_A (U_A\ct)^j \Pi_A \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d^{r^j} (U_A\ct)^j \Pi_A\ket{\psi};
+	\end{align}
+	\item The previous relation implies that 
+	\begin{align}
+	\bra{\psi} \Pi_A U_A^j U_A^{j'} \Pi_A \ket{\psi} \simeq \epsilon \text{ for all }j \neq j',
+	\end{align}
+	because the eigenspaces of a unitary are orthogonal;
+	\item The three relations above also hold on Bob's side.
+\end{enumerate}
+Note that Item $1$ and $2$ combined implies that
 \begin{align}
-	\frac{1}{d} \sum_{k_1, k_2 =  0}^{d-1} \ket{\psi}\ket{k_1}_A\ket{k_2}_B \to
-	\frac{1}{d} \sum_{k_1, k_2 =  0}^{d-1} X_A^{k_1} X_B^{k_2}\ket{\psi}\ket{k_1}_A\ket{k_2}_B.
+	\ket{\psi} \appd{O(\epsilon^{1/4})} \sum_{i=0}^{d-1} (U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi}.
 \end{align}
-In the ideal case $X_A = X_B = \sum_{i=1}^{d-1} \omega_d^i \ketbra{i}{i}$, then
+The isometry evolves the state as follows:
+\begin{enumerate}
+	\item Append control registers:
+	\begin{align}
+		\ket{\psi} \ket{0}_A\ket{0}_B \appd{O(\epsilon^{1/4})} 
+		\sum_{j=0}^{d-2} (U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{0}_A\ket{0}_B;
+	\end{align}
+	\item $QFT_d$ on the control registers:
+	\begin{align}
+		\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} (U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_A\ket{k_2}_B
+	\end{align}
+	\item Controlled-$X_A$ and $X_B$:
+	\begin{align}
+		&\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} X_A^{k_1}(U_A\ct)^j X_B^{k_2}(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_A\ket{k_2}_B\\
+		&\appd{O(\sqrt{\epsilon})}\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{(k_1+k_2)r^j}(U_A\ct)^j(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_A\ket{k_2}_B;
+	\end{align}
+	\item $QFT_d^{-1}$ on the control registers:
+	\begin{align}
+		\to &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=0}^{d-2} \omega_d^{k_1(r^j-l_1)}\omega_d^{k_2(r^j-l_2)} (U_A\ct)^j(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{l_1}_A\ket{l_2}_B\\
+		= &\sum_{j=0}^{d-2}(U_A\ct)^j(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{r^j}_A\ket{r^j}_B
+	\end{align}
+	\item Controlled-$U_A$ and $U_B$:
+	\begin{align}
+		&\to \sum_{j=0}^{d-2} U_A^j (U_A\ct)^j U_B^j (U_B\ct)^j \Pi_A \Pi_B \ket{\psi} \ket{r^j}_A\ket{r^j}_B\\
+		&= \Pi_A \Pi_B \ket{\psi} \x \sum_{j=0}^{d-2} \ket{r^j}_A\ket{r^j}_B\\
+		&\appd{O(\sqrt{\epsilon})} \sqrt{d-1}\Pi_A \Pi_B \ket{\psi} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^j}_A\ket{r^j}_B.
+	\end{align}
+\end{enumerate}
+If the initial state is $X_A\ket{\psi}$, then the evolution is very similar 
 \begin{align}
-	X_A^{k_1} X_B^{k_2}\ket{\psi} &= 
-	\sum_{i_1,i_2 = 1}^{d-1} \omega_d^{i_1k_1+i_2k_2} \ketbra{i_1}{i_1}_A \x\ketbra{i_2}{i_2}_B \ket{\psi}\\
-	&=\frac{1}{\sqrt{d-1}}  \sum_{i_1 = 1}^{d-1} \omega_d^{i_1(k_1+k_2)} \ket{i_1i_1}.
+	X_A \ket{\psi} \ket{0}_A\ket{0}_B &\appd{O(\epsilon^{1/4})} 
+		\sum_{j=0}^{d-2} X_A(U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{0}_A\ket{0}_B\\
+		&\appd{\sqrt{\epsilon}} \sum_{j=0}^{d-2} \omega_d^{r^j}(U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{0}_A\ket{0}_B\\
+		&\to\frac{1}{d}\sum_{j=0}^{d-2} \sum_{k_1,k_2 = 0}^{d-1} \omega_d^{r^j} (U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_A\ket{k_2}_B\\
+		&\to\frac{1}{d}\sum_{j=0}^{d-2}\sum_{k_1,k_2 = 0}^{d-1} 
+		\omega_d^{r^j} X_A^{k_1}(U_A\ct)^j X_B^{k_2}(U_B\ct)^j\Pi_A \Pi_B\ket{\psi} \ket{k_1}_A\ket{k_2}_B\\
+		&\appd{O(\sqrt{\epsilon})} \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{r^j}\omega_d^{(k_1+k_2)r^j}(U_A\ct)^j(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_A\ket{k_2}_B\\
+		&\to  \sum_{j=0}^{d-2} \omega_d^{r^j} (U_A\ct)^j(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{r^j}_A\ket{r^j}_B\\
+		&\to  \Pi_A \Pi_B \ket{\psi} \x  \sum_{j=0}^{d-2} \omega_d^{r^j}\ket{r^j}_A\ket{r^j}_B\\
+		&\appd{\sqrt{\epsilon}} \sqrt{d-1}\Pi_A \Pi_B \ket{\psi} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_d^{r^j} \ket{r^j}_A\ket{r^j}_B.
 \end{align}
-Then they apply inverse $QFT_d$ to the control register, the shared state becomes
+If the initial state is $U_A\ket{\psi}$, then the evolution is very similar too
 \begin{align}
-	&\frac{1}{d\sqrt{d-1}} \sum_{k_1, k_2 =  0}^{d-1}\sum_{i_1 = 1}^{d-1} \omega_d^{i_1(k_1+k_2)} \ket{i_1i_1}\\
-	\to& \frac{1}{d^2\sqrt{d-1}} \sum_{k_1, k_2,l_1,l_2 =  0}^{d-1}
-	\sum_{i_1 = 1}^{d-1}\omega_d^{k_1(i_1-l_1)}\omega_d^{k_2(i_1-l_2)} \ket{i_1i_1} \ket{l_1}_A\ket{l_2}_B\\
-	=& \frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1} \ket{i i} \ket{i}_A\ket{i}_B.
+	U_A \ket{\psi} \ket{0}_A\ket{0}_B &\appd{O(\epsilon^{1/4})} 
+		\sum_{j=0}^{d-2} X_A(U_A\ct)^{j-1} (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{0}_A\ket{0}_B\\
+		&\to\frac{1}{d}\sum_{j=0}^{d-2} \sum_{k_1,k_2 = 0}^{d-1} (U_A\ct)^{j-1} (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_A\ket{k_2}_B\\
+		&\to\frac{1}{d}\sum_{j=0}^{d-2}\sum_{k_1,k_2 = 0}^{d-1} 
+		X_A^{k_1}(U_A\ct)^{j-1} X_B^{k_2}(U_B\ct)^j\Pi_A \Pi_B\ket{\psi} \ket{k_1}_A\ket{k_2}_B\\
+		&\appd{O(\sqrt{\epsilon})} \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{k_1r^{j-1}}\omega_d^{k_2r^j}(U_A\ct)^{j-1}(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_A\ket{k_2}_B\\
+		&\to  \sum_{j=0}^{d-2} (U_A\ct)^{j-1}(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{r^{j-1}}_A\ket{r^j}_B\\
+		&\to  \Pi_A \Pi_B \ket{\psi} \x  \sum_{j=0}^{d-2} \ket{r^{j-1}}_A\ket{r^j}_B\\
+		&\appd{\sqrt{\epsilon}} \sqrt{d-1}\Pi_A \Pi_B \ket{\psi} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^{j-1}}_A\ket{r^j}_B.
 \end{align}
-In the last step $U_A^{k_i}$ and $U_B^{k_i}$ are applied when the control register is in the state 
-$\ket{i}_{A/B}$, where $k_i$ satisfies the condition that $r^{k_i} \equiv i \pmod{d}$, and the state 
-becomes
-\begin{align}
-	\frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1} \ket{i i} \ket{i}_A\ket{i}_B \to &
-	\frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1}U_A^{k_i} U_B^{k_i} \ket{i i} \ket{i}_A \ket{i}_B\\
-	= & \frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1} \ket{i (r^{-1})^k}\ket{i (r^{-1})^k}\ket{i}_A \ket{i}_B \\
-	= & \ket{11} \x \frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1}\ket{i}_A \ket{i}_B.
-\end{align}
-
-If we want to generalize the isometry, we need ways to deconstruct $X_{A/B}$ as 
-a linear combination of projectors. Recall that in the ideal strategy $A_{m_r+2}^0 = \ketbra{1}{1}$,
-so we can write 
-\begin{align}
-	X_A = \sum_{i=1}^{d-1} \omega_d^{2^{k_i}} U_A^{k_i} A_{m_r+2}^0 (U_A\ct)^{k_i}
-	= \sum_{i=1}^{d-1} \omega_d^i U_A^{k_i} A_{m_r+2}^0 (U_A\ct)^{k_i}.
-\end{align}
-On Bob's side, we use the fact that 
-\begin{align}
-B' := B_{n_r+1}^\diamond \frac{B_1^0 + B_2^0}{2\cos(\pi/2d)} B_{n_r+1}^\diamond = \ketbra{1}{1},
-\end{align}
-and write
-\begin{align}
-	X_B =\sum_{i=1}^{d-1} \omega_d^i U_B^{k_i} B' (U_B\ct)^{k_i}.
-\end{align}
-So we need to show that for all $i=1 \dots d-1$,
-\begin{align}
-	U_B^{k_i} B' (U_B\ct)^{k_i} \ket{\psi} = U_A^{k_i} A_{m_r+2}^0 (U_A\ct)^{k_i} \ket{\psi}.
-\end{align}
-Intuitively, Bob's operation can be moved to Alice's side.
-We also need to show that, for $i \neq j$, 
-\begin{align}
-	U_A^{k_i} A_{m_r+2}^0 (U_A\ct)^{k_i} U_A^{k_j} A_{m_r+2}^0 (U_A\ct)^{k_j} \ket{\psi} = 0.
-\end{align}
-Otherwise, we need different way to represent the eigen-structure of $X_{A/B}$.
+%In the ideal case, Alice and Bob share state $\ket{\psi} = \frac{1}{d-1} \sum_{i=1}^{d-1}\ket{ii}$.
+%They first append control register $\ket{0}$ to their own share of $\ket{\psi}$.
+%then apply $QFT_d$ to the control register, which evolves the state as
+%\begin{align}
+%	\ket{\psi} \ket{0}_A\ket{0}_B \to \frac{1}{d} \sum_{k_1, k_2 =  0}^{d-1} \ket{\psi}\ket{k_1}_A\ket{k_2}_B.
+%\end{align}
+%Controlled by the control register $X_A^{k_1}$ and $X_B^{k_2}$ are applied and the state becomes
+%\begin{align}
+%	\frac{1}{d} \sum_{k_1, k_2 =  0}^{d-1} \ket{\psi}\ket{k_1}_A\ket{k_2}_B \to
+%	\frac{1}{d} \sum_{k_1, k_2 =  0}^{d-1} X_A^{k_1} X_B^{k_2}\ket{\psi}\ket{k_1}_A\ket{k_2}_B.
+%\end{align}
+%In the ideal case $X_A = X_B = \sum_{i=1}^{d-1} \omega_d^i \ketbra{i}{i}$, then
+%\begin{align}
+%	X_A^{k_1} X_B^{k_2}\ket{\psi} &= 
+%	\sum_{i_1,i_2 = 1}^{d-1} \omega_d^{i_1k_1+i_2k_2} \ketbra{i_1}{i_1}_A \x\ketbra{i_2}{i_2}_B \ket{\psi}\\
+%	&=\frac{1}{\sqrt{d-1}}  \sum_{i_1 = 1}^{d-1} \omega_d^{i_1(k_1+k_2)} \ket{i_1i_1}.
+%\end{align}
+%Then they apply inverse $QFT_d$ to the control register, the shared state becomes
+%\begin{align}
+%	&\frac{1}{d\sqrt{d-1}} \sum_{k_1, k_2 =  0}^{d-1}\sum_{i_1 = 1}^{d-1} \omega_d^{i_1(k_1+k_2)} \ket{i_1i_1}\\
+%	\to& \frac{1}{d^2\sqrt{d-1}} \sum_{k_1, k_2,l_1,l_2 =  0}^{d-1}
+%	\sum_{i_1 = 1}^{d-1}\omega_d^{k_1(i_1-l_1)}\omega_d^{k_2(i_1-l_2)} \ket{i_1i_1} \ket{l_1}_A\ket{l_2}_B\\
+%	=& \frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1} \ket{i i} \ket{i}_A\ket{i}_B.
+%\end{align}
+%In the last step $U_A^{k_i}$ and $U_B^{k_i}$ are applied when the control register is in the state 
+%$\ket{i}_{A/B}$, where $k_i$ satisfies the condition that $r^{k_i} \equiv i \pmod{d}$, and the state 
+%becomes
+%\begin{align}
+%	\frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1} \ket{i i} \ket{i}_A\ket{i}_B \to &
+%	\frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1}U_A^{k_i} U_B^{k_i} \ket{i i} \ket{i}_A \ket{i}_B\\
+%	= & \frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1} \ket{i (r^{-1})^k}\ket{i (r^{-1})^k}\ket{i}_A \ket{i}_B \\
+%	= & \ket{11} \x \frac{1}{\sqrt{d-1}} \sum_{i = 1}^{d-1}\ket{i}_A \ket{i}_B.
+%\end{align}
+%
+%If we want to generalize the isometry, we need ways to deconstruct $X_{A/B}$ as 
+%a linear combination of projectors. Recall that in the ideal strategy $A_{m_r+2}^0 = \ketbra{1}{1}$,
+%so we can write 
+%\begin{align}
+%	X_A = \sum_{i=1}^{d-1} \omega_d^{2^{k_i}} U_A^{k_i} A_{m_r+2}^0 (U_A\ct)^{k_i}
+%	= \sum_{i=1}^{d-1} \omega_d^i U_A^{k_i} A_{m_r+2}^0 (U_A\ct)^{k_i}.
+%\end{align}
+%On Bob's side, we use the fact that 
+%\begin{align}
+%B' := B_{n_r+1}^\diamond \frac{B_1^0 + B_2^0}{2\cos(\pi/2d)} B_{n_r+1}^\diamond = \ketbra{1}{1},
+%\end{align}
+%and write
+%\begin{align}
+%	X_B =\sum_{i=1}^{d-1} \omega_d^i U_B^{k_i} B' (U_B\ct)^{k_i}.
+%\end{align}
+%So we need to show that for all $i=1 \dots d-1$,
+%\begin{align}
+%	U_B^{k_i} B' (U_B\ct)^{k_i} \ket{\psi} = U_A^{k_i} A_{m_r+2}^0 (U_A\ct)^{k_i} \ket{\psi}.
+%\end{align}
+%Intuitively, Bob's operation can be moved to Alice's side.
+%We also need to show that, for $i \neq j$, 
+%\begin{align}
+%	U_A^{k_i} A_{m_r+2}^0 (U_A\ct)^{k_i} U_A^{k_j} A_{m_r+2}^0 (U_A\ct)^{k_j} \ket{\psi} = 0.
+%\end{align}
+%Otherwise, we need different way to represent the eigen-structure of $X_{A/B}$.
 
 %-----------------------------------------------
 \subsection{Proof Sketch}
