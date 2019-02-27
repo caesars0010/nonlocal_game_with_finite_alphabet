@@ -1125,8 +1125,8 @@ In this basis, $B_1|_V$ and $B_2|_V$ are expressed as
 	&B_1|_V = \omega_d\ketbra{x_1}{x_{d-1}} + \omega_d^{-1} \ketbra{x_{d-1}}{x_1},\\
 	&B_2|_V =\ketbra{x_1}{x_{d-1}}  + \ketbra{x_{d-1}}{x_1}.
 \end{align}
-\textcolor{red}{If we express $\ket{j}$'s as $\ket{x_j}$'s, then we can find that 
-shared state is $\ket{\psi} = 1/2\sum_{j=0}^{d-2} e^{-ir^j\pi/d} (\ketbra{x_{r^j}}{x_{d-r^j}} + \ketbra{x_{d-r^j}}{x_{r^j}}$.}
+\hl{If we express $\ket{j}$'s as $\ket{x_j}$'s, then we can find that 
+shared state is $\sum_{j=1}^{d-1} \ket{j}\ket{j} = \sum_{j=0}^{(d-1)/2} e^{-ij\pi/d} (\ketbra{x_{j}}{x_{d-j}} + \ketbra{x_{d-j}}{x_{j}}$.}
 
 \textbf{The ideal strategy for $\LS_r$}.
 We denote the number of generators labelled by $x_i$ in $\LS_r$ by $n_r(x)$.
@@ -1414,7 +1414,7 @@ $X_A$, so we can write
 \end{align}
 where $\Pi_{V_{1}}$ is the projector onto the $\omega_d$-eigenspace of $X_A$ and $\Pi_{V_{d-1}}$ is the projector 
 onto the $\omega_d^{-1}$-eigenspace of $X_A$.
-\textcolor{red}{Here I assume that $\Pi_{V_1} \ket{\psi} = \ket{\psi}$ and $\Pi_{V_{d-1}} \ket{\psi} = \ket{\psi}$,
+\hl{Here I assume that $\Pi_{V_1} \ket{\psi} = \ket{\psi}$ and $\Pi_{V_{d-1}} \ket{\psi} = \ket{\psi}$,
 but it is not true.}
 Suppose $\ket{x_{1}} \in V_{1}$, then $X_A \ket{x_{1}} = \omega_d \ket{x_{1}}$.
 By \cref{eq:ux_relation} we can calculate that
