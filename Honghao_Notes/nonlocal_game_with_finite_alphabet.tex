@@ -1104,8 +1104,8 @@ The proof for $S_2$ is very similar so we omit it here.
 	\end{align}
 	From the correlation given above, we get 
          \begin{align}
-         	\bra{\psi} A_{n+1}^0 (B_1^0 - B_1^1) \ket{\psi} = \frac{\cos(\pi/d)}{d-1},\\
-        		\bra{\psi} A_{n+1}^0 (B_2^0 - B_2^1) \ket{\psi} = \frac{\cos(\pi/d)}{d-1},
+         	&\bra{\psi} A_{n+1}^0 (B_1^0 - B_1^1) \ket{\psi} = \frac{\cos(\pi/d)}{d-1},\\
+        		&\bra{\psi} A_{n+1}^0 (B_2^0 - B_2^1) \ket{\psi} = \frac{\cos(\pi/d)}{d-1},
          \end{align}
         which implies that 
         \begin{align}
@@ -1126,10 +1126,10 @@ The proof for $S_2$ is very similar so we omit it here.
 	\end{align}
 	Denoting $c = \cos(\pi/d)$ and $s = \sin(\pi/d)$, we can write 
         \begin{align}
-        		B_1A_{n+1}^0 \ket{\psi} = cA_{n+1}^0\ket{\psi} - sA_{n+2}A_{n+1}^1\ket{\psi}\\
-        		B_1A_{n+1}^1 \ket{\psi} = -cA_{n+1}^1\ket{\psi} - sA_{n+2}A_{n+1}^0\ket{\psi}\\
-        		B_2A_{n+1}^0 \ket{\psi} = cA_{n+1}^0\ket{\psi} + sA_{n+2}A_{n+1}^1\ket{\psi}\\
-        		B_2A_{n+1}^1 \ket{\psi} = -cA_{n+1}^1\ket{\psi} + sA_{n+2}A_{n+1}^0\ket{\psi}.
+        		&B_1A_{n+1}^0 \ket{\psi} = cA_{n+1}^0\ket{\psi} - sA_{n+2}A_{n+1}^1\ket{\psi}\\
+        		&B_1A_{n+1}^1 \ket{\psi} = -cA_{n+1}^1\ket{\psi} - sA_{n+2}A_{n+1}^0\ket{\psi}\\
+        		&B_2A_{n+1}^0 \ket{\psi} = cA_{n+1}^0\ket{\psi} + sA_{n+2}A_{n+1}^1\ket{\psi}\\
+        		&B_2A_{n+1}^1 \ket{\psi} = -cA_{n+1}^1\ket{\psi} + sA_{n+2}A_{n+1}^0\ket{\psi}.
         \end{align}
         Then we can calculate
         \begin{align}
@@ -1164,11 +1164,11 @@ The proof for $S_2$ is very similar so we omit it here.
 		&\frac{A_1-A_2}{2 \sin(-\pi/d)} B_{n+1}^0\ket{\psi} =B_{n+2} B_{n+1}^1\ket{\psi}\\
 		&\frac{A_1 -A_2}{2\sin(-\pi/d)} B_{n+1}^1 \ket{\psi} = B_{n+2} B_{n+1}^0 \ket{\psi}.
 	\end{align}
-	With similar calculation, we can get 
+	With similar calculation as in the previous case, we can get 
 	\begin{align}
 		A_1A_2 (B_{n+1}^0 - i B_{n+2}B_{n+1}^1) \ket{\psi} = \omega_d^{-1} (B_{n+1}^0 - i B_{n+2}B_{n+1}^1).
 	\end{align}
-	Multiplying both sides of the equation above by $(B_\ast^\diamond)$ we get
+	Multiplying both sides of the equation above by $(B_\ast^\diamond+iB_{n+2})$ we get
 	\begin{align}
 		A_1A_2 \ket{\psi_3} = \omega_d^{-1}\ket{\psi_3}.
 	\end{align}
@@ -1185,7 +1185,7 @@ From Item $5$ and $6$, we can further deduce that
 	&(B_1B_2)^r \ket{\psi_1} = \omega_d^r \ket{\psi_1} \\
 	&(A_1A_2)^r \ket{\psi_1} = \omega_d^{-r} \ket{\psi_1}.
 \end{align}
-Since $U_A(A_1A_2)U_A\ct = (A_1A_2)^r$ must hold on every orthogonal components of $\ket{\psi}$, which includs $\ket{\psi_1}$,
+Since $U_A(A_1A_2)U_A\ct = (A_1A_2)^r$ must hold on all the orthogonal components of $\ket{\psi}$, which includes $\ket{\psi_1}$,
 we know that 
 \begin{align}
 	(A_1A_2)U_A\ct \ket{\psi_1} = U_A\ct (A_1A_2)^r \ket{\psi_1} = \omega_d^{-r} U_A\ct \ket{\psi_1}.
@@ -1200,10 +1200,10 @@ We define
 \begin{align}
 	\ket{\psi'} = \sum_{j=0}^{d-2} (U_A\ct)^j(U_B\ct)^j \ket{\psi_1}.
 \end{align} 
-\hl{Then $\ket{\psi'}$ is obtained from $\ket{\psi}$ from an isometry.}
+\hl{[TODO] show that $\ket{\psi'}$ is obtained from $\ket{\psi}$ by local isometries.}
 
 Now we show that the isometry given in \cref{sec:isometry} can distill a maximally entangled
-state with local dimension $(d-1)$.
+state with local dimension $(d-1)$ out of $\ket{\psi'}$.
 Let $O_A = A_1A_2$ and $O_B = B_1B_2$.
 The isometry evolves the state as follows:
 \begin{enumerate}
@@ -1220,20 +1220,22 @@ The isometry evolves the state as follows:
 	\begin{align}
 		&\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} O_A^{k_1}(U_A\ct)^j O_B^{k_2}(U_B\ct)^j
 		 \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&=\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{(k_1-k_2)r^j}
+		 &= \frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{k_2r^j} (U_B\ct)^j O_A^{k_1}(U_A\ct)^j 
+		  \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		&=\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{(k_2-k_1)r^j}
 		(U_A\ct)^j(U_B\ct)^j  \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'};
 	\end{align}
 	\item $QFT_d^{-1}$ on the control registers:
 	\begin{align}
-		\to &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=0}^{d-2} \omega_d^{k_1(r^j-l_1)}\omega_d^{k_2(-r^j-l_2)}
+		\to &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=0}^{d-2} \omega_d^{k_1(-r^j-l_1)}\omega_d^{k_2(r^j-l_2)}
 		 (U_A\ct)^j(U_B\ct)^j \ket{\psi_1} \ket{l_1}_{A'}\ket{l_2}_{B'}\\
-		= &\sum_{j=0}^{d-2}(U_A\ct)^j(U_B\ct)^j  \ket{\psi_1} \ket{r^j}_{A'}\ket{-r^j}_{B'}
+		= &\sum_{j=0}^{d-2}(U_A\ct)^j(U_B\ct)^j  \ket{\psi_1} \ket{-r^j}_{A'}\ket{r^j}_{B'}
 	\end{align}
 	\item Controlled-$U_A$ and $U_B$:
 	\begin{align}
-		&\to \sum_{j=0}^{d-2} U_A^j (U_A\ct)^j U_B^j (U_B\ct)^j  \ket{\psi_1} \ket{r^j}_{A'}\ket{-r^j}_{B'}\\
-		&=  \ket{\psi_1} \x \sum_{j=0}^{d-2} \ket{r^j}_{A'}\ket{-r^j}_{B'}\\
-		&= \sqrt{d-1} \ket{\psi_1} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^j}_{A'}\ket{-r^j}_{B'}.
+		&\to \sum_{j=0}^{d-2} U_A^j (U_A\ct)^j U_B^j (U_B\ct)^j  \ket{\psi_1} \ket{-r^j}_{A'}\ket{r^j}_{B'}\\
+		&=  \ket{\psi_1} \x \sum_{j=0}^{d-2} \ket{-r^j}_{A'}\ket{r^j}_{B'}\\
+		&= \sqrt{d-1} \ket{\psi_1} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{-r^j}_{A'}\ket{r^j}_{B'}.
 	\end{align}
 \end{enumerate}
 
