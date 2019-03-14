@@ -1415,8 +1415,9 @@ $X_A$, so we can write
 \end{align}
 where $\Pi_{V_{1}}$ is the projector onto the $\omega_d$-eigenspace of $X_A$ and $\Pi_{V_{d-1}}$ is the projector 
 onto the $\omega_d^{-1}$-eigenspace of $X_A$.
-\hl{Here I assume that $\Pi_{V_1} \ket{\psi} = \ket{\psi}$ and $\Pi_{V_{d-1}} \ket{\psi} = \ket{\psi}$,
-but it is not true.}
+\hl{Here what we need is that $\Pi_{V_1,A} \ket{\psi} = \Pi_{V_{d-1},B} \ket{\psi} = \Pi_{V_1,A}\Pi_{V_{d-1},B}\ket{\psi}$
+and $\Pi_{V_1,B} \ket{\psi} = \Pi_{V_{d-1},A} \ket{\psi} = \Pi_{V_1,B}\Pi_{V_{d-1},A}\ket{\psi}$.
+This is not proved because $\Pi_{V_1}$ and $\Pi_{V_{d-1}}$ are not in the strategy.}
 Suppose $\ket{x_{1}} \in V_{1}$, then $X_A \ket{x_{1}} = \omega_d \ket{x_{1}}$.
 By \cref{eq:ux_relation} we can calculate that
 \begin{align}
@@ -1427,6 +1428,8 @@ so $U_A^\dagger \ket{x_{1}}$ is an eigenvector of $X_A$ with eigenvalue $\omega_
 By induction, we know $X_A (U_A^\dagger)^i \ket{x_{1}} = \omega_d^{r^i} (U_A^\dagger)^i\ket{x_{1}}$. 
 From the set $\{(U_A^\dagger)^i \Pi_{V_1} (U_A)^i \}_{i=0}^{d-2}$, we can identify $\Pi_{V_i}$ for $i = 1 \dots  d-1$
 such that $\Pi_{V_i}$ is the projector onto the $\omega_d^i$-eigenspace of $X_A$,
+\hl{Actually, we are not sure about the containment between $\supp((U_A\ct)^{\log_r(d-1)} \Pi_{V_1} U_A^{\log_r(d-1)})$ and 
+$\supp(\Pi_{V_{d-1}})$, so we cannot say that $\Pi_{V_{d-1}} = (U_A\ct)^{\log_r(d-1)} \Pi_{V_1} U_A^{\log_r(d-1)}$.}
 and 
 \begin{align}
  \cup_{i \in [d-1]+1} V_i \subset \supp(\rho_A).
@@ -1719,8 +1722,8 @@ the following Bell expression
 \end{align} 
 With the following notation
 \begin{align*}
-	Z_A = A_1 &\quad X_A = A_2\\
-	Z_B = \frac{B_1+B_2}{2\cos(\mu)} &\quad X_B = \frac{B_1-B_2}{2\sin(\mu)},
+	&Z_A = A_1 && X_A = A_2\\
+	&Z_B = \frac{B_1+B_2}{2\cos(\mu)} && X_B = \frac{B_1-B_2}{2\sin(\mu)},
 \end{align*}
 the two SOS decompositions that we use are
 \begin{align}
