@@ -552,6 +552,62 @@ which is
 Using entanglement, we can achieve $\ip{I_\alpha}^{\max} = 2\sqrt{1+\alpha^2}$.
 We first give some key relations derived from the SOS decomposition of $\tilde{\I}_\alpha := \ip{I_\alpha}^{\max}\1 - \I_\alpha$.
 %------------------------------------------------------------------------------------------------------
+\subsection{The weighted CHSH test and the operator $B_1B_2$}
+%------------------------------------------------------------------------------------------------------
+Suppose the strategy $\left(\{A_x\}, \{B_y\}, \ket{\psi}=\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})\right)$ is the ideal strategy that maximizes $\I_{\cot(-\pi/d)}$, then
+we know that
+\begin{align}
+	&B_1B_2 (\ket{0} + i\ket{i}) = \omega_d (\ket{0} + i\ket{i})\\
+	&B_1B_2 (\ket{0} - i\ket{i}) = \omega_d^{-1} (\ket{0} - i\ket{i}).
+\end{align}
+So we define 
+\begin{align}
+	&\ket{y_+} = \frac{1}{\sqrt{2}}(\ket{0}+ i\ket{1}),\\
+	&\ket{y_-}=\frac{1}{\sqrt{2}}(\ket{0}- i\ket{1}),
+\end{align}	
+such that $\ket{y_+}$ and $\ket{y_-}$ are eigenvalues for both $B_1B_2$ and $\sigma_y$ on $\spn(\ket{0}, \ket{1})$.
+It is easy to check that 
+\begin{align}
+	\ket{00}+\ket{11} = \ket{y_+y_-} + \ket{y_-y_+}.
+\end{align}
+\hl{So we want to prove the maximal violation can self-test the state $\ket{y_+y_-} + \ket{y_-y_+}$.}
+
+We can apply the Swap isometry from \cref{sec:isometry} to the state $\frac{1}{2}(\1 + iX_A)(\1+ iX_B) \ket{\psi}$,
+by the linearity of the isometry, we can get that 
+\begin{align}
+	&\Phi_A\x\Phi_B( \frac{1}{2} (\1 - iX_A)(\1+ iX_B) A_1^0\ket{\psi} ) \\
+	= &\ket{junk} \x\frac{1}{2} (\1-i \sigma_{x,A})(\1 + i\sigma_{x,B})\ket{00}\\
+	=& \ket{junk} \x \ket{y_-}\ket{y_+} .
+\end{align} 
+Similarly, we can get that 
+\begin{align}
+\Phi_A\x\Phi_B( \frac{1}{2} (\1 - iX_A)(\1+ iX_B) A_1^1 \ket{\psi} ) = \ket{junk} \x \ket{y_+}\ket{y_-}.
+\end{align}
+Moreover, the two junk states are the same.
+On the other hand, we also know that 
+\begin{align}
+	&B_1B_2 (\frac{1}{2} (\1 - iX_A)(\1+ iX_B)) A_1^0 \ket{\psi} = \omega_d (\frac{1}{2} (\1 - iX_A)(\1+ iX_B)) A_1^0 \ket{\psi}\\
+	&B_1B_2 (\frac{1}{2} (\1 - iX_A)(\1+ iX_B)) A_1^1 \ket{\psi} = \omega_d^{-1} (\frac{1}{2} (\1 - iX_A)(\1+ iX_B)) A_1^1 \ket{\psi}
+\end{align}
+And the two states $(\frac{1}{2} (\1 - iX_A)(\1+ iX_B)) A_1^0 \ket{\psi}$ and $(\frac{1}{2} (\1 - iX_A)(\1+ iX_B)) A_1^1 \ket{\psi}$
+are related by $X_AX_B$ because
+\begin{equation}
+\label{eq:xaxb_trans}
+\begin{aligned}
+	&X_AX_B (\1-iX_A)(\1+iX_B) A_1^0 \ket{\psi} \\
+	=& X_AX_B A_1^0 \ket{\psi} -iX_BA_1^0 \ket{\psi} + iX_AA_1^0\ket{\psi} + A_1^0\ket{\psi}\\
+	=&A_1^1\ket{\psi} -iX_A A_1^1\ket{\psi} + iX_B A_1^1 \ket{\psi} + X_AX_BA_1^1\ket{\psi} \\
+	=&(\1-iX_A)(\1+iX_B)A_1^1 \ket{\psi}.
+\end{aligned}
+\end{equation}
+Here we use the relation that $A_1^0\ket{\psi} = X_AX_B A_1^1 \ket{\psi}$.
+
+We can identify $\ket{\psi_1}$ with $\frac{1}{2} (\1 - iX_A)(\1+ iX_B) A_1^0 \ket{\psi}$, and
+$\ket{\psi_2}$ with $\frac{1}{2} (\1 - iX_A)(\1+ iX_B) A_1^1 \ket{\psi}$.
+In this simple case $\ket{\psi_1}$ and $\ket{\psi_2}$ are related by $X_AX_B$, we should have
+similar relations in the extended weighted CHSH test.
+
+%------------------------------------------------------------------------------------------------------
 \subsection{Key relations from the SOS decomposition of $\tilde{\I}_\alpha$}
 %------------------------------------------------------------------------------------------------------
 In this section we summarize the key relations derived from the SOS decomposition of $\tilde{\I}_\alpha$
@@ -582,6 +638,10 @@ We can further derive that
 	\label{eq:zaxb}&\norm{(Z_A(\1+X_B)-Z_B(\1-X_A))\ket{\psi}}\leq \frac{s+1}{c\sqrt{s}} \sqrt{\epsilon},\\
 	&\norm{(Z_AX_A+X_AZ_A)\ket{\psi}} \leq \frac{1+c+s}{c\sqrt{s}} \sqrt{\epsilon}.
 \end{align}
+Eq.~\ref{eq:xazb} can be rewritten as 
+\begin{align}
+	X_AX_BA_1^0 \ket{\psi} \appd{\frac{c+1}{c\sqrt{s}}} (\1+Z_B)/2 \ket{\psi} \appd{\sqrt{\epsilon}} A_1^1 \ket{\psi}.
+\end{align}
 The last relation that we will derive is that 
 \begin{align}
 	X_AZ_A \ket{\psi} \appd{\frac{\sqrt{s\epsilon}}{c}} X_AZ_B \ket{\psi},\\
@@ -593,9 +653,7 @@ we get
 	X_AZ_A \ket{\psi} \appd{\frac{2s+1}{c\sqrt{s}}} -X_BZ_B \ket{\psi}.
 \end{align}
 
-%------------------------------------------------------------------------
-\subsection{Robustness of $\I_\alpha$}
-%------------------------------------------------------------------------
+A special property of $\I_\alpha$ is summarized in the proposition below.
 \begin{proposition}
 \label{prop:2d-subspace}
 	Let $\mu = \arctan(1/\alpha)$ for some $\alpha$.
@@ -612,7 +670,7 @@ we get
 	For simplicity, we write $c = \cos(\mu)$ and $s = \sin(\mu)$.
 	Hence, the typical value of $\mu$ is $\pi/d$ for some large $d$, we assume both $c$ and $s$ are between $0$ and $1$.
 	
-	Following the argument in the proof of \cref{thm:selftest} in \cref{sec:selftest}, we define
+	Following the argument in the early section, we define
 	\begin{align*}	
 	\tilde{Z}_A = \tA_1, && \tX_A = \tA_2\\
 	\tilde{Z}_B = (\tB_1+\tB_2)/2c, && \tX_B = (\tB_1-\tB_2)/2s.
@@ -739,7 +797,8 @@ from the linear system game developed above so that we can make sure that the ob
 $O_A = A_1A_2$ and $O_B =B_1B_2$ have eigenvalues $\omega_d$ and $\omega_d^{d-1}$,
 where $A_1,A_2,B_1,B_2$ are used in this test and the linear system game.
 Intuitively, we want to combine the fact that $O_A$ has eigenvalue $\omega_d$ with the fact that 
-$O_A \sim O_A^2$ to achieve the same effect as $O_A^d = \1$.
+$O_A \sim O_A^r$ to establish that
+the eigenvalues of $O_A$ are $\omega_d^i$ for $i =1 \dots d-1$.
 
 Recall that the input for Alice and Bob in the linear system game are $\{1,2,\dots,n\}$.
 The input alphabets are $X = Y = \{\ast, 1, 2, n+1,n+2\}$.
@@ -816,16 +875,16 @@ $a = 0$ & $a=1$ & $a=\perp$ &
 $a = 0$ & $a=1$ & $a=\perp$\\
 \hline
 \hline
-\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{\sin^2(\pi/d)}{d-1}$ & \small $\pr{\perp0}{00}$ 
+\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{\perp0}{00}$ 
 & $\frac{1+\sin(\pi/d)}{2(d-1)}$ & $\frac{1-\sin(\pi/d)}{2(d-1)}$ & \small  $\pr{\perp0}{10}$ \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/d)}{d-1}$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{\perp0}{00}$ 
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{\perp0}{00}$ 
 &  $\frac{1-\sin(\pi/d)}{2(d-1)}$ & $\frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1} - \pr{\perp0}{10}$  \\
 \hline
-\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{\sin^2(\pi/d)}{d-1}$ & \small $\pr{\perp0}{01}$ & 
+\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{\perp0}{01}$ & 
 $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\pr{\perp 0}{11}$  \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/d)}{d-1}$ & $\frac{\cos^2(\pi/d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{\perp0}{01}$ &  
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{\perp0}{01}$ &  
 $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1}- \pr{\perp 0}{11}$ \\
 \hline
 \end{tabular}
@@ -1003,8 +1062,8 @@ We will prove that $\bra{\psi} A_{n+1}^0B_1^0 \ket{\psi} = \bra{\psi}A_\ast^\dia
 	+\bra{\psi}A_{n+1}^\perp A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_{n+1}^\perp A_{n+1}^0B_1^0 A_{n+1}^\perp\ket{\psi}\\
 	=&\bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi},
 \end{align*}
-where we use the facts that $B_\ast^\diamond \ket{\psi} = A_\ast^\diamond \ket{\psi} = A_{n+1}^\perp \ket{\psi}$ and that 
-$\spn(A_{n+1}^0) \cap \spn(A_{n+1}^\perp) = \emptyset$. This means that if Alice and Bob share state $A_\ast^\diamond \ket{\psi}/\norm{A_\ast^\diamond \ket{\psi}}$ and apply $A_{n+1}^0B_1^0$
+where we use the facts that $A_\ast^\perp \ket{\psi} = A_{n+1}^\perp \ket{\psi}$ and that 
+$\supp(A_{n+1}^0) \cap \supp(A_{n+1}^\perp) = \emptyset$. This means that if Alice and Bob share state $A_\ast^\diamond \ket{\psi}/\norm{A_\ast^\diamond \ket{\psi}}$ and apply $A_{n+1}^0B_1^0$
 we get conditional probability
 \begin{align}
 	\frac{\bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi}}{\bra{\psi} A_\ast^\diamond \ket{\psi}} = 
@@ -1109,7 +1168,7 @@ The proof for $S_2$ is very similar so we omit it here.
 	We define $B_1 := B_1^0 - B_1^1$, $B_2 := B_2^0-B_2^1$ and
 	\begin{align}
 		&Z_A  = A_{n+1} && X_A = A_{n+2} \\
-		&Z_B = \frac{B_1+B_2}{2\cos(-\pi/d)} && X_B = \frac{B_1-B_2}{\sin(-\pi/d)}.
+		&Z_B = \frac{B_1+B_2}{2\cos(-\pi/d)} && X_B = \frac{B_1-B_2}{2\sin(-\pi/d)}.
 	\end{align}
 	From the correlation given above, we get 
          \begin{align}
@@ -1186,6 +1245,12 @@ The proof for $S_2$ is very similar so we omit it here.
 		A_1A_2 \ket{\psi_1} = \omega_d^{-1}\ket{\psi_1}.
 	\end{align}
 \end{proof}
+Note that it can be shown that 
+\begin{align}
+	&\ket{\psi_1} =  (\1 - iA_{n+2})(\1 + i \frac{B_1 - B_2}{-2\sin(\pi/d)})A_{n+1}^0 \ket{\psi}\\
+	&\ket{\psi_2} =  (\1 - iA_{n+2})(\1 + i \frac{B_1 - B_2}{-2\sin(\pi/d)})A_{n+1}^1 \ket{\psi}.
+\end{align}
+
 %---------------------------------------
 \subsection{Going forward}
 %---------------------------------------
@@ -1205,10 +1270,7 @@ Similarly, we can get
 \end{align}
 Therefore, the set $\{ (U_A\ct)^j(U_B\ct)^j \ket{\psi_1}\}_{j=0}^{d-2}$ is an orthogonal set and
 each element of this set is of norm $1/\sqrt{d-1}$.
-We define 
-\begin{align}
-	\ket{\psi'} = \sum_{j=0}^{d-2} (U_A\ct)^j(U_B\ct)^j \ket{\psi_1}.
-\end{align} 
+
 Starting with $A_iB_i \ket{\psi} = \ket{\psi}$ for $i = 1 \dots n$, we know that 
 \begin{align}
 	A_4A_3 \x B_4B_3 \ket{\psi} = A_4 \x B_4 \ket{\psi} = \ket{\psi},
@@ -1222,19 +1284,26 @@ Moreover, we know $A_\ast^\diamond$ is projecting onto a subset of the Schmidt b
 By \cref{prop:2d-subspace}, we know that 
 \begin{align}
 	(O_A + O_A\ct)(U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi} = (U_A\ct U_B\ct)^j (O_A^{r^j} + (O_A\ct)^{r^j}) A_\ast^\diamond \ket{\psi}
-	= \cos( \frac{2r^j \pi}{d}) (U_A\ct U_B\ct)^jA_\ast^\diamond \ket{\psi}.
+	= 2\cos( \frac{2r^j \pi}{d}) (U_A\ct U_B\ct)^jA_\ast^\diamond \ket{\psi}.
 \end{align}
 Hence $(U_A\ct)^j(U_B\ct)^j A_\ast^\diamond \ket{\psi}$ is orthogonal to $(U_A\ct)^{j'}(U_B\ct)^{j'} A_\ast^\diamond \ket{\psi}$
-for all $j \neq j'$, and $\norm{(U_A\ct)^j(U_B\ct)^j A_\ast^\diamond \ket{\psi}} = \sqrt{2/(d-1)}$, we can conclude that 
+for all $j \neq j'$, and $\norm{(U_A\ct)^j(U_B\ct)^j A_\ast^\diamond \ket{\psi}} = \sqrt{2/(d-1)}$, we can write  
 \begin{align}
 	\ket{\psi} =& \sum_{j = 0}^{(d-3)/2} (U_A\ct)^j(U_B\ct)^j A_\ast^\diamond \ket{\psi}\\
 	=& \sum_{j = 0}^{(d-3)/2} (U_A\ct)^j(U_B\ct)^j (\ket{\psi_1} + \ket{\psi_2}).
+\end{align}
+Or can we write 
+\begin{align}
+	\ket{\psi} = 1/2 \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi} = 
+	1/2 \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j(\ket{\psi_1}+\ket{\psi_2})?
 \end{align}
 
 %It means that $(U_A\ct)(U_B\ct)^j \ket{\psi_1} \in \spn(\supp(\ket{\psi}))$ for all $j \in [d-1]$,
 %and so is $\ket{\psi'}$.
 %\hl{[TODO] show that $\ket{\psi'}$ is obtained from $\ket{\psi}$ by local isometries.}
 Let $O_A = A_1A_2$ and $O_B = B_1B_2$.
+
+\textbf{Case 1: Write $\ket{\psi} = \sum_{j = 0}^{(d-3)/2} (U_A\ct)^j(U_B\ct)^j (\ket{\psi_1} + \ket{\psi_2})$.}
 If we apply the isometry given in \cref{sec:isometry} to the state $\ket{\psi}$, the state will evolve as following.
 \begin{enumerate}
 	\item Append control registers $A'$ and $B'$:
@@ -1303,10 +1372,12 @@ Here are some evidence that this equality may hold:
 Moreover, $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}$ is orthogonal to $(U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi}$ for all $j = 1\dots (d-3)/2$,
 because
 \begin{align}
-	(O_A+O_A\ct)(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} = (U_A\ct U_B\ct)^{\log_r (d-1)} (O_A^{\log_r (d-1)} +(O_A\ct)^{\log_r (d-1)}) \ket{\psi_1} \\
-	= 2\cos(2\pi/d) (U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}\\
-	(O_A+O_A\ct)(U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi} = (U_A\ct U_B\ct)^j (O_A^{r^j} + (O_A\ct)^{r^j}) A_\ast^\diamond \ket{\psi}
-	= \cos( \frac{2r^j \pi}{d}) (U_A\ct U_B\ct)^jA_\ast^\diamond \ket{\psi}.
+	&(O_A+O_A\ct)(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} \\
+	=& (U_A\ct U_B\ct)^{\log_r (d-1)} (O_A^{\log_r (d-1)} +(O_A\ct)^{\log_r (d-1)}) \ket{\psi_1} \\
+	=& 2\cos(2\pi/d) (U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}\\
+	&(O_A+O_A\ct)(U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi}\\
+	 =& (U_A\ct U_B\ct)^j (O_A^{r^j} + (O_A\ct)^{r^j}) A_\ast^\diamond \ket{\psi}\\
+	=& \cos( \frac{2r^j \pi}{d}) (U_A\ct U_B\ct)^jA_\ast^\diamond \ket{\psi}.
 \end{align}
 So we can conclude $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} \in \spn(\supp(A_\ast^\diamond \ket{\psi}))$.
 On the other hand, considering the fact that $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}$ is orthogonal to $\ket{\psi_1}$, and $\ket{\psi_2}$ is orthogonal
@@ -1314,11 +1385,30 @@ to $\ket{\psi_1}$, we can say that
 \begin{align}
 	(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} \in \spn(\supp(\ket{\psi_2})).
 \end{align}
+We can use \cref{eq:xaxb_trans} to conclude that 
+\begin{align}
+	A_{n+2}  \frac{B_1 - B_2}{-2\sin(\pi/d)} \ket{\psi_1} = \ket{\psi_2}.
+\end{align}
+which means that $\ket{\psi_1}$ and $\ket{\psi_2}$ has the same Schmidt rank and
+the same set of Schmidt coefficients.
+Then $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}$ has the same Schmidt rank as $\ket{\psi_2}$.
 
+\textbf{Case 1: Write $\ket{\psi} = 1/2\sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j (\ket{\psi_1} + \ket{\psi_2})$.}
+Using $\Phi_A\x \Phi_B$ defined in \cref{sec:isometry},
+ It is easy to calculate 
+\begin{align}
+	&\Phi_A\x\Phi_B\left( \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j \ket{\psi_1}\right) = \ket{\psi_1} \x \sum_{j=0}^{d-2} \ket{-r^j}\ket{r^j},\\
+	&\Phi_A\x\Phi_B\left( \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j \ket{\psi_2}\right) = (U_A\ct U_B\ct)^{\log_r(d-1)}\ket{\psi_2} \x \sum_{j=0}^{d-2} \ket{r^j}\ket{-r^j},
+\end{align}
+Since $\sum_{j=0}^{d-2} \ket{r^j}\ket{-r^j} = \sum_{j=0}^{d-2}\ket{-r^j}\ket{r^j}$, we can write 
+\begin{align}
+	\Phi_A\x \Phi_B(\ket{\psi}) = \frac{1}{2}\left(\ket{\psi_1} + (U_A\ct U_B\ct)^{\log_r(d-1)}\ket{\psi_2})\right)
+	\x \sum_{j=0}^{d-2} \ket{r^j}\ket{-r^j}.
+\end{align}
 
-Now we show that the isometry given in \cref{sec:isometry} can distill a maximally entangled
+\textbf{Case 3: Write $\ket{\psi'} = \sum_{j=0}^{d-2} (U_A\ct)^j(U_B\ct)^j \ket{\psi_1}$}.
+We show that the isometry given in \cref{sec:isometry} can distill a maximally entangled
 state with local dimension $(d-1)$ out of $\ket{\psi'}$.
-Let $O_A = A_1A_2$ and $O_B = B_1B_2$.
 The isometry evolves the state as follows:
 \begin{enumerate}
 	\item Append control registers $A'$ and $B'$:
