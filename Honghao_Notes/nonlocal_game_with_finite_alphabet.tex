@@ -1251,102 +1251,267 @@ Note that it can be shown that
 	&\ket{\psi_2} =  (\1 - iA_{n+2})(\1 + i \frac{B_1 - B_2}{-2\sin(\pi/d)})A_{n+1}^1 \ket{\psi}.
 \end{align}
 
-%---------------------------------------
-\subsection{Going forward}
-%---------------------------------------
-From Item $5$ and $6$, we can further deduce that 
+%--------------------------------------------------------------
+\subsection{A decomposition of $\ket{\psi}$}
+%--------------------------------------------------------------
+Let $O_A = A_1A_2$ and $O_B = B_1B_2$.
+Before proving the proposition, we make one important observation.
+Recall that from the linear system game, we know that $A_iB_i \ket{\psi} = \ket{\psi}$ for $i = 1 \dots n$.
+Then we can deduce that 
 \begin{align}
-	&(B_1B_2)^r \ket{\psi_1} = \omega_d^r \ket{\psi_1} \\
-	&(A_1A_2)^r \ket{\psi_1} = \omega_d^{-r} \ket{\psi_1}.
-\end{align}
-Since $U_A(A_1A_2)U_A\ct = (A_1A_2)^r$ must hold on all the orthogonal components of $\ket{\psi}$, which includes $\ket{\psi_1}$,
-we know that 
-\begin{align}
-	(A_1A_2)U_A\ct \ket{\psi_1} = U_A\ct (A_1A_2)^r \ket{\psi_1} = \omega_d^{-r} U_A\ct \ket{\psi_1}.
-\end{align}
-Similarly, we can get 
-\begin{align}
-	(B_1B_2)U_B\ct \ket{\psi_1} = \omega_d^r U_B\ct \ket{\psi_1}.
-\end{align}
-Therefore, the set $\{ (U_A\ct)^j(U_B\ct)^j \ket{\psi_1}\}_{j=0}^{d-2}$ is an orthogonal set and
-each element of this set is of norm $1/\sqrt{d-1}$.
-
-Starting with $A_iB_i \ket{\psi} = \ket{\psi}$ for $i = 1 \dots n$, we know that 
-\begin{align}
-	A_4A_3 \x B_4B_3 \ket{\psi} = A_4 \x B_4 \ket{\psi} = \ket{\psi},
+	A_3A_4 \x B_3B_4 \ket{\psi} = A_3 \x B_3 \ket{\psi} = \ket{\psi},
 \end{align}
 or equivalently,
 \begin{align}
-	U_A\ct \x U_B\ct \ket{\psi} = \ket{\psi}.
+	U_A \x U_B \ket{\psi} = \ket{\psi}.
 \end{align}
-It means that $U_A\ct U_B\ct$ only permutes the Schmidt basis of $\ket{\psi}$.
-Moreover, we know $A_\ast^\diamond$ is projecting onto a subset of the Schmidt basis of $\ket{\psi}$.
-By \cref{prop:2d-subspace}, we know that 
-\begin{align}
-	(O_A + O_A\ct)(U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi} = (U_A\ct U_B\ct)^j (O_A^{r^j} + (O_A\ct)^{r^j}) A_\ast^\diamond \ket{\psi}
-	= 2\cos( \frac{2r^j \pi}{d}) (U_A\ct U_B\ct)^jA_\ast^\diamond \ket{\psi}.
-\end{align}
-Hence $(U_A\ct)^j(U_B\ct)^j A_\ast^\diamond \ket{\psi}$ is orthogonal to $(U_A\ct)^{j'}(U_B\ct)^{j'} A_\ast^\diamond \ket{\psi}$
-for all $j \neq j'$, and $\norm{(U_A\ct)^j(U_B\ct)^j A_\ast^\diamond \ket{\psi}} = \sqrt{2/(d-1)}$, we can write  
-\begin{align}
-	\ket{\psi} =& \sum_{j = 0}^{(d-3)/2} (U_A\ct)^j(U_B\ct)^j A_\ast^\diamond \ket{\psi}\\
-	=& \sum_{j = 0}^{(d-3)/2} (U_A\ct)^j(U_B\ct)^j (\ket{\psi_1} + \ket{\psi_2}).
-\end{align}
-Or can we write 
-\begin{align}
-	\ket{\psi} = 1/2 \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi} = 
-	1/2 \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j(\ket{\psi_1}+\ket{\psi_2})?
-\end{align}
+It means that $U_A U_B $ only permutes the Schmidt basis of $\ket{\psi}$.
+Similarly, we also have $U_A\ct U_B\ct \ket{\psi} = \ket{\psi}$.
+We use this observation in the proof of the following proposition.
 
-%It means that $(U_A\ct)(U_B\ct)^j \ket{\psi_1} \in \spn(\supp(\ket{\psi}))$ for all $j \in [d-1]$,
-%and so is $\ket{\psi'}$.
-%\hl{[TODO] show that $\ket{\psi'}$ is obtained from $\ket{\psi}$ by local isometries.}
-Let $O_A = A_1A_2$ and $O_B = B_1B_2$.
-
-\textbf{Case 1: Write $\ket{\psi} = \sum_{j = 0}^{(d-3)/2} (U_A\ct)^j(U_B\ct)^j (\ket{\psi_1} + \ket{\psi_2})$.}
-If we apply the isometry given in \cref{sec:isometry} to the state $\ket{\psi}$, the state will evolve as following.
+\begin{proposition}
+\label{prop:decomp_psi}
+Define 
+\begin{align}
+	&\ket{\psi'} = \sum_{j=1}^{(d-1)/2} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi},\\
+	&\ket{\psi''} = \sum_{j=(d+1)/2}^{d-1} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi},
+\end{align}
+then
 \begin{enumerate}
-	\item Append control registers $A'$ and $B'$:
-	\begin{align}
-		\ket{\psi} \ket{0}_{A'}\ket{0}_{B'} = 
-		\sum_{j=0}^{(d-3)/2} (U_A\ct U_B\ct)^j (\ket{\psi_1}+ \ket{\psi_2}) \ket{0}_{A'}\ket{0}_{B'};
-	\end{align}
-	\item $QFT_d$ on the control registers:
-	\begin{align}
-		\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} 
-		\sum_{j=0}^{(d-3)/2} (U_A\ct U_B\ct)^j (\ket{\psi_1}+ \ket{\psi_2}) \ket{k_1}_{A'}\ket{k_2}_{B'};
-	\end{align}
-	\item Controlled-$O_A$ and $O_B$ (If the control register is in state $\ket{k}_{A'/B'}$ apply
-	$O_{A/B}^k$):
-	\begin{align}
-		&\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{(d-3)/2} O_A^{k_1}(U_A\ct)^j O_B^{k_2}(U_B\ct)^j
-		 (\ket{\psi_1}+\ket{\psi_2}) \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		 &= \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{(d-3)/2} [\omega_d^{-k_1r^j+k_2r^j} (U_A\ct U_B\ct)^j \ket{\psi_1}
-		 + \omega_d^{k_1r^j-k_2r^j} (U_A\ct U_B\ct)^j \ket{\psi_2}]
-		 \ket{k_1}_{A'}\ket{k_2}_{B'}
-	\end{align}
-	\item $QFT_d^{-1}$ on the control registers:
-	\begin{align}
-		\to &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=0}^{(d-3)/2} \omega_d^{k_1(-r^j-l_1)}\omega_d^{k_2(r^j-l_2)}
-		 (U_A\ct U_B\ct)^j \ket{\psi_1} \ket{l_1}_{A'}\ket{l_2}_{B'}\\
-		 &+ \frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=0}^{(d-3)/2}\omega_d^{k_1(r^j-l_1)}\omega_d^{k_2(-r^j-l_2)}
-		 (U_A\ct U_B\ct)^j \ket{\psi_2} \ket{l_1}_{A'}\ket{l_2}_{B'}\\
-		= &\sum_{j=0}^{(d-3)/2}(U_A\ct U_B\ct)^j  \ket{\psi_1} \ket{-r^j}_{A'}\ket{r^j}_{B'}
-		+ \sum_{j=0}^{(d-3)/2} (U_A\ct U_B\ct)^j  \ket{\psi_2} \ket{r^j}_{A'} \ket{-r^j}_{B'}
-	\end{align}
-	\item Controlled-$U_A$ and $U_B$ 
-	(If Alice's control register is in state $\ket{k}_{A'}$, apply $U_A^{\log_r k}$,
-	if Bob's control register is in state $\ket{k}_{B'}$, apply $U_B^{\log_r (d-k)}$) :
-	\begin{align}
-		&\to 
-		\sum_{j=0}^{(d-3)/2} (U_A\ct U_B\ct)^{j-\log_r (d-r^j)} \ket{\psi_1}  \ket{-r^j}_{A'}\ket{r^j}_{B'}+
-		\sum_{j=0}^{(d-3)/2} U_A^j (U_A\ct)^j U_B^j (U_B\ct)^j  \ket{\psi_2} \ket{r^j}_{A'}\ket{-r^j}_{B'}\\
-		&= (U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} \x \sum_{j=0}^{(d-3)/2} \ket{-r^j}_{A'}\ket{r^j}_{B'}
-		 +\ket{\psi_2} \x \sum_{j=0}^{d-2} \ket{r^j}_{A'}\ket{-r^j}_{B'}
-	\end{align}
+	\item $\norm{\ket{\psi'}} = \norm{\ket{\psi''}} = 1$,
+	\item $\ket{\psi} = \ket{\psi'} = \ket{\psi''}$.
 \end{enumerate}
-Here we use the following fact.
-Since $r$ is the primitive root of $d$, we know
+\end{proposition}
+The intuition behind the proposition is that if we apply the projection $(U_A\ct)A_\ast^\diamond U_A^j$, for some $j$, to the state $\ket{\psi}$,
+we will get 
+\begin{align}
+	(U_A\ct)^j A_\ast^\diamond U_A^j \ket{\psi} = (U_A\ct)^j A_\ast^\diamond U_A^j (U_A\ct U_B\ct)^j \ket{\psi} = (U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi}.
+\end{align}
+This is how we get the terms in the decomposition.
+\begin{proof}
+	First observe that 
+	\begin{align}
+		\bra{\psi}A_\ast^\diamond (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi} = \bra{\psi} A_\ast^\diamond \ket{\psi} = \frac{2}{d-1}.
+	\end{align}
+	
+	Since $U_AO_A U_A\ct = O_A^r$ and $U_AO_A\ct U_A\ct = (O_A\ct)^r$ 
+	must hold on all the orthogonal components of $\ket{\psi}$, which includes $A_\ast^\diamond \ket{\psi}$,
+	we know that for $1 \leq j < j' \leq (d-1)/2$, we have
+	\begin{align}
+        	(O_A +O_A\ct) (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi} 
+        	= 2\cos(2j \pi/d) (U_A\ct U_B\ct )^{\log_r j} A_\ast^\diamond \ket{\psi},
+	\end{align}
+	and similarly
+        \begin{align}
+        		(O_A+O_A\ct) (U_A\ct U_B\ct)^{\log_r j'} A_\ast^\diamond \ket{\psi} = 2\cos(2j'\pi/d) (U_A\ct U_B\ct )^{\log_r j'} A_\ast^\diamond \ket{\psi},
+        \end{align}
+        where we use \cref{prop:2d-subspace}.
+	Since $j \neq j'$ we can conclude that 
+	\begin{align}
+		\bra{\psi} A_\ast^\diamond(U_A U_B)^{\log_r j'} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi} = 0,
+	\end{align}
+	because $O_A +O_A\ct$ is Hermitian.
+	With similar reasoning, we can show that if $(d+1)/2 \leq j < j' \leq d-1$, the two vectors 
+	$(U_A\ct U_B\ct)^{\log_r j} \ket{\psi}$ and $(U_A\ct U_B\ct)^{\log_r j'} \ket{\psi}$ are orthogonal as well.
+	Then we can calculate the norm of $\ket{\psi'}$ as 
+	\begin{align}
+		 \braket{\psi'}{\psi'} =& \sum_{j,j'=1}^{(d-1)/2} \bra{\psi} A_\ast^\diamond(U_A U_B)^{\log_r j'} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi}\\
+		 = & \sum_{j=1}^{(d-1)/2} \bra{\psi} A_\ast^\diamond(U_A U_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi}\\
+		 = & \frac{d-1}{2} \frac{2}{d-1} = 1.
+	\end{align}
+	With similar reasoning, we can conclude that $\braket{\psi''}{\psi''} = 1$.
+	
+	Next we expand $\braket{\psi}{\psi'}$ as
+	\begin{align}
+		\braket{\psi}{\psi'} =& \sum_{j=1}^{(d-1)/2} \bra{\psi} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi}  \\
+		=&\sum_{j=1}^{(d-1)/2} \bra{\psi} A_\ast^\diamond \ket{\psi}\\
+		=& \frac{d-1}{2} \frac{2}{d-1} = 1,
+	\end{align}
+	where we use the fact that $U_AU_B\ket{\psi} = \ket{\psi}$.
+	Then with similar reasoning we get 
+	$\braket{\psi}{\psi''} = 1$.
+\end{proof}
+The consequence of \cref{prop:decomp_psi} is the following decomposition of $\ket{\psi}$ 
+\begin{align}
+	\ket{\psi} = \frac{1}{2}(\ket{\psi'} + \ket{\psi''}) =& \frac{1}{2}\sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond\ket{\psi}\\
+	=& \frac{1}{2} \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j A_\ast^\diamond\ket{\psi}.
+\end{align}
+Since $A_\ast^\diamond \ket{\psi} = \ket{\psi_1} + \ket{\psi_2}$, we can further deduce that
+\begin{align}
+	\ket{\psi} =\frac{1}{2}\sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}(\ket{\psi_1}+\ket{\psi_2}).
+\end{align}
+
+
+%-----------------------------------------------
+\subsection{An isometry}
+\label{sec:isometry}
+%-----------------------------------------------
+We first build the isometry out of $U_A, O_A$ and $U_B$, $O_B$
+as shown in the diagram below.
+Then we list the key relations needed for this isometry to work.
+In the end, we prove this isometry can distill a copy of $\sum_{j=1}^{d-1}\ket{j}\ket{d-j}$.
+\begin{figure}[H]
+\center
+        \begin{tikzpicture}[thick]
+        %
+        % `operator' will only be used by Hadamard (H) gates here.
+        % `phase' is used for controlled phase gates (dots).
+        % `surround' is used for the background box.
+        \tikzstyle{operator} = [draw,fill=white,minimum size=1.5em] 
+        \tikzstyle{phase} = [fill,shape=circle,minimum size=5pt,inner sep=0pt]
+        \tikzstyle{surround} = [fill=blue!10,thick,draw=black,rounded corners=2mm]
+        %
+        % Bracket
+        \draw[decorate,decoration={brace,mirror},thick] (0,-1) to
+    	node[midway,left] (bracket1) {$\ket{\psi}$}
+    	(0,-2);
+        % Qubits
+        \node at (0,0) (q1) {$\ket{0}$};
+        \node at (0,-1) (q2) {};
+        \node at (0,-2) (q3) {};
+        \node at (0,-3) (q4) {$\ket{0}$};
+        %
+        % Column 1
+        \node[operator] (op11) at (1,0) {$QFT_d$} edge [-] (q1);
+        \node[operator] (op14) at (1,-3) {$QFT_d$} edge [-] (q4);
+        %
+        % Column 3
+        \node[phase] (phase11) at (2,0) {} edge [-] (op11);
+	\node[operator] (op22) at (2,-1) {$O_A$} edge [-] (q2);
+	\node[operator] (op23) at (2, -2) {$O_B$} edge[-] (q3);
+        \node[phase] (phase14) at (2,-3) {} edge [-] (op14);
+        \draw[-] (phase11) -- (op22);
+        \draw[-] (phase14) -- (op23);
+        %
+        % Column 4
+        \node[operator] (op31) at (3,0) {$QFT_d^{-1}$} edge [-] (phase11);
+        \node[operator] (op34) at (3,-3) {$QFT_d^{-1}$} edge [-] (phase14);
+        %
+        % Column 5
+        \node[phase] (phase21) at (4,0) {} edge [-] (op31);
+	\node[operator] (op42) at (4,-1) {$U_A$} edge [-] (op22);
+	\node[operator] (op43) at (4, -2) {$U_B$} edge[-] (op23);
+        \node[phase] (phase24) at (4,-3) {} edge [-] (op34);
+        \draw[-] (phase21) -- (op42);
+        \draw[-] (phase24) -- (op43);
+        %
+        % Column 6
+        \node (end2) at (5,-1) {} edge [-] (op42);
+        \node (end3) at (5,-2) {} edge [-] (op43);
+        %
+        % Bracket
+        \draw[decorate,decoration={brace},thick] (5,-1) to
+    	node[midway,right] (bracket) {$\ket{junk}$}
+    	(5,-2);
+        %
+        % Column 7
+        \node (end1) at (6.5,-0.5) {} edge [-] (phase21);
+        \node (end4) at (6.5,-2.5) {} edge [-] (phase24);
+        % Dashed line
+        \draw[loosely dotted] (0,-1.5) -- (5,-1.5);
+        % Bracket
+        \draw[decorate,decoration={brace},thick,] (6.5,-0.5) to
+    	node[midway,right] (bracket2) {$\sum_{j=1}^{d-1}\ket{j}\ket{d-j}$}
+    	(6.5,-2.5);
+        %
+        % Background Box
+        \begin{pgfonlayer}{background} 
+        \node[surround] (background) [fit = (q1) (op14) (bracket1)(bracket2)] {};
+        \end{pgfonlayer}
+        %
+        \end{tikzpicture}
+	\caption{The isometries $\Phi_A$ and $\Phi_B$.}
+\end{figure}
+The isometry has the following steps:
+\begin{enumerate}
+	\item Append control register $\ket{0}_{A'}$ on Alice's side and $\ket{0}_{B'}$ on Bob's side;
+	\item Apply Quantum Fourier Transform ($QFT_d$) to Alice and Bob's control registers;
+	\item Apply Controlled-$O_{A/B}$ operations (i.e. if the control register is in state $\ket{k}_{A'/ B'}$, apply
+	$O_{A/B}^k$.);
+	\item Apply inverse Quantum Fourier Transform ($QFT_d^{-1}$) to the control registers;
+	\item Apply Controlled-$U_{A/B}$ operations (i.e. If Alice's control register is in state $\ket{j}$, she applies
+	$U_A^{\log_r j}$. If Bob's control register is in state $\ket{j}$, he applies $(U_B\ct)^{\log_r (d-j)}$).
+\end{enumerate}
+In order to show the isometry works, the key relations that we use are
+\begin{align}
+	&\ket{\psi} = \frac{1}{2} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} (\ket{\psi_1}+\ket{\psi_2}),&&\\
+	&O_A \ket{\psi_1} = \omega_d^{-1} \ket{\psi_1},
+	&&O_A\ket{\psi_2} = \omega_d \ket{\psi_2} \\
+	&O_B\ket{\psi_1} = \omega_d \ket{\psi_1}
+	&&O_B\ket{\psi_2} = \omega_d^{-1} \ket{\psi_2}.
+\end{align}
+Since $U_AO_AU_A\ct \ket{\psi} = O_A^r \ket{\psi}$ must hold on all orthogonal components 
+of $\ket{\psi}$, which include $(U_A\ct)^{j-1} \ket{\psi_1}$, we can deduce that
+\begin{align}
+	O_A (U_A\ct)^j \ket{\psi_1} = U_A\ct O_A^r (U_A\ct)^{j-1} \ket{\psi_1} = \ldots = (U_A\ct)^j O_A^{r^j} \ket{\psi_1}
+	= \omega_d^{-r^j} (U_A\ct)^j \ket{\psi_1},
+\end{align}
+where we inductively apply $O_AU_A\ct = U_A\ct O_A^r$ to $(U_A\ct)^l \ket{\psi_1}$ for $l = j-2 \dots 0$.
+Similarly, on Bob's side, we have
+\begin{align}
+	O_B (U_B\ct)^j \ket{\psi_1} = \omega_d^{r^j} (U_B\ct)^j \ket{\psi_1}.
+\end{align}
+We can extend such results to $\ket{\psi_2}$ as 
+\begin{align}
+	&O_A (U_A\ct)^j \ket{\psi_2} = \omega_d^{r^j} (U_A\ct)^j \ket{\psi_2},\\
+	&O_B (U_B\ct)^j \ket{\psi_2} = \omega_d^{-r^j} (U_B\ct)^j \ket{\psi_2}.
+\end{align}
+
+%\hl{We need to find two isometries,$W_A$ and $W_B$, such that}
+%\begin{align}
+%	\label{eq:xa_eig} &X_A W_AW_B A_{m_r+2}^0\ket{\psi} \appd{\sqrt{\epsilon}} \omega_d W_AW_BA_{m_r+2}^0 \ket{\psi} \\
+%	\label{eq:xb_eig} &X_B W_AW_BA_{m_r+2}^0 \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d^{-1} W_AW_BA_{m_r+2}^0 \ket{\psi} \\
+%	\label{eq:norm} &\norm{W_AW_B A_{m_r+2}^0\ket{\psi}} \appd{\sqrt{\epsilon}} \frac{1}{\sqrt{d-1}}.
+%\end{align}
+%In the ideal case, $W_A$ and $W_B$ will change the basis of $\ket{\psi}$ in the following way
+%\begin{align}
+%	W_AW_B A_{m_r+2}^0 \ket{\psi} = \frac{1}{\sqrt{d-1}} W_AW_B \ket{1}\ket{1} = \ket{x_1}\ket{x_{d-1}}.
+%\end{align}
+%
+%
+%Then the key relations that we can derive are
+%\begin{enumerate}
+%	\item From \cref{eq:norm} and the weighted $CHSH$ correlation we can derive that 
+%	\begin{align}
+%	\norm{(U_A\ct)^j (U_B\ct)^{j} W_AW_B A_{m_r+2}^0\ket{\psi}} \appd{\sqrt{\epsilon}} \frac{1}{\sqrt{d-1}} \text{ for all } j \in [d-1];
+%	\end{align}
+%	\item Using relation $U_AX_AU_A\ct = X_A^r$ and \cref{eq:xa_eig}, we can derive
+%	\begin{align}
+%		X_A (U_A\ct)^j W_AW_B A_{m_r+2}^0 \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d^{r^j} (U_A\ct)^j W_AW_B A_{m_r+2}^0\Pi_A\ket{\psi},
+%	\end{align}
+%	on Bob's side, the relation is 
+%	\begin{align}
+%		X_B (U_B\ct)^j W_AW_B A_{m_r+2}^0 \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d^{-r^j} (U_B\ct)^j W_AW_B A_{m_r+2}^0\Pi_B\ket{\psi};
+%	\end{align}
+%	\item The previous relation implies that 
+%	\begin{align}
+%	\bra{\psi} A_{m_r+2}^0 W_AW_B U_A^j U_A^{j'} W_AW_B A_{m_r+2}^0 \ket{\psi} \simeq \epsilon \text{ for all }j \neq j',
+%	\end{align}
+%	because the eigenspaces of a unitary are orthogonal,
+%	and similarly on Bob's side.
+%\end{enumerate}
+%Note that Item $1$ and $2$ combined implies that
+%\begin{align}
+%	\ket{\psi} \appd{O(\epsilon^{1/4})} \sum_{i=0}^{d-1} (U_A\ct)^j (U_B\ct)^j W_AW_B A_{m_r+2}^0 \ket{\psi}.
+%\end{align}
+The isometry evolves the state as follows:
+	\begin{align}
+		\ket{\psi} \ket{0}_{A'}\ket{0}_{B'} %\appd{O(\epsilon^{1/4})} 
+		=& \frac{1}{2} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} (\ket{\psi_1}+\ket{\psi_2}) \ket{0}_{A'}\ket{0}_{B'}\\
+		\xrightarrow[]{QFT_d}& \frac{1}{2d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}  (\ket{\psi_1}+\ket{\psi_2}) \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		\xrightarrow[]{\text{Controlled-}O_{A/B}}& \frac{1}{2d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} O_A^{k_1}(U_A\ct)^{\log_r j} X_B^{k_2}(U_B\ct)^{\log_r j}
+		A_\ast^\diamond \ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		=&\frac{1}{2d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}\left(\omega_d^{(k_2-k_1)j}\ket{\psi_1} + \omega_d^{(k_1-k_2)j}\ket{\psi_2}\right) \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		\xrightarrow[]{QFT_d^{-1}} &\frac{1}{2d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} 
+		\left( \omega_d^{k_1(d-j-l_1)}\omega_d^{k_2(j-l_2)}\ket{\psi_1} + \omega_d^{k_1(j-l_1)}\omega_d^{k_2(d-j-l_2)}
+		 \ket{\psi_2}\right) \ket{l_1}_{A'}\ket{l_2}_{B'}\\
+		= &\frac{1}{2} \sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \left( \ket{\psi_1} \ket{d-j}_{A'}\ket{j}_{B'} + \ket{\psi_2} \ket{j}_{A'}\ket{d-j}_{B'}\right)\\
+		\xrightarrow[]{\text{Controlled-}U_{A/B}}& \frac{1}{2} \sum_{j=1}^{d-1} U_A^{\log_r(d-j)} (U_A\ct)^{\log_r j} U_B^{\log_r (d-j)} (U_B\ct)^{\log_r j} \ket{\psi_1} \ket{d-j}_{A'}\ket{j}_{B'}\\
+		&+\frac{1}{2} \sum_{j=1}^{d-1} U_A^{\log_r j} (U_A\ct)^{\log_r j} U_B^{\log_r j} (U_B\ct)^{\log_r j} \ket{\psi_2} \ket{j}_{A'}\ket{d-j}_{B'}\\
+		=& \frac{1}{2} ((U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}+\ket{\psi_2})\x \sum_{j=1}^{d-1} \ket{j}_{A'}\ket{d-j}_{B'},
+	\end{align}
+where we use the fact that $\sum_{j=1}^{d-1} \ket{j}\ket{d-j} = \sum_{j=1}^{d-1} \ket{d-j}\ket{j}$.
+The other fact is the following. Since $r$ is the primitive root of $d$, we know
 \begin{align}
 	r^{j-\log_r (d-r^j)} \equiv r^j (d-r^j)^{-1} \pmod{d}.
 \end{align}
@@ -1362,86 +1527,51 @@ and
 \begin{align}
 	j - \log_r (d-r^j) = \log_r (d-1).
 \end{align}
-\hl{We can see that at this point we need to show $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} = \ket{\psi_2}$.}
+\hl{We can see that at this point we need to show $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} = \ket{\psi_2}$, so that}\\
+\hl{$\norm{\frac{1}{2}((U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}+ \ket{\psi_2}} = 1/\sqrt{d-1}$. }
 
-Here are some evidence that this equality may hold:
+	
+If the initial state is $O_A\ket{\psi}$, then the evolution is very similar 
 \begin{align}
-	&O_A \ket{\psi_2} = \omega_d\ket{\psi_2}  && O_A (U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} = \omega_d (U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}\\
-	&O_B \ket{\psi_2} = \omega_d^{d-1} \ket{\psi_2} && O_B (U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} = \omega_d^{d-1} (U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}.
+	O_A \ket{\psi} \ket{0}_{A'}\ket{0}_{B'} =&  
+		\frac{1}{2} \sum_{j=1}^{d-1} O_A(U_A\ct U_B\ct)^{\log_r j}(\ket{\psi_1}+\ket{\psi_2} \ket{0}_{A'}\ket{0}_{B'}\\
+		=&\frac{1}{2}\sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} (\omega_d^{d-j} \ket{\psi_1} + \omega_d^j \ket{\psi_2}) \ket{0}_{A'}\ket{0}_{B'}\\
+		\xrightarrow[]{QFT_d} &\frac{1}{2d}\sum_{j=1}^{d-1} \sum_{k_1,k_2 = 0}^{d-1}(U_A\ct U_B\ct)^{\log_r j} (\omega_d^{d-j} \ket{\psi_1} + \omega_d^j \ket{\psi_2})  \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		\xrightarrow[]{\text{Controlled-}O_{A/B}}&\frac{1}{2d}\sum_{j=1}^{d-1}\sum_{k_1,k_2 = 0}^{d-1} 
+		 O_A^{k_1}(U_A\ct)^{\log_r j} O_B^{k_2}(U_B\ct)^{\log_r j} (\omega_d^{d-j} \ket{\psi_1} + \omega_d^j \ket{\psi_2}) \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		=& \frac{1}{2d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}
+		(\omega_d^{d-j}\omega_d^{(k_2-k_1)j}\ket{\psi_1}
+		+\omega_d^j \omega_d^{(k_1-k_2)j} \ket{\psi_2})
+		 \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		\xrightarrow[]{QFT_d^{-1}}& \frac{1}{2} \sum_{j=1}^{d-1}  (U_A\ct U_B\ct)^{\log_r j}  
+		(\omega_d^{d-j}\ket{\psi_1} \ket{d-j}_{A'}\ket{j}_{B'}
+		+ \omega_d^j \ket{\psi_2} \ket{j}_{A'} \ket{d-j}_{B'})\\
+		\xrightarrow[]{\text{Controlled-}U_{A/B}}&  \frac{1}{2} ((U_A\ct U_B\ct)^{\log_r(d-1)} \ket{\psi_1}+\ket{\psi_2}) \x  
+		\sum_{j=1}^{d-1} \omega_d^{j}\ket{j}_{A'}\ket{d-j}_{B'}.
 \end{align}
-Moreover, $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}$ is orthogonal to $(U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi}$ for all $j = 1\dots (d-3)/2$,
-because
+If the initial state is $U_A\ket{\psi}$, then the evolution is very similar too
 \begin{align}
-	&(O_A+O_A\ct)(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} \\
-	=& (U_A\ct U_B\ct)^{\log_r (d-1)} (O_A^{\log_r (d-1)} +(O_A\ct)^{\log_r (d-1)}) \ket{\psi_1} \\
-	=& 2\cos(2\pi/d) (U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}\\
-	&(O_A+O_A\ct)(U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi}\\
-	 =& (U_A\ct U_B\ct)^j (O_A^{r^j} + (O_A\ct)^{r^j}) A_\ast^\diamond \ket{\psi}\\
-	=& \cos( \frac{2r^j \pi}{d}) (U_A\ct U_B\ct)^jA_\ast^\diamond \ket{\psi}.
-\end{align}
-So we can conclude $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} \in \spn(\supp(A_\ast^\diamond \ket{\psi}))$.
-On the other hand, considering the fact that $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}$ is orthogonal to $\ket{\psi_1}$, and $\ket{\psi_2}$ is orthogonal
-to $\ket{\psi_1}$, we can say that 
-\begin{align}
-	(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1} \in \spn(\supp(\ket{\psi_2})).
-\end{align}
-We can use \cref{eq:xaxb_trans} to conclude that 
-\begin{align}
-	A_{n+2}  \frac{B_1 - B_2}{-2\sin(\pi/d)} \ket{\psi_1} = \ket{\psi_2}.
-\end{align}
-which means that $\ket{\psi_1}$ and $\ket{\psi_2}$ has the same Schmidt rank and
-the same set of Schmidt coefficients.
-Then $(U_A\ct U_B\ct)^{\log_r (d-1)} \ket{\psi_1}$ has the same Schmidt rank as $\ket{\psi_2}$.
-
-\textbf{Case 1: Write $\ket{\psi} = 1/2\sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j (\ket{\psi_1} + \ket{\psi_2})$.}
-Using $\Phi_A\x \Phi_B$ defined in \cref{sec:isometry},
- It is easy to calculate 
-\begin{align}
-	&\Phi_A\x\Phi_B\left( \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j \ket{\psi_1}\right) = \ket{\psi_1} \x \sum_{j=0}^{d-2} \ket{-r^j}\ket{r^j},\\
-	&\Phi_A\x\Phi_B\left( \sum_{j=0}^{d-2} (U_A\ct U_B\ct)^j \ket{\psi_2}\right) = (U_A\ct U_B\ct)^{\log_r(d-1)}\ket{\psi_2} \x \sum_{j=0}^{d-2} \ket{r^j}\ket{-r^j},
-\end{align}
-Since $\sum_{j=0}^{d-2} \ket{r^j}\ket{-r^j} = \sum_{j=0}^{d-2}\ket{-r^j}\ket{r^j}$, we can write 
-\begin{align}
-	\Phi_A\x \Phi_B(\ket{\psi}) = \frac{1}{2}\left(\ket{\psi_1} + (U_A\ct U_B\ct)^{\log_r(d-1)}\ket{\psi_2})\right)
-	\x \sum_{j=0}^{d-2} \ket{r^j}\ket{-r^j}.
+	U_A \ket{\psi} \ket{0}_{A'}\ket{0}_{B'} =&  
+		\frac{1}{2} \sum_{j=0}^{d-2} U_A(U_A\ct U_B\ct)^{j}(\ket{\psi_1}+\ket{\psi_2} \ket{0}_{A'}\ket{0}_{B'}\\
+		=&\frac{1}{2}\sum_{j=0}^{d-2}(U_A\ct)^{j-1}  (U_B\ct)^{j} (\ket{\psi_1} + \ket{\psi_2}) \ket{0}_{A'}\ket{0}_{B'}\\
+		\xrightarrow[]{QFT_d} &\frac{1}{2d}\sum_{j=0}^{d-2} \sum_{k_1,k_2 = 0}^{d-1}(U_A\ct)^{j-1} (U_B\ct)^{j} (\ket{\psi_1} + \ket{\psi_2})  \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		\xrightarrow[]{\text{Controlled-}O_{A/B}}&\frac{1}{2d}\sum_{j=0}^{d-2}\sum_{k_1,k_2 = 0}^{d-1} 
+		 O_A^{k_1}(U_A\ct)^{j-1} O_B^{k_2}(U_B\ct)^{j} (\ket{\psi_1} + \ket{\psi_2}) \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		=& \frac{1}{2d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} (U_A\ct)^{j-1} (U_B\ct)^{j}
+		(\omega_d^{k_2r^j-k_1r^{j-1}}\ket{\psi_1}
+		+\omega_d^{(k_1r^{j-1}-k_2r^j} \ket{\psi_2})
+		 \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		\xrightarrow[]{QFT_d^{-1}}& \frac{1}{2} \sum_{j=0}^{d-2}  (U_A\ct)^{j-1} (U_B\ct)^{ j}  
+		(\ket{\psi_1} \ket{d-r^{j-1}}_{A'}\ket{r^j}_{B'}
+		+ \ket{\psi_2} \ket{r^{j-1}}_{A'} \ket{d-r^j}_{B'})\\
+		\xrightarrow[]{\text{Controlled-}U_{A/B}}&  \frac{1}{2} ((U_A\ct U_B\ct)^{\log_r(d-1)} \ket{\psi_1}+\ket{\psi_2}) \x  
+		\sum_{j=0}^{d-2} \ket{r^{j-1}}_{A'}\ket{d-r^j}_{B'}.
 \end{align}
 
-\textbf{Case 3: Write $\ket{\psi'} = \sum_{j=0}^{d-2} (U_A\ct)^j(U_B\ct)^j \ket{\psi_1}$}.
-We show that the isometry given in \cref{sec:isometry} can distill a maximally entangled
-state with local dimension $(d-1)$ out of $\ket{\psi'}$.
-The isometry evolves the state as follows:
-\begin{enumerate}
-	\item Append control registers $A'$ and $B'$:
-	\begin{align}
-		\ket{\psi'} \ket{0}_{A'}\ket{0}_{B'} = 
-		\sum_{j=0}^{d-2} (U_A\ct)^j (U_B\ct)^j \ket{\psi_1} \ket{0}_{A'}\ket{0}_{B'};
-	\end{align}
-	\item $QFT_d$ on the control registers:
-	\begin{align}
-		\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} (U_A\ct)^j (U_B\ct)^j \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}
-	\end{align}
-	\item Controlled-$O_A$ and $O_B$:
-	\begin{align}
-		&\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} O_A^{k_1}(U_A\ct)^j O_B^{k_2}(U_B\ct)^j
-		 \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		 &= \frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{k_2r^j} (U_B\ct)^j O_A^{k_1}(U_A\ct)^j 
-		  \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&=\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{(k_2-k_1)r^j}
-		(U_A\ct)^j(U_B\ct)^j  \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'};
-	\end{align}
-	\item $QFT_d^{-1}$ on the control registers:
-	\begin{align}
-		\to &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=0}^{d-2} \omega_d^{k_1(-r^j-l_1)}\omega_d^{k_2(r^j-l_2)}
-		 (U_A\ct)^j(U_B\ct)^j \ket{\psi_1} \ket{l_1}_{A'}\ket{l_2}_{B'}\\
-		= &\sum_{j=0}^{d-2}(U_A\ct)^j(U_B\ct)^j  \ket{\psi_1} \ket{-r^j}_{A'}\ket{r^j}_{B'}
-	\end{align}
-	\item Controlled-$U_A$ and $U_B$:
-	\begin{align}
-		&\to \sum_{j=0}^{d-2} U_A^j (U_A\ct)^j U_B^j (U_B\ct)^j  \ket{\psi_1} \ket{-r^j}_{A'}\ket{r^j}_{B'}\\
-		&=  \ket{\psi_1} \x \sum_{j=0}^{d-2} \ket{-r^j}_{A'}\ket{r^j}_{B'}\\
-		&= \sqrt{d-1} \ket{\psi_1} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{-r^j}_{A'}\ket{r^j}_{B'}.
-	\end{align}
-\end{enumerate}
+
+%It means that $(U_A\ct)(U_B\ct)^j \ket{\psi_1} \in \spn(\supp(\ket{\psi}))$ for all $j \in [d-1]$,
+%and so is $\ket{\psi'}$.
+%\hl{[TODO] show that $\ket{\psi'}$ is obtained from $\ket{\psi}$ by local isometries.}
 
 
 %%------------------------------------------------------------------------
@@ -1530,184 +1660,6 @@ behave in this game. The correlation can be easily extracted from the behaviour 
 Note that the dimension $d$ is defined in the rules of $\CHSH_X$.
 Next we are going to prove that the strategy winning this game optimally can self-test $d$-dimensional EPR pair and 
 $d$-dimensional $\sigma_x$ and $\sigma_z$.
-%-----------------------------------------------
-\subsection{An isometry}
-\label{sec:isometry}
-%-----------------------------------------------
-We first build the isometry out of $U_A, X_A$ and $U_B$, $X_B$
-as shown in the diagram below.
-Then we list the key relations needed for this isometry to work.
-In the end, we prove this isometry works.
-\begin{figure}[H]
-\center
-        \begin{tikzpicture}[thick]
-        %
-        % `operator' will only be used by Hadamard (H) gates here.
-        % `phase' is used for controlled phase gates (dots).
-        % `surround' is used for the background box.
-        \tikzstyle{operator} = [draw,fill=white,minimum size=1.5em] 
-        \tikzstyle{phase} = [fill,shape=circle,minimum size=5pt,inner sep=0pt]
-        \tikzstyle{surround} = [fill=blue!10,thick,draw=black,rounded corners=2mm]
-        %
-        % Bracket
-        \draw[decorate,decoration={brace,mirror},thick] (0,-1) to
-    	node[midway,left] (bracket1) {$\ket{\psi}$}
-    	(0,-2);
-        % Qubits
-        \node at (0,0) (q1) {$\ket{0}$};
-        \node at (0,-1) (q2) {};
-        \node at (0,-2) (q3) {};
-        \node at (0,-3) (q4) {$\ket{0}$};
-        %
-        % Column 1
-        \node[operator] (op11) at (1,0) {$QFT_d$} edge [-] (q1);
-        \node[operator] (op14) at (1,-3) {$QFT_d$} edge [-] (q4);
-        %
-        % Column 3
-        \node[phase] (phase11) at (2,0) {} edge [-] (op11);
-	\node[operator] (op22) at (2,-1) {$X_A$} edge [-] (q2);
-	\node[operator] (op23) at (2, -2) {$X_B\ct$} edge[-] (q3);
-        \node[phase] (phase14) at (2,-3) {} edge [-] (op14);
-        \draw[-] (phase11) -- (op22);
-        \draw[-] (phase14) -- (op23);
-        %
-        % Column 4
-        \node[operator] (op31) at (3,0) {$QFT_d^{-1}$} edge [-] (phase11);
-        \node[operator] (op34) at (3,-3) {$QFT_d^{-1}$} edge [-] (phase14);
-        %
-        % Column 5
-        \node[phase] (phase21) at (4,0) {} edge [-] (op31);
-	\node[operator] (op42) at (4,-1) {$U_A$} edge [-] (op22);
-	\node[operator] (op43) at (4, -2) {$U_B\ct$} edge[-] (op23);
-        \node[phase] (phase24) at (4,-3) {} edge [-] (op34);
-        \draw[-] (phase21) -- (op42);
-        \draw[-] (phase24) -- (op43);
-        %
-        % Column 6
-        \node (end2) at (5,-1) {} edge [-] (op42);
-        \node (end3) at (5,-2) {} edge [-] (op43);
-        %
-        % Bracket
-        \draw[decorate,decoration={brace},thick] (5,-1) to
-    	node[midway,right] (bracket) {$\ket{junk}$}
-    	(5,-2);
-        %
-        % Column 7
-        \node (end1) at (6.5,-0.5) {} edge [-] (phase21);
-        \node (end4) at (6.5,-2.5) {} edge [-] (phase24);
-        % Dashed line
-        \draw[loosely dotted] (0,-1.5) -- (5,-1.5);
-        % Bracket
-        \draw[decorate,decoration={brace},thick,] (6.5,-0.5) to
-    	node[midway,right] (bracket2) {$\ket{\EPR{d-1}}$}
-    	(6.5,-2.5);
-        %
-        % Background Box
-        \begin{pgfonlayer}{background} 
-        \node[surround] (background) [fit = (q1) (op14) (bracket1)(bracket2)] {};
-        \end{pgfonlayer}
-        %
-        \end{tikzpicture}
-	\caption{The isometries $\Phi_A$ and $\Phi_B$.}
-\end{figure}
-Here, we use a slightly different maximally entangled state
-\begin{align}
-\ket{\EPR{d-1}} = \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}( \ket{j}\ket{d-j} + \ket{d-j}\ket{j}).
-\end{align} 
-\hl{We need to find two isometries,$W_A$ and $W_B$, such that}
-\begin{align}
-	\label{eq:xa_eig} &X_A W_AW_B A_{m_r+2}^0\ket{\psi} \appd{\sqrt{\epsilon}} \omega_d W_AW_BA_{m_r+2}^0 \ket{\psi} \\
-	\label{eq:xb_eig} &X_B W_AW_BA_{m_r+2}^0 \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d^{-1} W_AW_BA_{m_r+2}^0 \ket{\psi} \\
-	\label{eq:norm} &\norm{W_AW_B A_{m_r+2}^0\ket{\psi}} \appd{\sqrt{\epsilon}} \frac{1}{\sqrt{d-1}}.
-\end{align}
-In the ideal case, $W_A$ and $W_B$ will change the basis of $\ket{\psi}$ in the following way
-\begin{align}
-	W_AW_B A_{m_r+2}^0 \ket{\psi} = \frac{1}{\sqrt{d-1}} W_AW_B \ket{1}\ket{1} = \ket{x_1}\ket{x_{d-1}}.
-\end{align}
-\hl{Maybe we will build $W_A$ out of $A_{m_r+2}^0, A_{m_r+2}^1, A_{m_r+3}^0$ and $A_{m_r+3}^1$ and
-another weighted CHSH test to build $W_B$.}
-
-Then the key relations that we can derive are
-\begin{enumerate}
-	\item From \cref{eq:norm} and the weighted $CHSH$ correlation we can derive that 
-	\begin{align}
-	\norm{(U_A\ct)^j (U_B\ct)^{j} W_AW_B A_{m_r+2}^0\ket{\psi}} \appd{\sqrt{\epsilon}} \frac{1}{\sqrt{d-1}} \text{ for all } j \in [d-1];
-	\end{align}
-	\item Using relation $U_AX_AU_A\ct = X_A^r$ and \cref{eq:xa_eig}, we can derive
-	\begin{align}
-		X_A (U_A\ct)^j W_AW_B A_{m_r+2}^0 \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d^{r^j} (U_A\ct)^j W_AW_B A_{m_r+2}^0\Pi_A\ket{\psi},
-	\end{align}
-	on Bob's side, the relation is 
-	\begin{align}
-		X_B (U_B\ct)^j W_AW_B A_{m_r+2}^0 \ket{\psi} \appd{\sqrt{\epsilon}} \omega_d^{-r^j} (U_B\ct)^j W_AW_B A_{m_r+2}^0\Pi_B\ket{\psi};
-	\end{align}
-	\item The previous relation implies that 
-	\begin{align}
-	\bra{\psi} A_{m_r+2}^0 W_AW_B U_A^j U_A^{j'} W_AW_B A_{m_r+2}^0 \ket{\psi} \simeq \epsilon \text{ for all }j \neq j',
-	\end{align}
-	because the eigenspaces of a unitary are orthogonal,
-	and similarly on Bob's side.
-\end{enumerate}
-Note that Item $1$ and $2$ combined implies that
-\begin{align}
-	\ket{\psi} \appd{O(\epsilon^{1/4})} \sum_{i=0}^{d-1} (U_A\ct)^j (U_B\ct)^j W_AW_B A_{m_r+2}^0 \ket{\psi}.
-\end{align}
-The isometry evolves the state as follows:
-\begin{enumerate}
-	\item Append control registers $A'$ and $B'$:
-	\begin{align}
-		\ket{\psi} \ket{0}_{A'}\ket{0}_{B'} \appd{O(\epsilon^{1/4})} 
-		\sum_{j=0}^{d-2} (U_A\ct)^j (U_B\ct)^j W_AW_BA_{m_r+2}^0 \ket{\psi} \ket{0}_{A'}\ket{0}_{B'};
-	\end{align}
-	\item $QFT_d$ on the control registers:
-	\begin{align}
-		\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} (U_A\ct)^j (U_B\ct)^j W_AW_BA_{m_r+2}^0 \ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}
-	\end{align}
-	\item Controlled-$X_A$ and $X_B$:
-	\begin{align}
-		&\to \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} X_A^{k_1}(U_A\ct)^j X_B^{k_2}(U_B\ct)^j
-		W_AW_BA_{m_r+2}^0 \ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&\appd{O(\sqrt{\epsilon})}\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{(k_1-k_2)r^j}
-		(U_A\ct)^j(U_B\ct)^j W_AW_BA_{m_r+2}^0 \ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'};
-	\end{align}
-	\item $QFT_d^{-1}$ on the control registers:
-	\begin{align}
-		\to &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=0}^{d-2} \omega_d^{k_1(r^j-l_1)}\omega_d^{k_2(-r^j-l_2)}
-		 (U_A\ct)^j(U_B\ct)^j W_AW_BA_{m_r+2}^0 \ket{\psi} \ket{l_1}_{A'}\ket{l_2}_{B'}\\
-		= &\sum_{j=0}^{d-2}(U_A\ct)^j(U_B\ct)^j W_AW_BA_{m_r+2}^0 \ket{\psi} \ket{r^j}_{A'}\ket{-r^j}_{B'}
-	\end{align}
-	\item Controlled-$U_A$ and $U_B$:
-	\begin{align}
-		&\to \sum_{j=0}^{d-2} U_A^j (U_A\ct)^j U_B^j (U_B\ct)^j W_AW_BA_{m_r+2}^0 \ket{\psi} \ket{r^j}_{A'}\ket{-r^j}_{B'}\\
-		&= W_AW_BA_{m_r+2}^0 \ket{\psi} \x \sum_{j=0}^{d-2} \ket{r^j}_{A'}\ket{-r^j}_{B'}\\
-		&\appd{O(\sqrt{\epsilon})} \sqrt{d-1}W_AW_BA_{m_r+2}^0 \ket{\psi} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^j}_{A'}\ket{-r^j}_{B'}.
-	\end{align}
-\end{enumerate}
-If the initial state is $X_A\ket{\psi}$, then the evolution is very similar 
-\begin{align}
-	X_A \ket{\psi} \ket{0}_{A'}\ket{0}_{B'} &\appd{O(\epsilon^{1/4})} 
-		\sum_{j=0}^{d-2} X_A(U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{0}_{A'}\ket{0}_{B'}\\
-		&\appd{\sqrt{\epsilon}} \sum_{j=0}^{d-2} \omega_d^{r^j}(U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{0}_{A'}\ket{0}_{B'}\\
-		&\to\frac{1}{d}\sum_{j=0}^{d-2} \sum_{k_1,k_2 = 0}^{d-1} \omega_d^{r^j} (U_A\ct)^j (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&\to\frac{1}{d}\sum_{j=0}^{d-2}\sum_{k_1,k_2 = 0}^{d-1} 
-		\omega_d^{r^j} X_A^{k_1}(U_A\ct)^j X_B^{k_2}(U_B\ct)^j\Pi_A \Pi_B\ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&\appd{O(\sqrt{\epsilon})} \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{r^j}\omega_d^{(k_1-k_2)r^j}(U_A\ct)^j(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&\to  \sum_{j=0}^{d-2} \omega_d^{r^j} (U_A\ct)^j(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{r^j}_{A'}\ket{-r^j}_{B'}\\
-		&\to  \Pi_A \Pi_B \ket{\psi} \x  \sum_{j=0}^{d-2} \omega_d^{r^j}\ket{r^j}_{A'}\ket{-r^j}_{B'}\\
-		&\appd{\sqrt{\epsilon}} \sqrt{d-1}\Pi_A \Pi_B \ket{\psi} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_d^{r^j} \ket{r^j}_{A'}\ket{-r^j}_{B'}.
-\end{align}
-If the initial state is $U_A\ket{\psi}$, then the evolution is very similar too
-\begin{align}
-	U_A \ket{\psi} \ket{0}_{A'}\ket{0}_{B'} &\appd{O(\epsilon^{1/4})} 
-		\sum_{j=0}^{d-2} (U_A\ct)^{j-1} (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{0}_{A'}\ket{0}_{B'}\\
-		&\to\frac{1}{d}\sum_{j=0}^{d-2} \sum_{k_1,k_2 = 0}^{d-1} (U_A\ct)^{j-1} (U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&\to\frac{1}{d}\sum_{j=0}^{d-2}\sum_{k_1,k_2 = 0}^{d-1} 
-		X_A^{k_1}(U_A\ct)^{j-1} X_B^{k_2}(U_B\ct)^j\Pi_A \Pi_B\ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&\appd{O(\sqrt{\epsilon})} \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=0}^{d-2} \omega_d^{k_1r^{j-1}}\omega_d^{-k_2r^j}(U_A\ct)^{j-1}(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		&\to  \sum_{j=0}^{d-2} (U_A\ct)^{j-1}(U_B\ct)^j\Pi_A \Pi_B \ket{\psi} \ket{r^{j-1}}_{A'}\ket{-r^j}_{B'}\\
-		&\to  \Pi_A \Pi_B \ket{\psi} \x  \sum_{j=0}^{d-2} \ket{r^{j-1}}_{A'}\ket{-r^j}_{B'}\\
-		&\appd{\sqrt{\epsilon}} \sqrt{d-1}\Pi_A \Pi_B \ket{\psi} \x \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^{j-1}}_{A'}\ket{-r^j}_{B'}.
-\end{align}
 %In the ideal case, Alice and Bob share state $\ket{\psi} = \frac{1}{d-1} \sum_{i=1}^{d-1}\ket{ii}$.
 %They first append control register $\ket{0}$ to their own share of $\ket{\psi}$.
 %then apply $QFT_d$ to the control register, which evolves the state as
