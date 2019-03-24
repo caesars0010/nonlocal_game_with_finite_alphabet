@@ -210,6 +210,13 @@
 % Bell Ineqaulities
 \newcommand{\I}{\mathcal{I}}
 
+% Square root of epsilon
+\newcommand{\ep}{\epsilon}
+\newcommand{\se}{\sqrt{\epsilon}}
+\newcommand{\qe}{\epsilon^{1/4}}
+\newcommand{\sd}{\sqrt{d}}
+\newcommand{\sr}{\sqrt{r}}
+\newcommand{\qd}{d^{1/4}}
 % Commands for highlighting text and notes
 
 \usepackage{color}
@@ -267,7 +274,81 @@
 \maketitle
 
 %This note is based on results in \cite{slofstra2017} and \cite{coladan2017}.
-
+%=======================================
+\section{Approximation tools}
+%=======================================
+We use the following notation for approximation relations
+\begin{align}
+	\ket{u} \appd{\epsilon} \ket{v} \iff \norm{\ket{u} - \ket{v}} \leq \epsilon. 
+\end{align}
+For $a,b \in \C$, we have
+\begin{align}
+	a \appd{\epsilon} b \iff \norm{a-b} \leq \epsilon.
+\end{align}
+\begin{proposition}
+	Let $\ket{v}$ and $\ket{v'}$ be unit vectors satisfying the relation that $\ket{v} \appd{\epsilon} \ket{v'}$
+	then for any unit vector $\ket{u}$,
+	\begin{align}
+		| \braket{v}{u} - \braket{v'}{u} | \leq \epsilon.
+	\end{align}	
+\end{proposition}
+\begin{proof}
+	We can write $\ket{v'} = \ket{v} + \ket{v''}$, where $\norm{\ket{v''}} \leq \epsilon$,
+	then
+	\begin{align}
+	| \braket{v}{u} - \braket{v'}{u} | = |\braket{v''}{u}| \leq \norm{\ket{v''}} \leq \epsilon.
+	\end{align}
+\end{proof}
+\begin{proposition}
+	Suppose $\ket{u_1} \appd{\ep} \ket{v_1}$ and $\ket{u_2} \appd{\ep} \ket{v_2}$
+	then 
+	\begin{align}
+		\braket{u_1}{u_2} \appd{2\ep+\ep^2} \braket{v_1}{v_2}.
+	\end{align}
+\end{proposition}
+\begin{proof}
+	We can write $\ket{u_1} = \ket{v_1} + \ket{v_1'}$ and $\ket{u_2} = \ket{v_2} + \ket{v_2'}$,
+	such that $\norm{\ket{v_1'}} \leq \ep$ and $\norm{\ket{v_2'}} \leq \ep$. Then we see that 
+	\begin{align}
+		\norm{ \braket{u_1}{u_2} - \braket{v_1}{v_2} } \leq 
+		\norm{\braket{v_1}{v_2'}} + \norm{\braket{v_2}{v_1'}} + \norm{\braket{v_1'}{v_2'}}
+		\leq  2\ep + \ep^2. 
+	\end{align}
+\end{proof}
+\begin{proposition}
+\label{prop:orthog}
+	Let $H$ be a Hermitian matrix and $\ket{u}$ and $\ket{v}$ be two unit vectors
+	which satisfy the condition that 
+	\begin{align}
+		H\ket{u} \appd{\epsilon} a \ket{u}, \\
+		H\ket{v} \appd{\epsilon} b \ket{v}, 
+	\end{align}
+	for some $a > b \in \R$, then
+	\begin{align}
+		\braket{u}{v} \leq \frac{2\epsilon}{a-b}.
+	\end{align}
+\end{proposition}
+\begin{proof}
+	We write $H\ket{u} = a\ket{u} + \ket{u'}$ such that $\norm{\ket{u'}} \leq \epsilon$.
+	Similarly, we write $H\ket{v} = b\ket{v} + \ket{v'}$ such that $\norm{\ket{v'}} \leq \epsilon$.
+	Then, we know
+	\begin{align}
+		\bra{v}H\ket{u} = a\braket{v}{u} + \braket{v}{u'},\\
+		\bra{v}H\ket{u}  =b\braket{v}{u} + \braket{v'}{u},
+	\end{align}
+	so we can calculate that
+	\begin{align}
+		\braket{v}{u} = \frac{\braket{v'}{u} -  \braket{v}{u'}}{a-b} \leq \frac{\norm{\ket{u'}}+\norm{\ket{v'}}}{a-b} 
+		\leq \frac{2\epsilon}{a-b}.
+	\end{align}
+\end{proof}
+\begin{proposition}
+	Let $\ket{u}$ and $\ket{v}$ be two unit vectors, if $\braket{u}{v} \geq 1 - \ep$,
+	then
+	\begin{align}
+		\ket{u} \appd{\sqrt{2} \se} \ket{v}.
+	\end{align}
+\end{proposition}
 %----------------------------------------------------------------
 \section{The linear system game}
 %----------------------------------------------------------------
@@ -650,98 +731,97 @@ The last relation that we will derive is that
 Combining them with the relation $X_AZ_B \ket{\psi} \appd{\frac{\sqrt{\epsilon}}{c\sqrt{s}}} -Z_AX_B\ket{\psi}$,
 we get 
 \begin{align}
-	X_AZ_A \ket{\psi} \appd{\frac{2s+1}{c\sqrt{s}}} -X_BZ_B \ket{\psi}.
+	X_AZ_A \ket{\psi} \appd{\frac{2s+1}{c\sqrt{s}} \sqrt{\epsilon}} -X_BZ_B \ket{\psi}.
 \end{align}
 
 A special property of $\I_\alpha$ is summarized in the proposition below.
 \begin{proposition}
 \label{prop:2d-subspace}
 	Let $\mu = \arctan(1/\alpha)$ for some $\alpha$.
-	If a quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]+1}, \{\tilde{B}_y\}_{y \in [2]+1})$ 
+	If a quantum strategy $(\ket{\psi}, \{A_x\}_{x \in \{1,2\}}, \{B_y\}_{y \in \{1,2\}})$ 
 	satisfies the condition that $\ip{\I_\alpha} = 2\sqrt{1+\alpha^2}-\epsilon$, where 
-	$\ip{\I_\alpha}$ is expressed in terms of $\tA_x$,  $\tB_x$ and $\ket{\tpsi}$,
+	$\ip{\I_\alpha}$ is expressed in terms of $A_x$,  $B_x$ and $\ket{\psi}$,
 	then  
 	\begin{align}
-		[(\tB_0\tB_1)^r + (\tB_1\tB_0)^r] \ket{\tpsi} \appd{O(2^{r-1}\sqrt{\epsilon})} 2\cos(2r\mu)\ket{\tpsi},
+		[(B_0 B_1)^r + (B_1B_0)^r] \ket{\psi} \appd{O(2^{r-1}\sqrt{\epsilon})} 2\cos(2r\mu)\ket{\psi},
 	\end{align}
 	for all $r \geq 1$.
 \end{proposition}
 \begin{proof}[Proof of \cref{prop:2d-subspace}]
 	For simplicity, we write $c = \cos(\mu)$ and $s = \sin(\mu)$.
-	Hence, the typical value of $\mu$ is $\pi/d$ for some large $d$, we assume both $c$ and $s$ are between $0$ and $1$.
+	(The value of $\mu$ in our correlation is $-\pi/d$ for some large $d$).
 	
 	Following the argument in the early section, we define
 	\begin{align*}	
-	\tilde{Z}_A = \tA_1, && \tX_A = \tA_2\\
-	\tilde{Z}_B = (\tB_1+\tB_2)/2c, && \tX_B = (\tB_1-\tB_2)/2s.
+	&Z_A = A_1, && X_A = A_2\\
+	&Z_B = (B_1+B_2)/2c, && X_B = (B_1-B_2)/2s.
 	\end{align*}
-	A simple observation is that $c^2 \tZ_B^2 + s^2 \tX_B^2 = \1$, which implies that 
-	$ \tZ_B^2 \leq \1/c^2$ and 
+	A simple observation is that $c^2 Z_B^2 + s^2 X_B^2 = \1$, which implies that 
+	$ Z_B^2 \leq \1/c^2$ and 
 	\begin{align}
 		\label{eq:bnd_zb}
-		\norm{\tZ_B} \leq \frac{1}{c}.
+		\norm{Z_B} \leq \frac{1}{c}.
 	\end{align}
-	We would like to know how close $\tZ_B^2\ket{\tpsi}$ and $\tZ_A^2\ket{\tpsi}$ are,
+	We would like to know how close $Z_B^2\ket{\psi}$ and $Z_A^2\ket{\psi}$ are,
 	and we start with the condition 
 	\begin{align}
 		\label{eq:zazb}
-		\tZ_B \ket{\tpsi} \appd{\frac{\sqrt{s}}{c}\sqrt{\epsilon}} \tZ_A \ket{\psi},
+		Z_B \ket{\psi} \appd{\frac{\sqrt{s}}{c}\sqrt{\epsilon}} Z_A \ket{\psi}.
 	\end{align}
-	which means that $\norm{ (\tZ_B-\tZ_A)\ket{\tpsi}} \leq \frac{\sqrt{s}}{c}\sqrt{\epsilon}$.
 	Using \cref{eq:bnd_zb,eq:zazb}, we get
 	\begin{align}
-		\norm{ (\tZ_B^2 - \tZ_A^2)\ket{\tpsi}} \leq& \norm{ (\tZ_B^2 - \tZ_A\tZ_B)\ket{\tpsi}} + \norm{ (\tZ_A\tZ_B - \tZ_A^2)\ket{\tpsi}}\\
-		=&\norm{\tZ_B}\norm{ (\tZ_B - \tZ_A)\ket{\tpsi}} + \norm{\tZ_A}\norm{ (\tZ_B - \tZ_A)\ket{\tpsi}}\\
+		\norm{ (Z_B^2 - Z_A^2)\ket{\psi}} \leq& \norm{ (Z_B^2 - Z_AZ_B)\ket{\psi}} + \norm{ (Z_AZ_B - Z_A^2)\ket{\psi}}\\
+		=&\norm{Z_B}\norm{ (Z_B - Z_A)\ket{\psi}} + \norm{Z_A}\norm{ (Z_B - Z_A)\ket{\psi}}\\
 		\leq&(\frac{\sqrt{s}}{c^2}+ \frac{\sqrt{s}}{c})\sqrt{\epsilon},
 	\end{align}
-	where we also use the facts that $\tZ_A$ and $\tZ_B$ commute and $\tZ_A$ is a unitary.
-	Since $\tZ_A^2 = \1$, what we have shown is equivalent to 
+	where we also use the facts that $Z_A$ and $Z_B$ commute and $Z_A$ is a unitary.
+	Since $Z_A^2 = \1$, what we have shown is equivalent to 
 	\begin{align}
-		\tZ_B^2 \ket{\tpsi} \appd{(\frac{\sqrt{s}}{c^2}+ \frac{\sqrt{s}}{c})\sqrt{\epsilon}} \ket{\tpsi}.
+		Z_B^2 \ket{\psi} \appd{(\frac{\sqrt{s}}{c^2}+ \frac{\sqrt{s}}{c})\sqrt{\epsilon}} \ket{\psi}.
 	\end{align}
-	Expanding $\tilde{Z}_B^2$ we get
+	Expanding $Z_B^2$ we get
 	\begin{align*}
-		 \tilde{Z}_B^2 = \frac{\tB_1^2 + \tB_1\tB_2 + \tB_2\tB_1 + \tB_2^2}{4c^2}
-		=\frac{2\1 + \tB_1\tB_2 + \tB_2\tB_1}{4c^2},
+		 Z_B^2 = \frac{B_1^2 + B_1B_2 + B_2B_1 + B_2^2}{4c^2}
+		=\frac{2\1 + B_1B_2 + B_2B_1}{4c^2},
 	\end{align*}
 	so we can derive that 
 	\begin{align*}
-		&\norm{[\tB_1\tB_2 + \tB_2\tB_1 - 2(2\cos^2(\mu)-1)\1]\ket{\tpsi}} \\
-		=& \norm{ [\tB_1\tB_2 + \tB_2\tB_1 - 2 \cos(2\mu) \1]\ket{\tpsi}} \\
+		&\norm{[B_1 B_2 + B_2 B_1 - 2(2\cos^2(\mu)-1)\1]\ket{\psi}} \\
+		=& \norm{ [B_1B_2 + B_2B_1 - 2 \cos(2\mu) \1]\ket{\psi}} \\
 		\leq& 4c^2(\frac{\sqrt{s}}{c^2}+ \frac{\sqrt{s}}{c})\sqrt{\epsilon} \\
-		=& (4\sqrt{s} + 4c\sqrt{s})\sqrt{\epsilon}\\
-		=& O(\sqrt{\epsilon}).
+		=& (4\sqrt{s} + 4c\sqrt{s})\sqrt{\epsilon}
+		= O(4\sqrt{\epsilon}).
 	\end{align*}
 	We take one step further and assume that 
 	\begin{align}
-		[(\tB_1\tB_2)^j + (\tB_2\tB_1)^j]\ket{\tpsi} \appd{O(2^{j-1}\sqrt{\epsilon})} 2\cos(2j\mu) \ket{\tpsi},
+		[(B_1B_2)^j + (B_2B_1)^j]\ket{\psi} \appd{O(2^{j+1}\sqrt{\epsilon})} 2\cos(2j\mu) \ket{\psi},
 	\end{align}
 	for all $j =1\dots n-1$.
 	When $j=n$, we have
 	\begin{align}
-		&\norm{ (\tB_1\tB_2+\tB_2\tB_1)[(\tB_1\tB_2)^{n-1} + (\tB_2\tB_1)^{n-1}]\ket{\tpsi} - 2\cos(2(n-1)\mu)(\tB_1\tB_2+\tB_2\tB_1)\ket{\tpsi}}\\
-		\leq& \norm{(\tB_1\tB_2+\tB_2\tB_1)} \norm{ [(\tB_1\tB_2)^{n-1} + (\tB_2\tB_1)^{n-1}]\ket{\tpsi} - 2\cos(2(n-1)\mu)\ket{\tpsi}}\\
-		\leq & 2 O(2^{n-2} \sqrt{\epsilon}) = O(2^{n-1} \sqrt{\epsilon}).
+		&\norm{ (B_1B_2+B_2B_1)[(B_1B_2)^{n-1} + (B_2B_1)^{n-1}]\ket{\tpsi} - 2\cos(2(n-1)\mu)(B_1B_2+B_2B_1)\ket{\psi}}\\
+		\leq& \norm{(B_1B_2+B_2B_1)} \norm{ [(B_1B_2)^{n-1} + (B_2B_1)^{n-1}]\ket{\tpsi} - 2\cos(2(n-1)\mu)\ket{\psi}}\\
+		\leq & 2 O(2^{n} \sqrt{\epsilon}) = O(2^{n+1} \sqrt{\epsilon}).
 	\end{align}
 	On the other hand,
 	\begin{align}
-		 (\tB_1\tB_2+\tB_2\tB_1)[(\tB_1\tB_2)^{n-1} + (\tB_2\tB_1)^{n-1}] = 
-		 (\tB_1\tB_2)^{n} + (\tB_2\tB_1)^{n}+ (\tB_1\tB_2)^{n-2} + (\tB_2\tB_1)^{n-2}.
+		 (B_1B_2+B_2B_1)[(B_1B_2)^{n-1} + (B_2B_1)^{n-1}] = 
+		 (B_1B_2)^{n} + (B_2B_1)^{n}+ (B_1B_2)^{n-2} + (B_2B_1)^{n-2}.
 	\end{align}
 	By the induction hypothesis we have 
 	\begin{align}
-		[(\tB_1\tB_2)^{n-2} + (\tB_2\tB_1)^{n-2}] \ket{\tpsi} \appd{O(2^{n-3} \sqrt{\epsilon})} 2\cos(2(n-2)\mu) \ket{\tpsi}.
+		[(B_1B_2)^{n-2} + (B_2B_1)^{n-2}] \ket{\psi} \appd{O(2^{n-1} \sqrt{\epsilon})} 2\cos(2(n-2)\mu) \ket{\psi}.
 	\end{align}
 	The derivation so far gives us that
 	\begin{align}
-		&\qquad[(\tB_1\tB_2)^{n} + (\tB_2\tB_1)^{n}] \ket{\tpsi} \\
-		&\appd{O((2^{n-1}+2^{n-3})\sqrt{\epsilon})} 2\cos(2(n-1)\mu)(\tB_1\tB_2+\tB_2\tB_1)\ket{\tpsi} - 2\cos(2(n-2)\mu) \ket{\tpsi}\\
+		&\qquad[(B_1B_2)^{n} + (B_2B_1)^{n}] \ket{\psi} \\
+		&\appd{O((2^{n+1}+2^{n-1})\sqrt{\epsilon})} 2\cos(2(n-1)\mu)(B_1B_2+B_2B_1)\ket{\tpsi} - 2\cos(2(n-2)\mu) \ket{\tpsi}\\
 		&\appd{O(2\sqrt{\epsilon})} [4\cos(2(n-1)\mu)\cos(2\mu) - 2\cos(2(n-2)\mu)]\ket{\tpsi}\\
 		&= (2\cos(2n\mu) + 2\cos(2(n-2)\mu) - 2\cos(2(n-2)\mu))\ket{\tpsi}\\
 		&=2\cos(2n\mu) \ket{\tpsi}.
 	\end{align}
 	
-%	Since $\tB_1\tB_2$ is the product of two unitaries,
+%	Since $B_1\tB_2$ is the product of two unitaries,
 %	we can assume the eigen-decomposition of $\tB_1\tB_2$ is
 %	\begin{align}
 %		\tB_1\tB_2 = \sum_{i=1}^m \lambda_i \ketbra{i}{i}
@@ -981,53 +1061,65 @@ we prove the following propositions.
 The strategy $S$ satisfy the following relations
 \begin{align}
 	  A_\ast^\diamond B_\ast^\diamond \ket{\psi}
-	  =&A_\ast^\diamond \ket{\psi} = (A_{n+1}^0+A_{n+1}^1)\ket{\psi} = (A_{n+2}^0+A_{n+2}^1)\ket{\psi} \\
-	  =&B_\ast^\diamond \ket{\psi} = (B_{n+1}^0+B_{n+1}^1)\ket{\psi} = (B_{n+2}^0+B_{n+2}^1)\ket{\psi}\\
-	A_\ast^\perp B_\ast^\perp\ket{\psi}= &A_\ast^\perp\ket{\psi} = A_{n+1}^\perp \ket{\psi} = A_{n+2}^\perp \ket{\psi}\\
-	=&B_\ast^\perp\ket{\psi} = B_{n+1}^\perp \ket{\psi} = B_{n+2}^\perp \ket{\psi}.
+	  \appd{O( r\se)}&A_\ast^\diamond \ket{\psi} \appd{O( r\se)} (A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O( r\se)} (A_{n+2}^0+A_{n+2}^1)\ket{\psi} \\
+	  \appd{O( r\se)}&B_\ast^\diamond \ket{\psi} \appd{O( r\se)} (B_{n+1}^0+B_{n+1}^1)\ket{\psi} \appd{O( r\se)} (B_{n+2}^0+B_{n+2}^1)\ket{\psi}\\
+	A_\ast^\perp B_\ast^\perp\ket{\psi}\appd{O( r\se)} &A_\ast^\perp\ket{\psi} \appd{O( r\se)} A_{n+1}^\perp \ket{\psi} \appd{O( r\se)} A_{n+2}^\perp \ket{\psi}\\
+	\appd{O( r\se)}&B_\ast^\perp\ket{\psi} \appd{O( r\se)} B_{n+1}^\perp \ket{\psi} \appd{O( r\se)} B_{n+2}^\perp \ket{\psi}.
 \end{align}
 and
 \begin{align}
-&A_{n+1}^0 \ket{\psi} = B_{n+1}^0 \ket{\psi} && A_{n+1}^1\ket{\psi} = B_{n+1}^1 \ket{\psi}\\
-&A_{n+2}^0 \ket{\psi} = B_{n+2}^0 \ket{\psi} && A_{n+2}^1\ket{\psi} = B_{n+2}^1 \ket{\psi}
+&A_{n+1}^0 \ket{\psi} \appd{O( r\se)} B_{n+1}^0 \ket{\psi} && A_{n+1}^1\ket{\psi} \appd{O( r\se)} B_{n+1}^1 \ket{\psi}\\
+&A_{n+2}^0 \ket{\psi} \appd{O( r\se)} B_{n+2}^0 \ket{\psi} && A_{n+2}^1\ket{\psi} \appd{O( r\se)} B_{n+2}^1 \ket{\psi}
 \end{align}
 \end{proposition}
 
 \begin{proof} 
-We prove $(A_{n+1}^0+A_{n+1}^1)\ket{\psi} = B_\ast^\diamond \ket{\psi}$ as an example.
+We prove $(A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O(r\se)} B_\ast^\diamond \ket{\psi}$ as an example.
 The rest of the relations follow the same line of arguments.
 
 From the correlation, we can also observe that
 \begin{align}
- \bra{\psi} (A_{n+1}^0+A_{n+1}^1)B_\ast^\diamond \ket{\psi} = \frac{2}{d-1}.
+ \bra{\psi} (A_{n+1}^0+A_{n+1}^1)B_\ast^\diamond \ket{\psi} = \frac{2}{d-1} - O(r^2 \epsilon).
 \end{align}
+The $r^2$ comes from the fact that the whole correlation of size $\Theta(r^2)$.
 On the other hand, we can calculate that 
 \begin{align}
-	\bra{\psi} B_\ast^\diamond \ket{\psi} = \bra{\psi}(A_{n+1}^0+A_{n+1}^1)\ket{\psi} = \frac{2}{d-1},
+	\bra{\psi} B_\ast^\diamond \ket{\psi} \appd{O(r^2\epsilon)} 
+ \bra{\psi}(A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O(r^2\epsilon)} \frac{2}{d-1},
 \end{align}
-which implies that $\norm{ B_\ast^\diamond \ket{\psi} }= \norm{ (A_{n+1}^0+A_{n+1}^1) \ket{\psi}} = \sqrt{2/(d-1)}$.
-So we can find that 
+which implies that 
 \begin{align}
-	\frac{\bra{\psi}B_\ast^\diamond (A_{n+1}^0+A_{n+1}^1) B_\ast^\diamond\ket{\psi}}{ \| B_\ast^\diamond \ket{\psi} \|^2} = 1,
+	\norm{(A_{n+1}^0 + A_{n+1}^1)B_\ast^\diamond \ket{\psi} - B_\ast^\diamond\ket{\psi}}^2 
+	= \bra{\psi} B_\ast^\diamond \ket{\psi} - \bra{\psi}B_\ast^\diamond(A_{n+1}^0 + A_{n+1}^1)B_\ast^\diamond \ket{\psi}
+	= O(r^2 \epsilon),
 \end{align}
-which means that 
+where we used the fact that $(A_{n+1}^0 + A_{n+1}^1)^2 = A_{n+1}^0 + A_{n+1}^1$.
+Hence we can conclude that $(A_{n+1}^0 + A_{n+1}^1)B_\ast^\diamond \ket{\psi} \appd{O(r\se)} B_\ast^\diamond\ket{\psi}$.
+Since the projective measurement $(A_{n+1}^0+A_{n+1}^1)$ commute with $B_\ast^\diamond$, we can use similar calculation to get
+$(A_{n+1}^0 + A_{n+1}^1)B_\ast^\diamond \ket{\psi} \appd{O(r\se)} (A_{n+1}^0 + A_{n+1}^1)\ket{\psi}$.
+Combining the two relation together, we have
 \begin{align}
-	(A_{n+1}^0+A_{n+1}^1)B_\ast^\diamond \ket{\psi} = B_\ast^\diamond \ket{\psi}.
+	(A_{n+1}^0 + A_{n+1}^1) \ket{\psi} \appd{O(r\se)} B_\ast^\diamond \ket{\psi}.
 \end{align}
-Since the projective measurement $(A_{n+1}^0+A_{n+1}^1)$ commute with $B_\ast^\diamond$, we can get
+
+From the correlation, we know that 
 \begin{align}
-	\frac{\bra{\psi} (A_{n+1}^0+A_{n+1}^1) B_\ast^\diamond(A_{n+1}^0+A_{n+1}^1)\ket{\psi}}{ \| (A_{n+1}^0+A_{n+1}^1) \ket{\psi} \|^2} = 1,
+	\bra{\psi} A_\ast^\perp B_\ast^\perp \ket{\psi} = \frac{d-3}{d-1} - O(r^2 \ep).
 \end{align}
-with similar argument we get 
+In the mean time, we also have 
+$\norm{A_\ast^\perp \ket{\psi}} \appd{O(r\se)} \norm{B_\ast^\perp\ket{\psi}} \appd{O(r\se)} \sqrt{(d-3)/(d-1)}$.
+The two facts above imply that 
 \begin{align}
-	B_\ast^\diamond (A_{n+1}^0+A_{n+1}^1) \ket{\psi} = (A_{n+1}^0+A_{n+1}^1)\ket{\psi}.
+	\norm{A_\ast^\perp \ket{\psi} - B_\ast^\perp \ket{\psi}}^2 = \norm{A_\ast^\perp \ket{\psi}}^2 + \norm{B_\ast^\perp \ket{\psi}}^2
+	- 2 \bra{\psi} A_\ast^\perp B_\ast^\perp \ket{\psi}  = O(r^2 \ep),
 \end{align}
-The two conclusions above can be chained by commutativity to reach the conclusion that 
+or equivalently,
 \begin{align}
-	(A_{n+1}^0+A_{n+1}^1)\ket{\psi} = B_\ast^\diamond \ket{\psi}.
+	A_\ast^\perp \ket{\psi} \appd{O(r\se)} B_\ast^\perp \ket{\psi}.
 \end{align}
 \end{proof}
-Note that we have $A_1 \ket{\psi} = B_1 \ket{\psi}$ and $A_2 \ket{\psi} = B_2 \ket{\psi}$ from the linear
+
+Note that we have $A_1 \ket{\psi} \appd{O(r\se)} B_1 \ket{\psi}$ and $A_2 \ket{\psi} \appd{O(r\se)} B_2 \ket{\psi}$ from the linear
 system game.
 %Another conclusion we can draw is that $B_\ast^\diamond = A_\ast^\diamond$ and $B_\ast^\perp = A_\ast^\perp$.
 %We can assume the Schmidt decomposition of $\ket{\psi}$ is
@@ -1045,31 +1137,34 @@ system game.
 		&A_{n+1} = A_{n+1}^0 - A_{n+1}^1 && A_{n+2} = A_{n+2}^0 - A_{n+2}^1,\\
 		&B_{n+1} = B_{n+1}^0 - B_{n+1}^1 && B_{n+2} = B_{n+2}^0 - B_{n+2}^1.
 	\end{align}
-	Then $S$ introduces two optimal strategy that achieves $\ip{\I_\alpha}^{\max}$:
+	Then $S$ introduces two strategies that achieve $\ip{\I_\alpha}^{\max} - O(r\se)$, which are
 	\begin{align}
 		S_1 = \left(A_{n+1}, A_{n+2}, B_1, B_2, \frac{A_\ast^\diamond\ket{\psi}}{\norm{A_\ast^\diamond\ket{\psi}}}\right),\\
 		S_2 = \left(B_{n+1}, B_{n+2}, A_1, A_2, \frac{A_\ast^\diamond\ket{\psi}}{\norm{A_\ast^\diamond\ket{\psi}}}\right).
 	\end{align}
 \end{proposition}
 \begin{proof}
-We will prove that $\bra{\psi} A_{n+1}^0B_1^0 \ket{\psi} = \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi}$ as an example,
+We will prove that $\bra{\psi} A_{n+1}^0B_1^0 \ket{\psi} \appd{O(\sd r\se)} \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi}$ as an example,
 \begin{align*}
 	   &\bra{\psi} A_{n+1}^0B_1^0 \ket{\psi} \\
 	= &\bra{\psi}(A_\ast^\diamond + A_\ast^\perp) A_{n+1}^0B_1^0 (A_\ast^\diamond + A_\ast^\perp)\ket{\psi} \\
 	= & \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\perp\ket{\psi}
 	+\bra{\psi}A_\ast^\perp A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\perp A_{n+1}^0B_1^0 A_\ast^\perp\ket{\psi}\\
-	= & \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_{n+1}^\perp\ket{\psi} 
+	\appd{O(r\se)} & \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_{n+1}^\perp\ket{\psi} 
 	+\bra{\psi}A_{n+1}^\perp A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_{n+1}^\perp A_{n+1}^0B_1^0 A_{n+1}^\perp\ket{\psi}\\
 	=&\bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi},
 \end{align*}
-where we use the facts that $A_\ast^\perp \ket{\psi} = A_{n+1}^\perp \ket{\psi}$ and that 
+where we use the facts that $A_\ast^\perp \ket{\psi} \appd{O(r\se)} A_{n+1}^\perp \ket{\psi}$ and that 
 $\supp(A_{n+1}^0) \cap \supp(A_{n+1}^\perp) = \emptyset$. This means that if Alice and Bob share state $A_\ast^\diamond \ket{\psi}/\norm{A_\ast^\diamond \ket{\psi}}$ and apply $A_{n+1}^0B_1^0$
 we get conditional probability
 \begin{align}
-	\frac{\bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi}}{\bra{\psi} A_\ast^\diamond \ket{\psi}} = 
+	\frac{\bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi}}{\bra{\psi} A_\ast^\diamond \ket{\psi}}  
+	\appd{O(r\se)} \frac{\bra{\psi} A_{n+1}^0B_1^0 \ket{\psi}}{\bra{\psi} A_\ast^\diamond \ket{\psi}}
+	\appd{O(d r^2 \ep)}
 	\frac{\cos^2(-\pi/2d)}{2}.
 \end{align} 
-Hence, we can prove that the correlation generated by $S_1$ maximally violates $\I_{\cot(-\pi/d)}$.
+\hl{Using the fact that $O(r \se)$ dominates $O(dr^2 \ep)$,}
+we can prove that the correlation generated by $S_1$ achieves violation $\I^{\max}_{\cot(-\pi/d)} - O(r \se)$.
 The proof for $S_2$ is very similar so we omit it here.
 \end{proof}
 
@@ -1084,11 +1179,11 @@ The proof for $S_2$ is very similar so we omit it here.
 	\end{align}
 	then
 	\begin{enumerate}
-	\item $\ket{\psi_1} = \ket{\psi_3}$ and $\ket{\psi_2} = \ket{\psi_4}$; 
-	\item $A_\ast^\diamond \ket{\psi} = \ket{\psi_1}+\ket{\psi_2}$;
-	\item $\braket{\psi_2}{\psi_1} = 0$;
-	\item $\norm{\ket{\psi_i}} = 1/\sqrt{d-1}$ for $i = 1, 2, 3, 4$;
-	\item $B_1B_2 \ket{\psi_1} = \omega_d\ket{\psi_1}$;
+	\item $\ket{\psi_1} \appd{O(\sd \sr\qe)} \ket{\psi_3}$ and $\ket{\psi_2} \appd{O(\sd \sr\qe)} \ket{\psi_4}$; 
+	\item $A_\ast^\diamond \ket{\psi} \appd{O( r\se)} \ket{\psi_1}+\ket{\psi_2}$;
+	\item $\braket{\psi_2}{\psi_1} \appd{O( r\se)} 0$;
+	\item $\norm{\ket{\psi_i}} \appd{O(\sr\qe)} 1/\sqrt{d-1}$ for $i = 1, 2, 3, 4$;
+	\item $B_1B_2 \ket{\psi_1} \appd{O(\frac{dr}{cs}\se)} \omega_d\ket{\psi_1}$;
 	\item $A_1A_2 \ket{\psi_1} = \omega_d^{-1} \ket{\psi_1}$.
 	\end{enumerate}
 \end{proposition}
@@ -1098,29 +1193,35 @@ The proof for $S_2$ is very similar so we omit it here.
 		&\ket{\psi_1} = 1/2(A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 +A_{n+1}^1) \ket{\psi} \\
 		&\ket{\psi_3} = 1/2(B_{n+1}^0 - iB_{n+2}B_{n+1}^1+iB_{n+2}B_{n+1}^0 + B_{n+1}^1)\ket{\psi}.
 	\end{align}
-	Since $A_{n+1}^0 \ket{\psi} = B_{n+1}^0 \ket{\psi}$ and $A_{n+1}^1 \ket{\psi} = B_{n+1}^1 \ket{\psi}$,
+	Since $A_{n+1}^0 \ket{\psi} \appd{O(r\se)} B_{n+1}^0 \ket{\psi}$ and $A_{n+1}^1 \ket{\psi} \appd{O(r\se)} B_{n+1}^1 \ket{\psi}$,
 	it suffices to show
-	\begin{align}
-		iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 \ket{\psi} = - iB_{n+2}B_{n+1}^1+iB_{n+2}B_{n+1}^0\ket{\psi},
-	\end{align}
+	$A_{n+2}A_{n+1}^1 - A_{n+2}A_{n+1}^0 \ket{\psi}$ is close to $- B_{n+2}B_{n+1}^1+B_{n+2}B_{n+1}^0\ket{\psi}$,
 	or equivalently,
+	$A_{n+2}A_{n+1} \ket{\psi}$ is close to $-B_{n+2}B_{n+1} \ket{\psi}$.
+
+	
+	We first show that $B_{n+2}B_{n+1} \ket{\psi}$ is very close to $A_{n+1}A_{n+2}\ket{\psi}$, then we 
+	can use the anticommutation relation from $S_1$.
+	Starting with $B_{n+1} \ket{\psi} \appd{O(r\se)} A_{n+1}\ket{\psi}$, we have
 	\begin{align}
-		A_{n+2}A_{n+1} \ket{\psi} = -B_{n+2}B_{n+1} \ket{\psi}.
+		B_{n+2}B_{n+1}\ket{\psi} \appd{O(r\se)} B_{n+2}A_{n+1}\ket{\psi} =A_{n+1} B_{n+2}\ket{\psi} \appd{O(r\se)} A_{n+1}A_{n+2}\ket{\psi},
 	\end{align}
 	Recall that $A_{n+2}$ and $A_{n+1}$ are in the strategy $S_1$, where $A_{n+2}$ acts as $X_A$ 
-	and $A_{n+1}$ acts as $Z_A$ on $A_\ast^\diamond \ket{\psi}$.
-	Similarly, in $S_2$, $B_{n+1}$ and $B_{n+1}$ are unitaries on $A_\ast^\diamond \ket{\psi}$.
-	Starting with $B_{n+1} \ket{\psi} = A_{n+1}\ket{\psi}$, we have
+	and $A_{n+1}$ acts as $Z_A$ on $A_\ast^\diamond \ket{\psi}$, then we know 
 	\begin{align}
-		B_{n+2}B_{n+1}\ket{\psi} = B_{n+2}A_{n+1}\ket{\psi} =A_{n+1} B_{n+2}\ket{\psi} = A_{n+1}A_{n+2}\ket{\psi},
+		A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi} \appd{O(r\se)} A_{n+2}A_{n+1}(A_{n+1}^0 + A_{n+1}^1)\ket{\psi} = A_{n+2}A_{n+1}\ket{\psi}.
 	\end{align}
-	where we used the fact that
+	Similarly, we can also prove that 
 	\begin{align}
-	&B_{n+2}B_{n+1}\ket{\psi} = B_{n+2}B_{n+1}B_\ast^\diamond \ket{\psi} = B_{n+2}B_{n+1}A_\ast^\diamond \ket{\psi},\\
-	&A_{n+2}A_{n+1}\ket{\psi} = A_{n+2}A_{n+1}A_\ast^\diamond \ket{\psi},
+		A_{n+1}A_{n+2} \ket{\psi} \appd{O( r\se)} A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi}.
 	\end{align}
-	and the fact that $A_{n+2}\ket{\psi} = B_{n+2}\ket{\psi}$.
-	The proof of $\ket{\psi_2} = \ket{\psi_4}$ is similar.
+	At this point, we use the anticommutation relation induced by $S_1$ and conclude that 
+	\begin{align}
+		A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi} \appd{\frac{\sqrt{r}}{c\sqrt{s}}\qe} -A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi}
+	\end{align}
+	If we use the fact $c = 1 - \pi^2/(2d^2)$ and $s = \pi/d$, the distance is of order $O(\sd \sr \qe)$.
+	The proof of $\ket{\psi_2} \appd{O(\sd \sr \qe)} \ket{\psi_4}$ is similar.
+	\hl{This may not be the best bound.}
 	
 	\textbf{Item 2}. Expanding $\ket{\psi_2}$, we get
 	\begin{align}
@@ -1128,7 +1229,7 @@ The proof for $S_2$ is very similar so we omit it here.
 	\end{align}
 	Then,
 	\begin{align}
-		\ket{\psi_2} + \ket{\psi_1} = 1/2( 2A_{n+1}^0 + 2A_{n+1}^1) \ket{\psi} = A_\ast^\diamond \ket{\psi}.
+		\ket{\psi_2} + \ket{\psi_1} = 1/2( 2A_{n+1}^0 + 2A_{n+1}^1) \ket{\psi} \appd{O(r\se)} A_\ast^\diamond \ket{\psi}.
 	\end{align}
 	
 	\textbf{Item 3}. We can calculate that 
@@ -1137,11 +1238,15 @@ The proof for $S_2$ is very similar so we omit it here.
 	 = &1/4\bra{\psi}(A_{n+1}^0 - iA_{n+1}^1A_{n+2} + iA_{n+1}^0A_{n+2} +A_{n+1}^1)(A_{n+1}^1 + iA_{n+2}A_{n+1}^0 -iA_{n+2}A_{n+1}^1 + A_{n+1}^0)\ket{\psi}\\
 	 =& 1/2i \bra{\psi}(A_{n+1}^0A_{n+2}A_{n+1}^0-A_{n+1}^1A_{n+2}A_{n+1}^1\ket{\psi}.
 	\end{align*}
-	Note that $ \bra{\psi}(A_{n+1}^0A_{n+2}A_{n+1}^0\ket{\psi} =  \bra{\psi}(B_{n+1}^0A_{n+2}B_{n+1}^0)\ket{\psi} =\bra{\psi}A_{n+2}B_{n+1}^0)\ket{\psi}
-	= 0$, and similarly, $\bra{\psi}(A_{n+1}^1A_{n+2}A_{n+1}^1\ket{\psi} = \bra{\psi} A_{n+2}B_{n+1}^1 \ket{\psi} = 0$.
-	Hence, $\braket{\psi_2}{\psi_1} = 0$.
+	Then we will show that $\bra{\psi} A_{n+1}^0A_{n+2}A_{n+1}^0 \ket{\psi} \appd{O( r\se)} 0$ because
+	\begin{align}
+	 \bra{\psi}(A_{n+1}^0A_{n+2}A_{n+1}^0\ket{\psi} \appd{O(r\se)}  \bra{\psi}(B_{n+1}^0A_{n+2}B_{n+1}^0)\ket{\psi} =\bra{\psi}A_{n+2}B_{n+1}^0)\ket{\psi}
+	\appd{O(r^2\ep)} 0
+	\end{align}
+	Similarly, $\bra{\psi}(A_{n+1}^1A_{n+2}A_{n+1}^1\ket{\psi} \appd{O(r\se)} \bra{\psi} A_{n+2}B_{n+1}^1 \ket{\psi} \appd{O(r^2\ep)} 0$.
+	Hence, $\braket{\psi_2}{\psi_1} \appd{O(r\se)} 0$.
 	
-	\textbf{Item 4}. We prove $\norm{\psi_1} = 1/\sqrt{d-1}$ as an example. When it is shown,
+	\textbf{Item 4}. We prove $\norm{\psi_1} \appd{\sqrt{r} \qe} 1/\sqrt{d-1}$ as an example. When it is shown,
 	the rest of the norms can be derived using Item $1$ to $3$.
 	We start with
 	\begin{align*}
@@ -1151,98 +1256,133 @@ The proof for $S_2$ is very similar so we omit it here.
 	\end{align*}
 	Here we apply the same trick to flip $A_{n+1}^1$ to Bob's side and get 
 	\begin{align}
-		\bra{\psi}A_{n+1}^1A_{n+2}A_{n+1}^0\ket{\psi} = \bra{\psi}B_{n+1}^1A_{n+2}B_{n+1}^0\ket{\psi} 
+		\bra{\psi}A_{n+1}^1A_{n+2}A_{n+1}^0\ket{\psi} \appd{O(r\se)} \bra{\psi}B_{n+1}^1A_{n+2}B_{n+1}^0\ket{\psi} 
 		= \bra{\psi}B_{n+1}^1B_{n+1}^0A_{n+2}\ket{\psi} = 0.
 	\end{align}
-	Similarly, we have $\bra{\psi}A_{n+1}^0A_{n+2}A_{n+1}^1\ket{\psi} = 0$.
+	Similarly, we have $\bra{\psi}A_{n+1}^0A_{n+2}A_{n+1}^1\ket{\psi} \appd{ O(r\se)} 0$.
 	Hence, we get 
 	\begin{align}
-		\braket{\psi_1}{\psi_1} = 1/2\bra{\psi}(A_{n+1}^0+A_{n+1}^1\ket{\psi} = 1/2\bra{\psi}A_\ast^\diamond \ket{\psi} = \frac{1}{d-1}.
+		\braket{\psi_1}{\psi_1} \appd{O(r\se)} 1/2\bra{\psi}(A_{n+1}^0+A_{n+1}^1\ket{\psi} \appd{O(r^2\ep)} 
+		 \frac{1}{d-1}.
 	\end{align}
 	
 	\textbf{Item 5}.From the correlation, we can get that 
 	\begin{align}
-	\norm{A_{n+1}^0 \ket{\psi}} = \norm{A_{n+1}^1 \ket{\psi}} =\norm{A_{n+2}^0 \ket{\psi}} = \norm{A_{n+2}^1 \ket{\psi}} = \frac{1}{\sqrt{d-1}}.
+	\norm{A_{n+1}^0 \ket{\psi}} \appd{O(r\se)} 
+	\norm{A_{n+1}^1 \ket{\psi}} \appd{O(r\se)}
+	\norm{A_{n+2}^0 \ket{\psi}} \appd{O(r\se)}
+	 \norm{A_{n+2}^1 \ket{\psi}} \appd{O(r\se)} \frac{1}{\sqrt{d-1}}.
 	\end{align}
-	Next we focus on the implication of the fact that $S_1$ maximally violates $\I_{\cot(-\pi/d)}$.
+	Next we focus on the implication of the fact that $S_1$ almost maximally violates $\I_{\cot(-\pi/d)}$.
 	We define $B_1 := B_1^0 - B_1^1$, $B_2 := B_2^0-B_2^1$ and
 	\begin{align}
-		&Z_A  = A_{n+1} && X_A = A_{n+2} \\
-		&Z_B = \frac{B_1+B_2}{2\cos(-\pi/d)} && X_B = \frac{B_1-B_2}{2\sin(-\pi/d)}.
+		&Z_A  := A_{n+1} && X_A := A_{n+2} \\
+		&Z_B := \frac{B_1+B_2}{2\cos(-\pi/d)} && X_B := \frac{B_1-B_2}{2\sin(-\pi/d)}.
 	\end{align}
 	From the correlation given above, we get 
          \begin{align}
-         	&\bra{\psi} A_{n+1}^0 (B_1^0 - B_1^1) \ket{\psi} = \frac{\cos(\pi/d)}{d-1},\\
-        		&\bra{\psi} A_{n+1}^0 (B_2^0 - B_2^1) \ket{\psi} = \frac{\cos(\pi/d)}{d-1},
+         	&\bra{\psi} A_{n+1}^0 (B_1^0 - B_1^1) \ket{\psi} \appd{O(r^2\ep)} \frac{\cos(\pi/d)}{d-1},\\
+        		&\bra{\psi} A_{n+1}^0 (B_2^0 - B_2^1) \ket{\psi} \appd{O(r^2\ep)} \frac{\cos(\pi/d)}{d-1}.
          \end{align}
-        which implies that 
-        \begin{align}
-        		\frac{\bra{\psi} A_{n+1}^0 (B_1 + B_2)/(2\cos(-\pi/d)) A_{n+1}^0 \ket{\psi}}{\norm{A_{n+1}^0 \ket{\psi}}^2} = 1.
-        \end{align}
+         Based on \cref{prop:2d-subspace}, we can see that 
+         \begin{align}
+         	(B_1B_2+B_2B_1)(A_{n+1}^0+A_{n+1}^1)\ket{\psi} 
+	\appd{O(r\se)} (B_1B_2+B_2B_1) A_\ast^\diamond \ket{\psi} \\
+	\appd{O(\sr \qe)} 2\cos(2\pi/d) A_\ast^\diamond \ket{\psi}
+	\appd{O(r\se)} 2\cos(2\pi/d)(A_{n+1}^0+A_{n+1}^1)\ket{\psi} .
+         \end{align}
+         Since $A_{n+1}^0 \ket{\psi}$ is orthogonal to $A_{n+1}^1 \ket{\psi}$, we can conclude that 
+         \begin{align}
+         	(B_1B_2+B_2B_1)A_{n+1}^0\ket{\psi} \appd{O(\sr \qe)} 2 \cos(2\pi/d) A_{n+1}^0 \ket{\psi}.
+         \end{align}
+       	Then we can calculate that
+       	\begin{align}
+       		&\norm{\frac{B_1+B_2}{2\cos{\pi/d}} A_{n+1}^0 \ket{\psi} - A_{n+1}^0\ket{\psi}}^2 \\
+		=&\bra{\psi}A_{n+1}^0 \frac{(2\1 +B_1B_2 +B_2B_1)}{4\cos^2(\pi/d)}A_{n+1}^0\ket{\psi} +
+		\bra{\psi} A_{n+1}^0 \ket{\psi} - 2 \bra{\psi} A_{n+1}^0\frac{B_1+B_2}{2\cos(\pi/d)} A_{n+1}^0\ket{\psi}\\
+		\appd{O(\sr \qe)}& (\frac{2+2\cos(2\pi/d)}{4\cos^2(\pi/d)}+1 - 2) \bra{\psi}A_{n+1}^0 \ket{\psi} = 0.
+       	\end{align}
         Equivalently,
         \begin{align}
-        		\frac{B_1+B_2}{2 \cos(-\pi/d)} A_{n+1}^0 \ket{\psi} = A_{n+1}^0 \ket{\psi}.
+        		\frac{B_1+B_2}{2 \cos(\pi/d)} A_{n+1}^0 \ket{\psi} \appd{O(r^{1/4} \ep^{1/8})} A_{n+1}^0 \ket{\psi}.
         \end{align}
         With similar reasoning, we can get
         \begin{align}
-        		\frac{B_1+B_2}{2 \cos(-\pi/d)} A_{n+1}^1 \ket{\psi} = -A_{n+1}^1 \ket{\psi}.
+        		\frac{B_1+B_2}{2 \cos(-\pi/d)} A_{n+1}^1 \ket{\psi} \appd{O(r^{1/4} \ep^{1/8})} -A_{n+1}^1 \ket{\psi}.
         \end{align}
 	Substituting the appropriate operators and states into \cref{eq:zaxb,eq:xazb}, we get
 	\begin{align}
-		\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^0\ket{\psi} =A_{n+2} A_{n+1}^1\ket{\psi}\\
-		\frac{B_1 -B_2}{2\sin(-\pi/d)} A_{n+1}^1 \ket{\psi} = A_{n+2} A_{n+1}^0 \ket{\psi}.
+		\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^0A_\ast^\diamond \ket{\psi} 
+		\appd{O(\sqrt{dr} \qe)}A_{n+2} A_{n+1}^1A_\ast^\diamond\ket{\psi}\\
+		\frac{B_1 -B_2}{2\sin(-\pi/d)} A_{n+1}^1A_\ast^\diamond \ket{\psi}  
+		\appd{O(\sqrt{dr} \qe)}A_{n+2} A_{n+1}^0 A_\ast^\diamond \ket{\psi}.
 	\end{align}
-	Denoting $c = \cos(\pi/d)$ and $s = \sin(\pi/d)$, we can write 
+	Since $A_\ast^\diamond \ket{\psi} \appd{O(r\se)} (A_{n+1}^0 + A_{n+1}^1) \ket{\psi}$, we know
+	\begin{align}
+		&\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^0A_\ast^\diamond \ket{\psi}  
+		\appd{O(dr \se)} \frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^0 \ket{\psi},\\
+		&\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^1A_\ast^\diamond \ket{\psi}  
+		\appd{O(dr \se)} \frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^1 \ket{\psi}.
+	\end{align}
+	Chaining the equations above together,
+	we get
+	\begin{align}
+		\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^0 \ket{\psi} \appd{O(\sqrt{dr}\qe)}A_{n+2} A_{n+1}^1 \ket{\psi},\\
+		\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^1 \ket{\psi}\appd{O(\sqrt{dr}\qe)} A_{n+2} A_{n+1}^0 \ket{\psi}.
+	\end{align}
+	Since $O(r^{1/4} \ep^{1/8})$ dominates, we can write 
         \begin{align}
-        		&B_1A_{n+1}^0 \ket{\psi} = cA_{n+1}^0\ket{\psi} - sA_{n+2}A_{n+1}^1\ket{\psi}\\
-        		&B_1A_{n+1}^1 \ket{\psi} = -cA_{n+1}^1\ket{\psi} - sA_{n+2}A_{n+1}^0\ket{\psi}\\
-        		&B_2A_{n+1}^0 \ket{\psi} = cA_{n+1}^0\ket{\psi} + sA_{n+2}A_{n+1}^1\ket{\psi}\\
-        		&B_2A_{n+1}^1 \ket{\psi} = -cA_{n+1}^1\ket{\psi} + sA_{n+2}A_{n+1}^0\ket{\psi}.
+        		&B_1A_{n+1}^0 \ket{\psi} \appd{O(r^{1/4} \ep^{1/8})} cA_{n+1}^0\ket{\psi} - sA_{n+2}A_{n+1}^1\ket{\psi}\\
+        		&B_1A_{n+1}^1 \ket{\psi} \appd{O(r^{1/4} \ep^{1/8})} -cA_{n+1}^1\ket{\psi} - sA_{n+2}A_{n+1}^0\ket{\psi}\\
+        		&B_2A_{n+1}^0 \ket{\psi} \appd{O(r^{1/4} \ep^{1/8})} cA_{n+1}^0\ket{\psi} + sA_{n+2}A_{n+1}^1\ket{\psi}\\
+        		&B_2A_{n+1}^1 \ket{\psi} \appd{O(r^{1/4} \ep^{1/8})} -cA_{n+1}^1\ket{\psi} + sA_{n+2}A_{n+1}^0\ket{\psi}.
         \end{align}
         Then we can calculate
         \begin{align}
-        		B_1B_2 A_{n+1}^0 \ket{\psi} =& (c B_1A_{n+1}^0 +sA_{n+2}B_1A_{n+1}^1)\ket{\psi}\\
-        		=&(c^2A_{n+1}^0- csA_{n+2}A_{n+1}^1 -csA_{n+2}A_{n+1}^1 -s^2 A_{n+2}^2 A_{n+1}^0)\ket{\psi}\\
+        		B_1B_2 A_{n+1}^0 \ket{\psi} \appd{O(r^{1/4}\ep^{1/8})}& (c B_1A_{n+1}^0 +sA_{n+2}B_1A_{n+1}^1)\ket{\psi}\\
+        		\appd{O(r^{1/4}\ep^{1/8})}&(c^2A_{n+1}^0- csA_{n+2}A_{n+1}^1 -csA_{n+2}A_{n+1}^1 -s^2 A_{n+2}^2 A_{n+1}^0)\ket{\psi}\\
         		=& (\cos(2\pi/d) A_{n+1}^0 - \sin(2\pi/d) A_{n+2}A_{n+1}^1)\ket{\psi}.
         \end{align}
         and 
         \begin{align}
-        		B_1B_2 A_{n+1}^1 \ket{\psi} =& (-c B_1A_{n+1}^1 +sA_{n+2}B_1A_{n+1}^0)\ket{\psi}\\
-        		=&(c^2A_{n+1}^1+ csA_{n+2}A_{n+1}^0 +csA_{n+2}A_{n+1}^0 -s^2 A_{n+2}^2 A_{n+1}^1)\ket{\psi}\\
+        		B_1B_2 A_{n+1}^1 \ket{\psi} \appd{O(r^{1/4}\ep^{1/8})}& (-c B_1A_{n+1}^1 +sA_{n+2}B_1A_{n+1}^0)\ket{\psi}\\
+        		\appd{O(r^{1/4}\ep^{1/8})}&(c^2A_{n+1}^1+ csA_{n+2}A_{n+1}^0 +csA_{n+2}A_{n+1}^0 -s^2 A_{n+2}^2 A_{n+1}^1)\ket{\psi}\\
         		=& (\cos(2\pi/d) A_{n+1}^1 + \sin(2\pi/d) A_{n+2}A_{n+1}^0)\ket{\psi},
         \end{align}
         or equivalently,
         \begin{align}
-        		B_1B_2 A_{n+2}A_{n+1}^1 \ket{\psi} = \sin(2\pi/d) A_{n+1}^0\ket{\psi} + \cos(2\pi/d)A_{n+2}A_{n+1}^1\ket{\psi}.
+        		B_1B_2 A_{n+2}A_{n+1}^1 \ket{\psi}\appd{O(r^{1/4}\ep^{1/8})} 
+		\sin(2\pi/d) A_{n+1}^0\ket{\psi} + \cos(2\pi/d)A_{n+2}A_{n+1}^1\ket{\psi}.
         \end{align}
         Combining the two results above we know
 	\begin{align}
-		\label{eq:omegad}&B_1B_2 (A_{n+1}^0 + i A_{n+2}A_{n+1}^1) \ket{\psi} =\omega_d(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi}.
+		\label{eq:omegad}&B_1B_2 (A_{n+1}^0 + i A_{n+2}A_{n+1}^1) \ket{\psi} 
+		\appd{O(r^{1/4}\ep^{1/8})}\omega_d(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi}.
 	\end{align}
 	Multiplying both sides by $1/2(A_\ast^\diamond - iA_{n+2})$, we get
 	\begin{align}
-		B_1B_2 \ket{\psi_1} = \omega_d\ket{\psi_1}.
+		B_1B_2 \ket{\psi_1} \appd{O(r^{1/4}\ep^{1/8})} \omega_d\ket{\psi_1}.
 	\end{align}
 	
 	\textbf{Item 6}.This one is based on the strategy $S_2$. As in the previous Item,
 	we can get
 	\begin{align}
-		&\frac{A_1+A_2}{2 \cos(-\pi/d)} B_{n+1}^0 \ket{\psi} = B_{n+1}^0 \ket{\psi}.\\
-		&\frac{A_1+A_2}{2 \cos(-\pi/d)} B_{n+1}^1 \ket{\psi} = -B_{n+1}^1 \ket{\psi},\\
-		&\frac{A_1-A_2}{2 \sin(-\pi/d)} B_{n+1}^0\ket{\psi} =B_{n+2} B_{n+1}^1\ket{\psi}\\
-		&\frac{A_1 -A_2}{2\sin(-\pi/d)} B_{n+1}^1 \ket{\psi} = B_{n+2} B_{n+1}^0 \ket{\psi}.
+		&\frac{A_1+A_2}{2 \cos(-\pi/d)} B_{n+1}^0 \ket{\psi} \appd{O(r^{1/4} \ep^{1/8})} B_{n+1}^0 \ket{\psi}.\\
+		&\frac{A_1+A_2}{2 \cos(-\pi/d)} B_{n+1}^1 \ket{\psi}  \appd{O(r^{1/4} \ep^{1/8})} -B_{n+1}^1 \ket{\psi},\\
+		&\frac{A_1-A_2}{2 \sin(-\pi/d)} B_{n+1}^0\ket{\psi} \appd{O(\sqrt{dr}\qe)}B_{n+2} B_{n+1}^1\ket{\psi}\\
+		&\frac{A_1 -A_2}{2\sin(-\pi/d)} B_{n+1}^1 \ket{\psi} \appd{O(\sqrt{dr}\qe)} B_{n+2} B_{n+1}^0 \ket{\psi}.
 	\end{align}
 	With similar calculation as in the previous case, we can get 
 	\begin{align}
-		A_1A_2 (B_{n+1}^0 - i B_{n+2}B_{n+1}^1) \ket{\psi} = \omega_d^{-1} (B_{n+1}^0 - i B_{n+2}B_{n+1}^1).
+		A_1A_2 (B_{n+1}^0 - i B_{n+2}B_{n+1}^1) \ket{\psi} \appd{O(r^{1/4} \ep^{1/8})} \omega_d^{-1} (B_{n+1}^0 - i B_{n+2}B_{n+1}^1).
 	\end{align}
 	Multiplying both sides of the equation above by $(B_\ast^\diamond+iB_{n+2})$ we get
 	\begin{align}
-		A_1A_2 \ket{\psi_3} = \omega_d^{-1}\ket{\psi_3}.
+		A_1A_2 \ket{\psi_3} \appd{O(r^{1/4} \ep^{1/8})} \omega_d^{-1}\ket{\psi_3}.
 	\end{align}
-	In the end, we substitute $\ket{\psi_1} = \ket{\psi_3}$ to get
+	In the end, we substitute $\ket{\psi_1}  \appd{O(\sd \sr\qe)} \ket{\psi_3}$ to get
 	\begin{align}
-		A_1A_2 \ket{\psi_1} = \omega_d^{-1}\ket{\psi_1}.
+		A_1A_2 \ket{\psi_1} \appd{O(r^{1/4} \ep^{1/8})} \omega_d^{-1}\ket{\psi_1}.
 	\end{align}
 \end{proof}
 Note that it can be shown that 
@@ -1256,17 +1396,17 @@ Note that it can be shown that
 %--------------------------------------------------------------
 Let $O_A = A_1A_2$ and $O_B = B_1B_2$.
 Before proving the proposition, we make one important observation.
-Recall that from the linear system game, we know that $A_iB_i \ket{\psi} = \ket{\psi}$ for $i = 1 \dots n$.
+Recall that from the linear system game, we know that $A_iB_i \ket{\psi} \appd{O(r\se)} \ket{\psi}$ for $i = 1 \dots n$.
 Then we can deduce that 
 \begin{align}
-	A_3A_4 \x B_3B_4 \ket{\psi} = A_3 \x B_3 \ket{\psi} = \ket{\psi},
+	A_3A_4 \x B_3B_4 \ket{\psi} \appd{O(r\se)} A_3 \x B_3 \ket{\psi} \appd{O(r\se)} \ket{\psi},
 \end{align}
 or equivalently,
 \begin{align}
-	U_A \x U_B \ket{\psi} = \ket{\psi}.
+	U_A \x U_B \ket{\psi} \appd{O(r\se)} \ket{\psi}.
 \end{align}
 It means that $U_A U_B $ only permutes the Schmidt basis of $\ket{\psi}$.
-Similarly, we also have $U_A\ct U_B\ct \ket{\psi} = \ket{\psi}$.
+Similarly, we also have $U_A\ct U_B\ct \ket{\psi} \appd{O(r\se)} \ket{\psi}$.
 We use this observation in the proof of the following proposition.
 
 \begin{proposition}
@@ -1282,7 +1422,7 @@ then
 	\item $\ket{\psi} = \ket{\psi'} = \ket{\psi''}$.
 \end{enumerate}
 \end{proposition}
-The intuition behind the proposition is that if we apply the projection $(U_A\ct)A_\ast^\diamond U_A^j$, for some $j$, to the state $\ket{\psi}$,
+The intuition behind the proposition is that, in the exact case, if we apply the projection $(U_A\ct)A_\ast^\diamond U_A^j$, for some $j$, to the state $\ket{\psi}$,
 we will get 
 \begin{align}
 	(U_A\ct)^j A_\ast^\diamond U_A^j \ket{\psi} = (U_A\ct)^j A_\ast^\diamond U_A^j (U_A\ct U_B\ct)^j \ket{\psi} = (U_A\ct U_B\ct)^j A_\ast^\diamond \ket{\psi}.
@@ -1291,12 +1431,14 @@ This is how we get the terms in the decomposition.
 \begin{proof}
 	First observe that 
 	\begin{align}
-		\bra{\psi}A_\ast^\diamond (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi} = \bra{\psi} A_\ast^\diamond \ket{\psi} = \frac{2}{d-1}.
+		\bra{\psi}A_\ast^\diamond (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi} =
+		\bra{\psi} A_\ast^\diamond \ket{\psi} \appd{O(r^2\ep)} \frac{2}{d-1}.
 	\end{align}
 	
 	Since $U_AO_A U_A\ct = O_A^r$ and $U_AO_A\ct U_A\ct = (O_A\ct)^r$ 
-	must hold on all the orthogonal components of $\ket{\psi}$, which includes $A_\ast^\diamond \ket{\psi}$,
-	we know that for $1 \leq j < j' \leq (d-1)/2$, we have
+	must hold on all the orthogonal components of $\ket{\psi}$, which include $A_\ast^\diamond \ket{\psi}$,
+	\hl{The reasoning here may not hold in the approximate case.}
+	we know that for $1 \leq j < j' \leq (d-1)/2$
 	\begin{align}
         	(O_A +O_A\ct) (U_A\ct U_B\ct)^{\log_r j} A_\ast^\diamond \ket{\psi} 
         	= 2\cos(2j \pi/d) (U_A\ct U_B\ct )^{\log_r j} A_\ast^\diamond \ket{\psi},
@@ -1791,20 +1933,6 @@ Since $\ket{\psi} = B_{n_r+1}^\diamond \ket{\psi} + B_{n_r+1}^\perp \ket{\psi}$,
 	&+\bra{\psi} B_{n_r+1}^\perp [U_B(X_B+X_B\ct)U_B\ct - ((X_B\ct)^r+(X_B)^r)]^2 B_{n_r+1}^\diamond \ket{\psi}
 \end{align*}
 Here, we use the following proposition to bound $\bra{\psi} B_{n_r+1}^\diamond [U_B(X_B+X_B\ct)U_B\ct - ((X_B\ct)^r+(X_B)^r)]^2 B_{n_r+1}^\perp \ket{\psi}$ and $\bra{\psi} B_{n_r+1}^\perp [U_B(X_B+X_B\ct)U_B\ct - ((X_B\ct)^r+(X_B)^r)]^2 B_{n_r+1}^\diamond \ket{\psi}$.
-\begin{proposition}
-	Let $\ket{v}$ and $\ket{v'}$ be vectors satisfying the relation that $\ket{v} \appd{\sqrt{\epsilon}} \ket{v'}$
-	then for any vector $\ket{u}$,
-	\begin{align}
-		| \braket{v}{u} - \braket{v'}{u} | \leq \sqrt{\epsilon}.
-	\end{align}	
-\end{proposition}
-\begin{proof}
-	We can write $\ket{v'} = \ket{v} + \ket{v''}$, where $\norm{\ket{v''}} \leq \sqrt{\epsilon}$,
-	then
-	\begin{align}
-	| \braket{v}{u} - \braket{v'}{u} | = |\braket{v''}{u}| \leq \sqrt{\epsilon}.
-	\end{align}
-\end{proof}
 Going back to our target,
 \begin{align}
 	&\qquad\bra{\psi} B_{n_r+1}^\perp [U_B(X_B+X_B\ct)U_B\ct - ((X_B\ct)^r+(X_B)^r)]^2 B_{n_r+1}^\diamond \ket{\psi} \\
@@ -1848,32 +1976,6 @@ Comparing it with the fact that
 we would like to draw the conclusion that $B_{n_r+1}^\diamond \ket{\psi}$ is 
 close to orthogonal to $U_B\ct B_{n_r+1}^\diamond \ket{\psi}$
 by the following proposition.
-\begin{proposition}
-\label{prop:orthog}
-	Let $H$ be a Hermitian matrix and $\ket{u}$ and $\ket{v}$ be two unit vectors
-	which satisfy the condition that 
-	\begin{align}
-		H\ket{u} \appd{\sqrt{\epsilon}} a \ket{u}, \\
-		H\ket{v} \appd{\sqrt{\epsilon}} b \ket{v}, 
-	\end{align}
-	for some $a > b \in \R$, then
-	\begin{align}
-		\ketbra{u}{v} = O(\frac{\sqrt{\epsilon}}{a-b}).
-	\end{align}
-\end{proposition}
-\begin{proof}
-	We write $H\ket{u} = a\ket{u} + \ket{u'}$ such that $\norm{\ket{u'}} = \sqrt{\epsilon}$.
-	Similarly, we write $H\ket{v} = b\ket{v} + \ket{v'}$ such that $\norm{\ket{v'}} = \sqrt{\epsilon}$.
-	Then, we know
-	\begin{align}
-		\bra{v}H\ket{u} = a\braket{v}{u} + \braket{v}{u'},\\
-		\bra{v}H\ket{u}  =b\braket{v}{u} + \braket{v'}{u},
-	\end{align}
-	so we can calculate that
-	\begin{align}
-		\braket{v}{u} = \frac{\braket{v'}{u} -  \braket{v}{u'}}{a-b} \leq \frac{\norm{\ket{u'}}+\norm{\ket{v'}}}{a-b} = O(\frac{\sqrt{\epsilon}}{a-b}).
-	\end{align}
-\end{proof}
 Following \cref{prop:orthog} and the 
 and the fact that $(X_B + X_B\ct)$ is Hermitian, we can conclude that
 \begin{align}
