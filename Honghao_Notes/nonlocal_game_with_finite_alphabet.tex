@@ -286,6 +286,7 @@ For $a,b \in \C$, we have
 	a \appd{\epsilon} b \iff \norm{a-b} \leq \epsilon.
 \end{align}
 \begin{proposition}
+	\label{prop:inner_pd}
 	Let $\ket{v}$ and $\ket{v'}$ be vectors with length less than equal to $1$ satisfying the relation that $\ket{v} \appd{\epsilon} \ket{v'}$
 	then for any unit vector $\ket{u}$,
 	\begin{align}
@@ -302,47 +303,47 @@ For $a,b \in \C$, we have
 \begin{proposition}
 	Let $\ket{u_i}$ and $\ket{v_i}$ for $i = 1,2$ be vectors with length less than equal to $1$
 	such that 
-	$\ket{u_1} \appd{\ep} \ket{v_1}$ and $\ket{u_2} \appd{\ep} \ket{v_2}$
+	$\ket{u_1} \appd{\ep_1} \ket{v_1}$ and $\ket{u_2} \appd{\ep_2} \ket{v_2}$
 	then 
 	\begin{align}
-		\braket{u_1}{u_2} \appd{2\ep+\ep^2} \braket{v_1}{v_2}.
+		\braket{u_1}{u_2} \appd{\ep_1+ \ep_2} \braket{v_1}{v_2}.
 	\end{align}
 \end{proposition}
 \begin{proof}
-	We can write $\ket{u_1} = \ket{v_1} + \ket{v_1'}$ and $\ket{u_2} = \ket{v_2} + \ket{v_2'}$,
-	such that $\norm{\ket{v_1'}} \leq \ep$ and $\norm{\ket{v_2'}} \leq \ep$. Then we see that 
+	By direct calculation we have
 	\begin{align}
-		\norm{ \braket{u_1}{u_2} - \braket{v_1}{v_2} } \leq 
-		\norm{\braket{v_1}{v_2'}} + \norm{\braket{v_2}{v_1'}} + \norm{\braket{v_1'}{v_2'}}
-		\leq  2\ep + \ep^2. 
+		\norm{ \braket{u_1}{u_2} - \braket{v_1}{v_2}} \leq &\norm{\braket{u_1}{u_2} - \braket{v_1}{u_2}}
+		+ \norm{\braket{v_1}{u_2} - \braket{v_1}{v_2}} \\
+		\leq & \ep_1 + \ep_2,
 	\end{align}
+	where we used \cref{prop:inner_pd}.
 \end{proof}
 \begin{proposition}
 \label{prop:orthog}
 	Let $H$ be a Hermitian matrix and $\ket{u}$ and $\ket{v}$ be two vectors with length less or equal to $1$,
 	which satisfy the condition that 
 	\begin{align}
-		H\ket{u} \appd{\epsilon} a \ket{u}, \\
-		H\ket{v} \appd{\epsilon} b \ket{v}, 
+		H\ket{u} \appd{\ep_1} a \ket{u}, \\
+		H\ket{v} \appd{\ep_2} b \ket{v}, 
 	\end{align}
 	for some $a > b \in \R$, then
 	\begin{align}
-		\norm{\braket{u}{v}} \leq \frac{2\epsilon}{a-b}.
+		\norm{\braket{u}{v}} \leq \frac{\ep_1+\ep_2}{a-b}.
 	\end{align}
 \end{proposition}
 \begin{proof}
-	We write $H\ket{u} = a\ket{u} + \ket{u'}$ such that $\norm{\ket{u'}} \leq \epsilon$.
-	Similarly, we write $H\ket{v} = b\ket{v} + \ket{v'}$ such that $\norm{\ket{v'}} \leq \epsilon$.
+	We write $H\ket{u} = a\ket{u} + \ket{u'}$ such that $\norm{\ket{u'}} \leq \ep_1$.
+	Similarly, we write $H\ket{v} = b\ket{v} + \ket{v'}$ such that $\norm{\ket{v'}} \leq \ep_2$.
 	Then, we know
 	\begin{align}
 		\bra{v}H\ket{u} = a\braket{v}{u} + \braket{v}{u'},\\
 		\bra{v}H\ket{u}  =b\braket{v}{u} + \braket{v'}{u},
 	\end{align}
-	so we can calculate that
+	Subtracting the second equation from the first equation gives us that 
 	\begin{align}
 		\norm{\braket{v}{u}} = \frac{\norm{\braket{v'}{u} -  \braket{v}{u'}}}{a-b} \leq \frac{\norm{\ket{v}}\norm{\ket{u'}}+
 		\norm{\ket{u}}\norm{\ket{v'}}}{a-b} 
-		\leq \frac{2\epsilon}{a-b}.
+		\leq \frac{\ep_1+\ep_2}{a-b}.
 	\end{align}
 \end{proof}
 \begin{proposition}
@@ -385,27 +386,28 @@ For $a,b \in \C$, we have
 	\end{align}
 	where we used the fact that $\norm{U} = 1$ and $\norm{a} \leq 1$.
 \end{proof}
-\begin{proposition}
-	Let $\ket{v_1}$ and $\ket{v_2}$ be vectors be vectors with length close to $1$ such that
-	$\ket{v_1} \appd{\ep} \ket{u}$ and $\ket{v_2} \appd{\ep} \ket{u}$, then
-	\begin{align}
-		\ket{u} \appd{\ep} \frac{1}{2} (\ket{v_1} + \ket{v_2}).
-	\end{align}
-\end{proposition}	
-\begin{proof}
-	Using the relation 
-	\begin{align}
-	\ket{u} - \frac{1}{2}(\ket{v_1} + \ket{v_2}) = \ket{u} - \frac{1}{2}(\ket{u}+\ket{v_2}) +
-	\frac{1}{2}(\ket{u}+\ket{v_2}) - \frac{1}{2}(\ket{v_1} + \ket{v_2}),
-	\end{align} 
-	we can get
-	\begin{align}
-		&\norm{\ket{u} - \frac{1}{2}(\ket{v_1} + \ket{v_2})} \\
-		\leq & \norm{\ket{u} - \frac{1}{2}(\ket{u}+\ket{v_2})} + \norm{\frac{1}{2}(\ket{u}+\ket{v_2}) - \frac{1}{2}(\ket{v_1} + \ket{v_2})}\\
-		=&\frac{1}{2} \norm{\ket{u} - \ket{v_2}} + \frac{1}{2} \norm{\ket{u} - \ket{v_1}}\\
-		\leq & \frac{1}{2} \ep + \frac{1}{2} \ep = \ep.
-	\end{align}
-\end{proof}
+%\begin{proposition}
+%	Let $\ket{v_1}$ and $\ket{v_2}$ be vectors be vectors with length close to $1$ such that
+%	$\ket{v_1} \appd{\ep} \ket{u}$ and $\ket{v_2} \appd{\ep} \ket{u}$, then
+%	\begin{align}
+%		\ket{u} \appd{\ep} \frac{1}{2} (\ket{v_1} + \ket{v_2}).
+%	\end{align}
+%\end{proposition}	
+%\begin{proof}
+%	Using the relation 
+%	\begin{align}
+%	\ket{u} - \frac{1}{2}(\ket{v_1} + \ket{v_2}) = \ket{u} - \frac{1}{2}(\ket{u}+\ket{v_2}) +
+%	\frac{1}{2}(\ket{u}+\ket{v_2}) - \frac{1}{2}(\ket{v_1} + \ket{v_2}),
+%	\end{align} 
+%	we can get
+%	\begin{align}
+%		&\norm{\ket{u} - \frac{1}{2}(\ket{v_1} + \ket{v_2})} \\
+%		\leq & \norm{\ket{u} - \frac{1}{2}(\ket{u}+\ket{v_2})} + \norm{\frac{1}{2}(\ket{u}+\ket{v_2}) - \frac{1}{2}(\ket{v_1} + \ket{v_2})}\\
+%		=&\frac{1}{2} \norm{\ket{u} - \ket{v_2}} + \frac{1}{2} \norm{\ket{u} - \ket{v_1}}\\
+%		\leq & \frac{1}{2} \ep + \frac{1}{2} \ep = \ep.
+%	\end{align}
+%\end{proof}
+
 %----------------------------------------------------------------
 \section{The linear system game}
 %----------------------------------------------------------------
@@ -419,77 +421,6 @@ $\Z/(d\Z)$ has primitive root $r$ and the eigenspaces for different eigenvalues 
 \hl{Later we will set the exponent to be $a \in \{2, 3, 5\}$ which is the primitive root of infinitely many prime numbers and
 construct a nonlocal game that can self-test infinitely many maximally entangled state.}
 \footnote{Figuring out what $a$ is will take us one step closer to resolving Artin's Conjecture\cite{murty1988}.}
-
-
-It can be easily checked that the qudit Pauli-x and Pauli-z operators of dimension $d$ satisfy the new relations 
-above, where Pauli-x and Pauli-z operators are defined by
-\begin{align}
-	\sigma_x = \sum_{i=0}^{d-1} \ketbra{i+1 \pmod{d} }{i}  \quad \quad
-	\sigma_z = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i}.
-\end{align}
-%The eigen-decomposition of $\sigma_z$ is clear and we give the eigen-decomposition of $\sigma_x$ below
-%\begin{align}
-%	\sigma_x = \sum_{l=0}^{d-1} \omega_d^l \ketbra{s_{-l}}{s_{-l}}
-%\end{align}
-%where
-%$
-%\ket{s_{-l}} = \frac{1}{\sqrt{d}} \sum_{i=0}^{d-1} \omega_d^{-il} \ket{i}.
-%$
-%We can also calculate unitaries $U_x$ and $U_z$ satisfying \cref{eq:sim}, which are
-%\begin{align}
-%	U_z = \sum_{i=0}^{d-1} \ketbra{ i/2 \pmod{d}}{i}  \quad \quad
-%	U_x = \sum_{l=0}^{d-1} \ketbra{s_{-l/2 \pmod{d}}}{s_{-l \pmod{d}}}.
-%\end{align}
-%In the case that $d = 3$, we have $U_zU_x = \1 = U_xU_z$. 
-%In general we have
-%\begin{align}
-%	U_zU_x = &\sum_{i=0}^{d-1} \sum_{j=0}^{d-1} \ketbra{i/2}{i}\ketbra{s_{-j/2}}{s_{-j}} \\
-%	= &\sum_{i=0}^{d-1} \sum_{k = 0}^{(d-1)/2}\ketbra{i/2}{i}\ketbra{s_{-k}}{s_{-2k}} + 
-%	\sum_{i=0}^{d-1} \sum_{k = 0}^{(d-3)/2}\ketbra{i/2}{i}\ketbra{s_{-k-\frac{d+1}{2}}}{s_{-2k-1}} \\
-%	= &\frac{1}{\sqrt{d}} \sum_{i=0}^{d-1} \sum_{k = 0}^{(d-1)/2}\omega_d^{-ik} \ketbra{i/2}{s_{-2k}}
-%	+ \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1} \sum_{k = 0}^{(d-3)/2}\omega_d^{-ik - i\frac{d+1}{2}} \ketbra{i/2}{s_{-2k-1}}\\
-%\end{align}
-%Now we focus on 
-%\begin{align}
-%	&\frac{1}{\sqrt{d}}\sum_{i=0}^{d-1}\omega_d^{-ik} \ketbra{i/2}{s_{-2k}}\\
-%	= &\frac{1}{\sqrt{d}} \sum_{l= 0}^{(d-1)/2} \omega_d^{-l \cdot 2k}\ketbra{l}{s_{-2k}} +
-%	\frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(2l+1)k}\ketbra{l + \frac{d+1}{2}}{s_{-2k}}\\
-%	=&\frac{1}{\sqrt{d}} \sum_{l= 0}^{(d-1)/2} \omega_d^{-l \cdot 2k}\ketbra{l}{s_{-2k}} +
-%	\frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(l+(d+1)/2)\cdot 2k}\ketbra{l + \frac{d+1}{2}}{s_{-2k}}\\
-%	=&\ketbra{s_{-2k}}{s_{-2k}}
-%\end{align}
-%and
-%\begin{align}
-%	&\frac{1}{\sqrt{d}}\sum_{i=0}^{d-1}\omega_d^{-ik- i\frac{d+1}{2}} \ketbra{i/2}{s_{-2k-1}}\\
-%	=& \frac{1}{\sqrt{d}} \sum_{l= 0}^{(d-1)/2} \omega_d^{-2lk- l(d+1)} \ketbra{l}{s_{-2k-1]}}
-%	+ \frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(2l+1)k-(2l+1)(d+1)/2} \ketbra{l+\frac{d+1}{2}}{s_{-2k-1}} \\
-%	=& \frac{1}{\sqrt{d}} \sum_{i=0}^{(d-1)/2} \omega_d^{-(2k+1)l}\ketbra{l}{s_{-2k-1}} 
-%	+  \frac{1}{\sqrt{d}} \sum_{l=0}^{(d-3)/2} \omega_d^{-(2k+1)(l+ (d+1)/2)} \ketbra{l+\frac{d+1}{2}}{s_{-2k-1}} \\
-%	=& \ketbra{s_{-2k-1}}{s_{-2k-1}}
-%\end{align}
-%Moreover, if $U_x\sigma_xU_x^\dagger = \sigma_x^2$ and $U_z\sigma_zU_z^\dagger = \sigma_z^2$,
-%we can verify that 
-%\begin{align}
-%	U_xU_z = \1 = U_zU_x,
-%\end{align}
-%Hence, we define the new group by
-%\begin{equation}
-%\begin{aligned}
-%	\Pg =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
-%	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
-%\end{aligned}
-%\end{equation}
-%\hl{Since $\Pg_d$'s relations satisfy the relations of $\Pg$, can we say $\Pg_d$ is a subgroup of $\Pg$?}
-%This group will be embedded in a solution group, $\Gamma_\Pg$, following Slofstra's embedding techniques.
-%See Appendix~\ref{sec:construct} for details.
-%\textbf{Now there are two questions:}
-%\begin{itemize}
-%	\item How do we make $\J^d = e$ implicit?
-%	\item If we add $u_xu_z = e$ to the relations, what would be the consequences?
-%	(It seems now the group is not finite.)
-%\end{itemize}
-
-
 
 %\begin{align}
 %	K = \langle x, y: xyx^{-1} = y^2\rangle.
@@ -549,6 +480,7 @@ above, where Pauli-x and Pauli-z operators are defined by
 %--------------------------------------------------------------------------------------------
 \subsection{$U$ and $X$ generate all the $(d-1)\times(d-1)$ matrices}
 %--------------------------------------------------------------------------------------------
+\hl{We don't need this fact in the main proof.}
 Suppose $U$ and $X$ satisfies the relation $UXU^\dagger = X^2$. Moreover, we know the eigen-decomposition
 of $X$ is 
 \begin{align}
@@ -765,14 +697,14 @@ the two SOS decompositions that we use are
 From the SOS decomposition we know 
 \begin{align}
 	&\norm{(Z_AX_B+X_AZ_B)\ket{\psi}} \leq \frac{\sqrt{\epsilon}}{c\sqrt{s}},\\
-	&\norm{(Z_A-Z_B)\ket{\psi}} \leq \frac{\sqrt{s\epsilon}}{c},\\
+	\label{eq:za-zb}&\norm{(Z_A-Z_B)\ket{\psi}} \leq \frac{\sqrt{s\epsilon}}{c},\\
 	&\norm{(X_A-X_B)\ket{\psi}} \leq \frac{\sqrt{\epsilon}}{\sqrt{s}}.
 \end{align}
 We can further derive that 
 \begin{align}
 	\label{eq:xazb}&\norm{(X_A(\1+Z_B)-X_B(\1-Z_A))\ket{\psi}} \leq \frac{c+1}{c\sqrt{s}} \sqrt{\epsilon},\\
 	\label{eq:zaxb}&\norm{(Z_A(\1+X_B)-Z_B(\1-X_A))\ket{\psi}}\leq \frac{s+1}{c\sqrt{s}} \sqrt{\epsilon},\\
-	&\norm{(Z_AX_A+X_AZ_A)\ket{\psi}} \leq \frac{1+c+s}{c\sqrt{s}} \sqrt{\epsilon}.
+	\label{eq:zaxa}&\norm{(Z_AX_A+X_AZ_A)\ket{\psi}} \leq \frac{1+c+s}{c\sqrt{s}} \sqrt{\epsilon}.
 \end{align}
 Eq.~\ref{eq:xazb} can be rewritten as 
 \begin{align}
@@ -794,8 +726,8 @@ A special property of $\I_\alpha$ is summarized in the proposition below.
 \label{prop:2d-subspace}
 	Let $\mu = \arctan(1/\alpha)$ for some $\alpha$.
 	If a quantum strategy $(\ket{\psi}, \{A_x\}_{x \in \{1,2\}}, \{B_y\}_{y \in \{1,2\}})$ 
-	satisfies the condition that $\ip{\I_\alpha} = 2\sqrt{1+\alpha^2}-\epsilon$, where 
-	$\ip{\I_\alpha}$ is expressed in terms of $A_x$,  $B_x$ and $\ket{\psi}$,
+	satisfies the condition that $\ip{\tilde{\I}_\alpha} \leq \epsilon$, where 
+	$\ip{\tilde{\I}_\alpha}$ is expressed in terms of $A_x$,  $B_x$ and $\ket{\psi}$,
 	then  
 	\begin{align}
 		[(B_0 B_1)^r + (B_1B_0)^r] \ket{\psi} \appd{O(2^{r}\sqrt{\epsilon})} 2\cos(2r\mu)\ket{\psi},
@@ -914,7 +846,7 @@ A special property of $\I_\alpha$ is summarized in the proposition below.
 %	\end{align*}
 %	Hence each $V_i$ is spanned by $\omega_d$-eigenvector and $\omega_d^{-1}$-eigenvector of $\tB_0\tB_1$.
 \end{proof}
-
+Note that we don't need the $(B_1B_2)^n + (B_2B_1)^n$ part.
 
 %------------------------------------------------------------------------
 \subsection{The extended weighted CHSH game}
@@ -923,9 +855,11 @@ We want to force Alice and Bob to reuse observables
 from the linear system game developed above so that we can make sure that the observables 
 $O_A = A_1A_2$ and $O_B =B_1B_2$ have eigenvalues $\omega_d$ and $\omega_d^{d-1}$,
 where $A_1,A_2,B_1,B_2$ are used in this test and the linear system game.
-Intuitively, we want to combine the fact that $O_A$ has eigenvalue $\omega_d$ with the fact that 
+Intuitively, because $r$ is the primitive root of $d$, 
+we want to combine the fact that $O_A$ has eigenvalue $\omega_d$ with the fact that 
 $O_A \sim O_A^r$ to establish that
-the eigenvalues of $O_A$ are $\omega_d^i$ for $i =1 \dots d-1$.
+the eigenvalues of $O_A$ are $\omega_d^i$ for $i =1 \dots d-1$ and the eigenspace for 
+each eigenvalue is of the same structure.
 
 Recall that the input for Alice and Bob in the linear system game are $\{1,2,\dots,n\}$.
 The input alphabets are $X = Y = \{\ast, 1, 2, n+1,n+2\}$.
@@ -949,7 +883,7 @@ The correlation is generated with the following rules.
 \end{itemize}
 In the ideal strategy Alice and Bob share the state $\ket{\psi} =1/\sqrt{d-1} \sum_{j=1}^{d-1} \ket{j}\ket{j}$.
 We define two subspaces $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = \C^{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$ and
-define $\Pi_V$ and $\Pi_{V^\perp}$ to be the corresponding projectors. Note that $V$ is the subspace on which they should maximize $\ip{\I_{-\cot(\pi/d)}}$.
+define $\Pi_V$ and $\Pi_{V^\perp}$ to be the corresponding projectors. Note that $V$ is the subspace on which they should maximize $\ip{\I_{\cot(-\pi/d)}}$.
 
 We define the states for the measurements as follows
 \begin{align*}
@@ -1154,7 +1088,7 @@ From the correlation, we know that
 	\bra{\psi} A_\ast^\perp B_\ast^\perp \ket{\psi} = \frac{d-3}{d-1} - O(r^2 \ep).
 \end{align}
 In the mean time, we also have 
-$\norm{A_\ast^\perp \ket{\psi}} \appd{O(r\se)} \norm{B_\ast^\perp\ket{\psi}} \appd{O(r\se)} \sqrt{(d-3)/(d-1)}$.
+$\norm{A_\ast^\perp \ket{\psi}}^2 \appd{O(r^2\ep)} \norm{B_\ast^\perp\ket{\psi}}^2 \appd{O(r^2\ep)} (d-3)/(d-1)$.
 The two facts above imply that 
 \begin{align}
 	\norm{A_\ast^\perp \ket{\psi} - B_\ast^\perp \ket{\psi}}^2 = \norm{A_\ast^\perp \ket{\psi}}^2 + \norm{B_\ast^\perp \ket{\psi}}^2
@@ -1231,12 +1165,12 @@ The proof for $S_2$ is very similar so we omit it here.
 	\end{align}
 	then
 	\begin{enumerate}
-	\item $\ket{\psi_1} \appd{O(d \sr\qe)} \ket{\psi_3}$ and $\ket{\psi_2} \appd{O(d \sr\qe)} \ket{\psi_4}$; 
+	\item $\ket{\psi_1} \appd{O(\sd \sr\qe)} \ket{\psi_3}$ and $\ket{\psi_2} \appd{O(d \sr\qe)} \ket{\psi_4}$; 
 	\item $A_\ast^\diamond \ket{\psi} \appd{O( r\se)} \ket{\psi_1}+\ket{\psi_2}$;
 	\item $\braket{\psi_2}{\psi_1} \appd{O( r\se)} 0$;
 	\item $\norm{\ket{\psi_i}}^2 \appd{O(r\se)} 1/(d-1)$ for $i = 1, 2, 3, 4$;
-	\item $B_1B_2 \ket{\psi_1} \appd{O(d\sr \ep^{1/8})} \omega_d\ket{\psi_1}$;
-	\item $A_1A_2 \ket{\psi_1} \appd{O(d\sr \ep^{1/8})} \omega_d^{-1} \ket{\psi_1}$.
+	\item $B_1B_2 \ket{\psi_1} \appd{O(\sr \qe/\sd)} \omega_d\ket{\psi_1}$;
+	\item $A_1A_2 \ket{\psi_1} \appd{O(\sd\sr \qe)} \omega_d^{-1} \ket{\psi_1}$.
 	\end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -1267,19 +1201,19 @@ The proof for $S_2$ is very similar so we omit it here.
 	\begin{align}
 		A_{n+1}A_{n+2} \ket{\psi} \appd{O( r\se)} A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi}.
 	\end{align}
-	At this point, we use the anticommutation relation induced by $S_1$ and conclude that 
+	At this point, we use the anticommutation relation induced by $S_1$ (\cref{eq:zaxa}) and conclude that 
 	\begin{align}
-		A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi} \appd{\frac{\sqrt{dr}}{c\sqrt{s}}\qe} -A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi}.
+		A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi} \appd{\frac{\norm{\ket{A_\ast^\diamond\ket{\psi}}}}{c\sqrt{s}}O(\sd\sr\qe)} -A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi}.
 	\end{align}
-	If we use the fact $c = 1 - \pi^2/(2d^2) + O(1/d^4)$ and $s = \pi/d + O(1/d^3)$, the distance above is of order $O(d \sr \qe)$.
+	If we use the fact $c = 1 - \pi^2/(2d^2) + O(1/d^4)$ and $s = \pi/d + O(1/d^3)$, the distance above is of order $O(\sd \sr \qe)$.
 	Putting everything together, we get 
 	\begin{align}
 		A_{n+1}A_{n+2} \ket{\psi} &\appd{O( r\se)} A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi}\\
-							&\appd{O(d \sr \qe)} -A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi}\\
+							&\appd{O(\sd \sr \qe)} -A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi}\\
 							&\appd{O( r\se)} -A_{n+2}A_{n+1} \ket{\psi} \\
 							&\appd{O(r \se)}-B_{n+2}B_{n+1}\ket{\psi}
 	\end{align}
-	The proof of $\ket{\psi_2} \appd{O(d \sr \qe)} \ket{\psi_4}$ is similar.
+	The proof of $\ket{\psi_2} \appd{O(\sd \sr \qe)} \ket{\psi_4}$ is similar.
 	\hl{This may not be the best bound.}
 	
 	\textbf{Item 2}. Expanding $\ket{\psi_2}$, we get
@@ -1334,125 +1268,107 @@ The proof for $S_2$ is very similar so we omit it here.
 		\norm{\ket{\psi_1}} \appd{O(\sd r^2 \ep)} \frac{1}{\sqrt{d-1}}.
 	\end{align}	
 	
-	\textbf{Item 5}.From the correlation and applying the reasoning above, we can get that 
-	\begin{align*}
-	\norm{A_{n+1}^0 \ket{\psi}} \appd{O(\sd r^2 \ep)} 
-	\norm{A_{n+1}^1 \ket{\psi}} \appd{O(\sd r^2 \ep)}
-	\norm{A_{n+2}^0 \ket{\psi}} \appd{O(\sd r^2 \ep)}
-	 \norm{A_{n+2}^1 \ket{\psi}} \appd{O(\sd r^2 \ep)} \frac{1}{\sqrt{d-1}}.
-	\end{align*}
-	Next we focus on the implication of the fact that $S_1$ almost maximally violates $\I_{\cot(-\pi/d)}$.
+	\textbf{Item 5}.
+	First we focus on the implication of the fact that $S_1$ almost maximally violates $\I_{\cot(-\pi/d)}$.
 	We define $B_1 := B_1^0 - B_1^1$, $B_2 := B_2^0-B_2^1$ and
 	\begin{align}
 		&Z_A  := A_{n+1} && X_A := A_{n+2} \\
 		&Z_B := \frac{B_1+B_2}{2\cos(-\pi/d)} && X_B := \frac{B_1-B_2}{2\sin(-\pi/d)}.
 	\end{align}
-	From the correlation given above, we get 
-         \begin{align}
-         	&\bra{\psi} A_{n+1}^0 (B_1^0 - B_1^1) \ket{\psi} \appd{O(r^2\ep)} \frac{\cos(\pi/d)}{d-1},\\
-        		&\bra{\psi} A_{n+1}^0 (B_2^0 - B_2^1) \ket{\psi} \appd{O(r^2\ep)} \frac{\cos(\pi/d)}{d-1}.
-         \end{align}
-         Based on \cref{prop:2d-subspace}, we can see that 
-         \begin{align}
-         	(B_1B_2+B_2B_1)(A_{n+1}^0+A_{n+1}^1)\ket{\psi} 
-	&\appd{O(r\se)} (B_1B_2+B_2B_1) A_\ast^\diamond \ket{\psi} \\
-	&\appd{O(\sd \sr \qe)} 2\cos(2\pi/d) A_\ast^\diamond \ket{\psi}\\
-	&\appd{O(r\se)} 2\cos(2\pi/d)(A_{n+1}^0+A_{n+1}^1)\ket{\psi} .
-         \end{align}
-         Since $A_{n+1}^0 \ket{\psi}$ is orthogonal to $A_{n+1}^1 \ket{\psi}$, we can conclude that 
-         \begin{align}
-         	\bra{\psi} A_{n+1}^0 (B_1B_2+B_2B_1)A_{n+1}^0\ket{\psi} &= 
-	\bra{\psi} A_{n+1}^0 (B_1B_2+B_2B_1)(A_{n+1}^0+A_{n+1}^1)\ket{\psi} \\
-	&\appd{O(\sd \sr \qe)} 2\cos(2\pi/d) \bra{\psi} A_{n+1}^0 (A_{n+1}^0+A_{n+1}^1)\ket{\psi}\\
-	 &=2 \cos(2\pi/d) \bra{\psi} A_{n+1}^0 \ket{\psi}.
-         \end{align}
-       	Then we can calculate that
-       	\begin{align}
-       		&\qquad \norm{\frac{B_1+B_2}{2\cos{(\pi/d)}} A_{n+1}^0 \ket{\psi} - A_{n+1}^0\ket{\psi}}^2 \\
-		&=\bra{\psi}A_{n+1}^0 \frac{(2\1 +B_1B_2 +B_2B_1)}{4\cos^2(\pi/d)}A_{n+1}^0\ket{\psi} +
-		\bra{\psi} A_{n+1}^0 \ket{\psi} - 2 \bra{\psi} A_{n+1}^0\frac{B_1+B_2}{2\cos(\pi/d)} A_{n+1}^0\ket{\psi}\\
-		&\appd{O(\sd \sr \qe)} (\frac{2+2\cos(2\pi/d)}{4\cos^2(\pi/d)}+1 - 2) \bra{\psi}A_{n+1}^0 \ket{\psi} = 0.
-       	\end{align}
-        Equivalently,
-        \begin{align}
-        		\frac{B_1+B_2}{2 \cos(\pi/d)} A_{n+1}^0 \ket{\psi} \appd{O((dr)^{1/4} \ep^{1/8})} A_{n+1}^0 \ket{\psi}.
-        \end{align}
-        With similar reasoning, we can get
-        \begin{align}
-        		\frac{B_1+B_2}{2 \cos(-\pi/d)} A_{n+1}^1 \ket{\psi} \appd{O((dr)^{1/4} \ep^{1/8})} -A_{n+1}^1 \ket{\psi}.
-        \end{align}
-	Substituting the appropriate operators and states into \cref{eq:zaxb,eq:xazb}, we get
+	Recalling \cref{eq:za-zb}, we know
+	\begin{align}
+		\norm{Z_B A_\ast^\diamond \ket{\psi} - A_{n+1}A_\ast^\diamond \ket{\psi}} \leq 
+		\norm{A_\ast^\diamond \ket{\psi}} \sqrt{\sin(\pi/d)}O(\sd \sr \qe)
+		= O(\sr \qe/ \sd ).
+	\end{align}
+	Since $A_\ast^\diamond \ket{\psi} \appd{O(r\se)} (A_{n+1}^0 + A_{n+1}^1) \ket{\psi}$,
+	we can conclude that 
+	\begin{align}
+		Z_B (A_{n+1}^0 + A_{n+1}^1) \ket{\psi} \appd{O(\sr \qe / \sd )} (A_{n+1}^0 - A_{n+1}^1) \ket{\psi}.
+	\end{align}
+	On the other hand, using the fact $A_{n+1}^0 A_{n+1}^1 = 0$, we can get that
+	\begin{align}
+		O(r\se/d) \geq &\norm{Z_B (A_{n+1}^0 + A_{n+1}^1) \ket{\psi} - (A_{n+1}^0 - A_{n+1}^1) \ket{\psi}}^2\\
+		=&\norm{ Z_BA_{n+1}^0 \ket{\psi} - A_{n+1}^0\ket{\psi}}^2 + \norm{ Z_BA_{n+1}^1 \ket{\psi} + A_{n+1}^1\ket{\psi}}^2,
+	\end{align}
+	which immediately gives us that 
+	\begin{align}
+		\frac{B_1+B_2}{2\cos(\pi/d)} A_{n+1}^0\ket{\psi} \appd{O( \sr \qe /\sd)} A_{n+1}^0 \ket{\psi},\\
+		\frac{B_1+B_2}{2\cos(\pi/d)} A_{n+1}^1\ket{\psi} \appd{O( \sr \qe /\sd)} A_{n+1}^1 \ket{\psi}.
+	\end{align}
+		Substituting the appropriate operators and states into \cref{eq:zaxb,eq:xazb}, we get
 	\begin{align}
 		\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^0A_\ast^\diamond \ket{\psi} 
-		\appd{O(d \sr \qe)}A_{n+2} A_{n+1}^1A_\ast^\diamond\ket{\psi}\\
+		\appd{\norm{A_\ast^\diamond\ket{\psi}}/\sqrt{s} O(\sd \sr \qe)}A_{n+2} A_{n+1}^1A_\ast^\diamond\ket{\psi}\\
 		\frac{B_1 -B_2}{2\sin(-\pi/d)} A_{n+1}^1A_\ast^\diamond \ket{\psi}  
-		\appd{O(d \sr \qe)}A_{n+2} A_{n+1}^0 A_\ast^\diamond \ket{\psi}.
+		\appd{\norm{A_\ast^\diamond\ket{\psi}}/\sqrt{s}O(\sd \sr \qe)}A_{n+2} A_{n+1}^0 A_\ast^\diamond \ket{\psi}.
 	\end{align}
-	Using the fact that $A_\ast^\diamond \ket{\psi} \appd{O(r\se)} (A_{n+1}^0 + A_{n+1}^1) \ket{\psi}$, we know
+	Using the facts that $A_\ast^\diamond \ket{\psi} \appd{O(r\se)} (A_{n+1}^0 + A_{n+1}^1) \ket{\psi}$
+	and $O(\sd \sr \qe)$ dominates $O(r \se)$, we know
 	\begin{align}
-		\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^0 \ket{\psi} \appd{O(d\sr\qe)}A_{n+2} A_{n+1}^1 \ket{\psi},\\
-		\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^1 \ket{\psi}\appd{O(d\sr\qe)} A_{n+2} A_{n+1}^0 \ket{\psi}.
+		(B_1-B_2) A_{n+1}^0 \ket{\psi} \appd{O(\sr\qe/\sd )} 2 \sin(-\pi/d)A_{n+2} A_{n+1}^1 \ket{\psi},\\
+		(B_1-B_2) A_{n+1}^1 \ket{\psi}\appd{O(\sr\qe/\sd )} 2 \sin(-\pi/d)A_{n+2} A_{n+1}^0 \ket{\psi}.
 	\end{align}
-	Since $O(d \sr \ep^{1/8})$ dominates both $O(d \sr \qe)$ and $O((dr)^{1/4} \ep^{1/8})$, we can write 
+	In summary, we can write 
         \begin{align}
-        		&B_1A_{n+1}^0 \ket{\psi} \appd{O(d\sr \ep^{1/8})} cA_{n+1}^0\ket{\psi} - sA_{n+2}A_{n+1}^1\ket{\psi}\\
-        		&B_1A_{n+1}^1 \ket{\psi} \appd{O(d\sr \ep^{1/8})} -cA_{n+1}^1\ket{\psi} - sA_{n+2}A_{n+1}^0\ket{\psi}\\
-        		&B_2A_{n+1}^0 \ket{\psi} \appd{O(d\sr \ep^{1/8})} cA_{n+1}^0\ket{\psi} + sA_{n+2}A_{n+1}^1\ket{\psi}\\
-        		&B_2A_{n+1}^1 \ket{\psi} \appd{O(d\sr \ep^{1/8})} -cA_{n+1}^1\ket{\psi} + sA_{n+2}A_{n+1}^0\ket{\psi}.
+        		&B_1A_{n+1}^0 \ket{\psi} \appd{O(\sr \qe/ \sd)} cA_{n+1}^0\ket{\psi} - sA_{n+2}A_{n+1}^1\ket{\psi}\\
+        		&B_1A_{n+1}^1 \ket{\psi} \appd{O(\sr \qe/ \sd)} -cA_{n+1}^1\ket{\psi} - sA_{n+2}A_{n+1}^0\ket{\psi}\\
+        		&B_2A_{n+1}^0 \ket{\psi} \appd{O( \sr \qe /\sd)} cA_{n+1}^0\ket{\psi} + sA_{n+2}A_{n+1}^1\ket{\psi}\\
+        		&B_2A_{n+1}^1 \ket{\psi} \appd{O(\sr \qe/ \sd )} -cA_{n+1}^1\ket{\psi} + sA_{n+2}A_{n+1}^0\ket{\psi}.
         \end{align}
         Then we can calculate
         \begin{align}
-        		B_1B_2 A_{n+1}^0 \ket{\psi} &\appd{O(d\sr\ep^{1/8})} (c B_1A_{n+1}^0 +sA_{n+2}B_1A_{n+1}^1)\ket{\psi}\\
-        		&\appd{O(d\sr\ep^{1/8})}(c^2A_{n+1}^0- csA_{n+2}A_{n+1}^1 -csA_{n+2}A_{n+1}^1 -s^2 A_{n+2}^2 A_{n+1}^0)\ket{\psi}\\
+        		B_1B_2 A_{n+1}^0 \ket{\psi} &\appd{O(\sr \qe/\sd)} (c B_1A_{n+1}^0 +sA_{n+2}B_1A_{n+1}^1)\ket{\psi}\\
+        		&\appd{O( \sr \qe/\sd)}(c^2A_{n+1}^0- csA_{n+2}A_{n+1}^1 -csA_{n+2}A_{n+1}^1 -s^2 A_{n+2}^2 A_{n+1}^0)\ket{\psi}\\
         		&= (\cos(2\pi/d) A_{n+1}^0 - \sin(2\pi/d) A_{n+2}A_{n+1}^1)\ket{\psi}.
         \end{align}
         and 
         \begin{align}
-        		B_1B_2 A_{n+1}^1 \ket{\psi} &\appd{O(d\sr\ep^{1/8})} (-c B_1A_{n+1}^1 +sA_{n+2}B_1A_{n+1}^0)\ket{\psi}\\
-        		&\appd{O(d\sr\ep^{1/8})}(c^2A_{n+1}^1+ csA_{n+2}A_{n+1}^0 +csA_{n+2}A_{n+1}^0 -s^2 A_{n+2}^2 A_{n+1}^1)\ket{\psi}\\
+        		B_1B_2 A_{n+1}^1 \ket{\psi} &\appd{O( \sr \qe/\sd)} (-c B_1A_{n+1}^1 +sA_{n+2}B_1A_{n+1}^0)\ket{\psi}\\
+        		&\appd{O(\sr \qe/\sd)}(c^2A_{n+1}^1+ csA_{n+2}A_{n+1}^0 +csA_{n+2}A_{n+1}^0 -s^2 A_{n+2}^2 A_{n+1}^1)\ket{\psi}\\
         		&= (\cos(2\pi/d) A_{n+1}^1 + \sin(2\pi/d) A_{n+2}A_{n+1}^0)\ket{\psi},
         \end{align}
         or equivalently,
         \begin{align}
-        		B_1B_2 A_{n+2}A_{n+1}^1 \ket{\psi}\appd{O(d\sr\ep^{1/8})} 
+        		B_1B_2 A_{n+2}A_{n+1}^1 \ket{\psi}\appd{O(\sr \qe/\sd)} 
 		\sin(2\pi/d) A_{n+1}^0\ket{\psi} + \cos(2\pi/d)A_{n+2}A_{n+1}^1\ket{\psi}.
         \end{align}
         Combining the two results above we know
 	\begin{align}
 		\label{eq:omegad}&B_1B_2 (A_{n+1}^0 + i A_{n+2}A_{n+1}^1) \ket{\psi} 
-		\appd{O(d\sr\ep^{1/8})}\omega_d(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi}.
+		\appd{O(\sr \qe/\sd)}\omega_d(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi}.
 	\end{align}
 	Multiplying both sides by $1/2(A_\ast^\diamond - iA_{n+2})$, we get
 	\begin{align}
-		B_1B_2 \ket{\psi_1} \appd{O(d\sr\ep^{1/8})} \omega_d\ket{\psi_1}.
+		B_1B_2 \ket{\psi_1} \appd{O(\sr \qe/\sd)} \omega_d\ket{\psi_1}.
 	\end{align}
 	
 	\textbf{Item 6}.This one is based on the strategy $S_2$. As in the previous Item,
 	we can get
 	\begin{align}
-		&\frac{A_1+A_2}{2 \cos(-\pi/d)} B_{n+1}^0 \ket{\psi} \appd{O((dr)^{1/4} \ep^{1/8})} B_{n+1}^0 \ket{\psi}.\\
-		&\frac{A_1+A_2}{2 \cos(-\pi/d)} B_{n+1}^1 \ket{\psi}  \appd{O((dr)^{1/4} \ep^{1/8})} -B_{n+1}^1 \ket{\psi},\\
-		&\frac{A_1-A_2}{2 \sin(-\pi/d)} B_{n+1}^0\ket{\psi} \appd{O(d\sr\qe)}B_{n+2} B_{n+1}^1\ket{\psi}\\
-		&\frac{A_1 -A_2}{2\sin(-\pi/d)} B_{n+1}^1 \ket{\psi} \appd{O(d\sr\qe)} B_{n+2} B_{n+1}^0 \ket{\psi}.
+		&(A_1+A_2) B_{n+1}^0 \ket{\psi} \appd{O(\sr \qe/\sd)} 2 \cos(-\pi/d)B_{n+1}^0 \ket{\psi}.\\
+		&(A_1+A_2) B_{n+1}^1 \ket{\psi}  \appd{O(\sr \qe/\sd)} -2 \cos(-\pi/d)B_{n+1}^1 \ket{\psi},\\
+		&(A_1-A_2) B_{n+1}^0\ket{\psi} \appd{O(\sr\qe/\sd)}2 \sin(-\pi/d)B_{n+2} B_{n+1}^1\ket{\psi}\\
+		&(A_1 -A_2)B_{n+1}^1 \ket{\psi} \appd{O(\sr\qe/\sd)} 2 \sin(-\pi/d)B_{n+2} B_{n+1}^0 \ket{\psi}.
 	\end{align}
 	With similar calculation as in the previous case, we can get 
 	\begin{align}
-		A_1A_2 (B_{n+1}^0 - i B_{n+2}B_{n+1}^1) \ket{\psi} \appd{O(d \sr \ep^{1/8})} \omega_d^{-1} (B_{n+1}^0 - i B_{n+2}B_{n+1}^1).
+		A_1A_2 (B_{n+1}^0 - i B_{n+2}B_{n+1}^1) \ket{\psi} \appd{O(\sr \qe/\sd)} \omega_d^{-1} (B_{n+1}^0 - i B_{n+2}B_{n+1}^1).
 	\end{align}
 	Multiplying both sides of the equation above by $(B_\ast^\diamond+iB_{n+2})$ we get
 	\begin{align}
-		A_1A_2 \ket{\psi_3} \appd{O(d \sr \ep^{1/8})} \omega_d^{-1}\ket{\psi_3}.
+		A_1A_2 \ket{\psi_3} \appd{O(\sr \qe/\sd)} \omega_d^{-1}\ket{\psi_3}.
 	\end{align}
-	In the end, we substitute $\ket{\psi_1}  \appd{O(d \sr\qe)} \ket{\psi_3}$ to get
+	In the end, we substitute $\ket{\psi_1}  \appd{O(\sd \sr\qe)} \ket{\psi_3}$ to get
 	\begin{align}
-		A_1A_2 \ket{\psi_1} \appd{O(d \sr \ep^{1/8})} \omega_d^{-1}\ket{\psi_1}.
+		A_1A_2 \ket{\psi_1} \appd{O(\sd \sr \qe)} \omega_d^{-1}\ket{\psi_1}.
 	\end{align}
 \end{proof}
-Note that it can be shown that 
-\begin{align}
-	&\ket{\psi_1} =  (\1 - iA_{n+2})(\1 + i \frac{B_1 - B_2}{-2\sin(\pi/d)})A_{n+1}^0 \ket{\psi}\\
-	&\ket{\psi_2} =  (\1 - iA_{n+2})(\1 + i \frac{B_1 - B_2}{-2\sin(\pi/d)})A_{n+1}^1 \ket{\psi}.
-\end{align}
+%Note that it can be shown that 
+%\begin{align}
+%	&\ket{\psi_1} =  (\1 - iA_{n+2})(\1 + i \frac{B_1 - B_2}{-2\sin(\pi/d)})A_{n+1}^0 \ket{\psi}\\
+%	&\ket{\psi_2} =  (\1 - iA_{n+2})(\1 + i \frac{B_1 - B_2}{-2\sin(\pi/d)})A_{n+1}^1 \ket{\psi}.
+%\end{align}
 
 %--------------------------------------------------------------
 \subsection{A decomposition of $\ket{\psi}$}
@@ -1477,7 +1393,7 @@ Define
 $\ket{\psi'} = \sum_{j=1}^{(d-1)} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}$,
 then
 \begin{align}
-	&\ket{\psi} \appd{O(d^2 r^{1/4} \ep^{1/16})} \ket{\psi'}.
+	&\ket{\psi} \appd{O(d^{7/4} r^{1/4} \ep^{1/8})} \ket{\psi'}.
 \end{align}
 \end{proposition}
 \begin{proof}
@@ -1487,29 +1403,29 @@ then
 		\bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j}  \ket{\psi_1} =
 		\braket{\psi_1}{\psi_1} \appd{O(r\se)} \frac{1}{d-1}.
 	\end{align}
-	Using the relation $O_A(U_A\ct)^j \ket{\psi} \appd{O(r^j \se)} (U_A\ct)^j O_A^{r^j}\ket{\psi}$ and $\ket{\psi_1} \appd{O(d \sr \qe)} \ket{\psi_3}$,
+	Using the relation $O_A(U_A\ct)^j \ket{\psi} \appd{O(r^j \se)} (U_A\ct)^j O_A^{r^j}\ket{\psi}$ and $\ket{\psi_1} \appd{O(\sd \sr \qe)} \ket{\psi_3}$,
         we can see that 
         \begin{align}
-            	O_A (U_A\ct)^j \ket{\psi_1} &\appd{O(d \sr \qe)} O_A(U_A\ct)^j \ket{\psi_3} \\
+            	O_A (U_A\ct)^j \ket{\psi_1} &\appd{O(\sd \sr \qe)} O_A(U_A\ct)^j \ket{\psi_3} \\
             	& = 1/2 (B_\ast^\diamond + i B_{n+2})(B_{n+1}^0 - iB_{n+2}B_{n+1}^1) O_A (U_A\ct)^j \ket{\psi} \\
             	& \appd{O(r^j \se)} 1/2 (B_\ast^\diamond + i B_{n+2})(B_{n+1}^0 - iB_{n+2}B_{n+1}^1) (U_A\ct)^j O_A^{r^j} \ket{\psi} \\
             	& = (U_A\ct)^j O_A^{r^j} \ket{\psi_3} \\
-            	& \appd{O(d \sr \qe)} (U_A\ct)^j O_A^{r^j} \ket{\psi_1} \\
-            	& \appd{O(r^j r^{1/4} \ep^{1/8})} \omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
+            	& \appd{O(r^j \sr \qe/\sd)} \omega_d^{-r^j}(U_A\ct)^j \ket{\psi_3} \\
+            	& \appd{O(\sd \sr\qe)} \omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
         \end{align}
         In short, we have shown that 
         \begin{align}
-        		O_A (U_A\ct)^j \ket{\psi_1} \appd{O(d \sr \ep^{1/8})}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1},
+        		O_A (U_A\ct)^j \ket{\psi_1} \appd{O(\sd \sr \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1},
         \end{align}
         where we used the fact that when $j \leq \log_r(d-1)$, $r^j = O(d)$.
 	Hence for $j \neq j'$, \cref{prop:orthog} tells us that  
 	\begin{align}
-		\bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j'} \ket{\psi_1} \appd{O(d^2 \sr \ep^{1/8})} 0.
+		\bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j'} \ket{\psi_1} \appd{O(d^{3/2} \sr \qe)} 0.
 	\end{align}
 	We can calculate the norm of $\ket{\psi'}$ as 
 	\begin{align}
 		\braket{\psi'}{\psi'} &=\sum_{j,j'=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j'} \ket{\psi_1}\\
-		&\appd{O(d^4 \sr \ep^{1/8})} \sum_{j=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}\\
+		&\appd{O(d^{7/2} \sr \qe)} \sum_{j=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}\\
 		&\appd{O(dr\se)} (d-1) \frac{1}{d-1} = 1.
 	\end{align}
 	
@@ -1529,7 +1445,7 @@ then
 	
 	In the end, we apply \cref{prop:close_vec} to get
 	\begin{align}
-		\ket{\psi} \appd{O(d^2 r^{1/4} \ep^{1/16})} \ket{\psi'}.
+		\ket{\psi} \appd{O(d^{7/4} r^{1/4} \ep^{1/8})} \ket{\psi'}.
 	\end{align}
 \end{proof}
 %\begin{proposition}
@@ -1715,30 +1631,28 @@ The isometry has the following steps:
 \end{enumerate}
 In order to show the isometry works, the key relations that we use are
 \begin{align}
-	&\ket{\psi} \appd{O(d^2 r^{1/4} \ep^{1/16})}\ket{\psi'} = \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1},\\
-	&O_A \ket{\psi_1} \appd{O(d\sr \ep^{1/8})} \omega_d^{-1} \ket{\psi_1},\\
-	&O_B\ket{\psi_1} \appd{O(d \sr \ep^{1/8})} \omega_d \ket{\psi_1},\\
-	&O_A(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(d \sr \ep^{1/8})}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}\\
-	&O_B(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(d \sr \ep^{1/8})}\omega_d^{r^j}  (U_A\ct)^j \ket{\psi_1}\
+	&\ket{\psi} \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}\ket{\psi'} = \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1},\\
+	&O_A(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(\sd \sr \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}\\
+	&O_B(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(\sd \sr \qe)}\omega_d^{r^j}  (U_A\ct)^j \ket{\psi_1}
 \end{align}
 The result of this section is summarized in the theorem below.
 \begin{theorem}
 	Let $\Phi_A \x \Phi_B$ be the isometry defined above, then there exists a state $\ket{junk}$
 	such that $\norm{\ket{junk}} \appd{O(r\se)} 1$ and 
 	\begin{align}
-		&\Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})} \ket{junk} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j}_{B'}\\
-		&\Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})} \ket{junk} \x 
+		&\Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j}_{B'}\\
+		&\Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x 
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{d-j}\ket{d-j}_{A'}\ket{j}_{B'} \\
-		&\Phi_A \x \Phi_B (O_B\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})} \ket{junk} \x 
+		&\Phi_A \x \Phi_B (O_B\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x 
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{j}\ket{d-j}_{A'}\ket{j}_{B'}\\
-		&\Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})} \ket{junk} \x 
-		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j/r}_{A'}\ket{j}_{B'} \\
-		&\Phi_A \x \Phi_B (U_B\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})} \ket{junk} \x 
-		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j/r}_{B'}.
+		&\Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x 
+		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{(d-j)r^{-1}}_{A'}\ket{j}_{B'} \\
+		&\Phi_A \x \Phi_B (U_B\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x 
+		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j r^{-1}}_{B'}.
 	\end{align}
 \end{theorem}
 \begin{proof}
-Since $ \Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})}  \Phi_A \x \Phi_B (\ket{\psi'})$,  
+Since $ \Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_A \x \Phi_B (\ket{\psi'})$,  
 we will focus on how the isometry evolves $\ket{\psi'}$.
 The evolution is summarized below.
 	\begin{align}
@@ -1746,7 +1660,7 @@ The evolution is summarized below.
 		\xrightarrow[]{QFT_d}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}  \ket{\psi_1}\ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} O_A^{k_1}(U_A\ct)^{\log_r j} O_B^{k_2}(U_B\ct)^{\log_r j}
 		\ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		\appd{O(d^2 \sr \ep^{1/8})}&\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}\omega_d^{(k_2-k_1)j}\ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		\appd{O(d^{5/2} \sr \qe)}&\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}\omega_d^{(k_2-k_1)j}\ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}} &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} 
 		\omega_d^{k_1(d-j-l_1)}\omega_d^{k_2(j-l_2)}\ket{\psi_1} \ket{l_1}_{A'}\ket{l_2}_{B'}\\
 		= &\sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1} \ket{d-j}_{A'}\ket{j}_{B'} \\
@@ -1759,22 +1673,24 @@ So we define
 \end{align}
 such that 
 \begin{align}
-	\Phi_A\x\Phi_B(\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})} \ket{junk} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j}_{B'}.
+	\Phi_A\x\Phi_B(\ket{\psi}) \appd{O(d^{5/2} \sr \ep^{1/8})} \ket{junk} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j}_{B'},
 \end{align}
+where we use the fact that $O(d^{5/2} \sr \ep^{1/8})$ dominates both $O(d^{7/4} r^{1/4} \ep^{1/8})$ and 
+$O(d^{5/2} \sr \qe)$.
 Since $\norm{\ket{\psi_1}}^2 \appd{O(r \se)} 1/(d-1)$, we know $\norm{\ket{junk}} \appd{O(r\se)} 1$.
 	
 If the initial state is $O_A\ket{\psi}$, we first use the fact that 
-$ \Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})}  \Phi_A \x \Phi_B (O_A\ket{\psi'})$, 
+$ \Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_A \x \Phi_B (O_A\ket{\psi'})$, 
 and then we calculate $\Phi_A \x \Phi_B (O_A\ket{\psi'})$.
 \begin{align}
 	O_A \ket{\psi'} \ket{0}_{A'}\ket{0}_{B'} =&  
 		\sum_{j=1}^{d-1} O_A(U_A\ct U_B\ct)^{\log_r j}\ket{\psi_1}\ket{0}_{A'}\ket{0}_{B'}\\
-		\appd{O(d^2 \sr \ep^{1/8})}&\sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \omega_d^{-j} \ket{\psi_1} \ket{0}_{A'}\ket{0}_{B'}\\
+		\appd{O(d^{3/2} \sr \ep^{1/4})}&\sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \omega_d^{-j} \ket{\psi_1} \ket{0}_{A'}\ket{0}_{B'}\\
 		\xrightarrow[]{QFT_d} &\frac{1}{d}\sum_{j=1}^{d-1} \sum_{k_1,k_2 = 0}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \omega_d^{-j} 
 		\ket{\psi_1}\ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}&\frac{1}{d}\sum_{j=1}^{d-1}\sum_{k_1,k_2 = 0}^{d-1} 
 		 O_A^{k_1}(U_A\ct)^{\log_r j} O_B^{k_2}(U_B\ct)^{\log_r j} \omega_d^{-j} \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		\appd{O(d^2 \sr \ep^{1/8})}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}
+		\appd{O(d^{5/2} \sr \ep^{1/4})}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}
 		\omega_d^{-j}\omega_d^{(k_2-k_1)j}\ket{\psi_1}
 		 \ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}}& \sum_{j=1}^{d-1}  (U_A\ct U_B\ct)^{\log_r j}  
@@ -1785,7 +1701,7 @@ and then we calculate $\Phi_A \x \Phi_B (O_A\ket{\psi'})$.
 The analysis for $\Phi_A\x\Phi_B(O_B \ket{\psi})$ is very similar.
 
 If the initial state is $U_A\ket{\psi}$, we first use the fact that 
-$ \Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^2 r^{1/4} \ep^{1/16})}  \Phi_A \x \Phi_B (U_A\ket{\psi'})$, 
+$ \Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_A \x \Phi_B (U_A\ket{\psi'})$, 
 and then we calculate $\Phi_A \x \Phi_B U_A\ket{\psi'})$.
 \begin{align}
 	U_A \ket{\psi'} \ket{0}_{A'}\ket{0}_{B'} =&  
@@ -1794,14 +1710,15 @@ and then we calculate $\Phi_A \x \Phi_B U_A\ket{\psi'})$.
 		\xrightarrow[]{QFT_d} &\frac{1}{d}\sum_{j=1}^{d-1} \sum_{k_1,k_2 = 0}^{d-1}(U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j} \ket{\psi_1}  \ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}&\frac{1}{d}\sum_{j=1}^{d-1}\sum_{k_1,k_2 = 0}^{d-1} 
 		 O_A^{k_1}(U_A\ct)^{\log_r j-1} O_B^{k_2}(U_B\ct)^{\log_r j} \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		\appd{O(d^2 \sr \ep^{1/8})}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}
-		\omega_d^{k_2j-k_1j/r}\ket{\psi_1}
+		\appd{O(d^{5/2} \sr \qe)}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}
+		\omega_d^{k_2j-k_1jr^{-1}}\ket{\psi_1}
 		 \ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}}& \sum_{j=1}^{d-1}  (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}  
-		\ket{\psi_1} \ket{d-j/r}_{A'}\ket{j}_{B'}\\
+		\ket{\psi_1} \ket{(d-j)r^{-1}}_{A'}\ket{j}_{B'}\\
 		\xrightarrow[]{\text{Controlled-}U_{A/B}}& \ket{junk} \x  
-		\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{d-j/r}_{A'}\ket{j}_{B'}.
+		\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{(d-j)r^{-1}}_{A'}\ket{j}_{B'},
 \end{align}
+where we use the fact that $(d-j)r^{-1} \equiv d -jr^{-1} \pmod{d}$.
 The analysis for $\Phi_A\x\Phi_B(U_B \ket{\psi})$ is very similar.
 \end{proof}
 %It means that $(U_A\ct)(U_B\ct)^j \ket{\psi_1} \in \spn(\supp(\ket{\psi}))$ for all $j \in [d-1]$,
