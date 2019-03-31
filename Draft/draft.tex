@@ -194,7 +194,7 @@
 \newcommand{\CHSH}{CHSH^{(d)}}
 \newcommand{\MS}{MS}
 \newcommand{\SVT}{SVT}
-\newcommand{\EPR}[1]{EPR^{(#1)}}
+\newcommand{\EPR}[1]{\Sigma^{(#1)}}
 \newcommand{\paulix}{\sigma_x}
 \newcommand{\pauliz}{\sigma_z}
 \newcommand{\G}{G}
@@ -220,6 +220,16 @@
 % Bell Ineqaulities
 \newcommand{\I}{\mathcal{I}}
 
+% Square root of epsilon
+\newcommand{\ep}{\epsilon}
+\newcommand{\se}{\sqrt{\epsilon}}
+\newcommand{\qe}{\epsilon^{1/4}}
+\newcommand{\sd}{\sqrt{d}}
+\newcommand{\sr}{\sqrt{r}}
+\newcommand{\qd}{d^{1/4}}
+
+% Approximately equatli
+\newcommand{\appd}[1]{\simeq_{#1}}
 
 % Comments
 \def\carl#1{{\color{blue} #1 -Carl}}
@@ -319,16 +329,15 @@ Note that although the size of $C(\dr{r})$ does not depend on $d$, the optimal c
 
 
 In order to accomplish our goal, we introduce new techniques for self-testing.
-First of all, we use a different variant of the weighted CHSH inequality to enforce the eigenvalue of
+First of all, we use a different variant of the weighted CHSH inequality, \hf{which was first introduced in \cite{acin2012}}, to enforce the eigenvalue of
 some unknown operator which is the product of two binary observables used in the weighted CHSH test.
-\carl{I think this game might have been defined in APM12, and if so we need to cite it.}
 The variant of the CHSH inequality that we use is not used in the self-testing literature before.
 Secondly, we give a new way to decompose unitaries of arbitrary order into binary observables which maintains
 certain commutation relations. Such decomposition is different from what Slofstra used in his work \cite{slofstra2017}.
 \carl{Our work is heavily based on \cite{slofstra2017}, and we need to make that clearer.}
 Intuitively, such decomposition can be seen as the inverse of the Jordan's lemma decomposition.
 The third contribution is that we prove self-testing without using anti-commutation relations between Pauli operators, 
-which is the core idea in all the previous self-testing results.
+which is the core idea in \hf{most of} the previous self-testing results.
 \carl{Are we sure about that ("all")?}
 Instead, we find a new pair of operators that can generate the ring of matrices over complex numbers.
 
@@ -344,66 +353,56 @@ Our main result is based on the combination of the two tests and presented in \c
 \section{Preliminaries and notations}
 \label{sec:prelim}
 %========================================
+\textbf{Notations}.
 We use $[n]$ to denote the set $\{0,1 \dots n-1\}$ and $[n]+1$ for the set $\{1,2 \dots n\}$.
-%We denote the group commutator of $A$ and $B$, i.e. $ABA^{-1}B^{-1}$, by $[A,B]$.
+The maximally entangled state of local dimension $d-1$ for some prime $d$ is denoted by
+\begin{align}
+\ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{j = 1}^{d-1} \ket{j}\ket{d-j}.
+\end{align}
+The superscript $(d-1)$ stresses the dimension of the local Hilbert space and we follow this convention through this paper.
+We denote a Hilbert space by $\calH$. Note that we only work with finite Hilbert spaces in this work.
+When there are multiple Hilbert spaces, we label them with subscripts, for example, $\calH_A$ and
+$\calH_B$.
+The $d$-th root of unity is denoted by $\omega_d:=e^{2\pi i/d}$. In the qubit case, the Pauli operators
+are defined by
+\begin{align}
+	\paulix = \ketbra{0}{1}+\ketbra{1}{0} && \pauliz = \ketbra{0}{0} - \ketbra{1}{1}.
+\end{align}
 
+For quantum states and operators on different Hilbert spaces, we use subscripts to label them.
+For example, $O_A$ is an operator on Alice's side and $\ket{0}_{B}$ is a state on Bob's side. 
+The only exception is for projectors used in a quantum strategy defined below, where the subscript 
+is the input and the superscript is the output. For example, $A_x^a$ is Alice's projector for input $x$ and output $a$.
+Operators defined by the projectors follow the same convention. For example, $A_x := A_x^0 - A_x^1$.
+
+We use the following notation for the closeness between states.
+\begin{align}
+	\ket{u} \appd{\epsilon} \ket{v} \iff \norm{\ket{u} - \ket{v}} \leq \epsilon. 
+\end{align}
+Similarly, for $a,b \in \C$, we have
+$a \appd{\epsilon} b \iff \norm{a-b} \leq \epsilon$.
+
+
+\textbf{Number theory}.
 We use some basic number theory in our work. A primitive root of a prime number
-$d$ is an integer $r$ such that $r \pmod{d}$ has multiplicative order $d-1$. Equivalently,
-$r$ is the generator of the multiplicative group of integers modulo $d$, $\Zd$ where
-$\Zd = \{1,2\dots d-1\}$. \textcolor{red}{When the prime number $d$ has multiple primitive roots,
-we always work with the smallest one.}
-\carl{I'm not clear on what that last sentence means.  You just defined what a primitive root
-is --- are you changing the definition now?}
+$d$ is \hf{the smallest integer} $r$ such that $r \pmod{d}$ has multiplicative order $d-1$
+in the multiplicative group of integers modulo $d$, $\Zd$. Equivalently,
+$r$ is the generator of $\Zd$.
 
-The EPR pair of local dimension $d-1$ for some prime $d$ is denoted by
-\begin{align}
-\ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{i = 0}^{d-2} \ket{ii}.
-\end{align}
-The superscript $(d-1)$ stresses the local dimension and we follow this convention through this paper.
 
-We self-test $\ket{\EPR{d-1}}$ by verify that Alice and Bob has operators
-\begin{align}
-	X = \sum_{k=1}^{d-1} \omega_d^k\ketbra{k}{k} && U = \sum_{k=1}^{d-1} \ketbra{k/r}{k},
-\end{align}
-where $\omega_d = e^{i2\pi/d}$ is the primitive $d$-th root of unity,
-and $r$ is the primitive root of $d$.  \carl{That sentence is jumping ahead --- you should just stick to
-definitions and notation for now.}
-Through out this paper, any operation on the label of the eigenvector $\ket{k}$ is taken modulo $d$,
-unless otherwise specified, for example, the $k/r$ above.
 
-\textbf{The weighted CHSH inequality \cite{acin2012}.}
-The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
-In the CHSH scenario, Alice and Bob has binary observables $A_x,B_y$ for $x,y = 1,2$ 
-on Hilbert space $\calH_A$ and $\calH_B$ respectively.  \carl{It needs to be clearer who Alice and Bob
-are --- perhaps you should put this subsection after the ``Nonlocal games'' subsection.}
-A binary observable is a Hermitian matrix whose only eigenvalues are either $+1$ or $-1$.
-The weighted CHSH inequality is given by 
-\begin{align}
-	\label{eq:chsh_op}
-	\I_\alpha = \alpha\ip{A_1B_1}+\alpha\ip{A_1B_2} + \ip{A_2B_1} - \ip{A_2B_2}\leq 2\alpha,
-\end{align}
-where $\ip{A_xB_y}$ is the expectation value of of the observables.  \carl{Same here -- it's not clear enough
-what this means until the reader has seen the ``Nonlocal games'' subsection.}
-If Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$, they cannot violate
-the weighted CHSH inequality.
-However, If they share entangled state $\ket{\psi}$, the maximal violation is 
-\begin{align}
-\label{eq:chsh_max}
- \I_\alpha \leq 2\sqrt{1+\alpha^2}.
-\end{align}
-\begin{definition}[Ideal strategy for $\I_\alpha$]
-	\label{def:ideal}
-	Define $\mu = \arctan(1/\alpha)$.
-	The ideal strategy for weighted CHSH with parameter $\alpha$ (i.e. achieving maximal violation in \cref{eq:chsh_max})
-	consists of the joint state $\ket{\EPR{2}}$ and observables $A_1 = \pauliz$, $A_2 = \paulix$,
-	$B_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $B_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
-\end{definition}
-\carl{Just to be complete, you should say what $\pauliz$ and $\paulix$ denote.}
-An interesting observation of the weighted CHSH inequality is that its maximal violation can certify the shared states and the 
-measurements up to isometry, 
-which is a phenomenon referred as a self-test. We give formal statement of this self-testing result in \cref{sec:chsh}.
+%We self-test $\ket{\EPR{d-1}}$ by verify that Alice and Bob has operators
+%\begin{align}
+%	X = \sum_{k=1}^{d-1} \omega_d^k\ketbra{k}{k} && U = \sum_{k=1}^{d-1} \ketbra{k/r}{k},
+%\end{align}
+%where $\omega_d = e^{i2\pi/d}$ is the primitive $d$-th root of unity,
+%and $r$ is the primitive root of $d$.  \carl{That sentence is jumping ahead --- you should just stick to
+%definitions and notation for now.}
+%Through out this paper, any operation on the label of the eigenvector $\ket{k}$ is taken modulo $d$,
+%unless otherwise specified, for example, the $k/r$ above.
 
-\textbf{Nonlocal games}. The two players of a nonlocal game are Alice and Bob. Each of them is requested
+\textbf{Nonlocal games}. 
+The two players of a nonlocal game are Alice and Bob. Each of them is requested
 to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and answer set by $\calA$. Similarly,
 Bob's question set is denoted by $\calY$ and his answer set is denoted by $\calB$. The nonlocal game also
 comes with two functions: $\pi: \calX \times \calY \rightarrow [0,1]$, which is the probability distribution over the questions,
@@ -413,43 +412,19 @@ the start of the game. Note that in the literature, the typical scoring function
 pair to $\{0,1\}$ which corresponds to losing and winning. Allowing the score to be any real number is the key ingredient 
 to our new result. 
 
-A quantum strategy of a game $G$ consists of projective measurements $\{\{A_x^a\}_a\}$ on Alice's side, 
+A quantum strategy of a nonlocal game consists of projective measurements $\{\{A_x^a\}_a\}_x$ on Alice's side, 
 $\{\{B_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$, where a projective measurement $P$ satisfies
 the condition that $P^2 = P = P\ct$.  \carl{You need to put explicit labels on the quantum systems used by
 Alice and Bob.  (Later on you seem to use ``$A$'' and ``$B$'' to refer to those systems, but those are also
 the same letters you use for Alice's and Bob's measurements.  That's confusing.)}
+\hf{Addressed in the notation part. --H.F}
 Then Alice and Bob's quantum strategy produces the correlation
 \begin{align}
 	\pr{ab}{xy} = \bra{\psi} A_x^a \x B_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
 \end{align}
 where $(A_x^a)^2 = A_x^a = (A_x^a)^\dagger$ and $(B_y^b)^2 = B_y^b = (B_y^b)^\dagger$.
-%Note that we may use the term behaviour and correlation interchangeably.
-%The value of a strategy is given by
-%\begin{align}
-%	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
-%\end{align} 
+A particular type of nonlocal games that we are interested in is called linear system games, which is defined below.
 
-The main contribution of our work is the construction of a correlation, which is the combination of 
-the optimal correlation of a linear system game with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
-and the optimal correlation to violate the weighted CHSH inequality.  \carl{The reader does not 
-know yet what a linear system game is, so this comment is more confusing than helpful.}
-The special property of the correlation is that it can self-test $\ket{\EPR{d-1}}$ for arbitrary $d$ with certain 
-primitive root. 
-In the next part, we introduce the definition of self-testing, the definition of linear system game, 
-and its operator solution, 
-following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
-
-\carl{Before the next definition, you should define what a ``correlation'' is.}
-\begin{definition}[Self-testing]
-	We say that a correlation self-tests a quantum state $\ket{\psi}$, if 
-	the correlation is produced by a strategy with shared state $\ket{\psi}$, and 
-	for any quantum strategy $S = ( \{\tA_x\}, \{\tB_y\}, \ket{\tpsi})$ that produces the same correlation,
-	there exists local isometries $\Phi_A$ and $\Phi_B$ on Alice and Bob's side and a state $\ket{junk}$ 
-	such that 	
-	\begin{align*}
-		\Phi_A \x \Phi_B \ket{\tpsi} =  \ket{\psi} \x \ket{junk}.
-	\end{align*}
-\end{definition}
 \begin{definition}[Linear system game]
  Let $Hx = c$ be an $m \times n$ system of linear equations over $\Z_2$,
  where $H$ is an $m$-by-$n$ matrix with entries in $\Z_2 = \{0,1\}$ and 
@@ -493,44 +468,106 @@ vice versa.  \carl{This is not entirely true.  A ``quantum strategy presented in
 Alice to give answers that violate the ``Constraint satisfaction'' condition, while a ``quantum strategy presented 
 in terms of binary observables'' does not.}
 
-It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
-satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
-operator solution in the following sense.  \carl{There's a missing reference here?}
-\begin{definition}[Operator solution of a linear system]
-\label{def:op_sol}
-	An operator solution to a linear system $Hx =c$ over $\Z_2$ is a sequence of bounded Hermitian 
-	operators $A_1, A_2, \dots A_n$ on a Hilbert space $\calH$ such that \carl{(What does the word ``bounded'' mean here?  It might
-	be best to just state the definition for finite dimensions only.)}
-	\begin{enumerate}
-		\item $A_i^2 = \1$, i.e. $A_i$ is a binary observable, for all $1 \leq i \leq n$;
-		\item If $x_l$ and $x_k$ appear in the same equation, then $A_l$ and $A_k$ commute;
-		\item for all $1 \leq i \leq m$,
-		\begin{align*}
-			\Pi_{k=1}^n A_k^{H(i,k)} = (-1)^{c(i)}\1.
-		\end{align*}
-	\end{enumerate}
-	A finite dimensional operator solution to a linear system $Hx = c$ over $\Z_2$ is an operator
-	solution in which the Hilbert space is finite-dimensional.
+%It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
+%satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
+%operator solution in the following sense.  \carl{There's a missing reference here?}
+%\begin{definition}[Operator solution of a linear system]
+%\label{def:op_sol}
+%	An operator solution to a linear system $Hx =c$ over $\Z_2$ is a sequence of \hf{finite-dimensional} Hermitian 
+%	operators \hf{with finite entries}: $A_1, A_2, \dots A_n$ on a Hilbert space $\calH$ such that \carl{(What does the word ``bounded'' mean here?  It might
+%	be best to just state the definition for finite dimensions only.)}
+%	\begin{enumerate}
+%		\item $A_i^2 = \1$, i.e. $A_i$ is a binary observable, for all $1 \leq i \leq n$;
+%		\item If $x_l$ and $x_k$ appear in the same equation, then $A_l$ and $A_k$ commute;
+%		\item for all $1 \leq i \leq m$,
+%		\begin{align*}
+%			\Pi_{k=1}^n A_k^{H(i,k)} = (-1)^{c(i)}\1.
+%		\end{align*}
+%	\end{enumerate}
+%	A finite dimensional operator solution to a linear system $Hx = c$ over $\Z_2$ is an operator
+%	solution in which the Hilbert space is finite-dimensional.
+%\end{definition}
+%Perfect quantum strategies can be extracted from operator solutions and vice versa.
+%Another angle to look at the linear system game ($Hx = c$) is a finitely presented group
+%over $\Z_2$, which is called the solution group.
+%\begin{definition}[Solution group of a linear system game]
+%	\label{def:presentation}
+%	Let $Hx = c$ be an $m \times n$  linear system. The solution group of this system
+%	is the group
+%	\begin{align*}
+%		\Gamma(H,c) := \ip{
+%		x_1,\dots x_n, J: &J^2 = x_i^2 = e \text{ for all }1 \leq i \leq n, \\
+%				& \Pi_{j=1}^n x_j^{H(i,j)} = J^{c(i)} \text{ for all } 1 \leq i \leq m, \text{ and } \\
+%				& x_l x_k = x_k x_l \text{ if } H(i,k) = H(i,l) = 1 \text{ for some } i
+%				} .
+%	\end{align*}
+%\end{definition}
+%\carl{Don't you also need a commutativity condition for $J$ with $\{ x_i \}$?}
+%For concepts about group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
+%Combining \cref{def:op_sol} and \cref{def:presentation}, we know that an operator solution associated to $Hx =c$ is 
+%a finite-dimensional representation of $\Gamma(H,c)$ that maps $J$ to $-\1$.
+
+\textbf{The weighted CHSH inequality \cite{acin2012}.}
+The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
+In the CHSH scenario, $\calX = \calY = \{1, 2\}$ and $\calA = \calB = \{0,1\}$.
+We define binary observables $A_x := A_x^0 - A_x^1$ and $B_y := B_y^0 - B_y^1$ from Alice and Bob's projectors.
+It is easy to see that the binary observables are Hermitian and their only eigenvalues are either $+1$ or $-1$.
+The weighted CHSH inequality is given by 
+\begin{align}
+	\label{eq:chsh_op}
+	\ip{\I_\alpha} = \alpha\ip{A_1B_1}+\alpha\ip{A_1B_2} + \ip{A_2B_1} - \ip{A_2B_2}\leq 2\alpha,
+\end{align}
+where $\ip{A_xB_y} := \bra{\psi} A_x B_y \ket{\psi}$ is the expectation value of of the observables. 
+If Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$, they cannot violate
+the weighted CHSH inequality.
+However, If they share entangled state $\ket{\psi}$, the maximal violation is 
+\begin{align}
+\label{eq:chsh_max}
+ \ip{\I_\alpha}_{\max} = 2\sqrt{1+\alpha^2}.
+\end{align}
+\begin{definition}[Ideal strategy to achieve $\ip{\I_\alpha}_{\max}$]
+	\label{def:ideal}
+	Define $\mu = \arctan(1/\alpha)$.
+	The ideal strategy for weighted CHSH with parameter $\alpha$ (i.e. achieving maximal violation in \cref{eq:chsh_max})
+	consists of the joint state $\ket{\EPR{2}}$ and observables $A_1 = \pauliz$, $A_2 = \paulix$,
+	$B_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $B_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
 \end{definition}
-Perfect quantum strategies can be extracted from operator solutions and vice versa.
-Another angle to look at the linear system game ($Hx = c$) is a finitely presented group
-over $\Z_2$, which is called the solution group.
-\begin{definition}[Solution group of a linear system game]
-	\label{def:presentation}
-	Let $Hx = c$ be an $m \times n$  linear system. The solution group of this system
-	is the group
+An interesting observation of the weighted CHSH inequality is that its maximal violation can certify the shared states and the 
+measurements up to isometry, 
+which is a phenomenon referred as a self-test.
+We give the definition of a self-test below and the
+formal statement of this self-testing property of $\I_\alpha$. in \cref{sec:chsh}.
+
+
+%Note that we may use the term behaviour and correlation interchangeably.
+%The value of a strategy is given by
+%\begin{align}
+%	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
+%\end{align} 
+
+%The main contribution of our work is the construction of a correlation, which is the combination of 
+%the optimal correlation of a linear system game with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
+%and the optimal correlation to violate the weighted CHSH inequality.  \carl{The reader does not 
+%know yet what a linear system game is, so this comment is more confusing than helpful.}
+%The special property of the correlation is that it can self-test $\ket{\EPR{d-1}}$ for arbitrary $d$ with certain 
+%primitive root. 
+%In the next part, we introduce the definition of self-testing, the definition of linear system game, 
+%and its operator solution, 
+%following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
+
+\carl{Before the next definition, you should define what a ``correlation'' is.}
+\hf{Mentioned in the nonlocal game part, but not sure how to make it a definition. --HF}
+\begin{definition}[Self-testing]
+	We say that a correlation self-tests a quantum state $\ket{\psi}$, if 
+	the correlation is produced by a strategy with shared state $\ket{\psi}$, and 
+	for any quantum strategy $S = ( \{\tA_x\}, \{\tB_y\}, \ket{\tpsi})$ that produces the same correlation,
+	there exists local isometries $\Phi_A$ and $\Phi_B$ on Alice and Bob's side and a state $\ket{junk}$ 
+	such that 	
 	\begin{align*}
-		\Gamma(H,c) := \ip{
-		x_1,\dots x_n, J: &J^2 = x_i^2 = e \text{ for all }1 \leq i \leq n, \\
-				& \Pi_{j=1}^n x_j^{H(i,j)} = J^{c(i)} \text{ for all } 1 \leq i \leq m, \text{ and } \\
-				& x_l x_k = x_k x_l \text{ if } H(i,k) = H(i,l) = 1 \text{ for some } i
-				} .
+		\Phi_A \x \Phi_B \ket{\tpsi} =  \ket{\psi} \x \ket{junk}.
 	\end{align*}
 \end{definition}
-\carl{Don't you also need a commutativity condition for $J$ with $\{ x_i \}$?}
-For concepts about group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
-Combining \cref{def:op_sol} and \cref{def:presentation}, we know that an operator solution associated to $Hx =c$ is 
-a finite-dimensional representation of $\Gamma(H,c)$ that maps $J$ to $-\1$.
+
 
 \carl{Section 2 needs to be cleaned up in some places, but overall it is pretty good.}
 
