@@ -606,26 +606,26 @@ formal statement of this self-testing property of $\I_\alpha$. in \cref{sec:chsh
 %=======================================
 The goal of this section and the following two sections is to 
 present a correlation that can self-test $\ket{\EPR{d-1}}$, 
-where $d$ is prime and has primitive root $r \in \{2, 3, 5\}$,
+where $d$ is prime with primitive root $r$,
 and this correlation is denoted by $C(\dr{r})$.  \carl{Be more precise --- we are constructing
 such a correlation for any $d$ which has $2, 3,$ or $5$ as a primitive root.}
-The correlation we constructed is the optimal correlation for a game $\G(\dr{r})$, which is the combination of two tests.
-In this section, we introduce the linear system game which tests a relation that should be satisfied by 
+\hf{One part of $C(\dr{r})$ is produced by the optimal quantum strategy of a linear system game, denoted by $\LS$.}
+In this section, we introduce the linear system game which tests a key relation that should be satisfied by 
 Alice and Bob's observables.
 
 Slofstra's seminal work~\cite{slofstra2017} draws our attention to the relation $xyx^{-1} = y^2$.  \carl{That sentence
 is too vague -- either make it a rigorous statement or leave it out.}
-The main component of $\G(\dr{r})$ is a linear system game $\LS$, whose solution group is the embedding of the 
-following group
+\hf{We generalize this relation and make he solution group of $\LS$ the embedding of the 
+following group}
 \begin{align}
-	\Pg_r= \langle u, x : uxu^{-1} = x^r \rangle, \text{ for } r \in \{2, 3,5\}.
+	\Pg_r= \langle u, o : uou^{-1} = o^r \rangle, \text{ for } r \in \N.
 \end{align}
-In other words, relations in the presentation of the solution group of $\LS_r$ can be combined to derive the
-relation $uxu^{-1} = x^r$.  
+In other words, relations in the presentation of the solution group of $\LS$ can be combined to derive the
+relation $uou^{-1} = o^r$.  
 \begin{proposition}
 	\label{prop:embed}
 	The group $\Pg_r$ can be embedded into a linear system game $\LS_r$ over $\Z_2$,
-	with constant numbers of variables and equations, where each equation involves $3$ variables.
+	with the numbers of variables and equations linear in $r$, where each equation involves $3$ variables.
 	\carl{You need to make this a more precise statement.  (It sounds as if you're saying 
 	that the numbers of variables and equations is independent of $r$, which I'm pretty sure is not true.)}
 \end{proposition}
@@ -1136,7 +1136,11 @@ group $\Gamma(\LS)$, $\Psi$, which can be converted to an ideal strategy for $\L
 The ideal strategy for $C(\dr{r})$ is the combination of the two ideal strategies for the two tests.
 
 \textbf{The ideal strategy for the weighted $\CHSH_X$ test}.
-Alice and Bob share state $\ket{\psi} = \frac{1}{\sqrt{d-1}}\sum_{i=1}^{d-1} \ket{ii}$ and choose the special subspace to be 
+Alice and Bob share state 
+\begin{align}
+	\ket{\psi} = \frac{1}{\sqrt{d-1}}\sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})
+\end{align}	
+and choose the special subspace to be 
 $V = \spn(\ket{1} ,\ket{d-1})$.
 Alice's projectors and observables for the weighted $\CHSH_X$ test are
 \begin{align*}
@@ -1162,9 +1166,22 @@ In this basis, $B_1|_V$ and $B_2|_V$ are expressed as
 	&B_1|_V = \omega_d\ketbra{x_1}{x_{d-1}} + \omega_d^{-1} \ketbra{x_{d-1}}{x_1},\\
 	&B_2|_V =\ketbra{x_1}{x_{d-1}}  + \ketbra{x_{d-1}}{x_1}.
 \end{align}
-\hl{If we express $\ket{j}$'s as $\ket{x_j}$'s, then we can find that 
-shared state is}\\
-\hl{ $\sum_{j=1}^{d-1} \ket{j}\ket{j} = \sum_{j=0}^{(d-1)/2} e^{-ij\pi/d} (\ket{x_{j}}\ket{x_{d-j}} + \ket{x_{d-j}}\ket{x_{j}}$.}
+Extending $B_1|_V$ and $B_2|_V$ to the whole space spanned by $\{ \ket{j} \}_{j=1}^{d-1}$ gives us that
+\begin{align}
+	B_1 =\sum_{j=1}^{(d-1)/2} \omega_d^j \ketbra{x_j}{x_{d-j}} + \omega_d^{-j} \ketbra{x_{d-j}}{x_{j}} &&
+	B_2 = \sum_{j=1}^{d-1} \ketbra{x_j}{x_{d-j}},
+\end{align}
+where the basis state $\ket{x_j}$ and $\ket{x_{d-j}}$ are defined by
+\begin{align}
+	\ket{x_j} = \frac{-1}{\sqrt{2}}(\ket{j} + i\ket{d-j}), &&
+	\ket{x_{d-j}} = \frac{-e^{ij\pi/d}}{\sqrt{2}}(\ket{j} - i\ket{d-j}) \text{ for } j = 1 \dots \frac{d-1}{2}.
+\end{align}
+If we use the basis $\{ \ket{x_j} \}_{j=1}^{d-1}$, the shared state is 
+\begin{align}
+	\ket{\psi} =& \frac{1}{\sqrt{d-1}} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})\\
+	=& \frac{1}{\sqrt{d-1}} \sum_{j=1}^{(d-1)/2}  e^{ij\pi/d}e^{-ij\pi/d} (\ket{x_{j}}\ket{x_{d-j}} + \ket{x_{d-j}}\ket{x_{j}} \\
+	=& \frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j} \ket{x_{d-j}}.
+\end{align}
 
 \textbf{The ideal strategy for $\LS_r$}.
 We denote the number of generators labelled by $x_i$ in $\LS_r$ by $n_r(x)$.

@@ -203,6 +203,7 @@
 
 % Probabilities
 \newcommand{\pr}[2]{P(#1|#2)}
+\newcommand{\tpr}[2]{\tilde{P}(#1|#2)}
 \newcommand{\pa}[2]{P_A(#1|#2)}
 \newcommand{\pb}[2]{P_B(#1|#2)}
 \newcommand{\EPR}[1]{EPR^{(#1)}}
@@ -1036,10 +1037,12 @@ the transpose of Table~\ref{tb:chsh}, so we omit it here.
 %	&P(\perp \perp | 0 \ast) =  \bra{\psi} \Pi_V^\perp \otimes \Pi_V^\perp \ket{\psi} = \frac{d-3}{d-1}.
 %\end{align}
 %when the input is $(1, \ast)$, the correlation is similar as above.
-Let $S = (\ket{\psi}, \{A_x^a\}_{x \in X, a\in A}, \{B_y^b\}_{y \in Y, b\in B})$ be a quantum strategy, then
-we prove the following propositions.
+Let $\tpr{ab}{xy}$ be the ideal quantum correlation.
+We prove the following propositions.
 \begin{proposition}
-The strategy $S$ satisfy the following relations
+Let $S = (\ket{\psi}, \{A_x^a\}_{x \in X, a\in A}, \{B_y^b\}_{y \in Y, b\in B})$ be a quantum strategy such that the correlation
+$\pr{ab}{xy}$ produced by $S$ satisfies the condition that $E_{xy} \sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq \ep$,
+then the strategy $S$ satisfy the following relations
 \begin{align}
 	  A_\ast^\diamond B_\ast^\diamond \ket{\psi}
 	  \appd{O( r\se)}&A_\ast^\diamond \ket{\psi} \appd{O( r\se)} (A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O( r\se)} (A_{n+2}^0+A_{n+2}^1)\ket{\psi} \\
@@ -1055,6 +1058,18 @@ and
 \end{proposition}
 
 \begin{proof} 
+We first examine the implication of $E_{xy} \sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq \ep$.
+Since the size of $\calX \times \calY$ is of order $O(r^2)$ and we assume uniform distribution over the input pairs,
+we know that for each $(x,y)$, $\sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq O(r^2 \epsilon)$.
+For each question pair $(x,y)$, the number of possible output pairs is $(a,b)$ is constant.
+Hence, we know $\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$. In particularly, it means the probability for Alice and Bob to agree
+their assignments to the same variable is $1 - O(r^2 \ep)$. 
+Since the measurements for the assignment of the whole equation can be
+expressed as a linear combination of the measurements for the assignment of the individual variable, 
+the probability of giving assignments
+that satisfy the equation can be expressed as a linear combination of the probability to give matching assignment 
+to individual variable in the same fashion. Hence, the probability to satisfy each equation is $1 -O(r^2 \ep)$.
+
 We prove $(A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O(r\se)} B_\ast^\diamond \ket{\psi}$ as an example.
 The rest of the relations follow the same line of arguments.
 
