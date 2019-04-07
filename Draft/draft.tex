@@ -446,7 +446,7 @@ $V(a,b,x,y) =0$ implies that $\pr{ab}{xy} = 0$.  \carl{Make this clear in the de
 We focus on quantum strategies for the linear system game presented in terms of binary observables.
 \begin{definition}[Quantum strategy of a linear system game]
 \label{def:q_strat}
-A quantum strategy for the linear system game $(Hx = c)$ consists of 
+A quantum strategy presented in terms of observables for the linear system game $(Hx = c)$ consists of 
 \begin{enumerate}
 	\item a pair of finite Hilbert spaces $\calH_A$ and $\calH_B$;
 	\item a collection of binary observables $B_j$, $1 \leq j \leq n$, on $\calH_B$
@@ -463,10 +463,8 @@ A quantum strategy for the linear system game $(Hx = c)$ consists of
 \end{enumerate}
 \end{definition}
 Note that any quantum strategy presented in terms of binary observables can be 
-converted to a quantum strategy presented in terms of projective measurement, and
-vice versa.  \carl{This is not entirely true.  A ``quantum strategy presented in terms of projective measurement'' allows
-Alice to give answers that violate the ``Constraint satisfaction'' condition, while a ``quantum strategy presented 
-in terms of binary observables'' does not.}
+converted to a quantum strategy presented in terms of projective measurement by looking into
+the spectrum decompositions of the observables.
 
 %It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
 %satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
@@ -488,24 +486,32 @@ in terms of binary observables'' does not.}
 %	solution in which the Hilbert space is finite-dimensional.
 %\end{definition}
 %Perfect quantum strategies can be extracted from operator solutions and vice versa.
-%Another angle to look at the linear system game ($Hx = c$) is a finitely presented group
-%over $\Z_2$, which is called the solution group.
-%\begin{definition}[Solution group of a linear system game]
-%	\label{def:presentation}
-%	Let $Hx = c$ be an $m \times n$  linear system. The solution group of this system
-%	is the group
-%	\begin{align*}
-%		\Gamma(H,c) := \ip{
-%		x_1,\dots x_n, J: &J^2 = x_i^2 = e \text{ for all }1 \leq i \leq n, \\
-%				& \Pi_{j=1}^n x_j^{H(i,j)} = J^{c(i)} \text{ for all } 1 \leq i \leq m, \text{ and } \\
-%				& x_l x_k = x_k x_l \text{ if } H(i,k) = H(i,l) = 1 \text{ for some } i
-%				} .
-%	\end{align*}
-%\end{definition}
-%\carl{Don't you also need a commutativity condition for $J$ with $\{ x_i \}$?}
-%For concepts about group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
-%Combining \cref{def:op_sol} and \cref{def:presentation}, we know that an operator solution associated to $Hx =c$ is 
-%a finite-dimensional representation of $\Gamma(H,c)$ that maps $J$ to $-\1$.
+Another angle to look at the linear system game ($Hx = c$) is a finitely presented group
+over $\Z_2$, which is called the solution group.
+\begin{definition}[Solution group of a linear system game]
+	\label{def:presentation}
+	Let $Hx = c$ be an $m \times n$  linear system. The solution group of this system
+	is the group
+	\begin{align*}
+		\Gamma(H,c) := \ip{
+		x_1,\dots x_n, J: &J^2 = x_i^2 = e, Jx_i = x_iJ \text{ for all }1 \leq i \leq n, \\
+				& \Pi_{j=1}^n x_j^{H(i,j)} = J^{c(i)} \text{ for all } 1 \leq i \leq m, \text{ and } \\
+				& x_l x_k = x_k x_l \text{ if } H(i,k) = H(i,l) = 1 \text{ for some } i
+				} .
+	\end{align*}
+\end{definition}
+Let $\Psi$ be a finite-dimensional representation of $\Gamma(H,c)$ such that $\Psi(J) = -\1$ on the vector space $\C^d$, then a prefect strategy for 
+the linear system game ($Hx = c$) is given by 
+\begin{enumerate}
+	\item $A_{ij} = \Psi(x_j)$ for all $ 1 \leq i \leq m$ and $1 \leq j \leq n$,
+	\item $B_j = \Psi(x_j)$ for all $1 \leq j \leq n$,
+	\item the maximally entangled state $\ket{\psi} = \frac{1}{\sd} \sum_{k=1}^d \ket{k}\ket{k}$.
+\end{enumerate}
+We follow a similar approach to construct our ideal strategy. However, our strategy uses a different maximally entangled state,
+so we justify our strategy more carefully.
+For concepts related to group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
+For concepts related to group representations, we refer to Sec.~$2.5$ of Ref.~\cite{coladan2017}.
+
 
 \textbf{The weighted CHSH inequality \cite{acin2012}.}
 The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
@@ -613,9 +619,14 @@ such a correlation for any $d$ which has $2, 3,$ or $5$ as a primitive root.}
 In this section, we introduce the linear system game which tests a key relation that should be satisfied by 
 Alice and Bob's observables.
 
-Slofstra's seminal work~\cite{slofstra2017} draws our attention to the relation $xyx^{-1} = y^2$.  \carl{That sentence
-is too vague -- either make it a rigorous statement or leave it out.}
-\hf{We generalize this relation and make he solution group of $\LS$ the embedding of the 
+In Slofstra's seminal work~\cite{slofstra2017} embeds the group
+\begin{align}
+	K = \ip{ x,y,a,b:a^2=b^2=e, ab=ba, yay^{-1} = a, yby^{-1} = ab, xyx^{-1}=y^2}
+\end{align}
+into a linear system game such that the relations in the definition of $K$ can be reproduced from the
+combination of the equations of the linear system game. The special relation $xyx^{-1} = y^2$ inspired 
+our work.
+\hf{We generalize this relation and make he solution group of $\LS_r$ the embedding of the 
 following group}
 \begin{align}
 	\Pg_r= \langle u, o : uou^{-1} = o^r \rangle, \text{ for } r \in \N.
@@ -625,7 +636,8 @@ relation $uou^{-1} = o^r$.
 \begin{proposition}
 	\label{prop:embed}
 	The group $\Pg_r$ can be embedded into a linear system game $\LS_r$ over $\Z_2$,
-	with the numbers of variables and equations linear in $r$, where each equation involves $3$ variables.
+	with the numbers of variables, $n_r := 17r + 73$, 
+	and the number of equations, $m_r =15r + 61$, where each equation involves $3$ variables.
 	\carl{You need to make this a more precise statement.  (It sounds as if you're saying 
 	that the numbers of variables and equations is independent of $r$, which I'm pretty sure is not true.)}
 \end{proposition}
@@ -1236,19 +1248,7 @@ What we have shown so far is that conjugation by $U$ only permutes the terms of 
 \begin{align}
 	UB_2U\ct = B_2.
 \end{align}
-%There are two cases to consider which are the index is dividable by $r$ or not.
-%Note that in the following calculation, the division is not with respect to the modulo $d$.
-%When the index $i \equiv 0 \pmod{r}$, $U\ketbra{x_i}{x_{d-i}}U = \ketbra{x_{i/2}}{x_{d-i/r}}$, and
-%when the index $i \not\equiv 0 \pmod{r}$, $U\ketbra{x_i}{x_{d-i}}U = \ketbra{x_{(d+i)/2}}{x_{(d-i)/2}}$,
-%so we can calculate that 
-%\begin{align}
-%	\sum_{i=1}^{d-1} U\ketbra{x_i}{x_{d-i}}U\ct 
-%	=& \sum_{i=1}^{(d-1)/2}U\ketbra{x_{2i}}{x_{d-2i}}U\ct 
-%	+ \sum_{i=0}^{(d-1)/2-1} U\ketbra{x_{2i+1}}{x_{d-(2i+1)}}U\ct\\
-%	=& \sum_{i=1}^{(d-1)/2}\ketbra{x_i}{x_{d-i}} + \sum_{i=0}^{(d-1)/2-1} \ketbra{x_{(d+1)/2+i}}{x_{(d-1)/2-i}}\\
-%	=& \sum_{i=1}^{(d-1)/2}\ketbra{x_i}{x_{d-i}} + \sum_{i=(d+1)/2}^{d-1} \ketbra{x_i}{x_{d-i}}\\
-%	=&\sum_{i=1}^{d-1} \ketbra{x_i}{x_{d-i}}.
-%\end{align}
+
 The decomposition of $U$ into $\Psi_1(x_3)$ and $\Psi_1(x_4)$ is similar to the decomposition of $X$.
 Since $u$ has order $d-1$, we can find an eigenbasis $\{ \ket{u_i} \}_{i=0}^{d-2}$ such that the eigen-decomposition of $U$ is
 \begin{align}
@@ -1261,6 +1261,43 @@ then $\Psi_1(x_3)$ and $\Psi_1(x_4)$ are
 	A_4 = B_4  =\Psi_1(x_4) = &\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\+
 	 &\sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right).
 \end{align*}
+Next we will show that 
+\begin{align}
+	A_3\x B_3 \ket{\psi} = \ket{\psi} && A_4 \x B_4 \ket{\psi} = \ket{\psi}.
+\end{align}
+For this purpose, we use a different expression of $\ket{\psi}$, which is
+\begin{align}
+	\ket{\psi} = \frac{1}{\sqrt{d}} \sum_{j=0}^{d-2} \ket{r^j} \ket{r^{d-1-j}}.
+\end{align}
+Then the eigenvectors of $U$ are 
+\begin{align}
+	\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{r^j}.
+\end{align}
+Hence we can express $\ket{r^j}$ in terms of $\ket{u_k}$ as 
+\begin{align}
+	\ket{r^j} = \frac{1}{\sqrt{d-1}} \sum_{k=0}^{d-2} \omega_{d-1}^{-jk} \ket{u_k}.
+\end{align}
+Then $B_4$ acts on $\ket{r^j}$ as 
+\begin{align}
+	B_4 \ket{r^j} =& \frac{1}{\sqrt{d-1}} B_4\left(\ket{u_0} + \omega_{d-1}^{-j(d-1)/2}\ket{u_{(d-1)/2}}  + 
+	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_k} + \omega_{d-1}^{jk} \ket{u_{d-1-k}})\right) \\
+	=&\frac{1}{\sqrt{d-1}} \left(\ket{u_0} + (-1)^j\ket{u_{(d-1)/2}}  + 
+	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_{d-1-k}} + \omega_{d-1}^{jk} \ket{u_{k}})\right) \\
+	=& \ket{r^{d-1-j}}.
+\end{align}
+We first verify that $U \x U \ket{\psi} = \ket{\psi}$
+\begin{align}
+	U \x U \ket{\psi} &= \frac{1}{\sqrt{d-1}}\sum_{j = 0}^{d-2} \ketbra{ r^{j}r^{-1}}{r^j} \ket{r^j} \x \ketbra{r^{d-1-j} r^{-1}}{r^{d-1-j}} \ket{r^{d-1-j}} \\
+	&=\frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^{j-1}}\ket{r^{d-1-j}} = \ket{\psi},
+\end{align}
+where we use the fact that $\ket{r^{-1}} = \ket{r^{d-2}}$.
+Then we show that $A_4 \x B_4 \ket{\psi} = \ket{\psi}$ as 
+\begin{align}
+	A_4 \x B_4 \ket{\psi} = \frac{1}{\sqrt{d-1}}  \sum_{j=0}^{d-2} A_4 \x B_4 \ket{r^j} \ket{r^{d-1-j}} 
+	= \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^{d-1-j}} \ket{r^{j}} =\ket{\psi},
+\end{align}
+which combined with the previous fact implies that $A_3 \x B_3 \ket{\psi} = \ket{\psi}$.
+
 The conjugation relations in $C_r$ determines the representations of 
 the rest of the $x_i$'s from $x_1,x_2,x_3$ and $x_4$. 
 For example, if $x_5 = x_1x_2x_1 \in C_r$, then
