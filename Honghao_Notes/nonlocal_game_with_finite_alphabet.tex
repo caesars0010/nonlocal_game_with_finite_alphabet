@@ -638,24 +638,42 @@ Let $S$ be the strategy defined in the previous proposition, then
 \end{corollary}
 \begin{proof}
 The $l = 1$ case follows from the fact that the linear system game embeds $O(r)$ conjugation relations and 
-all the $O(r)$ conjugation relations are used in the derivation of $(x_3x_4)x_1x_2(x_4x_3) = (x_1x_2)^r$.
-
-Suppose the corollary is true for $l = k$, then
+all the $O(r)$ conjugation relations are used in the derivation of $(x_3x_4)x_1x_2(x_4x_3) = (x_1x_2)^r$, so we 
+have
 \begin{align}
-	A_1A_2(A_4A_3)^{k+1} \ket{\psi} &\appd{O(r\se)} B_3B_4 A_1A_2(A_4A_3)^k \ket{\psi} \\
-	&\appd{O(r^{k+1}\se)} B_3B_4(A_4A_3)^k (A_1A_2)^{r^k} \ket{\psi} \\
-	&\appd{O(r\se)} (A_4A_3)^k(A_1A_2)^{r^k} A_4A_3 \ket{\psi}\\
-	&\appd{O(r\se)} (A_4A_3)^k(A_1A_2)^{r^k-1} A_4A_3 (A_1A_2)^r \ket{\psi} \\
-	& \ldots (r^k \text{ such swaps} ) \ldots \\
-	&\appd{O(r\se)} (A_4A_3)^{k+1} (A_1A_2)^{r^{k+1}}\ket{\psi},
+	\label{eq:ls_comm_rel}
+	A_1A_2 (A_4A_3) \ket{\psi} \appd{O(r\se)} (A_4A_3)(A_1A_2)^r \ket{\psi}.
 \end{align}
-where each of the $r^k$ swaps introduces a difference of order $O(r\se)$.
+
+Assume the statement is true for $l = k$, then consider the case that $l = k+1$,
+\begin{align}
+	A_1A_2 (A_4A_3)^{k+1} \ket{\psi}  &\appd{O(r\se)} (B_3B_4) A_1A_2(A_4A_3)^k \ket{\psi} \\
+	&\appd{O(r^{k+1}\se)} (B_3B_4) (A_4A_3)^k (A_1A_2)^{r^k} \ket{\psi}\\
+	&\appd{O(r\se)} (A_4A_3)^k (A_1A_2)^{r^k} (A_4A_3) \ket{\psi} \\
+	& \appd{O(r^{k+1} \se)} (A_4A_3)^{k+1} (A_1A_2)^{r^{k+1}} \ket{\psi},
+\end{align}
+where from the second to the last line we used \cref{eq:ls_comm_rel} $r^k$ times.
 In summary, we have 
 \begin{align}
 	A_1A_2(A_4A_3)^{k+1} \ket{\psi} \appd{O(r^{k+2} \se)} (A_4A_3)^{k+1} (A_1A_2)^{r^{k+1}}\ket{\psi},
 \end{align}
 because $O(r^{k+1} \se)+O(r^{k+1}\se) = O(r^{k+2} \se)$.
+By the principal of proof by induction, the proof is complete.
 \end{proof}
+An informal justification of the corollary is the following calculation
+\begin{align}
+	A_1A_2(A_4A_3)^k \ket{\psi} &\appd{O((k-1)r\se)} (B_3B_4)^{k-1} A_1A_2(A_4A_3) \ket{\psi} \\
+	&\appd{O(r\se)} (B_3B_4)^{k-1}(A_4A_3) (A_1A_2)^r \ket{\psi} \\
+	&\appd{O(r\se)} (B_4B_4)^{k-2} (A_4A_3) (A_1A_2)^{r} (A_4A_3) \ket{\psi}\\
+	&\appd{O(r^2 \se)} (B_4B_3)^{k-2} (A_4A_3)^2 (A_1A_2)^{r^2} \ket{\psi} \\
+	& \ldots (k-2  \text{ more such swaps} ) \ldots \\
+	&\appd{O(r^{k-1}\se)} (A_4A_3)^{k} (A_1A_2)^{r^{k}}\ket{\psi}.
+\end{align}
+The total distance introduced by the whole procedure above is
+\begin{align}
+	\sum_{j=0}^{k-1} O(r^j \se) = O(r^k \se).
+\end{align}
+
 For simplicity, we define $O_A = A_1A_2$ and $U_A=A_3A_4$ such that
 the conclusion of the corollary above can be rewritten as 
 \begin{align}
