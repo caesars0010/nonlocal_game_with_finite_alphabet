@@ -210,6 +210,8 @@
 \newcommand{\tri}{\Delta}
 \newcommand{\lB}{\overline{B}}
 \newcommand{\dr}[1]{d^{(#1)}}
+\newcommand{\nr}{n(r)}
+\newcommand{\mr}{m(r)}
 
 
 % Probabilities
@@ -636,8 +638,8 @@ relation $uou^{-1} = o^r$.
 \begin{proposition}
 	\label{prop:embed}
 	The group $\Pg_r$ can be embedded into a linear system game $\LS_r$ over $\Z_2$,
-	with the numbers of variables, $n_r := 17r + 73$, 
-	and the number of equations, $m_r =15r + 61$, where each equation involves $3$ variables.
+	with the numbers of variables, $\nr := 17r + 73$, 
+	and the number of equations, $\mr =15r + 61$, where each equation involves $3$ variables.
 	\carl{You need to make this a more precise statement.  (It sounds as if you're saying 
 	that the numbers of variables and equations is independent of $r$, which I'm pretty sure is not true.)}
 \end{proposition}
@@ -647,7 +649,7 @@ The order of applying the results is the reverse of the order they are presented
 We give details of this embedding process in \cref{sec:power2} for $r = 2$, \cref{sec:power3} for $r = 3$, 
 and \cref{sec:power5} for $r = 5$. 
 
-In the later parts of the paper, we use $n_r$ and $m_r$ to refer to the size of $\LS_r$.
+In the later parts of the paper, we use $\nr$ and $\mr$ to refer to the size of $\LS_r$.
 The key feature of this embedding is that $\LS_r$ has constant-sized input-output alphabet
 even if the generators $u$ and $x$ have arbitrary order. 
 The product of the generators $x_1$ and $x_2$ from the solution group of $\LS_r$ plays the role 
@@ -1117,19 +1119,19 @@ prove that it can self-test the state $\ket{\EPR{d-1}}$.
 %-----------------------------------------------------------------
 \subsection{The correlation $C(\dr{r})$}
 %-----------------------------------------------------------------
-Recall that the linear system game $\LS_r$ has $n_r$ variables and $m_r$ equations.
+Recall that the linear system game $\LS_r$ has $\nr$ variables and $\mr$ equations.
 In game $\G(\dr{r})$, 
-Alice receives $x \in \{1,\dots m_r+3 \}$ and Bob receives
-$y \in \{1,\dots,n_r+1\}$. We follow the previous structure by first give intuition about how they should
+Alice receives $x \in \{1,\dots \mr+3 \}$ and Bob receives
+$y \in \{1,\dots,\nr+1\}$. We follow the previous structure by first give intuition about how they should
 behave in this game. The correlation can be easily extracted from the behaviour list below.
 \begin{itemize}
-	\item When $x \in \{1,\dots m_r\}$ and $y \in \{1, \dots n_r\}$, they should win the 
+	\item When $x \in \{1,\dots \mr\}$ and $y \in \{1, \dots \nr\}$, they should win the 
 	linear system game $\LS_r$ perfectly;
-	\item when $x \in \{m_r+1, m_r+2, m_r+3\}$ and $y \in \{1, 2, n_r+1\}$, they should follow the
+	\item when $x \in \{\mr+1, \mr+2, \mr+3\}$ and $y \in \{1, 2, \nr+1\}$, they should follow the
 	optimal correlation of the test $\CHSH_X$, where 
 	\begin{align}
 		&\ast_A = m_r+1, \quad 1_A = m_r+2,\quad 2_A = m_r+3,\\
-		&\ast_B = n_r+1,\quad 1_B = 1, \quad 2_A = 2,
+		&\ast_B = \nr+1,\quad 1_B = 1, \quad 2_A = 2,
 	\end{align}
 	are the inputs for the game $\CHSH_X$
 	(The intuition behind is that $B_1B_2 = X$.);
@@ -1196,13 +1198,14 @@ If we use the basis $\{ \ket{x_j} \}_{j=1}^{d-1}$, the shared state is
 \end{align}
 
 \textbf{The ideal strategy for $\LS_r$}.
-We denote the number of generators labelled by $x_i$ in $\LS_r$ by $n_r(x)$.
+We denote the number of generators labelled by $x_i$ in $\LS_r$ by $n(r,x)$.
 In order to construct a representation of $\Gamma(\LS_r)$, we first construct a representation, $\Psi_1$ for the group 
 \begin{align}
-	G_r(x) = \ip{ \{x_i\}_{i=1}^{n_r(x)}: x_i^2 = e, x_i x_j x_i = x_k \text{ for all } (i,j,k) \in C_r},
+	G_r(x) = \ip{ \{x_i\}_{i=1}^{n(r,x)}: x_i^2 = e, x_i x_j x_i = x_k \text{ for all } (i,j,k) \in C_r},
 \end{align}
+on the vector space $W_{d-1} = \spn(\{ \ket{x_j} \}_{j=1}^{d-1})$,
 where details of $C_r$ can be found in the appendices. 
-Note that the relation $uxu^{-1} = x^r$ is embedded in the conjugation relations in $C_r$.
+Note that the relation $uou^{-1} = x^r$ is embedded in the conjugation relations in $C_r$.
 Building on $\Psi_1$, we can construct 
 the representation $\Psi_{\LS_r}$ for the solution group $\Gamma(\LS_r)$.
 
@@ -1218,8 +1221,8 @@ the observables $A_1 = B_1 = \Psi_1(x_1)$ and $A_2 = B_2 = \Psi_1(x_2)$ are exte
 	A_1 = B_1 = \Psi_1(x_1) &= \sum_{k=1}^{(d-1)/2}\left( \omega_d^k\ketbra{x_k}{x_{d-k}} + \omega_d^{-k}\ketbra{x_{d-k}}{x_k}\right)\\
 	A_2 = B_2 = \Psi_1(x_2) &= \sum_{k=1}^{(d-1)/2}\left(\ketbra{x_{d-k}}{x_k} + \ketbra{x_k}{x_{d-k}}\right).
 \end{align}
-It can be checked that $X = \Psi_1(x_1x_2) = \sum_{i \in \Zd} \omega_d^i \ketbra{x_i}{x_i}$ 
-The relation $uxu^{-1} = x^r$ and $X$ determine that 
+It can be checked that $O = \Psi_1(x_1x_2) = \sum_{i \in \Zd} \omega_d^i \ketbra{x_i}{x_i}$ 
+The relation $uou^{-1} = x^r$ and the form of $O$ determine that 
 \begin{align}
 	U =\Psi_1(u) = \Psi_1(x_3x_4) =  \sum_{i \in \Zd} \ketbra{x_{r^{-1}i}}{x_i},
 \end{align}
@@ -1230,24 +1233,24 @@ the commutativity between $U$ and $B_2$, so we prove the commutation relation fi
 then give $\Psi_1(x_3)$ and $\Psi_1(x_4)$.
 The commutation relation can be checked as follows,
 \begin{align}
-	UB_2U\ct = \sum_{i=1}^{d-1} U\ketbra{x_i}{x_{d-i}}U\ct = \sum_{i=1}^{d-1} \ketbra{x_{r^{-1} i}}{x_{r^{-1}(d-i)}}.
+	UB_2U\ct = \sum_{i=1}^{d-1} U\ketbra{x_i}{x_{d-i}}U\ct = \sum_{i=1}^{d-1} \ketbra{x_{r^{-1} i}}{x_{r^{-1}(d-i)}} =B_2.
 \end{align}
-Let $i_1 = i r^{-1} \in \Zd$ and $i_2  = r^{-1} (d-i) \in \Zd$, then
-\begin{align*}
-	r(i_1 + i_2) \equiv  i + (d-i) \equiv d \pmod{d} .
-\end{align*}
-Let $i_1 + i_2= x \in \{2, 3 \dots 2d-2\}$, then
-\begin{align}
-	rx \equiv d \pmod{d}
-\end{align}
-Since $d$ is an odd prime number and $r < d$, then $r$ cannot divide $d$ and the only valid value of $x$ is $d$.
-Hence, conjugation by $U$ will transform $\ketbra{x_i}{x_{d-i}}$ into another term of the same form.
-Now suppose for some $1 \leq i < i' \leq d-1$ and $U\ketbra{x_i}{x_{d-i}}U\ct = U\ketbra{x_{i'}}{x_{d-i'}}U\ct$,
-it means that in $\Zd$, $i r^{-1} = i' r^{-1}$ and $i = i'$, which contradicts the fact that $i \neq i'$.
-What we have shown so far is that conjugation by $U$ only permutes the terms of $B_2$, so
-\begin{align}
-	UB_2U\ct = B_2.
-\end{align}
+%Let $i_1 = i r^{-1} \in \Zd$ and $i_2  = r^{-1} (d-i) \in \Zd$, then
+%\begin{align*}
+%	r(i_1 + i_2) \equiv  i + (d-i) \equiv d \pmod{d} .
+%\end{align*}
+%Let $i_1 + i_2= x \in \{2, 3 \dots 2d-2\}$, then
+%\begin{align}
+%	rx \equiv d \pmod{d}
+%\end{align}
+%Since $d$ is an odd prime number and $r < d$, then $r$ cannot divide $d$ and the only valid value of $x$ is $d$.
+%Hence, conjugation by $U$ will transform $\ketbra{x_i}{x_{d-i}}$ into another term of the same form.
+%Now suppose for some $1 \leq i < i' \leq d-1$ and $U\ketbra{x_i}{x_{d-i}}U\ct = U\ketbra{x_{i'}}{x_{d-i'}}U\ct$,
+%it means that in $\Zd$, $i r^{-1} = i' r^{-1}$ and $i = i'$, which contradicts the fact that $i \neq i'$.
+%What we have shown so far is that conjugation by $U$ only permutes the terms of $B_2$, so
+%\begin{align}
+%	UB_2U\ct = B_2.
+%\end{align}
 
 The decomposition of $U$ into $\Psi_1(x_3)$ and $\Psi_1(x_4)$ is similar to the decomposition of $X$.
 Since $u$ has order $d-1$, we can find an eigenbasis $\{ \ket{u_i} \}_{i=0}^{d-2}$ such that the eigen-decomposition of $U$ is
@@ -1307,134 +1310,87 @@ For example, if $x_5 = x_1x_2x_1 \in C_r$, then
 
 Next, we consider the representation $\Psi_2$ for the group 
 \begin{align*}
-	G(x,y,z,w) = \ip{ \{x_i, w_i, y_i, z_i\}_{i=1}^{n_r(x)}, f, \{g_{jk}\}_{(i,j,k) \in C_r} :&\text{all elements are of order $2$},\\
-	&x_i = y_iz_i = fw_i,\; fy_if =z_i \text{ for } i= 1 \dots n_r(x) \\
-	&g_{jk}y_j z_k = e,\; w_iy_jw_i = z_k \text{ for all } (i,j,k)\in C_r}.
+	G(x,y,z,w) = \ip{ \{x_i, w_i, y_i, z_i\}_{i=1}^{n(r,x)}, f, \{g_{jk}\}_{(i,j,k) \in C_r} :&\text{all elements are of order $2$},\\
+	&x_i = y_iz_i = fw_i,\; fy_if =z_i \text{ for } i= 1 \dots \nr(x) \\
+	&g_{jk}y_j z_k = e,\; w_iy_jw_i = z_k \text{ for all } (i,j,k)\in C_r},
 \end{align*}
+on the vector space $W_2 \x W_{d-1}$,
+where $W_2 = \spn\{ \ket{x_1}, \ket{x_2}\}$.
+Note that the choice of the basis states of $W_2$ is arbitrary.
+On $W_2$, we define 
+\begin{align}
+	\1_{W_2} = \ketbra{x_1}{x_1} + \ketbra{x_2}{x_2}, && X_{W_2} = \ketbra{x_1}{x_2} + \ketbra{x_2}{x_1}.
+\end{align}
+Another property that we should note is that from the presentation, we can deduce that for all $i = 1 \dots n(r,x)$, 
+\begin{align}
+	fx_i fx_i = f (fw_i) f (fw_i) = w_i w_i = e,
+\end{align}
+so $f$ commutes with $x_i$ for all $i$.
 The representation $\Psi_2$ of $G(x,y,z,w)$ should satisfy the condition that for each $x_i$, 
 $\Psi_2(x_i) = \Psi_2(y_i)\Psi_2(z_i) = \Psi_2(f)\Psi_2(w_i)$. We demonstrate how this representation is constructed 
-for $x_i$, $y_i$, $z_i$, $w_i$ and $f$ where $i = 1 \dots n_r(x)$.
-Building on $\Psi_1$, we have $\Psi_2(x_i) = \Psi_1(x_i) \oplus \Psi_1(x_i)$, then
+for $x_i$, $y_i$, $z_i$, $w_i$ and $f$ where $i = 1 \dots n(r,x)$.
+Building on $\Psi_1$, we have $\Psi_2(x_i) = \1_{W_2} \x \Psi_1(x_i)$, then
 $y_i$, $z_i$, $w_i$ and $f$ are mapped to
 \begin{align*}
-\Psi_2(y_i) = 
-\begin{pmatrix}
-\Psi_1(x_i) & 0\\
-0 & \1
-\end{pmatrix},
-&&
-\Psi_2(z_i) \to
-\begin{pmatrix}
-\1 & 0\\
-0 & \Psi_1(x_i)
-\end{pmatrix},
-\\
-\Psi_2(w_i) = 
-\begin{pmatrix}
-0 & \Psi_1(x_i)\\
-\Psi_1(x_i) & 0
-\end{pmatrix},
-&&
-\Psi_2(f) \to
-\begin{pmatrix}
-0 & \1\\
-\1 & 0
-\end{pmatrix}.
+&\Psi_2(y_i) = \ketbra{x_1}{x_1} \x \Psi_1(x_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} \\
+&\Psi_2(z_i) =\ketbra{x_1}{x_1} \x \1_{W_{d-1}} + \ketbra{x_2}{x_2} \x \Psi_1(x_i) \\
+&\Psi_2(w_i) =  X_{W_2} \x \Psi_1(x_i)\\
+&\Psi_2(f) = X_{W_2} \x \1_{W_{d-1}}.
 \end{align*}
 It can be easily checked that the order-$2$ generators are mapped to order-$2$ operators and
 the relations satisfied by the generators are preserved.
-For each $g_{jk}$ where $(i,j,k) \in C_r$, $\Psi_2(g_{jk}) = \Psi_2(y_j)\Psi_2(z_k)$ following
-their defining relations. 
+For each $g_{jk}$ where $(i,j,k) \in C_r$, 
+\begin{align}
+\Psi_2(g_{jk}) = \ketbra{x_1}{x_1} \x \Psi_1(x_j) + \ketbra{x_2}{x_2} \x \Psi_1(x_k).
+\end{align}
 
 The group $G_r(x,y,z,w)$ is embedded in $\Gamma(\LS_r)$ by replacing the conjugacy relations 
-by linear relations. The new generators are $\{\{y_{F_j,k}\}_{k=1}^6\}_{j=1}^{n_r(x)}
+by linear relations. The new generators are $\{\{y_{F_j,k}\}_{k=1}^6\}_{j=1}^{n(r,x)}
 \cup \{\{y_{K,k}\}_{k=1}^7\}_{K \in C_r}$. How the new linear relations can embed the conjugacy relations 
-in $G_r(x,y,z,w)$ can be found in the appendices. Now we define the representation $\Psi_{\LS_r}$ of
-$\Gamma(\LS_r)$. For any generator $a \in \{x_i, w_i, y_i, z_i\}_{i=1}^{n_r(x)}, f, \{g_{jk}\}_{(i,j,k) \in C_r}$,
+in $G_r(x,y,z,w)$ can be found in the appendices. 
+The relations that we should pay attention to are
 \begin{align}
-	\Psi_{\LS_r}(a) = \Psi_2(a) \oplus \Psi_2(a) = \Psi_1(a)^{\oplus 4}.
+	fy_{F_j,1}y_{F_j,2} =  e, && y_j y_{F_j,2}y_{F_j,3} = e \text{ for } j = 1 \dots n(r,x),
 \end{align}
-For generators $\{y_{F_j,k}\}_{k=1}^7\}_{j=1}^{n_r(x)}$,
+which imply that $y_{F_j, 2}$ commutes with $f$ and $y_j$.
+Since $z_j = fy_jf$, $y_{F_j, 2}$ commutes with $z_j$ too.
+We also know that $x_j = y_jz_j$, so we can conclude that $y_{F_j, 2}$ commutes with $x_j$.
+
+
+Now we define the representation $\Psi_{\LS_r}$ of
+$\Gamma(\LS_r)$ on $W_2 \x W_2 \x W_{d-1}$. For any generator $a \in \{x_i, w_i, y_i, z_i\}_{i=1}^{n(r,x)}, f, \{g_{jk}\}_{(i,j,k) \in C_r}$,
+\begin{align}
+	\Psi_{\LS_r}(a) = \1_{W_2} \x \Psi_2(a) 
+\end{align}
+For generators $\{y_{F_j,k}\}_{k=1}^7\}_{j=1}^{n(r,x)}$,
 \begin{align*}
-	\Psi_{\LS_r}(y_{F_j,1}) = 
-	\begin{pmatrix}
-		0 & \Psi_2(f) \\
-		\Psi_2(f) & 0
-	\end{pmatrix},
-	&&
-	\Psi_{\LS_r}(y_{F_j,2}) = 
-	\begin{pmatrix}
-		0 & \1\\
-		\1 & 0
-	\end{pmatrix},\\
-	\Psi_{\LS_r}(y_{F_j,3}) = 
-	\begin{pmatrix}
-		0 & \Psi_2(y_j) \\
-		\Psi_2(y_j) & 0
-	\end{pmatrix},
-	&&
-	\Psi_{\LS_r}(y_{F_j,4}) = 
-	\begin{pmatrix}
-		0 & \Psi_2(y_jf) \\
-		\Psi_2(fy_j) & 0
-	\end{pmatrix},\\
-	\Psi_{\LS_r}(y_{F_j,5}) = 
-	\begin{pmatrix}
-		 \Psi_2(fy_jf) & 0\\
-		  0 & \Psi_2(f)
-	\end{pmatrix},
-	&&
-	\Psi_{\LS_r}(y_{F_j,6}) = 
-	\begin{pmatrix}
-		 \Psi_2(y_jz_j) & 0\\
-		 0 & \1
-	\end{pmatrix},\\
-	\Psi_{\LS_r}(y_{F_j,7}) = 
-	\begin{pmatrix}
-		 \Psi_2(y_j) & 0\\
-		 0 & \Psi_2(z_j)
-	\end{pmatrix}.
+	\Psi_{\LS_r}(y_{F_j,1}) &=X_{W_2} \x \Psi_2(f) = X_{W_2} \x X_{W_2} \x \1_{W_{d-1}}\\
+	\Psi_{\LS_r}(y_{F_j,2}) &= X_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
+	\Psi_{\LS_r}(y_{F_j,3}) &= X_{W_2} \x \Psi_2(y_j) = X_{W_2} \x ( \ketbra{x_1}{x_1} \x \Psi_1(x_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} )\\
+	\Psi_{\LS_r}(y_{F_j,4}) &= \ketbra{x_1}{x_2} \x \Psi_2(y_jf) + \ketbra{x_2}{x_1} \x \Psi_2(fy_j)\\
+	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_1(x_j) + \ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_2}{x_1x_1} \x \Psi_1(x_j)\\ 
+	\Psi_{\LS_r}(y_{F_j,5}) &= \ketbra{x_1}{x_1} \x \Psi_2(fy_jf) + \ketbra{x_2}{x_2} \x \Psi_2(f) \\
+	&= \ketbra{x_1x_}{x_1x_1} \x \1_{W_{d-1}} + \ketbra{x_1x_2}{x_1x_2} \x \Psi_1(x_j) +  \ketbra{x_2}{x_2} \x X_{W_2} \x \1_{W_{d-1}}\\
+	\Psi_{\LS_r}(y_{F_j,6}) &=  \ketbra{x_1}{x_1} \x \Psi_2(fy_jf) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	&=(\ketbra{x_1x_1}{x_1x_1}+  \ketbra{x_1x_2}{x_1x_2}) \x \Psi_1(x_j) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi_{\LS_r}(y_{F_j,7}) &= \ketbra{x_1}{x_1} \x \Psi_2(y_j) + \ketbra{x_2}{x_2} \x \Psi_2(z_j) \\
+	&=\ketbra{x_1x_1}{x_1x_1} \x \Psi_1(x_j) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1}) + \ketbra{x_2x_2}{x_2x_2} \x \Psi_1(x_j)
 \end{align*}
 For generators $\{\{y_{K,k}\}_{k=1}^7\}_{K=(k_1,k_2,k_3) \in C_r}$,
 \begin{align*}
-	\Psi_{\LS_r}(y_{K,1}) = 
-	\begin{pmatrix}
-		0 & \Psi_2(w_{k_1}) \\
-		\Psi_2(w_{k_1}) & 0
-	\end{pmatrix},
-	&&
-	\Psi_{\LS_r}(y_{F_j,2}) = 
-	\begin{pmatrix}
-		0 & \1\\
-		\1 & 0
-	\end{pmatrix},\\
-	\Psi_{\LS_r}(y_{F_j,3}) = 
-	\begin{pmatrix}
-		0 & \Psi_2(y_{k_2}) \\
-		\Psi_2(y_{k_2}) & 0
-	\end{pmatrix},
-	&&
-	\Psi_{\LS_r}(y_{F_j,4}) = 
-	\begin{pmatrix}
-		0 & \Psi_2(y_{k_2}w_{k_1}) \\
-		\Psi_2(w_{k_1}y_{k_2}) & 0
-	\end{pmatrix},\\
-	\Psi_{\LS_r}(y_{F_j,5}) = 
-	\begin{pmatrix}
-		 \Psi_2(w_{k_1}y_{k_2}w_{k_1}) & 0\\
-		  0 & \Psi_2(w_{k_1})
-	\end{pmatrix},
-	&&
-	\Psi_{\LS_r}(y_{F_j,6}) = 
-	\begin{pmatrix}
-		 \Psi_2(y_{k_2}z_{k_3}) & 0\\
-		 0 & \1
-	\end{pmatrix},\\
-	\Psi_{\LS_r}(y_{F_j,7}) = 
-	\begin{pmatrix}
-		 \Psi_2(y_{k_2}) & 0\\
-		 0 & \Psi_2(z_{k_3})
-	\end{pmatrix}.
+	\Psi_{\LS_r}(y_{K,1}) &= X_{W_2} \x \Psi_2(w_{k_1}) = X_{W_2} \x X_{W_2} \x \Psi_1(x_{k_1}) \\
+	\Psi_{\LS_r}(y_{F_j,2}) &= X_{W_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi_{\LS_r}(y_{F_j,3}) &= X_{W_2} \x \Psi_2(y_{k_2}) = X_{W_2} \x (\ketbra{x_1}{x_1} \x \Psi_1(x_{k_2}) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}})\\
+	\Psi_{\LS_r}(y_{F_j,4}) &= \ketbra{x_1}{x_2} \x  \Psi_2(y_{k_2}w_{k_1}) + \ketbra{x_2}{x_1} \x \Psi_2(w_{k_1}y_{k_2})\\
+	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_1(x_{k_2}x_{k_1}) + (\ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_1}{x_1x_2}) \x \Psi_1(x_{k_1})
+	+  \ketbra{x_2x_2}{x_1x_1} \x \Psi_1(x_{k_1}x_{k_2}) \\
+	\Psi_{\LS_r}(y_{F_j,5}) &= \ketbra{x_1}{x_1} \x \Psi_2(w_{k_1}y_{k_2}w_{k_1}) + \ketbra{x_2}{x_2} \x  \Psi_2(w_{k_1})\\
+	&= \ketbra{x_1x_1}{x_1x_1} \x \1_{W_{d-1}} + \ketbra{x_1x_2}{x_1x_2} \x \Psi_1(x_{k_1}x_{k_2}x_{k_1}) + \ketbra{x_2}{x_2} \x X_{W_2} \x \Psi_1(x_{k_1})\\
+	\Psi_{\LS_r}(y_{F_j,6}) &=  \ketbra{x_1}{x_1} \x \Psi_2(y_{k_2}z_{k_3}) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_1(x_{k_2}) +  \ketbra{x_1x_2}{x_1x_2} \x \Psi_1(x_{k_3}) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi_{\LS_r}(y_{F_j,7}) &= \ketbra{x_1}{x_1} \x \Psi_2(y_{k_2}) + \ketbra{x_2}{x_2} \x \Psi_2(z_{k_3})\\
+	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_1(x_{k_2}) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1})\x\1_{W_{d-1}} + 
+	\ketbra{x_2x_2}{x_2x_2} \x \Psi_1(x_{k_3})
 \end{align*}
 
 In the end, to compensate the enlarged Hilbert space, the shared state is $\frac{1}{2}( \ket{\psi}^{\oplus 4})$,
