@@ -205,6 +205,8 @@
 \newcommand{\mr}{m(r)}
 \newcommand{\ux}{\underline{x}}
 \newcommand{\uc}{\underline{c}}
+\newcommand{\ua}{\underline{a}}
+\newcommand{\ub}{\underline{b}}
 
 % Probabilities
 \newcommand{\pr}[2]{P(#1|#2)}
@@ -1212,6 +1214,7 @@ and similar commutation relation holds on Bob's side too.
 The similar result for the rest of the observables are easy to check as they are defined by $a_i$ for $i=1,2,3,4$, so we omit it here.
 %------------------------------------------------------------------------------------------
 \subsection{Relation derived from the linear constraint test}
+\label{sec:rel_lct}
 %------------------------------------------------------------------------------------------
 In this and the following subsection, we denote the ideal strategy by $\tpr{ab}{xy}$.
 We derive properties of the strategy $S = ( \{\{M_x^a\}_a\}_x, \{\{N_y^b\}_b\}_y, \ket{\psi} )$,
@@ -1391,26 +1394,18 @@ and
 \end{proposition}
 
 \begin{proof} 
-We first examine the implication of $E_{xy} \sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq \ep$.
-Since the size of $\calX \times \calY$ is of order $O(r^2)$ and we assume uniform distribution over the input pairs,
-we know that for each $(x,y)$, $\sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq O(r^2 \epsilon)$.
-For each question pair $(x,y)$, the number of possible output pairs is $(a,b)$ is constant.
-Hence, we know $\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$. In particularly, it means the probability for Alice and Bob to agree
-their assignments to the same variable is $1 - O(r^2 \ep)$. 
-Since the measurements for the assignment of the whole equation can be
-expressed as a linear combination of the measurements for the assignment of the individual variable, 
-the probability of giving assignments
-that satisfy the equation can be expressed as a linear combination of the probability to give matching assignment 
-to individual variable in the same fashion. Hence, the probability to satisfy each equation is $1 -O(r^2 \ep)$.
+
+Recall that the implication of $E_{xy} \sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq \ep$ is that 
+for each $(x,y)$, $\sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq O(r^2 \epsilon)$. Since 
+the number of possible output pairs is $(a,b)$ is constant for each question pair $(x,y)$, 
+we can conclude that $\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$. 
 
 We prove $(A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O(r\se)} B_\ast^\diamond \ket{\psi}$ as an example.
 The rest of the relations follow the same line of arguments.
-
 From the correlation, we can also observe that
 \begin{align}
  \bra{\psi} (A_{n+1}^0+A_{n+1}^1)B_\ast^\diamond \ket{\psi} = \frac{2}{d-1} - O(r^2 \epsilon).
 \end{align}
-The $r^2$ comes from the fact that the whole correlation of size $\Theta(r^2)$.
 On the other hand, we can calculate that 
 \begin{align}
 	\bra{\psi} B_\ast^\diamond \ket{\psi} \appd{O(r^2\epsilon)} 
@@ -1885,7 +1880,47 @@ then
 %\begin{align}
 %	\ket{\psi} \appd{O(d \sr \qe)} \frac{1}{2}\sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}(\ket{\psi_1}+\ket{\psi_2}).
 %\end{align}
+%------------------------------------------------------------------------------------------
+\subsection{Robustness relation derived from the Commutation test}
+\label{sec:comm_test}
+%-------------------------------------------------------------------------------------------
+The commutation test is introduced to certify the operators used for the Magic Square test and 
+the operators for the extended weighted CHSH test commute. For details of the Commutation Test, 
+we refer to Appendix~A.$2$ of \cite{coladan2017verifier}. 
+For example, if we want to certify that $M_{r+6} M_{\nr+1}\ket{\psi} \appd{O(r\se)} M_{\nr+1} M_{r+6} \ket{\psi}$,
+we do the following
+\begin{enumerate}
+	\item Bob is asked for answers to both $\nr+1$ and $x_{r+6}$;
+	\item Alice is asked for an answer to $\nr+1$ or $x_{r+6}$ with equal probability;
+	\item their answer to the same question should agree.
+\end{enumerate}
+We test the following commutation relations $[M_j, M_k]$ for $j = r+6, r+8,r+9,r+11$ and $k = \nr+1, \nr+2$.
+The result is summarized in the following proposition.
+\begin{proposition}
+	\label{prop:rel_comm}
+	Let $S$ be the strategy defined in \cref{sec:rel_lct} that wins the commutation test with probability $1- O(r^2\ep)$,
+	then 
+	\begin{align}
+		M_{\nr+1} M_j \ket{\psi} \appd{O(r\se)} M_{j} M_{\nr+1} \ket{\psi} &&
+		M_{\nr+2} M_j \ket{\psi} \appd{O(r\se)} M_{j} M_{\nr+2} \ket{\psi} &&
+	\end{align}
+	for $j = r+6, r+8,r+9,r+11$.
+\end{proposition}
+Note that $M_j$'s tested in the commutation test are also used in the Magic Square test,
+which will be used to construct the isometry later.
+This proposition is an application of Lemma~$28$ of \cite{coladan2017verifier} with $\se$ replaced by $O(r\se)$.
 
+An observation based on this proposition is that 
+\begin{align}
+	M_{\nr+1}^0 M_j \ket{\psi} \appd{O(r\se)} M_j M_{\nr+1}^0 \ket{\psi} &&
+	M_{\nr+1}^1 M_j \ket{\psi} \appd{O(r\se)} M_j M_{\nr+1}^1 \ket{\psi} &&
+\end{align}
+which is because that 
+\begin{align}
+	&\norm{M_{\nr+1} M_j \ket{\psi} - M_j M_{\nr+1} \ket{\psi}}^2 \\
+	=& \norm{M_{\nr+1}^0 M_j  \ket{\psi} - M_j M_{\nr+1}^0 \ket{\psi}}^2
+	+ \norm{M_{\nr+1}^1 M_j  \ket{\psi} - M_j M_{\nr+1}^1\ket{\psi}}^2.
+\end{align}
 
 %-----------------------------------------------
 \subsection{An isometry}
@@ -2035,8 +2070,8 @@ $\Phi_{A,2} \x \Phi_{B,2}$ respectively.
         %
         % Column 7
         \node[phase] (phase62) at (7,-1) {} edge [-] (op42);
-	\node[operator] (op63) at (7,-2) {$M_{r+9}$} edge [-] (op53);
-	\node[operator] (op64) at (7, -3) {$N_{r+9}$} edge[-] (op54);
+	\node[operator] (op63) at (7,-2) {$M_{r+6}$} edge [-] (op53);
+	\node[operator] (op64) at (7, -3) {$N_{r+6}$} edge[-] (op54);
         \node[phase] (phase65) at (7,-4) {} edge [-] (op45);
         \draw[-] (phase62) -- (op63);
         \draw[-] (phase65) -- (op64);
@@ -2089,6 +2124,7 @@ The second isometry is the standard isometry for the Magic Square game, so we ju
 	&O_A(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(\sd \sr \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}\\
 	&O_B(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(\sd \sr \qe)}\omega_d^{r^j}  (U_A\ct)^j \ket{\psi_1}
 \end{align}
+
 The result of this section is summarized in the theorem below.
 \begin{theorem}
 	Let $\Phi_A \x \Phi_B = (\Phi_{A,2} \x \Phi_{B,2})(\Phi_{A,1}\x\Phi_{B,2})$ be the isometry defined above, then there exists a state $\ket{junk}$
@@ -2106,12 +2142,26 @@ The result of this section is summarized in the theorem below.
 	\end{align}
 \end{theorem}
 \begin{proof}
-We first show that there exists a state $\ket{reuse}$ such that 
-why $ \Phi_{A,1} \x \Phi_{B,1}(\ket{\psi}) $ is close to $\ket{resue} \x \ket{\EPR{d-1}}$. 
-Then we show that $\Phi_{A,2} \x \Phi_{B,2} (\ket{reuse})$ is close to $\ket{junk} \x \ket{\EPR{2}}^{\x 2}$.
+The proof takes two steps. 
+We first show that 
+\begin{align}
+	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d^{5/2} \sr \ep^{1/8})} \sqrt{d-1}\ket{\psi_1} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'}.
+\end{align}
+Then we show that there exists a state $\ket{junk}$ such that  
+\begin{align}
+\label{eq:phi2_result}
+\Phi_{A,2} \x \Phi_{B,2} (\sqrt{d-1}\ket{\psi_1}) \appd{O(r\se)} \ket{junk} \x \ket{\EPR{2}}^{\x 2}.
+\end{align}
+Combining the two equations above we get that 
+\begin{align}
+	&\Phi_{A,2} \x \Phi_{B,2}( \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi})) \\
+	&\appd{O(d^{5/2} \sr \ep^{1/8})} \Phi_{A,2} \x \Phi_{B,2}(\sqrt{d-1} \ket{\psi_1}) \x\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'} \\
+	&\appd{O(r\se)} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'},
+\end{align}
+where we use the fact that $\Phi_{A,2}\x \Phi_{B,2}$ only acts on the state $\ket{\psi_1}$.
 
-Since $ \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi'})$,  
-we will focus on how the isometry evolves $\ket{\psi'}$.
+The first step is based on the fact that $ \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi'})$,  
+so we focus on how the isometry evolves $\ket{\psi'}$.
 The evolution is summarized below.
 	\begin{align}
 		& \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1} \ket{0}_{A'}\ket{0}_{B'}\\
@@ -2125,22 +2175,68 @@ The evolution is summarized below.
 		\xrightarrow[]{\text{Controlled-}U_{A/B}}& \sum_{j=1}^{d-1} U_A^{\log_r j} (U_A\ct)^{\log_r j} U_B^{\log_r j} (U_B\ct)^{\log_r j} \ket{\psi_1} \ket{d-j}_{A'}\ket{j}_{B'}\\
 		=&\ket{\psi_1} \x \sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j}_{B'},
 	\end{align}
-So we define 
-\begin{align}
-	\ket{reuse} = \sqrt{d-1}\ket{\psi_1},
-\end{align}
-such that 
+In summary, we have shown that
 \begin{align}
 	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d^{5/2} \sr \ep^{1/8})} \ket{reuse} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j}_{B'},
 \end{align}
 where we use the fact that $O(d^{5/2} \sr \ep^{1/8})$ dominates both $O(d^{7/4} r^{1/4} \ep^{1/8})$ and 
 $O(d^{5/2} \sr \qe)$.
-Since $\norm{\ket{\psi_1}}^2 \appd{O(r \se)} 1/(d-1)$, we know $\norm{\ket{reuse}} \appd{O(r\se)} 1$.
+Since $\norm{\ket{\psi_1}}^2 \appd{O(r \se)} 1/(d-1)$, we know $ \sqrt{d-1} \norm{\ket{\psi_1}} \appd{O(\sd \sr\qe)} 1$.
 
-Recall that $\ket{\psi_1} =1/2 (A_\ast^\diamond - iA_{n+2})(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi}$.
-\hl{We need to show that $A_\ast^\diamond$ commutes with all the observables for the Magic Square game.}
+To prove \cref{eq:phi2_result}, we first
+recall that 
+\begin{align}
+	\ket{\psi_1} =&\frac{1}{2} (\1 - iA_{n+2})(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi} \\
+	=&\frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) \ket{\psi}.
+\end{align}
+The other key observation is that 
+\begin{align}
+	&\Phi_{A,2} \x \Phi_{B,2} (\ket{\psi_1})  \\
+	= &\frac{1}{16} \sum_{\ua \ub \in\{0,1\}^4}
+	M_{r+6}^{\ua(4)}N_{r+6}^{\ub(4)}M_{r+8}^{\ua(3)}N_{r+8}^{\ub(3)}M_{r+9}^{\ua(2)}N_{r+9}^{\ub(2)}M_{r+11}^{\ua(1)}N_{r+11}^{\ub(1)}
+	\ket{\psi_1} \ket{\ua}_{A''} \ket{\ub}_{B''}
+\end{align}
+For simplicity we define $M^{\ua} := M_{r+6}^{\ua(4)}M_{r+8}^{\ua(3)}M_{r+9}^{\ua(2)}M_{r+11}^{\ua(1)}$ and
+$N^{\ub} := N_{r+6}^{\ub(4)}N_{r+8}^{\ub(3)}N_{r+9}^{\ub(2)}N_{r+11}^{\ub(1)} $.
+We will show that 
+\begin{align}
+	\Phi_{A,2} \x \Phi_{B,2} (\ket{\psi_1}) &\appd{O(r\se)} 
+	\frac{1}{2} (A_\ast^\diamond - iA_{n+2})(A_{n+1}^0 + iA_{n+2}A_{n+1}^1)(\Phi_{A,2} \x \Phi_{B,2}(\ket{\psi})) \\
+	& \appd{O(r\se)} \ket{\EPR{2}}^{\x 2} \x \frac{1}{2} (A_\ast^\diamond - iA_{n+2})(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{junk},
+\end{align}
+where the last line follows Lemma C.$1$ of \cite{wu2016}.
 
-	
+First observe that $N^{\ub}$ commutes with $\frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1)$, so
+we would like to show that 
+\begin{align}
+	M^{\ua} \frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) \ket{\psi} \appd{O(r\se)}
+	\frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) M^{\ua} \ket{\psi},
+\end{align}
+which can be justified by \cref{prop:rel_comm}.
+We show how to apply \cref{prop:rel_comm} to commute $M_{r+11}^{\ua(1)}$ through $\frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1)$ and then similar process can be repeated for $M_{r+9}, M_{r+8}$ and $M_{r+6}$,
+\begin{align}
+	&M_{r+11}^{\ua(1)} \frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) \ket{\psi} \\
+	\appd{O(r\se)} &\frac{1}{2}[ (A_{n+1}^0+A_{n+1}^1) M_{r+11}^{\ua(1)} -i M_{r+11}^{\ua(1)} A_{n+2}B_{n+1}] \ket{\psi} \\
+	\appd{O(r\se)} &\frac{1}{2} [(A_{n+1}^0+A_{n+1}^1) M_{r+11}^{\ua(1)} - iA_{n+2}M_{r+11}^{\ua(1)} B_{n+1}] \ket{\psi} \\
+	\appd{O(r\se)}&\frac{1}{2} [(A_{n+1}^0+A_{n+1}^1) M_{r+11}^{\ua(1)} - iA_{n+2}M_{r+11}^{\ua(1)} A_{n+1}] \ket{\psi} \\
+	\appd{O(r\se)}&\frac{1}{2} [(A_{n+1}^0+A_{n+1}^1) M_{r+11}^{\ua(1)} - iA_{n+2}A_{n+1}M_{r+11}^{\ua(1)} ] \ket{\psi}.
+\end{align}
+In summary, we have 
+\begin{align}
+	M^{\ua} N^{\ub} \ket{\psi_1} \appd{O(r\se)} \frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1)M^{\ua}N^{\ub} \ket{\psi}
+\end{align}
+for all $\ua, \ub \in \{0,1\}^4$, which implies that 
+\begin{align}
+	\Phi_{A,2} \x \Phi_{B,2}(\ket{\psi_1}) \appd{O(r\se)} \frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) (\Phi_{A,2}\x\Phi_{B,2} (\ket{\psi}).
+\end{align}
+At this point we can apply Lemma C.$1$ of \cite{wu2016} to $\Phi_{A,2}\x\Phi_{B,2} (\ket{\psi})$ and conclude that 
+\begin{align}
+	\Phi_{A,2} \x \Phi_{B,2}(\sqrt{d-1} \ket{\psi_1}) \appd{O(\sd r \se)} \ket{junk} \x \ket{\EPR{2}}^{\x 2}.
+\end{align} 
+
+In the rest of the proof, we only show how $\Phi_{A,1} \x \Phi_{B,1}$ acts on $O_A\ket{\psi}$ and $U_A\ket{\psi}$ since the analysis for 
+$\Phi_{A,2} \x \Phi_{B,2}(\ket{\psi_1})$ is the same.
+
 If the initial state is $O_A\ket{\psi}$, we first use the fact that 
 $ \Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_A \x \Phi_B (O_A\ket{\psi'})$, 
 and then we calculate $\Phi_A \x \Phi_B (O_A\ket{\psi'})$.
