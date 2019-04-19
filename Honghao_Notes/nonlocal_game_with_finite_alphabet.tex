@@ -939,10 +939,12 @@ A special property of $\I_\alpha$ is summarized in the proposition below.
 \end{proof}
 Note that we don't need the $(B_1B_2)^n + (B_2B_1)^n$ part.
 
-%------------------------------------------------------------------------
-\section{The extended weighted CHSH test}
-%------------------------------------------------------------------------
-We want to force Alice and Bob to reuse observables 
+%========================================
+\section{The full test}
+\label{sec:main}
+%========================================
+In the full test,
+we want to force Alice and Bob to reuse observables 
 from the linear system test developed above so that we can make sure that the observables 
 $O_A = M_1M_2$ and $O_B =N_1N_2$ have eigenvalues $\omega_d$ and $\omega_d^{d-1}$,
 where $M_1,M_2,N_1,N_2$ are used in this test and the linear system game.
@@ -952,28 +954,44 @@ $O_A \sim O_A^r$ to establish that
 the eigenvalues of $O_A$ are $\omega_d^i$ for $i =1 \dots d-1$ and the eigenspace for 
 each eigenvalue is of the same structure.
 
-Recall that the input for Alice and Bob in the linear system game are $\{1,2,\dots,n\}$.
-The input alphabets are $X = Y = \{\ast, 1, 2, n+1,n+2\}$.
-The output alphabets are $A = B = \{0, 1, \diamond, \perp\}$.
+The tests are conducted in the following way.
+Recall that the the linear system test has variables labelled by $j \in \{1,2,\dots,\nr\}$ and
+equations labelled by $i \in \{1, 2 \dots \mr\}$. 
+We conduct the linear system game in a way such that Bob is always get a variable label
+but Alice gets either an equation label, in which case she needs to give the full assignment to this equation,
+or a pair of equation label and variable label, in which case she only needs to give the assignment to the particular 
+variable in the given equation. In this way, we force Alice and Bob to have an observable strategy for the linear system 
+test.
+In the extended weighted CHSH test, 
+the input alphabets are $X = Y = \{\ast, 1, 2, \nr+1,\nr+2\}$ and the
+output alphabets are $A = B = \{0, 1, \diamond, \perp\}$.
+In the commutation test, there are $8$ test cases, which are
+$(M_{\nr+1}, M_j)$ and $(M_{\nr+2}, M_j)$ for $j = r+6, r+8, r+9, r+11$.
+In each case the input to Alice is either $j \in \{r+6, r+8,r+9, r+11\}$ or $k \in \{\nr+1, \nr+2\}$
+and Bob gets the pair $(j,k)$.
 
-The correlation is generated with the following behaviour.
+To give better intuition about the full correlation, we describe the players' behaviour that 
+generates the full correlation:
 \begin{itemize}
-	\item \textbf{Case 1:} $x = y = \ast$, Alice and Bob should answer with $a = b \in \{\diamond, \perp\}$;
-	\item \textbf{Case 2:} $x = y \in \{1,2\}$, Alice and Bob should answer with $a = b \in \{0, 1\}$;
-	\item \textbf{Case 3:} $x = y \in \{n+1, n+2\}$, Alice and Bob should answer with $a = b \in \{0, 1, \perp\}$;
-	\item \textbf{Case 4a:} $x \in \{1,2\}$, $y \in \{n+1, n+2\}$ and they answer with $a,b \in \{0,1\}$, then
-	their answers are scored according to $I_{\cot(-\pi/d)}$ with Alice and Bob's roles flipped;
-	\item \textbf{Case 4b:} $x \in \{n+1, n+2\}$, $y \in \{1,2\}$ and they answer with $a,b \in \{0,1\}$, then
-	their answers are scored according to $I_{\cot(-\pi/d)}$;
-	\item \textbf{Case 4c:} in the two cases above, if the one get input chosen from $\{n+1,n+2\}$ answers
-	 with $\perp$, then all possible outputs from the other side are discarded;
-	\item \textbf{Case 5a:} $x \in \{n+1,n+2\}, y = \ast$ and Bob answers $\diamond$, Alice should answer with $\{0.1\}$ but not $\perp$, when Bob answers $\perp$ Alice should answer $\perp$ too;
-	\item \textbf{Case 5b:} $x = \ast, y \in \{n+1, n+2\}$ and Alice answers $\diamond$, Bob should not answer with $\perp$,
-	when Alice answers $\perp$, Bob should answer $\perp$ too;
-	\item \textbf{Case 6:} other combination of inputs are not scored.
+	\item In the linear constraint test, they try to win it perfectly;
+	\item In the commutation test, they try to win it perfectly;
+	\item In the extended weighted CHSH test, there are $7$ cases:
+	\begin{enumerate}
+	\item $x = y = \ast$, Alice and Bob answer with $a = b \in \{\diamond, \perp\}$;
+	\item $x = y \in \{1,2\}$, Alice and Bob should answer with $a = b \in \{0, 1\}$, as in the linear constraint test;
+	\item $x = y \in \{n+1, n+2\}$, Alice and Bob should answer with $a = b \in \{0, 1, \perp\}$;
+	\item $x \in \{1,2\}$, $y \in \{n+1, n+2\}$ and if they answer with $a,b \in \{0,1\}$, then
+	they should maximize $\I_{\cot(-\pi/d)}$ with Alice and Bob's roles flipped, if Bob answers with $\perp$
+	then Alice's answer doesn't matter;
+	\item $x \in \{n+1, n+2\}$, $y \in \{1,2\}$ and if they answer with $a,b \in \{0,1\}$, then
+	they should maximize $\I_{\cot(-\pi/d)}$, if Alice answers with $\perp$, then Bob's answer doesn't matter;
+	\item $x \in \{n+1,n+2\}, y = \ast$ and if Bob answers with $\diamond$, Alice should answer with $\{0.1\}$ but not $\perp$, if Bob answers with $\perp$ Alice should answer with $\perp$ too;
+	\item $x = \ast, y \in \{n+1, n+2\}$ and if Alice answers with $\diamond$, Bob should answer with $\{0.1\}$ but not $\perp$, 
+	if Alice answers $\perp$, Bob should answer $\perp$ too;
+\end{enumerate}
 \end{itemize}
 
-The correlation is given in the tables below.
+Parts of the full correlation is given in the tables below.
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c||c|c|}
@@ -989,7 +1007,7 @@ The correlation is given in the tables below.
 &$b=\perp$ & 0 & (d-3)/(d-1) \\
 \hline
 \end{tabular}
-\caption{Alice and Bob's behaviour when $x=y=\ast$.}
+\caption{The correlation for $x=y=\ast$.}
 \end{center}
 \end{table}
 
@@ -1020,7 +1038,7 @@ $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & \small $\fra
 \hline
 \end{tabular}
 \end{center}
-\caption{Alice and Bob's behaviour when $x \in \{n+1, n+2\}$ and $y \in \{1,2\}$.}
+\caption{The correlation for $x \in \{n+1, n+2\}$ and $y \in \{1,2\}$.}
 \label{tb:chsh}
 \end{table}
 
@@ -1065,10 +1083,43 @@ $a = \diamond$ & $a = \perp$\\
 \hline
 \end{tabular}
 \end{center}
-\caption{Alice and Bob's behaviour when $x ,y\in\{n+1,n+2, \ast\} $.}
+\caption{The correlation for $x ,y\in\{n+1,n+2, \ast\} $.}
 \end{table}
 Note that when $x \in \{1,2\}$ and $y \in \{n+1, n+2\}$, the correlation table is 
 the transpose of Table~\ref{tb:chsh}, so we omit it here.
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{6}{|c|}{$y=(\nr+1, r+6)$}\\
+\cline{3-8}
+\multicolumn{2}{|c|}{} &
+$b = 00$ & $b=01$ & 
+$b = 10$ & $b=11$ &
+$b = \perp0$ & $b= \perp1$   \\
+\hline
+\hline
+\multirow{3}{*}{$x = \nr+1$} & $a=0$ & $1/(2d-2)$ & $1/(2d-2)$ &  $0$
+& $0$ & $0$ & $0$  \\
+\cline{2-8}
+&$a=1$ & $0$ & $0 $ & $1/(2d-2)$ 
+&  $1/(2d-2)$ & $0$ & $0$  \\
+\cline{2-8}
+&$b=\perp$ & 0 & 0 & $0$ 
+&  0 & $\frac{d-3}{2d-2}$ & $\frac{d-3}{2d-2} $  \\
+\hline
+\multirow{2}{*}{$x = r+6$} & $a=0$ & $1/(2d-2)$ & $0$ & $1/(2d-2)$ 
+& $0$ & $\frac{d-3}{2d-2}$ & 0  \\
+\cline{2-8}
+&$a=1$ & $0$ & $1/(2d-2)$ & $0$ 
+&  $1/(2d-2)$ & $0$ & $\frac{d-3}{2d-2}$  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{The correlation for the commutation test between $M_{r+6}$ and $M_{\nr+1}$.}
+\end{table}
+The correlation table for the other $7$ commutation tests are similar.
 %The correlation for the first test
 %\begin{align}
 %	&P(\diamond \diamond| \ast \ast) = \bra{\psi} \Pi_V \otimes \Pi_V \ket{\psi} = \frac{2}{d-1}\\
@@ -1112,8 +1163,8 @@ the transpose of Table~\ref{tb:chsh}, so we omit it here.
 Recall the two subspaces $W_{d-1}$ and $W_2$ defined earlier. 
 In the ideal strategy Alice and Bob share the state 
 \begin{align}
-\ket{\psi} = &(\frac{1}{\sqrt{2}} \ket{x_1}{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}\right)\\
-=&(\frac{1}{\sqrt{2}} \ket{x_1}{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(1/\sqrt{d-1} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})\right).
+\ket{\psi} = &(\frac{1}{\sqrt{2}} \ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}\right)\\
+=&(\frac{1}{\sqrt{2}} \ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(1/\sqrt{d-1} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})\right).
 \end{align}
 Here we introduce the second basis $\{ \ket{j} \}_{j=1}^{d-1}$ of $W_{d-1}$ to introduce the 
 operators used for the extended weighted CHSH test easier. The two basis are related by
@@ -1121,7 +1172,7 @@ operators used for the extended weighted CHSH test easier. The two basis are rel
 	\ket{x_j} = \frac{-1}{\sqrt{2}}(\ket{j} + i\ket{d-j}), &&
 	\ket{x_{d-j}} = \frac{-e^{ij\pi/d}}{\sqrt{2}}(\ket{j} - i\ket{d-j}) && \text{for } j = 1 \dots \frac{d-1}{2}.
 \end{align}
-We define two subspaces $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = \C^{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$ on
+We define two subspaces $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = W_{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$ on
 $W_{d-1}$ and
 define $\Pi_V$ and $\Pi_{V^\perp}$ to be the corresponding projectors. Note that $V$ is the subspace on which they should maximize $\ip{\I_{\cot(-\pi/d)}}$.
 
@@ -1189,7 +1240,7 @@ and similar commutation relation holds on Bob's side too.
 	\end{align}
 	The eigenvectors of $M_3M_4$ and $N_3N_4$ are 
         \begin{align}
-        		\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{r^j}.
+        		\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{x_{r^j}}.
         \end{align}
         Hence we can express $\ket{x_{r^j}}$ in terms of $\ket{u_k}$ as 
         \begin{align}
@@ -1211,7 +1262,7 @@ and similar commutation relation holds on Bob's side too.
 	Combining it with the fact that $M_3M_4 N_3N_4 \ket{\psi} = \ket{\psi}$, we can conclude that
 	$M_3N_3 \ket{\psi} = \ket{\psi}$.
 \end{proof}
-The similar result for the rest of the observables are easy to check as they are defined by $a_i$ for $i=1,2,3,4$, so we omit it here.
+The similar result, i.e., $M_jN_j \ket{\psi} = \ket{\psi}$ for $j = 1 \dots \nr$, are easy to check because the observables are defined by $M_j, N_j$ for $j=1,2,3,4$.
 %------------------------------------------------------------------------------------------
 \subsection{Relation derived from the linear constraint test}
 \label{sec:rel_lct}
@@ -1224,17 +1275,18 @@ if the correlation $\pr{ab}{xy}$ produced by $S$ satisfies the condition
 \end{align}
 
 We denote the linear system associated with the linear constraint test by $H\underline{x} = \uc$ and
-define $S_i := \{ \ux : \sum_{k} H(i,k)\ux(k) = \uc(i) \}$ and $I_i = \{ k : H(i,k) = 1\}$.
+define $X_i := \{ \ux : \sum_{k} H(i,k)\ux(k) = \uc(i) \}$ and $I_i = \{ k : H(i,k) = 1\}$.
 From the construction of $\Gamma$, we know that $| I_i| \leq 3$.
 The convention of $\ux$ that we follow is that
 \begin{align}
 	&\ux(j) := a_j &&&&\text{ for } j = 1 \dots r+5 \\
 	&\ux(r+6+j) := f_j&& \ux(r+9+j) := g_j &&\text{ for } j = 0,1,2 
 \end{align} 
+The correspondence between the $\ux(j)$ and the generators of $\Gamma$ can be arbitrary for $j > r+11$.
 
-We slightly change the notation so that Alice gets equation number $i$ and Bob gets variable label $j$.
-For the linear constraint test Alice has measurements $M_i^{\ux}$ for all $\ux \in S_i$.
-On Bob's side, we define $N_j := N_j^0 - N_j^1$.
+We slightly change the notation so that instead of $(x,y)$, Alice gets equation number $i$ and Bob gets variable label $j$.
+The way we conducted the linear constraint test forces Alice to have binary observables $\{M_{ij}\}$ that satisfies the definition of the
+quantum strategy presented in terms of observables.
 \begin{proposition}
 	\label{prop:lct_base}
 	Let $S$ be the strategy defined above,
@@ -1247,35 +1299,29 @@ On Bob's side, we define $N_j := N_j^0 - N_j^1$.
 \begin{proof}
 Since $\tpr{\ux b}{ij}$ win's the linear system game optimally, we know that 
 \begin{align}
-\sum_{\ux,b: \ux \in S_i, \ux(j) = b} \tpr{\ux b}{ij} = 1
+\sum_{\ux,b: \ux \in X_i, \ux(j) = b} \tpr{\ux b}{ij} = 1
 \end{align}
 for all $i = 1 \dots \mr$.
-We define 
-\begin{align}
-	M_{ij} = \sum_{\ux \in S_i} (-1)^{\ux(j)} M_i^{\ux}
-\end{align}	
 It has been shown \cite{slofstra2017} that 
 \begin{align}
-	\bra{\psi} M_{ij} N_j \ket{\psi} = 2 \sum_{\ux,b: \ux \in S_i, \ux(j) = b} \pr{\ux b}{ij} -1 \appd{O(r^2 \ep)} 1.
+	\bra{\psi} M_{ij} N_j \ket{\psi} = 2 \sum_{\ux,b: \ux \in X_i, \ux(j) = b} \pr{\ux b}{ij} -1 \appd{O(r^2 \ep)} 1.
 \end{align}
 Since $M_{ij}$ and $N_j$ are unitaries, we know that
 \begin{align}
 	M_{ij} \ket{\psi} \appd{O(r\se)} N_j \ket{\psi} \text{ for all } i \in [\mr] \text{ and } j \in [\nr].
 \end{align}
-We define $M_j := M_{ij}$ for the smallest $i$ such that $i$-th equation contains variable $x_j$ then 
+We define $M_j := M_{ij}$ for the smallest $i$ such that $ j \in I_i$ then 
 \begin{align}
-	M_j N_j \ket{\psi} \appd{O(r\se)} \ket{\psi} \text{ for all } j \in [\nr].
+	M_j N_j \ket{\psi} \appd{O(r\se)} M_{ij}N_j\ket{\psi} \appd{O(r\se)} \ket{\psi} \quad \text{ for all } j \in [\nr].
 \end{align}
 
 The definition of $M_{ij}$ tells us that 
 \begin{align}
-	\bra{\psi} \Pi_{j \in I_i} M_{ij} \ket{\psi} = (-1)^{\uc(i)}  \sum_{\ux \in S_i } \bra{\psi} M_i^{\ux} \ket{\psi} 
-	\appd{O(r^2 \ep)} (-1)^{\uc(i)} &&
-	\text{ for all } i \in [\mr],
+	\bra{\psi} \Pi_{j \in I_i} M_{ij} \ket{\psi} = (-1)^{\uc(i)}\quad	\text{ for all } i \in [\mr],
 \end{align}
 or equivalently,
 \begin{align}
-	\Pi_{j \in C_i} M_{ij} \ket{\psi} \appd{O(r\se)} (-1)^{b_i} \ket{\psi}\text{ for all } i \in [\mr].
+	\Pi_{j \in C_i} M_{ij} \ket{\psi} = (-1)^{b_i} \ket{\psi}\quad\text{ for all } i \in [\mr].
 \end{align}	
 If we replace each $M_{ij}$ with $M_j$ in the equation above, we demonstrate the effect on a
 general case that $I_i = \{j_1, j_2, j_3\}$,
@@ -1288,12 +1334,12 @@ general case that $I_i = \{j_1, j_2, j_3\}$,
 \end{align}
 Hence we can conclude that 
 \begin{align}
-	\Pi_{j \in I_i} M_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} &&\text{ for all } i \in [\mr]
+	\Pi_{j \in I_i} M_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} \quad \text{ for all } i \in [\mr]
 \end{align}
 \end{proof}
 Note that with the same technique, we can prove that 
 \begin{align}
-	\Pi_{j \in I_i} N_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} && \text{ for all } i \in [\mr].
+	\Pi_{j \in I_i} N_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} \quad \text{ for all } i \in [\mr].
 \end{align}
 
 
@@ -1368,28 +1414,29 @@ We summarize the implications in the following corollary.
 	\end{align}
 	for all $j = 1 \dots r+5$, and
 	\begin{align}
-		M_{r+6}M_{r+9} \ket{\psi} \appd{O(r\se)} - M_{r+9}M_{r+6} \ket{\psi} 
-		M_{r+8}M_{r+11} \ket{\psi} \appd{O(r\se)} -M_{r+11}M_{r+8} \ket{\psi}.
+		&M_{r+6}M_{r+9} \ket{\psi} \appd{O(r\se)} - M_{r+9}M_{r+6} \ket{\psi} \\
+		&M_{r+8}M_{r+11} \ket{\psi} \appd{O(r\se)} -M_{r+11}M_{r+8} \ket{\psi}.
 	\end{align}
 \end{corollary}
 The proof is based on the fact all such relations are embedded in constant number of linear relations in $\Gamma$.
 %------------------------------------------------------------------------------------------
 \subsection{Relation derived from the extended weighted CHSH test}
+\label{sec:rel_chsh}
 %------------------------------------------------------------------------------------------
 \begin{proposition}
-Let $S$ be the quantum strategy defined in the previous subsection,
+Let $S$ be the quantum strategy defined in \cref{sec:rel_lct},
 then the strategy $S$ satisfy the following relations
 \begin{align}
-	  A_\ast^\diamond B_\ast^\diamond \ket{\psi}
-	  \appd{O( r\se)}&A_\ast^\diamond \ket{\psi} \appd{O( r\se)} (A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O( r\se)} (A_{n+2}^0+A_{n+2}^1)\ket{\psi} \\
-	  \appd{O( r\se)}&B_\ast^\diamond \ket{\psi} \appd{O( r\se)} (B_{n+1}^0+B_{n+1}^1)\ket{\psi} \appd{O( r\se)} (B_{n+2}^0+B_{n+2}^1)\ket{\psi}\\
-	A_\ast^\perp B_\ast^\perp\ket{\psi}\appd{O( r\se)} &A_\ast^\perp\ket{\psi} \appd{O( r\se)} A_{n+1}^\perp \ket{\psi} \appd{O( r\se)} A_{n+2}^\perp \ket{\psi}\\
-	\appd{O( r\se)}&B_\ast^\perp\ket{\psi} \appd{O( r\se)} B_{n+1}^\perp \ket{\psi} \appd{O( r\se)} B_{n+2}^\perp \ket{\psi}.
+	  M_\ast^\diamond N_\ast^\diamond \ket{\psi}
+	  \appd{O( r\se)}&M_\ast^\diamond \ket{\psi} \appd{O( r\se)} (M_{n+1}^0+M_{n+1}^1)\ket{\psi} \appd{O( r\se)} (M_{n+2}^0+M_{n+2}^1)\ket{\psi} \\
+	  \appd{O( r\se)}&N_\ast^\diamond \ket{\psi} \appd{O( r\se)} (N_{n+1}^0+N_{n+1}^1)\ket{\psi} \appd{O( r\se)} (N_{n+2}^0+N_{n+2}^1)\ket{\psi}\\
+	M_\ast^\perp N_\ast^\perp\ket{\psi}\appd{O( r\se)} &M_\ast^\perp\ket{\psi} \appd{O( r\se)} M_{n+1}^\perp \ket{\psi} \appd{O( r\se)} M_{n+2}^\perp \ket{\psi}\\
+	\appd{O( r\se)}&N_\ast^\perp\ket{\psi} \appd{O( r\se)} N_{n+1}^\perp \ket{\psi} \appd{O( r\se)} N_{n+2}^\perp \ket{\psi}.
 \end{align}
 and
 \begin{align}
-&A_{n+1}^0 \ket{\psi} \appd{O( r\se)} B_{n+1}^0 \ket{\psi} && A_{n+1}^1\ket{\psi} \appd{O( r\se)} B_{n+1}^1 \ket{\psi}\\
-&A_{n+2}^0 \ket{\psi} \appd{O( r\se)} B_{n+2}^0 \ket{\psi} && A_{n+2}^1\ket{\psi} \appd{O( r\se)} B_{n+2}^1 \ket{\psi}
+&M_{n+1}^0 \ket{\psi} \appd{O( r\se)} N_{n+1}^0 \ket{\psi} && M_{n+1}^1\ket{\psi} \appd{O( r\se)} N_{n+1}^1 \ket{\psi}\\
+&M_{n+2}^0 \ket{\psi} \appd{O( r\se)} N_{n+2}^0 \ket{\psi} && M_{n+2}^1\ket{\psi} \appd{O( r\se)} N_{n+2}^1 \ket{\psi}
 \end{align}
 \end{proposition}
 
@@ -1400,46 +1447,46 @@ for each $(x,y)$, $\sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq O(r^2 \epsilon)$.
 the number of possible output pairs is $(a,b)$ is constant for each question pair $(x,y)$, 
 we can conclude that $\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$. 
 
-We prove $(A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O(r\se)} B_\ast^\diamond \ket{\psi}$ as an example.
+We prove $(M_{n+1}^0+M_{n+1}^1)\ket{\psi} \appd{O(r\se)} N_\ast^\diamond \ket{\psi}$ as an example.
 The rest of the relations follow the same line of arguments.
 From the correlation, we can also observe that
 \begin{align}
- \bra{\psi} (A_{n+1}^0+A_{n+1}^1)B_\ast^\diamond \ket{\psi} = \frac{2}{d-1} - O(r^2 \epsilon).
+ \bra{\psi} (M_{n+1}^0+M_{n+1}^1)N_\ast^\diamond \ket{\psi} = \frac{2}{d-1} - O(r^2 \epsilon).
 \end{align}
 On the other hand, we can calculate that 
 \begin{align}
-	\bra{\psi} B_\ast^\diamond \ket{\psi} \appd{O(r^2\epsilon)} 
- \bra{\psi}(A_{n+1}^0+A_{n+1}^1)\ket{\psi} \appd{O(r^2\epsilon)} \frac{2}{d-1},
+	\bra{\psi} N_\ast^\diamond \ket{\psi} \appd{O(r^2\epsilon)} 
+ \bra{\psi}(M_{n+1}^0+M_{n+1}^1)\ket{\psi} \appd{O(r^2\epsilon)} \frac{2}{d-1},
 \end{align}
 which implies that 
 \begin{align}
-	\norm{(A_{n+1}^0 + A_{n+1}^1)B_\ast^\diamond \ket{\psi} - B_\ast^\diamond\ket{\psi}}^2 
-	= \bra{\psi} B_\ast^\diamond \ket{\psi} - \bra{\psi}B_\ast^\diamond(A_{n+1}^0 + A_{n+1}^1)B_\ast^\diamond \ket{\psi}
+	\norm{(M_{n+1}^0 + M_{n+1}^1)N_\ast^\diamond \ket{\psi} - N_\ast^\diamond\ket{\psi}}^2 
+	= \bra{\psi} N_\ast^\diamond \ket{\psi} - \bra{\psi}N_\ast^\diamond(M_{n+1}^0 + M_{n+1}^1)N_\ast^\diamond \ket{\psi}
 	= O(r^2 \epsilon),
 \end{align}
-where we used the fact that $(A_{n+1}^0 + A_{n+1}^1)^2 = A_{n+1}^0 + A_{n+1}^1$.
-Hence we can conclude that $(A_{n+1}^0 + A_{n+1}^1)B_\ast^\diamond \ket{\psi} \appd{O(r\se)} B_\ast^\diamond\ket{\psi}$.
-Since the projective measurement $(A_{n+1}^0+A_{n+1}^1)$ commute with $B_\ast^\diamond$, we can use similar calculation to get
-$(A_{n+1}^0 + A_{n+1}^1)B_\ast^\diamond \ket{\psi} \appd{O(r\se)} (A_{n+1}^0 + A_{n+1}^1)\ket{\psi}$.
+where we used the fact that $(M_{n+1}^0 + M_{n+1}^1)^2 = M_{n+1}^0 + M_{n+1}^1$.
+Hence we can conclude that $(M_{n+1}^0 + M_{n+1}^1)N_\ast^\diamond \ket{\psi} \appd{O(r\se)} N_\ast^\diamond\ket{\psi}$.
+Since the projective measurement $(M_{n+1}^0+M_{n+1}^1)$ commute with $N_\ast^\diamond$, we can use similar calculation to get
+$(M_{n+1}^0 + M_{n+1}^1)N_\ast^\diamond \ket{\psi} \appd{O(r\se)} (M_{n+1}^0 + M_{n+1}^1)\ket{\psi}$.
 Combining the two relation together, we have
 \begin{align}
-	(A_{n+1}^0 + A_{n+1}^1) \ket{\psi} \appd{O(r\se)} B_\ast^\diamond \ket{\psi}.
+	(M_{n+1}^0 + M_{n+1}^1) \ket{\psi} \appd{O(r\se)} N_\ast^\diamond \ket{\psi}.
 \end{align}
 
 From the correlation, we know that 
 \begin{align}
-	\bra{\psi} A_\ast^\perp B_\ast^\perp \ket{\psi} = \frac{d-3}{d-1} - O(r^2 \ep).
+	\bra{\psi} M_\ast^\perp N_\ast^\perp \ket{\psi} = \frac{d-3}{d-1} - O(r^2 \ep).
 \end{align}
 In the mean time, we also have 
-$\norm{A_\ast^\perp \ket{\psi}}^2 \appd{O(r^2\ep)} \norm{B_\ast^\perp\ket{\psi}}^2 \appd{O(r^2\ep)} (d-3)/(d-1)$.
+$\norm{M_\ast^\perp \ket{\psi}}^2 \appd{O(r^2\ep)} \norm{N_\ast^\perp\ket{\psi}}^2 \appd{O(r^2\ep)} (d-3)/(d-1)$.
 The two facts above imply that 
 \begin{align}
-	\norm{A_\ast^\perp \ket{\psi} - B_\ast^\perp \ket{\psi}}^2 = \norm{A_\ast^\perp \ket{\psi}}^2 + \norm{B_\ast^\perp \ket{\psi}}^2
-	- 2 \bra{\psi} A_\ast^\perp B_\ast^\perp \ket{\psi}  = O(r^2 \ep),
+	\norm{M_\ast^\perp \ket{\psi} - N_\ast^\perp \ket{\psi}}^2 = \norm{M_\ast^\perp \ket{\psi}}^2 + \norm{N_\ast^\perp \ket{\psi}}^2
+	- 2 \bra{\psi} M_\ast^\perp N_\ast^\perp \ket{\psi}  = O(r^2 \ep),
 \end{align}
 or equivalently,
 \begin{align}
-	A_\ast^\perp \ket{\psi} \appd{O(r\se)} B_\ast^\perp \ket{\psi}.
+	M_\ast^\perp \ket{\psi} \appd{O(r\se)} N_\ast^\perp \ket{\psi}.
 \end{align}
 \end{proof}
 
@@ -1887,13 +1934,17 @@ then
 The commutation test is introduced to certify the operators used for the Magic Square test and 
 the operators for the extended weighted CHSH test commute. For details of the Commutation Test, 
 we refer to Appendix~A.$2$ of \cite{coladan2017verifier}. 
-For example, if we want to certify that $M_{r+6} M_{\nr+1}\ket{\psi} \appd{O(r\se)} M_{\nr+1} M_{r+6} \ket{\psi}$,
+For example, if we want to certify that $M_{r+6} M_{\nr+2}\ket{\psi} \appd{O(r\se)} M_{\nr+2} M_{r+6} \ket{\psi}$,
+where $M_{\nr+2} := M_{\nr+2}^0 - M_{\nr+2}^1$,
 we do the following
 \begin{enumerate}
 	\item Bob is asked for answers to both $\nr+1$ and $x_{r+6}$;
 	\item Alice is asked for an answer to $\nr+1$ or $x_{r+6}$ with equal probability;
 	\item their answer to the same question should agree.
 \end{enumerate}
+The correlation is given in the table below.
+
+
 We test the following commutation relations $[M_j, M_k]$ for $j = r+6, r+8,r+9,r+11$ and $k = \nr+1, \nr+2$.
 The result is summarized in the following proposition.
 \begin{proposition}
@@ -1901,14 +1952,36 @@ The result is summarized in the following proposition.
 	Let $S$ be the strategy defined in \cref{sec:rel_lct} that wins the commutation test with probability $1- O(r^2\ep)$,
 	then 
 	\begin{align}
-		M_{\nr+1} M_j \ket{\psi} \appd{O(r\se)} M_{j} M_{\nr+1} \ket{\psi} &&
-		M_{\nr+2} M_j \ket{\psi} \appd{O(r\se)} M_{j} M_{\nr+2} \ket{\psi} &&
+		&M_{\nr+1}^0 M_j \ket{\psi} \appd{O(r\se)} M_{j} M_{\nr+1}^0 \ket{\psi}, &&
+		M_{\nr+1}^1 M_j \ket{\psi} \appd{O(r\se)} M_{j} M_{\nr+1}^1 \ket{\psi}, \\
+		&M_{\nr+2} M_j \ket{\psi} \appd{O(r\se)} M_j M_{\nr+2} \ket{\psi},
 	\end{align}
 	for $j = r+6, r+8,r+9,r+11$.
 \end{proposition}
 Note that $M_j$'s tested in the commutation test are also used in the Magic Square test,
 which will be used to construct the isometry later.
-This proposition is an application of Lemma~$28$ of \cite{coladan2017verifier} with $\se$ replaced by $O(r\se)$.
+\begin{proof}
+	The case of $M_j M_{\nr+2}$ is an application of Lemma~$28$ of \cite{coladan2017verifier} with $\se$ replaced by $O(r\se)$.
+	
+	For the other relations, we prove $M_{\nr+1}^0M_{r+6} \ket{\psi} \appd{O(r\se)} M_{r+6}M_{\nr+1} \ket{\psi}$ to demonstrate 
+	the techniques involved. We denote Bob's projectors by $\{ N_{(\nr+1, r+6)}^{b_1 b_2} \}$ where $b_1 \in \{0, 1, \perp\}$ and
+	$b_2 \in \{0,1\}$. From the correlation, we can get that 
+	\begin{align}
+		&M_{\nr+1}^0 \ket{\psi} \appd{O(r\se)} (N_{(\nr+1, r+6)}^{00} + N_{(\nr+1, r+6)}^{01}) \ket{\psi} \\
+		&M_{r+6} \ket{\psi} \appd{O(r\se)} (\sum_{b_1, b_2} (-1)^{b_2}N_{(\nr+1, r+6)}^{b_1b_2})\ket{\psi}.
+	\end{align}
+	Then we can show that
+	\begin{align}
+		M_{\nr+1}^0 M_{r+6} \ket{\psi} &\appd{O(r\se)} M_{\nr+1}^0 (\sum_{b_1, b_2} (-1)^{b_2}N_{(\nr+1, r+6)}^{b_1b_2})\ket{\psi}\\
+		&\appd{O(r\se)}(\sum_{b_1, b_2} (-1)^{b_2}N_{(\nr+1, r+6)}^{b_1b_2}) (N_{(\nr+1, r+6)}^{00} + N_{(\nr+1, r+6)}^{01})
+		\ket{\psi} \\
+		&= (N_{(\nr+1, r+6)}^{00} + N_{(\nr+1, r+6)}^{01}) (\sum_{b_1, b_2} (-1)^{b_2}N_{(\nr+1, r+6)}^{b_1b_2})  \ket{\psi} \\
+		& \appd{O(r\se)} (N_{(\nr+1, r+6)}^{00} + N_{(\nr+1, r+6)}^{01}) M_{r+6} \ket{\psi} \\
+		&= M_{r+6}  (N_{(\nr+1, r+6)}^{00} + N_{(\nr+1, r+6)}^{01}) \ket{\psi} \\
+		& \appd{O(r\se)} M_{r+6}M_{\nr+1}^0 \ket{\psi}.
+	\end{align}
+\end{proof}
+.
 
 An observation based on this proposition is that 
 \begin{align}
