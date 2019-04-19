@@ -1404,6 +1404,7 @@ The other relations that are embedded in $\Gamma$ are
 \end{align}
 We summarize the implications in the following corollary.
 \begin{corollary}
+	\label{cor:lct_comm}
 	Let $S$, $\{M_j, N_j\}_{j=1}^{\nr}$ be the strategy and observables defined in \cref{prop:lct_base},
 	then
 	\begin{align}
@@ -1428,15 +1429,15 @@ Let $S$ be the quantum strategy defined in \cref{sec:rel_lct},
 then the strategy $S$ satisfy the following relations
 \begin{align}
 	  M_\ast^\diamond N_\ast^\diamond \ket{\psi}
-	  \appd{O( r\se)}&M_\ast^\diamond \ket{\psi} \appd{O( r\se)} (M_{n+1}^0+M_{n+1}^1)\ket{\psi} \appd{O( r\se)} (M_{n+2}^0+M_{n+2}^1)\ket{\psi} \\
-	  \appd{O( r\se)}&N_\ast^\diamond \ket{\psi} \appd{O( r\se)} (N_{n+1}^0+N_{n+1}^1)\ket{\psi} \appd{O( r\se)} (N_{n+2}^0+N_{n+2}^1)\ket{\psi}\\
-	M_\ast^\perp N_\ast^\perp\ket{\psi}\appd{O( r\se)} &M_\ast^\perp\ket{\psi} \appd{O( r\se)} M_{n+1}^\perp \ket{\psi} \appd{O( r\se)} M_{n+2}^\perp \ket{\psi}\\
-	\appd{O( r\se)}&N_\ast^\perp\ket{\psi} \appd{O( r\se)} N_{n+1}^\perp \ket{\psi} \appd{O( r\se)} N_{n+2}^\perp \ket{\psi}.
+	  \appd{O( r\se)}&M_\ast^\diamond \ket{\psi} \appd{O( r\se)} (M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi} \appd{O( r\se)} (M_{\nr+2}^0+M_{\nr+2}^1)\ket{\psi} \\
+	  \appd{O( r\se)}&N_\ast^\diamond \ket{\psi} \appd{O( r\se)} (N_{\nr+1}^0+N_{\nr+1}^1)\ket{\psi} \appd{O( r\se)} (N_{\nr+2}^0+N_{\nr+2}^1)\ket{\psi}\\
+	M_\ast^\perp N_\ast^\perp\ket{\psi}\appd{O( r\se)} &M_\ast^\perp\ket{\psi} \appd{O( r\se)} M_{\nr+1}^\perp \ket{\psi} \appd{O( r\se)} M_{\nr+2}^\perp \ket{\psi}\\
+	\appd{O( r\se)}&N_\ast^\perp\ket{\psi} \appd{O( r\se)} N_{\nr+1}^\perp \ket{\psi} \appd{O( r\se)} N_{\nr+2}^\perp \ket{\psi}.
 \end{align}
 and
 \begin{align}
-&M_{n+1}^0 \ket{\psi} \appd{O( r\se)} N_{n+1}^0 \ket{\psi} && M_{n+1}^1\ket{\psi} \appd{O( r\se)} N_{n+1}^1 \ket{\psi}\\
-&M_{n+2}^0 \ket{\psi} \appd{O( r\se)} N_{n+2}^0 \ket{\psi} && M_{n+2}^1\ket{\psi} \appd{O( r\se)} N_{n+2}^1 \ket{\psi}
+&M_{\nr+1}^0 \ket{\psi} \appd{O( r\se)} N_{\nr+1}^0 \ket{\psi} && M_{\nr+1}^1\ket{\psi} \appd{O( r\se)} N_{\nr+1}^1 \ket{\psi}\\
+&M_{\nr+2}^0 \ket{\psi} \appd{O( r\se)} N_{\nr+2}^0 \ket{\psi} && M_{\nr+2}^1\ket{\psi} \appd{O( r\se)} N_{\nr+2}^1 \ket{\psi}
 \end{align}
 \end{proposition}
 
@@ -1447,30 +1448,30 @@ for each $(x,y)$, $\sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq O(r^2 \epsilon)$.
 the number of possible output pairs is $(a,b)$ is constant for each question pair $(x,y)$, 
 we can conclude that $\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$. 
 
-We prove $(M_{n+1}^0+M_{n+1}^1)\ket{\psi} \appd{O(r\se)} N_\ast^\diamond \ket{\psi}$ as an example.
+We prove $(M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi} \appd{O(r\se)} N_\ast^\diamond \ket{\psi}$ as an example.
 The rest of the relations follow the same line of arguments.
 From the correlation, we can also observe that
 \begin{align}
- \bra{\psi} (M_{n+1}^0+M_{n+1}^1)N_\ast^\diamond \ket{\psi} = \frac{2}{d-1} - O(r^2 \epsilon).
+ \bra{\psi} (M_{\nr+1}^0+M_{\nr+1}^1)N_\ast^\diamond \ket{\psi} = \frac{2}{d-1} - O(r^2 \epsilon).
 \end{align}
 On the other hand, we can calculate that 
 \begin{align}
 	\bra{\psi} N_\ast^\diamond \ket{\psi} \appd{O(r^2\epsilon)} 
- \bra{\psi}(M_{n+1}^0+M_{n+1}^1)\ket{\psi} \appd{O(r^2\epsilon)} \frac{2}{d-1},
+ \bra{\psi}(M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi} \appd{O(r^2\epsilon)} \frac{2}{d-1},
 \end{align}
 which implies that 
 \begin{align}
-	\norm{(M_{n+1}^0 + M_{n+1}^1)N_\ast^\diamond \ket{\psi} - N_\ast^\diamond\ket{\psi}}^2 
-	= \bra{\psi} N_\ast^\diamond \ket{\psi} - \bra{\psi}N_\ast^\diamond(M_{n+1}^0 + M_{n+1}^1)N_\ast^\diamond \ket{\psi}
+	\norm{(M_{\nr+1}^0 + M_{\nr+1}^1)N_\ast^\diamond \ket{\psi} - N_\ast^\diamond\ket{\psi}}^2 
+	= \bra{\psi} N_\ast^\diamond \ket{\psi} - \bra{\psi}N_\ast^\diamond(M_{\nr+1}^0 + M_{\nr+1}^1)N_\ast^\diamond \ket{\psi}
 	= O(r^2 \epsilon),
 \end{align}
-where we used the fact that $(M_{n+1}^0 + M_{n+1}^1)^2 = M_{n+1}^0 + M_{n+1}^1$.
-Hence we can conclude that $(M_{n+1}^0 + M_{n+1}^1)N_\ast^\diamond \ket{\psi} \appd{O(r\se)} N_\ast^\diamond\ket{\psi}$.
-Since the projective measurement $(M_{n+1}^0+M_{n+1}^1)$ commute with $N_\ast^\diamond$, we can use similar calculation to get
-$(M_{n+1}^0 + M_{n+1}^1)N_\ast^\diamond \ket{\psi} \appd{O(r\se)} (M_{n+1}^0 + M_{n+1}^1)\ket{\psi}$.
+where we used the fact that $(M_{\nr+1}^0 + M_{\nr+1}^1)^2 = M_{\nr+1}^0 + M_{\nr+1}^1$.
+Hence we can conclude that $(M_{\nr+1}^0 + M_{\nr+1}^1)N_\ast^\diamond \ket{\psi} \appd{O(r\se)} N_\ast^\diamond\ket{\psi}$.
+Since the projective measurement $(M_{\nr+1}^0+M_{\nr+1}^1)$ commutes with $N_\ast^\diamond$, we can use similar calculation to get
+$(M_{\nr+1}^0 + M_{\nr+1}^1)N_\ast^\diamond \ket{\psi} \appd{O(r\se)} (M_{\nr+1}^0 + M_{\nr+1}^1)\ket{\psi}$.
 Combining the two relation together, we have
 \begin{align}
-	(M_{n+1}^0 + M_{n+1}^1) \ket{\psi} \appd{O(r\se)} N_\ast^\diamond \ket{\psi}.
+	(M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi} \appd{O(r\se)} N_\ast^\diamond \ket{\psi}.
 \end{align}
 
 From the correlation, we know that 
@@ -1490,7 +1491,7 @@ or equivalently,
 \end{align}
 \end{proof}
 
-Note that we have $A_1 \ket{\psi} \appd{O(r\se)} B_1 \ket{\psi}$ and $A_2 \ket{\psi} \appd{O(r\se)} B_2 \ket{\psi}$ from the linear
+Note that we have $M_1 \ket{\psi} \appd{O(r\se)} N_1 \ket{\psi}$ and $M_2 \ket{\psi} \appd{O(r\se)} N_2 \ket{\psi}$ from the linear
 system game.
 %Another conclusion we can draw is that $B_\ast^\diamond = A_\ast^\diamond$ and $B_\ast^\perp = A_\ast^\perp$.
 %We can assume the Schmidt decomposition of $\ket{\psi}$ is
@@ -1505,39 +1506,39 @@ system game.
 \begin{proposition}
 	Let $S$ be as mentioned above. We define
 	\begin{align}
-		&A_{n+1} = A_{n+1}^0 - A_{n+1}^1 && A_{n+2} = A_{n+2}^0 - A_{n+2}^1,\\
-		&B_{n+1} = B_{n+1}^0 - B_{n+1}^1 && B_{n+2} = B_{n+2}^0 - B_{n+2}^1.
+		&M_{\nr+1} = M_{\nr+1}^0 - M_{\nr+1}^1 && M_{\nr+2} = M_{\nr+2}^0 - M_{\nr+2}^1,\\
+		&N_{\nr+1} = N_{\nr+1}^0 - N_{\nr+1}^1 && N_{\nr+2} = N_{\nr+2}^0 - N_{\nr+2}^1.
 	\end{align}
-	Then $S$ introduces two strategies that achieve $\ip{\I_\alpha}^{\max} - O(d r\se)$, which are
+	Then $S$ induces two strategies that achieve $\ip{\I_\alpha}^{\max} - O(d r\se)$, which are
 	\begin{align}
-		S_1 = \left(A_{n+1}, A_{n+2}, B_1, B_2, \frac{A_\ast^\diamond\ket{\psi}}{\norm{A_\ast^\diamond\ket{\psi}}}\right),\\
-		S_2 = \left(B_{n+1}, B_{n+2}, A_1, A_2, \frac{A_\ast^\diamond\ket{\psi}}{\norm{A_\ast^\diamond\ket{\psi}}}\right).
+		S_1 = \left(M_{\nr+1}, M_{\nr+2}, N_1, N_2, \frac{M_\ast^\diamond\ket{\psi}}{\norm{M_\ast^\diamond\ket{\psi}}}\right),\\
+		S_2 = \left(N_{\nr+1}, N_{\nr+2}, M_1, M_2, \frac{M_\ast^\diamond\ket{\psi}}{\norm{M_\ast^\diamond\ket{\psi}}}\right).
 	\end{align}
 \end{proposition}
 \begin{proof}
-We will prove that $\bra{\psi} A_{n+1}^0B_1^0 \ket{\psi} \appd{O(\sd r\se)} \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi}$ as an example,
+We will prove that $\bra{\psi} M_{\nr+1}^0N_1^0 \ket{\psi} \appd{O(\sd r\se)} \bra{\psi}M_\ast^\diamond M_{\nr+1}^0N_1^0 M_\ast^\diamond\ket{\psi}$ as an example,
 \begin{align*}
-	   &\bra{\psi} A_{n+1}^0B_1^0 \ket{\psi} \\
-	= &\bra{\psi}(A_\ast^\diamond + A_\ast^\perp) A_{n+1}^0B_1^0 (A_\ast^\diamond + A_\ast^\perp)\ket{\psi} \\
-	= & \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\perp\ket{\psi}
-	+\bra{\psi}A_\ast^\perp A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\perp A_{n+1}^0B_1^0 A_\ast^\perp\ket{\psi}\\
-	\appd{O(r\se)} & \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_{n+1}^\perp\ket{\psi} 
-	+\bra{\psi}A_{n+1}^\perp A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} + \bra{\psi}A_{n+1}^\perp A_{n+1}^0B_1^0 A_{n+1}^\perp\ket{\psi}\\
-	=&\bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi},
+	   &\bra{\psi} M_{\nr+1}^0N_1^0 \ket{\psi} \\
+	= &\bra{\psi}(M_\ast^\diamond + M_\ast^\perp) M_{\nr+1}^0N_1^0 (M_\ast^\diamond + M_\ast^\perp)\ket{\psi} \\
+	= & \bra{\psi}M_\ast^\diamond M_{\nr+1}^0N_1^0 M_\ast^\diamond\ket{\psi} + \bra{\psi}M_\ast^\diamond M_{\nr+1}^0N_1^0 M_\ast^\perp\ket{\psi}\\
+	&+\bra{\psi}M_\ast^\perp M_{\nr+1}^0N_1^0 M_\ast^\diamond\ket{\psi} + \bra{\psi}M_\ast^\perp M_{\nr+1}^0N_1^0 M_\ast^\perp\ket{\psi}\\
+	\appd{O(r\se)} & \bra{\psi}M_\ast^\diamond M_{\nr+1}^0N_1^0 M_\ast^\diamond\ket{\psi} + \bra{\psi}M_\ast^\diamond M_{\nr+1}^0N_1^0 M_{\nr+1}^\perp\ket{\psi} \\
+	&+\bra{\psi}M_{\nr+1}^\perp M_{\nr+1}^0N_1^0 M_\ast^\diamond\ket{\psi} + \bra{\psi}M_{\nr+1}^\perp M_{\nr+1}^0N_1^0 M_{\nr+1}^\perp\ket{\psi}\\
+	=&\bra{\psi}M_\ast^\diamond M_{\nr+1}^0N_1^0 M_\ast^\diamond\ket{\psi},
 \end{align*}
-where we use the facts that $A_\ast^\perp \ket{\psi} \appd{O(r\se)} A_{n+1}^\perp \ket{\psi}$ and that 
-$\supp(A_{n+1}^0) \cap \supp(A_{n+1}^\perp) = \emptyset$. This means that if Alice and Bob share state $A_\ast^\diamond \ket{\psi}/\norm{A_\ast^\diamond \ket{\psi}}$ and apply $A_{n+1}^0B_1^0$
+where we use the facts that $M_\ast^\perp \ket{\psi} \appd{O(r\se)} M_{\nr+1}^\perp \ket{\psi}$ and that 
+$\supp(M_{\nr+1}^0) \cap \supp(M_{\nr+1}^\perp) = \emptyset$. This means that if Alice and Bob share state $M_\ast^\diamond \ket{\psi}/\norm{M_\ast^\diamond \ket{\psi}}$ and apply $M_{\nr+1}^0N_1^0$
 we get conditional probability
 \begin{align}
-	\frac{\bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi}}{\bra{\psi} A_\ast^\diamond \ket{\psi}}  
-	\appd{O(d r\se)} \frac{\bra{\psi} A_{n+1}^0B_1^0 \ket{\psi}}{\bra{\psi} A_\ast^\diamond \ket{\psi}}
+	\frac{\bra{\psi}M_\ast^\diamond M_{\nr+1}^0N_1^0 M_\ast^\diamond\ket{\psi}}{\bra{\psi} M_\ast^\diamond \ket{\psi}}  
+	\appd{O(d r\se)} \frac{\bra{\psi} M_{\nr+1}^0N_1^0 \ket{\psi}}{\bra{\psi} M_\ast^\diamond \ket{\psi}}
 	\appd{O(d r^2 \ep)}
 	\frac{\cos^2(-\pi/2d)}{2}.
 \end{align} 
 because
 \begin{align}
-	\frac{ \norm{\bra{\psi}A_\ast^\diamond A_{n+1}^0B_1^0 A_\ast^\diamond\ket{\psi} -  \bra{\psi} A_{n+1}^0B_1^0 \ket{\psi}}}
-	{\bra{\psi} A_\ast^\diamond \ket{\psi}} \leq \frac{O(r\se)}{\frac{2}{d-1} - O(r^2 \ep)} = O(d r  \se).
+	\frac{ \norm{\bra{\psi}M_\ast^\diamond M_{\nr+1}^0N_1^0 M_\ast^\diamond\ket{\psi} -  \bra{\psi} M_{\nr+1}^0N_1^0 \ket{\psi}}}
+	{\bra{\psi} M_\ast^\diamond \ket{\psi}} \leq \frac{O(r\se)}{\frac{2}{d-1} - O(r^2 \ep)} = O(d r  \se).
 \end{align}
 \hl{Using the fact that $O(d r \se)$ dominates $O(dr^2 \ep)$,}
 we can prove that the correlation generated by $S_1$ achieves violation $\I^{\max}_{\cot(-\pi/d)} - O(d r \se)$.
@@ -1545,107 +1546,106 @@ The proof for $S_2$ is very similar so we omit it here.
 \end{proof}
 
 \begin{proposition}
-	Let $S$ be as mentioned above. We define $A_{n+1}, A_{n+2},B_{n+1}$ and $B_{n+2}$ as in the previous proposition.
+	Let $S$ be the strategy mentioned above and $M_{\nr+1}, M_{\nr+2},N_{\nr+1}$ and $N_{\nr+2}$ as defined in the previous proposition.
 	We also define
 	\begin{align}
-		&\ket{\psi_1} =1/2 (A_\ast^\diamond - iA_{n+2})(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi} \\
-		&\ket{\psi_2} = 1/2 (A_\ast^\diamond - iA_{n+2})(A_{n+1}^1 + iA_{n+2}A_{n+1}^0) \ket{\psi} \\
-		&\ket{\psi_3} =1/2 (B_\ast^\diamond + i B_{n+2})(B_{n+1}^0 - iB_{n+2}B_{n+1}^1) \ket{\psi}  \\
-		&\ket{\psi_4} =1/2 (B_\ast^\diamond + i B_{n+2})(B_{n+1}^1 - iB_{n+2}B_{n+1}^0) \ket{\psi},
+		&\ket{\psi_1} =1/2(M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 +M_{\nr+1}^1) \ket{\psi} \\
+		&\ket{\psi_2} = 1/2(M_{\nr+1}^1 + iM_{\nr+2}M_{\nr+1}^0 -iM_{\nr+2}M_{\nr+1}^1 + M_{\nr+1}^0)  \ket{\psi} \\
+		&\ket{\psi_3} =1/2 (N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1+iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi}\\
+		&\ket{\psi_4} =1/2(N_{\nr+1}^1 + iN_{\nr+2}N_{\nr+1}^1 -iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi}
 	\end{align}
 	then
 	\begin{enumerate}
 	\item $\ket{\psi_1} \appd{O(\sd \sr\qe)} \ket{\psi_3}$ and $\ket{\psi_2} \appd{O(d \sr\qe)} \ket{\psi_4}$; 
-	\item $A_\ast^\diamond \ket{\psi} \appd{O( r\se)} \ket{\psi_1}+\ket{\psi_2}$;
+	\item $M_\ast^\diamond \ket{\psi} \appd{O( r\se)} \ket{\psi_1}+\ket{\psi_2}$;
 	\item $\braket{\psi_2}{\psi_1} \appd{O( r\se)} 0$;
 	\item $\norm{\ket{\psi_i}}^2 \appd{O(r\se)} 1/(d-1)$ for $i = 1, 2, 3, 4$;
-	\item $B_1B_2 \ket{\psi_1} \appd{O(\sr \qe/\sd)} \omega_d\ket{\psi_1}$;
-	\item $A_1A_2 \ket{\psi_1} \appd{O(\sd\sr \qe)} \omega_d^{-1} \ket{\psi_1}$.
+	\item $N_1N_2 \ket{\psi_1} \appd{O(\sr \qe/\sd)} \omega_d\ket{\psi_1}$;
+	\item $M_1M_2 \ket{\psi_1} \appd{O(\sd\sr \qe)} \omega_d^{-1} \ket{\psi_1}$.
 	\end{enumerate}
 \end{proposition}
 \begin{proof}
-	\textbf{Item 1}. We can expand $\ket{\psi_1}$ and $\ket{\psi_3}$ to get
-	\begin{align}
-		&\ket{\psi_1} = 1/2(A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 +A_{n+1}^1) \ket{\psi} \\
-		&\ket{\psi_3} = 1/2(B_{n+1}^0 - iB_{n+2}B_{n+1}^1+iB_{n+2}B_{n+1}^0 + B_{n+1}^1)\ket{\psi}.
-	\end{align}
-	Since $A_{n+1}^0 \ket{\psi} \appd{O(r\se)} B_{n+1}^0 \ket{\psi}$ and $A_{n+1}^1 \ket{\psi} \appd{O(r\se)} B_{n+1}^1 \ket{\psi}$,
+	\textbf{Item 1}. 
+	Since $M_{\nr+1}^0 \ket{\psi} \appd{O(r\se)} N_{\nr+1}^0 \ket{\psi}$ and $M_{\nr+1}^1 \ket{\psi} \appd{O(r\se)} N_{\nr+1}^1 \ket{\psi}$,
 	it suffices to show
-	$A_{n+2}A_{n+1}^1 - A_{n+2}A_{n+1}^0 \ket{\psi}$ is close to $- B_{n+2}B_{n+1}^1+B_{n+2}B_{n+1}^0\ket{\psi}$,
+	$M_{\nr+2}M_{\nr+1}^1 - M_{\nr+2}M_{\nr+1}^0 \ket{\psi}$ is close to $- N_{\nr+2}N_{\nr+1}^1+N_{\nr+2}N_{\nr+1}^0\ket{\psi}$,
 	or equivalently,
-	$A_{n+2}A_{n+1} \ket{\psi}$ is close to $-B_{n+2}B_{n+1} \ket{\psi}$.
+	$M_{\nr+2}M_{\nr+1} \ket{\psi}$ is close to $-N_{\nr+2}N_{\nr+1} \ket{\psi}$.
 
 	
-	We first show that $B_{n+2}B_{n+1} \ket{\psi}$ is very close to $A_{n+1}A_{n+2}\ket{\psi}$, then we 
+	We first show that $N_{\nr+2}N_{\nr+1} \ket{\psi}$ is very close to $M_{\nr+1}M_{\nr+2}\ket{\psi}$, then we 
 	can use the anticommutation relation from $S_1$.
-	Starting with $B_{n+1} \ket{\psi} \appd{O(r\se)} A_{n+1}\ket{\psi}$, we have
+	Starting with $N_{\nr+1} \ket{\psi} \appd{O(r\se)} M_{\nr+1}\ket{\psi}$, we have
 	\begin{align}
-		B_{n+2}B_{n+1}\ket{\psi} \appd{O(r\se)} B_{n+2}A_{n+1}\ket{\psi} =A_{n+1} B_{n+2}\ket{\psi} \appd{O(r\se)} A_{n+1}A_{n+2}\ket{\psi},
+		N_{\nr+2}N_{\nr+1}\ket{\psi} \appd{O(r\se)} N_{\nr+2}M_{\nr+1}\ket{\psi} =M_{\nr+1} N_{\nr+2}\ket{\psi} \appd{O(r\se)} M_{\nr+1}M_{\nr+2}\ket{\psi},
 	\end{align}
-	Recall that $A_{n+2}$ and $A_{n+1}$ are in the strategy $S_1$, where $A_{n+2}$ acts as $X_A$ 
-	and $A_{n+1}$ acts as $Z_A$ on $A_\ast^\diamond \ket{\psi}$, then we know 
+	Recall that $M_{\nr+2}$ and $M_{\nr+1}$ are in the strategy $S_1$, where $M_{\nr+2}$ acts as $X_A$ 
+	and $M_{\nr+1}$ acts as $Z_A$ on $M_\ast^\diamond \ket{\psi}$. We know 
 	\begin{align}
-		A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi} \appd{O(r\se)} A_{n+2}A_{n+1}(A_{n+1}^0 + A_{n+1}^1)\ket{\psi} = A_{n+2}A_{n+1}\ket{\psi}.
+		M_{\nr+2}M_{\nr+1} M_\ast^\diamond \ket{\psi} \appd{O(r\se)} M_{\nr+2}M_{\nr+1}(M_{\nr+1}^0 + M_{\nr+1}^1)\ket{\psi} = M_{\nr+2}M_{\nr+1}\ket{\psi}.
 	\end{align}
 	Similarly, we can also prove that 
 	\begin{align}
-		A_{n+1}A_{n+2} \ket{\psi} \appd{O( r\se)} A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi}.
+		M_{\nr+1}M_{\nr+2} \ket{\psi} \appd{O( r\se)} M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi}.
 	\end{align}
 	At this point, we use the anticommutation relation induced by $S_1$ (\cref{eq:zaxa}) and conclude that 
 	\begin{align}
-		A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi} \appd{\frac{\norm{\ket{A_\ast^\diamond\ket{\psi}}}}{c\sqrt{s}}O(\sd\sr\qe)} -A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi}.
+		M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi} \appd{\frac{\norm{\ket{M_\ast^\diamond\ket{\psi}}}}{c\sqrt{s}}O(\sd\sr\qe)} -M_{\nr+2}M_{\nr+1} M_\ast^\diamond \ket{\psi}.
 	\end{align}
 	If we use the fact $c = 1 - \pi^2/(2d^2) + O(1/d^4)$ and $s = \pi/d + O(1/d^3)$, the distance above is of order $O(\sd \sr \qe)$.
 	Putting everything together, we get 
 	\begin{align}
-		A_{n+1}A_{n+2} \ket{\psi} &\appd{O( r\se)} A_{n+1}A_{n+2} A_\ast^\diamond \ket{\psi}\\
-							&\appd{O(\sd \sr \qe)} -A_{n+2}A_{n+1} A_\ast^\diamond \ket{\psi}\\
-							&\appd{O( r\se)} -A_{n+2}A_{n+1} \ket{\psi} \\
-							&\appd{O(r \se)}-B_{n+2}B_{n+1}\ket{\psi}
+		M_{\nr+1}M_{\nr+2} \ket{\psi} &\appd{O( r\se)} M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi}\\
+							&\appd{O(\sd \sr \qe)} -M_{\nr+2}M_{\nr+1} M_\ast^\diamond \ket{\psi}\\
+							&\appd{O( r\se)} -M_{\nr+2}M_{\nr+1} \ket{\psi} \\
+							&\appd{O(r \se)}-N_{\nr+2}N_{\nr+1}\ket{\psi}
 	\end{align}
 	The proof of $\ket{\psi_2} \appd{O(\sd \sr \qe)} \ket{\psi_4}$ is similar.
 	\hl{This may not be the best bound.}
 	
-	\textbf{Item 2}. Expanding $\ket{\psi_2}$, we get
+	\textbf{Item 2}. From the definition of $\ket{\psi_1}$ and $\ket{\psi_2}$, we can get that 
 	\begin{align}
-		\ket{\psi_2} = 1/2(A_{n+1}^1 + iA_{n+2}A_{n+1}^0 -iA_{n+2}A_{n+1}^1 + A_{n+1}^0)\ket{\psi}.
-	\end{align}
-	Then,
-	\begin{align}
-		\ket{\psi_2} + \ket{\psi_1} = 1/2( 2A_{n+1}^0 + 2A_{n+1}^1) \ket{\psi} \appd{O(r\se)} A_\ast^\diamond \ket{\psi}.
+		\ket{\psi_2} + \ket{\psi_1} = 1/2( 2M_{\nr+1}^0 + 2M_{\nr+1}^1) \ket{\psi} \appd{O(r\se)} M_\ast^\diamond \ket{\psi}.
 	\end{align}
 	
-	\textbf{Item 3}. We can calculate that 
+	\textbf{Item 3}. Expanding the inner product gives us that 
 	\begin{align*}
 		&\braket{\psi_1}{\psi_2}\\
-	 = &1/4\bra{\psi}(A_{n+1}^0 - iA_{n+1}^1A_{n+2} + iA_{n+1}^0A_{n+2} +A_{n+1}^1)(A_{n+1}^1 + iA_{n+2}A_{n+1}^0 -iA_{n+2}A_{n+1}^1 + A_{n+1}^0)\ket{\psi}\\
-	 =& 1/2i \bra{\psi}(A_{n+1}^0A_{n+2}A_{n+1}^0-A_{n+1}^1A_{n+2}A_{n+1}^1\ket{\psi}.
+	 = &1/4\bra{\psi}(M_{\nr+1}^0 - iM_{\nr+1}^1M_{\nr+2} + iM_{\nr+1}^0M_{\nr+2} +M_{\nr+1}^1)\\
+	 &(M_{\nr+1}^1 + iM_{\nr+2}M_{\nr+1}^0 -iM_{\nr+2}M_{\nr+1}^1 + M_{\nr+1}^0)\ket{\psi}\\
+	 =& 1/2i \bra{\psi}(M_{\nr+1}^0M_{\nr+2}M_{\nr+1}^0-M_{\nr+1}^1M_{\nr+2}M_{\nr+1}^1\ket{\psi}.
 	\end{align*}
-	Then we will show that $\bra{\psi} A_{n+1}^0A_{n+2}A_{n+1}^0 \ket{\psi} \appd{O( r\se)} 0$ because
+	Then we will show that $\bra{\psi} M_{\nr+1}^0M_{\nr+2}M_{\nr+1}^0 \ket{\psi} \appd{O( r\se)} 0$ because
 	\begin{align}
-	 \bra{\psi}(A_{n+1}^0A_{n+2}A_{n+1}^0\ket{\psi} \appd{O(r\se)}  \bra{\psi}(B_{n+1}^0A_{n+2}B_{n+1}^0)\ket{\psi} =\bra{\psi}A_{n+2}B_{n+1}^0)\ket{\psi}
-	\appd{O(r^2\ep)} 0
+	 \bra{\psi}(M_{\nr+1}^0M_{\nr+2}M_{\nr+1}^0\ket{\psi} &\appd{O(r\se)}  \bra{\psi}(N_{\nr+1}^0M_{\nr+2}N_{\nr+1}^0)\ket{\psi}\\
+	  &=\bra{\psi}M_{\nr+2}N_{\nr+1}^0)\ket{\psi}\\
+	&\appd{O(r^2\ep)} 0,
 	\end{align}
-	Similarly, $\bra{\psi}(A_{n+1}^1A_{n+2}A_{n+1}^1\ket{\psi} \appd{O(r\se)} \bra{\psi} A_{n+2}B_{n+1}^1 \ket{\psi} \appd{O(r^2\ep)} 0$.
+	where the last approximation comes from the correlation.
+	Similarly, we have 
+	\begin{align}
+	\bra{\psi}(M_{\nr+1}^1M_{\nr+2}M_{\nr+1}^1\ket{\psi} \appd{O(r\se)} \bra{\psi} M_{\nr+2}N_{\nr+1}^1 \ket{\psi} \appd{O(r^2\ep)} 0
+	\end{align}.
 	Hence, $\braket{\psi_2}{\psi_1} \appd{O(r\se)} 0$.
 	
-	\textbf{Item 4}. We prove $\norm{\ket{\psi_1}}^2 \appd{O(r \se)} 1/(d-1)$ as an example. When it is shown,
-	the rest of the norms can be derived using Item $1$ to $3$.
+	\textbf{Item 4}. We prove $\norm{\ket{\psi_1}}^2 \appd{O(r \se)} 1/(d-1)$ as an example. 
+	The norms of the other $3$ vectors can be derived with previous results.
 	We start with
 	\begin{align*}
 		&\braket{\psi_1}{\psi_1} \\
-		=&1/4\bra{\psi}(A_{n+1}^0 - iA_{n+1}^1A_{n+2} + iA_{n+1}^0A_{n+2} +A_{n+1}^1)(A_{n+1}^0 + iA_{n+2}A_{n+1}^1 -iA_{n+2}A_{n+1}^0 + A_{n+1}^1)\ket{\psi}\\
-		=&1/2\bra{\psi}(A_{n+1}^0+A_{n+1}^1-iA_{n+1}^1A_{n+2}A_{n+1}^0+iA_{n+1}^0A_{n+2}A_{n+1}^1\ket{\psi}
+		=&1/4\bra{\psi}(M_{n+1}^0 - iM_{n+1}^1M_{n+2} + iM_{n+1}^0M_{n+2} +M_{n+1}^1)\\
+		&(M_{n+1}^0 + iM_{n+2}M_{n+1}^1 -iM_{n+2}M_{n+1}^0 + M_{n+1}^1)\ket{\psi}\\
+		=&1/2\bra{\psi}(M_{n+1}^0+M_{n+1}^1-iM_{n+1}^1M_{n+2}M_{n+1}^0+iM_{n+1}^0M_{n+2}M_{n+1}^1\ket{\psi}
 	\end{align*}
-	Here we apply the same trick to flip $A_{n+1}^1$ to Bob's side and get 
+	Here we apply the same trick to flip $M_{n+1}^1$ to Bob's side and get 
 	\begin{align}
-		\bra{\psi}A_{n+1}^1A_{n+2}A_{n+1}^0\ket{\psi} \appd{O(r\se)} \bra{\psi}B_{n+1}^1A_{n+2}B_{n+1}^0\ket{\psi} 
-		= \bra{\psi}B_{n+1}^1B_{n+1}^0A_{n+2}\ket{\psi} = 0.
+		\bra{\psi}M_{\nr+1}^1M_{\nr+2}M_{\nr+1}^0\ket{\psi} \appd{O(r\se)} \bra{\psi}N_{\nr+1}^1M_{\nr+2}N_{\nr+1}^0\ket{\psi} 
+		= \bra{\psi}N_{\nr+1}^1N_{\nr+1}^0M_{\nr+2}\ket{\psi} = 0.
 	\end{align}
-	Similarly, we have $\bra{\psi}A_{n+1}^0A_{n+2}A_{n+1}^1\ket{\psi} \appd{ O(r\se)} 0$.
+	Similarly, we have $\bra{\psi}M_{\nr+1}^0M_{\nr+2}M_{\nr+1}^1\ket{\psi} \appd{ O(r\se)} 0$.
 	Hence, we get 
 	\begin{align}
-		\braket{\psi_1}{\psi_1} \appd{O(r\se)} 1/2\bra{\psi}(A_{n+1}^0+A_{n+1}^1\ket{\psi} \appd{O(r^2\ep)} 
+		\braket{\psi_1}{\psi_1} \appd{O(r\se)} 1/2\bra{\psi}(M_{\nr+1}^0+M_{\nr+1}^1\ket{\psi} \appd{O(r^2\ep)} 
 		 \frac{1}{d-1}.
 	\end{align}
 	Using the fact that for $0 < x < 1$, $\sqrt{1+x} = 1 + 1/2 x - O(x^2)$ and $\sqrt{1-x} = 1- 1/2x - O(x^2)$,
@@ -1660,98 +1660,108 @@ The proof for $S_2$ is very similar so we omit it here.
 	
 	\textbf{Item 5}.
 	First we focus on the implication of the fact that $S_1$ almost maximally violates $\I_{\cot(-\pi/d)}$.
-	We define $B_1 := B_1^0 - B_1^1$, $B_2 := B_2^0-B_2^1$ and
+	We define
 	\begin{align}
-		&Z_A  := A_{n+1} && X_A := A_{n+2} \\
-		&Z_B := \frac{B_1+B_2}{2\cos(-\pi/d)} && X_B := \frac{B_1-B_2}{2\sin(-\pi/d)}.
+		&Z_A  := M_{\nr+1} && X_A := M_{\nr+2} \\
+		&Z_B := \frac{N_1+N_2}{2\cos(-\pi/d)} && X_B := \frac{N_1-N_2}{2\sin(-\pi/d)}.
 	\end{align}
+	Note that $Z_A$ should be defined by $M_{\nr+1}^0 - M_{\nr+1}^1 + M_{\nr+1}^\perp$,
+	but $M_{\nr+1}^\perp$ is almost orthogonal to $M_\ast^\diamond$, so we omit the $M_{\nr+1}^\perp$ term here.
+	We do the similar modification on $X_A$ too.
 	Recalling \cref{eq:za-zb}, we know
 	\begin{align}
-		\norm{Z_B A_\ast^\diamond \ket{\psi} - A_{n+1}A_\ast^\diamond \ket{\psi}} \leq 
-		\norm{A_\ast^\diamond \ket{\psi}} \sqrt{\sin(\pi/d)}O(\sd \sr \qe)
+		\norm{Z_B M_\ast^\diamond \ket{\psi} - M_{\nr+1}M_\ast^\diamond \ket{\psi}} \leq 
+		\norm{M_\ast^\diamond \ket{\psi}} \sqrt{\sin(\pi/d)}O(\sd \sr \qe)
 		= O(\sr \qe/ \sd ).
 	\end{align}
-	Since $A_\ast^\diamond \ket{\psi} \appd{O(r\se)} (A_{n+1}^0 + A_{n+1}^1) \ket{\psi}$,
+	Since $M_\ast^\diamond \ket{\psi} \appd{O(r\se)} (M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi}$,
 	we can conclude that 
 	\begin{align}
-		Z_B (A_{n+1}^0 + A_{n+1}^1) \ket{\psi} \appd{O(\sr \qe / \sd )} (A_{n+1}^0 - A_{n+1}^1) \ket{\psi}.
+		Z_B (M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi} \appd{O(\sr \qe / \sd )} (M_{\nr+1}^0 - M_{\nr+1}^1) \ket{\psi}.
 	\end{align}
-	On the other hand, using the fact $A_{n+1}^0 A_{n+1}^1 = 0$, we can get that
+	On the other hand, using the fact $M_{\nr+1}^0 M_{\nr+1}^1 = 0$, we can get that
 	\begin{align}
-		O(r\se/d) \geq &\norm{Z_B (A_{n+1}^0 + A_{n+1}^1) \ket{\psi} - (A_{n+1}^0 - A_{n+1}^1) \ket{\psi}}^2\\
-		=&\norm{ Z_BA_{n+1}^0 \ket{\psi} - A_{n+1}^0\ket{\psi}}^2 + \norm{ Z_BA_{n+1}^1 \ket{\psi} + A_{n+1}^1\ket{\psi}}^2,
+		O(r\se/d) \geq &\norm{Z_B (M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi} - (M_{\nr+1}^0 - M_{\nr+1}^1) \ket{\psi}}^2\\
+		=&\norm{ Z_BM_{\nr+1}^0 \ket{\psi} - M_{\nr+1}^0\ket{\psi}}^2 + \norm{ Z_BM_{\nr+1}^1 \ket{\psi} + M_{\nr+1}^1\ket{\psi}}^2,
 	\end{align}
 	which immediately gives us that 
 	\begin{align}
-		\frac{B_1+B_2}{2\cos(\pi/d)} A_{n+1}^0\ket{\psi} \appd{O( \sr \qe /\sd)} A_{n+1}^0 \ket{\psi},\\
-		\frac{B_1+B_2}{2\cos(\pi/d)} A_{n+1}^1\ket{\psi} \appd{O( \sr \qe /\sd)} A_{n+1}^1 \ket{\psi}.
+		\frac{N_1+N_2}{2\cos(\pi/d)} M_{\nr+1}^0\ket{\psi} \appd{O( \sr \qe /\sd)} M_{\nr+1}^0 \ket{\psi},\\
+		\frac{N_1+N_2}{2\cos(\pi/d)} M_{\nr+1}^1\ket{\psi} \appd{O( \sr \qe /\sd)} M_{\nr+1}^1 \ket{\psi}.
 	\end{align}
 		Substituting the appropriate operators and states into \cref{eq:zaxb,eq:xazb}, we get
 	\begin{align}
-		\frac{B_1-B_2}{2 \sin(-\pi/d)} A_{n+1}^0A_\ast^\diamond \ket{\psi} 
-		\appd{\norm{A_\ast^\diamond\ket{\psi}}/\sqrt{s} O(\sd \sr \qe)}A_{n+2} A_{n+1}^1A_\ast^\diamond\ket{\psi}\\
-		\frac{B_1 -B_2}{2\sin(-\pi/d)} A_{n+1}^1A_\ast^\diamond \ket{\psi}  
-		\appd{\norm{A_\ast^\diamond\ket{\psi}}/\sqrt{s}O(\sd \sr \qe)}A_{n+2} A_{n+1}^0 A_\ast^\diamond \ket{\psi}.
+		\frac{N_1-N_2}{2 \sin(-\pi/d)} M_{\nr+1}^0M_\ast^\diamond \ket{\psi} 
+		\appd{\norm{M_\ast^\diamond\ket{\psi}}/\sqrt{s} O(\sd \sr \qe)}M_{\nr+2} M_{\nr+1}^1M_\ast^\diamond\ket{\psi}\\
+		\frac{N_1 -N_2}{2\sin(-\pi/d)} M_{\nr+1}^1M_\ast^\diamond \ket{\psi}  
+		\appd{\norm{M_\ast^\diamond \ket{\psi}}/\sqrt{s}O(\sd \sr \qe)}M_{\nr+2} M_{\nr+1}^0 M_\ast^\diamond \ket{\psi}.
 	\end{align}
-	Using the facts that $A_\ast^\diamond \ket{\psi} \appd{O(r\se)} (A_{n+1}^0 + A_{n+1}^1) \ket{\psi}$
+	Using the facts that $M_\ast^\diamond \ket{\psi} \appd{O(r\se)} (M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi}$
 	and $O(\sd \sr \qe)$ dominates $O(r \se)$, we know
 	\begin{align}
-		(B_1-B_2) A_{n+1}^0 \ket{\psi} \appd{O(\sr\qe/\sd )} 2 \sin(-\pi/d)A_{n+2} A_{n+1}^1 \ket{\psi},\\
-		(B_1-B_2) A_{n+1}^1 \ket{\psi}\appd{O(\sr\qe/\sd )} 2 \sin(-\pi/d)A_{n+2} A_{n+1}^0 \ket{\psi}.
+		(N_1-N_2) M_{\nr+1}^0 \ket{\psi} \appd{O(\sr\qe/\sd )} 2 \sin(-\pi/d)M_{\nr+2} M_{n+1}^1 \ket{\psi},\\
+		(N_1-N_2) M_{\nr+1}^1 \ket{\psi}\appd{O(\sr\qe/\sd )} 2 \sin(-\pi/d)M_{\nr+2} M_{n+1}^0 \ket{\psi}.
 	\end{align}
-	In summary, we can write 
+	In summary, we have shown that 
         \begin{align}
-        		&B_1A_{n+1}^0 \ket{\psi} \appd{O(\sr \qe/ \sd)} cA_{n+1}^0\ket{\psi} - sA_{n+2}A_{n+1}^1\ket{\psi}\\
-        		&B_1A_{n+1}^1 \ket{\psi} \appd{O(\sr \qe/ \sd)} -cA_{n+1}^1\ket{\psi} - sA_{n+2}A_{n+1}^0\ket{\psi}\\
-        		&B_2A_{n+1}^0 \ket{\psi} \appd{O( \sr \qe /\sd)} cA_{n+1}^0\ket{\psi} + sA_{n+2}A_{n+1}^1\ket{\psi}\\
-        		&B_2A_{n+1}^1 \ket{\psi} \appd{O(\sr \qe/ \sd )} -cA_{n+1}^1\ket{\psi} + sA_{n+2}A_{n+1}^0\ket{\psi}.
+        		&N_1M_{\nr+1}^0 \ket{\psi} \appd{O(\sr \qe/ \sd)} cM_{\nr+1}^0\ket{\psi} - sM_{\nr+2}M_{\nr+1}^1\ket{\psi}\\
+        		&N_1M_{\nr+1}^1 \ket{\psi} \appd{O(\sr \qe/ \sd)} -cM_{\nr+1}^1\ket{\psi} - sM_{\nr+2}M_{\nr+1}^0\ket{\psi}\\
+        		&N_2M_{\nr+1}^0 \ket{\psi} \appd{O( \sr \qe /\sd)} cM_{\nr+1}^0\ket{\psi} + sM_{\nr+2}M_{\nr+1}^1\ket{\psi}\\
+        		&N_2M_{\nr+1}^1 \ket{\psi} \appd{O(\sr \qe/ \sd )} -cM_{\nr+1}^1\ket{\psi} + sM_{\nr+2}M_{\nr+1}^0\ket{\psi}.
         \end{align}
-        Then we can calculate
+        Then we can calculate that 
         \begin{align}
-        		B_1B_2 A_{n+1}^0 \ket{\psi} &\appd{O(\sr \qe/\sd)} (c B_1A_{n+1}^0 +sA_{n+2}B_1A_{n+1}^1)\ket{\psi}\\
-        		&\appd{O( \sr \qe/\sd)}(c^2A_{n+1}^0- csA_{n+2}A_{n+1}^1 -csA_{n+2}A_{n+1}^1 -s^2 A_{n+2}^2 A_{n+1}^0)\ket{\psi}\\
-        		&= (\cos(2\pi/d) A_{n+1}^0 - \sin(2\pi/d) A_{n+2}A_{n+1}^1)\ket{\psi}.
+        		N_1N_2 M_{\nr+1}^0 \ket{\psi} &\appd{O(\sr \qe/\sd)} (c N_1M_{\nr+1}^0 +sM_{\nr+2}N_1M_{\nr+1}^1)\ket{\psi}\\
+        		&\appd{O( \sr \qe/\sd)}(c^2M_{\nr+1}^0- csM_{\nr+2}M_{\nr+1}^1 -csM_{\nr+2}M_{\nr+1}^1 -s^2 M_{\nr+2}^2 M_{\nr+1}^0)\ket{\psi}\\
+        		&= (\cos(2\pi/d) M_{\nr+1}^0 - \sin(2\pi/d) M_{\nr+2}M_{\nr+1}^1)\ket{\psi}.
         \end{align}
         and 
         \begin{align}
-        		B_1B_2 A_{n+1}^1 \ket{\psi} &\appd{O( \sr \qe/\sd)} (-c B_1A_{n+1}^1 +sA_{n+2}B_1A_{n+1}^0)\ket{\psi}\\
-        		&\appd{O(\sr \qe/\sd)}(c^2A_{n+1}^1+ csA_{n+2}A_{n+1}^0 +csA_{n+2}A_{n+1}^0 -s^2 A_{n+2}^2 A_{n+1}^1)\ket{\psi}\\
-        		&= (\cos(2\pi/d) A_{n+1}^1 + \sin(2\pi/d) A_{n+2}A_{n+1}^0)\ket{\psi},
+        		N_1N_2 M_{\nr+1}^1 \ket{\psi} &\appd{O( \sr \qe/\sd)} (-c N_1M_{\nr+1}^1 +sM_{\nr+2}N_1M_{\nr+1}^0)\ket{\psi}\\
+        		&\appd{O(\sr \qe/\sd)}(c^2M_{\nr+1}^1+ csM_{\nr+2}M_{\nr+1}^0 +csM_{\nr+2}M_{\nr+1}^0 -s^2 M_{\nr+2}^2 M_{\nr+1}^1)\ket{\psi}\\
+        		&= (\cos(2\pi/d) M_{\nr+1}^1 + \sin(2\pi/d) M_{\nr+2}M_{\nr+1}^0)\ket{\psi},
         \end{align}
         or equivalently,
         \begin{align}
-        		B_1B_2 A_{n+2}A_{n+1}^1 \ket{\psi}\appd{O(\sr \qe/\sd)} 
-		\sin(2\pi/d) A_{n+1}^0\ket{\psi} + \cos(2\pi/d)A_{n+2}A_{n+1}^1\ket{\psi}.
+        		N_1N_2 M_{\nr+2}M_{\nr+1}^1 \ket{\psi}\appd{O(\sr \qe/\sd)} 
+		\sin(2\pi/d) M_{\nr+1}^0\ket{\psi} + \cos(2\pi/d)M_{\nr+2}M_{\nr+1}^1\ket{\psi}.
         \end{align}
         Combining the two results above we know
 	\begin{align}
-		\label{eq:omegad}&B_1B_2 (A_{n+1}^0 + i A_{n+2}A_{n+1}^1) \ket{\psi} 
-		\appd{O(\sr \qe/\sd)}\omega_d(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi}.
+		\label{eq:omegad}
+		&N_1N_2 (M_{\nr+1}^0 + i M_{\nr+2}M_{\nr+1}^1) \ket{\psi} 
+		\appd{O(\sr \qe/\sd)}\omega_d(M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1) \ket{\psi}.
 	\end{align}
-	Multiplying both sides by $1/2(A_\ast^\diamond - iA_{n+2})$, we get
+	Multiplying both sides by $1/2(\1 - iM_{\nr+2})$, we get
 	\begin{align}
-		B_1B_2 \ket{\psi_1} \appd{O(\sr \qe/\sd)} \omega_d\ket{\psi_1}.
+		N_1N_2 \ket{\psi_1} \appd{O(\sr \qe/\sd)} \omega_d\ket{\psi_1}.
 	\end{align}
+	Note that here we use another form of $\ket{\psi_1}$ which is 
+	$\ket{\psi_1} = 1/2(\1 - iM_{\nr+2})(M_{\nr+1}^0 + i M_{\nr+2}M_{\nr+1}^1) \ket{\psi}$.
 	
-	\textbf{Item 6}.This one is based on the strategy $S_2$. As in the previous Item,
-	we can get
+	\textbf{Item 6}.
+	We first show that $M_1M_2 \ket{\psi_3}\appd{O(\sr \qe/\sd)} \omega_d^{-1} \ket{\psi_3}$, then we 
+	use the fact that $\ket{\psi_3} \appd{O(\sd \sr\qe)} \ket{\psi_1}$ to draw the conclusion.
+	
+	From the strategy $S_2$, we can summarize that 
 	\begin{align}
-		&(A_1+A_2) B_{n+1}^0 \ket{\psi} \appd{O(\sr \qe/\sd)} 2 \cos(-\pi/d)B_{n+1}^0 \ket{\psi}.\\
-		&(A_1+A_2) B_{n+1}^1 \ket{\psi}  \appd{O(\sr \qe/\sd)} -2 \cos(-\pi/d)B_{n+1}^1 \ket{\psi},\\
-		&(A_1-A_2) B_{n+1}^0\ket{\psi} \appd{O(\sr\qe/\sd)}2 \sin(-\pi/d)B_{n+2} B_{n+1}^1\ket{\psi}\\
-		&(A_1 -A_2)B_{n+1}^1 \ket{\psi} \appd{O(\sr\qe/\sd)} 2 \sin(-\pi/d)B_{n+2} B_{n+1}^0 \ket{\psi}.
+		&(M_1+M_2) N_{\nr+1}^0 \ket{\psi} \appd{O(\sr \qe/\sd)} 2 \cos(-\pi/d)N_{\nr+1}^0 \ket{\psi}.\\
+		&(M_1+M_2) N_{\nr+1}^1 \ket{\psi}  \appd{O(\sr \qe/\sd)} -2 \cos(-\pi/d)N_{\nr+1}^1 \ket{\psi},\\
+		&(M_1-M_2) N_{\nr+1}^0\ket{\psi} \appd{O(\sr\qe/\sd)}2 \sin(-\pi/d)N_{\nr+2} N_{\nr+1}^1\ket{\psi}\\
+		&(M_1 -M_2)N_{\nr+1}^1 \ket{\psi} \appd{O(\sr\qe/\sd)} 2 \sin(-\pi/d)N_{\nr+2} N_{\nr+1}^0 \ket{\psi}.
 	\end{align}
 	With similar calculation as in the previous case, we can get 
 	\begin{align}
-		A_1A_2 (B_{n+1}^0 - i B_{n+2}B_{n+1}^1) \ket{\psi} \appd{O(\sr \qe/\sd)} \omega_d^{-1} (B_{n+1}^0 - i B_{n+2}B_{n+1}^1).
+		M_1M_2 (N_{\nr+1}^0 - i N_{\nr+2}N_{\nr+1}^1) \ket{\psi} \appd{O(\sr \qe/\sd)} \omega_d^{-1} (N_{\nr+1}^0 - i N_{\nr+2}N_{\nr+1}^1).
 	\end{align}
-	Multiplying both sides of the equation above by $(B_\ast^\diamond+iB_{n+2})$ we get
+	Multiplying both sides of the equation above by $1/2(\1+iN_{\nr+2})$ we get
 	\begin{align}
-		A_1A_2 \ket{\psi_3} \appd{O(\sr \qe/\sd)} \omega_d^{-1}\ket{\psi_3}.
+		M_1M_2 \ket{\psi_3} \appd{O(\sr \qe/\sd)} \omega_d^{-1}\ket{\psi_3},
 	\end{align}
+	where we use the fact that $\ket{\psi_3} = 1/2(\1+iN_{\nr+2})(N_{\nr+1}^0 - i N_{\nr+2}N_{\nr+1}^1) \ket{\psi}$
 	In the end, we substitute $\ket{\psi_1}  \appd{O(\sd \sr\qe)} \ket{\psi_3}$ to get
 	\begin{align}
-		A_1A_2 \ket{\psi_1} \appd{O(\sd \sr \qe)} \omega_d^{-1}\ket{\psi_1}.
+		M_1M_2 \ket{\psi_1} \appd{O(\sd \sr \qe)} \omega_d^{-1}\ket{\psi_1}.
 	\end{align}
 \end{proof}
 %Note that it can be shown that 
@@ -1763,12 +1773,12 @@ The proof for $S_2$ is very similar so we omit it here.
 %--------------------------------------------------------------
 \subsection{A decomposition of $\ket{\psi}$}
 %--------------------------------------------------------------
-Let $O_A = A_1A_2$ and $O_B = B_1B_2$.
-Before proving the proposition, we make one important observation.
-Recall that from the linear system game, we know that $A_iB_i \ket{\psi} \appd{O(r\se)} \ket{\psi}$ for $i = 1 \dots n$.
+Before proving the next proposition, we make one important observation.
+Recall that \cref{sec:rel_lct} establishes that there existes observables $\{M_i, N_i\}$ such that 
+$M_iN_i \ket{\psi} \appd{O(r\se)} \ket{\psi}$ for $i = 1 \dots \nr$.
 Then we can deduce that 
 \begin{align}
-	A_3A_4 \x B_3B_4 \ket{\psi} \appd{O(r\se)} A_3 \x B_3 \ket{\psi} \appd{O(r\se)} \ket{\psi},
+	M_3M_4 \x N_3N_4 \ket{\psi} \appd{O(r\se)} M_3 \x N_3 \ket{\psi} \appd{O(r\se)} \ket{\psi},
 \end{align}
 or equivalently,
 \begin{align}
@@ -1779,7 +1789,8 @@ Similarly, we also have $U_A\ct U_B\ct \ket{\psi} \appd{O(r\se)} \ket{\psi}$.
 We use this observation in the proof of the following proposition.
 \begin{proposition}
 \label{prop:decomp_psi}
-Define 
+Let $S$ be the strategy defined in \cref{sec:rel_lct} and 
+define 
 $\ket{\psi'} = \sum_{j=1}^{(d-1)} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}$,
 then
 \begin{align}
@@ -1797,45 +1808,43 @@ then
         we can see that 
         \begin{align}
             	O_A (U_A\ct)^j \ket{\psi_1} &\appd{O(\sd \sr \qe)} O_A(U_A\ct)^j \ket{\psi_3} \\
-            	& = 1/2 (B_\ast^\diamond + i B_{n+2})(B_{n+1}^0 - iB_{n+2}B_{n+1}^1) O_A (U_A\ct)^j \ket{\psi} \\
-            	& \appd{O(r^j \se)} 1/2 (B_\ast^\diamond + i B_{n+2})(B_{n+1}^0 - iB_{n+2}B_{n+1}^1) (U_A\ct)^j O_A^{r^j} \ket{\psi} \\
+            	& = 1/2 (\1 + i N_{\nr+2})(N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1) O_A (U_A\ct)^j \ket{\psi} \\
+            	& \appd{O(r^j \se)} 1/2  (\1 + i N_{\nr+2})(N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1)  (U_A\ct)^j O_A^{r^j} \ket{\psi} \\
             	& = (U_A\ct)^j O_A^{r^j} \ket{\psi_3} \\
             	& \appd{O(r^j \sr \qe/\sd)} \omega_d^{-r^j}(U_A\ct)^j \ket{\psi_3} \\
             	& \appd{O(\sd \sr\qe)} \omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
         \end{align}
         In short, we have shown that 
         \begin{align}
-        		O_A (U_A\ct)^j \ket{\psi_1} \appd{O(\sd \sr \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1},
+        		O_A (U_A\ct)^j \ket{\psi_1} \appd{O(\sd r^j \sr \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
         \end{align}
-        where we used the fact that when $j \leq \log_r(d-1)$, $r^j = O(d)$.
 	Hence for $j \neq j'$, \cref{prop:orthog} tells us that  
 	\begin{align}
-		\bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j'} \ket{\psi_1} \appd{O(d^{3/2} \sr \qe)} 0.
+		\bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j'} \ket{\psi_1} \appd{O(d^{3/2} (r^j + r^{j'})\sr \qe)} 0.
 	\end{align}
 	We can calculate the norm of $\ket{\psi'}$ as 
 	\begin{align}
 		\braket{\psi'}{\psi'} &=\sum_{j,j'=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j'} \ket{\psi_1}\\
-		&\appd{O(d^{7/2} \sr \qe)} \sum_{j=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}\\
+		&\appd{O(d^{5/2} r^d \sr \qe)} \sum_{j=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}\\
 		&\appd{O(dr\se)} (d-1) \frac{1}{d-1} = 1.
 	\end{align}
 	
 	Next we calculate $\braket{\psi}{\psi'}$ which is
 	\begin{align}
-		\braket{\psi}{\psi'} &= \sum_{j=1}^{d-1} \bra{\psi} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}\\
-			& \appd{O(d^2r\se)} (d-1) \braket{\psi}{\psi_1}.
+		\braket{\psi}{\psi'} = \sum_{j=1}^{d-1} \bra{\psi} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}
+		 \appd{O(dr\se)} (d-1) \braket{\psi}{\psi_1}.
 	\end{align}
 	So the problem is reduced to calculate $\braket{\psi}{\psi_1}$, which is
 	\begin{align}
-		\braket{\psi}{\psi_1} &= \frac{1}{2} \bra{\psi} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 +A_{n+1}^1) \ket{\psi}\\
-		& = \frac{1}{2} \left(\bra{\psi}(A_{n+1}^0 + A_{n+1}^1) \ket{\psi} - i \bra{\psi}A_{n+2}A_{n+1} \ket{\psi} \right)\\
-		& \appd{O(r\se)} \frac{1}{2} \left(\bra{\psi}(A_{n+1}^0 + A_{n+1}^1) \ket{\psi}  - i \bra{\psi}B_{n+2}A_{n+1} \ket{\psi} \right)\\
+		\braket{\psi}{\psi_1} &= \frac{1}{2} \bra{\psi} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 +M_{\nr+1}^1) \ket{\psi}\\
+		& = \frac{1}{2} \left(\bra{\psi}(M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi} - i \bra{\psi}M_{\nr+2}M_{\nr+1} \ket{\psi} \right)\\
+		& \appd{O(r\se)} \frac{1}{2} \left(\bra{\psi}(M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi}  - i \bra{\psi}N_{\nr+2}M_{\nr+1} \ket{\psi} \right)\\
 		& \appd{O(r^2 \ep)} \frac{1}{2} \frac{2}{d-1} = \frac{1}{d-1}.
 	\end{align}
-	Hence, we know $\braket{\psi}{\psi'} \appd{O(d^2 r \se)} 1$.
-	
+	Hence, we know $\braket{\psi}{\psi'} \appd{O(d r \se)} 1$.
 	In the end, we apply \cref{prop:close_vec} to get
 	\begin{align}
-		\ket{\psi} \appd{O(d^{7/4} r^{1/4} \ep^{1/8})} \ket{\psi'}.
+		\ket{\psi} \appd{O(d^{5/4} r^{d/2} r^{1/4} \ep^{1/8})} \ket{\psi'}.
 	\end{align}
 \end{proof}
 %\begin{proposition}
@@ -2003,7 +2012,8 @@ The isometry has two steps. In the first step,
 we use $U_A, O_A$ and $U_B$, $O_B$ to distill a copy of $\ket{\EPR{d-1}}$.
 In the second step. we use the observables $M_{r+6},M_{r+8}, M_{r+9}, M_{r+11}$ and 
 $N_{r+6}, N_{r+8}, N_{r+9}, N_{r+11}$ to distill two copies of $\ket{\EPR{2}}$.
-as shown in the diagram below. Intuitively, $M_{r+6}$ acts as $\1 \x X$; $M_{r+8}$ acts as $X \x \1$;
+The isometries used in the two steps are 
+shown in the diagrams below. Intuitively, $M_{r+6}$ acts as $\1 \x X$; $M_{r+8}$ acts as $X \x \1 $;
 $M_{r+9}$ acts as $\1 \x Z$ and $M_{r+11}$ acts as $Z \x \1$; and similarly on Bob's side.
 We denote the isometry used in the first step and the second step by $\Phi_{A,1} \x \Phi_{B,1}$ and 
 $\Phi_{A,2} \x \Phi_{B,2}$ respectively.
@@ -2079,7 +2089,7 @@ $\Phi_{A,2} \x \Phi_{B,2}$ respectively.
         \end{pgfonlayer}
         %
         \end{tikzpicture}
-	\caption{The isometries $\Phi_{A,1}$ and $\Phi_{B,1}$.}
+	\caption{The isometries $\Phi_{A,1} \x \Phi_{B,1}$.}
 \end{figure}
 
 \begin{figure}[H]
@@ -2175,7 +2185,7 @@ $\Phi_{A,2} \x \Phi_{B,2}$ respectively.
         \end{pgfonlayer}
         %
         \end{tikzpicture}
-	\caption{The isometries $\Phi_A$ and $\Phi_B$.}
+	\caption{The isometries $\Phi_{A,2} \x \Phi_{B,2}$.}
 \end{figure}
 
 The first isometry has the following steps:
@@ -2188,29 +2198,31 @@ The first isometry has the following steps:
 	\item Apply Controlled-$U_{A/B}$ operations (i.e. If Alice's control register is in state $\ket{j}$, she applies
 	$U_A^{\log_r (d-j)}$. If Bob's control register is in state $\ket{j}$, he applies $(U_B\ct)^{\log_r j}$).
 \end{enumerate}
+The second isometry is the standard isometry used in the self-testing result of the Magic Square game \cite{wu2016}.
+The only thing to note is that the state $\ket{reuse}$, which is on the same Hilbert space as $\ket{\psi}$ and produced by $\Phi_{A,1} \x \Phi_{B,1}$, is the input state to $\Phi_{A,2} \x \Phi_{B,2}$. In this sense, our isometry is a $2$-step sequential procedure.
 
-We list the key relations needed for $\Phi_{A,1} \x \Phi_{B,1}$ to work.
-The second isometry is the standard isometry for the Magic Square game, so we just need the commutation relations in
-\cref{prop:lct_comm}.
+We first list the key relations needed for $\Phi_{A,1} \x \Phi_{B,1}$ to work.
 \begin{align}
-	&\ket{\psi} \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}\ket{\psi'} = \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1},\\
-	&O_A(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(\sd \sr \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}\\
-	&O_B(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(\sd \sr \qe)}\omega_d^{r^j}  (U_A\ct)^j \ket{\psi_1}
+	&\ket{\psi} \appd{O(d^{5/4} r^{d/2} r^{1/4} \ep^{1/8})}\ket{\psi'} = \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1},\\
+	&O_A(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(\sd r^j \sr \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}\\
+	&O_B(U_A\ct)^{\log_r j} \ket{\psi_1} \appd{O(\sd r^j \sr \qe)}\omega_d^{r^j}  (U_A\ct)^j \ket{\psi_1}.
 \end{align}
+The second isometry just requires properties of the Magic Square game, especially, the commutation relations in \cref{cor:lct_comm}.
 
-The result of this section is summarized in the theorem below.
+The result of this section devoted to proving the theorem below.
 \begin{theorem}
-	Let $\Phi_A \x \Phi_B = (\Phi_{A,2} \x \Phi_{B,2})(\Phi_{A,1}\x\Phi_{B,2})$ be the isometry defined above, then there exists a state $\ket{junk}$
-	such that $\norm{\ket{junk}} \appd{O(r\se)} 1$ and 
+	Let $S$ be the strategy defined in \cref{sec:rel_lct} and  
+	$\Phi_A \x \Phi_B = (\Phi_{A,2} \x \Phi_{B,2})(\Phi_{A,1}\x\Phi_{B,2})$ be the isometry defined above, then there exists a state $\ket{junk}$
+	such that $\norm{\ket{junk}}^2 \appd{O(dr\se)} 1$ and 
 	\begin{align}
-		&\Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}\\	
-		&\Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^{5/4} r^{2d} \sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}\\	
+		&\Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{5/4} r^{2d}\sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{d-j}\ket{x_{d-j}}_{A'}\ket{x_j}_{B'} \\
-		&\Phi_A \x \Phi_B (O_B\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (O_B\ket{\psi}) \appd{O(d^{5/4}r^{2d}\sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{j}\ket{x_{d-j}}_{A'}\ket{x_j}_{B'}\\
-		&\Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^{5/4} r^{2d} \sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{(d-j)r^{-1}}}_{A'}\ket{x_j}_{B'} \\
-		&\Phi_A \x \Phi_B (U_B\ket{\psi}) \appd{O(d^{5/2}\sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (U_B\ket{\psi}) \appd{O(d^{5/4} r^{2d}\sr \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_{j r^{-1}}}_{B'}.
 	\end{align}
 \end{theorem}
@@ -2233,7 +2245,7 @@ Combining the two equations above we get that
 \end{align}
 where we use the fact that $\Phi_{A,2}\x \Phi_{B,2}$ only acts on the state $\ket{\psi_1}$.
 
-The first step is based on the fact that $ \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi'})$,  
+The first step is based on the fact that $ \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi}) \appd{O(d^{5/4} r^{d/2} r^{1/4} \ep^{1/8})}  \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi'})$,  
 so we focus on how the isometry evolves $\ket{\psi'}$.
 The evolution is summarized below.
 	\begin{align}
@@ -2241,7 +2253,7 @@ The evolution is summarized below.
 		\xrightarrow[]{QFT_d}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}  \ket{\psi_1}\ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} O_A^{k_1}(U_A\ct)^{\log_r j} O_B^{k_2}(U_B\ct)^{\log_r j}
 		\ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		\appd{O(d^{5/2} \sr \qe)}&\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}\omega_d^{(k_2-k_1)j}\ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
+		\appd{O(\sd r^{2d} \sr \qe)}&\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}\omega_d^{(k_2-k_1)j}\ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}} &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} 
 		\omega_d^{k_1(d-j-l_1)}\omega_d^{k_2(j-l_2)}\ket{\psi_1} \ket{l_1}_{A'}\ket{l_2}_{B'}\\
 		= &\sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1} \ket{d-j}_{A'}\ket{j}_{B'} \\
@@ -2250,19 +2262,19 @@ The evolution is summarized below.
 	\end{align}
 In summary, we have shown that
 \begin{align}
-	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d^{5/2} \sr \ep^{1/8})} \ket{reuse} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j}_{B'},
+	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d^{5/4} r^{2d} \sr \ep^{1/8})} \sqrt{d-1} \ket{\psi_1} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{d-j}_{A'}\ket{j}_{B'},
 \end{align}
-where we use the fact that $O(d^{5/2} \sr \ep^{1/8})$ dominates both $O(d^{7/4} r^{1/4} \ep^{1/8})$ and 
-$O(d^{5/2} \sr \qe)$.
+where we use the fact that $O(d^{5/4} r^{2d} \sr \ep^{1/8})$ dominates both $O(d^{5/4} r^{d/2} r^{1/4} \ep^{1/8})$ and 
+$O(\sd r^{2d} \sr \qe)$.
 Since $\norm{\ket{\psi_1}}^2 \appd{O(r \se)} 1/(d-1)$, we know $ \sqrt{d-1} \norm{\ket{\psi_1}} \appd{O(\sd \sr\qe)} 1$.
 
 To prove \cref{eq:phi2_result}, we first
 recall that 
 \begin{align}
-	\ket{\psi_1} =&\frac{1}{2} (\1 - iA_{n+2})(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{\psi} \\
-	=&\frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) \ket{\psi}.
+	\ket{\psi_1} 
+	=&\frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi}.
 \end{align}
-The other key observation is that 
+The other observation that we need is that 
 \begin{align}
 	&\Phi_{A,2} \x \Phi_{B,2} (\ket{\psi_1})  \\
 	= &\frac{1}{16} \sum_{\ua \ub \in\{0,1\}^4}
@@ -2273,55 +2285,56 @@ For simplicity we define $M^{\ua} := M_{r+6}^{\ua(4)}M_{r+8}^{\ua(3)}M_{r+9}^{\u
 $N^{\ub} := N_{r+6}^{\ub(4)}N_{r+8}^{\ub(3)}N_{r+9}^{\ub(2)}N_{r+11}^{\ub(1)} $.
 We will show that 
 \begin{align}
-	\Phi_{A,2} \x \Phi_{B,2} (\ket{\psi_1}) &\appd{O(r\se)} 
-	\frac{1}{2} (A_\ast^\diamond - iA_{n+2})(A_{n+1}^0 + iA_{n+2}A_{n+1}^1)(\Phi_{A,2} \x \Phi_{B,2}(\ket{\psi})) \\
-	& \appd{O(r\se)} \ket{\EPR{2}}^{\x 2} \x \frac{1}{2} (A_\ast^\diamond - iA_{n+2})(A_{n+1}^0 + iA_{n+2}A_{n+1}^1) \ket{junk},
+	\Phi_{A,2} \x &\Phi_{B,2} (\ket{\psi_1}) \appd{O(r\se)} \\
+	&\frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1)(\Phi_{A,2} \x \Phi_{B,2}(\ket{\psi})).
 \end{align}
-where the last line follows Lemma C.$1$ of \cite{wu2016}.
-
-First observe that $N^{\ub}$ commutes with $\frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1)$, so
-we would like to show that 
+First observe that $N^{\ub}$ commutes with $\frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1)$, so
+we only need to show that 
 \begin{align}
-	M^{\ua} \frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) \ket{\psi} \appd{O(r\se)}
-	\frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) M^{\ua} \ket{\psi},
+	M^{\ua} \frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi} \\
+	\appd{O(r\se)}
+	\frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1) M^{\ua} \ket{\psi},
 \end{align}
 which can be justified by \cref{prop:rel_comm}.
-We show how to apply \cref{prop:rel_comm} to commute $M_{r+11}^{\ua(1)}$ through $\frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1)$ and then similar process can be repeated for $M_{r+9}, M_{r+8}$ and $M_{r+6}$,
+We show how to apply \cref{prop:rel_comm} to commute $M_{r+11}^{\ua(1)}$ through 
+$\frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1)$ and then similar process can be repeated for $M_{r+9}, M_{r+8}$ and $M_{r+6}$,
 \begin{align}
-	&M_{r+11}^{\ua(1)} \frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) \ket{\psi} \\
-	\appd{O(r\se)} &\frac{1}{2}[ (A_{n+1}^0+A_{n+1}^1) M_{r+11}^{\ua(1)} -i M_{r+11}^{\ua(1)} A_{n+2}B_{n+1}] \ket{\psi} \\
-	\appd{O(r\se)} &\frac{1}{2} [(A_{n+1}^0+A_{n+1}^1) M_{r+11}^{\ua(1)} - iA_{n+2}M_{r+11}^{\ua(1)} B_{n+1}] \ket{\psi} \\
-	\appd{O(r\se)}&\frac{1}{2} [(A_{n+1}^0+A_{n+1}^1) M_{r+11}^{\ua(1)} - iA_{n+2}M_{r+11}^{\ua(1)} A_{n+1}] \ket{\psi} \\
-	\appd{O(r\se)}&\frac{1}{2} [(A_{n+1}^0+A_{n+1}^1) M_{r+11}^{\ua(1)} - iA_{n+2}A_{n+1}M_{r+11}^{\ua(1)} ] \ket{\psi}.
+	&M_{r+11}^{\ua(1)} \frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1) \ket{\psi} \\
+	\appd{O(r\se)} &\frac{1}{2}[ (M_{\nr+1}^0+M_{\nr+1}^1) M_{r+11}^{\ua(1)} -i M_{r+11}^{\ua(1)} M_{\nr+2}N_{\nr+1}] \ket{\psi} \\
+	\appd{O(r\se)} &\frac{1}{2} [(M_{\nr+1}^0+M_{\nr+1}^1) M_{r+11}^{\ua(1)} - iM_{\nr+2}M_{r+11}^{\ua(1)} N_{\nr+1}] \ket{\psi} \\
+	\appd{O(r\se)}&\frac{1}{2} [(M_{\nr+1}^0+M_{\nr+1}^1) M_{r+11}^{\ua(1)} - iM_{\nr+2}M_{r+11}^{\ua(1)} M_{\nr+1}] \ket{\psi} \\
+	\appd{O(r\se)}&\frac{1}{2} [(M_{\nr+1}^0+M_{\nr+1}^1) M_{r+11}^{\ua(1)} - iM_{\nr+2}M_{\nr+1}M_{r+11}^{\ua(1)} ] \ket{\psi}.
 \end{align}
 In summary, we have 
 \begin{align}
-	M^{\ua} N^{\ub} \ket{\psi_1} \appd{O(r\se)} \frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1)M^{\ua}N^{\ub} \ket{\psi}
+	M^{\ua} N^{\ub} \ket{\psi_1} \appd{O(r\se)} \frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1)M^{\ua}N^{\ub} \ket{\psi}
 \end{align}
 for all $\ua, \ub \in \{0,1\}^4$, which implies that 
 \begin{align}
-	\Phi_{A,2} \x \Phi_{B,2}(\ket{\psi_1}) \appd{O(r\se)} \frac{1}{2} (A_{n+1}^0 + iA_{n+2}A_{n+1}^1 - iA_{n+2}A_{n+1}^0 + A_{n+1}^1) (\Phi_{A,2}\x\Phi_{B,2} (\ket{\psi}).
+	\Phi_{A,2} \x& \Phi_{B,2}(\ket{\psi_1}) \appd{O(r\se)}\\
+	 &\frac{1}{2} (M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1)(\Phi_{A,2}\x\Phi_{B,2} (\ket{\psi}).
 \end{align}
 At this point we can apply Lemma C.$1$ of \cite{wu2016} to $\Phi_{A,2}\x\Phi_{B,2} (\ket{\psi})$ and conclude that 
 \begin{align}
 	\Phi_{A,2} \x \Phi_{B,2}(\sqrt{d-1} \ket{\psi_1}) \appd{O(\sd r \se)} \ket{junk} \x \ket{\EPR{2}}^{\x 2}.
 \end{align} 
+The length of $\ket{junk}$ can be deduced from the length of $\ket{\psi_1}$.
 
 In the rest of the proof, we only show how $\Phi_{A,1} \x \Phi_{B,1}$ acts on $O_A\ket{\psi}$ and $U_A\ket{\psi}$ since the analysis for 
 $\Phi_{A,2} \x \Phi_{B,2}(\ket{\psi_1})$ is the same.
 
 If the initial state is $O_A\ket{\psi}$, we first use the fact that 
-$ \Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_A \x \Phi_B (O_A\ket{\psi'})$, 
-and then we calculate $\Phi_A \x \Phi_B (O_A\ket{\psi'})$.
+$ \Phi_{A,1} \x \Phi_{B,1} (O_A\ket{\psi}) \appd{O(d^{5/4} r^{d/2} r^{1/4} \ep^{1/8})}  \Phi_{A,1} \x \Phi_{B,1} (O_A\ket{\psi'})$, 
+and then we calculate $\Phi_{A,1} \x \Phi_{B,1} (O_A\ket{\psi'})$.
 \begin{align}
 	O_A \ket{\psi'} \ket{0}_{A'}\ket{0}_{B'} =&  
 		\sum_{j=1}^{d-1} O_A(U_A\ct U_B\ct)^{\log_r j}\ket{\psi_1}\ket{0}_{A'}\ket{0}_{B'}\\
-		\appd{O(d^{3/2} \sr \ep^{1/4})}&\sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \omega_d^{-j} \ket{\psi_1} \ket{0}_{A'}\ket{0}_{B'}\\
+		\appd{O(\sd r^d \sr \ep^{1/4})}&\sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \omega_d^{-j} \ket{\psi_1} \ket{0}_{A'}\ket{0}_{B'}\\
 		\xrightarrow[]{QFT_d} &\frac{1}{d}\sum_{j=1}^{d-1} \sum_{k_1,k_2 = 0}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \omega_d^{-j} 
 		\ket{\psi_1}\ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}&\frac{1}{d}\sum_{j=1}^{d-1}\sum_{k_1,k_2 = 0}^{d-1} 
 		 O_A^{k_1}(U_A\ct)^{\log_r j} O_B^{k_2}(U_B\ct)^{\log_r j} \omega_d^{-j} \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		\appd{O(d^{5/2} \sr \ep^{1/4})}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}
+		\appd{O(\sd r^{2d}  \sr \ep^{1/4})}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}
 		\omega_d^{-j}\omega_d^{(k_2-k_1)j}\ket{\psi_1}
 		 \ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}}& \sum_{j=1}^{d-1}  (U_A\ct U_B\ct)^{\log_r j}  
@@ -2329,11 +2342,11 @@ and then we calculate $\Phi_A \x \Phi_B (O_A\ket{\psi'})$.
 		\xrightarrow[]{\text{Controlled-}U_{A/B}}&   \sqrt{d-1} \ket{\psi_1} \x  
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{d-j}\ket{d-j}_{A'}\ket{j}_{B'}.
 \end{align}
-The analysis for $\Phi_A\x\Phi_B(O_B \ket{\psi})$ is very similar.
+The analysis for $\Phi_{A,1} \x\Phi_{B,1} (O_B \ket{\psi})$ is very similar.
 
 If the initial state is $U_A\ket{\psi}$, we first use the fact that 
-$ \Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^{7/4} r^{1/4} \ep^{1/8})}  \Phi_A \x \Phi_B (U_A\ket{\psi'})$, 
-and then we calculate $\Phi_A \x \Phi_B U_A\ket{\psi'})$.
+$ \Phi_{A,1} \x \Phi_{B,1} (U_A\ket{\psi}) \appd{O(d^{5/4}r^{d/2} r^{1/4} \ep^{1/8})}  \Phi_{A,1} \x \Phi_{B,1} (U_A\ket{\psi'})$, 
+and then we calculate $\Phi_{A,1} \x \Phi_{B,1} U_A\ket{\psi'})$.
 \begin{align}
 	U_A \ket{\psi'} \ket{0}_{A'}\ket{0}_{B'} =&  
 		\sum_{j=1}^{d-1} U_A(U_A\ct U_B\ct)^{\log_r j}\ket{\psi_1} \ket{0}_{A'}\ket{0}_{B'}\\
@@ -2341,16 +2354,16 @@ and then we calculate $\Phi_A \x \Phi_B U_A\ket{\psi'})$.
 		\xrightarrow[]{QFT_d} &\frac{1}{d}\sum_{j=1}^{d-1} \sum_{k_1,k_2 = 0}^{d-1}(U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j} \ket{\psi_1}  \ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}&\frac{1}{d}\sum_{j=1}^{d-1}\sum_{k_1,k_2 = 0}^{d-1} 
 		 O_A^{k_1}(U_A\ct)^{\log_r j-1} O_B^{k_2}(U_B\ct)^{\log_r j} \ket{\psi_1} \ket{k_1}_{A'}\ket{k_2}_{B'}\\
-		\appd{O(d^{5/2} \sr \qe)}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}
+		\appd{O(\sd r^{2d} \sr \qe)}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}
 		\omega_d^{k_2j-k_1jr^{-1}}\ket{\psi_1}
 		 \ket{k_1}_{A'}\ket{k_2}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}}& \sum_{j=1}^{d-1}  (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}  
 		\ket{\psi_1} \ket{(d-j)r^{-1}}_{A'}\ket{j}_{B'}\\
-		\xrightarrow[]{\text{Controlled-}U_{A/B}}& \ket{junk} \x  
+		\xrightarrow[]{\text{Controlled-}U_{A/B}}& \sqrt{d-1} \ket{\psi_1} \x  
 		\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{(d-j)r^{-1}}_{A'}\ket{j}_{B'},
 \end{align}
 where we use the fact that $(d-j)r^{-1} \equiv d -jr^{-1} \pmod{d}$.
-The analysis for $\Phi_A\x\Phi_B(U_B \ket{\psi})$ is very similar.
+The analysis for $\Phi_{A,1} \x\Phi_{B,1} (U_B \ket{\psi})$ is very similar.
 \end{proof}
 %It means that $(U_A\ct)(U_B\ct)^j \ket{\psi_1} \in \spn(\supp(\ket{\psi}))$ for all $j \in [d-1]$,
 %and so is $\ket{\psi'}$.
