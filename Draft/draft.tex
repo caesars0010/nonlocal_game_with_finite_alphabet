@@ -212,6 +212,9 @@
 \newcommand{\dr}[1]{d^{(#1)}}
 \newcommand{\nr}{n(r)}
 \newcommand{\mr}{m(r)}
+\newcommand{\ux}{\underline{x}}
+\newcommand{\uc}{\underline{c}}
+\newcommand{\ua}{\underline{a}}
 
 
 % Probabilities
@@ -263,7 +266,7 @@
 
 \begin{document}
 
-\title{Self-test prime dimensional EPR pairs with constant alphabet}
+\title{Robust self-testing of large entanglement with constant alphabet}
 
 \author[1]{Honghao Fu}
 \author[1,2]{Carl Miller}
@@ -355,9 +358,10 @@ Our main result is based on the combination of the two tests and presented in \c
 \section{Preliminaries and notations}
 \label{sec:prelim}
 %========================================
-\textbf{Notations}.
-We use $[n]$ to denote the set $\{0,1 \dots n-1\}$ and $[n]+1$ for the set $\{1,2 \dots n\}$.
-The maximally entangled state of local dimension $d-1$ for some prime $d$ is denoted by
+%-----------------------------------
+\subsection{Notations}
+%-----------------------------------
+The maximally entangled state of local dimension $d-1$ for some odd prime $d$ that we are interested in is denoted by
 \begin{align}
 \ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{j = 1}^{d-1} \ket{j}\ket{d-j}.
 \end{align}
@@ -365,8 +369,12 @@ The superscript $(d-1)$ stresses the dimension of the local Hilbert space and we
 We denote a Hilbert space by $\calH$. Note that we only work with finite Hilbert spaces in this work.
 When there are multiple Hilbert spaces, we label them with subscripts, for example, $\calH_A$ and
 $\calH_B$.
-The $d$-th root of unity is denoted by $\omega_d:=e^{2\pi i/d}$. In the qubit case, the Pauli operators
-are defined by
+The $d$-th root of unity is denoted by $\omega_d:=e^{2\pi i/d}$. In the qubit case, 
+the maximally entangled state is denoted by 
+\begin{align}
+	\ket{\EPR{2}} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}),
+\end{align}
+and the Pauli operators are given by
 \begin{align}
 	\paulix = \ketbra{0}{1}+\ketbra{1}{0} && \pauliz = \ketbra{0}{0} - \ketbra{1}{1}.
 \end{align}
@@ -374,21 +382,23 @@ are defined by
 For quantum states and operators on different Hilbert spaces, we use subscripts to label them.
 For example, $O_A$ is an operator on Alice's side and $\ket{0}_{B}$ is a state on Bob's side. 
 The only exception is for projectors used in a quantum strategy defined below, where the subscript 
-is the input and the superscript is the output. For example, $A_x^a$ is Alice's projector for input $x$ and output $a$.
-Operators defined by the projectors follow the same convention. For example, $A_x := A_x^0 - A_x^1$.
+is the input and the superscript is the output. For example, $M_x^a$ is Alice's projector for input $x$ and output $a$.
+Operators defined by the projectors follow the same convention, for example, $M_x := M_x^0 - M_x^1$.
 
-We use the following notation for the closeness between states.
+We use the following notation for the closeness between quantum states.
 \begin{align}
 	\ket{u} \appd{\epsilon} \ket{v} \iff \norm{\ket{u} - \ket{v}} \leq \epsilon. 
 \end{align}
-Similarly, for $a,b \in \C$, we have
+Similarly, for numbers $a,b \in \C$, the closeness is denoted by
 $a \appd{\epsilon} b \iff \norm{a-b} \leq \epsilon$.
 
-
-\textbf{Number theory}.
-We use some basic number theory in our work. A primitive root of a prime number
+We use some basic number theory in our work. 
+\begin{definition}
+A primitive root of a prime number
 $d$ is \hf{the smallest integer} $r$ such that $r \pmod{d}$ has multiplicative order $d-1$
-in the multiplicative group of integers modulo $d$, $\Zd$. Equivalently,
+in the multiplicative group of integers modulo $d$, $\Zd$.
+\end{definition}
+In other words,
 $r$ is the generator of $\Zd$.
 
 
@@ -402,53 +412,58 @@ $r$ is the generator of $\Zd$.
 %definitions and notation for now.}
 %Through out this paper, any operation on the label of the eigenvector $\ket{k}$ is taken modulo $d$,
 %unless otherwise specified, for example, the $k/r$ above.
-
-\textbf{Nonlocal games}. 
-The two players of a nonlocal game are Alice and Bob. Each of them is requested
-to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and answer set by $\calA$. Similarly,
+%-----------------------------------------
+\subsection{Nonlocal games}
+%-----------------------------------------
+In a nonlocal game, there are two players, Alice and Bob and each of them is requested
+to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and her answer set by $\calA$. Similarly,
 Bob's question set is denoted by $\calY$ and his answer set is denoted by $\calB$. The nonlocal game also
 comes with two functions: $\pi: \calX \times \calY \rightarrow [0,1]$, which is the probability distribution over the questions,
-and $V: \calA \times \calB \times \calX \times \calY \rightarrow \R$, which is the scoring function. Such games are nonlocal
-because Alice and Bob cannot communicate after getting their questions but they may share some strategy before 
-the start of the game. Note that in the literature, the typical scoring function of a nonlocal game maps the input-output
-pair to $\{0,1\}$ which corresponds to losing and winning. Allowing the score to be any real number is the key ingredient 
-to our new result. 
+and $V: \calA \times \calB \times \calX \times \calY \rightarrow \R$, which is the scoring function. 
+Note that in the literature, the typical scoring function of a nonlocal game maps the input-output
+pair to $\{0,1\}$ which corresponds to losing and winning. 
+Such games are nonlocal
+because Alice and Bob cannot communicate after getting their questions but they may share some strategy beforehand. 
 
-A quantum strategy of a nonlocal game consists of projective measurements $\{\{A_x^a\}_a\}_x$ on Alice's side, 
-$\{\{B_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$, where a projective measurement $P$ satisfies
-the condition that $P^2 = P = P\ct$.  \carl{You need to put explicit labels on the quantum systems used by
+A quantum strategy of a nonlocal game presented in terms of projective measurements
+consists of projective measurements $\{\{M_x^a\}_a\}_x$ on Alice's side, 
+$\{\{N_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$, where 
+$(M_x^a)^2 = M_x^a = (M_x^a)^\dagger$ and $(N_y^b)^2 = N_y^b = (N_y^b)^\dagger$.
+\carl{You need to put explicit labels on the quantum systems used by
 Alice and Bob.  (Later on you seem to use ``$A$'' and ``$B$'' to refer to those systems, but those are also
 the same letters you use for Alice's and Bob's measurements.  That's confusing.)}
 \hf{Addressed in the notation part. --H.F}
-Then Alice and Bob's quantum strategy produces the correlation
+Then Alice and Bob's quantum strategy produces the conditional probability distribution
 \begin{align}
 	\pr{ab}{xy} = \bra{\psi} A_x^a \x B_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
 \end{align}
-where $(A_x^a)^2 = A_x^a = (A_x^a)^\dagger$ and $(B_y^b)^2 = B_y^b = (B_y^b)^\dagger$.
-A particular type of nonlocal games that we are interested in is called linear system games, which is defined below.
-
-\begin{definition}[Linear system game]
- Let $Hx = c$ be an $m \times n$ system of linear equations over $\Z_2$,
- where $H$ is an $m$-by-$n$ matrix with entries in $\Z_2 = \{0,1\}$ and 
- $c$ is a length-$n$ vector with entries in $\Z_2$. 
- The associated linear system game involves two
- players Alice and Bob, where Alice is given an equation number $i \in \calX = [m]+1$ and replies with $a \in \calA = \Z_2^{\times n}$,
- and Bob is given a variable number $j \in \calY = [n]+1$ and replies with an assignment $b \in \calB = \Z_2$. The winning condition is 
- that Alice's assignment to the variables should satisfy equation $i$ and Alice's $j$-th assignment $a(j)$ should match $b$.
- Formally, the winning condition is 
- \begin{align*}
- 	a(j) &= b && \text{(Consistency)} \\
-	\sum_{k= 1}^n H(i,k) a(k) &\equiv c(i) \pmod 2. &&\text{(Constraint satisfaction)},
- \end{align*}
- for all $(i,j) \in \calX \times \calY$. 
+\begin{definition}
+	Given sets $\calX, \calY, \calA, \calB$, a correlation is a collection of conditional probability distributions
+	$\{\pr{ab}{xy}: a \in \calA, b \in \calB\}_{x \in \calX, y \in \calY}$.
 \end{definition}
-The scoring function of linear system games always maps an input-output pair to $\{0,1\}$, 
-so later when we say a quantum strategy wins a linear system game perfectly, we mean that 
-$V(a,b,x,y) =0$ implies that $\pr{ab}{xy} = 0$.  \carl{Make this clear in the definition itself.}
-We focus on quantum strategies for the linear system game presented in terms of binary observables.
+A particular type of nonlocal games that we are interested in is called linear system games, which is defined below.
+\begin{definition}[Linear system game]
+ Let $H\ux = \uc$ be an $m \times n$ system of linear equations over $\Z_2 = \{0, 1\}$,
+ where $H$ is an $m$-by-$n$ matrix with entries in $\Z_2$ and 
+ $\uc$ is a length-$n$ vector with entries in $\Z_2$. 
+ The associated linear system game involves two
+ players Alice and Bob, where Alice is given an equation number $i \in \calX = \{1 \dots m\}$ and replies with $\ua \in \calA = \Z_2^{\times n}$,
+ and Bob is given a variable number $j \in \calY = \{1 \dots n\}$ and replies with an assignment $b \in \calB = \Z_2$. The 
+ scoring function is defined by
+ \begin{align}
+ 	V(\ua, b, i, j) =
+	\begin{cases}
+		1, \quad \text{if } \sum_{k= 1}^n H(i,k) \ua(k) \equiv c(i) \pmod 2 \text{ and } \ua(j) = b \\
+		0,  \quad \text{otherwise.}
+	\end{cases}
+\end{align}
+\end{definition}
+\carl{Make this clear in the definition itself.}
+\hf{I made the definition of the scoring function part of the big definition now.}
+In the later parts, we will work with quantum strategies for the linear system game presented in terms of binary observables.
 \begin{definition}[Quantum strategy of a linear system game]
 \label{def:q_strat}
-A quantum strategy presented in terms of observables for the linear system game $(Hx = c)$ consists of 
+A quantum strategy presented in terms of observables for the linear system game $(H\ux = \uc)$ consists of 
 \begin{enumerate}
 	\item a pair of finite Hilbert spaces $\calH_A$ and $\calH_B$;
 	\item a collection of binary observables $B_j$, $1 \leq j \leq n$, on $\calH_B$
@@ -457,7 +472,7 @@ A quantum strategy presented in terms of observables for the linear system game 
 	on $\calH_A$ such that 
 	\begin{enumerate}
 		\item $A_{ij}^2 = \1$ for every $i,j$,
-		\item $\Pi_j A_{ij}^{H(i,j)} = (-\1)^{c(i)}$ for every $i$, and
+		\item $\Pi_j A_{ij}^{H(i,j)} = (-\1)^{\uc(i)}$ for every $i$, and
 		\item $A_{il}A_{ik} = A_{ik}A_{il}$ for every $i$ and $H(i,l) = H(i,k) =1$;
 	\end{enumerate} 
 	and
@@ -466,7 +481,7 @@ A quantum strategy presented in terms of observables for the linear system game 
 \end{definition}
 Note that any quantum strategy presented in terms of binary observables can be 
 converted to a quantum strategy presented in terms of projective measurement by looking into
-the spectrum decompositions of the observables.
+the spectral decompositions of the observables.
 
 %It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
 %satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
@@ -488,22 +503,23 @@ the spectrum decompositions of the observables.
 %	solution in which the Hilbert space is finite-dimensional.
 %\end{definition}
 %Perfect quantum strategies can be extracted from operator solutions and vice versa.
-Another angle to look at the linear system game ($Hx = c$) is a finitely presented group
+A quantum strategy using binary observables for the linear system game associated with $H\ux = \uc$ can be constructed from
+the finite-dimensional representation of a finitely presented group
 over $\Z_2$, which is called the solution group.
 \begin{definition}[Solution group of a linear system game]
 	\label{def:presentation}
-	Let $Hx = c$ be an $m \times n$  linear system. The solution group of this system
+	Let $H\ux = \uc$ be an $m \times n$  linear system. The solution group of this system
 	is the group
 	\begin{align*}
-		\Gamma(H,c) := \ip{
+		\Gamma(H,\uc) := \ip{
 		x_1,\dots x_n, J: &J^2 = x_i^2 = e, Jx_i = x_iJ \text{ for all }1 \leq i \leq n, \\
-				& \Pi_{j=1}^n x_j^{H(i,j)} = J^{c(i)} \text{ for all } 1 \leq i \leq m, \text{ and } \\
+				& \Pi_{j=1}^n x_j^{H(i,j)} = J^{\uc(i)} \text{ for all } 1 \leq i \leq m, \text{ and } \\
 				& x_l x_k = x_k x_l \text{ if } H(i,k) = H(i,l) = 1 \text{ for some } i
 				} .
 	\end{align*}
 \end{definition}
-Let $\Psi$ be a finite-dimensional representation of $\Gamma(H,c)$ such that $\Psi(J) = -\1$ on the vector space $\C^d$, then a prefect strategy for 
-the linear system game ($Hx = c$) is given by 
+Let $\Psi$ be a finite-dimensional representation of $\Gamma(H,\uc)$ such that $\Psi(J) = -\1$ on the vector space $\C^d$, then a prefect strategy for 
+the linear system game ($H\ux = \uc$) has
 \begin{enumerate}
 	\item $A_{ij} = \Psi(x_j)$ for all $ 1 \leq i \leq m$ and $1 \leq j \leq n$,
 	\item $B_j = \Psi(x_j)$ for all $1 \leq j \leq n$,
@@ -514,21 +530,32 @@ so we justify our strategy more carefully.
 For concepts related to group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
 For concepts related to group representations, we refer to Sec.~$2.5$ of Ref.~\cite{coladan2017}.
 
-
-\textbf{The weighted CHSH inequality \cite{acin2012}.}
-The first building-block of our result is a robust self-testing result based on the weighted CHSH inequality.
-In the CHSH scenario, $\calX = \calY = \{1, 2\}$ and $\calA = \calB = \{0,1\}$.
-We define binary observables $A_x := A_x^0 - A_x^1$ and $B_y := B_y^0 - B_y^1$ from Alice and Bob's projectors.
-It is easy to see that the binary observables are Hermitian and their only eigenvalues are either $+1$ or $-1$.
-The weighted CHSH inequality is given by 
+%-------------------------------------------------------------------------------
+\subsection{The weighted CHSH inequality \cite{acin2012}.}
+%-------------------------------------------------------------------------------
+The weighted CHSH inequality is extracted from the CHSH test, which is another nonlocal game. 
+The input sets and output sets of Alice and Bob are
+$\calX = \calY = \{1, 2\}$ and $\calA = \calB = \Z_2$.
+The scoring function for the $\alpha$-weighted CHSH test is defined by
+\begin{align}
+	V(a,b,x,y)_{\alpha-CHSH} = 
+	\begin{cases}
+		\alpha (-1)^{a + b}, \quad \text{if } x = 1 \\
+		(-1)^{a + b}, \quad \text{if } x = 2,\; y =1 \\
+		(-1)^{1 + a + b}, \quad \text{if } x = y =2.
+	\end{cases}
+\end{align}
+Let Alice and Bob's quantum strategy in terms of projectors be $( \{\{M_x^a\}_a\}_x, \{\{N_y^b\}_b\}_y, \ket{\psi})$. 
+We define binary observables $M_x := M_x^0 - M_x^1$ and $N_y := N_y^0 - N_y^1$ from Alice and Bob's projectors.
+The weighted CHSH inequality states that 
 \begin{align}
 	\label{eq:chsh_op}
-	\ip{\I_\alpha} = \alpha\ip{A_1B_1}+\alpha\ip{A_1B_2} + \ip{A_2B_1} - \ip{A_2B_2}\leq 2\alpha,
+	\ip{\I_\alpha} = \alpha\ip{M_1N_1}+\alpha\ip{M_1N_2} + \ip{M_2N_1} - \ip{M_2N_2}\leq 2\alpha,
 \end{align}
-where $\ip{A_xB_y} := \bra{\psi} A_x B_y \ket{\psi}$ is the expectation value of of the observables. 
-If Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$, they cannot violate
-the weighted CHSH inequality.
-However, If they share entangled state $\ket{\psi}$, the maximal violation is 
+where $\ip{M_xN_y} := \bra{\psi} M_xN _y \ket{\psi}$ is the expectation value of of the observables. 
+The weighted CHSH inequality is true 
+If Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$.
+However, If they share an entangled state $\ket{\psi}$, the value of $\ip{\I_\alpha}$ can be as large as
 \begin{align}
 \label{eq:chsh_max}
  \ip{\I_\alpha}_{\max} = 2\sqrt{1+\alpha^2}.
@@ -536,15 +563,15 @@ However, If they share entangled state $\ket{\psi}$, the maximal violation is
 \begin{definition}[Ideal strategy to achieve $\ip{\I_\alpha}_{\max}$]
 	\label{def:ideal}
 	Define $\mu = \arctan(1/\alpha)$.
-	The ideal strategy for weighted CHSH with parameter $\alpha$ (i.e. achieving maximal violation in \cref{eq:chsh_max})
-	consists of the joint state $\ket{\EPR{2}}$ and observables $A_1 = \pauliz$, $A_2 = \paulix$,
-	$B_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $B_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
+	The ideal strategy for weighted CHSH with parameter $\alpha$, which achieves the value $\ip{\I_\alpha}_{\max}$, 
+	consists of the joint state $\ket{\EPR{2}}$ and observables $M_1 = \pauliz$, $M_2 = \paulix$,
+	$N_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $N_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
 \end{definition}
-An interesting observation of the weighted CHSH inequality is that its maximal violation can certify the shared states and the 
-measurements up to isometry, 
-which is a phenomenon referred as a self-test.
-We give the definition of a self-test below and the
-formal statement of this self-testing property of $\I_\alpha$. in \cref{sec:chsh}.
+An interesting observation of the weighted CHSH inequality is that if some strategy can achieve 
+value $\ip{\I_\alpha}$ close to $\ip{\I_\alpha}_{\max}$, then the strategy is close to the ideal 
+strategy up to some local isometry, 
+which is a phenomenon referred as a robust self-test.
+We give the formal statement of this self-testing property of $\ip{\I_\alpha}_{\max}$ in \cref{sec:chsh}.
 
 
 %Note that we may use the term behaviour and correlation interchangeably.
@@ -564,17 +591,18 @@ formal statement of this self-testing property of $\I_\alpha$. in \cref{sec:chsh
 %following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
 
 \carl{Before the next definition, you should define what a ``correlation'' is.}
-\hf{Mentioned in the nonlocal game part, but not sure how to make it a definition. --HF}
-\begin{definition}[Self-testing]
-	We say that a correlation self-tests a quantum state $\ket{\psi}$, if 
-	the correlation is produced by a strategy with shared state $\ket{\psi}$, and 
-	for any quantum strategy $S = ( \{\tA_x\}, \{\tB_y\}, \ket{\tpsi})$ that produces the same correlation,
-	there exists local isometries $\Phi_A$ and $\Phi_B$ on Alice and Bob's side and a state $\ket{junk}$ 
-	such that 	
-	\begin{align*}
-		\Phi_A \x \Phi_B \ket{\tpsi} =  \ket{\psi} \x \ket{junk}.
-	\end{align*}
-\end{definition}
+\hf{Done. I decided to remove the definition of self-testing here because I think it is hard
+to give a general robust self-testing definition and it suffices to just give our robust self-testing result.}
+%\begin{definition}[Self-testing]
+%	We say that a correlation self-tests a quantum state $\ket{\psi}$, if 
+%	the correlation is produced by a strategy with shared state $\ket{\psi}$, and 
+%	for any quantum strategy $S = ( \{\tA_x\}, \{\tB_y\}, \ket{\tpsi})$ that produces the same correlation,
+%	there exists local isometries $\Phi_A$ and $\Phi_B$ on Alice and Bob's side and a state $\ket{junk}$ 
+%	such that 	
+%	\begin{align*}
+%		\Phi_A \x \Phi_B \ket{\tpsi} =  \ket{\psi} \x \ket{junk}.
+%	\end{align*}
+%\end{definition}
 
 
 \carl{Section 2 needs to be cleaned up in some places, but overall it is pretty good.}
