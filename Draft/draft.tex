@@ -518,6 +518,7 @@ over $\Z_2$, which is called the solution group.
 				} .
 	\end{align*}
 \end{definition}
+We remark that a linear system game can be extracted from a solution group and \textit{vice versa}.
 Let $\Psi$ be a finite-dimensional representation of $\Gamma(H,\uc)$ such that $\Psi(J) = -\1$ on the vector space $\C^d$, then a prefect strategy for 
 the linear system game ($H\ux = \uc$) has
 \begin{enumerate}
@@ -637,200 +638,333 @@ to give a general robust self-testing definition and it suffices to just give ou
 
 
 %=======================================
-\section{The linear system game}
-\label{sec:lsg}
+\section{The linear constraint test}
+\label{sec:lct}
 %=======================================
-The goal of this section and the following two sections is to 
-present a correlation that can self-test $\ket{\EPR{d-1}}$, 
-where $d$ is prime with primitive root $r$,
-and this correlation is denoted by $C(\dr{r})$.  \carl{Be more precise --- we are constructing
-such a correlation for any $d$ which has $2, 3,$ or $5$ as a primitive root.}
-\hf{One part of $C(\dr{r})$ is produced by the optimal quantum strategy of a linear system game, denoted by $\LS$.}
-In this section, we introduce the linear system game which tests a key relation that should be satisfied by 
-Alice and Bob's observables.
-
-In Slofstra's seminal work~\cite{slofstra2017} embeds the group
+In this section, we introduce a linear constraint test that is satisfied by our correlation.
+The linear constraint test is designed to enforce relations that should be satisfied by 
+Alice and Bob's observables and it is inspired by 
+Slofstra's seminal work~\cite{slofstra2017}, in which he
+embeds the group
 \begin{align}
 	K = \ip{ x,y,a,b:a^2=b^2=e, ab=ba, yay^{-1} = a, yby^{-1} = ab, xyx^{-1}=y^2}
 \end{align}
-into a linear system game such that the relations in the definition of $K$ can be reproduced from the
-combination of the equations of the linear system game. The special relation $xyx^{-1} = y^2$ inspired 
-our work.
-\hf{We generalize this relation and make he solution group of $\LS_r$ the embedding of the 
+into a linear system game such that the relations in the definition of $K$ can be derived from the
+combination of the equations of the linear system game. Then he showed the difference between exact representations
+and approximate representations of $K$, which implies that the set of quantum correlation is not closed.
+\hf{We generalize the relation $xyx^{-1} = y^2$ and embed the 
 following group}
 \begin{align}
-	\Pg_r= \langle u, o : uou^{-1} = o^r \rangle, \text{ for } r \in \N.
+	G = \langle u, o : uou^{-1} = o^r \rangle, 
 \end{align}
-In other words, relations in the presentation of the solution group of $\LS$ can be combined to derive the
-relation $uou^{-1} = o^r$.  
-\begin{proposition}
-	\label{prop:embed}
-	The group $\Pg_r$ can be embedded into a linear system game $\LS_r$ over $\Z_2$,
-	with the numbers of variables, $\nr := 17r + 73$, 
-	and the number of equations, $\mr =15r + 61$, where each equation involves $3$ variables.
-	\carl{You need to make this a more precise statement.  (It sounds as if you're saying 
-	that the numbers of variables and equations is independent of $r$, which I'm pretty sure is not true.)}
-\end{proposition}
-The process of embedding $\Pg_r$ into the solution group of $\LS$ follows the recipe given in the proofs of
-Proposition~$4.8$, Lemma~$4.4$ and Proposition $4.2$ of Ref.~\cite{slofstra2017}.
-The order of applying the results is the reverse of the order they are presented in Ref.~\cite{slofstra2017}.
-We give details of this embedding process in \cref{sec:power2} for $r = 2$, \cref{sec:power3} for $r = 3$, 
-and \cref{sec:power5} for $r = 5$. 
+for some $r \in \N$ into a linear constraint test.
 
-In the later parts of the paper, we use $\nr$ and $\mr$ to refer to the size of $\LS_r$.
-The key feature of this embedding is that $\LS_r$ has constant-sized input-output alphabet
-even if the generators $u$ and $x$ have arbitrary order. 
-The product of the generators $x_1$ and $x_2$ from the solution group of $\LS_r$ plays the role 
-of the generator $x$ in $\Pg_r$ and the product of the generators $x_3$ and $x_4$ plays the role
-of the generator $u$ in $\Pg_r$.   \carl{It's reasonable to make a couple informal statements
-at the beginning of a section, but you shouldn't be making
-such vague statements at this point.  Everything said at this point in the section should have a precise mathematical
-meaning.}
-As shown in \cref{sec:power2}, \cref{sec:power3} and \cref{sec:power5}, 
-$x_1$,$x_2$,$x_3$ and $x_4$ satisfy the relation
-\begin{align}
-	(x_3x_4)(x_1x_2)(x_4x_3) = (x_1x_2)^r.
-\end{align}
-Hence the perfect quantum strategy $(\ket{\psi}, \{A_i, B_i\}_{i=1}^n)$ should satisfy 
-the key relation that 
-\begin{align}
-	(A_3A_4) (A_1A_2)(A_4A_3) \ket{\psi} = (A_1A_2)^r\ket{\psi}, 
-\end{align}
-and similarly on Bob's side.
-If we denote the unitary corresponding to the generator $u$ of $\Pg_r$ by $U$ and the unitary
-corresponding to $x$ by $X$, then $U = A_3A_4$, $X= A_1A_2$, and 
-$UXU\ct \ket{\psi} = X^r \ket{\psi}$.
-The special property of $U$ and $X$ is summarized in the following lemma. 
+%------------------------------------------------------------------------
+\subsection{The embedding of $G$}
+%------------------------------------------------------------------------
+The main result of this subsection is summarized in the following theorem.
+\begin{theorem}
+	The relation $uou^{-1} = o^r$ can be embedded in a linear constraint test which has
+	$n(r) := 18r+86$ variables and $m(r) := 16r + 72$ equations, where each equation has $3$ variables.
+\end{theorem}
+We prove this by constructing the solution group $\Gamma$ of the linear constraint test. 
+We also prove some properties of the generators of $\Gamma$ along the way.
 
-\begin{lemma}
-	\label{lm:ux_independ}
-	Suppose there exist unitaries $U$ and $X$ which have the following forms
+We embed $G$ into $\Gamma$ in three steps and introduce two intermediate groups $G_0$ and $G_1$, which are defined below.
+\begin{definition}
+	The presentation of $G_0$ has order-$2$ generators:
 	\begin{align}
-		X = \sum_{i=1}^{d-1} \omega_d^i \ketbra{i}{i} && U = \sum_{i=1}^{d-1}\ketbra{i/r}{i},
+		\{o_i\}_{i=1}^{r} \cup \{u_i\}_{i=1}^5
 	\end{align}
-	where $d$ is an odd prime number with primitive root $r$,
-	then the set $\{U^k X^l\}$ for $k=0,1\dots d-2$ and $l = 1,2\dots d-1$ forms a basis of 
-	the ring of $(d-1)\times (d-1)$ matrices over $\C$.
-\end{lemma}
-Note that the unitaries $U$ and $X$ defined in the lemma above satisfy the condition $UXU^\dagger = X^r$.
-In the self-test proof, this lemma will be a critical step.
+	and relations:
+	\begin{align}
+	&u_3 = u_2o_1u_2 && u_4 = u_2o_2u_2 \\
+	&u_5 = u_1u_3u_1 && o_2 = u_1u_4u_1\\
+	&u_5 = o_1 o_r o_1,
+	\end{align}
+	and when $r$ is even
+	\begin{align}
+	&o_{1+2j} = o_1o_{2j}o_1 && o_{2+2j} = o_2o_{1+2j}o_2&& \text{ for } j = 1 \dots r/2 - 1;
+	\end{align}
+	when $r$ is odd
+	\begin{align}
+	&o_3 = o_2o_1o_2 &&
+	 o_{2+2j} =o_1o_{1+2j}o_1 && o_{3+2j} = o_2o_{2j+2}o_2 &&\text{ for } j = 1 \dots (r-3)/2.
+	\end{align}
+\end{definition}
+\begin{proposition}
+	The group $G_1$ embeds the relation 
+	\begin{align}
+		(u_1u_2)^j o_1o_2 (u_2u_1)^j = (o_1o_2)^{r^j}, 
+	\end{align}
+	for any $ j \in \N$.
+\end{proposition}
+The proof follows the proof of Proposition~$4.8$ of Ref.~\cite{slofstra2017}
 \begin{proof}
-We are going to show the $(d-1)^2$ matrices from the set $\{U^k X^l\}_{k \in[d-1], l \in [d-1]+1}$ are linearly independent.
-Suppose there exists a set of complex numbers $\{ x_{k,l} \}_{k \in[d-1], l \in [d-1]+1}$
-such that 
-\begin{align}
-	M = \sum_{k=0}^{d-2} \sum_{l=1}^{d-1} x_{k,l} U^k X^l = 0. 
-\end{align}
-We further assume that there exists a set of integers $\{ k_i \}_{i=1}^{d-1}$ such that $r^{k_i} \equiv i \pmod{d}$.
-\carl{We shouldn't be making extra assumptions that are not stated in the lemma.  This looks to me more like
-a definition of the variables $\{ k_i \}$, rather than an assumption.}
-The fact that $r$ is a primitive root of $d$ guarantees that $k_i$'s are distinct.
-Then we can group $\{x_{k,l}\}$ into vectors: $\ket{x_{k_1}}, \ket{x_{k_2}} \dots \ket{x_{k_{d-1}}}$,
-where $\ket{x_{k_i}}= (x_{k_i, 1}, x_{k_i, 2} \dots x_{k_i, d-1})^\intercal$.
-Our goal is equivalent to proving that $\ket{x_{k_i}} = 0$ for all $i$.
-
-We start with proving that $\ket{x_{k_1}} = 0$.
-Proving $\ket{x_{k_i}} = 0$ for other $i$ follows a similar argument, so we briefly
-discuss about it in the end.
-The entry $\bra{1}M\ket{1}$ can be expressed as  
-\begin{align}
-	\bra{1}M\ket{1} = \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{1}{i/r^k}\braket{i}{1}.
-\end{align}
-For the term $\braket{1}{i/r^k}\braket{i}{1} \neq 0$ we must have $i = 1$ and $r^k \equiv 1 \pmod{d}$, or equivalently,
-$k = k_1$. We can conclude that 
-\begin{align}
-	\bra{1}M\ket{1} = \sum_{l = 1}^{d-1} x_{k_1,l}\omega_d^l = 0. 
-\end{align}
-Similarly we can determine that for all $j = 1,2\dots d-1$,
-\begin{align}
-	\bra{j}M\ket{j} 
-	=  \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{j}{i/r^k}\braket{i}{j} 
-	= \sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl} = 0.
-\end{align}
-Hence we get $d-1$ equations with $d-1$ variables, and the linear system is
-\begin{align}
-	W \ket{x_{k_1}} = 0,
-\end{align}
-where $W(m,n) = \omega_d^{mn}$. Then we define
-\begin{align}
-	\tW = 
-	\begin{pmatrix}
-	1 & 1 \\
-	1 & W
-	\end{pmatrix}.
-\end{align}
-First observe that $\tW$ is a Vandermonde matrix, hence it is non-singular.
-Next, we define $\ket{\tx_{k_1}} = (0, x_{k_1,1}, \dots x_{k_1,d-1})^\intercal$ 
-and prove that it satisfies the condition
-that 
-\begin{align}
-	\tW \ket{\tx_{k_1}} = 0,
-\end{align}
-which involves $d$ equations. The last $d-1$ equations are given by the assumption and $M$.
-We only need to prove that $\sum_{l=1}^d x_{k_1, l} = 0$, which is required by the first row of $\tW$.
-It can be proved by summing the known $d-1$ equations as follows
-\begin{align}
-	0=\sum_{j = 1}^{d-1} \bra{j}M\ket{j}  
-	=  \sum_{j=1}^{d-1}\sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl}
-	=\sum_{l = 1}^{d-1}x_{k_1,l} (\sum_{j=1}^{d-1} \omega_d^{jl})
-	= \sum_{l = 1}^{d-1}- x_{k_1,l}
-\end{align}
-where we have used the fact that $\sum_{j=1}^{d-1} \omega_d^{jl} =-1$ for all $l = 1,2\dots d-1$.
-Since $\tW$ is non-singluar, we know $\ket{\tx_{k_1}} = 0$ which implies that $\ket{x_{k_1}} = 0$.
-
-For $\ket{x_{k_a}}$, we look at entries $\{\bra{j}M\ket{aj}\}_{j=1}^{d-1}$ for $a = 2 \dots d-1$ and get equations
-of the form
-\begin{align}
-	0 = \bra{j}M\ket{aj} = \sum_{l=1}^{d-1} x_{k_a, l} \omega_d^{ajl} 
-\end{align}
-The corresponding coefficient matrix has value $\omega_d^{amn}$ at coordinate $(m,n)$,
-so it is also a submatrix of a Vandermonde matrix. Similar argument gives us that $\ket{x_{k_a}} = 0$.
-
-To summarize, we have proven that $x_{k,l} = 0$ for all $k$ and $l$, which implies that the elements of the set
-$\{ U^k X^l \}$ are linearly independent and forms a basis for the ring of all the $(d-1)\times(d-1)$ matrices over $\C$.
-\carl{Nice proof.  I like the use of the Vandermonde matrix.  We can think a little about possible simplifications.}
+	We prove it by induction.
+	Direct calculation gives us that
+	\begin{align} 
+		u_1u_2 o_1o_2 u_2u_1 = &u_1 (u_2 o_1u_2) (u_2o_2 u_2) u_1 \\
+	=& (u_1 u_3 u_1) (u_1 u_4 u_1)\\
+	=& u_5 o_2\\
+	=& o_1o_ro_1 o_2.
+	\end{align}
+	Then substituting the definitions of $o_k$ for $k = r \dots 3$ gives us the case for $j=1$.
+	
+	Now assume the statement is true for $j = n$, then when $j = n+1$
+	\begin{align}
+		(u_1u_2)^{n+1} o_1o_2 (u_2u_1)^{n+1} =& u_1u_2 (o_1o_2)^{r^n} u_2u_1 \\ 
+		 =& (u_1u_2 o_1o_2 u_2u_1)^{r^n} \\
+		 =& (o_1o_2)^{r^{n+1}},
+	\end{align}
+	where from the first line to the second line, we insert $(u_2u_1)(u_1u_2)$ between every pair of $o_1o_2$ and $o_1o_2$.
+	Hence, the statement is true.
 \end{proof}
-Note that the primitive root $r$ in the lemma is not restricted to the set $\{2,3,5\}$, so this lemma works for any 
-odd prime number $d$.
+To better characterize all the conjugation relations above and simplify the form of $G_1$
+and make the introduction of $G_2$ easier, we relabel $u_i$ and $o_i$'s
+as $a_i$'s such that
+\begin{align}
+	a_j := 
+	\begin{cases}
+	 o_j \text{ for } j = 1,2 \\
+	 u_{j-2} \text{ for } j = 3\dots 7 \\
+	o_{j- 5} \text{ for } j = 8 \dots r+5.
+	\end{cases}
+\end{align}
+Then we define the set $C(r)$ of tuples $(i,j,k)$ such that
+\begin{align}
+	(i,j,k) \in C(r) \iff a_ia_ja_i = a_k.
+\end{align}
+The size of $C(r)$ is $r+3$. 
+%We can also employ some ordering of $C(r)$ such that $C(r,j)$ is a unique tuple for 
+%$j = 1 \dots r+3$.
+In this way, the group $G_0$ can be presented by
+\begin{align}
+	G_0  = \ip{ \{a_i\}_{i=1}^{r+5} : C(r) }.
+\end{align}
 
-%\begin{align}
-%	\Pg_d = \langle x, z, \J : x^d = z^d = \J^d = e, zxz^{-1}x^{-1} = \J, x\J x^{-1}\J^{-1}= z\J z^{-1}\J^{-1} = e\rangle. 
-%\end{align}
-%The goal of our modification is to construct $\Pg_{\LS}$ which has implicit $d$-dependence.
-%We first introduce new generators $u_x$ and $u_z$ to $\Pg_d$, and replace the relation $x^d = z^d = e$ 
-%by the following relations
-%\begin{align}
-%\label{eq:sim}
-%	u_x x u_x = x^2, \quad
-%	u_z z u_z = z^2.
-%\end{align}
-%Consequently, the $d$ dependency of $\G$ comes from constraints imposed by other components of the game,
-%\footnote{Figuring out what $a$ is will take us one step closer to resolving Artin's Conjecture\cite{murty1988}.}
-%but the alphabet sizes are determined by $\Pg_{\LS}$ and we will see why they are constant.
-%Next, we drop the relation $\J^d = e$ and make the value of $\J$ determined by $x$ and $z$ in the 
-%relation $xzx^{-1}z^{-1} = \J$.
-%
-%It can be easily checked that $\paulix{d}$ and $\pauliz{d}$ can be extended to a representation of $\Pg_{\LS}$ 
-%where  $\paulix{d}$ and $\pauliz{d}$ are defined by
-%\begin{align}
-%	\paulix{d} = \sum_{i=0}^{d-1} \ketbra{i+1 \pmod{d} }{i}  \quad \quad
-%	\pauliz{d} = \sum_{i=0}^{d-1} \omega_d^i \ketbra{i}{i}.
-%\end{align}
-%Moreover, if $U_x\paulix{d}U_x^\dagger = (\paulix{d})^2$ and $U_z\pauliz{d}U_z^\dagger = (\pauliz{d})^2$,
-%we can verify that 
-%\begin{align}
-%	U_xU_z = \1 = U_zU_x,
-%\end{align}
-%Hence, we do not need both $u_x$ and $u_z$ as generators and we just need one of them.
-%In the end, we define $\Pg_{\LS}$ by
-%\begin{equation}
-%\begin{aligned}
-%	\Pg_{\LS} =  \langle x, z, u, \J :  &zxz^{-1}x^{-1} = \J, [x,\J]=[z,\J]=[u,\J] = e, \\
-%	&uxu^{-1} = x^2, u^{-1}zu = z^2 \rangle. 
-%\end{aligned}
-%\end{equation}
-%This group will be embedded in a solution group, $\Gamma(\LS)$, following Slofstra's embedding techniques.
-%The corresponding game $\LS$ has $n = 2351$ variables and $m= 1916$ equations.
+Then we define the group $G_1$.
+\begin{definition}
+The presentation of $G_1$ has order-$2$ generators:
+\begin{align*}
+	\{a_i, b_i, c_i, d_i, v_i\}_{i=1}^{r+5}, f, g, \{h_{jk}\}_{(i,j,k) \in C(r)};
+\end{align*}
+and relations:
+\begin{align*}
+	&a_i = b_ic_i = fd_i = gv_i,&& fb_if =c_i &&\text{ for } i= 1 \dots r+5 \\
+	&h_{jk}b_j c_k = e,&& d_ib_jd_i = c_k &&\text{ for all } (i,j,k) \in C(r).
+\end{align*}
+\end{definition}
+Note that the group $G_1$ is slightly different from the group $K$ used in the proof of Lemma~$4.4$ of Ref.~\cite{slofstra2017}.
+We introduce the generator $g$ so that later we can associate $f$ with $g$ in linear relations of the Magic Square game.
+Such relations are important for the self-testing proof.
+Two important properties of $G_1$ are given in propositions below.
+The first property of $G_1$ was first proved in Lemma~$4.4$ of \cite{slofstra2017}.
+\begin{proposition}
+	The group $G_1$ embeds relation $x_ix_jx_i = x_k$ for all $(i,j,k) \in C(r)$.
+\end{proposition}
+\begin{proof}
+	We first show that $d_i c_j d_i = b_k$, which is because
+	\begin{align}
+		d_i c_j d_i = d_i (f b_j f) d_i = f (d_i b_j d_i) f = f c_k f = b_k.
+	\end{align}
+	Then, we can prove that 
+	\begin{align}
+		a_i a_j a_i = f d_i b_j c_j f d_i = (f d_i b_j d_i f)(f d_i c_j d_i f) = (f c_k f)(f b_k f) = b_k c_k = a_k. 
+	\end{align}
+\end{proof}
+\begin{proposition}
+	In the group $G_1$, the generators $f$ and $g$ commute with $a_i$ for all $i = 1 \dots r+5$.
+\end{proposition}
+\begin{proof}
+	We can check that
+	\begin{align}
+		fa_i f a_i = d_i d_i = e && g a_i g a_i = v_i v_i  = e,
+	\end{align}
+	for all $i = 1 \dots r+5$.
+\end{proof}
+Note that there are two types of conjugacy relations in $G_1$. One is of the form
+$f b_i f = c_i$ for all $i = 1 \dots r+5$. The other one is of the form 
+$d_ib_jd_i = c_k$ for all $(i,j,k) \in C(r)$. For each type of the conjugacy relations, 
+we are going to embed it into a different set of linear relations in $\Gamma$.
+
+\begin{definition}
+The presentation of $\Gamma$ has order-$2$ generators:
+\begin{align*}
+	J, \{a_i, b_i, c_i, d_i, v_i,w_i,\{ k_{i,j} \}_{j=1}^5\}_{i=1}^{r+5}, \{f_i,g_i,m_i\}_{i=0}^2, \{h_{jk}\}_{(i,j,k) \in C(r)}, 
+	\{\{ k_{c,j} \}_{j=1}^6\}_{c \in C(r)},
+\end{align*}
+and relations:
+\begin{itemize}
+\item for all $i = 1 \dots r+5$:
+\begin{align}
+	&a_i = b_ic_i = f_0d_i = g_0v_i \\
+	&g_2 a_i w_i = e \\
+	&f_0 f_1 f_2 = e && b_i f_2 k_{i,1} = e && k_{i,1} k_{i,2} k_{i,3} = e\\
+	&f_0 k_{i,3} k_{i,4} = e && c_i k_{i,4} k_{i,5} =e && f_1 k_{i,2} k_{i,5} = e,
+\end{align}
+which embed $f_0 b_i f_0 = c_i$;
+\item for all $ c = (i,j,k) \in C(r)$:
+\begin{align}
+	&h_{jk}b_j c_k = e\\
+	&d_i k_{c,1} f_2 = e && b_j f_2 k_{c,2} = e && k_{c,2} k_{c,3} k_{c,4} = e\\
+	&d_i k_{c,4} k_{c,5} = e && c_k k_{c,5} k_{c,6} =e && k_{c,1} k_{c,3} k_{c,6} = e,
+\end{align}
+which embed $d_i b_j d_i = c_k$;
+\item relations of a Magic Square test:
+\begin{align}
+	&f_0 f_1 f_2 = e && g_0 g_1 g_2 = e &&m_0 m_1 m_2 = e \\
+	&f_0 g_2 m_0 = e && f_2 g_0 m_1 = e && f_1 g_1 m_2 = J,
+\end{align}
+which embed $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$;
+\item $J$ commutes with all the other generators.
+\end{itemize}
+\end{definition}
+The special properties of the generators of $\Gamma$ are summarized in the two propositions below.
+\begin{proposition}
+	The group $\Gamma$ embeds all the conjugacy relations of $G_1$.
+	It also embeds the relations: $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$.
+\end{proposition}
+The proof of the proposition above follows the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017}.
+\begin{proposition}
+	In the group $\Gamma$, the generator $f_2$ commutes with $f_0$ and $a_i$ for all $i = 1 \dots r+5$;
+	the generator $g_2$ commutes with $g_0$ and $a_i$ for all $i = 1 \dots r+5$.
+\end{proposition}
+\begin{proof}
+	We show the commutativity property of $f_2$ as an example. The proof for $g_2$ is very similar.
+	The commutativity between $f_0$ and $f_2$ is immediate from the relations.
+	From the relation, we can also deduce that $f_2$ commutes with $b_i$ for all $i$.
+	Since $a_i =b_ic_i = b_i f_0 b_i f_0$, we know $f_2$ commutes with $a_i$.
+\end{proof}
+
+%------------------------------------------------------------------------
+\subsection{The representation of $\Gamma$}
+%------------------------------------------------------------------------
+In this section we give the presentation of $\Gamma$ which is built upon the representation 
+$\Psi_0$ of $G_0$ and $\Psi_1$ of $G_1$. We need the representation of $\Gamma$ to construct the
+ideal strategy that realizes our correlation.
+
+Before giving the representation, we define two Hilbert spaces $W_{d-1}$ and $W_2$, which will form the carrier spaces
+of the representations,
+\begin{align}
+	W_{d-1} := \spn(\{\ket{x_j}\}_{j=1}^{d-1}) && W_2 = \spn(\ket{x_1}, \ket{x_2}).
+\end{align}
+Note that another form of the basis of $W_{d-1}$ is $\{\ket{x_{r^j}}\}_{j=0}^{d-2}$, where the subscript $r^j$ is taken
+modulo $d$ implicitly. We use the second form of the basis when it is convenient.
+We denote the identity operator for these two spaces by $\1_{W_{d-1}}$ and $\1_{W_2}$.
+On the Hilbert space $W_2$, we define
+\begin{align}
+	X_{W_2} = \ketbra{x_1}{x_2} + \ketbra{x_2}{x_1} &&
+	Y_{W_2} = i\ketbra{x_1}{x_2} - i \ketbra{x_2}{x_1} &&
+	Z_{W_2} = \ketbra{x_1}{x_1} - \ketbra{x_2}{x_2},
+\end{align}
+\begin{definition}
+The representation, $\Psi_0$, of $G_0$ on $W_{d-1}$ is defined by
+\begin{align}
+	\Psi_0(a_1) =&\sum_{j=1}^{(d-1)/2} \omega_d^j \ketbra{x_j}{x_{d-j}} + \omega_d^{-j} \ketbra{x_{d-j}}{x_{j}} \\
+	\Psi_0(a_2) = &\sum_{j=1}^{d-1} \ketbra{x_j}{x_{d-j}}\\
+	\Psi_0(a_3) = &\ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}}\\ + 
+	&\sum_{k=1}^{(d-3)/2}\left( \omega_{d-1}^k\ketbra{u_k}{u_{d-1-k}} + \omega_{d-1}^{-k}\ketbra{x_{d-1-k}}{x_k}\right)\\ 
+	\Psi_0(a_4) = &\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\+
+	 &\sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right),
+\end{align}
+where $\{ \ket{u_j} \}_{j=0}^{d-2}$ is a another basis of $W_{d-1}$ given by
+\begin{align}
+	\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{x_{r^j}}.
+\end{align}
+The representation of the rest of the generators
+can be constructed from $\Psi_0(a_1)$, $\Psi_0(a_2)$, $\Psi_0(a_3)$ and $\Psi_0(a_4)$ following the 
+conjugation relations.
+\end{definition}
+We can check that
+\begin{align}
+	\Psi_0(a_1a_2) =  \sum_{j=0}^{d-2} \omega_d^{r^j} \ketbra{x_{r^j}}{x_{r^j}} &&
+	\Psi_0(a_3a_4) =  \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}},
+\end{align}
+which satisfy the relation $\Psi_0(a_3a_4) \Psi_0(a_1a_2) \Psi_0(a_4a_3) = \Psi_0(a_1a_2)^r$ and
+$[\Psi_0(a_3a_4), \Psi_0(a_2)] = \1_{W_{d-1}}$. 
+
+Following the proof of Lemma~$4.4$ of Ref.~\cite{slofstra2017}, we construct a representation of $G_1$.
+\begin{definition}
+The representation $\Psi_1$ of $G_1$ on $W_2 \x W_{d-1}$ is defined by
+\begin{itemize}
+\item for $f_0$ and $g_0$
+\begin{align}
+	&\Psi_1(f_0) = X_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi_1(g_0) = Z_{W_2} \x \1_{W_{d-1}},
+\end{align}
+\item
+for $i = 1 \dots r+5$,
+\begin{align}
+	&\Psi_1(a_i) = \1_{W_2} \x \Psi_0(a_i) \\
+	&\Psi_1(b_i) = \ketbra{x_1}{x_1} \x \Psi_1(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} \\
+	&\Psi_1(c_i) =\ketbra{x_1}{x_1} \x \1_{W_{d-1}} + \ketbra{x_2}{x_2} \x \Psi_1(a_i) \\
+	&\Psi_1(d_i) =  X_{W_2} \x \Psi_0(a_i)\\
+	&\Psi_1(v_i) = Z_{W_2} \x \Psi_0(a_i).
+\end{align}
+\item for $(i,j,k) \in C(r)$,
+\begin{align}
+	\Psi_1(h_{jk}) = \ketbra{x_1}{x_1} \x \Psi_1(a_j) + \ketbra{x_2}{x_2} \x \Psi_1(a_k).
+\end{align}
+\end{itemize}
+\end{definition}
+
+Finally, we follow the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017} to construct the 
+representation of $\Gamma$.
+\begin{definition}
+The representation $\Psi$ of $\Gamma$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
+\begin{itemize}
+\item for any $x$ which is also a generator of $G_1$,
+\begin{align}
+	\Psi(x) = \1_{W_2} \x \Psi_1(x);
+\end{align}
+\item for the generators involved in the Magic square test
+\begin{align}
+	&\Psi(f_1) = X_{W_2} \x X_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi(g_1) = Z_{W_2} \x Z_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi(f_2) = X_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi(g_2) = Z_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
+	& \Psi(m_0) = Z_{W_2} \x X_{W_2} \x \1_{W_{d-1}}\\
+	& \Psi(m_1) = X_{W_2} \x Z_{W_2} \x \1_{W_{d-1}}\\
+	& \Psi(m_2) = Y_{W_2} \x Y_{W_2} \x \1_{W_{d-1}}\\
+	& \Psi(J) = - \1_{W_2} \x \1_{W_2} \x \1_{W_{d-1}};
+\end{align}
+\item for the generators $\{ w_i \}_{i=1}^{r+5}$:
+\begin{align}
+	\Psi(w_i) = Z_{W_2} \x \1_{W_{d-1}} \x \Psi_0(a_i);
+\end{align}
+\item for the generators to embed the relation $f b_i f = c_i$:
+\begin{align}
+	\Psi(k_{i,1}) &= X_{W_2} \x \Psi_1(b_i) = X_{W_2} \x ( \ketbra{x_1}{x_1} \x \Psi_0(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} )\\
+	\Psi(k_{i,2}) &= \ketbra{x_1}{x_2} \x \Psi_1(b_if_0) + \ketbra{x_2}{x_1} \x \Psi_1(f_0b_i)\\
+	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_2x_1}+\ketbra{x_2x_1}{x_1x_2})\x\1_{W_{d-1}}\\
+	&+ \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_i)\\ 
+	\Psi(k_{i,3}) &= \ketbra{x_1}{x_1} \x \Psi_1(f_0b_if_0) + \ketbra{x_2}{x_2} \x \Psi_1(f_0) \\
+	&= \ketbra{x_1x_1}{x_1x_1} \x \1_{W_{d-1}} + \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x X_{W_2} \x \1_{W_{d-1}}\\
+	\Psi(k_{i,4}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_ic_i) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	&=(\ketbra{x_1x_1}{x_1x_1}+  \ketbra{x_1x_2}{x_1x_2}) \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi(k_{i,5}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_i) + \ketbra{x_2}{x_2} \x \Psi_1(c_i) \\
+	&=\ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1}) \x \1_{W_{d-1}}\\
+	&+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_0(a_i);
+\end{align}
+\item for the generators to embed the relation $d_i b_j d_i = c_k$:
+\begin{align*}
+	\Psi(k_{c,1}) &= X_{W_2} \x \Psi_1(d_i) = X_{W_2} \x X_{W_2} \x \Psi_0(a_{i}) \\
+	\Psi(k_{c,2}) &= X_{W_2} \x \Psi_1(b_j) = X_{W_2} \x (\ketbra{x_1}{x_1} \x \Psi_0(a_j) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}})\\
+	\Psi(k_{c,3}) &= \ketbra{x_1}{x_2} \x  \Psi_1(b_jd_i) + \ketbra{x_2}{x_1} \x \Psi_1(d_ib_j)\\
+	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_{j}x_{i}) + (\ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_1}{x_1x_2}) \x \Psi_0(a_i)\\
+	&+  \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_{i}a_{j}) \\
+	\Psi(k_{c,4}) &= \ketbra{x_1}{x_1} \x \Psi_1(d_ib_jd_i) + \ketbra{x_2}{x_2} \x  \Psi_1(d_i)\\
+	&= \ketbra{x_1x_1}{x_1x_1} \x \1_{W_{d-1}} + \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_ia_ja_i) + \ketbra{x_2}{x_2} \x X_{W_2} \x \Psi_0(a_i)\\
+	\Psi(k_{c,5}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_jc_k) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) +  \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_{k}) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi(k_{c,6}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_j) + \ketbra{x_2}{x_2} \x \Psi_1(c_{k})\\
+	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1})\x\1_{W_{d-1}}\\
+	 &+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_1(a_{k}).
+\end{align*}
+\end{itemize}
+\end{definition}
+
 
 %======================================
 \section{The extended weighted CHSH test}
@@ -1962,21 +2096,99 @@ The dependence of the error term on $\alpha$ comes from the fact that
 \end{align}
 \end{proof}
 %%=====================================
-\section{Equations to embed $uxu^{-1} = x^2$}
-\label{sec:power2}
+\section{ The special property of $U$ and $O$}
+\label{sec:u_and_o}
 %%=====================================
-\input{power2_equations}
+\begin{lemma}
+	\label{lm:ux_independ}
+	Suppose there exist unitaries $U$ and $X$ which have the following forms
+	\begin{align}
+		X = \sum_{i=1}^{d-1} \omega_d^i \ketbra{i}{i} && U = \sum_{i=1}^{d-1}\ketbra{i/r}{i},
+	\end{align}
+	where $d$ is an odd prime number with primitive root $r$,
+	then the set $\{U^k X^l\}$ for $k=0,1\dots d-2$ and $l = 1,2\dots d-1$ forms a basis of 
+	the ring of $(d-1)\times (d-1)$ matrices over $\C$.
+\end{lemma}
+Note that the unitaries $U$ and $X$ defined in the lemma above satisfy the condition $UXU^\dagger = X^r$.
+In the self-test proof, this lemma will be a critical step.
+\begin{proof}
+We are going to show the $(d-1)^2$ matrices from the set $\{U^k X^l\}_{k \in[d-1], l \in [d-1]+1}$ are linearly independent.
+Suppose there exists a set of complex numbers $\{ x_{k,l} \}_{k \in[d-1], l \in [d-1]+1}$
+such that 
+\begin{align}
+	M = \sum_{k=0}^{d-2} \sum_{l=1}^{d-1} x_{k,l} U^k X^l = 0. 
+\end{align}
+We further assume that there exists a set of integers $\{ k_i \}_{i=1}^{d-1}$ such that $r^{k_i} \equiv i \pmod{d}$.
+\carl{We shouldn't be making extra assumptions that are not stated in the lemma.  This looks to me more like
+a definition of the variables $\{ k_i \}$, rather than an assumption.}
+The fact that $r$ is a primitive root of $d$ guarantees that $k_i$'s are distinct.
+Then we can group $\{x_{k,l}\}$ into vectors: $\ket{x_{k_1}}, \ket{x_{k_2}} \dots \ket{x_{k_{d-1}}}$,
+where $\ket{x_{k_i}}= (x_{k_i, 1}, x_{k_i, 2} \dots x_{k_i, d-1})^\intercal$.
+Our goal is equivalent to proving that $\ket{x_{k_i}} = 0$ for all $i$.
 
-%%=====================================
-\section{Equations to embed $uxu^{-1} = x^3$}
-\label{sec:power3}
-%%=====================================
-\input{power3_equations}
+We start with proving that $\ket{x_{k_1}} = 0$.
+Proving $\ket{x_{k_i}} = 0$ for other $i$ follows a similar argument, so we briefly
+discuss about it in the end.
+The entry $\bra{1}M\ket{1}$ can be expressed as  
+\begin{align}
+	\bra{1}M\ket{1} = \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{1}{i/r^k}\braket{i}{1}.
+\end{align}
+For the term $\braket{1}{i/r^k}\braket{i}{1} \neq 0$ we must have $i = 1$ and $r^k \equiv 1 \pmod{d}$, or equivalently,
+$k = k_1$. We can conclude that 
+\begin{align}
+	\bra{1}M\ket{1} = \sum_{l = 1}^{d-1} x_{k_1,l}\omega_d^l = 0. 
+\end{align}
+Similarly we can determine that for all $j = 1,2\dots d-1$,
+\begin{align}
+	\bra{j}M\ket{j} 
+	=  \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{j}{i/r^k}\braket{i}{j} 
+	= \sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl} = 0.
+\end{align}
+Hence we get $d-1$ equations with $d-1$ variables, and the linear system is
+\begin{align}
+	W \ket{x_{k_1}} = 0,
+\end{align}
+where $W(m,n) = \omega_d^{mn}$. Then we define
+\begin{align}
+	\tW = 
+	\begin{pmatrix}
+	1 & 1 \\
+	1 & W
+	\end{pmatrix}.
+\end{align}
+First observe that $\tW$ is a Vandermonde matrix, hence it is non-singular.
+Next, we define $\ket{\tx_{k_1}} = (0, x_{k_1,1}, \dots x_{k_1,d-1})^\intercal$ 
+and prove that it satisfies the condition
+that 
+\begin{align}
+	\tW \ket{\tx_{k_1}} = 0,
+\end{align}
+which involves $d$ equations. The last $d-1$ equations are given by the assumption and $M$.
+We only need to prove that $\sum_{l=1}^d x_{k_1, l} = 0$, which is required by the first row of $\tW$.
+It can be proved by summing the known $d-1$ equations as follows
+\begin{align}
+	0=\sum_{j = 1}^{d-1} \bra{j}M\ket{j}  
+	=  \sum_{j=1}^{d-1}\sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl}
+	=\sum_{l = 1}^{d-1}x_{k_1,l} (\sum_{j=1}^{d-1} \omega_d^{jl})
+	= \sum_{l = 1}^{d-1}- x_{k_1,l}
+\end{align}
+where we have used the fact that $\sum_{j=1}^{d-1} \omega_d^{jl} =-1$ for all $l = 1,2\dots d-1$.
+Since $\tW$ is non-singluar, we know $\ket{\tx_{k_1}} = 0$ which implies that $\ket{x_{k_1}} = 0$.
 
-%%=====================================
-\section{Equations to embed $uxu^{-1} = x^5$}
-\label{sec:power5}
-%%=====================================
-\input{power5_equations}
+For $\ket{x_{k_a}}$, we look at entries $\{\bra{j}M\ket{aj}\}_{j=1}^{d-1}$ for $a = 2 \dots d-1$ and get equations
+of the form
+\begin{align}
+	0 = \bra{j}M\ket{aj} = \sum_{l=1}^{d-1} x_{k_a, l} \omega_d^{ajl} 
+\end{align}
+The corresponding coefficient matrix has value $\omega_d^{amn}$ at coordinate $(m,n)$,
+so it is also a submatrix of a Vandermonde matrix. Similar argument gives us that $\ket{x_{k_a}} = 0$.
+
+To summarize, we have proven that $x_{k,l} = 0$ for all $k$ and $l$, which implies that the elements of the set
+$\{ U^k X^l \}$ are linearly independent and forms a basis for the ring of all the $(d-1)\times(d-1)$ matrices over $\C$.
+\carl{Nice proof.  I like the use of the Vandermonde matrix.  We can think a little about possible simplifications.}
+\end{proof}
+Note that the primitive root $r$ in the lemma is not restricted to the set $\{2,3,5\}$, so this lemma works for any 
+odd prime number $d$.
+
 
 \end{document}
