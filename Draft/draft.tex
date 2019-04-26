@@ -199,6 +199,8 @@
 \newcommand{\pauliz}{\sigma_z}
 \newcommand{\G}{G}
 \newcommand{\LS}{LS}
+\newcommand{\tM}{\tilde{M}}
+\newcommand{\tN}{\tilde{N}}
 \newcommand{\tA}{\tilde{A}}
 \newcommand{\tB}{\tilde{B}}
 \newcommand{\tX}{\tilde{X}}
@@ -221,6 +223,7 @@
 \newcommand{\pr}[2]{P(#1|#2)}
 \newcommand{\pa}[2]{P_A(#1|#2)}
 \newcommand{\pb}[2]{P_B(#1|#2)}
+\newcommand{\tpr}[2]{\tilde{P}(#1|#2)}
 
 % Bell Ineqaulities
 \newcommand{\I}{\mathcal{I}}
@@ -463,7 +466,7 @@ A particular type of nonlocal games that we are interested in is called linear s
 In the later parts, we will work with quantum strategies for the linear system game presented in terms of binary observables.
 \begin{definition}[Quantum strategy of a linear system game]
 \label{def:q_strat}
-A quantum strategy presented in terms of observables for the linear system game $(H\ux = \uc)$ consists of 
+A quantum strategy presented in terms of binary observables for the linear system game $(H\ux = \uc)$ consists of 
 \begin{enumerate}
 	\item a pair of finite Hilbert spaces $\calH_A$ and $\calH_B$;
 	\item a collection of binary observables $B_j$, $1 \leq j \leq n$, on $\calH_B$
@@ -565,8 +568,8 @@ However, If they share an entangled state $\ket{\psi}$, the value of $\ip{\I_\al
 	\label{def:ideal}
 	Define $\mu = \arctan(1/\alpha)$.
 	The ideal strategy for weighted CHSH with parameter $\alpha$, which achieves the value $\ip{\I_\alpha}_{\max}$, 
-	consists of the joint state $\ket{\EPR{2}}$ and observables $M_1 = \pauliz$, $M_2 = \paulix$,
-	$N_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $N_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
+	consists of the joint state $\ket{\EPR{2}}$ and observables $\tM_1 = \pauliz$, $\tM_2 = \paulix$,
+	$\tN_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix$ and $\tN_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix$.
 \end{definition}
 An interesting observation of the weighted CHSH inequality is that if some strategy can achieve 
 value $\ip{\I_\alpha}$ close to $\ip{\I_\alpha}_{\max}$, then the strategy is close to the ideal 
@@ -574,68 +577,11 @@ strategy up to some local isometry,
 which is a phenomenon referred as a robust self-test.
 We give the formal statement of this self-testing property of $\ip{\I_\alpha}_{\max}$ in \cref{sec:chsh}.
 
-
-%Note that we may use the term behaviour and correlation interchangeably.
-%The value of a strategy is given by
-%\begin{align}
-%	\omega(G,p)  = \sum_{a,b,x,y} \pi(x,y) \pr{ab}{xy} V(a,b,x,y).
-%\end{align} 
-
-%The main contribution of our work is the construction of a correlation, which is the combination of 
-%the optimal correlation of a linear system game with constant-sized $\calX$,$\calY$,$\calA$ and $\calB$
-%and the optimal correlation to violate the weighted CHSH inequality.  \carl{The reader does not 
-%know yet what a linear system game is, so this comment is more confusing than helpful.}
-%The special property of the correlation is that it can self-test $\ket{\EPR{d-1}}$ for arbitrary $d$ with certain 
-%primitive root. 
-%In the next part, we introduce the definition of self-testing, the definition of linear system game, 
-%and its operator solution, 
-%following definitions given in Ref.~\cite{coladan2017, slofstra2017}.
-
 \carl{Before the next definition, you should define what a ``correlation'' is.}
 \hf{Done. I decided to remove the definition of self-testing here because I think it is hard
 to give a general robust self-testing definition and it suffices to just give our robust self-testing result.}
-%\begin{definition}[Self-testing]
-%	We say that a correlation self-tests a quantum state $\ket{\psi}$, if 
-%	the correlation is produced by a strategy with shared state $\ket{\psi}$, and 
-%	for any quantum strategy $S = ( \{\tA_x\}, \{\tB_y\}, \ket{\tpsi})$ that produces the same correlation,
-%	there exists local isometries $\Phi_A$ and $\Phi_B$ on Alice and Bob's side and a state $\ket{junk}$ 
-%	such that 	
-%	\begin{align*}
-%		\Phi_A \x \Phi_B \ket{\tpsi} =  \ket{\psi} \x \ket{junk}.
-%	\end{align*}
-%\end{definition}
-
 
 \carl{Section 2 needs to be cleaned up in some places, but overall it is pretty good.}
-
-
-%The main tool to understand linear system game is through its solution group over $\Z_d$.
-%\begin{definition}[Solution group over $\Z_d$ \cite{coladan2017}]
-%	For the linear system game associated with $Ax = b$ over $\Z_d$, its solution group $\Gamma(A,b,\Z_d)$ has 
-%	one generator for each variable and one relation for each equation and relations enforcing that the variables in the same
-%	equation commutes. The set of local commutativity relations is denoted by $R_c$ and defined by
-%	\begin{align}
-%		R_c := \set{ [x_i, x_j] |  A_{li} \neq 0 \neq A_{lj} \text{ for some } 1 \leq l \leq m}.
-%	\end{align}
-%	The set of constraint satisfaction relations is denoted by $R_{eq}$ and defined by.
-%	\begin{align}
-%		R_{eq} := \set{ \J^{-b(l)} \Pi_{i=1}^n  x_i^{A_{li}} | 1\leq l\leq m}
-%	\end{align}
-%	Then the solution group has presentation 
-%	\begin{align}
-%	\Gamma(A,b,\Z_d) := \ip{ \{x_i\}_{i=1}^n \cup \{\J\} : R_c \cup R_{eq} \cup \{ (x_i)^d, \J^d| 1 \leq i \leq n\}}. 
-%	\end{align}
-%\end{definition}
-%Note that the relations $(x_i)^d$ and $\J^d$ ensure that we have solutions over $\Z_d$.
-%Then the operator solution of $\Gamma(A,b,\Z_d)$ is given below.
-%\begin{definition}[Operator solution]
-%	An operator solution for the linear system game associated with $Ax =b$ over $\Z_d$ is a unitary representation
-%	$\tau$ of $\Gamma(A,b,\Z_d)$ such that $\tau(\J) = \omega_d\1$. A conjugate operator solution is a unitary 
-%	representation mapping $\J$ to $\overline{\omega_d}\1$.
-%\end{definition}
-%What has been established in Ref.\cite{cleve2017,coladan2017} is that we can construct a perfect strategy of a
-%linear system game from its operator solution and vice versa.
-
 
 %=======================================
 \section{The linear constraint test}
@@ -789,6 +735,7 @@ $d_ib_jd_i = c_k$ for all $(i,j,k) \in C(r)$. For each type of the conjugacy rel
 we are going to embed it into a different set of linear relations in $\Gamma$.
 
 \begin{definition}
+\label{def:gamma}
 The presentation of $\Gamma$ has order-$2$ generators:
 \begin{align*}
 	J, \{a_i, b_i, c_i, d_i, v_i,w_i,\{ k_{i,j} \}_{j=1}^5\}_{i=1}^{r+5}, \{f_i,g_i,m_i\}_{i=0}^2, \{h_{jk}\}_{(i,j,k) \in C(r)}, 
@@ -847,6 +794,7 @@ ideal strategy that realizes our correlation.
 Before giving the representation, we define two Hilbert spaces $W_{d-1}$ and $W_2$, which will form the carrier spaces
 of the representations,
 \begin{align}
+	\label{eq:w_subspace}
 	W_{d-1} := \spn(\{\ket{x_j}\}_{j=1}^{d-1}) && W_2 = \spn(\ket{x_1}, \ket{x_2}).
 \end{align}
 Note that another form of the basis of $W_{d-1}$ is $\{\ket{x_{r^j}}\}_{j=0}^{d-2}$, where the subscript $r^j$ is taken
@@ -912,6 +860,7 @@ for $i = 1 \dots r+5$,
 Finally, we follow the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017} to construct the 
 representation of $\Gamma$.
 \begin{definition}
+\label{def:rep_gamma}
 The representation $\Psi$ of $\Gamma$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
 \begin{itemize}
 \item for any $x$ which is also a generator of $G_1$,
@@ -966,134 +915,246 @@ The representation $\Psi$ of $\Gamma$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
 \end{definition}
 The validation of $\Psi_1$ and $\Psi$ are done in Slofstra's work \cite{slofstra2017}.
 
-%======================================
-\section{The extended weighted CHSH test}
+%====================================================
+\section{Robust self-testing of $\ket{\EPR{2}}$ \textit{via} $\I_\alpha$}
 \label{sec:chsh}
-%======================================
-Before introducing the extended weighted CHSH test, we fill in some background about the weighted CHSH inequality,
-namely, that its maximal violation can self-test $2$-dimensional EPR pair and rotated Pauli operators.
-The robust self-testing result is summarized in the following theorem.
+%====================================================
+In this section, we show how the weighted CHSH inequality can be used to self-test $\ket{\EPR{2}}$ robustly.
+Intuitively, it means that if some quantum strategy achieves a value $\ip{\I_\alpha}$ that is close to $\ip{\I_\alpha}_{\max}$,
+then the shared state must be close to $\ket{\EPR{2}}$ and their observables are close to rotated Pauli operators up to
+some local isometry.
+The formal statement is given in the theorem below. Since the proof uses the same technique as the one used in Ref.~\cite{bamps2015},
+we defer the proof till \cref{sec:selftest}. Instead, we only list the key relations used in the proof because they will be reused in the later parts of 
+the paper.
 \begin{theorem}
 \label{thm:selftest}
-	Suppose the quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]+1}, \{\tilde{B}_y\}_{y \in [2]+1})$ achieves the violation
-	at least $2\sqrt{1+\alpha^2} - \epsilon$
-	for some $\epsilon$, then
+	Suppose the quantum strategy $(\ket{\psi}, \{M_x:=M_x^0-M_x^1\}_{x=1,2}, \{N_y :=N_y^0-N_y^1\}_{y = 1,2} )$ achieves that
+	$\ip{\I_\alpha} \geq 2\sqrt{1+\alpha^2} - \epsilon$
+	for some $\epsilon > 0$, then we define $\mu := \arctan(1/\alpha)$ and
 	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{aux}$  such that
-	\begin{align}
-		\| \Phi( \tilde{A}_x \x \tilde{B}_y \ket{\psi}) -\ket{junk} \x (A_x \x B_y) \ket{\EPR{2}}  \| = O((\alpha^2+\frac{1}{\alpha}) \sqrt{\epsilon})
-	\end{align}
-	for $x,y \in \{0, 1, 2\}$ where the subscript $0$ refers to the identity operator and $A_x, B_y$ are 
+	\begin{align*}
+		\| \Phi( M_x \x N_y \ket{\psi}) -\ket{aux} \x (\tM_x \x \tN_y) \ket{\EPR{2}}  \| = O(\frac{1}{\cos^2(\mu)\sin^{1/2}(\mu)}+
+		\frac{1}{\sin(\mu)^{3/2}})) \sqrt{\epsilon}
+	\end{align*}
+	for $x,y \in \{0, 1, 2\}$ where the subscript $0$ refers to the identity operator and $\tM_x, \tN_y$ are 
 	defined in \cref{def:ideal}.  \carl{You're using both ``aux'' and ``junk'' for the auxilliary state.  Also you need
 	to be clearer about what label you are using for Alice's and Bob's systems (see my previous comment on this).}
 \end{theorem}
-Our approach is very similar to the one used in Ref.~\cite{bamps2015} so we 
-defer the proof of \cref{thm:selftest} till \cref{sec:selftest}.
-After proving the robust self-testing result, we take one step further and observe an interesting property of the 
-product of Bob's observables.
-\begin{proposition}
-\label{prop:2d-subspace}
-	Let $\mu = \arctan(1/\alpha)$ for some $\alpha$.
-	If a quantum strategy $(\ket{\tpsi}, \{\tilde{A}_x\}_{x \in [2]+1}, \{\tilde{B}_y\}_{y \in [2]+1})$ achieves the maximal 
-	violation of  $\I_{\alpha}$, then \hf{the only eigenvalues of $\tilde{B}_0\tilde{B}_1$ on the support of 
-	$\tilde{\rho}_B = \Tr_A(\ketbra{\tpsi}{\tpsi})$
-	are $e^{i2\mu}$ and $e^{-i2\mu}$.}  \carl{Make clear
-	that we mean that these are the only eigenvalues.}
-\end{proposition}
-\begin{proof}[Proof of \cref{prop:2d-subspace}]
-	Following the argument in the proof of \cref{thm:selftest} in \cref{sec:selftest}, we define
-	\begin{align*}	
-	\tilde{Z}_A = \tA_1, &&
-	\tilde{Z}_B = (\tB_1+\tB_2)/2\cos(\mu).
-	\end{align*}
-	Substituting $\epsilon = 0$ into \cref{eq:zazb} we know that 
-	\begin{align}
-		\tZ_B \ket{\tpsi} = \tZ_A \ket{\psi}.
-	\end{align}
-	Using this relation, we get
-	\begin{align}
-		\tZ_B^2\ket{\tpsi} = \tZ_B \tZ_A\ket{\tpsi} = \tZ_A \tZ_B \ket{\tpsi} = \tZ_A^2 \ket{\tpsi} = \ket{\tpsi},
-	\end{align}
-	where we also use the facts that $\tZ_A$ and $\tZ_B$ commute and $\tZ_A^2 = A_1^2 = \1$.
-	Hence we can conclude that $\tZ_B^2 =\1$ on $\supp(\tilde{\rho}_B)$.
-	Expanding $\tilde{Z}_B^2$ we get
-	\begin{align*}
-		\1 = \tilde{Z}_B^2 = \frac{\tB_1^2 + \tB_1\tB_2 + \tB_2\tB_1 + \tB_2^2}{4\cos(\mu)^2}
-		=\frac{2\1 + \tB_1\tB_2 + \tB_2\tB_1}{4\cos^2(\mu)},
-	\end{align*}
-	so we can derive that 
-	\begin{align}
-	\label{eq:eig_v}
-		\tB_1\tB_2 + \tB_2\tB_1 = 2(2\cos^2(\mu)-1)\1 = 2 \cos(2\mu) \1.
-	\end{align}
-	\hf{Since $\tB_1\tB_2$ is the product of two unitaries,}
-	we can assume the eigen-decomposition of $\tB_1\tB_2$ is
-	\begin{align}
-		\tB_1\tB_2 = \sum_{i=1}^m \lambda_i \ketbra{i}{i}
-	\end{align}
-	for some orthonormal set of eigenvectors $\{ \ket{i} \}_{i=1}^m$
-	and $\norm{\lambda_i} =1$ for $1 \leq i \leq m$.
-	Eq.~\ref{eq:eig_v} tells us that for each $1 \leq i \leq m$
-	\begin{align*}
-		\lambda_i + \lambda_i^{-1} = 2\Re(\lambda_i) = 2 \cos(2\mu),
-	\end{align*}
-	so we can conclude that $\lambda_i = e^{i 2\mu}$ or $e^{-i 2\mu}$.	
-%	\begin{align}
-%		\ket{\tpsi} = \sum_{i=1}^m \frac{c_i}{\sqrt{2}} (\ket{u_{i,0}}\ket{u_{i,0}}+\ket{u_{i,1}}\ket{u_{i,1}}),
-%	\end{align}
-%	where $c_i$'s are coefficients such that $\sum_{i=1}^m \norm{c_i}^2 = 1$.
-%	The special property of the subspace $V_i = \spn( \ket{u_{i,0}}, \ket{u_{i,1}})$ is that 
-%	\begin{align*}
-%	(\tilde{B}_0 + \tilde{B}_1) \ket{u_{i,0}} = 2\cos(-\pi/2d) \ket{u_{i,0}} 
-%	&&(\tilde{B}_0 + \tilde{B}_1) \ket{u_{i,1}} = -2\cos(-\pi/2d) \ket{u_{i,1}}\\
-%	(\tilde{B}_0 - \tilde{B}_1) \ket{u_{i,0}} = 2\sin(-\pi/2d) \ket{u_{i,1}} 
-%	&&(\tilde{B}_0 - \tilde{B}_1) \ket{u_{i,1}} = 2\sin(-\pi/2d) \ket{u_{i,0}}.
-%	\end{align*}
-%	It is straightforward to calculate that 
-%	\begin{align*}
-%		\tilde{B}_0\tilde{B}_1 \ket{u_{i,0}} = \cos(\pi/d) \ket{u_{i,0}} -\sin(\pi/d) \ket{u_{i,1}},&&
-%		\tilde{B}_0\tilde{B}_1\ket{u_{i,1}} = \sin(\pi/d)\ket{u_{i,0}} + \cos(\pi/d) \ket{u_{i,1}},
-%	\end{align*}
-%	so we can conclude that 
-%	\begin{align*}
-%		&\tilde{B}_0\tilde{B}_1(\ket{u_{i,0}} + i\ket{u_{i,1}}) = e^{i \frac{\pi}{d}} (\ket{u_{i,0}} + i\ket{u_{i,1}}), &&
-%		&\tilde{B}_0\tilde{B}_1(\ket{u_{i,0}} - i\ket{u_{i,1}}) = e^{-i \frac{\pi}{d}} (\ket{u_{i,0}} - i\ket{u_{i,1}}).
-%	\end{align*}
-%	Hence each $V_i$ is spanned by $\omega_d$-eigenvector and $\omega_d^{-1}$-eigenvector of $\tB_0\tB_1$.
-\end{proof}
+We follow the convention and define $c := \cos(\mu)$, $s := \sin(\mu)$, and
+\begin{align}
+	&Z_A := M_1 && X_A := M_2\\
+	&Z_B := \frac{N_1+N_2}{2c} && X_B := \frac{N_1-N_2}{2s}.
+\end{align}
+The key relations that we will reuse are
+\begin{align}
+	\label{eq:za-zb}& Z_A\ket{\psi} \appd{\frac{\sqrt{s\epsilon}}{c}} Z_B\ket{\psi},\\
+	\label{eq:xa-xb}&X_A\ket{\psi} \appd{\frac{\sqrt{\epsilon}}{\sqrt{s}}} X_B \ket{\psi}, \\
+	\label{eq:xazb}&X_A(\1+Z_B)\ket{\psi} \appd{\frac{c+1}{c\sqrt{s}} \se} X_B(\1-Z_A) \ket{\psi},\\
+	\label{eq:zaxb}&Z_A(\1+X_B)\ket{\psi} \appd{ \frac{s+1}{c\sqrt{s}} \se} Z_B(\1-X_A) \ket{\psi},\\
+	\label{eq:zaxa}&Z_AX_A\ket{\psi} \appd{\frac{1+c+s}{c\sqrt{s}} \se} -X_AZ_A \ket{\psi},\\
+	\label{eq:zaxaxbzb}&X_AZ_A \ket{\psi} \appd{\frac{2s^2+cs+c+s}{cs\sqrt{s}} \sqrt{\epsilon}} -X_BZ_B \ket{\psi},
+\end{align}
+where \cref{eq:zaxaxbzb} can be derived from \cref{eq:za-zb}, \cref{eq:xa-xb} and \cref{eq:zaxa}.
+%==========================
+\section{The full test}
+\label{sec:full_test}
+%==========================
+The full test consists of three subtest: the linear constraint test,
+the extended weighted CHSH test and a commutation test. We explain how the three tests are conducted and
+combined below.
 
-The extended weighted CHSH test is added to make sure that the operator $X$ extracted from 
-Alice and Bob's operator solution of $\LS$ has eigenvalues $\omega_d$ and $\omega_d^{d-1}$.
-In \cref{sec:main}, we will reason why showing these two eigenvalues is enough to guarantee that 
-$X$ has the eigen-structure required by \cref{lm:ux_independ}.
-We denote this game that enforces the eigenvalues of the observable $X$ by
-$\CHSH_X$, where the superscript $d$ emphasizes that the scoring rules of this game depend on $d$.
-We remark that for the extended weighted CHSH test, the primitive root of $d$ is irrelevant,
-so we drop the superscript $(r)$.
-\carl{You need to be more clear --- after reading this, I am still not sure what mathematical object ``$\CHSH_X$'' refers to.}
+\textbf{The linear constraint test}.
+Recall that the the linear constraint test with solution group $\Gamma$ defined in \cref{def:gamma} has variables labelled by $j \in \{1,2,\dots,\nr\}$ and
+equations labelled by $i \in \{1, 2 \dots \mr\}$.
+We denote the linear system associated with the linear constraint test by $H\underline{x} = \uc$ and
+define $X_i := \{ \ux : \sum_{k} H(i,k)\ux(k) = \uc(i) \}$ and $I_i = \{ k : H(i,k) = 1\}$.
+From the construction of $\Gamma$, we know that $| I_i| \leq 3$.
+The correspondence between $\ux$ and the generators of $\Gamma$ is that
+\begin{align*}
+	&\ux(j) := a_j &&&&\text{ for } j = 1 \dots r+5 \\
+	&\ux(r+6+j) := f_j&& \ux(r+9+j) := g_j &&\text{ for } j = 0,1,2 
+\end{align*} 
+The correspondence can be arbitrary for $j > r+11$.
+We conduct the linear constraint test in a way such that Bob is always get a variable label
+but Alice gets either an equation label, in which case she needs to give the full assignment to this equation,
+or a pair of equation label and variable label, in which case she only needs to give the assignment to the particular 
+variable in the given equation. In this way, we force Alice and Bob to use an binary observable strategy for the linear constraint 
+test. 
 
-In this test, Alice and Bob each gets a question $x$,$y \in \{ 1, 2, \ast\}$ and 
-they answer with $a,b \in \{0,1,\diamond,\perp\}$. 
-The correlation $C(\dr{2})$ is the optimal correlation of this test.
-Before presenting the optimal correlation, we give intuitions about how the players should behave.
+\textbf{The extended weighted CHSH test}.
+In this test, 
+the input alphabets are $\calX = \calY = \{\ast, 1, 2, \nr+1,\nr+2\}$.
+For each question, there is an associated answer set:
 \begin{itemize}
-	\item \textbf{Case 1:} when $x = y = \ast$, Alice and Bob should answer with $a, b \in \{\diamond, \perp\}$ and 
-	their answer should agree;
-	\item \textbf{Case 2a:} when $x,y \in \{1,2\}$ and if they answer with $a,b \in \{0,1\}$, then
-	their answers are scored according to $I_{\cot(-\pi/d)}$;
-	\item \textbf{Case 2b:} when $x,y \in \{1,2\}$ and if Alice answers with $\perp$, then all Bob's answers are irrelevant;
-	\item \textbf{Case 3:} when $x \in {1,2}, y = \ast$, if Bob answers $\diamond$, 
-	Alice should answer with $\{0.1\}$ but not $\perp$,
-	if Bob answers $\perp$, Alice should answer $\perp$ too.
+	\item when the question is $\ast$, the answer set is $\{\diamond, \perp\}$;
+	\item when the question is $1$ or $2$, the answer set is $\{0,1\}$;
+	\item when the question is $\nr+1$ or $\nr+2$, the answer set is $\{0, 1, \perp\}$.
 \end{itemize}
-\textbf{The ideal strategy and ideal correlation}. Alice and Bob share the state $\ket{\psi} =\frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1} \ket{u_i}\ket{u_i}$.
-We define two subspaces $V = \spn\{\ket{u_1}, \ket{u_{d-1}}\}$ and $V^\perp = \C^d \setminus\spn\{\ket{u_1}, \ket{u_{d-1}}\}$ \carl{(That's not 
-the way I usually see the $\setminus$ symbol used.)} and
-define $\Pi_V$ and $\Pi_{V}^\perp$ to be the corresponding projectors. Note that $V$ is the subspace on which they should
-maximize $\langle I_{\cot(-\pi/d)} \rangle$.
+Note that when the referee wants to ask Alice $x = 1,2$, the referee gives Alice a pair $(i_x. x)$ where 
+$i_x$ labels an equation containing the variable labelled by $x$. 
+For simplicity we omit the $i_x$ part in the alphabet $\calX$.
+Later we will show that the $i_x$ part can be made implicit.
+The test is conducted in the following way:
+\begin{enumerate}
+	\item if $x = y = \ast$, Alice and Bob should answer with $a = b \in \{\diamond, \perp\}$;
+	\item if $x = y \in \{1,2\}$, Alice and Bob should answer with $a = b \in \{0, 1\}$, as in the linear constraint test;
+	\item if $x = y \in \{n+1, n+2\}$, Alice and Bob should answer with $a = b \in \{0, 1, \perp\}$;
+	\item if $x \in \{1,2\}$ and $y \in \{n+1, n+2\}$, 
+		\begin{enumerate}
+		\item if they answer with $a,b \in \{0,1\}$, then
+	they should maximize $\ip{\I_{\cot(-\pi/d)}}$ with Alice and Bob's roles flipped, 
+		\item if Bob answers with $\perp$, then Alice's answer doesn't matter;
+		\end{enumerate}
+	\item if $x \in \{n+1, n+2\}$ and $y \in \{1,2\}$,
+	\begin{enumerate} 
+		\item if they answer with $a,b \in \{0,1\}$, then
+		they should maximize $\ip{\I_{\cot(-\pi/d)}}$, 
+		\item if Alice answers with $\perp$, then Bob's answer doesn't matter;
+	\end{enumerate}
+	\item $x \in \{n+1,n+2\}, y = \ast$ 
+		\begin{enumerate}
+		\item if Bob answers with $\diamond$, Alice should answer with $\{0.1\}$ but not $\perp$, 
+		\item if Bob answers with $\perp$ Alice should answer with $\perp$ too;
+		\end{enumerate}
+	\item $x = \ast, y \in \{n+1, n+2\}$
+	\begin{enumerate}
+		\item if Alice answers with $\diamond$, Bob should answer with $\{0.1\}$ but not $\perp$, 
+		\item if Alice answers $\perp$, Bob should answer $\perp$ too.
+	\end{enumerate}
+\end{enumerate}
 
-For completeness, we show the ideal correlation in the following three charts and then give the projectors. 
-Note that we don't explicitly calculate the conditional probabilities of the form $\pr{\perp 0}{xy}$ for all possible $x$,$y$ 
-because they are irrelevant.
+\textbf{The commutation test.}
+In this test, we reuse questions from the two other tests so the answer
+set for each question is the same across the tests.
+There are $8$ test cases.
+In each test case, Alice is given one of two questions.
+One of the possible question is to assign a value to some variable of the linear constraint test.
+Again, the equation label is implicit when this variable is given.
+The other possibility is to answer $\nr+1$ or $\nr+2$.
+Bob is given both of the question so he needs to give answers to both questions.
+Their answers should agree on the question that is given to both.
+The $\calY$ has $8$ pairs, $\calY = \{ (\nr+1, j), (\nr+2, j) \}_{j = r+6, r+8, r+9, r+11}$.
+Alice's input is determined by the pair so she receives one of the two questions with equal probability.
+
+The full correlation is generated by a strategy that can pass all the three tests. We give the ideal strategy first.
+%--------------------------------------------
+\subsection{The ideal strategy}
+%--------------------------------------------
+Recall the two subspaces $W_{d-1}$ and $W_2$ defined in \cref{eq:w_subspace}. 
+In the ideal strategy Alice and Bob share the state 
+\begin{align*}
+\ket{\psi} = &(\frac{1}{\sqrt{2}} \ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}\right)\\
+=&(\frac{1}{\sqrt{2}} \ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(1/\sqrt{d-1} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})\right).
+\end{align*}
+Here we introduce the second basis $\{ \ket{j} \}_{j=1}^{d-1}$ of $W_{d-1}$ so that
+the observables used in the extended weighted CHSH test have a simpler form.
+The two basis are related by
+\begin{align*}
+	\ket{x_j} = \frac{-1}{\sqrt{2}}(\ket{j} + i\ket{d-j}), &&
+	\ket{x_{d-j}} = \frac{-e^{ij\pi/d}}{\sqrt{2}}(\ket{j} - i\ket{d-j}) && \text{for } j = 1 \dots \frac{d-1}{2}.
+\end{align*}
+We define two subspaces $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = W_{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$ on
+$W_{d-1}$ and
+define $\Pi_V$ and $\Pi_{V^\perp}$ to be the corresponding projectors. Note that $V$ is the subspace on which they should maximize $\ip{\I_{\cot(-\pi/d)}}$.
+We define the states for the measurements used in the extended weighted CHSH test as follows
+\begin{align*}
+	&\ket{1_1} = \cos(-\pi/2d)\ket{1} + \sin(-\pi/2d)\ket{d-1}
+	&&\ket{(d-1)_1} = \sin(-\pi/2d)\ket{1} - \cos(-\pi/2d)\ket{d-1}\\
+	&\ket{1_2} = \cos(-\pi/2d)\ket{1} - \sin(-\pi/2d)\ket{d-1}
+	&&\ket{(d-1)_2} = \sin(-\pi/2d)\ket{1} + \cos(-\pi/2d)\ket{d-1}\\
+	&\ket{+} = \frac{1}{\sqrt{2}}\ket{1} + \frac{1}{\sqrt{2}}\ket{d-1}
+	&&\ket{-} = \frac{1}{\sqrt{2}}\ket{1} - \frac{1}{\sqrt{2}}\ket{d-1}.
+\end{align*}
+Then the measurements are
+\begin{align*}
+	&M_\ast^\diamond =(\1_{W_2})^{\x 2} \x \Pi_V && M_\ast^\perp = M_{n+1}^\perp = M_{n+2}^\perp = (\1_{W_2})^{\x 2} \x \Pi_{V^\perp}\\
+	&N_\ast^\diamond = (\1_{W_2})^{\x 2} \x \Pi_V && N_\ast^\perp = N_{n+1}^\perp = N_{n+2}^\perp = (\1_{W_2})^{\x 2} \x \Pi_{V^\perp}\\
+	&M_{n+1}^0 =N_{n+1}^0=(\1_{W_2})^{\x 2} \x  \ketbra{1}{1} && M_{n+1}^1=N_{n+1}^1 = (\1_{W_2})^{\x 2} \x \ketbra{d-1}{d-1}\\
+	&M_{n+2}^0 =N_{n+2}^0=(\1_{W_2})^{\x 2} \x  \ketbra{+}{+} && M_{n+2}^1= N_{n+2}^1 = (\1_{W_2})^{\x 2} \x \ketbra{-}{-}\\
+	&M_1^0 = N_1^0 =(\1_{W_2})^{\x 2} \x  \ketbra{1_1}{1_1} && M_1^1 = N_1^1 =(\1_{W_2})^{\x 2} \x  \ketbra{(d-1)_1}{(d-1)_1}\\
+	&M_2^0 = N_2^0 = (\1_{W_2})^{\x 2} \x \ketbra{1_2}{1_2} && M_1^1 = N_1^1 = (\1_{W_2})^{\x 2} \x \ketbra{(d-1)_2}{(d-1)_2}.
+\end{align*}
+To present the observables used in the linear constraints test, we relabel the generators of $\Gamma$ as $x_i$ for $i = 1 \dots \nr$. Then the 
+observables are
+\begin{align}
+	M_i = N_i = \Psi(x_i),
+\end{align}
+where the representation $\Psi$ is defined in \cref{def:rep_gamma}.
+To make sure the strategy is correct, there are some facts to check.
+\begin{proposition}
+Let $M_1 = N_1 :=\Psi(a_1)$, $M_2 = N_2 := \Psi(a_2)$, $M_3 = N_3 := \Psi(a_3)$
+and $M_4 = N_4 := \Psi(a_4)$, then
+\begin{align}
+	\label{eq:mn_preserve} &M_i N_i \ket{\psi} = \ket{\psi} && \text{for } i = 1 \dots 4,\\
+	\label{eq:o2_comm} &(M_3M_4)M_2(M_4M_3) = M_2,
+\end{align}
+and similar commutation relation holds on Bob's side too.
+\end{proposition}
+\begin{proof}
+	Since all the operators involved in this proposition act trivially on $W_2^{\x 2}$, we focus on
+	their actions on $W_{d-1}$. In the later proof, by $\ket{\psi}$ we mean the part of $\ket{\psi}$ on $W_{d-1}$.
+	
+	We prove \cref{eq:o2_comm} first. It is simple to check that
+	\begin{align}
+		&M_1M_2= \sum_{j=1}^{d-1} \omega_d^{j} \ketbra{x_j}{x_j},\\
+		&M_3M_4= \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}},
+	\end{align}
+	and that 
+	\begin{align}
+		M_3M_4 M_2 M_4 M_3 = &\sum_{j=0}^{(d-3)/2} M_3M_4 (\ketbra{x_{r^j}}{x_{r^{d-1-j}}}+\ketbra{x_{r^{d-1-j}}}{x_{r^j}}) M_4M_3\\
+		=& \sum_{j=0}^{(d-3)/2} \ketbra{x_{r^{j-1}}}{x_{r^{d-2-j}}}+\ketbra{x_{r^{d-2-j}}}{x_{r^{j-1}}} = M_2.
+	\end{align}
+	
+	Next we prove \cref{eq:mn_preserve}. It is straightforward to see that $M_iN_i \ket{\psi} = \ket{\psi}$ for $i = 1,2$.
+	Before checking $i=3$ and $i=4$, we first observe that
+	\begin{align}
+		M_3M_4 N_3 N_4 \ket{\psi} = \ket{\psi}.
+	\end{align}
+	The eigenvectors of $M_3M_4$ and $N_3N_4$ are 
+        \begin{align}
+        		\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{x_{r^j}}.
+        \end{align}
+        Hence we can express $\ket{x_{r^j}}$ in terms of $\ket{u_k}$ as 
+        \begin{align}
+        		\ket{x_{r^j}} = \frac{1}{\sqrt{d-1}} \sum_{k=0}^{d-2} \omega_{d-1}^{-jk} \ket{u_k}.
+        \end{align}
+        Then $M_4$ acts on $\ket{x_{r^j}}$ by
+        \begin{align*}
+        		M_4 \ket{x_{r^j}} =& \frac{1}{\sqrt{d-1}} M_4\left(\ket{u_0} + \omega_{d-1}^{-j(d-1)/2}\ket{u_{(d-1)/2}}  + 
+        	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_k} + \omega_{d-1}^{jk} \ket{u_{d-1-k}})\right) \\
+        	=&\frac{1}{\sqrt{d-1}} \left(\ket{u_0} + (-1)^j\ket{u_{(d-1)/2}}  + 
+        	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_{d-1-k}} + \omega_{d-1}^{jk} \ket{u_{k}})\right) \\
+        	=& \ket{x_{r^{d-1-j}}}.
+        \end{align*}
+        Then we show that $M_4  N_4 \ket{\psi} = \ket{\psi}$ as 
+        \begin{align}
+        	M_4 N_4 \ket{\psi} = \frac{1}{\sqrt{d-1}}  \sum_{j=0}^{d-2} M_4  N_4 \ket{x_{r^j}} \ket{x_{r^{d-1-j}}} 
+        	= \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{x_{r^{d-1-j}}} \ket{x_{r^{j}}} =\ket{\psi},
+        \end{align}
+	Combining it with the fact that $M_3M_4 N_3N_4 \ket{\psi} = \ket{\psi}$, we can conclude that
+	$M_3N_3 \ket{\psi} = \ket{\psi}$.
+\end{proof}
+The similar result, i.e., $M_jN_j \ket{\psi} = \ket{\psi}$ for $j = 1 \dots \nr$, are easy to check because all the observables are defined by $M_j, N_j$ for $j=1,2,3,4$.
+An interesting property of $U := M_3M_4$ and $O := M_1M_2$ is summarized in the proposition below. 
+\begin{lemma}
+	\label{lm:uo_independ}
+	The unitaries $O$ and $U$ of the form
+	\begin{align}
+		O = \sum_{j=1}^{d-1} \omega_d^j \ketbra{x_j}{x_j} && U = \sum_{j=1}^{d-1}\ketbra{x_{j r^{-1}}}{x_j},
+	\end{align}
+	where $d$ is an odd prime number with primitive root $r$, generates
+	the ring of $(d-1)\times (d-1)$ matrices over $\C$.
+\end{lemma}
+The proof of this lemma is provided in \cref{sec:u_and_o}.
+Our self-test argument certifies that Alice and Bob has such $O$ and $U$ in their hands, so
+it provides another angle to justify our self-testing argument.
+
+%---------------------------------------------------
+\subsection{The full correlation}
+%---------------------------------------------------
+The full correlation is generated by the ideal strategy presented in the previous subsection.
+To help readers understanding later parts of this paper better, 
+parts of the full correlation is given in the tables below.
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{|c|c||c|c|}
@@ -1109,7 +1170,7 @@ because they are irrelevant.
 &$b=\perp$ & 0 & (d-3)/(d-1) \\
 \hline
 \end{tabular}
-\caption{Alice and Bob's behaviour when $x=y=\ast$.}
+\caption{The correlation for $x=y=\ast$.}
 \end{center}
 \end{table}
 
@@ -1118,29 +1179,78 @@ because they are irrelevant.
 \begin{tabular}{|c|c||c|c|c|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{} &
-\multicolumn{3}{|c|}{$x=1$}&
-\multicolumn{3}{|c|}{$x=2$} \\
+\multicolumn{3}{|c|}{$x=\nr+1$}&
+\multicolumn{3}{|c|}{$x=\nr+2$} \\
 \cline{3-8}
 \multicolumn{2}{|c|}{} &
 $a = 0$ & $a=1$ & $a=\perp$ &
 $a = 0$ & $a=1$ & $a=\perp$\\
 \hline
 \hline
-\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{\sin^2(\pi/d)}{d-1}$ & \small $\pr{\perp0}{00}$ 
+\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{\perp0}{00}$ 
 & $\frac{1+\sin(\pi/d)}{2(d-1)}$ & $\frac{1-\sin(\pi/d)}{2(d-1)}$ & \small  $\pr{\perp0}{10}$ \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/d)}{d-1}$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{\perp0}{00}$ 
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{\perp0}{00}$ 
 &  $\frac{1-\sin(\pi/d)}{2(d-1)}$ & $\frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1} - \pr{\perp0}{10}$  \\
 \hline
-\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/d)}{d-1}$ & $\frac{\sin^2(\pi/d)}{d-1}$ & \small $\pr{\perp0}{01}$ & 
+\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{\perp0}{01}$ & 
 $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\pr{\perp 0}{11}$  \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/d)}{d-1}$ & $\frac{\cos^2(\pi/d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{\perp0}{01}$ &  
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{\perp0}{01}$ &  
 $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1}- \pr{\perp 0}{11}$ \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Alice and Bob's behaviour when $x,y \in [2]$.}
+\caption{The correlation for $x \in \{n+1, n+2\}$ and $y \in \{1,2\}$.}
+\label{tb:chsh}
+\end{table}
+We don't explicitly calculate the conditional probabilities of the form $\pr{\perp 0}{xy}$ for all possible $x$,$y$ 
+because they are irrelevant.
+Note that when $x \in \{1,2\}$ and $y \in \{\nr+1, \nr+2\}$, the correlation table is 
+the transpose of Table~\ref{tb:chsh}, so we omit it here.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{3}{|c|}{$x=\nr+1$}&
+\multicolumn{3}{|c|}{$x=\nr+2$}&
+\multicolumn{2}{|c|}{$x=\ast$}\\
+\cline{3-10}
+\multicolumn{2}{|c|}{} &
+$a = 0$ & $a=1$ & $a=\perp$ &
+$a = 0$ & $a=1$ & $a=\perp$ &
+$a = \diamond$ & $a = \perp$\\
+\hline
+\hline
+\multirow{3}{*}{$y = \nr+1$} & $b=0$ & $\frac{1}{d-1}$ & $0$ & 0 
+& $\frac{1}{2d-2}$ & $\frac{1}{2d-2}$ & 0 & $\frac{1}{d-1}$ & 0 \\
+\cline{2-10}
+&$b=1$ & 0 & $\frac{1}{d-1}$ & $0$ 
+&  $\frac{1}{2d-2}$ & $\frac{1}{2d-2}$ & 0 &$\frac{1}{d-1}$ & 0 \\
+\cline{2-10}
+&$b=\perp$ & 0 & 0 & $\frac{d-3}{d-1}$ 
+&  0 & 0 &  $\frac{d-3}{d-1} $ &0 & $\frac{d-3}{d-1}$ \\
+\hline
+\multirow{3}{*}{$y = \nr+2$} & $b=0$ & $\frac{1}{2d-2}$ & $\frac{1}{2d-2}$ & 0 
+& $\frac{1}{d-1}$ & $0$ & 0 & $\frac{1}{d-1}$ & 0 \\
+\cline{2-10}
+&$b=1$ & $\frac{1}{2d-2}$ & $\frac{1}{2d-2}$ & $0$ 
+&  0 & $\frac{1}{d-1}$ & $0$ &$\frac{1}{d-1}$ & 0 \\
+\cline{2-10}
+&$b=\perp$ & 0 & 0 & \small $\frac{d-3}{d-1}$ 
+&  0 & 0 & \small $\frac{d-3}{d-1} $ &0 &\small $\frac{d-3}{d-1}$ \\
+\hline
+\multirow{2}{*}{$y = \ast$} & $b=\diamond$ & $\frac{1}{d-1}$ & $\frac{1}{d-1}$ & 0 
+& $\frac{1}{d-1}$ & $\frac{1}{d-1}$ & 0 & $\frac{2}{d-1}$ & 0 \\
+\cline{2-10}
+&$b=\perp$ & 0 & 0 & $\frac{d-3}{d-1}$ 
+&  0 & 0 & \small $\frac{d-3}{d-1} $ &0 & \small $\frac{d-3}{d-1}$ \\
+\hline
+\end{tabular}
+\end{center}
+\caption{The correlation for $x ,y\in\{\nr+1,\nr+2, \ast\} $.}
 \end{table}
 
 \begin{table}[H]
@@ -1148,419 +1258,206 @@ $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & \small $\fra
 \begin{tabular}{|c|c||c|c|c|c|c|c|}
 \hline
 \multicolumn{2}{|c|}{} &
-\multicolumn{3}{|c|}{$x=1$}&
-\multicolumn{3}{|c|}{$x=2$} \\
+\multicolumn{6}{|c|}{$y=(\nr+1, r+6)$}\\
 \cline{3-8}
 \multicolumn{2}{|c|}{} &
-$a = 0$ & $a=1$ & $a=\perp$ &
-$a = 0$ & $a=1$ & $a=\perp$\\
+$b = 00$ & $b=01$ & 
+$b = 10$ & $b=11$ &
+$b = \perp0$ & $b= \perp1$   \\
 \hline
 \hline
-\multirow{2}{*}{$y = \ast$} & $b=\diamond$ & $1/(d-1)$ & $1/(d-1)$ & 0 
-& $1/(d-1)$ & $1/(d-1)$ & 0 \\
+\multirow{3}{*}{$x = \nr+1$} & $a=0$ & $\frac{1}{2d-2}$ & $\frac{1}{2d-2}$ &  $0$
+& $0$ & $0$ & $0$  \\
 \cline{2-8}
-&$b=\perp$ & 0 & 0 & $\frac{d-3}{d-1}$ 
-&  0 & 0 & \small $\frac{d-3}{d-1} $  \\
+&$a=1$ & $0$ & $0 $ & $\frac{1}{2d-2}$ 
+&  $\frac{1}{2d-2}$ & $0$ & $0$  \\
+\cline{2-8}
+&$b=\perp$ & 0 & 0 & $0$ 
+&  0 & $\frac{d-3}{2d-2}$ & $\frac{d-3}{2d-2} $  \\
+\hline
+\multirow{2}{*}{$x = r+6$} & $a=0$ & $\frac{1}{2d-2}$ & $0$ & $\frac{1}{2d-2}$ 
+& $0$ & $\frac{d-3}{2d-2}$ & 0  \\
+\cline{2-8}
+&$a=1$ & $0$ & $\frac{1}{2d-2}$ & $0$ 
+&  $\frac{1}{2d-2}$ & $0$ & $\frac{d-3}{2d-2}$  \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Alice and Bob's behaviour when $x\in [2]$ and $y = \ast$.}
+\caption{The correlation for the commutation test between $M_{r+6}$ and $M_{\nr+1}$.}
 \end{table}
-Alice's projectors are 
-\begin{align*}
-	&A_\ast^\diamond = \Pi_V, A_\ast^\perp = \Pi_V^\perp \\
-	&A_1^0 = \ketbra{u_1}{u_1}, A_1^1 = \ketbra{u_{d-1}}{u_{d-1}}, A_1^\perp = \Pi_V^\perp\\
-	&A_2^0 = \frac{1}{2}(\ket{u_1}+\ket{u_{d-1}})(\bra{u_1}+\bra{u_{d-1}}), 
-	A_2^1 = \frac{1}{2}(\ket{u_1}-\ket{u_{d-1}})(\bra{u_1}-\bra{u_{d-1}}),A_2^\perp = \Pi_V^\perp.
-\end{align*}
-Bob's projectors are 
-\begin{align*}
-	&B_\ast^\diamond = \Pi_V, B_\ast^\perp = \Pi_V^\perp \\
-	&B_1^0|_V = \left( \cos(\frac{\pi}{d})\ket{u_1} + \sin(\frac{\pi}{d})\ket{u_{d-1}}\right)
-	\left( \cos(\frac{\pi}{d})\bra{u_1} + \sin(\frac{\pi}{d})\bra{u_{d-1}}\right)\\
-	&B_1^1|_V = \left( \sin(\frac{\pi}{d})\ket{u_1} - \cos(\frac{\pi}{d})\ket{u_{d-1}}\right)
-	\left( \sin(\frac{\pi}{d})\bra{u_1} - \cos(\frac{\pi}{d})\bra{u_{d-1}}\right)\\
-	&B_2^0|_V = \left( \cos(\frac{\pi}{d})\ket{u_1} - \sin(\frac{\pi}{d})\ket{u_{d-1}}\right)
-	\left( \cos(\frac{\pi}{d})\bra{u_1} - \sin(\frac{\pi}{d})\bra{u_{d-1}}\right)\\
-	&B_2^1|_V = \left( \sin(\frac{\pi}{d})\ket{u_1} + \cos(\frac{\pi}{d})\ket{u_{d-1}}\right)
-	\left( \sin(\frac{\pi}{d})\bra{u_1} + \cos(\frac{\pi}{d})\bra{u_{d-1}}\right).
-\end{align*}
-About Bob's projectors for input $y \in [2]+1$, we are only interested in their actions when restricted 
-to the subspace $V$. Their actions on the subspace $V^\perp$ is irrelevant in this game.
-
-\carl{This good, but I imagine a reader being a little confused about what you are doing
-with these correlations (since the previous subsection wasn't very clear).}
-
-The self-testing property of this correlation is summarized in the following lemma.
-\begin{lemma}
-	\label{lm:chsh_comp}
-	Suppose a quantum strategy $\left(\{\{\tA_x^a\}_a\}_x, \{\{\tB_y^b\}_b\}_y, \ket{\tpsi}\right)$
-	achieves the optimal correlation of the weighted $\CHSH$ test, 
-	and let $\ket{\tpsi'} = \tA_\ast^\diamond \x \tB_\ast^\diamond \ket{\tpsi}/\norm{\tA_\ast^\diamond \x \tB_\ast^\diamond \ket{\tpsi}}^2$,
-	then there exists isometries $\Phi_A$ and $\Phi_B$ 
-	and a quantum state $\ket{junk}$
-	such that 
-	\begin{align*}
-		&\Phi_A\x \Phi_B \left( \ket{\tpsi'}\right) = \ket{\EPR{2}}\x \ket{junk} \\
-		&\Phi_A\x \Phi_B \left[\left(\1 \x  \frac{\tB_1 + \tB_2}{2\cos(\pi/d)}\right)\ket{\tpsi'}\right]
-		=[(\1 \x \pauliz) \ket{\EPR{2}}] \x \ket{junk} \\
-		&\Phi_A\x \Phi_B \left[\left(\1 \x  \frac{\tB_1 - \tB_2}{-2\sin(\pi/d)}\right)\ket{\tpsi'} \right]
-		=[(\1 \x \paulix) \ket{\EPR{2}}] \x \ket{junk} 
-	\end{align*}
-	where $\tB_1 = \tB_1^0 - \tB_1^1$ and $\tB_2 = \tB_2^0 - \tB_2^1$.
-\end{lemma}
-\begin{proof}
-Note that $\tA_x^a \tB_y^b$ means $\tA_x^a \x\tB_y^b$ in the following proof.
-
-From the marginal distribution $\pb{\diamond}{\ast} = \pa{0}{1}+\pa{1}{1} = 2/(d-1)$,
-we know $\| \tB_\ast^\diamond \ket{\tpsi} \| = \| (\tA_1^0+\tA_1^1) \ket{\tpsi}\| = \sqrt{2/d-1}$.
-Since $\pr{0\diamond}{1\ast} + \pr{1\diamond}{1\ast} = 2/(d-1)$, we find that 
-\begin{align*}
-	\frac{\bra{\tpsi}\tB_\ast^\diamond (\tA_1^0+\tA_1^1) \tB_\ast^\diamond\ket{\tpsi}}{ \| \tB_\ast^\diamond \ket{\tpsi} \|^2} = 1,
-\end{align*}
-which means that 
-\begin{align}
-	(\tA_1^0+\tA_1^1)\tB_\ast^\diamond \ket{\tpsi} = \tB_\ast^\diamond \ket{\tpsi}.
-\end{align}
-Using the commutation relation between $(\tA_1^0+\tA_1^1)$ and $\tB_\ast^\diamond$, we get
-\begin{align*}
-	\frac{\bra{\tpsi} (\tA_1^0+\tA_1^1) \tB_\ast^\diamond(\tA_1^0+\tA_1^1)\ket{\tpsi}}{ \| (\tA_1^0+\tA_1^1) \ket{\tpsi} \|^2} = 1,
-\end{align*}
-Similar argument gives us that 
-\begin{align}
-	\tB_\ast^\diamond (\tA_1^0+\tA_1^1) \ket{\tpsi} = (\tA_1^0+\tA_1^1)\ket{\tpsi}.
-\end{align}
-The two equations above can be chained by commutativity to reach the conclusion that 
-\begin{align}
-	(\tA_1^0+\tA_1^1)\ket{\tpsi} = \tB_\ast^\diamond \ket{\tpsi}.
-\end{align}
-Following the same line of argument, we can conclude that
-\begin{align}
-	\tB_\ast^\diamond \ket{\tpsi} = \tA_\ast^\diamond \ket{\tpsi} = (\tA_1^0+\tA_1^1)\ket{\tpsi} = (\tA_2^0+\tA_2^1)\ket{\tpsi}.
-\end{align}
-Looking at the marginal distribution when Alice and Bob output $\perp$, we conclude that 
-\begin{align}
-	\tB_\ast^\perp \ket{\tpsi} = \tA_\ast^\perp \ket{\tpsi} = \tA_1^\perp \ket{\tpsi} = \tA_2^\perp \ket{\tpsi},
-\end{align}
-with similar arguments.
-
-Next we examine the CHSH-type correlation when $x,y \in [2]+1$,
-\begin{align*}
-	   \bra{\tpsi} \tA_1^0\tB_1^0 \ket{\tpsi} 
-	= &\bra{\tpsi}(\tA_\ast^\diamond + \tA_\ast^\perp) \tA_1^0\tB_1^0 (\tA_\ast^\diamond + \tA_\ast^\perp)\ket{\tpsi} \\
-	= & \bra{\tpsi}\tA_\ast^\diamond \tA_1^0\tB_1^0 \tA_\ast^\diamond\ket{\tpsi} + \bra{\tpsi}\tA_\ast^\diamond \tA_1^0\tB_1^0 \tA_\ast^\perp\ket{\tpsi} \\
-	&+\bra{\tpsi}\tA_\ast^\perp \tA_1^0\tB_1^0 \tA_\ast^\diamond\ket{\tpsi} + \bra{\tpsi}\tA_\ast^\perp \tA_1^0\tB_1^0 \tA_\ast^\perp\ket{\tpsi}\\
-	= & \bra{\tpsi}\tB_\ast^\diamond \tA_1^0\tB_1^0 \tB_\ast^\diamond\ket{\tpsi} + \bra{\tpsi}\tA_\ast^\diamond \tA_1^0\tB_1^0 \tA_0^\perp\ket{\tpsi} \\
-	&+\bra{\tpsi}\tA_0^\perp \tA_1^0\tB_1^0 \tA_\ast^\diamond\ket{\tpsi} + \bra{\tpsi}\tA_0^\perp \tA_1^0\tB_1^0 \tA_0^\perp\ket{\tpsi}\\
-	=&\bra{\tpsi}\tB_\ast^\diamond \tA_1^0\tB_1^0 \tB_\ast^\diamond\ket{\tpsi},
-\end{align*}
-where we use the facts that $\tB_\ast^\diamond \ket{\tpsi} = \tA_\ast^\diamond \ket{\tpsi}$, $\tA_\ast^\perp \ket{\tpsi} = \tA_1^\perp \ket{\tpsi}$ and that 
-$\spn(\tA_1^0) \cap \spn(\tA_0^\perp) = \emptyset$. 
-This means that if Alice and Bob share the state $\tB_\ast^\diamond \ket{\tpsi}/\|\tB_\ast^\diamond \ket{\tpsi}\|$ and apply 
-$\tA_1^0\tB_1^0$, the conditional probability is
-\begin{align}
-	\frac{\bra{\tpsi}\tB_\ast^\diamond \tA_1^0\tB_1^0 \tB_\ast^\diamond\ket{\tpsi}}{\bra{\tpsi} \tB_\ast^\diamond \tB_\ast^\diamond \ket{\tpsi}} = \frac{\cos^2(\pi/2d)}{2}.
-\end{align} 
-We can re-normalize the other correlations of $a,b \in [2]$ when $x,y \in [2+1]$ similarly, and get a new set of correlations 
-which achieves the maximal value of $\langle \1_{-\cot(\pi/2d)}\rangle$. 
-The conclusion of \cref{lm:chsh_comp} follows the application of \cref{thm:selftest} on the state $\tA_\ast^\diamond\tB_\ast^\diamond \ket{\tpsi}/\|\tA_\ast^\diamond\tB_\ast^\diamond \ket{\tpsi}\|$ as $\tA_\ast^\diamond\tB_\ast^\diamond \ket{\tpsi} = \tB_\ast^\diamond \ket{\tpsi}$.
-\end{proof}
-Note that the combination of \cref{lm:chsh_comp} with \cref{prop:2d-subspace} gives us that 
-$\tB_1\tB_2$ has eigenvalues $\omega_d$ and $\omega_d^{-1}$.
-
-
+The correlation table for the other $7$ commutation tests are similar.
 
 %=====================================
 \section{Main result}
 \label{sec:main}
 %=====================================
-In this section, we introduce the correlation $C(\dr{r})$, which is the
-ideal correlation of $\G(\dr{r})$, and then
-prove that it can self-test the state $\ket{\EPR{d-1}}$.
+In this section, we examine the properties of a strategy $S$ that can reproduce the
+full correlation approximately and 
+prove that the strategy $S$ must contain the state $\ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}$
+up to some local isometry.
 
-%-----------------------------------------------------------------
-\subsection{The correlation $C(\dr{r})$}
-%-----------------------------------------------------------------
-Recall that the linear system game $\LS_r$ has $\nr$ variables and $\mr$ equations.
-In game $\G(\dr{r})$, 
-Alice receives $x \in \{1,\dots \mr+3 \}$ and Bob receives
-$y \in \{1,\dots,\nr+1\}$. We follow the previous structure by first give intuition about how they should
-behave in this game. The correlation can be easily extracted from the behaviour list below.
-\begin{itemize}
-	\item When $x \in \{1,\dots \mr\}$ and $y \in \{1, \dots \nr\}$, they should win the 
-	linear system game $\LS_r$ perfectly;
-	\item when $x \in \{\mr+1, \mr+2, \mr+3\}$ and $y \in \{1, 2, \nr+1\}$, they should follow the
-	optimal correlation of the test $\CHSH_X$, where 
+Let us denote the full correlation by $( \tpr{ab}{xy} )$, then the formal statement of an approximate strategy is given below.
+\begin{definition}
+	We say a quantum strategy $S = (\ket{\psi}, \{M_x^a\}, \{N_y^b\})$, which produces the correlation
+	$( \pr{ab}{xy} = \bra{\psi} M_x^a N_y^b \ket{\psi} )$ such that
 	\begin{align}
-		&\ast_A = m_r+1, \quad 1_A = m_r+2,\quad 2_A = m_r+3,\\
-		&\ast_B = \nr+1,\quad 1_B = 1, \quad 2_A = 2,
+	E_{xy} \sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq \ep,
 	\end{align}
-	are the inputs for the game $\CHSH_X$
-	(The intuition behind is that $B_1B_2 = X$.);
-	\item otherwise, their behaviour is irrelevant.
-\end{itemize}
-Note that the dimension $\dr{r}$ is defined in the rules of $\CHSH_X$.
+	is an $\ep$-approximate quantum strategy.
+\end{definition}
+In the our full test, the probability distribution over all the questions $(x,y)$ is uniform.
+Since the number of all the possible questions is $O(r^2)$ and 
+the number of possible output pairs is $(a,b)$ is constant for each question pair $(x,y)$, 
+the approximate condition directly imply that 
+$\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$, for all $(a,b,x,y)$.
 
+In the next three subsections, we analyze the implication of an approximate strategy to pass the 
+three subtests given in \cref{sec:full_test}.
+
+%------------------------------------------------------------------------------------------
+\subsection{Implication of passing the linear constraint test}
+\label{sec:imp_lct}
+%------------------------------------------------------------------------------------------
+We slightly change the notation so that instead of the notation $(x,y)$, Alice gets equation number $i$, sometimes with a variable label $j$,
+ and Bob gets a variable label $j$.
+The way we conducted the linear constraint test forces Alice to have binary observables $\{M_{ij}\}$ that satisfies 
+\cref{def:q_strat}.
 \begin{proposition}
-	\label{prop:realize}
-	The correlation $C(\dr{r})$ can be realized by a quantum strategy.
+	\label{prop:lct_base}
+	Let $S$ be an $\ep$-approximate strategy,
+	then there exist binary observables $\{ M_j \}_{j \in [\nr]}$, such that
+	\begin{align}
+		&M_j N_j \ket{\psi} \appd{O(r\se)} \ket{\psi} \\
+		&\Pi_{j \in I_i} M_j \ket{\psi} \appd{O(r\se)}(-1)^{\uc(i)} \ket{\psi}.
+	\end{align}
 \end{proposition}
-We prove this proposition by giving the ideal strategy.
 \begin{proof}
-We give the ideal strategy for the extended weighted $\CHSH_X$ test first and then based on it we give a representation of 
-group $\Gamma(\LS)$, $\Psi$, which can be converted to an ideal strategy for $\LS$. 
-The ideal strategy for $C(\dr{r})$ is the combination of the two ideal strategies for the two tests.
-
-\textbf{The ideal strategy for the weighted $\CHSH_X$ test}.
-Alice and Bob share state 
+Since $\tpr{\ux b}{ij}$ win's the linear system game optimally, we know that 
+$
+\sum_{\ux,b: \ux \in X_i, \ux(j) = b} \tpr{\ux b}{ij} = 1
+$
+for all $i = 1 \dots \mr$.
+It has been shown \cite{slofstra2017} that 
 \begin{align}
-	\ket{\psi} = \frac{1}{\sqrt{d-1}}\sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})
+	\bra{\psi} M_{ij} N_j \ket{\psi} = 2 \sum_{\ux,b: \ux \in X_i, \ux(j) = b} \pr{\ux b}{ij} -1 \appd{O(r^2 \ep)} 1.
+\end{align}
+Since $M_{ij}$ and $N_j$ are unitaries, we know that
+\begin{align}
+	M_{ij} \ket{\psi} \appd{O(r\se)} N_j \ket{\psi} \text{ for all } i \leq \mr \text{ and } j \leq \nr.
+\end{align}
+We define $M_j := M_{ij}$ for the smallest $i$ such that $ j \in I_i$ then 
+\begin{align}
+	M_j N_j \ket{\psi} \appd{O(r\se)} M_{ij}N_j\ket{\psi} \appd{O(r\se)} \ket{\psi} \quad \text{ for all } j \leq \nr.
+\end{align}
+
+The definition of $M_{ij}$ tells us that 
+$
+\bra{\psi} \Pi_{j \in I_i} M_{ij} \ket{\psi} = (-1)^{\uc(i)}
+$
+or equivalently,
+\begin{align}
+	\Pi_{j \in I_i} M_{ij} \ket{\psi} = (-1)^{b_i} \ket{\psi}\quad\text{ for all } i \leq \mr.
 \end{align}	
-and choose the special subspace to be 
-$V = \spn(\ket{1} ,\ket{d-1})$.
-Alice's projectors and observables for the weighted $\CHSH_X$ test are
+If we replace each $M_{ij}$ with $M_j$ in the equation above, we demonstrate the effect on a
+general case that $I_i = \{j_1, j_2, j_3\}$,
 \begin{align*}
-	&A_0^\diamond = \ketbra{1}{1} + \ketbra{d-1}{d-1}, &&A_0^\perp = \1 - A_\ast^\diamond, \\
-	&A_{m_r+2} = A_{m_r+2}^0-A_{m_r+2}^1 = \ketbra{1}{1} - \ketbra{d-1}{d-1}, &&A_{m_r+2}^\perp = A_\ast^\perp,\\
-	&A_{m_r+3} = A_{m_r+3}^0-A_{m_r+3}^1 = \ketbra{1}{d-1} + \ketbra{d-1}{1} ,&&A_{m_r+3}^\perp = A_\ast^\perp.
+	&\norm{ M_{ij_1}M_{ij_2}M_{ij_3} \ket{\psi} - M_{j_1}M_{j_2}M_{j_3} \ket{\psi}}\\
+	\leq & \norm{M_{ij_1}M_{ij_2}M_{ij_3} \ket{\psi} - M_{j_1}M_{ij_2}M_{ij_3} \ket{\psi}}+
+	\norm{M_{j_1}M_{ij_2}M_{ij_3} \ket{\psi} - M_{j_1}M_{j_2}M_{ij_3} \ket{\psi}} +\\
+	&\norm{M_{j_1}M_{j_2}M_{ij_3} \ket{\psi} - M_{j_1}M_{j_2}M_{j_3} \ket{\psi}}\\
+	\leq &3O(r\se) = O(r\se).
 \end{align*}
-Recall that in the extended weighted $\CHSH_X$ test, what matters is the 
-Bob's observables restricted to the subspace $V$, which are given by
-\begin{align*}
-	B_1|_V = \cos(\frac{\pi}{d})(\ketbra{1}{1} - \ketbra{d-1}{d-1}) - \sin(\frac{\pi}{d})(\ketbra{1}{d-1} + \ketbra{d-1}{1}),\\
-	B_2|_V = \cos(\frac{\pi}{d})(\ketbra{1}{1} - \ketbra{d-1}{d-1}) +\sin(\frac{\pi}{d})(\ketbra{1}{d-1} + \ketbra{d-1}{1}).
-\end{align*}
-To make sure operator $B_2$ commutes with the operator $U = \Psi(x_3x_4) = \Psi(u)$ that we will construct later, we pick a 
-special basis of $X|_V =B_1|_VB_2|_V$, which is
+Hence we can conclude that 
 \begin{align}
-	\ket{x_1} = \frac{-1}{\sqrt{2}}(\ket{1} + i\ket{d-1}), &&
-	\ket{x_{d-1}} = \frac{-e^{i\pi/d}}{\sqrt{2}}(\ket{1} - i\ket{d-1}).
+	\Pi_{j \in I_i} M_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} \quad \text{ for all } i \leq \mr.
 \end{align}
-It can be checked that $X\ket{x_1} = \omega_d \ket{x_1}$ and $X\ket{x_{d-1}} = \omega_d^{d-1} \ket{x_{d-1}}$.
-In this basis, $B_1|_V$ and $B_2|_V$ are expressed as 
-\begin{align}
-	&B_1|_V = \omega_d\ketbra{x_1}{x_{d-1}} + \omega_d^{-1} \ketbra{x_{d-1}}{x_1},\\
-	&B_2|_V =\ketbra{x_1}{x_{d-1}}  + \ketbra{x_{d-1}}{x_1}.
-\end{align}
-Extending $B_1|_V$ and $B_2|_V$ to the whole space spanned by $\{ \ket{j} \}_{j=1}^{d-1}$ gives us that
-\begin{align}
-	B_1 =\sum_{j=1}^{(d-1)/2} \omega_d^j \ketbra{x_j}{x_{d-j}} + \omega_d^{-j} \ketbra{x_{d-j}}{x_{j}} &&
-	B_2 = \sum_{j=1}^{d-1} \ketbra{x_j}{x_{d-j}},
-\end{align}
-where the basis state $\ket{x_j}$ and $\ket{x_{d-j}}$ are defined by
-\begin{align}
-	\ket{x_j} = \frac{-1}{\sqrt{2}}(\ket{j} + i\ket{d-j}), &&
-	\ket{x_{d-j}} = \frac{-e^{ij\pi/d}}{\sqrt{2}}(\ket{j} - i\ket{d-j}) \text{ for } j = 1 \dots \frac{d-1}{2}.
-\end{align}
-If we use the basis $\{ \ket{x_j} \}_{j=1}^{d-1}$, the shared state is 
-\begin{align}
-	\ket{\psi} =& \frac{1}{\sqrt{d-1}} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})\\
-	=& \frac{1}{\sqrt{d-1}} \sum_{j=1}^{(d-1)/2}  e^{ij\pi/d}e^{-ij\pi/d} (\ket{x_{j}}\ket{x_{d-j}} + \ket{x_{d-j}}\ket{x_{j}} \\
-	=& \frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j} \ket{x_{d-j}}.
-\end{align}
-
-\textbf{The ideal strategy for $\LS_r$}.
-We denote the number of generators labelled by $x_i$ in $\LS_r$ by $n(r,x)$.
-In order to construct a representation of $\Gamma(\LS_r)$, we first construct a representation, $\Psi_1$ for the group 
-\begin{align}
-	G_r(x) = \ip{ \{x_i\}_{i=1}^{n(r,x)}: x_i^2 = e, x_i x_j x_i = x_k \text{ for all } (i,j,k) \in C_r},
-\end{align}
-on the vector space $W_{d-1} = \spn(\{ \ket{x_j} \}_{j=1}^{d-1})$,
-where details of $C_r$ can be found in the appendices. 
-Note that the relation $uou^{-1} = x^r$ is embedded in the conjugation relations in $C_r$.
-Building on $\Psi_1$, we can construct 
-the representation $\Psi_{\LS_r}$ for the solution group $\Gamma(\LS_r)$.
-
-Since Bob gets the same symbols $1$ and $2$ in different sub-tests, 
-the observables $A_1 = B_1 = \Psi_1(x_1)$ and $A_2 = B_2 = \Psi_1(x_2)$ are extended from $B_1|_V$ and $B_2|_V$ as follows
-%\begin{align}
-%	B_1 = \ketbra{x_0}{x_0} + 
-%	\sum_{k=1}^{(d-1)/2}\left( e^{ik\pi/2d}\ketbra{x_k}{x_{d-k}} + e^{-ik\pi/2d}\ketbra{x_{d-k}}{x_k}\right)\\
-%	B_2 = \ketbra{x_0}{x_0} + 
-%	\sum_{k=1}^{(d-1)/2}\left( e^{ik\pi/2d}\ketbra{x_{d-k}}{x_k} + e^{-ik\pi/2d}\ketbra{x_{k}}{x_{d-k}}\right)
-%\end{align}
-\begin{align}
-	A_1 = B_1 = \Psi_1(x_1) &= \sum_{k=1}^{(d-1)/2}\left( \omega_d^k\ketbra{x_k}{x_{d-k}} + \omega_d^{-k}\ketbra{x_{d-k}}{x_k}\right)\\
-	A_2 = B_2 = \Psi_1(x_2) &= \sum_{k=1}^{(d-1)/2}\left(\ketbra{x_{d-k}}{x_k} + \ketbra{x_k}{x_{d-k}}\right).
-\end{align}
-It can be checked that $O = \Psi_1(x_1x_2) = \sum_{i \in \Zd} \omega_d^i \ketbra{x_i}{x_i}$ 
-The relation $uou^{-1} = x^r$ and the form of $O$ determine that 
-\begin{align}
-	U =\Psi_1(u) = \Psi_1(x_3x_4) =  \sum_{i \in \Zd} \ketbra{x_{r^{-1}i}}{x_i},
-\end{align}
-\hf{where $r^{-1}$ is the multiplicative inverse of $r$ in $\Zd$.
-All the multiplications done on the label $i$ of the state $\ket{x_i}$ are within the group $\Zd$.}
-The first step of the embedding procedure in the proof of \cref{prop:embed} requires
-the commutativity between $U$ and $B_2$, so we prove the commutation relation first and
-then give $\Psi_1(x_3)$ and $\Psi_1(x_4)$.
-The commutation relation can be checked as follows,
-\begin{align}
-	UB_2U\ct = \sum_{i=1}^{d-1} U\ketbra{x_i}{x_{d-i}}U\ct = \sum_{i=1}^{d-1} \ketbra{x_{r^{-1} i}}{x_{r^{-1}(d-i)}} =B_2.
-\end{align}
-%Let $i_1 = i r^{-1} \in \Zd$ and $i_2  = r^{-1} (d-i) \in \Zd$, then
-%\begin{align*}
-%	r(i_1 + i_2) \equiv  i + (d-i) \equiv d \pmod{d} .
-%\end{align*}
-%Let $i_1 + i_2= x \in \{2, 3 \dots 2d-2\}$, then
-%\begin{align}
-%	rx \equiv d \pmod{d}
-%\end{align}
-%Since $d$ is an odd prime number and $r < d$, then $r$ cannot divide $d$ and the only valid value of $x$ is $d$.
-%Hence, conjugation by $U$ will transform $\ketbra{x_i}{x_{d-i}}$ into another term of the same form.
-%Now suppose for some $1 \leq i < i' \leq d-1$ and $U\ketbra{x_i}{x_{d-i}}U\ct = U\ketbra{x_{i'}}{x_{d-i'}}U\ct$,
-%it means that in $\Zd$, $i r^{-1} = i' r^{-1}$ and $i = i'$, which contradicts the fact that $i \neq i'$.
-%What we have shown so far is that conjugation by $U$ only permutes the terms of $B_2$, so
-%\begin{align}
-%	UB_2U\ct = B_2.
-%\end{align}
-
-The decomposition of $U$ into $\Psi_1(x_3)$ and $\Psi_1(x_4)$ is similar to the decomposition of $X$.
-Since $u$ has order $d-1$, we can find an eigenbasis $\{ \ket{u_i} \}_{i=0}^{d-2}$ such that the eigen-decomposition of $U$ is
-\begin{align}
-	U = \sum_{i=0}^{d-2} \omega_{d-1}^i \ketbra{u_i}{u_i},
-\end{align} 
-then $\Psi_1(x_3)$ and $\Psi_1(x_4)$ are  
-\begin{align*}
-	A_3 = B_3 =\Psi_1(x_3) = &\ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}}\\ + 
-	&\sum_{k=1}^{(d-3)/2}\left( \omega_{d-1}^k\ketbra{u_k}{u_{d-1-k}} + \omega_{d-1}^{-k}\ketbra{x_{d-1-k}}{x_k}\right)\\ 
-	A_4 = B_4  =\Psi_1(x_4) = &\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\+
-	 &\sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right).
-\end{align*}
-Next we will show that 
-\begin{align}
-	A_3\x B_3 \ket{\psi} = \ket{\psi} && A_4 \x B_4 \ket{\psi} = \ket{\psi}.
-\end{align}
-For this purpose, we use a different expression of $\ket{\psi}$, which is
-\begin{align}
-	\ket{\psi} = \frac{1}{\sqrt{d}} \sum_{j=0}^{d-2} \ket{r^j} \ket{r^{d-1-j}}.
-\end{align}
-Then the eigenvectors of $U$ are 
-\begin{align}
-	\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{r^j}.
-\end{align}
-Hence we can express $\ket{r^j}$ in terms of $\ket{u_k}$ as 
-\begin{align}
-	\ket{r^j} = \frac{1}{\sqrt{d-1}} \sum_{k=0}^{d-2} \omega_{d-1}^{-jk} \ket{u_k}.
-\end{align}
-Then $B_4$ acts on $\ket{r^j}$ as 
-\begin{align}
-	B_4 \ket{r^j} =& \frac{1}{\sqrt{d-1}} B_4\left(\ket{u_0} + \omega_{d-1}^{-j(d-1)/2}\ket{u_{(d-1)/2}}  + 
-	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_k} + \omega_{d-1}^{jk} \ket{u_{d-1-k}})\right) \\
-	=&\frac{1}{\sqrt{d-1}} \left(\ket{u_0} + (-1)^j\ket{u_{(d-1)/2}}  + 
-	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_{d-1-k}} + \omega_{d-1}^{jk} \ket{u_{k}})\right) \\
-	=& \ket{r^{d-1-j}}.
-\end{align}
-We first verify that $U \x U \ket{\psi} = \ket{\psi}$
-\begin{align}
-	U \x U \ket{\psi} &= \frac{1}{\sqrt{d-1}}\sum_{j = 0}^{d-2} \ketbra{ r^{j}r^{-1}}{r^j} \ket{r^j} \x \ketbra{r^{d-1-j} r^{-1}}{r^{d-1-j}} \ket{r^{d-1-j}} \\
-	&=\frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^{j-1}}\ket{r^{d-1-j}} = \ket{\psi},
-\end{align}
-where we use the fact that $\ket{r^{-1}} = \ket{r^{d-2}}$.
-Then we show that $A_4 \x B_4 \ket{\psi} = \ket{\psi}$ as 
-\begin{align}
-	A_4 \x B_4 \ket{\psi} = \frac{1}{\sqrt{d-1}}  \sum_{j=0}^{d-2} A_4 \x B_4 \ket{r^j} \ket{r^{d-1-j}} 
-	= \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{r^{d-1-j}} \ket{r^{j}} =\ket{\psi},
-\end{align}
-which combined with the previous fact implies that $A_3 \x B_3 \ket{\psi} = \ket{\psi}$.
-
-The conjugation relations in $C_r$ determines the representations of 
-the rest of the $x_i$'s from $x_1,x_2,x_3$ and $x_4$. 
-For example, if $x_5 = x_1x_2x_1 \in C_r$, then
-\begin{align}
-	\Psi_1(x_5) = \Psi_1(x_1)\Psi_1(x_2) \Psi_1(x_1).
-\end{align}
-
-Next, we consider the representation $\Psi_2$ for the group 
-\begin{align*}
-	G(x,y,z,w) = \ip{ \{x_i, w_i, y_i, z_i\}_{i=1}^{n(r,x)}, f, \{g_{jk}\}_{(i,j,k) \in C_r} :&\text{all elements are of order $2$},\\
-	&x_i = y_iz_i = fw_i,\; fy_if =z_i \text{ for } i= 1 \dots \nr(x) \\
-	&g_{jk}y_j z_k = e,\; w_iy_jw_i = z_k \text{ for all } (i,j,k)\in C_r},
-\end{align*}
-on the vector space $W_2 \x W_{d-1}$,
-where $W_2 = \spn\{ \ket{x_1}, \ket{x_2}\}$.
-Note that the choice of the basis states of $W_2$ is arbitrary.
-On $W_2$, we define 
-\begin{align}
-	\1_{W_2} = \ketbra{x_1}{x_1} + \ketbra{x_2}{x_2}, && X_{W_2} = \ketbra{x_1}{x_2} + \ketbra{x_2}{x_1}.
-\end{align}
-Another property that we should note is that from the presentation, we can deduce that for all $i = 1 \dots n(r,x)$, 
-\begin{align}
-	fx_i fx_i = f (fw_i) f (fw_i) = w_i w_i = e,
-\end{align}
-so $f$ commutes with $x_i$ for all $i$.
-The representation $\Psi_2$ of $G(x,y,z,w)$ should satisfy the condition that for each $x_i$, 
-$\Psi_2(x_i) = \Psi_2(y_i)\Psi_2(z_i) = \Psi_2(f)\Psi_2(w_i)$. We demonstrate how this representation is constructed 
-for $x_i$, $y_i$, $z_i$, $w_i$ and $f$ where $i = 1 \dots n(r,x)$.
-Building on $\Psi_1$, we have $\Psi_2(x_i) = \1_{W_2} \x \Psi_1(x_i)$, then
-$y_i$, $z_i$, $w_i$ and $f$ are mapped to
-\begin{align*}
-&\Psi_2(y_i) = \ketbra{x_1}{x_1} \x \Psi_1(x_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} \\
-&\Psi_2(z_i) =\ketbra{x_1}{x_1} \x \1_{W_{d-1}} + \ketbra{x_2}{x_2} \x \Psi_1(x_i) \\
-&\Psi_2(w_i) =  X_{W_2} \x \Psi_1(x_i)\\
-&\Psi_2(f) = X_{W_2} \x \1_{W_{d-1}}.
-\end{align*}
-It can be easily checked that the order-$2$ generators are mapped to order-$2$ operators and
-the relations satisfied by the generators are preserved.
-For each $g_{jk}$ where $(i,j,k) \in C_r$, 
-\begin{align}
-\Psi_2(g_{jk}) = \ketbra{x_1}{x_1} \x \Psi_1(x_j) + \ketbra{x_2}{x_2} \x \Psi_1(x_k).
-\end{align}
-
-The group $G_r(x,y,z,w)$ is embedded in $\Gamma(\LS_r)$ by replacing the conjugacy relations 
-by linear relations. The new generators are $\{\{y_{F_j,k}\}_{k=1}^6\}_{j=1}^{n(r,x)}
-\cup \{\{y_{K,k}\}_{k=1}^7\}_{K \in C_r}$. How the new linear relations can embed the conjugacy relations 
-in $G_r(x,y,z,w)$ can be found in the appendices. 
-The relations that we should pay attention to are
-\begin{align}
-	fy_{F_j,1}y_{F_j,2} =  e, && y_j y_{F_j,2}y_{F_j,3} = e \text{ for } j = 1 \dots n(r,x),
-\end{align}
-which imply that $y_{F_j, 2}$ commutes with $f$ and $y_j$.
-Since $z_j = fy_jf$, $y_{F_j, 2}$ commutes with $z_j$ too.
-We also know that $x_j = y_jz_j$, so we can conclude that $y_{F_j, 2}$ commutes with $x_j$.
-
-
-Now we define the representation $\Psi_{\LS_r}$ of
-$\Gamma(\LS_r)$ on $W_2 \x W_2 \x W_{d-1}$. For any generator $a \in \{x_i, w_i, y_i, z_i\}_{i=1}^{n(r,x)}, f, \{g_{jk}\}_{(i,j,k) \in C_r}$,
-\begin{align}
-	\Psi_{\LS_r}(a) = \1_{W_2} \x \Psi_2(a) 
-\end{align}
-For generators $\{y_{F_j,k}\}_{k=1}^7\}_{j=1}^{n(r,x)}$,
-\begin{align*}
-	\Psi_{\LS_r}(y_{F_j,1}) &=X_{W_2} \x \Psi_2(f) = X_{W_2} \x X_{W_2} \x \1_{W_{d-1}}\\
-	\Psi_{\LS_r}(y_{F_j,2}) &= X_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
-	\Psi_{\LS_r}(y_{F_j,3}) &= X_{W_2} \x \Psi_2(y_j) = X_{W_2} \x ( \ketbra{x_1}{x_1} \x \Psi_1(x_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} )\\
-	\Psi_{\LS_r}(y_{F_j,4}) &= \ketbra{x_1}{x_2} \x \Psi_2(y_jf) + \ketbra{x_2}{x_1} \x \Psi_2(fy_j)\\
-	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_1(x_j) + \ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_2}{x_1x_1} \x \Psi_1(x_j)\\ 
-	\Psi_{\LS_r}(y_{F_j,5}) &= \ketbra{x_1}{x_1} \x \Psi_2(fy_jf) + \ketbra{x_2}{x_2} \x \Psi_2(f) \\
-	&= \ketbra{x_1x_}{x_1x_1} \x \1_{W_{d-1}} + \ketbra{x_1x_2}{x_1x_2} \x \Psi_1(x_j) +  \ketbra{x_2}{x_2} \x X_{W_2} \x \1_{W_{d-1}}\\
-	\Psi_{\LS_r}(y_{F_j,6}) &=  \ketbra{x_1}{x_1} \x \Psi_2(fy_jf) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	&=(\ketbra{x_1x_1}{x_1x_1}+  \ketbra{x_1x_2}{x_1x_2}) \x \Psi_1(x_j) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	\Psi_{\LS_r}(y_{F_j,7}) &= \ketbra{x_1}{x_1} \x \Psi_2(y_j) + \ketbra{x_2}{x_2} \x \Psi_2(z_j) \\
-	&=\ketbra{x_1x_1}{x_1x_1} \x \Psi_1(x_j) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1}) + \ketbra{x_2x_2}{x_2x_2} \x \Psi_1(x_j)
-\end{align*}
-For generators $\{\{y_{K,k}\}_{k=1}^7\}_{K=(k_1,k_2,k_3) \in C_r}$,
-\begin{align*}
-	\Psi_{\LS_r}(y_{K,1}) &= X_{W_2} \x \Psi_2(w_{k_1}) = X_{W_2} \x X_{W_2} \x \Psi_1(x_{k_1}) \\
-	\Psi_{\LS_r}(y_{F_j,2}) &= X_{W_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	\Psi_{\LS_r}(y_{F_j,3}) &= X_{W_2} \x \Psi_2(y_{k_2}) = X_{W_2} \x (\ketbra{x_1}{x_1} \x \Psi_1(x_{k_2}) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}})\\
-	\Psi_{\LS_r}(y_{F_j,4}) &= \ketbra{x_1}{x_2} \x  \Psi_2(y_{k_2}w_{k_1}) + \ketbra{x_2}{x_1} \x \Psi_2(w_{k_1}y_{k_2})\\
-	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_1(x_{k_2}x_{k_1}) + (\ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_1}{x_1x_2}) \x \Psi_1(x_{k_1})
-	+  \ketbra{x_2x_2}{x_1x_1} \x \Psi_1(x_{k_1}x_{k_2}) \\
-	\Psi_{\LS_r}(y_{F_j,5}) &= \ketbra{x_1}{x_1} \x \Psi_2(w_{k_1}y_{k_2}w_{k_1}) + \ketbra{x_2}{x_2} \x  \Psi_2(w_{k_1})\\
-	&= \ketbra{x_1x_1}{x_1x_1} \x \1_{W_{d-1}} + \ketbra{x_1x_2}{x_1x_2} \x \Psi_1(x_{k_1}x_{k_2}x_{k_1}) + \ketbra{x_2}{x_2} \x X_{W_2} \x \Psi_1(x_{k_1})\\
-	\Psi_{\LS_r}(y_{F_j,6}) &=  \ketbra{x_1}{x_1} \x \Psi_2(y_{k_2}z_{k_3}) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_1(x_{k_2}) +  \ketbra{x_1x_2}{x_1x_2} \x \Psi_1(x_{k_3}) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	\Psi_{\LS_r}(y_{F_j,7}) &= \ketbra{x_1}{x_1} \x \Psi_2(y_{k_2}) + \ketbra{x_2}{x_2} \x \Psi_2(z_{k_3})\\
-	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_1(x_{k_2}) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1})\x\1_{W_{d-1}} + 
-	\ketbra{x_2x_2}{x_2x_2} \x \Psi_1(x_{k_3})
-\end{align*}
-
-In the end, to compensate the enlarged Hilbert space, the shared state is $\frac{1}{2}( \ket{\psi}^{\oplus 4})$,
-where $\ket{\psi} = \frac{1}{\sqrt{d-1}} \sum_{i=1}^{d-1} \ket{i}\ket{i}$.
-At the same time, the observables for the extended weighted CHSH test are mapped to four copies of themselves. 
 \end{proof}
-Next we are going to prove that the correlation $C(\dr{r})$, which is produced by the 
-strategy winning this game optimally, can self-test $d-1$-dimensional EPR pair.
+Note that with the same technique, we can prove that 
+\begin{align}
+	\Pi_{j \in I_i} N_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} \quad \text{ for all } i \leq \mr.
+\end{align}
+
+Following the steps of the embedding of $(a_3a_4)^l a_1a_2(a_4a_3)^l = (a_1a_2)^{r^l}$ into $\Gamma$,
+we can get the following corollary.
+\begin{proposition}
+\label{prop:lct_adv}
+Let $S$ be an $\ep$-approximate strategy defined earlier and $\{M_j, N_j\}_{j \in \nr}$ be the observables defined in 
+\cref{prop:lct_base}, 
+then
+\begin{align}
+	M_1M_2 (M_4M_3)^l \ket{\psi}\appd{O(r^{l+1} \se)} (M_4M_3)^l (M_1M_2)^{r^l} \ket{\psi} \text{ for all } l \geq 1.
+\end{align}
+\end{proposition}
+\begin{proof}
+The $l = 1$ case follows from the fact that the linear system game embeds $O(r)$ conjugacy relations and 
+all the $O(r)$ conjugacy relations are used in the derivation of $(a_3a_4)a_1a_2(a_4a_3) = (a_1a_2)^r$, so we 
+have
+\begin{align}
+	\label{eq:ls_comm_rel}
+	M_1M_2 (M_4M_3) \ket{\psi} \appd{O(r\se)} (M_4M_3)(M_1M_2)^r \ket{\psi}.
+\end{align}
+Assume the statement is true for $l = n$, then consider the case that $l = n+1$,
+\begin{align*}
+	M_1M_2 (M_4M_3)^{n+1} \ket{\psi}  &\appd{O(r\se)} (N_3N_4) M_1M_2(M_4M_3)^n \ket{\psi} \\
+	&\appd{O(r^{n+1}\se)} (N_3N_4) (M_4M_3)^k (M_1M_2)^{r^n} \ket{\psi}\\
+	&\appd{O(r\se)} (M_4M_3)^n (M_1M_2)^{r^n} (M_4M_3) \ket{\psi} \\
+	& \appd{O(r^{n+1} \se)} (M_4M_3)^{n+1} (M_1M_2)^{r^{n+1}} \ket{\psi},
+\end{align*}
+where from the second to the last line we repeat the process of applying \cref{eq:ls_comm_rel} 
+and the relation $M_1M_2 \ket{\psi} \appd{O(r\se)} N_1N_2 \ket{\psi}$, $r^n$ times.
+In summary, we have 
+\begin{align}
+	M_1M_2(M_4M_3)^{n+1} \ket{\psi} \appd{O(r^{n+2} \se)} (M_4M_3)^{n+1} (M_1M_2)^{r^{n+1}}\ket{\psi},
+\end{align}
+because $O(r^{n+1} \se)+O(r^{n+1}\se) = O(r^{n+2} \se)$.
+By the principal of proof by induction, the proof is complete.
+\end{proof}
+%An informal justification of the corollary is the following calculation
+%\begin{align}
+%	M_1M_2(M_4M_3)^k \ket{\psi} &\appd{O((k-1)r\se)} (N_3N_4)^{k-1} M_1M_2(M_4M_3) \ket{\psi} \\
+%	&\appd{O(r\se)} (N_3N_4)^{k-1}(M_4M_3) (M_1M_2)^r \ket{\psi} \\
+%	&\appd{O(r\se)} (N_4N_4)^{k-2} (M_4M_3) (M_1M_2)^{r} (M_4M_3) \ket{\psi}\\
+%	&\appd{O(r^2 \se)} (N_4N_3)^{k-2} (M_4M_3)^2 (M_1M_2)^{r^2} \ket{\psi} \\
+%	& \ldots (k-2  \text{ more such swaps} ) \ldots \\
+%	&\appd{O(r^{k-1}\se)} (M_4M_3)^{k} (M_1M_2)^{r^{k}}\ket{\psi}.
+%\end{align}
+%The total distance introduced by the whole procedure above is
+%\begin{align}
+%	\sum_{j=0}^{k-1} O(r^j \se) = O(r^k \se).
+%\end{align}
+
+For simplicity, we define $O_A = M_1M_2$ and $U_A=M_3M_4$ such that
+the conclusion of \cref{prop:lct_adv} can be rewritten as 
+\begin{align}
+	U_A^k O_A (U_A\ct)^k \ket{\psi} \appd{O(r^{k+1} \se)} O_A^{r^k} \ket{\psi}.
+\end{align}
+Similar relation holds on Bob's side too.
+
+The other relations that are embedded in $\Gamma$ are 
+\begin{align}
+	\label{eq:comm}&[f_0, a_i] = [f_2, a_i] = [g_0, a_i] = [g_2, a_i] = e \text{ for all } i = 1 \dots r+5 \\
+	\label{eq:mg1}&f_0g_0 = Jg_0f_0 \\
+	\label{eq:mg2}&f_2g_2 = J g_2 f_2.
+\end{align}
+We summarize the implications in the following corollary.
+\begin{proposition}
+	\label{prop:lct_comm}
+	Let $S$, $\{M_j, N_j\}_{j=1}^{\nr}$ be the strategy and observables defined in \cref{prop:lct_base},
+	then
+	\begin{align}
+		&M_{r+6} M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+6} \ket{\psi} && 
+		M_{r+8}M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+8} \ket{\psi} \\
+		&M_{r+9} M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+9} \ket{\psi} && 
+		M_{r+11}M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+11} \ket{\psi} 
+	\end{align}
+	for all $j = 1 \dots r+5$, and
+	\begin{align}
+		&M_{r+6}M_{r+9} \ket{\psi} \appd{O(r\se)} - M_{r+9}M_{r+6} \ket{\psi} \\
+		&M_{r+8}M_{r+11} \ket{\psi} \appd{O(r\se)} -M_{r+11}M_{r+8} \ket{\psi}.
+	\end{align}
+\end{proposition}
+Recall all the relations in \cref{eq:comm,eq:mg1,eq:mg2} are embedded in constant number of linear relations in $\Gamma$,
+so this proposition can be proved using the same technique as that used in the proof of \cref{prop:lct_base}.
 
 %-----------------------------------------------------------------
 \subsection{Self-test}
@@ -1914,87 +1811,88 @@ method uses correlation grows linearly in $d$.
 \bibliography{quantum_correlation}
 \appendix
 %========================================
-\section{Proof of \cref{thm:selftest} }
+\section{The proof of \cref{thm:selftest} }
 \label{sec:selftest}
 %========================================
 This proof follows the same line of argument in Appendix A of Ref.~\cite{bamps2015}.
-We first find two sum-of-square decompositions of $2\sqrt{\alpha^2+1} \1 - \I_\alpha$.
+We first find two sum-of-square decompositions of $2\sqrt{\alpha^2+1} \1 - \I_\alpha$,
+where $\I_\alpha$ is expressed in terms of $\{M_x\}$ and $\{N_y\}$.
 The decompositions allow us to determine some key relations between Alice and Bob's observables
-and their shared state, which will be used to draw the closeness conclusion.
+and their shared state, which will be used to draw the conclusion.
 
 \begin{proof}
 The first step is to find a sum-of-square decomposition of 
 the following Bell expression
 \begin{align}
 	\bar{\I}_\alpha = 2\sqrt{\alpha^2+1} \1 - \I_\alpha
-	= \frac{2}{\sin(\mu)} \1 - \frac{\cos(\mu)}{\sin(\mu)}(A_1B_1+A_1B_2) -  A_2B_1 + A_2B_2.
+	= \frac{2}{\sin(\mu)} \1 - \frac{\cos(\mu)}{\sin(\mu)}(M_1N_1+M_1N_2) -  M_2N_1 + M_2N_2.
 \end{align} 
-With the following notation
+With the notation $c:= \cos(\mu)$, $s := \sin(\mu)$ and 
 \begin{align*}
-	&Z_A = A_1 && X_A = A_2\\
-	&Z_B = \frac{B_1+B_2}{2\cos(\mu)} && X_B = \frac{B_1-B_2}{2\sin(\mu)},
+	&Z_A = M_1 && X_A = M_2\\
+	&Z_B = \frac{N_1+N_2}{2c} && X_B = \frac{N_1-N_2}{2s},
 \end{align*}
 the two SOS decompositions that we use are
 \begin{align}
-	\label{eq:sos1}&\bar{\I}_\alpha = \frac{\sin(\mu)\bar{\I}_\alpha^2 + 4\sin(\mu)\cos(\mu)^2(Z_AX_B+X_AZ_B)^2}{4},\\
-	\label{eq:sos2}&\bar{\I}_\alpha = \frac{\cos^2(\mu)}{\sin(\mu)}(Z_A-Z_B)^2 + \sin(\mu) (X_A-X_B)^2.
+	\label{eq:sos1}&\bar{\I}_\alpha = \frac{s \bar{\I}_\alpha^2 + 4sc^2(Z_AX_B+X_AZ_B)^2}{4},\\
+	\label{eq:sos2}&\bar{\I}_\alpha = \frac{c^2}{s}(Z_A-Z_B)^2 + s(X_A-X_B)^2.
 \end{align}
-The verification is omitted here.
-
-Suppose the quantum strategy $(\ket{\psi}, \{\tilde{A}_x\}_{x=1,2}, \{\tilde{B}_{y }\}_{y=1,2}$ achieves that 
-$\bra{\psi} \bar{\I}_\alpha \ket{\psi} \leq \epsilon$ where
-$\bar{\I}_\alpha$ is expressed with $\tA_x$ and $\tB_y$.
-The second step is to establish bounds of the following form
-\begin{align}
-	\label{eq:zazb} &\|(\tilde{Z}_A-\tilde{Z}_B)\ket{\psi}\| \leq c_1 \sqrt{\epsilon}\\
-	\label{eq:xzxz}&\|(\tilde{X}_A(\1+\tilde{Z}_B)-\tilde{X}_B(\1-\tilde{Z}_A))\ket{\psi}\| \leq c_2 \sqrt{\epsilon}\\
-	\label{eq:xaxb}&\|(\tilde{X}_A-\tilde{X}_B)\ket{\psi}\| \leq c_3 \sqrt{\epsilon}\\
-	\label{eq:anticom} &\|(\tilde{Z}_A\tilde{X}_A+\tilde{X}_A\tilde{Z}_A)\ket{\psi}\| \leq c_4 \sqrt{\epsilon}.
-\end{align}
-Going back to the sum-of-square decomposition, we write $s = \sin(\mu)$, $c = \cos(\mu)$ and define
+The verification is omitted here. From the SOS decomposition, we establish \cref{eq:za-zb,eq:xa-xb,eq:xazb,eq:zaxb,eq:zaxa,eq:zaxaxbzb}.
+We define
 \begin{align*}
-	S_1 = \frac{\sqrt{s}}{2} \bar{\I}_\alpha, &&
-	S_2 = \sqrt{s}c(\tilde{Z}_A\tilde{X}_B+\tilde{X}_A\tilde{Z}_B),\\
-	S_3 = \frac{c}{\sqrt{s}}(\tilde{Z}_A-\tilde{Z}_B), &&
-	S_4 = \sqrt{s}(\tilde{X}_A-\tilde{X}_B)
+	&S_1 = \frac{\sqrt{s}}{2} \bar{\I}_\alpha, &&
+	S_2 = \sqrt{s}c(Z_AX_B+ X_AZ_B),\\
+	&S_3 = \frac{c}{\sqrt{s}}(Z_A-Z_B), &&
+	S_4 = \sqrt{s}(X_A-X_B)
 \end{align*}
 then 
 \begin{align}
 \bar{\I}_\alpha = S_1^2 + S_2^2 = S_3^2 + S_4^2
 \end{align}
- and $\bra{\psi}\bar{\I}_\alpha \ket{\psi} \leq \epsilon$ implies that 
-$\bra{\psi}S^2_i \ket{\psi} \leq \epsilon$ and $\|S_i \ket{\psi} \| \leq \sqrt{\epsilon}$ for $i = 1,2,3,4$.
-The coefficients $c_1$, $c_2$ and $c_3$ in \cref{eq:zazb,eq:xzxz,eq:xaxb} can be determined from $S_1$,$S_2$ and $S_3$ as
-\begin{align*}
-	c_1 = \frac{\sqrt{s}}{c}, \quad
-	c_2 = \frac{1}{\sqrt{s}} + \frac{1}{c\sqrt{s}}, \quad
-	c_3 = \frac{1}{\sqrt{s}}.
-\end{align*}
-where we use the relation that $\tilde{X}_A(\1+\tilde{Z}_B)-\tilde{X}_B(\1-\tilde{Z}_A) = S_4/s^{1/2} + S_2/(cs^{1/2})$.
-To calculate $c_4$, we use the relation
+The fact that the quantum strategy $(\ket{\psi}, \{M_x\}_{x=1,2}, \{N_{y }\}_{y=1,2}$ achieves that 
+$\ip{\bar{\I}_\alpha} \leq \epsilon$ implies that
+$\bra{\psi} S_i^2 \ket{\psi} \leq \ep$, and equivalently, $\norm{S_i \ket{\psi}} \leq \se$ for $i = 1,2,3,4$.
+From the definitions of $S_i$'s, we can get that 
 \begin{align}
-	\tilde{Z}_A\tilde{X}_A + \tilde{X}_A\tilde{Z}_A = \frac{S_2}{c\sqrt{s}} + \frac{\sqrt{s}\tilde{X}_AS_3}{c} + \frac{\tilde{Z}_AS_4}{\sqrt{s}}
+	&\norm{(X_AZ_B+X_BZ_A)\ket{\psi}} \leq \frac{1}{c\sqrt{s}} \se\\
+	&\norm{(Z_A-Z_B)\ket{\psi}} \leq \frac{\sqrt{s}}{c} \se\\
+	&\norm{(X_A-X_B)\ket{\psi}} \leq \frac{1}{\sqrt{s}} \se.
 \end{align}
-and reach the conclusion that  
+The first and the second inequality give us that 
 \begin{align}
-	c_4 = \frac{1+c+s}{c\sqrt{s}}
+	\norm{ [Z_A(\1+X_B) - (\1-X_A)Z_B] \ket{\psi} } 
+	\leq \norm{(X_AZ_B+X_BZ_A)\ket{\psi}} + \norm{(Z_A-Z_B)\ket{\psi}}
+	\leq \frac{s+1}{c\sqrt{s}} \se.
 \end{align}
-where we use that fact that $\tilde{Z}_A, \tilde{X}_A$ are unitaries.
+Similarly, the first and the third inequality give us that 
+\begin{align}
+	\norm{[X_A(\1+Z_B) - X_B(\1-Z_A)] \ket{\psi}} \leq \frac{c+1}{c\sqrt{s}} \se.
+\end{align}
+Since $Z_AX_A +X_A Z_A = \frac{S_2}{c\sqrt{s}} + \frac{\sqrt{s}\tilde{X}_AS_3}{c} + \frac{\tilde{Z}_AS_4}{\sqrt{s}}$, we can deduce that
+\begin{align}
+	\norm{ (Z_A X_A+X_AZ_A)\ket{\psi}} \leq \frac{1+c+s}{c\sqrt{s}} \se.
+\end{align}
+To prove \cref{eq:zaxaxbzb}, we switch to the approximate relation form and derive that 
+\begin{align}
+	X_AZ_A \ket{\psi} &\appd{\frac{1+c+s}{c\sqrt{s}} \se}  -Z_AX_A \ket{\psi} \\
+	&\appd{\frac{\sqrt{s}}{c} \se} -Z_AX_B \ket{\psi} \\
+	&\appd{\frac{1}{s^{3/2} }\se} -X_BZ_B\ket{\psi},
+\end{align}
+where in the last line we use the fact $\norm{X_B} \leq 1/s$.
 
 Now we introduce the isometries $\Phi_A$ and $\Phi_B$ mentioned in the statement of the theorem.
 They are the same as the ones used in Ref.~\cite{bamps2015}.
-To construct $\Phi_A$ and $\Phi_B$ we need to regularize $\tZ_B$ and $\tX_B$ to make sure the corresponding operations 
-are unitaries in the isometries. We define $\tZ_B^\ast$ to be the operator obtained from $\tZ_B$ by changing all the $0$-eigenvalues
+To construct $\Phi_A$ and $\Phi_B$ we need to regularize $Z_B$ and $X_B$ to make sure the corresponding operations 
+are unitary in the isometries. We define $Z_B^\ast$ to be the operator obtained from $Z_B$ by changing all the $0$-eigenvalues
 to $1$ and 
 \begin{align*}
-\tZ_B' = \tZ_B^\ast |\tZ_B|^{-1}.
+Z_B' := Z_B^\ast |Z_B^\ast|^{-1},
 \end{align*}
-In a similar way, we define $\tX_B^\ast$ and $\tX_B'$.
-On Alice's side, since $\tZ_A$ and $\tX_A$ are unitaries already,
+where $|Z_B^\ast|$ is obtained from $Z_B^\ast$ by replacing all negative eigenvalues by its absolute value.
+In a similar way, we define $X_B^\ast$ and $X_B'$.
+On Alice's side, since $Z_A$ and $X_A$ are unitaries already,
 we define
-\begin{align}
-	\tZ_A' = \tZ_A, && \tX_A' = \tX_A.
-\end{align}
+$Z_A' := Z_A$ and $X_A' = X_A$.
 The isometries are illustrated in the figure below.
 \begin{figure}[H]
 \center
@@ -2023,8 +1921,8 @@ The isometries are illustrated in the figure below.
         %
         % Column 3
         \node[phase] (phase11) at (2,0) {} edge [-] (op11);
-	\node[operator] (op22) at (2,-1) {$\tZ_A'$} edge [-] (q2);
-	\node[operator] (op23) at (2, -2) {$\tZ_B'$} edge[-] (q3);
+	\node[operator] (op22) at (2,-1) {$Z_A'$} edge [-] (q2);
+	\node[operator] (op23) at (2, -2) {$Z_B'$} edge[-] (q3);
         \node[phase] (phase14) at (2,-3) {} edge [-] (op14);
         \draw[-] (phase11) -- (op22);
         \draw[-] (phase14) -- (op23);
@@ -2035,8 +1933,8 @@ The isometries are illustrated in the figure below.
         %
         % Column 5
         \node[phase] (phase21) at (4,0) {} edge [-] (op31);
-	\node[operator] (op42) at (4,-1) {$\tX_A'$} edge [-] (op22);
-	\node[operator] (op43) at (4, -2) {$\tX_B'$} edge[-] (op23);
+	\node[operator] (op42) at (4,-1) {$X_A'$} edge [-] (op22);
+	\node[operator] (op43) at (4, -2) {$X_B'$} edge[-] (op23);
         \node[phase] (phase24) at (4,-3) {} edge [-] (op34);
         \draw[-] (phase21) -- (op42);
         \draw[-] (phase24) -- (op43);
@@ -2047,7 +1945,7 @@ The isometries are illustrated in the figure below.
         %
         % Bracket
         \draw[decorate,decoration={brace},thick] (5,-1) to
-    	node[midway,right] (bracket) {$\ket{junk}$}
+    	node[midway,right] (bracket) {$\ket{aux}$}
     	(5,-2);
         %
         % Column 7
@@ -2071,54 +1969,43 @@ The isometries are illustrated in the figure below.
 To bound $e_{xy} := \norm{ (\Phi_A\x\Phi_B) (\tA_x \x \tB_y) \ket{\tpsi} - \ket{junk} \x (A_x\x B_y) \ket{\EPR{2}}}$,
 there are some intermediate steps. Since the derivations are the same as in Ref.~\cite{bamps2015}, 
 we only record the key relations here.
-\begin{align}
-	&\norm{(\tZ_B' - \tZ_B) \ket{\tpsi}} \leq c_1 \sqrt{\epsilon},\\
-	&\norm{(\tZ_B' - \tZ_A') \ket{\tpsi}} \leq 2c_1 \sqrt{\epsilon}, \\
-	&\norm{(\tX_B' - \tX_B) \ket{\tpsi}} \leq \frac{c+1}{s^{3/2}} \sqrt{\epsilon} := c_5\sqrt{\epsilon},\\
-	&\norm{(\tX_B'\tZ_B'+ \tZ_B'\tX_B')\ket{\tpsi}} \leq [2c_1 + 2c_3 + 2c_5 + (\sqrt{2}+1/c)(2c_1+c_4)]\sqrt{\epsilon}
-	:= c_6 \sqrt{\epsilon}.
-\end{align}
+\begin{align*}
+	&\norm{(Z_B' - Z_B) \ket{\tpsi}} \leq \frac{\sqrt{s}}{c} \sqrt{\epsilon},\\
+	&\norm{(Z_B' - Z_A') \ket{\tpsi}} \leq 2 \frac{\sqrt{s}}{c}\sqrt{\epsilon}, \\
+	&\norm{(X_B' - X_B) \ket{\tpsi}} \leq \frac{c+1}{s^{3/2}} \sqrt{\epsilon} := \delta_1 \sqrt{\epsilon},\\
+	&\norm{(X_B'Z_B'+ Z_B'X_B')\ket{\tpsi}} \leq [\frac{2\sqrt{s}}{c} + \frac{2}{\sqrt{s}} + 2\delta_1 + 
+	(\sqrt{2}+\frac{1}{c})(2\frac{\sqrt{s}}{c}+\frac{1+c+s}{c\sqrt{s}})]\sqrt{\epsilon}
+	:= \delta_2 \sqrt{\epsilon}.
+\end{align*}
 Then we can calculate that 
-\begin{align}
-	&e_{00} = e_{10} = 2c_6 \sqrt{\epsilon}\\
-	&e_{20} = 2(c_4 + c_6) \sqrt{\epsilon}\\
-	&e_{01} = e_{02} = e_{11} = e_{12} = [c(c_1)+s(2c_4 + c_5) + 2c_6]\sqrt{\epsilon}\\
-	&e_{21} = e_{22} = [2c_4 + c(c_1)+s(2c_4 + c_5) + 2c_6]\sqrt{\epsilon},
-\end{align}
+\begin{align*}
+	&e_{00} = e_{10} = 2\delta_2 \sqrt{\epsilon}\\
+	&e_{20} = 2(\frac{1+c+s}{c\sqrt{s}} + \delta_2) \sqrt{\epsilon}\\
+	&e_{01} = e_{02} = e_{11} = e_{12} = [\sqrt{s}+s(2\frac{1+c+s}{c\sqrt{s}} + \delta_1) + 2\delta_2]\sqrt{\epsilon}\\
+	&e_{21} = e_{22} = [2\frac{1+c+s}{c\sqrt{s}} + \sqrt{s}+s(2\frac{1+c+s}{c\sqrt{s}} + \delta_1) + 2\delta_2]\sqrt{\epsilon},
+\end{align*}
 so an upper bound of the error is that
 \begin{align}
-	\forall x,y \in \{0,1,2\}, e_{xy} \in O((\frac{1}{cs^{1/2}} + \frac{1}{s^{3/2}})\sqrt{\epsilon}).
-\end{align}
-The dependence of the error term on $\alpha$ comes from the fact that 
-\begin{align}
-&\frac{1}{\cos(\arctan(1/\alpha)) \sin^{1/2}(\arctan(1/\alpha))} = \frac{1}{\alpha}+\frac{3}{4}\alpha - O(\alpha^3),\\
-&\frac{1}{\sin^{3/2}(\arctan(1/\alpha))} = 1 + \frac{3}{4}\alpha^2 - O(\alpha^4).
+	\forall x,y \in \{0,1,2\}, e_{xy} \in O((\frac{1}{c^2s^{1/2}} + \frac{1}{s^{3/2}})\sqrt{\epsilon}).
 \end{align}
 \end{proof}
 %%=====================================
-\section{ The special property of $U$ and $O$}
+\section{The proof of \cref{lm:uo_independ}}
 \label{sec:u_and_o}
 %%=====================================
-\begin{lemma}
-	\label{lm:ux_independ}
-	Suppose there exist unitaries $U$ and $X$ which have the following forms
-	\begin{align}
-		X = \sum_{i=1}^{d-1} \omega_d^i \ketbra{i}{i} && U = \sum_{i=1}^{d-1}\ketbra{i/r}{i},
-	\end{align}
-	where $d$ is an odd prime number with primitive root $r$,
-	then the set $\{U^k X^l\}$ for $k=0,1\dots d-2$ and $l = 1,2\dots d-1$ forms a basis of 
-	the ring of $(d-1)\times (d-1)$ matrices over $\C$.
-\end{lemma}
-Note that the unitaries $U$ and $X$ defined in the lemma above satisfy the condition $UXU^\dagger = X^r$.
-In the self-test proof, this lemma will be a critical step.
+
+We are going to prove 
+the set $\{U^k O^l\}$ for $k=0,1\dots d-2$ and $l = 1,2\dots d-1$ forms a basis of the ring of $(d-1)\times (d-1)$ matrices over $\C$
+Note that the unitaries $U$ and $O$ defined in the lemma above satisfy the condition $UOU^\dagger = O^r$.
+In this proof, we denote the set $\{0,1,2\dots d-2\}$ by $[d-1]$ and the set $\{1,2 \dots d-1\}$ by $[d-1]+1$.
 \begin{proof}
-We are going to show the $(d-1)^2$ matrices from the set $\{U^k X^l\}_{k \in[d-1], l \in [d-1]+1}$ are linearly independent.
+We are going to show the $(d-1)^2$ matrices from the set $\{U^k O^l\}_{k \in[d-1], l \in [d-1]+1}$ are linearly independent.
 Suppose there exists a set of complex numbers $\{ x_{k,l} \}_{k \in[d-1], l \in [d-1]+1}$
 such that 
 \begin{align}
-	M = \sum_{k=0}^{d-2} \sum_{l=1}^{d-1} x_{k,l} U^k X^l = 0. 
+	M = \sum_{k=0}^{d-2} \sum_{l=1}^{d-1} x_{k,l} U^k O^l = 0. 
 \end{align}
-We further assume that there exists a set of integers $\{ k_i \}_{i=1}^{d-1}$ such that $r^{k_i} \equiv i \pmod{d}$.
+We \hf{define} a set of integers $\{ k_i \}_{i=1}^{d-1}$ such that $r^{k_i} \equiv i \pmod{d}$.
 \carl{We shouldn't be making extra assumptions that are not stated in the lemma.  This looks to me more like
 a definition of the variables $\{ k_i \}$, rather than an assumption.}
 The fact that $r$ is a primitive root of $d$ guarantees that $k_i$'s are distinct.
@@ -2131,9 +2018,9 @@ Proving $\ket{x_{k_i}} = 0$ for other $i$ follows a similar argument, so we brie
 discuss about it in the end.
 The entry $\bra{1}M\ket{1}$ can be expressed as  
 \begin{align}
-	\bra{1}M\ket{1} = \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{1}{i/r^k}\braket{i}{1}.
+	\bra{1}M\ket{1} = \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{1}{i (r^{-1})^k}\braket{i}{1}.
 \end{align}
-For the term $\braket{1}{i/r^k}\braket{i}{1} \neq 0$ we must have $i = 1$ and $r^k \equiv 1 \pmod{d}$, or equivalently,
+For the term $\braket{1}{i (r^{-1})^k}\braket{i}{1} \neq 0$ we must have $i = 1$ and $r^k \equiv 1 \pmod{d}$, or equivalently,
 $k = k_1$. We can conclude that 
 \begin{align}
 	\bra{1}M\ket{1} = \sum_{l = 1}^{d-1} x_{k_1,l}\omega_d^l = 0. 
@@ -2141,7 +2028,7 @@ $k = k_1$. We can conclude that
 Similarly we can determine that for all $j = 1,2\dots d-1$,
 \begin{align}
 	\bra{j}M\ket{j} 
-	=  \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{j}{i/r^k}\braket{i}{j} 
+	=  \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{j}{i (r^{-1})^k}\braket{i}{j} 
 	= \sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl} = 0.
 \end{align}
 Hence we get $d-1$ equations with $d-1$ variables, and the linear system is
@@ -2187,8 +2074,6 @@ To summarize, we have proven that $x_{k,l} = 0$ for all $k$ and $l$, which impli
 $\{ U^k X^l \}$ are linearly independent and forms a basis for the ring of all the $(d-1)\times(d-1)$ matrices over $\C$.
 \carl{Nice proof.  I like the use of the Vandermonde matrix.  We can think a little about possible simplifications.}
 \end{proof}
-Note that the primitive root $r$ in the lemma is not restricted to the set $\{2,3,5\}$, so this lemma works for any 
-odd prime number $d$.
 
 
 \end{document}
