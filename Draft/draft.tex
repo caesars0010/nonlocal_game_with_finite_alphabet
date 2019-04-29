@@ -375,7 +375,8 @@ The maximally entangled state of local dimension $d-1$ for some odd prime $d$ th
 \ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{j = 1}^{d-1} \ket{j}\ket{d-j}.
 \end{align}
 The superscript $(d-1)$ stresses the dimension of the local Hilbert space and we follow this convention through this paper.
-We denote a Hilbert space by $\calH$. Note that we only work with finite Hilbert spaces in this work.
+We denote a Hilbert space by $\calH$.  \carl{That last sentence is too vague.  Does $\calH$ refer to a specific Hilbert space?}
+Note that we only work with finite Hilbert spaces in this work.
 When there are multiple Hilbert spaces, we label them with subscripts, for example, $\calH_A$ and
 $\calH_B$.
 The $d$-th root of unity is denoted by $\omega_d:=e^{2\pi i/d}$. In the qubit case, 
@@ -405,7 +406,7 @@ We use some basic number theory in our work.
 \begin{definition}
 A primitive root of a prime number
 $d$ is \hf{the smallest integer} $r$ such that $r \pmod{d}$ has multiplicative order $d-1$
-in the multiplicative group of integers modulo $d$, $\Zd$.
+in the multiplicative group of integers modulo $d$, $\Zd$.  \carl{I'm skeptical about whether that's the standard definition.  (For example, the definition on wikipedia doesn't include that ``smallest integer'' part.)}
 \end{definition}
 In other words,
 $r$ is the generator of $\Zd$.
@@ -438,14 +439,11 @@ A quantum strategy of a nonlocal game presented in terms of projective measureme
 consists of projective measurements $\{\{M_x^a\}_a\}_x$ on Alice's side, 
 $\{\{N_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$, where 
 $(M_x^a)^2 = M_x^a = (M_x^a)^\dagger$ and $(N_y^b)^2 = N_y^b = (N_y^b)^\dagger$.
-\carl{You need to put explicit labels on the quantum systems used by
-Alice and Bob.  (Later on you seem to use ``$A$'' and ``$B$'' to refer to those systems, but those are also
-the same letters you use for Alice's and Bob's measurements.  That's confusing.)}
-\hf{Addressed in the notation part. --H.F}
 Then Alice and Bob's quantum strategy produces the conditional probability distribution
 \begin{align}
 	\pr{ab}{xy} = \bra{\psi} A_x^a \x B_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
 \end{align}
+\carl{Check the use of notation above (``$A$'', ``$B$'').}
 \begin{definition}
 	Given sets $\calX, \calY, \calA, \calB$, a correlation is a collection of conditional probability distributions
 	$\{\pr{ab}{xy}: a \in \calA, b \in \calB\}_{x \in \calX, y \in \calY}$.
@@ -467,16 +465,14 @@ A particular type of nonlocal games that we are interested in is called linear s
 	\end{cases}
 \end{align}
 \end{definition}
-\carl{Make this clear in the definition itself.}
-\hf{I made the definition of the scoring function part of the big definition now.}
 In the later parts, we will work with quantum strategies for the linear system game presented in terms of binary observables.
 \begin{definition}[Quantum strategy of a linear system game]
 \label{def:q_strat}
 A quantum strategy presented in terms of binary observables for the linear system game $(H\ux = \uc)$ consists of 
 \begin{enumerate}
-	\item a pair of finite Hilbert spaces $\calH_A$ and $\calH_B$;
+	\item a pair of finite Hilbert spaces $\calH_A$ and $\calH_B$;  \carl{``finite-dimensional''?}
 	\item a collection of binary observables $B_j$, $1 \leq j \leq n$, on $\calH_B$
-	such that $B_j^2 = \1$ for every $1 \leq j \leq n$;
+	such that $B_j^2 = \1$ for every $1 \leq j \leq n$;  \carl{You're using ``$A$,$B$'' here still.}
 	\item a collection of binary observables $A_{ij}$, $1\leq i \leq m$, $1\leq j\leq n$ 
 	on $\calH_A$ such that 
 	\begin{enumerate}
@@ -490,7 +486,7 @@ A quantum strategy presented in terms of binary observables for the linear syste
 \end{definition}
 Note that any quantum strategy presented in terms of binary observables can be 
 converted to a quantum strategy presented in terms of projective measurement by looking into
-the spectral decompositions of the observables.
+the spectral decompositions of the observables.  \carl{If you're going to make that claim, you should make it more precise.  Add a sentence explaining briefly how the construction is done.}
 
 %It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
 %satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
@@ -514,7 +510,8 @@ the spectral decompositions of the observables.
 %Perfect quantum strategies can be extracted from operator solutions and vice versa.
 A quantum strategy using binary observables for the linear system game associated with $H\ux = \uc$ can be constructed from
 the finite-dimensional representation of a finitely presented group
-over $\Z_2$, which is called the solution group.
+over $\Z_2$, which is called the solution group.  \carl{The phrase ``the finite-dimensional
+representation'' is confusing -- it sound like you are implying that there is only one representation.}
 \begin{definition}[Solution group of a linear system game]
 	\label{def:presentation}
 	Let $H\ux = \uc$ be an $m \times n$  linear system. The solution group of this system
@@ -528,17 +525,17 @@ over $\Z_2$, which is called the solution group.
 	\end{align*}
 \end{definition}
 We remark that a linear system game can be extracted from a solution group and \textit{vice versa}.
-Let $\Psi$ be a finite-dimensional representation of $\Gamma(H,\uc)$ such that $\Psi(J) = -\1$ on the vector space $\C^d$, then a prefect strategy for 
-the linear system game ($H\ux = \uc$) has
+Let $\Psi$ be a finite-dimensional representation of $\Gamma(H,\uc)$ such that $\Psi(J) = -\1$ on the vector space $\C^d$, then a perfect strategy for 
+the linear system game ($H\ux = \uc$) has \carl{Replace ``has'' with ``is given by''.}
 \begin{enumerate}
 	\item $A_{ij} = \Psi(x_j)$ for all $ 1 \leq i \leq m$ and $1 \leq j \leq n$,
-	\item $B_j = \Psi(x_j)$ for all $1 \leq j \leq n$,
+	\item $B_j = \Psi(x_j)$ for all $1 \leq j \leq n$, \carl{Do you need a transpose symbol in here somewhere?}
 	\item the maximally entangled state $\ket{\psi} = \frac{1}{\sd} \sum_{k=1}^d \ket{k}\ket{k}$.
 \end{enumerate}
-We follow a similar approach to construct our ideal strategy. However, our strategy uses a different maximally entangled state,
+We follow a similar approach to construct our ideal strategy. \carl{I don't think the reader will know what ``ideal strategy'' refers to at this point.}. However, our strategy uses a different maximally entangled state,
 so we justify our strategy more carefully.
 For concepts related to group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
-For concepts related to group representations, we refer to Sec.~$2.5$ of Ref.~\cite{coladan2017}.
+For concepts related to group representations, we refer to Sec.~$2.5$ of Ref.~\cite{coladan2017}.  \carl{These last two sentences seem out of place -- consider rephrasing and relocating.}
 
 %-------------------------------------------------------------------------------
 \subsection{The weighted CHSH inequality \cite{acin2012}.}
@@ -555,6 +552,7 @@ The scoring function for the $\alpha$-weighted CHSH test is defined by
 		(-1)^{1 + a + b}, \quad \text{if } x = y =2.
 	\end{cases}
 \end{align}
+\carl{What is the input distribution?}
 Let Alice and Bob's quantum strategy in terms of projectors be $( \{\{M_x^a\}_a\}_x, \{\{N_y^b\}_b\}_y, \ket{\psi})$. 
 We define binary observables $M_x := M_x^0 - M_x^1$ and $N_y := N_y^0 - N_y^1$ from Alice and Bob's projectors.
 The weighted CHSH inequality states that 
@@ -562,14 +560,15 @@ The weighted CHSH inequality states that
 	\label{eq:chsh_op}
 	\ip{\I_\alpha} = \alpha\ip{M_1N_1}+\alpha\ip{M_1N_2} + \ip{M_2N_1} - \ip{M_2N_2}\leq 2\alpha,
 \end{align}
-where $\ip{M_xN_y} := \bra{\psi} M_xN _y \ket{\psi}$ is the expectation value of of the observables. 
+where $\ip{M_xN_y} := \bra{\psi} M_xN _y \ket{\psi}$ is the expectation value of the observables. 
 The weighted CHSH inequality is true 
-If Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$.
-However, If they share an entangled state $\ket{\psi}$, the value of $\ip{\I_\alpha}$ can be as large as
+if Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$.
+However, if they share an entangled state $\ket{\psi}$, the value of $\ip{\I_\alpha}$ can be as large as
 \begin{align}
 \label{eq:chsh_max}
  \ip{\I_\alpha}_{\max} = 2\sqrt{1+\alpha^2}.
 \end{align}
+\carl{You need to cite the results that you're summarizing here (or refer to an appendix).}
 \begin{definition}[Ideal strategy to achieve $\ip{\I_\alpha}_{\max}$]
 	\label{def:ideal}
 	Define $\mu = \arctan(1/\alpha)$.
@@ -583,11 +582,6 @@ strategy up to some local isometry,
 which is a phenomenon referred as a robust self-test.
 We give the formal statement of this self-testing property of $\ip{\I_\alpha}_{\max}$ in \cref{sec:chsh}.
 
-\carl{Before the next definition, you should define what a ``correlation'' is.}
-\hf{Done. I decided to remove the definition of self-testing here because I think it is hard
-to give a general robust self-testing definition and it suffices to just give our robust self-testing result.}
-
-\carl{Section 2 needs to be cleaned up in some places, but overall it is pretty good.}
 
 %-----------------------------------------------------------
 \subsection{Approximation tools}
@@ -600,6 +594,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 	\begin{align}
 		 \braket{v}{u} \appd{\ep} \braket{v'}{u} .
 	\end{align}	
+	\carl{Check the grammar in this proposition.}
 \end{proposition}
 \begin{proof}
 	We can write $\ket{v'} = \ket{v} + \ket{v''}$, where $\norm{\ket{v''}} \leq \epsilon$,
@@ -608,6 +603,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 	\norm{ \braket{v}{u} - \braket{v'}{u} } = \norm{\braket{v''}{u}} \leq \norm{\ket{u}}\norm{\ket{v''}} \leq \epsilon.
 	\end{align}
 \end{proof}
+\carl{Question: Do we actually need the assumption that $v,v'$ have length less than $1$?}
 \begin{proposition}
 	Let $\ket{u_i}$ and $\ket{v_i}$ for $i = 1,2$ be vectors with length less than equal to $1$
 	such that 
@@ -663,6 +659,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 		\ket{u} \appd{O(\sqrt{\ep_1+\ep_2+\ep_3})} \ket{v}.
 	\end{align}
 \end{proposition}
+\carl{Fix the grammar in the proposition above.}
 \begin{proof}
 	Direct calculation gives us that
 	\begin{align}
@@ -673,7 +670,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 	\end{align}
 \end{proof}
 \begin{proposition}
-	Let $\ket{u}$ be a vector with length less or equal to $1$ such that for a unitary $U$,
+	Let $\ket{u}$ be a vector with length less than or equal to $1$ such that for a unitary $U$,
 	\begin{align}
 		U\ket{u} \appd{\ep} a\ket{u} \text{ for } a \in \C,
 	\end{align}
