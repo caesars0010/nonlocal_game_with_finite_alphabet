@@ -475,6 +475,10 @@ A particular type of nonlocal games that we are interested in is called linear s
 	\end{cases}
 \end{align}
 \end{definition}
+\hf{A widely-used example of linear system games is the Magic Square game introduced in Ref.~\cite{magic_square}.
+For the formulation of the Magic Square game as a linear system game
+and the general linear system games over $\Z_d$, we refer to Section $3.1$ of Ref.~\cite{coladan2017}.}
+
 In the rest of the paper, we will work with quantum strategies for the linear system game presented in terms of binary observables.
 \begin{definition}[Quantum strategy of a linear system game]
 \label{def:q_strat}
@@ -721,59 +725,60 @@ In the rest of the paper, we use the following approximation results implicitly 
 \section{The linear system game}
 \label{sec:lsg}
 %=======================================
-In this section, we introduce a linear constraint test that is satisfied by our correlation.
-The linear constraint test is designed to enforce relations that should be satisfied by 
-Alice and Bob's observables and it is inspired by 
+In this section, we introduce a linear system game which is a component of the full test.
+This game is designed to enforce relations that should be satisfied by 
+Alice and Bob's observables. The inspiration comes from 
 Slofstra's seminal work~\cite{slofstra2017}, in which he
 embeds the group
 \begin{align}
 	K = \ip{ x,y,a,b:a^2=b^2=e, ab=ba, yay^{-1} = a, yby^{-1} = ab, xyx^{-1}=y^2}
 \end{align}
 into a linear system game such that the relations in the definition of $K$ can be derived from the
-combination of the equations of the linear system game. Then he showed the difference between exact representations
+combination of the linear equations. Then he showed the difference between exact representations
 and approximate representations of $K$, which implies that the set of quantum correlation is not closed.
 \hf{We generalize the relation $xyx^{-1} = y^2$ and embed the 
-following group}
-\begin{align}
-	G = \langle u, o : uou^{-1} = o^r \rangle, 
-\end{align}
-for some $r \in \N$ into a linear constraint test.
+following relation
+$
+uou^{-1} = o^r 
+$
+for some $r \in \N$ into a linear system game.}
 
 %------------------------------------------------------------------------
 \subsection{The embedding of $G$}
 %------------------------------------------------------------------------
 The main result of this subsection is summarized in the following theorem.
 \begin{theorem}
-	The relation $uou^{-1} = o^r$ can be embedded in a linear constraint test which has
-	$n(r) := 18r+86$ variables and $m(r) := 16r + 72$ equations, where each equation has $3$ variables.
+	The relation $uou^{-1} = o^r$ can be embedded in a linear system game which has
+	$n(r) := 18r+85$ variables and $m(r) := 17r + 77$ equations, where each equation has $3$ variables.
 \end{theorem}
-We prove this by constructing the solution group $\Gamma$ of the linear constraint test. 
+We prove this by constructing the solution group $\Gamma$ of the linear system game. 
 We also prove some properties of the generators of $\Gamma$ along the way.
 
-We embed $G$ into $\Gamma$ in three steps and introduce two intermediate groups $G_0$ and $G_1$, which are defined below.
-\begin{definition}
+We embed $uou^{-1}= o^r$ into $\Gamma$ in three steps, which introduce two intermediate groups $G_0$ and $G_1$ defined below.
+\begin{definition}	
+\label{def:g0}
 	The presentation of $G_0$ has order-$2$ generators:
-	\begin{align}
+	\begin{align*}
 		\{o_i\}_{i=1}^{r} \cup \{u_i\}_{i=1}^5
-	\end{align}
+	\end{align*}
 	and relations:
-	\begin{align}
+	\begin{align*}
 	&u_3 = u_2o_1u_2 && u_4 = u_2o_2u_2 \\
 	&u_5 = u_1u_3u_1 && o_2 = u_1u_4u_1\\
 	&u_5 = o_1 o_r o_1,
-	\end{align}
+	\end{align*}
 	and when $r$ is even
-	\begin{align}
+	\begin{align*}
 	&o_{1+2j} = o_1o_{2j}o_1 && o_{2+2j} = o_2o_{1+2j}o_2&& \text{ for } j = 1 \dots r/2 - 1;
-	\end{align}
+	\end{align*}
 	when $r$ is odd
-	\begin{align}
+	\begin{align*}
 	&o_3 = o_2o_1o_2 &&
 	 o_{2+2j} =o_1o_{1+2j}o_1 && o_{3+2j} = o_2o_{2j+2}o_2 &&\text{ for } j = 1 \dots (r-3)/2.
-	\end{align}
+	\end{align*}
 \end{definition}
 \begin{proposition}
-	The group $G_1$ embeds the relation 
+	The group $G_0$ embeds the relation 
 	\begin{align}
 		(u_1u_2)^j o_1o_2 (u_2u_1)^j = (o_1o_2)^{r^j}, 
 	\end{align}
@@ -783,25 +788,26 @@ The proof follows the proof of Proposition~$4.8$ of Ref.~\cite{slofstra2017}
 \begin{proof}
 	We prove it by induction.
 	Direct calculation gives us that
-	\begin{align} 
+	\begin{align*} 
 		u_1u_2 o_1o_2 u_2u_1 = &u_1 (u_2 o_1u_2) (u_2o_2 u_2) u_1 \\
 	=& (u_1 u_3 u_1) (u_1 u_4 u_1)\\
 	=& u_5 o_2\\
 	=& o_1o_ro_1 o_2.
-	\end{align}
-	Then substituting the definitions of $o_k$ for $k = r \dots 3$ gives us the case for $j=1$.
+	\end{align*}
+	Then we substitute the definitions of $o_k$ for $k = r \dots 3$ into the equation above and
+	proves the $j=1$ case.
 	
-	Now assume the statement is true for $j = n$, then when $j = n+1$
-	\begin{align}
+	Now assume the statement is true for $j = n$, then for $j = n+1$
+	\begin{align*}
 		(u_1u_2)^{n+1} o_1o_2 (u_2u_1)^{n+1} =& u_1u_2 (o_1o_2)^{r^n} u_2u_1 \\ 
 		 =& (u_1u_2 o_1o_2 u_2u_1)^{r^n} \\
 		 =& (o_1o_2)^{r^{n+1}},
-	\end{align}
-	where from the first line to the second line, we insert $(u_2u_1)(u_1u_2)$ between every pair of $o_1o_2$ and $o_1o_2$.
+	\end{align*}
+	where from the first line to the second line, we insert $(u_2u_1)(u_1u_2)$ between every pair of $o_1o_2$.
 	Hence, the statement is true.
 \end{proof}
-To better characterize all the conjugation relations above and simplify the form of $G_1$
-and make the introduction of $G_2$ easier, we relabel $u_i$ and $o_i$'s
+To better characterize all the conjugation relations above and simplify the form of $G_1$ defined below, 
+we relabel $u_i$ and $o_i$'s
 as $a_i$'s such that
 \begin{align}
 	a_j := 
@@ -812,17 +818,16 @@ as $a_i$'s such that
 	\end{cases}
 \end{align}
 Then we define the set $C(r)$ of tuples $(i,j,k)$ such that
-\begin{align}
+\begin{align*}
 	(i,j,k) \in C(r) \iff a_ia_ja_i = a_k.
-\end{align}
+\end{align*}
 The size of $C(r)$ is $r+3$. 
 %We can also employ some ordering of $C(r)$ such that $C(r,j)$ is a unique tuple for 
 %$j = 1 \dots r+3$.
 In this way, the group $G_0$ can be presented by
-\begin{align}
-	G_0  = \ip{ \{a_i\}_{i=1}^{r+5} : C(r) }.
-\end{align}
-
+$
+G_0  = \ip{ \{a_i\}_{i=1}^{r+5} : C(r) }.
+$
 Then we define the group $G_1$.
 \begin{definition}
 The presentation of $G_1$ has order-$2$ generators:
@@ -845,22 +850,22 @@ The first property of $G_1$ was first proved in Lemma~$4.4$ of \cite{slofstra201
 \end{proposition}
 \begin{proof}
 	We first show that $d_i c_j d_i = b_k$, which is because
-	\begin{align}
+	\begin{align*}
 		d_i c_j d_i = d_i (f b_j f) d_i = f (d_i b_j d_i) f = f c_k f = b_k.
-	\end{align}
+	\end{align*}
 	Then, we can prove that 
-	\begin{align}
+	\begin{align*}
 		a_i a_j a_i = f d_i b_j c_j f d_i = (f d_i b_j d_i f)(f d_i c_j d_i f) = (f c_k f)(f b_k f) = b_k c_k = a_k. 
-	\end{align}
+	\end{align*}
 \end{proof}
 \begin{proposition}
 	In the group $G_1$, the generators $f$ and $g$ commute with $a_i$ for all $i = 1 \dots r+5$.
 \end{proposition}
 \begin{proof}
 	We can check that
-	\begin{align}
+	\begin{align*}
 		fa_i f a_i = d_i d_i = e && g a_i g a_i = v_i v_i  = e,
-	\end{align}
+	\end{align*}
 	for all $i = 1 \dots r+5$.
 \end{proof}
 Note that there are two types of conjugacy relations in $G_1$. One is of the form
@@ -873,30 +878,30 @@ we are going to embed it into a different set of linear relations in $\Gamma$.
 The presentation of $\Gamma$ has order-$2$ generators:
 \begin{align*}
 	J, \{a_i, b_i, c_i, d_i, v_i,w_i,\{ k_{i,j} \}_{j=1}^5\}_{i=1}^{r+5}, \{f_i,g_i,m_i\}_{i=0}^2, \{h_{jk}\}_{(i,j,k) \in C(r)}, 
-	\{\{ k_{c,j} \}_{j=1}^6\}_{c \in C(r)},
+	\{\{ k_{l,j} \}_{j=1}^6\}_{l \in C(r)},
 \end{align*}
 and relations:
 \begin{itemize}
 \item for all $i = 1 \dots r+5$:
-\begin{align}
+\begin{align*}
 	&a_i = b_ic_i = f_0d_i = g_0v_i \\
 	&g_2 a_i w_i = e \\
 	&f_0 f_1 f_2 = e && b_i f_2 k_{i,1} = e && k_{i,1} k_{i,2} k_{i,3} = e\\
 	&f_0 k_{i,3} k_{i,4} = e && c_i k_{i,4} k_{i,5} =e && f_1 k_{i,2} k_{i,5} = e,
-\end{align}
+\end{align*}
 which embed $f_0 b_i f_0 = c_i$;
-\item for all $ c = (i,j,k) \in C(r)$:
-\begin{align}
+\item for all $ l = (i,j,k) \in C(r)$:
+\begin{align*}
 	&h_{jk}b_j c_k = e\\
-	&d_i k_{c,1} f_2 = e && b_j f_2 k_{c,2} = e && k_{c,2} k_{c,3} k_{c,4} = e\\
-	&d_i k_{c,4} k_{c,5} = e && c_k k_{c,5} k_{c,6} =e && k_{c,1} k_{c,3} k_{c,6} = e,
-\end{align}
+	&d_i k_{l,1} f_2 = e && b_j f_2 k_{l,2} = e && k_{l,2} k_{l,3} k_{l,4} = e\\
+	&d_i k_{l,4} k_{l,5} = e && c_k k_{l,5} k_{l,6} =e && k_{l,1} k_{l,3} k_{l,6} = e,
+\end{align*}
 which embed $d_i b_j d_i = c_k$;
-\item relations of a Magic Square test:
-\begin{align}
+\item relations of a Magic Square game:
+\begin{align*}
 	&f_0 f_1 f_2 = e && g_0 g_1 g_2 = e &&m_0 m_1 m_2 = e \\
 	&f_0 g_2 m_0 = e && f_2 g_0 m_1 = e && f_1 g_1 m_2 = J,
-\end{align}
+\end{align*}
 which embed $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$;
 \item $J$ commutes with all the other generators.
 \end{itemize}
@@ -921,11 +926,11 @@ The proof of the proposition above follows the proof of Proposition $4.2$ of Ref
 %------------------------------------------------------------------------
 \subsection{The representation of $\Gamma$}
 %------------------------------------------------------------------------
-In this section we give the presentation of $\Gamma$ which is built upon the representation 
+In this section we give a representation of $\Gamma$ which is built upon the representation 
 $\Psi_0$ of $G_0$ and $\Psi_1$ of $G_1$. We need the representation of $\Gamma$ to construct the
 ideal strategy that realizes our correlation.
 
-Before giving the representation, we define two Hilbert spaces $W_{d-1}$ and $W_2$, which will form the carrier spaces
+Before giving the representations, we define two Hilbert spaces $W_{d-1}$ and $W_2$, which will form the carrier spaces
 of the representations,
 \begin{align}
 	\label{eq:w_subspace}
@@ -971,23 +976,23 @@ Following the proof of Lemma~$4.4$ of Ref.~\cite{slofstra2017}, we construct a r
 The representation $\Psi_1$ of $G_1$ on $W_2 \x W_{d-1}$ is defined by
 \begin{itemize}
 \item for $f_0$ and $g_0$
-\begin{align}
+\begin{align*}
 	&\Psi_1(f_0) = X_{W_2} \x \1_{W_{d-1}} \\
 	&\Psi_1(g_0) = Z_{W_2} \x \1_{W_{d-1}},
-\end{align}
+\end{align*}
 \item
 for $i = 1 \dots r+5$,
-\begin{align}
+\begin{align*}
 	&\Psi_1(a_i) = \1_{W_2} \x \Psi_0(a_i) \\
 	&\Psi_1(b_i) = \ketbra{x_1}{x_1} \x \Psi_1(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} \\
 	&\Psi_1(c_i) =\ketbra{x_1}{x_1} \x \1_{W_{d-1}} + \ketbra{x_2}{x_2} \x \Psi_1(a_i) \\
 	&\Psi_1(d_i) =  X_{W_2} \x \Psi_0(a_i)\\
 	&\Psi_1(v_i) = Z_{W_2} \x \Psi_0(a_i).
-\end{align}
+\end{align*}
 \item for $(i,j,k) \in C(r)$,
-\begin{align}
+\begin{align*}
 	\Psi_1(h_{jk}) = \ketbra{x_1}{x_1} \x \Psi_1(a_j) + \ketbra{x_2}{x_2} \x \Psi_1(a_k).
-\end{align}
+\end{align*}
 \end{itemize}
 \end{definition}
 
@@ -998,11 +1003,11 @@ representation of $\Gamma$.
 The representation $\Psi$ of $\Gamma$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
 \begin{itemize}
 \item for any $x$ which is also a generator of $G_1$,
-\begin{align}
+\begin{align*}
 	\Psi(x) = \1_{W_2} \x \Psi_1(x);
-\end{align}
+\end{align*}
 \item for the generators involved in the Magic square test
-\begin{align}
+\begin{align*}
 	&\Psi(f_1) = X_{W_2} \x X_{W_2} \x \1_{W_{d-1}} \\
 	&\Psi(g_1) = Z_{W_2} \x Z_{W_2} \x \1_{W_{d-1}} \\
 	&\Psi(f_2) = X_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
@@ -1011,37 +1016,37 @@ The representation $\Psi$ of $\Gamma$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
 	& \Psi(m_1) = X_{W_2} \x Z_{W_2} \x \1_{W_{d-1}}\\
 	& \Psi(m_2) = Y_{W_2} \x Y_{W_2} \x \1_{W_{d-1}}\\
 	& \Psi(J) = - \1_{W_2} \x \1_{W_2} \x \1_{W_{d-1}};
-\end{align}
+\end{align*}
 \item for the generators $\{ w_i \}_{i=1}^{r+5}$:
-\begin{align}
+\begin{align*}
 	\Psi(w_i) = Z_{W_2} \x \1_{W_{d-1}} \x \Psi_0(a_i);
-\end{align}
+\end{align*}
 \item for the generators to embed the relation $f b_i f = c_i$:
-\begin{align}
+\begin{align*}
 	\Psi(k_{i,1}) &= X_{W_2} \x \Psi_1(b_i) = X_{W_2} \x ( \ketbra{x_1}{x_1} \x \Psi_0(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} )\\
 	\Psi(k_{i,2}) &= \ketbra{x_1}{x_2} \x \Psi_1(b_if_0) + \ketbra{x_2}{x_1} \x \Psi_1(f_0b_i)\\
 	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_2x_1}+\ketbra{x_2x_1}{x_1x_2})\x\1_{W_{d-1}}\\
 	&+ \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_i)\\ 
-	\Psi(k_{i,3}) &= \ketbra{x_1}{x_1} \x \Psi_1(f_0b_if_0) + \ketbra{x_2}{x_2} \x \Psi_1(f_0) \\
-	&= \ketbra{x_1x_1}{x_1x_1} \x \1_{W_{d-1}} + \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x X_{W_2} \x \1_{W_{d-1}}\\
+	\Psi(k_{i,3}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_if_0b_i) + \ketbra{x_2}{x_2} \x \Psi_1(f_0) \\
+	&= \ketbra{x_1}{x_1} \x X_{W_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x X_{W_2} \x \1_{W_{d-1}}\\
 	\Psi(k_{i,4}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_ic_i) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	&=(\ketbra{x_1x_1}{x_1x_1}+  \ketbra{x_1x_2}{x_1x_2}) \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	&=\ketbra{x_1}{x_1} \x \1_{W_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
 	\Psi(k_{i,5}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_i) + \ketbra{x_2}{x_2} \x \Psi_1(c_i) \\
 	&=\ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1}) \x \1_{W_{d-1}}\\
 	&+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_0(a_i);
-\end{align}
-\item for the generators to embed the relation $d_i b_j d_i = c_k$:
+\end{align*}
+\item for the generators to embed the relation $d_i b_j d_i = c_k$ with $l = (i,j,k)$:
 \begin{align*}
-	\Psi(k_{c,1}) &= X_{W_2} \x \Psi_1(d_i) = X_{W_2} \x X_{W_2} \x \Psi_0(a_{i}) \\
-	\Psi(k_{c,2}) &= X_{W_2} \x \Psi_1(b_j) = X_{W_2} \x (\ketbra{x_1}{x_1} \x \Psi_0(a_j) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}})\\
-	\Psi(k_{c,3}) &= \ketbra{x_1}{x_2} \x  \Psi_1(b_jd_i) + \ketbra{x_2}{x_1} \x \Psi_1(d_ib_j)\\
-	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_{j}x_{i}) + (\ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_1}{x_1x_2}) \x \Psi_0(a_i)\\
+	\Psi(k_{l,1}) &= X_{W_2} \x \Psi_1(d_i) = X_{W_2} \x X_{W_2} \x \Psi_0(a_{i}) \\
+	\Psi(k_{l,2}) &= X_{W_2} \x \Psi_1(b_j) = X_{W_2} \x (\ketbra{x_1}{x_1} \x \Psi_0(a_j) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}})\\
+	\Psi(k_{l,3}) &= \ketbra{x_1}{x_2} \x  \Psi_1(b_jd_i) + \ketbra{x_2}{x_1} \x \Psi_1(d_ib_j)\\
+	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_{j}a_{i}) + (\ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_1}{x_1x_2}) \x \Psi_0(a_i)\\
 	&+  \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_{i}a_{j}) \\
-	\Psi(k_{c,4}) &= \ketbra{x_1}{x_1} \x \Psi_1(d_ib_jd_i) + \ketbra{x_2}{x_2} \x  \Psi_1(d_i)\\
-	&= \ketbra{x_1x_1}{x_1x_1} \x \1_{W_{d-1}} + \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_ia_ja_i) + \ketbra{x_2}{x_2} \x X_{W_2} \x \Psi_0(a_i)\\
-	\Psi(k_{c,5}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_jc_k) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi(k_{l,4}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_jd_ib_j) + \ketbra{x_2}{x_2} \x  \Psi_1(d_i)\\
+	&= \ketbra{x_1}{x_1} \x (\ketbra{x_2}{x_1} \x \Psi_0(a_ia_j)+ \ketbra{x_1}{x_2} \x \Psi_0(a_ja_i)) + \ketbra{x_2}{x_2} \x X_{W_2} \x \Psi_0(a_i)\\
+	\Psi(k_{l,5}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_jc_k) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
 	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) +  \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_{k}) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	\Psi(k_{c,6}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_j) + \ketbra{x_2}{x_2} \x \Psi_1(c_{k})\\
+	\Psi(k_{l,6}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_j) + \ketbra{x_2}{x_2} \x \Psi_1(c_{k})\\
 	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1})\x\1_{W_{d-1}}\\
 	 &+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_1(a_{k}).
 \end{align*}
