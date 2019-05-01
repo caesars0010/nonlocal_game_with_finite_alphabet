@@ -224,6 +224,8 @@
 \newcommand{\ua}{\underline{a}}
 \newcommand{\ub}{\underline{b}}
 
+\newcommand{\fC}{\mathfrak{C}}
+
 
 % Probabilities
 \newcommand{\pr}[2]{P(#1|#2)}
@@ -248,6 +250,7 @@
 % Comments
 \def\carl#1{{\color{blue} #1 -Carl}}
 \newcommand{\hf}[1]{\textcolor{red}{#1}}
+\newcommand{\hfc}[1]{\textcolor{red}{#1 -H.F.}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %  N E W T H E O R E M  %
@@ -275,7 +278,8 @@
 
 \begin{document}
 
-\title{Robust self-testing of large entanglement with constant-sized correlations}
+\title{Constant-sized correlations are sufficient for 
+robust self-testing of maximally entangled states with unbounded dimension}
 
 \author[1]{Honghao Fu}
 \author[1,2]{Carl Miller}
@@ -300,15 +304,8 @@ The case of self-testing $2$-dimensional EPR pair is fully understood. One can r
 one copy of it by the CHSH inequality \cite{bamps2015}. and self-test many copies of the $2$-dimensional EPR
 pair in parallel \cite{mckague2016, coladan2017parallel}. 
 Self-testing general $d$-dimensional EPR pairs is a harder task.
-Recently, a remarkable result by Coladangelo \textit{et al}.\cite{cgs2017} 
-has shown that the maximally entangled state with arbitrary local dimension 
-can be self-tested with constant question alphabet but answer alphabet growing with
-the local dimension. 
-Then Coladangelo and Stark \cite{coladan2017} further showed that by playing many instances
-of the generalized Magic Square game and Magic Pentagram game, one can robustly self-test
-$N$ copies of the maximally entangled state with local dimension $d$ for any $d, N \geq 2$.
-Both the Magic Square game and the Magic Pentagram game have constant question alphabet
-but answer alphabet of size $d$.
+Proving robustness is harder.
+
 
 At a high level, general $d$-dimensional maximally entangled states are self-tested by
 modifying the correlation and enlarging the size of the correlation.
@@ -375,7 +372,9 @@ The maximally entangled state of local dimension $d-1$ for some odd prime $d$ th
 \ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{j = 1}^{d-1} \ket{j}\ket{d-j}.
 \end{align}
 The superscript $(d-1)$ stresses the dimension of the local Hilbert space and we follow this convention through this paper.
-We denote a Hilbert space by $\calH$.  \carl{That last sentence is too vague.  Does $\calH$ refer to a specific Hilbert space?}
+Usually, we denote a \hf{general} Hilbert space by $\calH$.  
+\carl{That last sentence is too vague.  Does $\calH$ refer to a specific Hilbert space?}
+\hfc{How about now?}
 Note that we only work with finite Hilbert spaces in this work.
 When there are multiple Hilbert spaces, we label them with subscripts, for example, $\calH_A$ and
 $\calH_B$.
@@ -405,11 +404,13 @@ $a \appd{\epsilon} b \iff \norm{a-b} \leq \epsilon$.
 We use some basic number theory in our work. 
 \begin{definition}
 A primitive root of a prime number
-$d$ is \hf{the smallest integer} $r$ such that $r \pmod{d}$ has multiplicative order $d-1$
+$d$ is \hf{an integer} $r$ such that $r \pmod{d}$ has multiplicative order $d-1$
 in the multiplicative group of integers modulo $d$, $\Zd$.  \carl{I'm skeptical about whether that's the standard definition.  (For example, the definition on wikipedia doesn't include that ``smallest integer'' part.)}
+\hfc{How about now?}
 \end{definition}
 In other words,
 $r$ is the generator of $\Zd$.
+\hf{In our work, we always pick $r$ to be the smallest primitive root of $d$.}
 
 
 
@@ -429,11 +430,19 @@ In a nonlocal game, there are two players, Alice and Bob and each of them is req
 to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and her answer set by $\calA$. Similarly,
 Bob's question set is denoted by $\calY$ and his answer set is denoted by $\calB$. The nonlocal game also
 comes with two functions: $\pi: \calX \times \calY \rightarrow [0,1]$, which is the probability distribution over the questions,
-and $V: \calA \times \calB \times \calX \times \calY \rightarrow \R$, which is the scoring function. 
-Note that in the literature, the typical scoring function of a nonlocal game maps the input-output
-pair to $\{0,1\}$ which corresponds to losing and winning. 
+and $V: \calA \times \calB \times \calX \times \calY \rightarrow \{0,1\}$, which is the scoring function. 
+The score $0$ and $1$ correspond to losing and winning. 
 Such games are nonlocal
 because Alice and Bob cannot communicate after getting their questions but they may share some strategy beforehand. 
+
+\hf{In our work, we consider a special case of nonlocal games, which we call a nonlocal test.
+There are three differences between a nonlocal game and a nonlocal test:
+\begin{itemize}
+	\item only a subset of all the question pairs are given to Alice and Bob;
+	\item the answer sets for different questions are different;
+	\item the scoring function maps input-output pairs to real numbers $(\R)$.
+\end{itemize}
+}
 
 A quantum strategy of a nonlocal game presented in terms of projective measurements
 consists of projective measurements $\{\{M_x^a\}_a\}_x$ on Alice's side, 
@@ -441,9 +450,10 @@ $\{\{N_y^b\}_b\}_y$ on Bob's side, and a shared state $\ket{\psi}$, where
 $(M_x^a)^2 = M_x^a = (M_x^a)^\dagger$ and $(N_y^b)^2 = N_y^b = (N_y^b)^\dagger$.
 Then Alice and Bob's quantum strategy produces the conditional probability distribution
 \begin{align}
-	\pr{ab}{xy} = \bra{\psi} A_x^a \x B_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
+	\pr{ab}{xy} = \bra{\psi} M_x^a \x N_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
 \end{align}
-\carl{Check the use of notation above (``$A$'', ``$B$'').}
+\hf{For simplicity we omit the tensor product between operators acting on different Hilbert spaces in the rest of the work.}
+
 \begin{definition}
 	Given sets $\calX, \calY, \calA, \calB$, a correlation is a collection of conditional probability distributions
 	$\{\pr{ab}{xy}: a \in \calA, b \in \calB\}_{x \in \calX, y \in \calY}$.
@@ -465,20 +475,20 @@ A particular type of nonlocal games that we are interested in is called linear s
 	\end{cases}
 \end{align}
 \end{definition}
-In the later parts, we will work with quantum strategies for the linear system game presented in terms of binary observables.
+In the rest of the paper, we will work with quantum strategies for the linear system game presented in terms of binary observables.
 \begin{definition}[Quantum strategy of a linear system game]
 \label{def:q_strat}
 A quantum strategy presented in terms of binary observables for the linear system game $(H\ux = \uc)$ consists of 
 \begin{enumerate}
-	\item a pair of finite Hilbert spaces $\calH_A$ and $\calH_B$;  \carl{``finite-dimensional''?}
-	\item a collection of binary observables $B_j$, $1 \leq j \leq n$, on $\calH_B$
-	such that $B_j^2 = \1$ for every $1 \leq j \leq n$;  \carl{You're using ``$A$,$B$'' here still.}
-	\item a collection of binary observables $A_{ij}$, $1\leq i \leq m$, $1\leq j\leq n$ 
+	\item a pair of finite-dimensional Hilbert spaces $\calH_A$ and $\calH_B$; 
+	\item a collection of binary observables $N_j$, $1 \leq j \leq n$, on $\calH_B$
+	such that $N_j^2 = \1$ for every $1 \leq j \leq n$; 
+	\item a collection of binary observables $M_{ij}$, $1\leq i \leq m$, $1\leq j\leq n$ 
 	on $\calH_A$ such that 
 	\begin{enumerate}
-		\item $A_{ij}^2 = \1$ for every $i,j$,
-		\item $\Pi_j A_{ij}^{H(i,j)} = (-\1)^{\uc(i)}$ for every $i$, and
-		\item $A_{il}A_{ik} = A_{ik}A_{il}$ for every $i$ and $H(i,l) = H(i,k) =1$;
+		\item $M_{ij}^2 = \1$ for every $i,j$,
+		\item $\Pi_j M_{ij}^{H(i,j)} = (-\1)^{\uc(i)}$ for every $i$, and
+		\item $M_{il}M_{ik} = M_{ik}M_{il}$ for every $i$ and $H(i,l) = H(i,k) =1$;
 	\end{enumerate} 
 	and
 	\item a quantum state $\ket{\psi} \in \calH_A \x \calH_B$.
@@ -486,7 +496,11 @@ A quantum strategy presented in terms of binary observables for the linear syste
 \end{definition}
 Note that any quantum strategy presented in terms of binary observables can be 
 converted to a quantum strategy presented in terms of projective measurement by looking into
-the spectral decompositions of the observables.  \carl{If you're going to make that claim, you should make it more precise.  Add a sentence explaining briefly how the construction is done.}
+the spectral decompositions of the observables. 
+\hf{More specifically, the fact that all the observables $\{M_{ij}\}_{j: H(i,j) = 1}$ commute with each other
+implies that they share a common eigenspace. The collection of eigenvalues associated with one eigenstate is the assignment
+to the whole equation when this eigenstate is measured in a projective measurement strategy.}
+ \carl{If you're going to make that claim, you should make it more precise.  Add a sentence explaining briefly how the construction is done.}
 
 %It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
 %satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
@@ -509,8 +523,12 @@ the spectral decompositions of the observables.  \carl{If you're going to make t
 %\end{definition}
 %Perfect quantum strategies can be extracted from operator solutions and vice versa.
 A quantum strategy using binary observables for the linear system game associated with $H\ux = \uc$ can be constructed from
-the finite-dimensional representation of a finitely presented group
-over $\Z_2$, which is called the solution group.  \carl{The phrase ``the finite-dimensional
+\hf{a} finite-dimensional representation of a finitely presented group
+over $\Z_2$, which is called the solution group.  
+\hf{Here we skip the background about group representations and presentations.
+For concepts related to group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
+For concepts related to group representations, we refer to Sec.~$2.5$ of Ref.~\cite{coladan2017}. }
+\carl{The phrase ``the finite-dimensional
 representation'' is confusing -- it sound like you are implying that there is only one representation.}
 \begin{definition}[Solution group of a linear system game]
 	\label{def:presentation}
@@ -525,25 +543,31 @@ representation'' is confusing -- it sound like you are implying that there is on
 	\end{align*}
 \end{definition}
 We remark that a linear system game can be extracted from a solution group and \textit{vice versa}.
-Let $\Psi$ be a finite-dimensional representation of $\Gamma(H,\uc)$ such that $\Psi(J) = -\1$ on the vector space $\C^d$, then a perfect strategy for 
-the linear system game ($H\ux = \uc$) has \carl{Replace ``has'' with ``is given by''.}
+\hf{In later parts of this work, we give the solution group instead of the set of linear equations when we defines
+a linear system game.} 
+
+Let $\Psi$ be a finite-dimensional representation of $\Gamma(H,\uc)$ such that $\Psi(J) = -\1$ on the carrier space $\C^d$, then a perfect strategy for 
+the linear system game ($H\ux = \uc$) is given by 
 \begin{enumerate}
-	\item $A_{ij} = \Psi(x_j)$ for all $ 1 \leq i \leq m$ and $1 \leq j \leq n$,
-	\item $B_j = \Psi(x_j)$ for all $1 \leq j \leq n$, \carl{Do you need a transpose symbol in here somewhere?}
+	\item $M_{ij} = \Psi(x_j)$ for all $ 1 \leq i \leq m$ and $1 \leq j \leq n$,
+	\item $N_j = \Psi(x_j)$ for all $1 \leq j \leq n$, \carl{Do you need a transpose symbol in here somewhere?}
+	\hf{I don't think we need to take transpose because these are binary observables. -HF}
 	\item the maximally entangled state $\ket{\psi} = \frac{1}{\sd} \sum_{k=1}^d \ket{k}\ket{k}$.
 \end{enumerate}
-We follow a similar approach to construct our ideal strategy. \carl{I don't think the reader will know what ``ideal strategy'' refers to at this point.}. However, our strategy uses a different maximally entangled state,
+\hf{Later we will use this approach to construct a strategy for a linear system game.}
+\carl{I don't think the reader will know what ``ideal strategy'' refers to at this point.}
+\hfc{How about now?}
+However, our strategy uses a different maximally entangled state,
 so we justify our strategy more carefully.
-For concepts related to group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
-For concepts related to group representations, we refer to Sec.~$2.5$ of Ref.~\cite{coladan2017}.  \carl{These last two sentences seem out of place -- consider rephrasing and relocating.}
 
 %-------------------------------------------------------------------------------
 \subsection{The weighted CHSH inequality \cite{acin2012}.}
 %-------------------------------------------------------------------------------
-The weighted CHSH inequality is extracted from the CHSH test, which is another nonlocal game. 
+\hf{The weighted CHSH inequality a variation of the CHSH inequality \cite{chsh}. 
+We formulate it as a nonlocal test.}
 The input sets and output sets of Alice and Bob are
 $\calX = \calY = \{1, 2\}$ and $\calA = \calB = \Z_2$.
-The scoring function for the $\alpha$-weighted CHSH test is defined by
+The scoring function for the $\alpha$-weighted CHSH test, for $|\alpha|\geq 1$,  is defined by
 \begin{align}
 	V(a,b,x,y)_{\alpha-CHSH} = 
 	\begin{cases}
@@ -552,24 +576,23 @@ The scoring function for the $\alpha$-weighted CHSH test is defined by
 		(-1)^{1 + a + b}, \quad \text{if } x = y =2.
 	\end{cases}
 \end{align}
-\carl{What is the input distribution?}
+The input distribution is $\pi(x,y) = 1/4$ for all $(x,y) \in \calX \times \calY$.
 Let Alice and Bob's quantum strategy in terms of projectors be $( \{\{M_x^a\}_a\}_x, \{\{N_y^b\}_b\}_y, \ket{\psi})$. 
 We define binary observables $M_x := M_x^0 - M_x^1$ and $N_y := N_y^0 - N_y^1$ from Alice and Bob's projectors.
 The weighted CHSH inequality states that 
 \begin{align}
 	\label{eq:chsh_op}
-	\ip{\I_\alpha} = \alpha\ip{M_1N_1}+\alpha\ip{M_1N_2} + \ip{M_2N_1} - \ip{M_2N_2}\leq 2\alpha,
+	\ip{\I_\alpha} = \alpha\ip{M_1N_1}+\alpha\ip{M_1N_2} + \ip{M_2N_1} - \ip{M_2N_2}\leq 2|\alpha|,
 \end{align}
 where $\ip{M_xN_y} := \bra{\psi} M_xN _y \ket{\psi}$ is the expectation value of the observables. 
 The weighted CHSH inequality is true 
 if Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$.
 However, if they share an entangled state $\ket{\psi}$, the value of $\ip{\I_\alpha}$ can be as large as
-\begin{align}
-\label{eq:chsh_max}
- \ip{\I_\alpha}_{\max} = 2\sqrt{1+\alpha^2}.
-\end{align}
+$ \ip{\I_\alpha}_{\max} = 2\sqrt{1+\alpha^2}$ \cite{acin2012}.
 \carl{You need to cite the results that you're summarizing here (or refer to an appendix).}
-\begin{definition}[Ideal strategy to achieve $\ip{\I_\alpha}_{\max}$]
+\hfc{I cited the paper in the title of this subsection. Maybe I add a sentence saying that this subsection
+summarizes results in \cite{acin2012}?}
+\begin{definition}[Ideal strategy to achieve $\ip{\I_\alpha}_{\max}$ \cite{acin2012}]
 	\label{def:ideal}
 	Define $\mu = \arctan(1/\alpha)$.
 	The ideal strategy for weighted CHSH with parameter $\alpha$, which achieves the value $\ip{\I_\alpha}_{\max}$, 
@@ -581,7 +604,8 @@ value $\ip{\I_\alpha}$ close to $\ip{\I_\alpha}_{\max}$, then the strategy is cl
 strategy up to some local isometry, 
 which is a phenomenon referred as a robust self-test.
 We give the formal statement of this self-testing property of $\ip{\I_\alpha}_{\max}$ in \cref{sec:chsh}.
-
+\hf{In \cref{sec:full_test} we design
+a nonlocal test call the extended weighted CHSH test based on the weighted CHSH inequality.}
 
 %-----------------------------------------------------------
 \subsection{Approximation tools}
@@ -589,112 +613,113 @@ We give the formal statement of this self-testing property of $\ip{\I_\alpha}_{\
 In the rest of the paper, we use the following approximation results implicitly and explicitly.
 \begin{proposition}
 	\label{prop:inner_pd}
-	Let $\ket{v}$ and $\ket{v'}$ be vectors with length less than equal to $1$ satisfying the relation that $\ket{v} \appd{\epsilon} \ket{v'}$
+	Let $\ket{v}$ and $\ket{v'}$ be vectors such that the relation $\ket{v} \appd{\epsilon} \ket{v'}$ holds,
 	then for any unit vector $\ket{u}$,
-	\begin{align}
+	\begin{align*}
 		 \braket{v}{u} \appd{\ep} \braket{v'}{u} .
-	\end{align}	
+	\end{align*}	
 	\carl{Check the grammar in this proposition.}
 \end{proposition}
 \begin{proof}
 	We can write $\ket{v'} = \ket{v} + \ket{v''}$, where $\norm{\ket{v''}} \leq \epsilon$,
 	then
-	\begin{align}
+	\begin{align*}
 	\norm{ \braket{v}{u} - \braket{v'}{u} } = \norm{\braket{v''}{u}} \leq \norm{\ket{u}}\norm{\ket{v''}} \leq \epsilon.
-	\end{align}
+	\end{align*}
 \end{proof}
 \carl{Question: Do we actually need the assumption that $v,v'$ have length less than $1$?}
+\hfc{You are right. We don't.}
 \begin{proposition}
-	Let $\ket{u_i}$ and $\ket{v_i}$ for $i = 1,2$ be vectors with length less than equal to $1$
+	Let $\ket{u_i}$ and $\ket{v_i}$ for $i = 1,2$ be vectors with norm less than equal to $1$
 	such that 
-	$\ket{u_1} \appd{\ep_1} \ket{v_1}$ and $\ket{u_2} \appd{\ep_2} \ket{v_2}$
+	$\ket{u_1} \appd{\ep_1} \ket{v_1}$ and $\ket{u_2} \appd{\ep_2} \ket{v_2}$,
 	then 
-	\begin{align}
+	\begin{align*}
 		\braket{u_1}{u_2} \appd{\ep_1+ \ep_2} \braket{v_1}{v_2}.
-	\end{align}
+	\end{align*}
 \end{proposition}
 \begin{proof}
 	By direct calculation we have
-	\begin{align}
+	\begin{align*}
 		\norm{ \braket{u_1}{u_2} - \braket{v_1}{v_2}} \leq &\norm{\braket{u_1}{u_2} - \braket{v_1}{u_2}}
 		+ \norm{\braket{v_1}{u_2} - \braket{v_1}{v_2}} \\
 		\leq & \ep_1 + \ep_2,
-	\end{align}
+	\end{align*}
 	where we used \cref{prop:inner_pd}.
 \end{proof}
 \begin{proposition}
 \label{prop:orthog}
-	Let $H$ be a Hermitian matrix and $\ket{u}$ and $\ket{v}$ be two vectors with length less or equal to $1$,
-	which satisfy the condition that 
-	\begin{align}
-		H\ket{u} \appd{\ep_1} a \ket{u}, \\
+	Let $H$ be a Hermitian matrix and $\ket{u}$ and $\ket{v}$ be two vectors with norm less or equal to $1$
+	such that
+	\begin{align*}
+		H\ket{u} \appd{\ep_1} a \ket{u} &&
 		H\ket{v} \appd{\ep_2} b \ket{v}, 
-	\end{align}
+	\end{align*}
 	for some $a > b \in \R$, then
-	\begin{align}
+	\begin{align*}
 		\norm{\braket{u}{v}} \leq \frac{\ep_1+\ep_2}{a-b}.
-	\end{align}
+	\end{align*}
 \end{proposition}
 \begin{proof}
 	We write $H\ket{u} = a\ket{u} + \ket{u'}$ such that $\norm{\ket{u'}} \leq \ep_1$.
 	Similarly, we write $H\ket{v} = b\ket{v} + \ket{v'}$ such that $\norm{\ket{v'}} \leq \ep_2$.
 	Then, we know
-	\begin{align}
+	\begin{align*}
 		\bra{v}H\ket{u} = a\braket{v}{u} + \braket{v}{u'},\\
 		\bra{v}H\ket{u}  =b\braket{v}{u} + \braket{v'}{u},
-	\end{align}
+	\end{align*}
 	Subtracting the second equation from the first equation gives us that 
-	\begin{align}
+	\begin{align*}
 		\norm{\braket{v}{u}} = \frac{\norm{\braket{v'}{u} -  \braket{v}{u'}}}{a-b} \leq \frac{\norm{\ket{v}}\norm{\ket{u'}}+
 		\norm{\ket{u}}\norm{\ket{v'}}}{a-b} 
 		\leq \frac{\ep_1+\ep_2}{a-b}.
-	\end{align}
+	\end{align*}
 \end{proof}
 \begin{proposition}
 \label{prop:close_vec}
-	Let $\ket{u}$ and $\ket{v}$ be two vectors such that $\norm{\ket{u}} \appd{\ep_1} 1$ and
-	$\norm{\ket{v}} \appd{\ep_2} 1$ , if $\braket{u}{v} \geq 1 - \ep_3$,
+	Let $\ket{u}$ and $\ket{v}$ be two vectors such that $\norm{\ket{u}} \appd{\ep_1} 1$,
+	$\norm{\ket{v}} \appd{\ep_2} 1$, and $\braket{u}{v} \geq 1 - \ep_3$,
 	then
-	\begin{align}
+	\begin{align*}
 		\ket{u} \appd{O(\sqrt{\ep_1+\ep_2+\ep_3})} \ket{v}.
-	\end{align}
+	\end{align*}
 \end{proposition}
 \carl{Fix the grammar in the proposition above.}
 \begin{proof}
 	Direct calculation gives us that
-	\begin{align}
+	\begin{align*}
 		\norm{\ket{u} - \ket{v}}^2 &= \norm{\ket{u}}^2 + \norm{\ket{v}}^2 - 2\braket{u}{v} \\
 		&\leq (1+\ep_1)^2 + (1+\ep_2)^2 - 2(1 - \ep_3)\\
 		&= 2(\ep_1+\ep_2+\ep_3)+ \ep_1^2 + \ep_2^2\\
 		& = O(\ep_1+\ep_2+\ep_3).
-	\end{align}
+	\end{align*}
 \end{proof}
 \begin{proposition}
-	Let $\ket{u}$ be a vector with length less than or equal to $1$ such that for a unitary $U$,
-	\begin{align}
+	Let $\ket{u}$ be a vector with norm less than or equal to $1$ such that for a unitary $U$,
+	\begin{align*}
 		U\ket{u} \appd{\ep} a\ket{u} \text{ for } a \in \C,
-	\end{align}
+	\end{align*}
 	then
-	\begin{align}
+	\begin{align*}
 		U^n \ket{u} \appd{n\ep} a^n \ket{u} \text{ for all } n \geq 1.
-	\end{align}
+	\end{align*}
 \end{proposition}
 \begin{proof}
 	We can prove it by induction. 
-	For $n=1$, the statement is satisfied.
-	Assume it holds for $n = k-1$ and consider $n = k$, then we have
-	\begin{align}
-		&\norm{U^k \ket{u} - a^k\ket{u}} \\
-		\leq &\norm{U} \norm{U^{k-1} \ket{\psi} - a^{k-1}\ket{\psi}} + \norm{a^{k-1}}
+	For $k=1$, the statement is satisfied.
+	Assume it holds for $k = n-1$ and consider $k = n$, then we have
+	\begin{align*}
+		&\norm{U^n \ket{u} - a^n\ket{u}} \\
+		\leq &\norm{U} \norm{U^{n-1} \ket{\psi} - a^{n-1}\ket{\psi}} + \norm{a^{n-1}}
 		\norm{U\ket{\psi} - a \ket{\psi}}\\
-		\leq &(k-1)\ep + \ep = k \ep,
-	\end{align}
+		\leq &(n-1)\ep + \ep = n \ep,
+	\end{align*}
 	where we used the fact that $\norm{U} = 1$ and $\norm{a} \leq 1$.
 \end{proof}
 
 %=======================================
-\section{The linear constraint test}
-\label{sec:lct}
+\section{The linear system game}
+\label{sec:lsg}
 %=======================================
 In this section, we introduce a linear constraint test that is satisfied by our correlation.
 The linear constraint test is designed to enforce relations that should be satisfied by 
@@ -1033,8 +1058,8 @@ Intuitively, it means that if some quantum strategy achieves a value $\ip{\I_\al
 then the shared state must be close to $\ket{\EPR{2}}$ and their observables are close to rotated Pauli operators up to
 some local isometry.
 The formal statement is given in the theorem below. Since the proof uses the same technique as the one used in Ref.~\cite{bamps2015},
-we defer the proof till \cref{sec:selftest}. Instead, we only list the key relations used in the proof because they will be reused in the later parts of 
-the paper.
+we defer the proof till \cref{sec:selftest}. Instead, we only list the key relations used in the proof because they will be reused in 
+\cref{sec:main} where we prove our robust self-testing result.
 \begin{theorem}
 \label{thm:selftest}
 	Suppose the quantum strategy $(\ket{\psi}, \{M_x:=M_x^0-M_x^1\}_{x=1,2}, \{N_y :=N_y^0-N_y^1\}_{y = 1,2} )$ achieves that
@@ -1262,7 +1287,7 @@ it provides another angle to justify our self-testing argument.
 \subsection{The full correlation}
 %---------------------------------------------------
 The full correlation is generated by the ideal strategy presented in the previous subsection.
-To help readers understanding later parts of this paper better, 
+To help readers understanding the proofs in \cref{sec:main} of this paper better, 
 parts of the full correlation is given in the tables below.
 \begin{table}[H]
 \begin{center}
