@@ -722,7 +722,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 \end{proof}
 
 %=======================================
-\section{The linear system game}
+\section{The linear system game $\LS(\Gamma_r)$}
 \label{sec:lsg}
 %=======================================
 In this section, we introduce a linear system game which is a component of the full test.
@@ -744,17 +744,19 @@ $
 for some $r \in \N$ into a linear system game.}
 
 %------------------------------------------------------------------------
-\subsection{The embedding of $G$}
+\subsection{The embedding of $uou^{-1} = o^r$}
 %------------------------------------------------------------------------
 The main result of this subsection is summarized in the following theorem.
 \begin{theorem}
 	The relation $uou^{-1} = o^r$ can be embedded in a linear system game which has
 	$n(r) := 18r+85$ variables and $m(r) := 17r + 77$ equations, where each equation has $3$ variables.
 \end{theorem}
-We prove this by constructing the solution group $\Gamma$ of the linear system game. 
-We also prove some properties of the generators of $\Gamma$ along the way.
+We prove this by constructing the solution group $\Gamma_r$ of the linear system game,
+so we denote the linear system game by $\LS(\Gamma_r)$.
+\hfc{Do you prefer $\Gamma_r$ or $\Gamma(r)$? Or you have any suggestion about a symbol for this group?}
+We also prove some properties of the generators of $\Gamma_r$ along the way.
 
-We embed $uou^{-1}= o^r$ into $\Gamma$ in three steps, which introduce two intermediate groups $G_0$ and $G_1$ defined below.
+We embed $uou^{-1}= o^r$ into $\Gamma_r$ in three steps, which introduce two intermediate groups $G_0$ and $G_1$ defined below.
 \begin{definition}	
 \label{def:g0}
 	The presentation of $G_0$ has order-$2$ generators:
@@ -871,11 +873,11 @@ The first property of $G_1$ was first proved in Lemma~$4.4$ of \cite{slofstra201
 Note that there are two types of conjugacy relations in $G_1$. One is of the form
 $f b_i f = c_i$ for all $i = 1 \dots r+5$. The other one is of the form 
 $d_ib_jd_i = c_k$ for all $(i,j,k) \in C(r)$. For each type of the conjugacy relations, 
-we are going to embed it into a different set of linear relations in $\Gamma$.
+we are going to embed it into a different set of linear relations in $\Gamma_r$.
 
 \begin{definition}
 \label{def:gamma}
-The presentation of $\Gamma$ has order-$2$ generators:
+The presentation of $\Gamma_r$ has order-$2$ generators:
 \begin{align*}
 	J, \{a_i, b_i, c_i, d_i, v_i,w_i,\{ k_{i,j} \}_{j=1}^5\}_{i=1}^{r+5}, \{f_i,g_i,m_i\}_{i=0}^2, \{h_{jk}\}_{(i,j,k) \in C(r)}, 
 	\{\{ k_{l,j} \}_{j=1}^6\}_{l \in C(r)},
@@ -906,14 +908,14 @@ which embed $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$;
 \item $J$ commutes with all the other generators.
 \end{itemize}
 \end{definition}
-The special properties of the generators of $\Gamma$ are summarized in the two propositions below.
+The special properties of the generators of $\Gamma_r$ are summarized in the two propositions below.
 \begin{proposition}
-	The group $\Gamma$ embeds all the conjugacy relations of $G_1$.
+	The group $\Gamma_r$ embeds all the conjugacy relations of $G_1$.
 	It also embeds the relations: $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$.
 \end{proposition}
 The proof of the proposition above follows the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017}.
 \begin{proposition}
-	In the group $\Gamma$, the generator $f_2$ commutes with $f_0$ and $a_i$ for all $i = 1 \dots r+5$;
+	In the group $\Gamma_r$, the generator $f_2$ commutes with $f_0$ and $a_i$ for all $i = 1 \dots r+5$;
 	the generator $g_2$ commutes with $g_0$ and $a_i$ for all $i = 1 \dots r+5$.
 \end{proposition}
 \begin{proof}
@@ -924,11 +926,11 @@ The proof of the proposition above follows the proof of Proposition $4.2$ of Ref
 \end{proof}
 
 %------------------------------------------------------------------------
-\subsection{The representation of $\Gamma$}
+\subsection{A representation of $\Gamma_r$}
 %------------------------------------------------------------------------
-In this section we give a representation of $\Gamma$ which is built upon the representation 
-$\Psi_0$ of $G_0$ and $\Psi_1$ of $G_1$. We need the representation of $\Gamma$ to construct the
-ideal strategy that realizes our correlation.
+In this section we give a representation of $\Gamma_r$ which is built upon the representation 
+$\Psi_0$ of $G_0$ and $\Psi_1$ of $G_1$. We need the representation of $\Gamma_r$ to construct the
+ideal strategy of $\LS(\Gamma_r)$.
 
 Before giving the representations, we define two Hilbert spaces $W_{d-1}$ and $W_2$, which will form the carrier spaces
 of the representations,
@@ -997,10 +999,10 @@ for $i = 1 \dots r+5$,
 \end{definition}
 
 Finally, we follow the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017} to construct the 
-representation of $\Gamma$.
+representation of $\Gamma_r$.
 \begin{definition}
 \label{def:rep_gamma}
-The representation $\Psi$ of $\Gamma$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
+The representation $\Psi$ of $\Gamma_r$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
 \begin{itemize}
 \item for any $x$ which is also a generator of $G_1$,
 \begin{align*}
@@ -1060,9 +1062,10 @@ The validation of $\Psi_1$ and $\Psi$ are done in Slofstra's work \cite{slofstra
 %====================================================
 In this section, we show how the weighted CHSH inequality can be used to self-test $\ket{\EPR{2}}$ robustly.
 Intuitively, it means that if some quantum strategy achieves a value $\ip{\I_\alpha}$ that is close to $\ip{\I_\alpha}_{\max}$,
-then the shared state must be close to $\ket{\EPR{2}}$ and their observables are close to rotated Pauli operators up to
-some local isometry.
-The formal statement is given in the theorem below. Since the proof uses the same technique as the one used in Ref.~\cite{bamps2015},
+then the shared state must be close to $\ket{\EPR{2}}$ and their observables are close to the rotated Pauli operators 
+defined in \cref{def:ideal},
+up to some local isometry.
+The formal statement is given in the theorem below. Since the proof uses the same techniques as introduced in Ref.~\cite{bamps2015},
 we defer the proof till \cref{sec:selftest}. Instead, we only list the key relations used in the proof because they will be reused in 
 \cref{sec:main} where we prove our robust self-testing result.
 \begin{theorem}
@@ -1080,10 +1083,10 @@ we defer the proof till \cref{sec:selftest}. Instead, we only list the key relat
 	to be clearer about what label you are using for Alice's and Bob's systems (see my previous comment on this).}
 \end{theorem}
 We follow the convention and define $c := \cos(\mu)$, $s := \sin(\mu)$, and
-\begin{align}
+\begin{align*}
 	&Z_A := M_1 && X_A := M_2\\
 	&Z_B := \frac{N_1+N_2}{2c} && X_B := \frac{N_1-N_2}{2s}.
-\end{align}
+\end{align*}
 The key relations that we will reuse are
 \begin{align}
 	\label{eq:za-zb}& Z_A\ket{\psi} \appd{\frac{\sqrt{s\epsilon}}{c}} Z_B\ket{\psi},\\
@@ -1098,16 +1101,16 @@ where \cref{eq:zaxaxbzb} can be derived from \cref{eq:za-zb}, \cref{eq:xa-xb} an
 \section{The full test}
 \label{sec:full_test}
 %==========================
-The full test consists of three subtest: the linear constraint test,
+The full test consists of three subtest: the linear system game $\LS(\Gamma_r)$,
 the extended weighted CHSH test and a commutation test. We explain how the three tests are conducted and
 combined below.
 
-\textbf{The linear constraint test}.
-Recall that the the linear constraint test with solution group $\Gamma$ defined in \cref{def:gamma} has variables labelled by $j \in \{1,2,\dots,\nr\}$ and
+\textbf{The linear system game}.
+Recall that the the linear system game with solution group $\Gamma_r$ defined in \cref{def:gamma} has variables labelled by $j \in \{1,2,\dots,\nr\}$ and
 equations labelled by $i \in \{1, 2 \dots \mr\}$.
-We denote the linear system associated with the linear constraint test by $H\underline{x} = \uc$ and
+We denote the associated linear system by $H\underline{x} = \uc$ and
 define $X_i := \{ \ux : \sum_{k} H(i,k)\ux(k) = \uc(i) \}$ and $I_i = \{ k : H(i,k) = 1\}$.
-From the construction of $\Gamma$, we know that $| I_i| \leq 3$.
+From the construction of $\Gamma_r$, we know that $| I_i| \leq 3$.
 The correspondence between $\ux$ and the generators of $\Gamma$ is that
 \begin{align*}
 	&\ux(j) := a_j &&&&\text{ for } j = 1 \dots r+5 \\
