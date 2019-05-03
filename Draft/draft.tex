@@ -306,14 +306,22 @@ robust self-testing of maximally entangled states with unbounded dimension}
 \label{sec:intro}
 %========================================
 Self-testing is a unique phenomenon of quantum mechanics. It has many applications in quantum
-delegated computation \cite{ruv2013,cgsv2017} and device independent quantum cryptography
-\cite{qkd2011,qkd2014,miller2016,fu2018,eat2018}.
+delegated computation \cite{ruv2013,coladan2017verifier} and device independent quantum cryptography
+\cite{miller2017,fu2018,eat2018}.
+\hfc{Which DIQKD paper should I cite?}
 
 The case of self-testing $2$-dimensional EPR pair is fully understood. One can robustly self-test
 one copy of it by the CHSH inequality \cite{bamps2015}. and self-test many copies of the $2$-dimensional EPR
-pair in parallel \cite{mckague2016, coladan2017parallel}. 
+pair in parallel \cite{mckague2016, coladan2016parallel, lowdegree}. 
 Self-testing general $d$-dimensional EPR pairs is a harder task.
-Proving robustness is harder.
+Coladangelo, Goh and Scarani has shown that all pure bipartite entangled states can be self-tested \cite{coladan2017all}
+by constructing an explicit correlation of size $\Theta(d^2)$ that can be used for self-testing,
+which is the only result about the general $d$-dimensional case so far.
+However, proving the robustness of the correlation remains an open problem. 
+Without robustness, we cannot infer anything about a quantum strategy if
+the produced correlation deviates from the ideal correlation, no matter how small the 
+deviation is. 
+ 
 
 
 At a high level, general $d$-dimensional maximally entangled states are self-tested by
