@@ -294,7 +294,8 @@ robust self-testing of maximally entangled states with unbounded dimension}
 
 \begin{abstract}
 	We show that for any prime odd integer $d$ with primitive $r$, there exists a correlation of size
-	$\Theta(r^2)$ that can robustly self-test a maximally entangled state of dimension $4d-4$. Our result is
+	$\Theta(r^2)$ 
+	that can robustly self-test a maximally entangled state of dimension $4d-4$. Our result is
 	inspired by the robust self-testing result by Bamps and Pironio (\textit{Physical Review A} $91.5$ $(2015)$) and
 	techniques introduced by Slofstra (\textit{Forum of Mathematics, Pi}. Vol. $7$, $2019$). Since there are
 	infinitely many prime numbers with primitive root at most $5$ (\textit{The Mathematical Intelligencer} $10.4$ ($1988$)), 
@@ -572,12 +573,9 @@ the linear system game ($H\ux = \uc$) is given by
 \begin{enumerate}
 	\item $M_{ij} = \Psi(x_j)$ for all $ 1 \leq i \leq m$ and $1 \leq j \leq n$,
 	\item $N_j = \Psi(x_j)$ for all $1 \leq j \leq n$, \carl{Do you need a transpose symbol in here somewhere?}
-	\hf{I don't think we need to take transpose because these are binary observables. -HF}
+	\hf{I don't think we need to take transpose because these are binary observables. -HF}  \carl{A binary observable can still be different from its transpose.}
 	\item the maximally entangled state $\ket{\psi} = \frac{1}{\sd} \sum_{k=1}^d \ket{k}\ket{k}$.
 \end{enumerate}
-\hf{Later we will use this approach to construct a strategy for a linear system game.}
-\carl{I don't think the reader will know what ``ideal strategy'' refers to at this point.}
-\hfc{How about now?}
 However, our strategy uses a different maximally entangled state,
 so we justify our strategy more carefully.
 
@@ -770,7 +768,7 @@ The main result of this subsection is summarized in the following theorem.
 \end{theorem}
 We prove this by constructing the solution group $\Gamma_r$ of the linear system game,
 so we denote the linear system game by $\LS(\Gamma_r)$.
-\hfc{Do you prefer $\Gamma_r$ or $\Gamma(r)$? Or you have any suggestion about a symbol for this group?}
+\hfc{Do you prefer $\Gamma_r$ or $\Gamma(r)$? Or you have any suggestion about a symbol for this group?} \carl{The notation that you're using seems backwards -- I think we should express the solution group as a function of the linear system, not the other way around.}
 We also prove some properties of the generators of $\Gamma_r$ along the way.
 
 We embed $uou^{-1}= o^r$ into $\Gamma_r$ in three steps, which introduce two intermediate groups $G_0$ and $G_1$ defined below.
