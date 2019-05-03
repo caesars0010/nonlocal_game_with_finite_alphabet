@@ -1,53 +1,75 @@
-This is BibTeX, Version 0.99d (TeX Live 2016)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: draft.aux
 The style file: alphaurl.bst
+I couldn't open database file quantum_correlation.bib
+---line 193 of file draft.aux
+ : \bibdata{quantum_correlation
+ :                             }
+I'm skipping whatever remains of this command
+I found no database files---while reading file draft.aux
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Database file #1: quantum_correlation.bib
-Warning--I didn't find a database entry for "cleve2014"
+Warning--I didn't find a database entry for "ruv2013"
+Warning--I didn't find a database entry for "cgsv2017"
+Warning--I didn't find a database entry for "qkd2011"
+Warning--I didn't find a database entry for "qkd2014"
+Warning--I didn't find a database entry for "miller2016"
+Warning--I didn't find a database entry for "fu2018"
+Warning--I didn't find a database entry for "eat2018"
+Warning--I didn't find a database entry for "bamps2015"
+Warning--I didn't find a database entry for "mckague2016"
+Warning--I didn't find a database entry for "coladan2017parallel"
+Warning--I didn't find a database entry for "murty1988"
+Warning--I didn't find a database entry for "acin2012"
+Warning--I didn't find a database entry for "slofstra2017"
+Warning--I didn't find a database entry for "magic_square"
+Warning--I didn't find a database entry for "coladan2017"
+Warning--I didn't find a database entry for "chsh"
+Warning--I didn't find a database entry for "coladan2017verifier"
+Warning--I didn't find a database entry for "wu2016"
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-You've used 15 entries,
+You've used 0 entries,
             3274 wiz_defined-function locations,
-            775 strings with 7720 characters,
-and the built_in function-call counts, 7287 in all, are:
-= -- 732
-> -- 323
-< -- 4
-+ -- 100
-- -- 99
-* -- 439
-:= -- 1134
-add.period$ -- 45
-call.type$ -- 15
-change.case$ -- 95
-chr.to.int$ -- 15
-cite$ -- 15
-duplicate$ -- 211
-empty$ -- 600
-format.name$ -- 117
-if$ -- 1756
+            694 strings with 5647 characters,
+and the built_in function-call counts, 46 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 32
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 2
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 15
-newline$ -- 79
-num.names$ -- 45
-pop$ -- 120
+missing$ -- 0
+newline$ -- 3
+num.names$ -- 0
+pop$ -- 0
 preamble$ -- 1
-purify$ -- 110
+purify$ -- 0
 quote$ -- 0
-skip$ -- 515
+skip$ -- 2
 stack$ -- 0
-substring$ -- 288
-swap$ -- 15
-text.length$ -- 4
-text.prefix$ -- 4
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
 top$ -- 0
-type$ -- 120
+type$ -- 0
 warning$ -- 0
-while$ -- 55
-width$ -- 20
-write$ -- 195
-(There was 1 warning)
+while$ -- 0
+width$ -- 0
+write$ -- 2
+(There were 2 error messages)
