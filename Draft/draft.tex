@@ -323,28 +323,26 @@ Without robustness, we cannot infer anything about a quantum strategy if
 the produced correlation deviates from the ideal correlation, no matter how small the 
 deviation is. 
  
-
-
-At a high level, general $d$-dimensional maximally entangled states are self-tested by
-modifying the correlation and enlarging the size of the correlation.
-A natural question to ask is whether maximally entangled state with large local dimension
-can be self-tested with fixed-sized correlation. 
-An equivalent question to ask is whether it is possible to self-test maximally
-entangled state of some local dimension more efficiently, with constant correlation size. 
-In this report, we give an affirmative answer to this question by proving the following theorem.
+A natural question to ask is whether maximally entangled states with large local dimension
+can be self-tested with constant-sized correlations. 
+In this paper, we give an affirmative answer to this question by proving the following theorem.
 \begin{theorem}[Informal]
 \label{thm:inf}
 	There exists an infinite-sized set $D$ of odd prime numbers such that, for any $d \in D$, 
-	the maximally entangled state of local dimension $d-1$ can be self-tested 
+	the maximally entangled state of local dimension $4d-4$ can be robustly self-tested 
 	with constant-sized question and answer alphabets.
 \end{theorem}
+The formal statement of this theorem is given in \cref{thm:self-test} and \cref{thm:infty}.
 
 The set $D$ is easily characterizable as it contains all the odd prime numbers with smallest
-primitive root $2$, $3$ or $5$. It has been shown that there are infinitely many prime numbers
-with smallest primitive root in the set $\{2,3,5\}$ \cite{murty1988}, so the set $D$ has infinitely many elements.
-To prove \cref{thm:inf}, we give explicit self-testing proof of 
-the maximally entangled state with local dimension $d-1$ where the primitive root of $d$ is $2$,$3$, or $5$, 
-by explicitly giving the correlation that achieves self-testing. 
+primitive root $2$, $3$ or $5$. It has been shown that  the set $D$ has infinitely many elements \cite{murty1988}.
+To prove \cref{thm:inf}, we construct a correlation of size $\Theta(r^2)$ for each $d \in D$ whose primitive
+root is $r$. This correlation is denoted by $\fC(d,r)$.
+Note that although the size of $\fC(d,r)$ does not depend on $d$, the entries of $\fC(d,r)$ do.
+Then we prove the robust self-testing property of $\fC(d,r)$ by showing 
+that if some quantum strategy can approximate $\fC(d,r)$, then
+the generalized swap isometry \cite{yang2013}
+can produce the desired maximally entangled states when applied to the unknown state used in the strategy.
 %Then the self-testing property of this correlation is 
 %given in the following theorem.
 %\begin{theorem}[Informal]
@@ -352,31 +350,36 @@ by explicitly giving the correlation that achieves self-testing.
 %	All maximally entangled state with local dimension $d-1$, where $d$ is prime and has
 %	primitive root $r \in \{2, 3, 5\}$, can be self-tested by a constant-sized correlation.
 %\end{theorem}
-Our correlation is denoted by $C(\dr{r})$ for prime $d$.
-We use the superscript $(r)$ to denote the primitive root of $d$.
-Note that although the size of $C(\dr{r})$ does not depend on $d$, the optimal correlation does.
 
 
-In order to accomplish our goal, we introduce new techniques for self-testing.
-First of all, we use a different variant of the weighted CHSH inequality, \hf{which was first introduced in \cite{acin2012}}, to enforce the eigenvalue of
-some unknown operator which is the product of two binary observables used in the weighted CHSH test.
-The variant of the CHSH inequality that we use is not used in the self-testing literature before.
-Secondly, we give a new way to decompose unitaries of arbitrary order into binary observables which maintains
-certain commutation relations. Such decomposition is different from what Slofstra used in his work \cite{slofstra2017}.
-\carl{Our work is heavily based on \cite{slofstra2017}, and we need to make that clearer.}
-Intuitively, such decomposition can be seen as the inverse of the Jordan's lemma decomposition.
-The third contribution is that we prove self-testing without using anti-commutation relations between Pauli operators, 
+
+
+In order to accomplish our goal, we introduce new techniques for robust self-testing.
+We use a different variant of the weighted CHSH inequality, \hf{which was first introduced in Ref.~\cite{acin2012}
+for studying randomness and entanglement and not used in the self-testing literature before}, 
+to enforce the eigenvalue of the product of two binary observables used in the weighted CHSH test.
+The idea of decompose the unitaries of arbitrary order into binary observables was first introduced by Slofstra \cite{slofstra2017}.
+We use a different way to decompose the unitaries, which can be seen as the inverse of Jordan's lemma, and
+apply it to self-testing proofs.
+Comparing to the previous approaches, which aim to enforcing eigenvalues of individual operators, our approach
+gives us more flexibility in designing the correlation and easier generalization of our proof techniques. 
+The other contribution is that we prove self-testing without using the anti-commutation relation between Pauli operators,
+or the generalized version of it, 
 which is the core idea in \hf{most of} the previous self-testing results.
 \carl{Are we sure about that ("all")?}
-Instead, we find a new pair of operators that can generate the ring of matrices over complex numbers.
+Instead, we find a new relation that should be enforced. 
 
+pair of operators that can generate the ring of matrices over complex numbers.
+\carl{Our work is heavily based on \cite{slofstra2017}, and we need to make that clearer.}
+\hfc{How about now?}
 
 \textbf{Structure of the paper}.
 We start with notations and background information in \cref{sec:prelim}.
 Since the correlation we designed can win a special linear system game and satisfy
 an extended weighted CHSH test, we introduce the linear system game
-in \cref{sec:lsg} and the extended weighted CHSH test in \cref{sec:chsh}. 
-Our main result is based on the combination of the two tests and presented in \cref{sec:main}. 
+in \cref{sec:lsg} and the self-testing properties of the extended weighted CHSH inequality in \cref{sec:chsh}. 
+Then we give the correlation $\fC(d,r)$ and the ideal strategy to generate it in \cref{sec:full_test}.
+In the end, we give the robust self-testing proof in \cref{sec:main}. 
 
 %========================================
 \section{Preliminaries and notations}
@@ -2128,6 +2131,7 @@ Moreover, there are infinitely many prime numbers
 whose primitive roots are in the set $\{2,3,5\}$ \cite{murty1988},
 Hence, our main result is the following theorem.
 \begin{theorem}
+	\label{thm:infty}
 	There exists an infinity-sized set $D$ of prime numbers such that 
 	for each $d \in D$, there exists
 	a constant-sized correlation that can self-test the maximally entangled state
