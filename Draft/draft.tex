@@ -351,25 +351,34 @@ can produce the desired maximally entangled states when applied to the unknown s
 %	primitive root $r \in \{2, 3, 5\}$, can be self-tested by a constant-sized correlation.
 %\end{theorem}
 
-
-
-
-In order to accomplish our goal, we introduce new techniques for robust self-testing.
-We use a different variant of the weighted CHSH inequality, \hf{which was first introduced in Ref.~\cite{acin2012}
-for studying randomness and entanglement and not used in the self-testing literature before}, 
-to enforce the eigenvalue of the product of two binary observables used in the weighted CHSH test.
-The idea of decompose the unitaries of arbitrary order into binary observables was first introduced by Slofstra \cite{slofstra2017}.
-We use a different way to decompose the unitaries, which can be seen as the inverse of Jordan's lemma, and
-apply it to self-testing proofs.
-Comparing to the previous approaches, which aim to enforcing eigenvalues of individual operators, our approach
-gives us more flexibility in designing the correlation and easier generalization of our proof techniques. 
-The other contribution is that we prove self-testing without using the anti-commutation relation between Pauli operators,
-or the generalized version of it, 
-which is the core idea in \hf{most of} the previous self-testing results.
-\carl{Are we sure about that ("all")?}
-Instead, we find a new relation that should be enforced. 
-
-pair of operators that can generate the ring of matrices over complex numbers.
+In order to accomplish our goal, we first design a linear system game to enforce the 
+relation $UOU\ct = O^r$, with the inspiration comes from Slofstra \cite{slofstra2017}.
+Unlike previous self-testing proofs, which tries to enforce the anti-commutation relation
+between Pauli operators of dimension $2$, $XZ=-ZX$, or the generalized anti-commutation relation 
+between Pauli operators of higher dimension, $XZ = \omega_d ZX$, the dimension $d$ is implicit in our
+relation. 
+The implication is that the eigenvalues of $O$ are powers of $\omega_d$, for
+some $d$ whose primitive root is $r$, and $U$ only permutes the eigenvectors of $O$. 
+Since winning the linear system game requires that Alice
+and Bob share a state $\ket{\psi}$, which satisfies the condition that 
+$O_A \x O_B \ket{\psi} = \ket{\psi}$, intuitively, we know that 
+$\ket{\psi}$ is spanned by eigenvectors of $O$. 
+The other specialty of the linear system game is that it forces Alice and Bob to have binary observables
+whose products are the speical unitaries $U$ and $O$, because the answers to the questions of the 
+linear system games are binary. 
+The idea of decompose the unitaries of arbitrary order into binary observables was also first introduced by Slofstra \cite{slofstra2017}.
+We use a different way to decompose the unitaries, which can be seen as the inverse of Jordan's lemma, 
+The fact that Alice and Bob only have binary observables make it easier for us 
+to compose the linear system game with another test, which we call the extended weighted CHSH test.
+The core idea of the extended weighted CHSH test is to certify that Alice and Bob's observables and state 
+for the linear system game can also be used to violate the weighted CHSH inequality \cite{acin2012} maximally.
+We find that the maximal violation of the weighted CHSH inequality can certify the eigenvalues of the product
+of Bob's observables. 
+At this point, we can use the extended weighted CHSH test to certify that
+$O$ has eigenvalue $\omega_d$ and $d$ is prime, then we know $O$ also has eigenvalues $\omega_d^j$ for $j = 1 \dots d-1$.
+In the end, we can use the generalized swap isometry \cite{yang2013} to prove our robust self-testing.
+Note that our robust self-testing proof follows a different line of arguments from what was originally
+proposed in Ref.~\cite{yang2013}.
 \carl{Our work is heavily based on \cite{slofstra2017}, and we need to make that clearer.}
 \hfc{How about now?}
 
@@ -1762,16 +1771,17 @@ in the proposition below. In the next lemma, we establish that this special comp
 	We also define
 	\begin{align}
 		&\ket{\psi_1} =1/2(M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 +M_{\nr+1}^1) \ket{\psi} \\
-		&\ket{\psi_2} = 1/2(M_{\nr+1}^1 + iM_{\nr+2}M_{\nr+1}^0 -iM_{\nr+2}M_{\nr+1}^1 + M_{\nr+1}^0)  \ket{\psi} \\
-		&\ket{\psi_3} =1/2 (N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1+iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi}\\
-		&\ket{\psi_4} =1/2(N_{\nr+1}^1 + iN_{\nr+2}N_{\nr+1}^1 -iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi}
+		%&\ket{\psi_2} = 1/2(M_{\nr+1}^1 + iM_{\nr+2}M_{\nr+1}^0 -iM_{\nr+2}M_{\nr+1}^1 + M_{\nr+1}^0)  \ket{\psi} \\
+		&\ket{\psi_2} =1/2 (N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1+iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi}\\
+		%&\ket{\psi_4} =1/2(N_{\nr+1}^1 + iN_{\nr+2}N_{\nr+1}^1 -iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi}
 	\end{align}
 	then
 	\begin{align}
-	 \label{eq:psi1_eq} &\ket{\psi_1} \appd{O(\sd \sr\qe)} \ket{\psi_3} \text{ and } \ket{\psi_2} \appd{O(\sd \sr\qe)} \ket{\psi_4}, \\
-	 \label{eq:psi1_sum} &M_\ast^\diamond \ket{\psi} \appd{O( r\se)} \ket{\psi_1}+\ket{\psi_2}, \\
-	 \label{eq:psi1_orth} &\braket{\psi_2}{\psi_1} \appd{O( r\se)} 0,\\
-	 \label{eq:psi1_norm} &\norm{\ket{\psi_i}}^2 \appd{O(r\se)} 1/(d-1) \quad \text{ for } i = 1, 2, 3, 4,\\
+	 \label{eq:psi1_eq} &\ket{\psi_1} \appd{O(\sd \sr\qe)} \ket{\psi_2},\\ 
+	 %\text{ and } \ket{\psi_2} \appd{O(\sd \sr\qe)} \ket{\psi_4}, \\
+	 %\label{eq:psi1_sum} &M_\ast^\diamond \ket{\psi} \appd{O( r\se)} \ket{\psi_1}+\ket{\psi_2}, \\
+	 %\label{eq:psi1_orth} &\braket{\psi_2}{\psi_1} \appd{O( r\se)} 0,\\
+	 \label{eq:psi1_norm} &\norm{\ket{\psi_i}}^2 \appd{O(r\se)} 1/(d-1) \quad \text{ for } i = 1, 2\\
 	 \label{eq:psi1_eig1} &N_1N_2 \ket{\psi_1} \appd{O(\sr \qe/\sd)} \omega_d\ket{\psi_1},\\
 	 \label{eq:psi1_eig2} &M_1M_2 \ket{\psi_1} \appd{O(\sd\sr \qe)} \omega_d^{-1} \ket{\psi_1}.
 	\end{align}
@@ -1802,31 +1812,6 @@ In this proof, we use the notation $c := \cos(\pi/d)$ and $s := \sin(\pi/d)$.
 			&\appd{O(r\se)} -N_{\nr+2} N_{\nr+1} \ket{\psi}.
 	\end{align*}
 	The proof of $\ket{\psi_2} \appd{O(\sd \sr \qe)} \ket{\psi_4}$ is similar.
-	
-	\textbf{To prove \cref{eq:psi1_sum}}, we use the definition of $\ket{\psi_1}$ and $\ket{\psi_2}$ and get 
-	\begin{align*}
-		\ket{\psi_2} + \ket{\psi_1} = 1/2( 2M_{\nr+1}^0 + 2M_{\nr+1}^1) \ket{\psi} \appd{O(r\se)} M_\ast^\diamond \ket{\psi}.
-	\end{align*}
-	
-	\textbf{To prove \cref{eq:psi1_orth}}, we expand the inner product and get 
-	\begin{align*}
-		&\braket{\psi_1}{\psi_2}\\
-	 = &1/4\bra{\psi}(M_{\nr+1}^0 - iM_{\nr+1}^1M_{\nr+2} + iM_{\nr+1}^0M_{\nr+2} +M_{\nr+1}^1)\\
-	 &(M_{\nr+1}^1 + iM_{\nr+2}M_{\nr+1}^0 -iM_{\nr+2}M_{\nr+1}^1 + M_{\nr+1}^0)\ket{\psi}\\
-	 =& 1/2i \bra{\psi}(M_{\nr+1}^0M_{\nr+2}M_{\nr+1}^0-M_{\nr+1}^1M_{\nr+2}M_{\nr+1}^1\ket{\psi}.
-	\end{align*}
-	Then we will show that $\bra{\psi} M_{\nr+1}^0M_{\nr+2}M_{\nr+1}^0 \ket{\psi} \appd{O( r\se)} 0$ as follows
-	\begin{align*}
-	 \bra{\psi}(M_{\nr+1}^0M_{\nr+2}M_{\nr+1}^0\ket{\psi} &\appd{O(r\se)}  \bra{\psi}(N_{\nr+1}^0M_{\nr+2}N_{\nr+1}^0)\ket{\psi}\\
-	  &=\bra{\psi}M_{\nr+2}N_{\nr+1}^0)\ket{\psi}\\
-	&\appd{O(r^2\ep)} 0,
-	\end{align*}
-	where the last approximation comes from the correlation.
-	Similarly, we have 
-	\begin{align*}
-	\bra{\psi}(M_{\nr+1}^1M_{\nr+2}M_{\nr+1}^1\ket{\psi} \appd{O(r\se)} \bra{\psi} M_{\nr+2}N_{\nr+1}^1 \ket{\psi} \appd{O(r^2\ep)} 0.
-	\end{align*}
-	Hence, $\braket{\psi_2}{\psi_1} \appd{O(r\se)} 0$.
 	
 	\textbf{To prove \cref{eq:psi1_norm}}, we use $\norm{\ket{\psi_1}}^2$ as an example. 
 	The norms of the other $3$ vectors can be derived with previous results.
@@ -1945,8 +1930,8 @@ In this proof, we use the notation $c := \cos(\pi/d)$ and $s := \sin(\pi/d)$.
 	\end{align*}
 	
 	\textbf{To prove \cref{eq:psi1_eig2}},
-	we first show that $M_1M_2 \ket{\psi_3}\appd{O(\sr \qe/\sd)} \omega_d^{-1} \ket{\psi_3}$, then we 
-	use the fact that $\ket{\psi_3} \appd{O(\sd \sr\qe)} \ket{\psi_1}$ to draw the conclusion.
+	we first show that $M_1M_2 \ket{\psi_2}\appd{O(\sr \qe/\sd)} \omega_d^{-1} \ket{\psi_2}$, then we 
+	use the fact that $\ket{\psi_2} \appd{O(\sd \sr\qe)} \ket{\psi_1}$ to draw the conclusion.
 	
 	From the strategy $S_2$, we can summarize that 
 	\begin{align}
@@ -1962,10 +1947,10 @@ In this proof, we use the notation $c := \cos(\pi/d)$ and $s := \sin(\pi/d)$.
 	\end{align*}
 	Multiplying both sides of the equation above by $1/2(\1+iN_{\nr+2})$ we get
 	\begin{align}
-		M_1M_2 \ket{\psi_3} \appd{O(\sr \qe/\sd)} \omega_d^{-1}\ket{\psi_3},
+		M_1M_2 \ket{\psi_2} \appd{O(\sr \qe/\sd)} \omega_d^{-1}\ket{\psi_2},
 	\end{align}
-	where we use the fact that $\ket{\psi_3} = 1/2(\1+iN_{\nr+2})(N_{\nr+1}^0 - i N_{\nr+2}N_{\nr+1}^1) \ket{\psi}$
-	In the end, the relation $\ket{\psi_1}  \appd{O(\sd \sr\qe)} \ket{\psi_3}$ gives us that 
+	where we use the fact that $\ket{\psi_2} = 1/2(\1+iN_{\nr+2})(N_{\nr+1}^0 - i N_{\nr+2}N_{\nr+1}^1) \ket{\psi}$
+	In the end, the relation $\ket{\psi_1}  \appd{O(\sd \sr\qe)} \ket{\psi_2}$ gives us that 
 	\begin{align}
 		M_1M_2 \ket{\psi_1} \appd{O(\sd \sr \qe)} \omega_d^{-1}\ket{\psi_1}.
 	\end{align}
