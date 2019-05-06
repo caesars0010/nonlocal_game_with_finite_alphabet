@@ -278,8 +278,8 @@
 
 \begin{document}
 
-\title{Constant-sized correlations are sufficient for 
-robust self-testing of maximally entangled states with unbounded dimension}
+\title{Constant-sized correlations are sufficient to 
+robustly self-test maximally entangled states with unbounded dimension}
 
 \author[1]{Honghao Fu}
 \author[1,2]{Carl Miller}
@@ -644,8 +644,8 @@ a nonlocal test call the extended weighted CHSH test based on the weighted CHSH 
 In the rest of the paper, we use the following approximation results implicitly and explicitly.
 \begin{proposition}
 	\label{prop:inner_pd}
-	Let $\ket{v}$ and $\ket{v'}$ be vectors such that the relation $\ket{v} \appd{\epsilon} \ket{v'}$ holds,
-	then for any unit vector $\ket{u}$,
+	Let $\ket{v}$ and $\ket{v'}$ be vectors such that the relation $\ket{v} \appd{\epsilon} \ket{v'}$ holds.
+	Then for any unit vector $\ket{u}$,
 	\begin{align*}
 		 \braket{v}{u} \appd{\ep} \braket{v'}{u} .
 	\end{align*}	
@@ -663,8 +663,8 @@ In the rest of the paper, we use the following approximation results implicitly 
 \begin{proposition}
 	Let $\ket{u_i}$ and $\ket{v_i}$ for $i = 1,2$ be vectors with norm less than equal to $1$
 	such that 
-	$\ket{u_1} \appd{\ep_1} \ket{v_1}$ and $\ket{u_2} \appd{\ep_2} \ket{v_2}$,
-	then 
+	$\ket{u_1} \appd{\ep_1} \ket{v_1}$ and $\ket{u_2} \appd{\ep_2} \ket{v_2}$.
+	Then, 
 	\begin{align*}
 		\braket{u_1}{u_2} \appd{\ep_1+ \ep_2} \braket{v_1}{v_2}.
 	\end{align*}
@@ -686,7 +686,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 		H\ket{u} \appd{\ep_1} a \ket{u} &&
 		H\ket{v} \appd{\ep_2} b \ket{v}, 
 	\end{align*}
-	for some $a > b \in \R$, then
+	for some $a > b \in \R$. Then,
 	\begin{align*}
 		\norm{\braket{u}{v}} \leq \frac{\ep_1+\ep_2}{a-b}.
 	\end{align*}
@@ -709,8 +709,8 @@ In the rest of the paper, we use the following approximation results implicitly 
 \begin{proposition}
 \label{prop:close_vec}
 	Let $\ket{u}$ and $\ket{v}$ be two vectors such that $\norm{\ket{u}} \appd{\ep_1} 1$,
-	$\norm{\ket{v}} \appd{\ep_2} 1$, and $\braket{u}{v} \geq 1 - \ep_3$,
-	then
+	$\norm{\ket{v}} \appd{\ep_2} 1$, and $\braket{u}{v} \geq 1 - \ep_3$.
+	Then
 	\begin{align*}
 		\ket{u} \appd{O(\sqrt{\ep_1+\ep_2+\ep_3})} \ket{v}.
 	\end{align*}
@@ -728,9 +728,9 @@ In the rest of the paper, we use the following approximation results implicitly 
 \begin{proposition}
 	Let $\ket{u}$ be a vector with norm less than or equal to $1$ such that for a unitary $U$,
 	\begin{align*}
-		U\ket{u} \appd{\ep} a\ket{u} \text{ for } a \in \C,
+		U\ket{u} \appd{\ep} a\ket{u} \text{ for } a \in \C.
 	\end{align*}
-	then
+	Then,
 	\begin{align*}
 		U^n \ket{u} \appd{n\ep} a^n \ket{u} \text{ for all } n \geq 1.
 	\end{align*}
@@ -749,7 +749,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 \end{proof}
 
 %=======================================
-\section{The linear system game $\LS(\Gamma_r)$}
+\section{The linear system game $\LS(r)$}
 \label{sec:lsg}
 %=======================================
 In this section, we introduce a linear system game which is a component of the full test.
@@ -778,12 +778,12 @@ The main result of this subsection is summarized in the following theorem.
 	The relation $uou^{-1} = o^r$ can be embedded in a linear system game which has
 	$n(r) := 18r+85$ variables and $m(r) := 17r + 77$ equations, where each equation has $3$ variables.
 \end{theorem}
-We prove this by constructing the solution group $\Gamma_r$ of the linear system game,
-so we denote the linear system game by $\LS(\Gamma_r)$.
+We prove this by constructing the solution group $\Gamma(\LS_r)$ of the linear system game,
+and we denote the linear system game by $\LS(r)$.
 \hfc{Do you prefer $\Gamma_r$ or $\Gamma(r)$? Or you have any suggestion about a symbol for this group?} \carl{The notation that you're using seems backwards -- I think we should express the solution group as a function of the linear system, not the other way around.}
-We also prove some properties of the generators of $\Gamma_r$ along the way.
+We also prove some properties of the generators of $\Gamma(\LS(r))$ along the way.
 
-We embed $uou^{-1}= o^r$ into $\Gamma_r$ in three steps, which introduce two intermediate groups $G_0$ and $G_1$ defined below.
+We embed $uou^{-1}= o^r$ into $\Gamma(\LS(r))$ in three steps, which introduce two intermediate groups $G_0$ and $G_1$ defined below.
 \begin{definition}	
 \label{def:g0}
 	The presentation of $G_0$ has order-$2$ generators:
@@ -900,11 +900,11 @@ The first property of $G_1$ was first proved in Lemma~$4.4$ of \cite{slofstra201
 Note that there are two types of conjugacy relations in $G_1$. One is of the form
 $f b_i f = c_i$ for all $i = 1 \dots r+5$. The other one is of the form 
 $d_ib_jd_i = c_k$ for all $(i,j,k) \in C(r)$. For each type of the conjugacy relations, 
-we are going to embed it into a different set of linear relations in $\Gamma_r$.
+we are going to embed it into a different set of linear relations in $\Gamma(\LS(r))$.
 
 \begin{definition}
 \label{def:gamma}
-The presentation of $\Gamma_r$ has order-$2$ generators:
+The presentation of $\Gamma(\LS(r))$ has order-$2$ generators:
 \begin{align*}
 	J, \{a_i, b_i, c_i, d_i, v_i,w_i,\{ k_{i,j} \}_{j=1}^5\}_{i=1}^{r+5}, \{f_i,g_i,m_i\}_{i=0}^2, \{h_{jk}\}_{(i,j,k) \in C(r)}, 
 	\{\{ k_{l,j} \}_{j=1}^6\}_{l \in C(r)},
@@ -935,14 +935,14 @@ which embed $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$;
 \item $J$ commutes with all the other generators.
 \end{itemize}
 \end{definition}
-The special properties of the generators of $\Gamma_r$ are summarized in the two propositions below.
+The special properties of the generators of $\Gamma(\LS(r))$ are summarized in the two propositions below.
 \begin{proposition}
-	The group $\Gamma_r$ embeds all the conjugacy relations of $G_1$.
+	The group $\Gamma(\LS(r))$ embeds all the conjugacy relations of $G_1$.
 	It also embeds the relations: $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$.
 \end{proposition}
 The proof of the proposition above follows the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017}.
 \begin{proposition}
-	In the group $\Gamma_r$, the generator $f_2$ commutes with $f_0$ and $a_i$ for all $i = 1 \dots r+5$;
+	In the group $\Gamma(\LS(r))$, the generator $f_2$ commutes with $f_0$ and $a_i$ for all $i = 1 \dots r+5$;
 	the generator $g_2$ commutes with $g_0$ and $a_i$ for all $i = 1 \dots r+5$.
 \end{proposition}
 \begin{proof}
@@ -953,11 +953,11 @@ The proof of the proposition above follows the proof of Proposition $4.2$ of Ref
 \end{proof}
 
 %------------------------------------------------------------------------
-\subsection{A representation of $\Gamma_r$}
+\subsection{A representation of $\Gamma(\LS(r))$}
 %------------------------------------------------------------------------
-In this section we give a representation of $\Gamma_r$ which is built upon the representation 
-$\Psi_0$ of $G_0$ and $\Psi_1$ of $G_1$. We need the representation of $\Gamma_r$ to construct the
-ideal strategy of $\LS(\Gamma_r)$.
+In this section we give a representation of $\Gamma(\LS(r))$ which is built upon the representation 
+$\Psi_0$ of $G_0$ and $\Psi_1$ of $G_1$. We need the representation of $\Gamma(\LS(r))$ to construct the
+ideal strategy of $\LS(r)$.
 
 Before giving the representations, we define two Hilbert spaces $W_{d-1}$ and $W_2$, which will form the carrier spaces
 of the representations,
@@ -1026,10 +1026,10 @@ for $i = 1 \dots r+5$,
 \end{definition}
 
 Finally, we follow the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017} to construct the 
-representation of $\Gamma_r$.
+representation of $\Gamma(\LS(r))$.
 \begin{definition}
 \label{def:rep_gamma}
-The representation $\Psi$ of $\Gamma_r$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
+The representation $\Psi$ of $\Gamma(\LS(r))$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
 \begin{itemize}
 \item for any $x$ which is also a generator of $G_1$,
 \begin{align*}
@@ -1052,32 +1052,35 @@ The representation $\Psi$ of $\Gamma_r$ on $W_2 \x W_2 \x W_{d-1}$ is defined by
 \end{align*}
 \item for the generators to embed the relation $f b_i f = c_i$:
 \begin{align*}
-	\Psi(k_{i,1}) &= X_{W_2} \x \Psi_1(b_i) = X_{W_2} \x ( \ketbra{x_1}{x_1} \x \Psi_0(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} )\\
+	\Psi(k_{i,1}) &= X_{W_2} \x \Psi_1(b_i) \\
+	%= X_{W_2} \x ( \ketbra{x_1}{x_1} \x \Psi_0(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} )\\
 	\Psi(k_{i,2}) &= \ketbra{x_1}{x_2} \x \Psi_1(b_if_0) + \ketbra{x_2}{x_1} \x \Psi_1(f_0b_i)\\
-	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_2x_1}+\ketbra{x_2x_1}{x_1x_2})\x\1_{W_{d-1}}\\
-	&+ \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_i)\\ 
+%	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_2x_1}+\ketbra{x_2x_1}{x_1x_2})\x\1_{W_{d-1}}\\
+%	&+ \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_i)\\ 
 	\Psi(k_{i,3}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_if_0b_i) + \ketbra{x_2}{x_2} \x \Psi_1(f_0) \\
-	&= \ketbra{x_1}{x_1} \x X_{W_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x X_{W_2} \x \1_{W_{d-1}}\\
+	%&= \ketbra{x_1}{x_1} \x X_{W_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x X_{W_2} \x \1_{W_{d-1}}\\
 	\Psi(k_{i,4}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_ic_i) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	&=\ketbra{x_1}{x_1} \x \1_{W_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	\Psi(k_{i,5}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_i) + \ketbra{x_2}{x_2} \x \Psi_1(c_i) \\
-	&=\ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1}) \x \1_{W_{d-1}}\\
-	&+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_0(a_i);
+	%&=\ketbra{x_1}{x_1} \x \1_{W_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi(k_{i,5}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_i) + \ketbra{x_2}{x_2} \x \Psi_1(c_i) 
+%	&=\ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1}) \x \1_{W_{d-1}}\\
+%	&+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_0(a_i);
 \end{align*}
 \item for the generators to embed the relation $d_i b_j d_i = c_k$ with $l = (i,j,k)$:
 \begin{align*}
-	\Psi(k_{l,1}) &= X_{W_2} \x \Psi_1(d_i) = X_{W_2} \x X_{W_2} \x \Psi_0(a_{i}) \\
-	\Psi(k_{l,2}) &= X_{W_2} \x \Psi_1(b_j) = X_{W_2} \x (\ketbra{x_1}{x_1} \x \Psi_0(a_j) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}})\\
+	\Psi(k_{l,1}) &= X_{W_2} \x \Psi_1(d_i) \\
+	%= X_{W_2} \x X_{W_2} \x \Psi_0(a_{i}) \\
+	\Psi(k_{l,2}) &= X_{W_2} \x \Psi_1(b_j) \\
+	%= X_{W_2} \x (\ketbra{x_1}{x_1} \x \Psi_0(a_j) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}})\\
 	\Psi(k_{l,3}) &= \ketbra{x_1}{x_2} \x  \Psi_1(b_jd_i) + \ketbra{x_2}{x_1} \x \Psi_1(d_ib_j)\\
-	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_{j}a_{i}) + (\ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_1}{x_1x_2}) \x \Psi_0(a_i)\\
-	&+  \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_{i}a_{j}) \\
+%	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_{j}a_{i}) + (\ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_1}{x_1x_2}) \x \Psi_0(a_i)\\
+%	&+  \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_{i}a_{j}) \\
 	\Psi(k_{l,4}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_jd_ib_j) + \ketbra{x_2}{x_2} \x  \Psi_1(d_i)\\
-	&= \ketbra{x_1}{x_1} \x (\ketbra{x_2}{x_1} \x \Psi_0(a_ia_j)+ \ketbra{x_1}{x_2} \x \Psi_0(a_ja_i)) + \ketbra{x_2}{x_2} \x X_{W_2} \x \Psi_0(a_i)\\
+	%&= \ketbra{x_1}{x_1} \x (\ketbra{x_2}{x_1} \x \Psi_0(a_ia_j)+ \ketbra{x_1}{x_2} \x \Psi_0(a_ja_i)) + \ketbra{x_2}{x_2} \x X_{W_2} \x \Psi_0(a_i)\\
 	\Psi(k_{l,5}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_jc_k) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) +  \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_{k}) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	\Psi(k_{l,6}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_j) + \ketbra{x_2}{x_2} \x \Psi_1(c_{k})\\
-	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1})\x\1_{W_{d-1}}\\
-	 &+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_1(a_{k}).
+	%&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) +  \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_{k}) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi(k_{l,6}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_j) + \ketbra{x_2}{x_2} \x \Psi_1(c_{k})
+%	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1})\x\1_{W_{d-1}}\\
+%	 &+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_1(a_{k}).
 \end{align*}
 \end{itemize}
 \end{definition}
@@ -1128,15 +1131,15 @@ where \cref{eq:zaxaxbzb} can be derived from \cref{eq:za-zb}, \cref{eq:xa-xb} an
 \section{The full test}
 \label{sec:full_test}
 %==========================
-The full test consists of three subtest: the linear system game $\LS(\Gamma_r)$,
+The full test consists of three subtest: the linear system game $\LS(r)$,
 the extended weighted CHSH test and a commutation test. We explain how the three tests are conducted and
 combined below.
 
-Recall that the the linear system game with solution group $\Gamma_r$ defined in \cref{def:gamma} has variables labelled by $j \in \{1,2,\dots,\nr\}$ and
+Recall that the the linear system game with solution group $\Gamma(\LS(r))$ defined in \cref{def:gamma} has variables labelled by $j \in \{1,2,\dots,\nr\}$ and
 equations labelled by $i \in \{1, 2 \dots \mr\}$.
 We denote the associated linear system by $H\underline{x} = \uc$ and
 define $X_i := \{ \ux : \sum_{k} H(i,k)\ux(k) = \uc(i) \}$ and $I_i = \{ k : H(i,k) = 1\}$.
-From the construction of $\Gamma_r$, we know that $| I_i| \leq 3$.
+From the construction of $\Gamma(\LS(r))$, we know that $| I_i| \leq 3$.
 The correspondence between $\ux$ and the generators of $\Gamma$ is that
 \begin{align*}
 	&\ux(j) := a_j &&&&\text{ for } j = 1 \dots r+5 \\
@@ -1160,10 +1163,10 @@ For each question, there is an associated answer set:
 	\item when the question is $1$ or $2$, the answer set is $\{0,1\}$;
 	\item when the question is $\nr+1$ or $\nr+2$, the answer set is $\{0, 1, \perp\}$.
 \end{itemize}
-Note that when the referee wants to ask Alice $x = 1,2$, which also labels a variable of $\LS(\Gamma_r)$, 
+Note that when the referee wants to ask Alice $x = 1,2$, which also labels a variable of $\LS(r)$, 
 the referee gives Alice a pair $(i_x. x)$ where 
 $i_x$ labels an equation containing the variable labelled by $x$. 
-For simplicity we omit the $i_x$ part in the alphabet $\calX$, since $\LS(\Gamma_r)$
+For simplicity we omit the $i_x$ part in the alphabet $\calX$, since $\LS(r)$
 forces Alice to use a binary observable strategy.
 Later we will show that the $i_x$ part can be made implicit.
 The test is conducted in the following way:
@@ -1200,7 +1203,7 @@ we reuse questions from the two other tests so the answer
 set for each question is the same across the tests.
 There are $8$ test cases.
 In each test case, Alice is given one of two questions.
-One of the possible question is to assign a value to some variable of $\LS(\Gamma_r)$.
+One of the possible question is to assign a value to some variable of $\LS(r)$.
 Again, the equation label is implicit when this variable is given.
 The other possibility is to answer $\nr+1$ or $\nr+2$ from the extended weighted CHSH test.
 Bob is given both of the question so he needs to give answers to both questions.
@@ -1247,7 +1250,7 @@ Then the measurements are
 	&M_1^0 = N_1^0 =(\1_{W_2})^{\x 2} \x  \ketbra{1_+}{1_+} && M_1^1 = N_1^1 =(\1_{W_2})^{\x 2} \x  \ketbra{(d-1)_+}{(d-1)_+}\\
 	&M_2^0 = N_2^0 = (\1_{W_2})^{\x 2} \x \ketbra{1_-}{1_-} && M_1^1 = N_1^1 = (\1_{W_2})^{\x 2} \x \ketbra{(d-1)_-}{(d-1)_-}.
 \end{align*}
-The observables for $\LS(\Gamma_r)$ are
+The observables for $\LS(r)$ are
 \begin{align}
 	M_i = N_i = \Psi(x_i),
 \end{align}
@@ -1493,7 +1496,7 @@ In the next three subsections, we analyze the implication of an approximate stra
 three subtests given in \cref{sec:full_test}.
 
 %------------------------------------------------------------------------------------------
-\subsection{Implication of passing $\LS(\Gamma_r)$}
+\subsection{Implication of passing $\LS(r)$}
 \label{sec:imp_lct}
 %------------------------------------------------------------------------------------------
 In this subsection, we use $(i,j)$ to denote the question pair so that Alice gets equation number $i$, sometimes with a variable label $j$,
@@ -2044,7 +2047,7 @@ then
 \subsection{Implications of passing the commutation test}
 \label{sec:imp_comm}
 %-------------------------------------------------------------------------------------------
-The commutation test is introduced to certify the operators used for the Magic Square test (part of $\LS(\Gamma_r)$ and 
+The commutation test is introduced to certify the operators used for the Magic Square test (part of $\LS(r)$ and 
 the operators for the extended weighted CHSH test commute. For the details of the general commutation test, 
 we refer to Appendix~A.$2$ of \cite{coladan2017verifier}. 
 We use similar techniques in our proof but our proof also bases on the correlation given in \cref{tbl:comm}.
