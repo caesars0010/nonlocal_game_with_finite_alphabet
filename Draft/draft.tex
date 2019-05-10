@@ -352,33 +352,46 @@ can produce the desired maximally entangled states when applied to the unknown s
 %\end{theorem}
 
 In order to accomplish our goal, we first design a linear system game to enforce the 
-relation $UOU\ct = O^r$, with the inspiration comes from Slofstra \cite{slofstra2017}.
-Unlike previous self-testing proofs, which tries to enforce the anti-commutation relation
-between Pauli operators of dimension $2$, $XZ=-ZX$, or the generalized anti-commutation relation 
-between Pauli operators of higher dimension, $XZ = \omega_d ZX$, the dimension $d$ is implicit in our
-relation. 
-The implication is that the eigenvalues of $O$ are powers of $\omega_d$, for
-some $d$ whose primitive root is $r$, and $U$ only permutes the eigenvectors of $O$. 
-Since winning the linear system game requires that Alice
-and Bob share a state $\ket{\psi}$, which satisfies the condition that 
-$O_A \x O_B \ket{\psi} = \ket{\psi}$, intuitively, we know that 
-$\ket{\psi}$ is spanned by eigenvectors of $O$. 
-The other specialty of the linear system game is that it forces Alice and Bob to have binary observables
-whose products are the speical unitaries $U$ and $O$, because the answers to the questions of the 
+relation $UOU\ct = O^r$, which is a generalization of a relation in Ref.~\cite{slofstra2017}.
+The number of variables and the number of equations of the linear system game depend linearly on $r$,
+which makes our correlation of size $\Theta(r^2)$.
+Unlike previous self-testing proofs, which try to enforce the anti-commutation relation
+$XZ = \omega_d^{-1} ZX$ between Pauli operators of dimension $d \geq 2$, 
+our approach is more succinct in terms of the size of the correlation but at a cost that
+it only works for odd prime $d$.
+The reason why we focus on this relation is that if we can certify that $O$ has one eigenvalue $\omega_d$
+for some $d$ with primitive $r$,
+then it guarantees that $O$ has eigenvalues $\omega_d^j$ for $j = 1 \dots d-1$ and $U$ only
+permutes the eigenvectors of $O$ in certain way.
+After knowing the eigenvalues of $O$, we can use infer the structure of the shared state $\ket{\psi}$
+based on the two relation of $\ket{\psi}$ imposed by the linear system game --
+$U_A \x U_B \ket{\psi} = \ket{\psi}$ and $O_A \x O_B \ket{\psi} = \ket{\psi}$.
+The two relations imply that $\ket{\psi}$ is spanned by eigenvectors of $O$ and its
+Schmidt coefficient follows some pattern that is invariant under the permutation by $U$.
+At this point, we can use the generalized swap isometry \cite{yang2013} to extract a copy of the 
+$(d-1)$-dimensional maximally entangled state. Note that our robust self-testing proof 
+follows a different line of arguments from what was originally
+proposed in Ref.~\cite{yang2013}.
+Our self-testing proof actually certifies $\ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}$. 
+The self-testing of $\ket{\EPR{2}}^{\x 2}$ follows a known result \cite{wu2016}.
+
+The remaining question is how to certify a particular eigenvalue of $O$. Before going to the answer,
+we remark that 
+the other specialty of the linear system game is that it forces Alice and Bob to have binary observables
+whose products are the special unitaries $U$ and $O$, because the answers to the questions of the 
 linear system games are binary. 
 The idea of decompose the unitaries of arbitrary order into binary observables was also first introduced by Slofstra \cite{slofstra2017}.
 We use a different way to decompose the unitaries, which can be seen as the inverse of Jordan's lemma, 
 The fact that Alice and Bob only have binary observables make it easier for us 
-to compose the linear system game with another test, which we call the extended weighted CHSH test.
+to compose the linear system game with another nonlocal test, which we call the extended weighted CHSH test.
+The difference between a nonlocal game and a nonlocal test will be discussed later.
 The core idea of the extended weighted CHSH test is to certify that Alice and Bob's observables and state 
 for the linear system game can also be used to violate the weighted CHSH inequality \cite{acin2012} maximally.
 We find that the maximal violation of the weighted CHSH inequality can certify the eigenvalues of the product
 of Bob's observables. 
-At this point, we can use the extended weighted CHSH test to certify that
-$O$ has eigenvalue $\omega_d$ and $d$ is prime, then we know $O$ also has eigenvalues $\omega_d^j$ for $j = 1 \dots d-1$.
-In the end, we can use the generalized swap isometry \cite{yang2013} to prove our robust self-testing.
-Note that our robust self-testing proof follows a different line of arguments from what was originally
-proposed in Ref.~\cite{yang2013}.
+At this point, we fix a prime $d$ by picking the weight in the weighted CHSH inequality and 
+use the extended weighted CHSH test to certify that
+$O$ has eigenvalue $\omega_d$.
 \carl{Our work is heavily based on \cite{slofstra2017}, and we need to make that clearer.}
 \hfc{How about now?}
 
@@ -423,6 +436,8 @@ For example, $O_A$ is an operator on Alice's side and $\ket{0}_{B}$ is a state o
 The only exception is for projectors used in a quantum strategy defined below, where the subscript 
 is the input and the superscript is the output. For example, $M_x^a$ is Alice's projector for input $x$ and output $a$.
 Operators defined by the projectors follow the same convention, for example, $M_x := M_x^0 - M_x^1$.
+If we add tilde to an operator, then this operator is fully characterized and belongs to some ideal strategy.
+Otherwise, the operator is general and the only assumption is that it is finite-dimensional.
 
 We use the following notation for the closeness between quantum states.
 \begin{align}
@@ -680,7 +695,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 \end{proof}
 \begin{proposition}
 \label{prop:orthog}
-	Let $H$ be a Hermitian matrix and $\ket{u}$ and $\ket{v}$ be two vectors with norm less or equal to $1$
+	Let $H$ be a Hermitian matrix and $\ket{u}$ and $\ket{v}$ be two vectors
 	such that
 	\begin{align*}
 		H\ket{u} \appd{\ep_1} a \ket{u} &&
@@ -688,7 +703,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 	\end{align*}
 	for some $a > b \in \R$. Then,
 	\begin{align*}
-		\norm{\braket{u}{v}} \leq \frac{\ep_1+\ep_2}{a-b}.
+		\norm{\braket{u}{v}} \leq \max(\norm{\ket{u}}, \norm{\ket{v}})\frac{\ep_1+\ep_2}{a-b}.
 	\end{align*}
 \end{proposition}
 \begin{proof}
@@ -703,7 +718,7 @@ In the rest of the paper, we use the following approximation results implicitly 
 	\begin{align*}
 		\norm{\braket{v}{u}} = \frac{\norm{\braket{v'}{u} -  \braket{v}{u'}}}{a-b} \leq \frac{\norm{\ket{v}}\norm{\ket{u'}}+
 		\norm{\ket{u}}\norm{\ket{v'}}}{a-b} 
-		\leq \frac{\ep_1+\ep_2}{a-b}.
+		\leq \max(\norm{\ket{u}}, \norm{\ket{v}})\frac{\ep_1+\ep_2}{a-b}.
 	\end{align*}
 \end{proof}
 \begin{proposition}
@@ -761,25 +776,24 @@ embeds the group
 	K = \ip{ x,y,a,b:a^2=b^2=e, ab=ba, yay^{-1} = a, yby^{-1} = ab, xyx^{-1}=y^2}
 \end{align}
 into a linear system game such that the relations in the definition of $K$ can be derived from the
-combination of the linear equations. Then he showed the difference between exact representations
+combination of the linear equations. Then he shows the difference between exact representations
 and approximate representations of $K$, which implies that the set of quantum correlation is not closed.
 \hf{We generalize the relation $xyx^{-1} = y^2$ and embed the 
 following relation
 $
 uou^{-1} = o^r 
 $
-for some $r \in \N$ into a linear system game.}
+for some $r \in \N$ into a linear system game, denoted by $\LS(r)$.}
 
 %------------------------------------------------------------------------
 \subsection{The embedding of $uou^{-1} = o^r$}
 %------------------------------------------------------------------------
 The main result of this subsection is summarized in the following theorem.
 \begin{theorem}
-	The relation $uou^{-1} = o^r$ can be embedded in a linear system game which has
+	The relation $uou^{-1} = o^r$ can be embedded in a binary linear system game which has
 	$n(r) := 18r+85$ variables and $m(r) := 17r + 77$ equations, where each equation has $3$ variables.
 \end{theorem}
-We prove this by constructing the solution group $\Gamma(\LS_r)$ of the linear system game,
-and we denote the linear system game by $\LS(r)$.
+We prove this by constructing the solution group $\Gamma(\LS(r))$ of the linear system game.
 \hfc{Do you prefer $\Gamma_r$ or $\Gamma(r)$? Or you have any suggestion about a symbol for this group?} \carl{The notation that you're using seems backwards -- I think we should express the solution group as a function of the linear system, not the other way around.}
 We also prove some properties of the generators of $\Gamma(\LS(r))$ along the way.
 
@@ -824,7 +838,7 @@ The proof follows the proof of Proposition~$4.8$ of Ref.~\cite{slofstra2017}
 	=& o_1o_ro_1 o_2.
 	\end{align*}
 	Then we substitute the definitions of $o_k$ for $k = r \dots 3$ into the equation above and
-	proves the $j=1$ case.
+	prove the $j=1$ case.
 	
 	Now assume the statement is true for $j = n$, then for $j = n+1$
 	\begin{align*}
@@ -861,16 +875,16 @@ Then we define the group $G_1$.
 \begin{definition}
 The presentation of $G_1$ has order-$2$ generators:
 \begin{align*}
-	\{a_i, b_i, c_i, d_i, v_i\}_{i=1}^{r+5}, f, g, \{h_{jk}\}_{(i,j,k) \in C(r)};
+	\{a_i, b_i, c_i, d_i, v_i\}_{i=1}^{r+5}, f_0, g_0, \{h_{jk}\}_{(i,j,k) \in C(r)};
 \end{align*}
 and relations:
 \begin{align*}
-	&a_i = b_ic_i = fd_i = gv_i,&& fb_if =c_i &&\text{ for } i= 1 \dots r+5 \\
+	&a_i = b_ic_i = f_0d_i = g_0v_i,&& f_0b_if_0 =c_i &&\text{ for } i= 1 \dots r+5 \\
 	&h_{jk}b_j c_k = e,&& d_ib_jd_i = c_k &&\text{ for all } (i,j,k) \in C(r).
 \end{align*}
 \end{definition}
 Note that the group $G_1$ is slightly different from the group $K$ used in the proof of Lemma~$4.4$ of Ref.~\cite{slofstra2017}.
-We introduce the generator $g$ so that later we can associate $f$ with $g$ in linear relations of the Magic Square game.
+We introduce the generator $g_0$ so that later we can associate $f_0$ with $g_0$ in linear relations of the Magic Square game.
 Such relations are important for the self-testing proof.
 Two important properties of $G_1$ are given in propositions below.
 The first property of $G_1$ was first proved in Lemma~$4.4$ of \cite{slofstra2017}.
@@ -880,20 +894,20 @@ The first property of $G_1$ was first proved in Lemma~$4.4$ of \cite{slofstra201
 \begin{proof}
 	We first show that $d_i c_j d_i = b_k$, which is because
 	\begin{align*}
-		d_i c_j d_i = d_i (f b_j f) d_i = f (d_i b_j d_i) f = f c_k f = b_k.
+		d_i c_j d_i = d_i (f_0 b_j f_0) d_i = f_0 (d_i b_j d_i) f_0 = f_0 c_k f_0 = b_k.
 	\end{align*}
 	Then, we can prove that 
 	\begin{align*}
-		a_i a_j a_i = f d_i b_j c_j f d_i = (f d_i b_j d_i f)(f d_i c_j d_i f) = (f c_k f)(f b_k f) = b_k c_k = a_k. 
+		a_i a_j a_i = f_0 d_i b_j c_j f_0 d_i = (f_0 d_i b_j d_i f_0)(f_0 d_i c_j d_i f_0) = (f_0 c_k f_0)(f_0 b_k f_0) = b_k c_k = a_k. 
 	\end{align*}
 \end{proof}
 \begin{proposition}
-	In the group $G_1$, the generators $f$ and $g$ commute with $a_i$ for all $i = 1 \dots r+5$.
+	In the group $G_1$, the generators $f_0$ and $g_0$ commute with $a_i$ for all $i = 1 \dots r+5$.
 \end{proposition}
 \begin{proof}
 	We can check that
 	\begin{align*}
-		fa_i f a_i = d_i d_i = e && g a_i g a_i = v_i v_i  = e,
+		f_0a_i f_0 a_i = d_i d_i = e && g_0 a_i g_0 a_i = v_i v_i  = e,
 	\end{align*}
 	for all $i = 1 \dots r+5$.
 \end{proof}
@@ -935,7 +949,9 @@ which embed $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$;
 \item $J$ commutes with all the other generators.
 \end{itemize}
 \end{definition}
-The special properties of the generators of $\Gamma(\LS(r))$ are summarized in the two propositions below.
+Note that $\Gamma(\LS(r))$ has all the generators of $G_1$ but all the conjugacy relations 
+from $G_1$ are broken into linear relations.
+Formal statements of the properties of $\Gamma(\LS(r))$ are summarized in the two propositions below.
 \begin{proposition}
 	The group $\Gamma(\LS(r))$ embeds all the conjugacy relations of $G_1$.
 	It also embeds the relations: $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$.
@@ -965,8 +981,11 @@ of the representations,
 	\label{eq:w_subspace}
 	W_{d-1} := \spn(\{\ket{x_j}\}_{j=1}^{d-1}) && W_2 = \spn(\ket{x_1}, \ket{x_2}).
 \end{align}
+The basis of $W_{d-1}$ is the eigenbasis of an operator $O = \sum_{j=1}^{d-1} \omega_d^j \ketbra{x_j}{x_j}$.
 Note that another form of the basis of $W_{d-1}$ is $\{\ket{x_{r^j}}\}_{j=0}^{d-2}$, where the subscript $r^j$ is taken
-modulo $d$ implicitly. We use the second form of the basis when it is convenient.
+modulo $d$ implicitly,
+because another form of $O$ is $\sum_{j=0}^{d-2} \omega_d^{r^j} \ketbra{x_{r^j}}{x_{r^j}}$.
+We use the second form of the basis when it is convenient.
 We denote the identity operator for these two spaces by $\1_{W_{d-1}}$ and $\1_{W_2}$.
 On the Hilbert space $W_2$, we define
 \begin{align*}
@@ -990,7 +1009,7 @@ where $\{ \ket{u_j} \}_{j=0}^{d-2}$ is a another basis of $W_{d-1}$ given by
 \end{align*}
 The representation of the rest of the generators
 can be constructed from $\Psi_0(a_1)$, $\Psi_0(a_2)$, $\Psi_0(a_3)$ and $\Psi_0(a_4)$ following the 
-conjugation relations.
+conjugacy relations.
 \end{definition}
 We can check that
 \begin{align*}
@@ -1035,7 +1054,7 @@ The representation $\Psi$ of $\Gamma(\LS(r))$ on $W_2 \x W_2 \x W_{d-1}$ is defi
 \begin{align*}
 	\Psi(x) = \1_{W_2} \x \Psi_1(x);
 \end{align*}
-\item for the generators involved in the Magic square test
+\item for the generators involved in the Magic square game
 \begin{align*}
 	&\Psi(f_1) = X_{W_2} \x X_{W_2} \x \1_{W_{d-1}} \\
 	&\Psi(g_1) = Z_{W_2} \x Z_{W_2} \x \1_{W_{d-1}} \\
@@ -1084,7 +1103,7 @@ The representation $\Psi$ of $\Gamma(\LS(r))$ on $W_2 \x W_2 \x W_{d-1}$ is defi
 \end{align*}
 \end{itemize}
 \end{definition}
-The validation of $\Psi_1$ and $\Psi$ are done in Slofstra's work \cite{slofstra2017}.
+The validation of $\Psi_1$ and $\Psi$ are done in the proofs of Lemma $4.4$ and Proposition $4.2$ in Ref.~\cite{slofstra2017}.
 
 %====================================================
 \section{Robust self-testing of $\ket{\EPR{2}}$ \textit{via} $\I_\alpha$}
@@ -1100,9 +1119,10 @@ we defer the proof till \cref{sec:selftest}. Instead, we only list the key relat
 \cref{sec:main} where we prove our robust self-testing result.
 \begin{theorem}
 \label{thm:selftest}
-	Suppose the quantum strategy $(\ket{\psi}, \{M_x:=M_x^0-M_x^1\}_{x=1,2}, \{N_y :=N_y^0-N_y^1\}_{y = 1,2} )$ achieves that
-	$\ip{\I_\alpha} \geq 2\sqrt{1+\alpha^2} - \epsilon$
-	for some $\epsilon > 0$, then we define $\mu := \arctan(1/\alpha)$ and
+    Define $\mu := \arctan(1/\alpha)$.
+	If a quantum strategy $(\ket{\psi}, \{M_x:=M_x^0-M_x^1\}_{x=1,2}, \{N_y :=N_y^0-N_y^1\}_{y = 1,2} )$ achieves that
+	$\ip{\I_\alpha} \geq \ip{\I_\alpha}_{\max} - \epsilon$
+	for some $\epsilon > 0$, then
 	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{aux}$  such that
 	\begin{align*}
 		\| \Phi( M_x \x N_y \ket{\psi}) -\ket{aux} \x (\tM_x \x \tN_y) \ket{\EPR{2}}  \| = O(\frac{1}{\cos^2(\mu)\sin^{1/2}(\mu)}+
@@ -1111,6 +1131,7 @@ we defer the proof till \cref{sec:selftest}. Instead, we only list the key relat
 	for $x,y \in \{0, 1, 2\}$ where the subscript $0$ refers to the identity operator and $\tM_x, \tN_y$ are 
 	defined in \cref{def:ideal}.  \carl{You're using both ``aux'' and ``junk'' for the auxilliary state.  Also you need
 	to be clearer about what label you are using for Alice's and Bob's systems (see my previous comment on this).}
+	\hfc{This problem should be fixed now.}
 \end{theorem}
 We follow the convention and define $c := \cos(\mu)$, $s := \sin(\mu)$, and
 \begin{align*}
@@ -1131,31 +1152,32 @@ where \cref{eq:zaxaxbzb} can be derived from \cref{eq:za-zb}, \cref{eq:xa-xb} an
 \section{The full test}
 \label{sec:full_test}
 %==========================
-The full test consists of three subtest: the linear system game $\LS(r)$,
+The full test consists of three tests: the linear system game $\LS(r)$,
 the extended weighted CHSH test and a commutation test. We explain how the three tests are conducted and
 combined below.
 
 Recall that the the linear system game with solution group $\Gamma(\LS(r))$ defined in \cref{def:gamma} has variables labelled by $j \in \{1,2,\dots,\nr\}$ and
 equations labelled by $i \in \{1, 2 \dots \mr\}$.
-We denote the associated linear system by $H\underline{x} = \uc$ and
-define $X_i := \{ \ux : \sum_{k} H(i,k)\ux(k) = \uc(i) \}$ and $I_i = \{ k : H(i,k) = 1\}$.
-From the construction of $\Gamma(\LS(r))$, we know that $| I_i| \leq 3$.
-The correspondence between $\ux$ and the generators of $\Gamma$ is that
+We denote the associated linear system by $H\ux = \uc$ and
+define $X_i := \{ \ux : \sum_{k} H(i,k)\ux(k) = \uc(i) \}$, which is the answer set of equation $i$,
+and $I_i = \{ k : H(i,k) = 1\}$, which is the set of all the nonzero coefficient of equation $i$.
+From the construction of $\Gamma(\LS(r))$, we know that $| I_i| = 3$ for all $i$.
+The correspondence between $\ux$ and the generators of $\Gamma(\LS(r))$ is that
 \begin{align*}
 	&\ux(j) := a_j &&&&\text{ for } j = 1 \dots r+5 \\
 	&\ux(r+6+j) := f_j&& \ux(r+9+j) := g_j &&\text{ for } j = 0,1,2 
 \end{align*} 
 The correspondence can be arbitrary for $j > r+11$.
 We conduct the linear constraint test in a way such that Bob is always get a variable label
-but Alice gets either an equation label, in which case she needs to give the full assignment to this equation,
+but Alice gets either an equation label, in which case she needs to give the full assignment to the given equation,
 or a pair of equation label and variable label, in which case she only needs to give the assignment to the particular 
-variable in the given equation. In this way, we force Alice and Bob to use an binary observable strategy for the linear constraint 
-test. 
+variable in the given equation. In this way, we force Alice and Bob to use an binary observable strategy 
+for the linear system game. 
 
 In the extended weighted CHSH test,
 all the question pairs are $\{ (\ast, \ast) \} \cup \{(\ast, y), (x, \ast)\}_{x,y = \nr+1, \nr+2} \cup 
 \{(x,y)\}_{x=y \in \{\nr+1, \nr+2\}} \cup
-\{(x,y)\}_{x = y \in \{1, 2\}} \cup \{(x,y)\}_{x = 1,2, y =\nr+1, \nr+2} \cup  \{(x,y)\}_{x = \nr+1,\nr+2, y =1, 2}$.
+\{(x,y)\}_{x = 1,2, y =\nr+1, \nr+2} \cup  \{(x,y)\}_{x = \nr+1,\nr+2, y =1, 2}$.
 %the input alphabets are $\calX = \calY = \{\ast, 1, 2, \nr+1,\nr+2\}$.
 For each question, there is an associated answer set:
 \begin{itemize}
@@ -1166,13 +1188,11 @@ For each question, there is an associated answer set:
 Note that when the referee wants to ask Alice $x = 1,2$, which also labels a variable of $\LS(r)$, 
 the referee gives Alice a pair $(i_x. x)$ where 
 $i_x$ labels an equation containing the variable labelled by $x$. 
-For simplicity we omit the $i_x$ part in the alphabet $\calX$, since $\LS(r)$
-forces Alice to use a binary observable strategy.
+For simplicity we omit the $i_x$ part in the alphabet $\calX$.
 Later we will show that the $i_x$ part can be made implicit.
 The test is conducted in the following way:
 \begin{enumerate}
 	\item if $x = y = \ast$, Alice and Bob should answer with $a = b \in \{\diamond, \perp\}$;
-	\item if $x = y \in \{1,2\}$, Alice and Bob should answer with $a = b \in \{0, 1\}$, as in the linear constraint test;
 	\item if $x = y \in \{n+1, n+2\}$, Alice and Bob should answer with $a = b \in \{0, 1, \perp\}$;
 	\item if $x \in \{1,2\}$ and $y \in \{n+1, n+2\}$, 
 		\begin{enumerate}
@@ -1198,28 +1218,35 @@ The test is conducted in the following way:
 	\end{enumerate}
 \end{enumerate}
 
-In the commutation test, 
+Our commutation test is slightly different from the one used in Ref.~\cite{coladan2017verifier}.
+The commutation relations that we test are
+\begin{align*}
+    [M_{\nr+1}, M_j] = [M_{\nr+2}, M_j] = \1,
+\end{align*}
+where $j = r+6, r+8, r+9, r+11$.
+The difference is that we will examine the probability distribution 
+generated by this test and conclude that $M_{\nr+1}^0$ and $M_{\nr+1}^1$ commute with
+$M_j$ for $j = r+6, r+8, r+9, r+11$.
 we reuse questions from the two other tests so the answer
 set for each question is the same across the tests.
-There are $8$ test cases.
-In each test case, Alice is given one of two questions.
-One of the possible question is to assign a value to some variable of $\LS(r)$.
-Again, the equation label is implicit when this variable is given.
-The other possibility is to answer $\nr+1$ or $\nr+2$ from the extended weighted CHSH test.
+There are $8$ test cases, one for each commutation relation.
+In each test case, Alice is given one of the two questions involved.
+If her question is to assign a value to some variable of $\LS(r)$,
+the equation label is implicit.
 Bob is given both of the question so he needs to give answers to both questions.
 Their answers should agree on the question that is given to both.
-The $\calY$ has $8$ pairs, $\calY = \{ (\nr+1, j), (\nr+2, j) \}_{j = r+6, r+8, r+9, r+11}$.
-Alice's input is determined by the pair so she receives one of the two questions of a given pair with equal probability.
+%The $\calY$ has $8$ pairs, $\calY = \{ (\nr+1, j), (\nr+2, j) \}_{j = r+6, r+8, r+9, r+11}$.
+%Alice's input is determined by the pair so she receives one of the two questions of a given pair with equal probability.
 
-In the full test, the question pairs from the three subtests are given to Alice and Bob with equal probability.
-The full correlation, denoted by $\fC(d,r)$, is generated by the ideal strategy that can pass all the three tests. We give the ideal strategy first.
+In the full test, the question pairs from the three sub-tests are given to Alice and Bob with equal probability.
+The full correlation, denoted by $\fC(d,r)$, is generated by the ideal strategy that can pass all the three sub-tests. We give the ideal strategy first and then $\fC(d,r)$.
 %--------------------------------------------
 \subsection{The ideal strategy}
 %--------------------------------------------
 Recall the two subspaces $W_{d-1}$ and $W_2$ defined in \cref{eq:w_subspace}. 
 In the ideal strategy Alice and Bob share the state 
 \begin{align*}
-\ket{\psi} = &\frac{1}{2} (\ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}\right)\\
+\ket{\tpsi} = &\frac{1}{2} (\ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}\right)\\
 =&\frac{1}{2} (\ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(1/\sqrt{d-1} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})\right).
 \end{align*}
 Here we introduce the second basis $\{ \ket{j} \}_{j=1}^{d-1}$ of $W_{d-1}$ so that
@@ -1243,51 +1270,54 @@ We define the states for the measurements used in the extended weighted CHSH tes
 \end{align*}
 Then the measurements are
 \begin{align*}
-	&M_\ast^\diamond =(\1_{W_2})^{\x 2} \x \Pi_V && M_\ast^\perp = M_{n+1}^\perp = M_{n+2}^\perp = (\1_{W_2})^{\x 2} \x \Pi_{V^\perp}\\
-	&N_\ast^\diamond = (\1_{W_2})^{\x 2} \x \Pi_V && N_\ast^\perp = N_{n+1}^\perp = N_{n+2}^\perp = (\1_{W_2})^{\x 2} \x \Pi_{V^\perp}\\
-	&M_{n+1}^0 =N_{n+1}^0=(\1_{W_2})^{\x 2} \x  \ketbra{1}{1} && M_{n+1}^1=N_{n+1}^1 = (\1_{W_2})^{\x 2} \x \ketbra{d-1}{d-1}\\
-	&M_{n+2}^0 =N_{n+2}^0=(\1_{W_2})^{\x 2} \x  \ketbra{1_{\times}}{1_{\times}} && M_{n+2}^1= N_{n+2}^1 = (\1_{W_2})^{\x 2} \x \ketbra{(d-1)_{\times}}{(d-1)_{\times}}\\
-	&M_1^0 = N_1^0 =(\1_{W_2})^{\x 2} \x  \ketbra{1_+}{1_+} && M_1^1 = N_1^1 =(\1_{W_2})^{\x 2} \x  \ketbra{(d-1)_+}{(d-1)_+}\\
-	&M_2^0 = N_2^0 = (\1_{W_2})^{\x 2} \x \ketbra{1_-}{1_-} && M_1^1 = N_1^1 = (\1_{W_2})^{\x 2} \x \ketbra{(d-1)_-}{(d-1)_-}.
+	&\tM_\ast^\diamond =(\1_{W_2})^{\x 2} \x \Pi_V && \tM_\ast^\perp = \tM_{\nr+1}^\perp = \tM_{\nr+2}^\perp = (\1_{W_2})^{\x 2} \x \Pi_{V^\perp}\\
+	&\tN_\ast^\diamond = (\1_{W_2})^{\x 2} \x \Pi_V && \tN_\ast^\perp = \tN_{\nr+1}^\perp = \tN_{\nr+2}^\perp = (\1_{W_2})^{\x 2} \x \Pi_{V^\perp}\\
+	&\tM_{\nr+1}^0 =\tN_{\nr+1}^0=(\1_{W_2})^{\x 2} \x  \ketbra{1}{1} && \tM_{\nr+1}^1=\tN_{\nr+1}^1 = (\1_{W_2})^{\x 2} \x \ketbra{d-1}{d-1}\\
+	&\tM_{\nr+2}^0 =\tN_{\nr+2}^0=(\1_{W_2})^{\x 2} \x  \ketbra{1_{\times}}{1_{\times}} && \tM_{\nr+2}^1= \tN_{\nr+2}^1 = (\1_{W_2})^{\x 2} \x \ketbra{(d-1)_{\times}}{(d-1)_{\times}}.
 \end{align*}
 The observables for $\LS(r)$ are
 \begin{align}
-	M_i = N_i = \Psi(x_i),
+	\tM_i = \tN_i = \Psi(x_i),
 \end{align}
 where the representation $\Psi$ is defined in \cref{def:rep_gamma}.
 Note that Alice uses the same observable for the same variable appearing in different equations.
+In particular, the action of $\tM_1, \tN_1$ and $\tM_2, \tN_2$ on the subspace $V$ can be expressed as
+\begin{align*}
+	&\tM_1^0 = \tN_1^0 =  \ketbra{1_+}{1_+} && \tM_1^1 = \tN_1^1 =  \ketbra{(d-1)_+}{(d-1)_+}\\
+	&\tM_2^0 = \tN_2^0 =  \ketbra{1_-}{1_-} && \tM_1^1 = \tN_1^1 =  \ketbra{(d-1)_-}{(d-1)_-}.
+\end{align*}
 
 To make sure the strategy is correct, we need to check a few properties of it.
 \begin{proposition}
-Let $M_1 = N_1 :=\Psi(a_1)$, $M_2 = N_2 := \Psi(a_2)$, $M_3 = N_3 := \Psi(a_3)$
-and $M_4 = N_4 := \Psi(a_4)$, then
+The observables $\tM_1 = \tN_1 :=\Psi(a_1)$, $\tM_2 = \tN_2 := \Psi(a_2)$, $\tM_3 = \tN_3 := \Psi(a_3)$
+and $\tM_4 = \tN_4 := \Psi(a_4)$ satisfy the relations
 \begin{align}
-	\label{eq:mn_preserve} &M_i N_i \ket{\psi} = \ket{\psi} && \text{for } i = 1 \dots 4,\\
-	\label{eq:o2_comm} &(M_3M_4)M_2(M_4M_3) = M_2,
+	\label{eq:mn_preserve} &\tM_i \tN_i \ket{\psi} = \ket{\psi} && \text{for } i = 1 \dots 4,\\
+	\label{eq:o2_comm} &(\tM_3\tM_4)\tM_2(\tM_4\tM_3) = \tM_2,
 \end{align}
-and similar commutation relation holds on Bob's side too.
+and similar commutation relations on Bob's side.
 \end{proposition}
 \begin{proof}
 	Since all the operators involved in this proposition act trivially on $W_2^{\x 2}$, we focus on
-	their actions on $W_{d-1}$. In the later proof, by $\ket{\psi}$ we mean the part of $\ket{\psi}$ on $W_{d-1}$.
+	their actions on $W_{d-1}$. In the later proof, by $\ket{\tpsi}$ we mean the part of $\ket{\tpsi}$ on $W_{d-1}$.
 	
 	We prove \cref{eq:o2_comm} first. It is simple to check that
 	\begin{align*}
-		&M_1M_2= \sum_{j=1}^{d-1} \omega_d^{j} \ketbra{x_j}{x_j},
-		&&M_3M_4= \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}},
+		&\tM_1\tM_2= \sum_{j=1}^{d-1} \omega_d^{j} \ketbra{x_j}{x_j},
+		&&\tM_3\tM_4= \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}},
 	\end{align*}
 	and that 
 	\begin{align*}
-		M_3M_4 M_2 M_4 M_3 = &\sum_{j=0}^{(d-3)/2} M_3M_4 (\ketbra{x_{r^j}}{x_{r^{d-1-j}}}+\ketbra{x_{r^{d-1-j}}}{x_{r^j}}) M_4M_3\\
-		=& \sum_{j=0}^{(d-3)/2} \ketbra{x_{r^{j-1}}}{x_{r^{d-2-j}}}+\ketbra{x_{r^{d-2-j}}}{x_{r^{j-1}}} = M_2.
+		\tM_3\tM_4 \tM_2 \tM_4 \tM_3 = &\sum_{j=0}^{(d-3)/2} M_3M_4 (\ketbra{x_{r^j}}{x_{r^{d-1-j}}}+\ketbra{x_{r^{d-1-j}}}{x_{r^j}}) M_4M_3\\
+		=& \sum_{j=0}^{(d-3)/2} \ketbra{x_{r^{j-1}}}{x_{r^{d-2-j}}}+\ketbra{x_{r^{d-2-j}}}{x_{r^{j-1}}} = \tM_2.
 	\end{align*}
 	
-	Next we prove \cref{eq:mn_preserve}. It is straightforward to see that $M_iN_i \ket{\psi} = \ket{\psi}$ for $i = 1,2$.
-	Before checking $i=3$ and $i=4$, we first observe that
+	Next we prove \cref{eq:mn_preserve}. It is straightforward to see that $\tM_i\tN_i \ket{\tpsi} = \ket{\tpsi}$ for $i = 1,2$.
+	Before checking the two cases $i=3$ and $i=4$, we first observe that
 	\begin{align*}
-		M_3M_4 N_3 N_4 \ket{\psi} = \ket{\psi}.
+		\tM_3\tM_4 \tN_3 \tN_4 \ket{\tpsi} = \ket{\tpsi}.
 	\end{align*}
-	The eigenvectors of $M_3M_4$ and $N_3N_4$ are 
+	The eigenvectors of $\tM_3\tM_4$ and $\tN_3\tN_4$ are 
         \begin{align*}
         		\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{x_{r^j}}.
         \end{align*}
@@ -1295,24 +1325,24 @@ and similar commutation relation holds on Bob's side too.
         \begin{align*}
         		\ket{x_{r^j}} = \frac{1}{\sqrt{d-1}} \sum_{k=0}^{d-2} \omega_{d-1}^{-jk} \ket{u_k}.
         \end{align*}
-        Then $M_4$ acts on $\ket{x_{r^j}}$ by
+        Then $\tM_4$ acts on $\ket{x_{r^j}}$ by
         \begin{align*}
-        		M_4 \ket{x_{r^j}} =& \frac{1}{\sqrt{d-1}} M_4\left(\ket{u_0} + \omega_{d-1}^{-j(d-1)/2}\ket{u_{(d-1)/2}}  + 
+        		\tM_4 \ket{x_{r^j}} =& \frac{1}{\sqrt{d-1}} M_4\left(\ket{u_0} + \omega_{d-1}^{-j(d-1)/2}\ket{u_{(d-1)/2}}  + 
         	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_k} + \omega_{d-1}^{jk} \ket{u_{d-1-k}})\right) \\
         	=&\frac{1}{\sqrt{d-1}} \left(\ket{u_0} + (-1)^j\ket{u_{(d-1)/2}}  + 
         	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_{d-1-k}} + \omega_{d-1}^{jk} \ket{u_{k}})\right) \\
         	=& \ket{x_{r^{d-1-j}}}.
         \end{align*}
-        Then we show that $M_4  N_4 \ket{\psi} = \ket{\psi}$ as 
+        Then we can show that $\tM_4  \tN_4 \ket{\tpsi} = \ket{\tpsi}$ because 
         \begin{align*}
-        	M_4 N_4 \ket{\psi} = \frac{1}{\sqrt{d-1}}  \sum_{j=0}^{d-2} M_4  N_4 \ket{x_{r^j}} \ket{x_{r^{d-1-j}}} 
+        	\tM_4 \tN_4 \ket{\tpsi} = \frac{1}{\sqrt{d-1}}  \sum_{j=0}^{d-2} \tM_4  \tN_4 \ket{x_{r^j}} \ket{x_{r^{d-1-j}}} 
         	= \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{x_{r^{d-1-j}}} \ket{x_{r^{j}}} =\ket{\psi},
         \end{align*}
-	Combining it with the fact that $M_3M_4 N_3N_4 \ket{\psi} = \ket{\psi}$, we can conclude that
-	$M_3N_3 \ket{\psi} = \ket{\psi}$.
+	Combining it with the fact that $\tM_3\tM_4 \tN_3\tN_4 \ket{\tpsi} = \ket{\tpsi}$, we can conclude that
+	$\tM_3\tN_3 \ket{\tpsi} = \ket{\tpsi}$.
 \end{proof}
-The similar result, i.e., $M_jN_j \ket{\psi} = \ket{\psi}$ for $j = 1 \dots \nr$, are easy to check because all the other observables are defined by $M_j, N_j$ for $j=1,2,3,4$.
-An interesting property of $U_A := M_3M_4$ and $O_A := M_1M_2$ is summarized in the proposition below. 
+The similar result, i.e., $\tM_j\tN_j \ket{\tpsi} = \ket{\tpsi}$ for $j = 1 \dots \nr$, are easy to check because all the other observables are defined by $\tM_j, \tN_j$ for $j=1,2,3,4$.
+An interesting property of $U_A := \tM_3\tM_4$ and $O_A := \tM_1\tM_2$ is summarized in the proposition below. 
 \begin{lemma}
 	\label{lm:uo_independ}
 	The unitaries $O$ and $U$ of the form
@@ -1324,7 +1354,7 @@ An interesting property of $U_A := M_3M_4$ and $O_A := M_1M_2$ is summarized in 
 \end{lemma}
 The proof of this lemma is provided in \cref{sec:u_and_o}.
 Our self-test argument certifies that Alice and Bob has such $O$ and $U$ in their hands, so
-it provides another angle to justify our self-testing argument.
+this proposition provides another angle to justify our self-testing argument.
 
 %---------------------------------------------------
 \subsection{The correlation $\fC(d,r)$}
@@ -1490,30 +1520,33 @@ Since the number of all the possible question pairs is $\Theta(r^2)$ and
 the number of possible output pairs is constant for each question pair $(x,y)$, 
 the approximate condition directly implies that, if $S$ is an $\ep$-approximate strategy
 of $\fC(d,r)$, then
-$\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$, for all $(a,b,x,y)$.
+\begin{align*}
+    \pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy},
+\end{align*}
+for all $(a,b,x,y)$.
 
 In the next three subsections, we analyze the implication of an approximate strategy to pass the 
 three subtests given in \cref{sec:full_test}.
 
 %------------------------------------------------------------------------------------------
-\subsection{Implication of passing $\LS(r)$}
+\subsection{Implication of winning $\LS(r)$}
 \label{sec:imp_lct}
 %------------------------------------------------------------------------------------------
-In this subsection, we use $(i,j)$ to denote the question pair so that Alice gets equation number $i$, sometimes with a variable label $j$,
- and Bob gets a variable label $j$.
+In this subsection, we use $(i,j)$ to denote the question pair so that Alice gets equation number $i$, 
+sometimes with a variable label $j$, and Bob gets a variable label $j$.
 The way we conduct the linear constraint test forces Alice to have binary observables $\{M_{ij}\}$ that satisfy 
 \cref{def:q_strat}.
 \begin{proposition}
 	\label{prop:lct_base}
-	Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$,
-	then there exist binary observables $\{ M_j \}_{j=1}^{\nr} $, such that
+	Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$.
+	Then there exist binary observables $\{ M_j \}_{j=1}^{\nr} $, such that
 	\begin{align}
 		&M_j N_j \ket{\psi} \appd{O(r\se)} \ket{\psi} \\
 		&\Pi_{j \in I_i} M_j \ket{\psi} \appd{O(r\se)}(-1)^{\uc(i)} \ket{\psi}.
 	\end{align}
 \end{proposition}
 \begin{proof}
-The condition that $\tpr{\ux b}{ij}$ from $\fC(d,r)$ wins the linear system game optimally is equivalent to
+The condition that $(\tpr{\ux b}{ij})$ of $\fC(d,r)$ wins the linear system game optimally is equivalent to
 \begin{align*}
 \sum_{\ux,b: \ux \in X_i, \ux(j) = b} \tpr{\ux b}{ij} = 1
 \end{align*}
@@ -1558,13 +1591,13 @@ Note that with the same technique, we can prove that
 	\Pi_{j \in I_i} N_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} \quad \text{ for all } i \leq \mr.
 \end{align*}
 
-Following the steps of the embedding of $(a_3a_4)^l a_1a_2(a_4a_3)^l = (a_1a_2)^{r^l}$ into $\Gamma_r$,
-we can get the following proposition.
+Following the steps of the embedding of $(a_3a_4)^l a_1a_2(a_4a_3)^l = (a_1a_2)^{r^l}$ into $\Gamma(\LS(r))$,
+we can prove the following proposition.
 \begin{proposition}
 \label{prop:lct_adv}
 Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$ and $\{M_j, N_j\}_{j \in \nr}$ be the observables defined in 
-\cref{prop:lct_base}, 
-then
+\cref{prop:lct_base}. 
+Then,
 \begin{align}
 	&M_1M_2 (M_4M_3)^l \ket{\psi}\appd{O(r^{l+1} \se)} (M_4M_3)^l (M_1M_2)^{r^l} \ket{\psi}, \\
 	&N_1N_2 (N_4N_3)^l \ket{\psi}\appd{O(r^{l+1} \se)} (N_4N_3)^l (N_1N_2)^{r^l} \ket{\psi}, 
@@ -1572,7 +1605,7 @@ then
 for all $l \geq 1$.
 \end{proposition}
 \begin{proof}
-The $l = 1$ case follows from the fact that the linear system game embeds $O(r)$ conjugacy relations and 
+The $l = 1$ case follows from the fact that $\Gamma(\LS(r))$ embeds $O(r)$ conjugacy relations and 
 all the $O(r)$ conjugacy relations are used in the derivation of $(a_3a_4)a_1a_2(a_4a_3) = (a_1a_2)^r$, so we 
 have
 \begin{align}
@@ -1584,15 +1617,14 @@ Assume the statement is true for $l = n$ and consider the case that $l = n+1$,
 	M_1M_2 (M_4M_3)^{n+1} \ket{\psi}  &\appd{O(r\se)} (N_3N_4) M_1M_2(M_4M_3)^n \ket{\psi} \\
 	&\appd{O(r^{n+1}\se)} (N_3N_4) (M_4M_3)^n (M_1M_2)^{r^n} \ket{\psi}\\
 	&\appd{O(r\se)} (M_4M_3)^n (M_1M_2)^{r^n} (M_4M_3) \ket{\psi} \\
-	& \appd{O(r^{n+1} \se)} (M_4M_3)^{n+1} (M_1M_2)^{r^{n+1}} \ket{\psi},
+	& \appd{O(r^{n+2} \se)} (M_4M_3)^{n+1} (M_1M_2)^{r^{n+1}} \ket{\psi},
 \end{align*}
 where from the second to the last line we repeat the process of applying \cref{eq:ls_comm_rel} 
-and the relation $M_1M_2 \ket{\psi} \appd{O(r\se)} N_1N_2 \ket{\psi}$, $r^n$ times.
+and the relation $(M_1M_2)^r \ket{\psi} \appd{O(r^2\se)} (N_1N_2)^r \ket{\psi}$, $r^n$ times.
 In summary, we have 
 \begin{align}
-	M_1M_2(M_4M_3)^{n+1} \ket{\psi} \appd{O(r^{n+2} \se)} (M_4M_3)^{n+1} (M_1M_2)^{r^{n+1}}\ket{\psi},
+	M_1M_2(M_4M_3)^{n+1} \ket{\psi} \appd{O(r^{n+2} \se)} (M_4M_3)^{n+1} (M_1M_2)^{r^{n+1}}\ket{\psi}.
 \end{align}
-because $O(r^{n+1} \se)+O(r^{n+1}\se) = O(r^{n+2} \se)$.
 By the principal of proof by induction, the proof is complete.
 The proof for Bob's observables $\{ N_j \}_{j=1}^{\nr}$ is similar.
 \end{proof}
@@ -1610,13 +1642,13 @@ The proof for Bob's observables $\{ N_j \}_{j=1}^{\nr}$ is similar.
 %	\sum_{j=0}^{k-1} O(r^j \se) = O(r^k \se).
 %\end{align}
 
-Recall $O_A = M_1M_2$ and $U_A=M_3M_4$, then
+Recall that we define $O_A = M_1M_2$ and $U_A=M_3M_4$, then
 the conclusion of \cref{prop:lct_adv} can be rewritten as 
 \begin{align*}
-	U_A^n O_A (U_A\ct)^n \ket{\psi} \appd{O(r^{n+1} \se)} O_A^{r^n} \ket{\psi}.
+	 O_A (U_A\ct)^n \ket{\psi} \appd{O(r^{n+1} \se)} (U_A\ct)^n O_A^{r^n} \ket{\psi}.
 \end{align*}
 On Bob's side, we also define $O_B = N_1N_2$ and $U_B = N_3N_4$ 
-and similar relations hold.
+and the similar relation holds.
 
 The other relations that are embedded in $\Gamma_r$ are 
 \begin{align}
@@ -1627,8 +1659,8 @@ The other relations that are embedded in $\Gamma_r$ are
 We summarize the implications in the following proposition.
 \begin{proposition}
 	\label{prop:lct_comm}
-	Let $S$, $\{M_j, N_j\}_{j=1}^{\nr}$ be the strategy and observables defined in \cref{prop:lct_base},
-	then
+	Let $S$, $\{M_j, N_j\}_{j=1}^{\nr}$ be the strategy and observables defined in \cref{prop:lct_base}.
+	Then,
 	\begin{align}
 		&M_{r+6} M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+6} \ket{\psi} && 
 		M_{r+8}M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+8} \ket{\psi} \\
@@ -1637,12 +1669,12 @@ We summarize the implications in the following proposition.
 	\end{align}
 	for all $j = 1 \dots r+5$, and
 	\begin{align}
-		&M_{r+6}M_{r+9} \ket{\psi} \appd{O(r\se)} - M_{r+9}M_{r+6} \ket{\psi} \\
+		&M_{r+6}M_{r+9} \ket{\psi} \appd{O(r\se)} -M_{r+9}M_{r+6} \ket{\psi} \\
 		&M_{r+8}M_{r+11} \ket{\psi} \appd{O(r\se)} -M_{r+11}M_{r+8} \ket{\psi}.
 	\end{align}
 \end{proposition}
-Recall all the relations in \cref{eq:comm,eq:mg1,eq:mg2} are embedded in constant number of linear relations in $\Gamma_r$,
-so this proposition can be proved using the same technique used in the proof of \cref{prop:lct_base}.
+Recall all the relations in \cref{eq:comm,eq:mg1,eq:mg2} are embedded in constant number of linear relations in $\Gamma(\LS(r))$,
+so this proposition can be proved with the same techniques used in the proof of \cref{prop:lct_base}.
 %------------------------------------------------------------------------------------------
 \subsection{Implication of passing the extended weighted CHSH test}
 \label{sec:imp_chsh}
@@ -1651,27 +1683,36 @@ In this subsection, we prove a series of propositions and lemmas which lead to a
 used in the self-testing proof.
 \begin{proposition}
 \label{prop:chsh_base}
-Let $S$ be an $\ep$-approximate quantum strategy of $\fC(d,r)$,
-then the strategy $S$ satisfy the following relations
-\begin{align}
+Let $S$ be an $\ep$-approximate quantum strategy of $\fC(d,r)$.
+Then the strategy $S$ satisfies the following relations
+\begin{align*}
 	  M_\ast^\diamond N_\ast^\diamond \ket{\psi}
-	  \appd{O( r\se)}&M_\ast^\diamond \ket{\psi} \appd{O( r\se)} (M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi} \appd{O( r\se)} (M_{\nr+2}^0+M_{\nr+2}^1)\ket{\psi} \\
-	  \appd{O( r\se)}&N_\ast^\diamond \ket{\psi} \appd{O( r\se)} (N_{\nr+1}^0+N_{\nr+1}^1)\ket{\psi} \appd{O( r\se)} (N_{\nr+2}^0+N_{\nr+2}^1)\ket{\psi}\\
-	M_\ast^\perp N_\ast^\perp\ket{\psi}\appd{O( r\se)} &M_\ast^\perp\ket{\psi} \appd{O( r\se)} M_{\nr+1}^\perp \ket{\psi} \appd{O( r\se)} M_{\nr+2}^\perp \ket{\psi}\\
-	\appd{O( r\se)}&N_\ast^\perp\ket{\psi} \appd{O( r\se)} N_{\nr+1}^\perp \ket{\psi} \appd{O( r\se)} N_{\nr+2}^\perp \ket{\psi}.
-\end{align}
+	  &\appd{O( r\se)}M_\ast^\diamond \ket{\psi}\\
+	  &\appd{O( r\se)} (M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi}\\
+	  &\appd{O( r\se)} (M_{\nr+2}^0+M_{\nr+2}^1)\ket{\psi} \\
+	  &\appd{O( r\se)} N_\ast^\diamond \ket{\psi}\\
+	  &\appd{O( r\se)} (N_{\nr+1}^0+N_{\nr+1}^1)\ket{\psi}\\
+	  &\appd{O( r\se)} (N_{\nr+2}^0+N_{\nr+2}^1)\ket{\psi}\\
+	M_\ast^\perp N_\ast^\perp\ket{\psi}&\appd{O( r\se)} M_\ast^\perp\ket{\psi}\\
+	&\appd{O( r\se)} M_{\nr+1}^\perp \ket{\psi}\\
+	&\appd{O( r\se)} M_{\nr+2}^\perp \ket{\psi}\\
+	&\appd{O( r\se)} N_\ast^\perp\ket{\psi}\\
+	&\appd{O( r\se)} N_{\nr+1}^\perp \ket{\psi}\\
+	&\appd{O( r\se)} N_{\nr+2}^\perp \ket{\psi},
+\end{align*}
 and
-\begin{align}
+\begin{align*}
 &M_{\nr+1}^0 \ket{\psi} \appd{O( r\se)} N_{\nr+1}^0 \ket{\psi} && M_{\nr+1}^1\ket{\psi} \appd{O( r\se)} N_{\nr+1}^1 \ket{\psi}\\
 &M_{\nr+2}^0 \ket{\psi} \appd{O( r\se)} N_{\nr+2}^0 \ket{\psi} && M_{\nr+2}^1\ket{\psi} \appd{O( r\se)} N_{\nr+2}^1 \ket{\psi}.
-\end{align}
+\end{align*}
 \end{proposition}
 
 \begin{proof} 
-Recall that the implication of $S$ being an $\ep$-approximate strategy is that 
-$\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$. 
 We prove $(M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi} \appd{O(r\se)} N_\ast^\diamond \ket{\psi}$ as an example.
-The rest of the relations follow the same line of arguments.
+The rest of the relations follow the same line of argument.
+
+Recall that the implication of $S$ being an $\ep$-approximate strategy is that 
+$\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$ for all question and answer pairs $(x,y)$ and $(a,b)$.
 From the correlation, we can observe that
 \begin{align*}
  \bra{\psi} (M_{\nr+1}^0+M_{\nr+1}^1)N_\ast^\diamond \ket{\psi} = \frac{2}{d-1} - O(r^2 \epsilon).
@@ -1725,7 +1766,7 @@ Hence we can conclude that $(M_{\nr+1}^0 + M_{\nr+1}^1)N_\ast^\diamond \ket{\psi
 		&N_{\nr+1} = N_{\nr+1}^0 - N_{\nr+1}^1  && 
 		N_{\nr+2} = N_{\nr+2}^0 - N_{\nr+2}^1.
 	\end{align}
-	Then $S$ induces two strategies that achieve $\ip{\I_{\cot(-\pi/d)}}_{\max} - O(d r\se)$, which are
+	Then $S$ induces two $O(d r\se)$-approximate strategies of the ideal correlation that achieves $\ip{\I_{\cot(-\pi/d)}}_{\max}$, which are
 	\begin{align}
 		S_1 = \left(M_{\nr+1}, M_{\nr+2}, N_1, N_2, \frac{M_\ast^\diamond\ket{\psi}}{\norm{M_\ast^\diamond\ket{\psi}}}\right),\\
 		S_2 = \left(N_{\nr+1}, N_{\nr+2}, M_1, M_2, \frac{M_\ast^\diamond\ket{\psi}}{\norm{M_\ast^\diamond\ket{\psi}}}\right).
@@ -1746,7 +1787,7 @@ which relate to $\bra{\psi} M_x^a N_y^b \ket{\psi}$ as follows,
 	=&\bra{\psi}M_\ast^\diamond M_x^aN_y^b M_\ast^\diamond\ket{\psi},
 \end{align*}
 where we use the facts that $M_\ast^\perp \ket{\psi} \appd{O(r\se)} M_x^\perp \ket{\psi}$ and that 
-$\supp(M_x^0) \cap \supp(M_x^\perp) = \emptyset$ for the relevant values of $(x,y,a,b)$.
+$M_x^0 M_x^\perp = 0$ for the relevant values of $(x,y,a,b)$.
 This means that if Alice and Bob share state $M_\ast^\diamond \ket{\psi}/\norm{M_\ast^\diamond \ket{\psi}}$ and apply $M_{\nr+1}^0N_1^0$
 they get conditional probability
 \begin{align*}
@@ -1762,70 +1803,41 @@ because
 \end{align*}
 The rest of the conditional probabilities produced by $S_1$ can be derived in the same way.
 Using the fact that $O(d r \se)$ dominates $O(dr^2 \ep)$,
-we can prove that the correlation generated by $S_1$ 
-is $O(dr\se)$-close to the ideal correlation that achieves $\ip{\I_{\cot(-\pi/d)}}_{\max}$.
-Hence, the strategy $S_1$ achieves the value $\ip{\I_{\cot(-\pi/d)}}_{\max} - O(d r \se)$.
+we can prove that $S_1$ is an $O(dr\se)$-approximate strategy of the ideal correlation that achieves $\ip{\I_{\cot(-\pi/d)}}_{\max}$.
 The proof for $S_2$ is very similar so we omit it here.
 \end{proof}
 Based on \cref{prop:chsh_base,prop:s1s2}, we identify a special component of $\ket{\psi}$, whose special properties are summarized
-in the proposition below. In the next lemma, we establish that this special component can be used to approximate $\ket{\psi}$. 
+in the proposition below. In the next lemma, we prove that this special component can be used to approximate $\ket{\psi}$. 
 \begin{proposition}
+    \label{prop:psi1}
 	Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$ and $M_{\nr+1}, M_{\nr+2},N_{\nr+1}$ and $N_{\nr+2}$ as defined in \cref{prop:s1s2}.
-	We also define
+	Then, the state
 	\begin{align}
-		&\ket{\psi_1} =1/2(M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 +M_{\nr+1}^1) \ket{\psi} \\
+		&\ket{\psi_1} =1/2(M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 - iM_{\nr+2}M_{\nr+1}^0 +M_{\nr+1}^1) \ket{\psi}.
 		%&\ket{\psi_2} = 1/2(M_{\nr+1}^1 + iM_{\nr+2}M_{\nr+1}^0 -iM_{\nr+2}M_{\nr+1}^1 + M_{\nr+1}^0)  \ket{\psi} \\
-		&\ket{\psi_2} =1/2 (N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1+iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi}\\
 		%&\ket{\psi_4} =1/2(N_{\nr+1}^1 + iN_{\nr+2}N_{\nr+1}^1 -iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi}
 	\end{align}
-	then
+	satisfies the following properties
 	\begin{align}
-	 \label{eq:psi1_eq} &\ket{\psi_1} \appd{O(\sd \sr\qe)} \ket{\psi_2},\\ 
 	 %\text{ and } \ket{\psi_2} \appd{O(\sd \sr\qe)} \ket{\psi_4}, \\
 	 %\label{eq:psi1_sum} &M_\ast^\diamond \ket{\psi} \appd{O( r\se)} \ket{\psi_1}+\ket{\psi_2}, \\
 	 %\label{eq:psi1_orth} &\braket{\psi_2}{\psi_1} \appd{O( r\se)} 0,\\
-	 \label{eq:psi1_norm} &\norm{\ket{\psi_i}}^2 \appd{O(r\se)} 1/(d-1) \quad \text{ for } i = 1, 2\\
+	 \label{eq:psi1_norm} &\norm{\ket{\psi_1}}^2 \appd{O(r\se)} 1/(d-1),\\
 	 \label{eq:psi1_eig1} &N_1N_2 \ket{\psi_1} \appd{O(\sr \qe/\sd)} \omega_d\ket{\psi_1},\\
 	 \label{eq:psi1_eig2} &M_1M_2 \ket{\psi_1} \appd{O(\sd\sr \qe)} \omega_d^{-1} \ket{\psi_1}.
 	\end{align}
 \end{proposition}
 In this proof, we use the notation $c := \cos(\pi/d)$ and $s := \sin(\pi/d)$.
 \begin{proof}
-	We prove \cref{eq:psi1_eq} to \cref{eq:psi1_eig2} one by one.
-	
-	\textbf{To prove \cref{eq:psi1_eq}}, 
-	recall that $M_{\nr+1}^0 \ket{\psi} \appd{O(r\se)} N_{\nr+1}^0 \ket{\psi}$ 
-	and $M_{\nr+1}^1 \ket{\psi} \appd{O(r\se)} N_{\nr+1}^1 \ket{\psi}$ proved in \cref{prop:chsh_base},
-	so it suffices to show
-	$(M_{\nr+2}M_{\nr+1}^1 - M_{\nr+2}M_{\nr+1}^0) \ket{\psi}$ is close to $(- N_{\nr+2}N_{\nr+1}^1+N_{\nr+2}N_{\nr+1}^0)\ket{\psi}$,
-%	or equivalently,
-%	$M_{\nr+2}M_{\nr+1} \ket{\psi}$ is close to $-N_{\nr+2}N_{\nr+1} \ket{\psi}$.
-	At this point, we can use the anti-commutation relation induced by $S_1$ (\cref{eq:zaxa}) and conclude that 
-	\begin{align*}
-		M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi} \appd{\frac{\norm{\ket{M_\ast^\diamond\ket{\psi}}}}{c\sqrt{s}}O(\sd\sr\qe)} -M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi}.
-	\end{align*}
-	Using the fact $c = 1 - \pi^2/(2d^2) + O(1/d^4)$ and $s = \pi/d + O(1/d^3)$, the distance above is of order $O(\sd \sr \qe)$.
-	Then we can show that 
-	\begin{align*}
-		M_{\nr+2}M_{\nr+1}\ket{\psi} &= M_{\nr+2}M_{\nr+1}(M_{\nr+1}^0 + M_{\nr+1}^1)\ket{\psi} \\
-			&\appd{O(r\se)} M_{\nr+2}M_{\nr+1} M_\ast^\diamond \ket{\psi} \\
-			&\appd{O(\sd \sr \qe)} -M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi}\\
-			&\appd{O(r\se)} -M_{\nr+1}M_{\nr+2} \ket{\psi} \\
-			&\appd{O(r\se)} -M_{\nr+1} N_{\nr+2} \ket{\psi} \\
-			&\appd{O(r\se)} -N_{\nr+2} N_{\nr+1} \ket{\psi}.
-	\end{align*}
-	The proof of $\ket{\psi_2} \appd{O(\sd \sr \qe)} \ket{\psi_4}$ is similar.
-	
-	\textbf{To prove \cref{eq:psi1_norm}}, we use $\norm{\ket{\psi_1}}^2$ as an example. 
-	The norms of the other $3$ vectors can be derived with previous results.
-	We start by expanding the inner product
+    \textbf{To prove \cref{eq:psi1_norm}}, 
+	we start by expanding the inner product
 	\begin{align*}
 		&\braket{\psi_1}{\psi_1} \\
-		=&1/4\bra{\psi}(M_{n+1}^0 - iM_{n+1}^1M_{n+2} + iM_{n+1}^0M_{n+2} +M_{n+1}^1)\\
-		&(M_{n+1}^0 + iM_{n+2}M_{n+1}^1 -iM_{n+2}M_{n+1}^0 + M_{n+1}^1)\ket{\psi}\\
-		=&1/2\bra{\psi}(M_{n+1}^0+M_{n+1}^1-iM_{n+1}^1M_{n+2}M_{n+1}^0+iM_{n+1}^0M_{n+2}M_{n+1}^1\ket{\psi}
+		=&1/4\bra{\psi}(M_{\nr+1}^0 - iM_{\nr+1}^1M_{\nr+2} + iM_{\nr+1}^0M_{\nr+2} +M_{\nr+1}^1)\\
+		&(M_{\nr+1}^0 + iM_{\nr+2}M_{\nr+1}^1 -iM_{\nr+2}M_{\nr+1}^0 + M_{\nr+1}^1)\ket{\psi}\\
+		=&1/2\bra{\psi}(M_{\nr+1}^0+M_{\nr+1}^1-iM_{\nr+1}^1M_{\nr+2}M_{\nr+1}^0+iM_{\nr+1}^0M_{\nr+2}M_{\nr+1}^1\ket{\psi}
 	\end{align*}
-	Here we apply the same trick to flip $M_{n+1}^1$ to Bob's side and get 
+	Here we apply the trick to flip $M_{\nr+1}^1$ and $M_{\nr+1}^0$ to Bob's side and get 
 	\begin{align*}
 		\bra{\psi}M_{\nr+1}^1M_{\nr+2}M_{\nr+1}^0\ket{\psi} 
 		&\appd{O(r\se)} \bra{\psi}N_{\nr+1}^1M_{\nr+2}N_{\nr+1}^0\ket{\psi} \\
@@ -1848,8 +1860,8 @@ In this proof, we use the notation $c := \cos(\pi/d)$ and $s := \sin(\pi/d)$.
 %	\end{align}	
 	
 	\textbf{To prove \cref{eq:psi1_eig1}},
-	we need to dive deeper into the implication of the fact that $S_1$ almost achieves $\ip{\I_{\cot(-\pi/d)}}_{\max}$.
-	We define
+	we need to dive deeper into the implication of the fact that $S_1$ achieves $\ip{\I_{\cot(-\pi/d)}}_{\max}$ approximately.
+	Define
 	\begin{align}
 		&Z_A  := M_{\nr+1} && X_A := M_{\nr+2} \\
 		&Z_B := \frac{N_1+N_2}{2c} && X_B := \frac{N_1-N_2}{-2s}.
@@ -1857,7 +1869,7 @@ In this proof, we use the notation $c := \cos(\pi/d)$ and $s := \sin(\pi/d)$.
 %	Note that $Z_A$ should be defined by $M_{\nr+1}^0 - M_{\nr+1}^1 + M_{\nr+1}^\perp$,
 %	but $M_{\nr+1}^\perp$ is almost orthogonal to $M_\ast^\diamond$, so we omit the $M_{\nr+1}^\perp$ term here.
 %	In the definition of $X_A$, we omit $M_{\nr+2}^\perp$ too.
-	Recalling \cref{eq:za-zb}, which states that
+	Recall \cref{eq:za-zb}, which states that
 	\begin{align*}
 		\norm{Z_B M_\ast^\diamond \ket{\psi} - M_{\nr+1}M_\ast^\diamond \ket{\psi}} \leq 
 		\sqrt{s}\norm{M_\ast^\diamond \ket{\psi}} O(\sd \sr \qe)
@@ -1932,16 +1944,47 @@ In this proof, we use the notation $c := \cos(\pi/d)$ and $s := \sin(\pi/d)$.
 	\ket{\psi_1} = 1/2(\1 - iM_{\nr+2})(M_{\nr+1}^0 + i M_{\nr+2}M_{\nr+1}^1) \ket{\psi}.
 	\end{align*}
 	
-	\textbf{To prove \cref{eq:psi1_eig2}},
-	we first show that $M_1M_2 \ket{\psi_2}\appd{O(\sr \qe/\sd)} \omega_d^{-1} \ket{\psi_2}$, then we 
-	use the fact that $\ket{\psi_2} \appd{O(\sd \sr\qe)} \ket{\psi_1}$ to draw the conclusion.
+	\textbf{To prove \cref{eq:psi1_eig2}}, we introduce an approximation of $\ket{\psi_1}$, which is 
+	\begin{align}
+	    &\ket{\psi_2} =1/2 (N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1+iN_{\nr+2}N_{\nr+1}^0 + N_{\nr+1}^1)\ket{\psi},
+	\end{align}
+	and we will first show that 
+	\begin{align}
+	    \label{eq:psi1_eq} &\ket{\psi_1} \appd{O(\sd \sr\qe)} \ket{\psi_2}.
+	\end{align}
 	
-	From the strategy $S_2$, we can summarize that 
+	To prove \cref{eq:psi1_eq}, 
+	we first recall that $M_{\nr+1}^0 \ket{\psi} \appd{O(r\se)} N_{\nr+1}^0 \ket{\psi}$ 
+	and $M_{\nr+1}^1 \ket{\psi} \appd{O(r\se)} N_{\nr+1}^1 \ket{\psi}$ from \cref{prop:chsh_base},
+	so it suffices to show
+	$(M_{\nr+2}M_{\nr+1}^1 - M_{\nr+2}M_{\nr+1}^0) \ket{\psi}$ is close to $(- N_{\nr+2}N_{\nr+1}^1+N_{\nr+2}N_{\nr+1}^0)\ket{\psi}$,
+%	or equivalently,
+%	$M_{\nr+2}M_{\nr+1} \ket{\psi}$ is close to $-N_{\nr+2}N_{\nr+1} \ket{\psi}$.
+	At this point, we can use the anti-commutation relation (\cref{eq:zaxa}) induced by $S_1$  and conclude that 
+	\begin{align*}
+		M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi} \appd{\frac{\norm{\ket{M_\ast^\diamond\ket{\psi}}}}{c\sqrt{s}}O(\sd\sr\qe)} -M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi}.
+	\end{align*}
+	Using the fact $c = 1 - \pi^2/(2d^2) + O(1/d^4)$ and $s = \pi/d + O(1/d^3)$, the distance above is of order $O(\sd \sr \qe)$.
+	Then we can show that 
+	\begin{align*}
+		M_{\nr+2}M_{\nr+1}\ket{\psi} &= M_{\nr+2}M_{\nr+1}(M_{\nr+1}^0 + M_{\nr+1}^1)\ket{\psi} \\
+			&\appd{O(r\se)} M_{\nr+2}M_{\nr+1} M_\ast^\diamond \ket{\psi} \\
+			&\appd{O(\sd \sr \qe)} -M_{\nr+1}M_{\nr+2} M_\ast^\diamond \ket{\psi}\\
+			&\appd{O(r\se)} -M_{\nr+1}M_{\nr+2} \ket{\psi} \\
+			&\appd{O(r\se)} -M_{\nr+1} N_{\nr+2} \ket{\psi} \\
+			&\appd{O(r\se)} -N_{\nr+2} N_{\nr+1} \ket{\psi},
+	\end{align*}
+	where we use the fact that $M_\ast^\diamond \ket{\psi} \appd{O(r\se)} (M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi} \appd{O(r\se)}
+	(M_{\nr+2}^0+M_{\nr+2}^1) \ket{\psi}$.
+
+	Next, we show that $M_1M_2 \ket{\psi_2}\appd{O(\sr \qe/\sd)} \omega_d^{-1} \ket{\psi_2}$, which gives
+	us \cref{eq:psi1_eig2} after substituting in\cref{eq:psi1_eq}.
+	From the strategy $S_2$, we can deduce that 
 	\begin{align}
 		&(M_1+M_2) N_{\nr+1}^0 \ket{\psi} \appd{O(\sr \qe/\sd)} 2c N_{\nr+1}^0 \ket{\psi}.\\
 		&(M_1+M_2) N_{\nr+1}^1 \ket{\psi}  \appd{O(\sr \qe/\sd)} -2cN_{\nr+1}^1 \ket{\psi},\\
 		&(M_1-M_2) N_{\nr+1}^0\ket{\psi} \appd{O(\sr\qe/\sd)}-2sN_{\nr+2} N_{\nr+1}^1\ket{\psi}\\
-		&(M_1 -M_2)N_{\nr+1}^1 \ket{\psi} \appd{O(\sr\qe/\sd)} -2sN_{\nr+2} N_{\nr+1}^0 \ket{\psi}.
+		&(M_1-M_2)N_{\nr+1}^1 \ket{\psi} \appd{O(\sr\qe/\sd)} -2sN_{\nr+2} N_{\nr+1}^0 \ket{\psi}.
 	\end{align}
 	With similar calculation as in the previous case, we can get 
 	\begin{align*}
@@ -1969,56 +2012,68 @@ Recall that \cref{prop:lct_base} establishes that there exist observables $\{M_i
 $M_iN_i \ket{\psi} \appd{O(r\se)} \ket{\psi}$ for $i = 1 \dots \nr$.
 Then we can deduce that 
 \begin{align*}
-	M_3M_4 \x N_3N_4 \ket{\psi} \appd{O(r\se)} M_3 \x N_3 \ket{\psi} \appd{O(r\se)} \ket{\psi},
+	M_4M_3 \x N_4N_3 \ket{\psi} \appd{O(r\se)} M_4 \x N_4 \ket{\psi} \appd{O(r\se)} \ket{\psi},
 \end{align*}
 or equivalently,
 \begin{align*}
-	U_A \x U_B \ket{\psi} \appd{O(r\se)} \ket{\psi}.
+	U_A\ct \x U_B\ct \ket{\psi} \appd{O(r\se)} \ket{\psi}.
 \end{align*}
-Intuitively, it means that $U_A U_B $ only permutes the Schmidt basis of $\ket{\psi}$.
-Similarly, we also have $U_A\ct U_B\ct \ket{\psi} \appd{O(r\se)} \ket{\psi}$.
+Intuitively, it means that $\ket{\psi}$ is invariant under the permutation induced by $U_A\ct U_B\ct$.
 We use this observation in the proof of the following lemma.
 \begin{lemma}
 \label{lm:decomp_psi}
 Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$ and 
 define 
 $\ket{\psi'} := \sum_{j=1}^{(d-1)} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}$
-with $\log_r j$ being the discrete log,
-then
+with $\log_r j$ being the discrete log.
+Then,
 \begin{align}
-	&\ket{\psi} \appd{O(d^{5/4} r^{d/2} \ep^{1/8})} \ket{\psi'}.
+	&\ket{\psi} \appd{O(d r^{d/2} \ep^{1/8})} \ket{\psi'}.
 \end{align}
 \end{lemma}
 \begin{proof}
-	We first prove that $\norm{\ket{\psi'}}^2 \appd{O(d^{5/2} r^d \qe)} 1$.
+	We first prove that $\norm{\ket{\psi'}}^2 \appd{O(d r^d \qe)} 1$.
 	Observe that 
 	\begin{align*}
 		\bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j}  \ket{\psi_1} =
 		\braket{\psi_1}{\psi_1} \appd{O(r\se)} \frac{1}{d-1}.
 	\end{align*}
-	Using the relation $O_A(U_A\ct)^j \ket{\psi} \appd{O(r^j \se)} (U_A\ct)^j O_A^{r^j}\ket{\psi}$ and $\ket{\psi_1} \appd{O(\sd \sr \qe)} \ket{\psi_3}$,
-        we can see that 
-        \begin{align*}
-            	O_A (U_A\ct)^j \ket{\psi_1} &\appd{O(\sd \sr \qe)} O_A(U_A\ct)^j \ket{\psi_3} \\
-            	& = 1/2 (\1 + i N_{\nr+2})(N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1) O_A (U_A\ct)^j \ket{\psi} \\
-            	& \appd{O(r^j \se)} 1/2  (\1 + i N_{\nr+2})(N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1)  (U_A\ct)^j O_A^{r^j} \ket{\psi} \\
-            	& = (U_A\ct)^j O_A^{r^j} \ket{\psi_3} \\
-            	& \appd{O(r^j \sr \qe/\sd)} \omega_d^{-r^j}(U_A\ct)^j \ket{\psi_3} \\
-            	& \appd{O(\sd \sr\qe)} \omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
-        \end{align*}
-        In short, we have shown that 
-        \begin{align}
-        \label{eq:omega}
-        		O_A (U_A\ct)^j \ket{\psi_1} \appd{O(\sd r^{j+1/2} \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
-        \end{align}
-	Hence for $j \neq j'$, \cref{prop:orthog} tells us that  
+	Using the relation $O_B(U_B\ct)^j \ket{\psi} \appd{O(r^j \se)} (U_B\ct)^j O_B^{r^j}\ket{\psi}$ and \cref{eq:psi1_eig1}, we can deduce that 
 	\begin{align*}
-		\bra{\psi_1} (U_AU_B)^{j} (U_A\ct U_B\ct)^{ j'} \ket{\psi_1} \appd{O(d^{3/2} (r^j + r^{j'})\sr \qe)} 0.
+	    O_B (U_B\ct)^j \ket{\psi_1} &= \frac{1}{2} (\1 - iM_{\nr+2})(M_{\nr+1}^0 + i M_{\nr+2}M_{\nr+1}^1)  O_B (U_B\ct)^j \ket{\psi}\\
+	                                & \appd{O(r^j \se)} \frac{1}{2} (\1 - iM_{\nr+2})(M_{\nr+1}^0 + i M_{\nr+2}M_{\nr+1}^1) (U_B\ct)^j O_B^{r^j} \ket{\psi} \\
+	                                & = (U_B\ct)^j O_B^{r^j} \ket{\psi_1} \\
+	                                & \appd{O(r^j \sr \qe/ \sd)} \omega_d^{r^j} (U_B\ct)^j\ket{\psi_1}.
+	\end{align*}
+	In short, we have shown that 
+    \begin{align}
+    \label{eq:B_omega}
+        	O_B (U_B\ct)^j \ket{\psi_1} \appd{O(r^{j+1/2} \qe/ \sd )}\omega_d^{r^j}  (U_B\ct)^j \ket{\psi_1}.
+    \end{align}
+	%Using the relation $O_A(U_A\ct)^j \ket{\psi} \appd{O(r^j \se)} (U_A\ct)^j O_A^{r^j}\ket{\psi}$ and $\ket{\psi_1} \appd{O(\sd \sr \qe)} \ket{\psi_2}$ defined in the proof of \cref{prop:psi1},
+    %we can see that 
+    %\begin{align*}
+            % 	O_A (U_A\ct)^j \ket{\psi_1} &\appd{O(\sd \sr \qe)} O_A(U_A\ct)^j \ket{\psi_2} \\
+            % 	& = 1/2 (\1 + i N_{\nr+2})(N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1) O_A (U_A\ct)^j \ket{\psi} \\
+            % 	& \appd{O(r^j \se)} 1/2  (\1 + i N_{\nr+2})(N_{\nr+1}^0 - iN_{\nr+2}N_{\nr+1}^1)  (U_A\ct)^j O_A^{r^j} \ket{\psi} \\
+            % 	& = (U_A\ct)^j O_A^{r^j} \ket{\psi_2} \\
+            % 	& \appd{O(r^j \sr \qe/\sd)} \omega_d^{-r^j}(U_A\ct)^j \ket{\psi_2} \\
+            % 	& \appd{O(\sd \sr\qe)} \omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
+    %\end{align*}
+    %In short, we have shown that 
+    With similar reasoning, we can also get
+    \begin{align}
+    \label{eq:A_omega}
+        O_A (U_A\ct)^j \ket{\psi_1} \appd{O(\sd r^{j+1/2} \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
+    \end{align}
+	Hence for $j \neq j'$, Applying \cref{prop:orthog} to \cref{eq:B_omega} gives us that  
+	\begin{align*}
+		\bra{\psi_1} (U_AU_B)^{j} (U_A\ct U_B\ct)^{ j'} \ket{\psi_1} \appd{O( (r^j + r^{j'})\sr \qe)} 0.
 	\end{align*}
 	We can calculate the norm of $\ket{\psi'}$ as 
 	\begin{align*}
 		\braket{\psi'}{\psi'} &=\sum_{j,j'=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j'} \ket{\psi_1}\\
-		&\appd{O(d^{5/2} r^{d+1/2} \qe)} \sum_{j=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}\\
+		&\appd{O(dr^{d+1/2} \qe)} \sum_{j=1}^{d-1} \bra{\psi_1} (U_AU_B)^{\log_r j} (U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1}\\
 		&\appd{O(dr\se)} (d-1) \frac{1}{d-1} = 1.
 	\end{align*}
 	
@@ -2038,7 +2093,7 @@ then
 	Hence, we know $\braket{\psi}{\psi'} \appd{O(d^2 r \se)} 1$.
 	In the end, we apply \cref{prop:close_vec} to get
 	\begin{align*}
-		\ket{\psi} \appd{O(d^{5/4} r^{d/2} \ep^{1/8})} \ket{\psi'}.
+		\ket{\psi} \appd{O(d r^{d/2} \ep^{1/8})} \ket{\psi'}.
 	\end{align*}
 \end{proof}
 
@@ -2055,8 +2110,8 @@ We use similar techniques in our proof but our proof also bases on the correlati
 The implication of passing the commutation test is summarized in the following proposition.
 \begin{proposition}
 	\label{prop:rel_comm}
-	Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$,
-	then 
+	Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$.
+	Then, 
 	\begin{align}
 		&M_{\nr+1}^0 M_j \ket{\psi} \appd{O(r\se)} M_{j} M_{\nr+1}^0 \ket{\psi}, &&
 		M_{\nr+1}^1 M_j \ket{\psi} \appd{O(r\se)} M_{j} M_{\nr+1}^1 \ket{\psi}, \\
@@ -2067,7 +2122,7 @@ The implication of passing the commutation test is summarized in the following p
 Note that $M_j$'s for $j = r+6, r+8,r+9,r+11$ tested in the commutation test are used in the Magic Square test,
 which will be used to construct the isometry in the next subsection.
 \begin{proof}
-	The case of $M_j M_{\nr+2}$ is an application of Lemma~$28$ of \cite{coladan2017verifier} with $\se$ replaced by $O(r\se)$.
+	The case of $[M_j, M_{\nr+2}]$ is an application of Lemma~$28$ of \cite{coladan2017verifier} with $\se$ replaced by $O(r\se)$.
 	
 	For the other relations, we prove $M_{\nr+1}^0M_{r+6} \ket{\psi} \appd{O(r\se)} M_{r+6}M_{\nr+1}^0 \ket{\psi}$ to demonstrate 
 	the techniques involved. We denote Bob's projectors by $\{ N_{(\nr+1, r+6)}^{b_1 b_2} \}$ where $b_1 \in \{0, 1, \perp\}$ and
@@ -2095,7 +2150,7 @@ With the previous propositions and lemmas, we can prove the self-testing theorem
 \begin{theorem}
 	\label{thm:self-test}
 	Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$.
-	There exists an isometry   
+	Then there exists an isometry   
 	$\Phi_A \x \Phi_B = (\Phi_{A,2} \x \Phi_{B,2})(\Phi_{A,1}\x\Phi_{B,2})$ and a state $\ket{junk}$
 	such that $\norm{\ket{junk}}^2 \appd{O(dr\se)} 1$ and 
 	\begin{align}
@@ -2199,7 +2254,7 @@ $M_{r+9}$ acts as $\1 \x \pauliz$ and $M_{r+11}$ acts as $\pauliz \x \1$; and si
         \draw[loosely dotted] (0,-1.5) -- (5,-1.5);
         % Bracket
         \draw[decorate,decoration={brace},thick,] (6.5,-0.5) to
-    	node[midway,right] (bracket2) {$\sum_{j=1}^{d-1}\ket{j}\ket{d-j}$}
+    	node[midway,right] (bracket2) {$\sum_{j=1}^{d-1}\ket{x_j}\ket{x_{d-j}}$}
     	(6.5,-2.5);
         %
         % Background Box
@@ -2219,7 +2274,7 @@ The first isometry has the following steps:
 	$O_{A/B}^k$.);
 	\item Apply inverse Quantum Fourier Transform ($QFT_d^{-1}$) to the control registers;
 	\item Apply Controlled-$U_{A/B}$ operations (i.e. If Alice's control register is in state $\ket{x_j}$, she applies
-	$U_A^{\log_r (d-j)}$. If Bob's control register is in state $\ket{x_j}$, he applies $(U_B\ct)^{\log_r j}$).
+	$U_A^{\log_r (d-j)}$. If Bob's control register is in state $\ket{x_j}$, he applies $(U_B)^{\log_r j}$).
 \end{enumerate}
 
 \begin{figure}[H]
@@ -2349,7 +2404,7 @@ Combining the two equations above we get that
 \end{align*}
 where we use the fact that $\Phi_{A,2}\x \Phi_{B,2}$ only acts on the state $\ket{\psi_1}$.
 
-\Cref{lm:decomp_psi} implies that $ \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi}) \appd{O(d^{5/4} r^{d/2 +1/4} \ep^{1/8})}  \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi'})$,  
+\Cref{lm:decomp_psi} implies that $ \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi}) \appd{O(d r^{d/2 +1/4} \ep^{1/8})}  \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi'})$,  
 so we focus on how the isometry evolves $\ket{\psi'}$.
 The evolution is summarized below.
 	\begin{align*}
@@ -2364,12 +2419,12 @@ The evolution is summarized below.
 		\xrightarrow[]{\text{Controlled-}U_{A/B}}& \sum_{j=1}^{d-1} U_A^{\log_r j} (U_A\ct)^{\log_r j} U_B^{\log_r j} (U_B\ct)^{\log_r j} \ket{\psi_1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'}\\
 		=&\ket{\psi_1} \x \sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'}.
 	\end{align*}
-When we analyze the effect of the controlled-$O_{A/B}$, we applied \cref{eq:omega} repeatedly.
+When we analyze the effect of the controlled-$O_{A/B}$, we applied \cref{eq:A_omega,eq:B_omega} repeatedly.
 In summary, we have shown that
 \begin{align}
 	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d^{5/2} r^{d+1/2} \ep^{1/8})} \sqrt{d-1} \ket{\psi_1} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'},
 \end{align}
-where we use the fact that $O(d^{5/2} r^{d+1/2} \ep^{1/8})$ dominates both $O(d^{5/4} r^{d/2+1/4} \ep^{1/8})$ and 
+where we use the fact that $O(d^{5/2} r^{d+1/2} \ep^{1/8})$ dominates both $O(d r^{d/2+1/4} \ep^{1/8})$ and 
 $O(d^{5/2} r^{d+1/2} \qe)$.
 Since $\norm{\ket{\psi_1}}^2 \appd{O(r \se)} 1/(d-1)$, we know $ \sqrt{d-1} \norm{\ket{\psi_1}} \appd{O(\sd \sr\qe)} 1$.
 
