@@ -226,6 +226,8 @@
 \newcommand{\ub}{\underline{b}}
 \newcommand{\fC}{\mathfrak{C}}
 \newcommand{\ba}{\pmb{a}}
+\newcommand{\bc}{\pmb{c}}
+\newcommand{\bS}{\pmb{S}}
 
 % Probabilities
 \newcommand{\pr}[2]{P(#1|#2)}
@@ -248,7 +250,7 @@
 \newcommand{\appd}[1]{\simeq_{#1}}
 
 % Comments
-\def\carl#1{{\color{blue} #1 -Carl}}
+\def\carl#1{{\color{blue} #1}}
 \newcommand{\hf}[1]{\textcolor{red}{#1}}
 \newcommand{\hfc}[1]{\textcolor{red}{#1 -H.F.}}
 
@@ -310,10 +312,12 @@ Self-testing is a unique phenomenon of quantum mechanics. It has many applicatio
 delegated computation \cite{ruv2013,coladan2017verifier} and device independent quantum cryptography
 \cite{miller2017,fu2018,eat2018}.
 \hfc{Which DIQKD paper should I cite?}
+\carl{Two possible papers that you could cite are Mayer Yao 1998 (which originated the idea of self-testing as far as I know, and mentions QKD) and my paper (miller2017, which you've already cited --- indeed it uses the concept of self-testing).  Also you should check Vazirani-Vidick's 2014 PRL paper to see if it mentions self-testing at all.  (It was the first to fully prove DI-QKD.)}
 
 The case of self-testing $2$-dimensional EPR pair is fully understood. One can robustly self-test
 one copy of it by the CHSH inequality \cite{bamps2015}. and self-test many copies of the $2$-dimensional EPR
 pair in parallel \cite{mckague2016, coladan2016parallel, lowdegree}. 
+\carl{I believe the first to prove robust self-testing of a single EPR pair was McKague-Yang-Scarani 2012.}
 Self-testing general $d$-dimensional EPR pairs is a harder task.
 Coladangelo, Goh and Scarani has shown that all pure bipartite entangled states can be self-tested \cite{coladan2017all}
 by constructing an explicit correlation of size $\Theta(d^2)$ that can be used for self-testing,
@@ -334,8 +338,10 @@ In this paper, we give an affirmative answer to this question by proving the fol
 \end{theorem}
 The formal statement of this theorem is given in \cref{thm:self-test} and \cref{thm:infty}.
 
-The set $D$ is easily characterizable as it contains all the odd prime numbers with smallest
-primitive root $2$, $3$ or $5$. It has been shown that  the set $D$ has infinitely many elements \cite{murty1988}.
+The set $D$ is, \carl{
+specifically, the set of all 
+odd prime numbers whose smallest primitive root is either $2$, $3$,
+or $5$}.  It has been shown that \carl{this set} has infinitely many elements \cite{murty1988}.
 To prove \cref{thm:inf}, we construct a correlation of size $\Theta(r^2)$ for each $d \in D$ whose primitive
 root is $r$. This correlation is denoted by $\fC(d,r)$.
 Note that although the size of $\fC(d,r)$ does not depend on $d$, the entries of $\fC(d,r)$ do.
@@ -350,6 +356,7 @@ can produce the desired maximally entangled states when applied to the unknown s
 %	All maximally entangled state with local dimension $d-1$, where $d$ is prime and has
 %	primitive root $r \in \{2, 3, 5\}$, can be self-tested by a constant-sized correlation.
 %\end{theorem}
+\carl{The paper \cite{bamps2015} says that the earlier paper \cite{yang2013} has ``flaws.'' Check what those flaws are, and make sure that they won't put a shadow on anything that you're discussing when you cite \cite{yang2013}.} 
 
 In order to accomplish our goal, we first design a linear system game to enforce the 
 relation $UOU\ct = O^r$, which is a generalization of a relation in Ref.~\cite{slofstra2017}.  \carl{A reader may get lost at the last sentence -- you're jumping into the material too quickly without enough explanation.}
@@ -392,6 +399,7 @@ of Bob's observables.
 At this point, we fix a prime $d$ by picking the weight in the weighted CHSH inequality and 
 use the extended weighted CHSH test to certify that
 $O$ has eigenvalue $\omega_d$.
+\carl{This paragraph (also) will need more context.}
 
 \textbf{Structure of the paper}.
 We start with notations and background information in \cref{sec:prelim}.
@@ -408,21 +416,22 @@ In the end, we give the robust self-testing proof in \cref{sec:main}.
 %-----------------------------------
 \subsection{Notations and mathematical background}
 %-----------------------------------
-The maximally entangled state of local dimension $d-1$ for some odd prime $d$ that we are interested in is denoted by
+The maximally entangled state of local dimension $d-1$ for some odd prime $d$ that we \hf{self-test} is denoted by
 \begin{align}
 \ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{j = 1}^{d-1} \ket{j}\ket{d-j}.
 \end{align}
 The superscript $(d-1)$ stresses the dimension of the local Hilbert space and we follow this convention through this paper.
-\hfc{I removed the sentence about $\calH$.}
+\hf{The special form of this maximally entangled state is the effect of our linear system game.} \carl{I don't know what that sentence means.  Refer to something specific.}
 The $d$-th root of unity is denoted by $\omega_d:=e^{2\pi i/d}$. In the qubit case, 
-the maximally entangled state is denoted by 
+\hf{the EPR pair is denoted by} 
 \begin{align}
-	\ket{\EPR{2}} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}),
+	\ket{EPR} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}),
 \end{align}
 and the Pauli operators are given by
 \begin{align}
 	\paulix = \ketbra{0}{1}+\ketbra{1}{0} && \pauliz = \ketbra{0}{0} - \ketbra{1}{1}.
 \end{align}
+\hf{Note that we only work with finite Hilbert spaces in our work.}
 
 For quantum states and operators on different Hilbert spaces, we use subscripts to label them.
 For example, $O_A$ is an operator on Alice's side and $\ket{0}_{B}$ is a state on Bob's side. 
@@ -442,38 +451,57 @@ $a \appd{\epsilon} b \iff \cnorm{a-b} \leq \epsilon$.
 We use some basic number theory in our work. 
 \begin{definition}
 A primitive root of a prime number
-$d$ is \hf{an integer} $r$ such that $r$ has multiplicative order $d-1$
-in the group of integers modulo $d$, $\Zd$.
+$d$ is an integer $r$ such that $r$ has multiplicative order $d-1$
+in the ring of integers modulo $d$, $\mathbb{Z}_d$.
 \end{definition}
 In other words,
-$r$ is the generator of $\Zd$.
+$r$ is a generator of $\Zd$. 
 
 We also need some basic notions of group presentation and group
 representation, so 
-We give the definitions of group presentation and group representations below.
-\begin{definition}
-    Let $S$ be a set of letters. We denote by $\mathcal{F}(S)$ the free group generated by $S$. As a set, $\mathcal{F}(S)$ consists of all finite words made from $\set{s, s^{−1}| s \in S}$ such that no $ss^{−1}$ or $s^{−1}s$ appears as a substring for any $s$. The group law is given by concatenation and cancellation.
-\end{definition}
-\begin{definition}[Group Presentation]
+We \hf{introduce them} below.
+For more contexts, please refer to Ref.~\cite{dummit2004}.
+
+\hf{
+Let $S$ be a set of letters. We denote by $\mathcal{F}(S)$ the \emph{free group generated by $S$}, 
+which consists of all finite words made from $\set{s, s^{−1}| s \in S}$ such that no $ss^{−1}$ or $s^{−1}s$ appears as a substring for any $s$,
+where $s^{-1}$ denotes the inverse of $s$. 
+The group law is given by concatenation and cancellation.
+For a more formal treatment, we refer to Section $6.3$ of Ref.~\cite{dummit2004}.}
+\carl{This definition is (still) confusing.  It would be ok to simply cite the concept of a free group, provided that you refer to a precise \& complete definition.}
+
+\begin{definition}[Group presentation]
     Given a set $S$, let $\mathcal{F}(S)$ be the free group generated by $S$ and $R$ be a subset of $\mathcal{F}(S)$.
     Then $\ip{S:R}$ denotes the quotient of $\mathcal{F}(S)$
     by the normal subgroup generated by $R$.
-    If the group $G$ is isomorphic to $ip{S:R}$,
+    If the group $G$ is isomorphic to $\ip{S:R}$,
     then we say $G$ 
     has a presentation $\ip{S:R}$. 
 \end{definition}
+If both sets $S$ and $R$ are finite, then we say the group $G = \ip{S:R}$ is \emph{finitely-presentable}.
 The elements of $S$ are the \emph{generators} and the elements
 of $R$ are the \emph{relations}.
-If both sets $S$ and $R$ are finite, then we say the group $G = \ip{S:R}$ is \emph{finitely-presentable}.
-For more properties of group presentations, we refer to Sec.~$2$ of Ref.~\cite{slofstra2017}.
+When we refer to an equation
+of the form $a = b$ with $a, b \in \mathcal{F} ( S )$ as a ``relation,'' 
+it is understood 
+that we mean the element $ab^{-1} 
+\in R$.
+\hf{ There are two types of relations that we will be working with.
+} 
+Considering \hf{a subset of generators} $\{ s_j \}_{j=1}^n \subset S$ \hf{such that $s_{j_1} \neq s_{j_2}$ if $j_1 \neq j_2$},
+the relations of the form $\Pi_{j=1}^n s_j  = e$, where $e$ is the identity element, are called 
+\emph{linear relations};
+and the relations of the form
+$s_i s_j s_i^{-1} = s_k$ for some $i \neq j$ are called \emph{conjugacy relations}.   \carl{This last sentence
+needs to be made more precise (e.g., are
+repetitions allows in the linear relations)?}
+\hfc{I thought the fact that $\{s_j\}$ is a subset of $S$ guarantees that there will be no repetitions in a linear relation.}
 \begin{definition}
-    A representation of $G$ on the Hilbert space $\calH$ is a homomorphism from $G$ to the group of invertible linear operators on $\calH$. 
+    A representation of $G$ on the finite Hilbert space $\calH$ is a homomorphism from $G$ to the group of invertible linear operators on $\calH$. 
 \end{definition}
-In this work, we only consider representations on a finite-dimensional Hilbert space.
-For other concepts and properties related to group representations, we refer to Sec.~$2.5$ of Ref.~\cite{coladan2017}. 
-The other concept that we need is about the embedding of a group.
-\begin{definition}
-    We say a group $K$ is an embedding of $G$ if there exists an injective group homomorphism: $\phi: G \rightarrow K$.
+The last concept of group theory that we need is group embedding.
+\begin{definition}[Group embedding]
+    An embedding of $G$ into $K$ is an injective group homomorphism: $\phi: G \rightarrow K$.
 \end{definition}
 %-----------------------------------------
 \subsection{Nonlocal games}
@@ -482,14 +510,12 @@ In a nonlocal game, there are two players, Alice and Bob and each of them is req
 to give an answer for a randomly chosen question. We denote Alice's question set by $\calX$ and her answer set by $\calA$. Similarly,
 Bob's question set is denoted by $\calY$ and his answer set is denoted by $\calB$. The nonlocal game also
 comes with two functions: $\pi: \calX \times \calY \rightarrow [0,1]$, which is the probability distribution over the questions,
-and $V: \calA \times \calB \times \calX \times \calY \rightarrow \{0,1\}$, which is the scoring function. 
-The scores $0$ and $1$ correspond to losing and winning. 
-Such games are nonlocal
-because Alice and Bob cannot communicate after getting their questions but they may share some strategy beforehand. 
+and $V: \calA \times \calB \times \calX \times \calY \rightarrow \R$, which is the scoring function. 
 
-\hf{In our work, we consider a special case of nonlocal games, which we call a nonlocal test.
-A nonlocal test is a nonlocal game without the scoring function.
-}
+
+\hf{We also define A nonlocal test 
+to be a tuple $(\calX, \calY, \calA, \calB, \pi)$, where
+$\calX, \calY, \calA, \calB$ and $\pi$ are as defined for a nonlocal game, so a nonlocal test doesn't have a scoring function.}
 
 A quantum strategy of a nonlocal game presented in terms of projective measurements
 consists of projective measurements $\{\{M_x^a\}_a\}_x$ on Alice's side, 
@@ -500,21 +526,23 @@ Then Alice and Bob's quantum strategy produces the conditional probability distr
 \begin{align}
 	\pr{ab}{xy} = \bra{\psi} M_x^a \x N_y^b \ket{\psi} \text{ for all } (a,b,x,y) \in \calA \times \calB \times \calX \times \calY,
 \end{align}
-\hf{For simplicity we omit the tensor product symbol between operators acting on different Hilbert spaces in the rest of the work, so if $M_x^a : \calH_A \rightarrow \calH_A$ and $N_y^b: 
-\calH_B \rightarrow \calH_B$, then $M_x^a N_y^b: \calH_A\x \calH_B \rightarrow \calH_A \x \calH_B$.}
-
+\hf{Note that the tensor product structure indicates that the
+two parties cannot communicate with each other, which is the reason why such game is called a nonlocal game.}
+For simplicity we omit the tensor product symbol between operators acting on different Hilbert spaces in the rest of the work, so if $M_x^a : \calH_A \rightarrow \calH_A$ and $N_y^b: 
+\calH_B \rightarrow \calH_B$, then $M_x^a N_y^b: \calH_A\x \calH_B \rightarrow \calH_A \x \calH_B$.
 \begin{definition}
 	Given sets $\calX, \calY, \calA, \calB$, a correlation is a conditional probability distribution
 	$\{\pr{ab}{xy}: a \in \calA, b \in \calB\}_{x \in \calX, y \in \calY}$.  
 \end{definition}
-A particular type of nonlocal games that we are interested in is called linear system games, which is defined below.
-\begin{definition}[Linear system game]
- Let \hf{$Hx = c$} be an $m \times n$ system of linear equations over $\Z_2 = \{0, 1\}$,
- where $H$ is an $m$-by-$n$ matrix with entries in $\Z_2$ and 
- $c$ is a length-$n$ vector with entries in $\Z_2$. 
+A particular type of nonlocal games that we are interested in is called linear system games.
+\begin{definition}[Binary linear system game]
+ Let \hf{$Hx = c$} be an $m \times n$ system of linear equations over $\Z_2 = \{0, 1\}$ \carl{(meaning that} $H$ is an $m$-by-$n$ matrix with entries in $\Z_2$ and 
+ $c$ is a length-$n$ vector with entries in $\Z_2$\carl{)}. 
  The associated linear system game involves two
- players Alice and Bob, where Alice is given an equation number $i \in \calX = \{1 \dots m\}$ and replies with $\ba \in \calA = \Z_2^{\times n}$,
- and Bob is given a variable number $j \in \calY = \{1 \dots n\}$ and replies with an assignment $b \in \calB = \Z_2$. The 
+ players Alice and Bob. 
+ Alice is given an equation number $i \in \calX = \{1 \dots m\}$,
+ and replies with $\ba \in \calA = \Z_2^{\times n}$.
+ Bob is given a variable number $j \in \calY = \{1 \dots n\}$ and replies with an assignment $b \in \calB = \Z_2$. The 
  scoring function is defined by
  \begin{align}
  	V(\ua, b, i, j) =
@@ -524,7 +552,7 @@ A particular type of nonlocal games that we are interested in is called linear s
 	\end{cases}
 \end{align}
 \end{definition}
-\hf{A widely-used example of a linear system game is the Magic Square game introduced in Ref.~\cite{magic_square}, which 
+A widely-used example of a linear system game is the Magic Square game introduced in Ref.~\cite{magic_square}, which 
 have equations
 \begin{align*}
     &x_1 + x_2 + x_3 = 0 && x_4 + x_5 + x_6 = 0 &&
@@ -532,13 +560,21 @@ have equations
     &x_1 + x_4 + x_7 = 0 && x_2 + x_5 + x_8 = 1 &&
     x_3 + x_6 + x_9 = 0.
 \end{align*}
-For the formulation of the Magic Square game as a linear system game
-and the general linear system games over $\Z_d$, we refer to Section $3.1$ of Ref.~\cite{coladan2017}.}
+\hf{Note that the equations above are taken modulo $2$.
+We follow this convention in the rest of our work.}
+For the formulation of a general linear system games over $\Z_d$, we refer to Section $3.1$ of Ref.~\cite{coladan2017}.
 
-In the rest of the paper, we will work with quantum strategies for the linear system game presented in terms of binary observables.
-\begin{definition}[Quantum strategy of a linear system game]
+% \hf{In our work, a binary linear system game is conducted in a slightly different way.
+% Instead of always getting an equation number, Alice gets an equation number or 
+% a pair of equation number and variable number with equal probability. In the later case,
+% she just needs to give assignment to the particular variable.
+% By conducting a binary linear system game in this way,
+% we force Alice and Bob to share
+% a quantum strategy in terms of binary observables.}
+% \carl{Is this modification necessary?}
+\begin{definition}[Binary observable strategy of a linear system game]
 \label{def:q_strat}
-A quantum strategy presented in terms of binary observables for the linear system game $(Hx = c)$ consists of 
+A quantum strategy presented in terms of binary observables for the binary linear system game $Hx = c$ consists of 
 \begin{enumerate}
 	\item a pair of finite-dimensional Hilbert spaces $\calH_A$ and $\calH_B$; 
 	\item a collection of binary observables $N_j$, $1 \leq j \leq n$, on $\calH_B$
@@ -546,43 +582,31 @@ A quantum strategy presented in terms of binary observables for the linear syste
 	\item a collection of binary observables $M_{ij}$, $1\leq i \leq m$, $1\leq j\leq n$ 
 	on $\calH_A$ such that 
 	\begin{enumerate}
-		\item $M_{ij}^2 = \1$ for every $i,j$,
-		\item $\Pi_j M_{ij}^{H(i,j)} = (-\1)^{c(i)}$ for every $i$, and
-		\item $M_{il}M_{ik} = M_{ik}M_{il}$ for every $i$ and $H(i,l) = H(i,k) =1$;
+		\item $M_{ij}^2 = \1$ for every $i,j$, and
+		\item $M_{il}M_{ik} = M_{ik}M_{il}$ for every \carl{$i,l,k$ such that} $H(i,l) = H(i,k) =1$;
 	\end{enumerate} 
 	and
 	\item a quantum state $\ket{\psi} \in \calH_A \x \calH_B$.
 \end{enumerate}
 \end{definition}
-Note that any quantum strategy presented in terms of binary observables can be 
-converted to a quantum strategy presented in terms of projective measurement by looking into
-the spectral decompositions of the observables. 
-More specifically, the fact that all the observables $\{M_{ij}\}_{j: H(i,j) = 1}$ commute with each other
-implies that they share a common eigenspace. The collection of eigenvalues associated with one eigenstate is the assignment
-to the whole equation when this eigenstate is measured in a projective measurement strategy \cite{cleve2014}.
+\hf{Note that a measurement strategy of a binary linear system game can be converted to a binary observable strategy. Let a  measurement strategy be 
+$(\{\{M_i^{\ba}\}_{\ba \in X_i}\}_{i=1}^m, \{\{N_j^b\}_{b=0}^1\}_{j=1}^n,\\ \ket{\psi})$, where $X_i$ is some answer set of equation $i$.
+The corresponding binary observable
+strategy consists of, $\ket{\psi}$, $N_j := N_j^0 - N_j^1$ and
+\begin{align*}
+    M_{ij} = \sum_{\ba: a(j)=0} M_i^{\ba} - \sum_{\ba: a(j) =1}
+    M_i^{\ba}
+\end{align*}
+for $1\leq i \leq m$ and $1 \leq j \leq n$. Hence, in the rest of the work, we focus on binary observable strategies.}
 
+% Note that any quantum strategy presented in terms of binary observables can be 
+% converted to a quantum strategy presented in terms of projective measurement by looking into
+% the spectral decompositions of the observables. 
+% More specifically, the fact that all the observables $\{M_{ij}\}_{j: H(i,j) = 1}$ commute with each other
+% implies that they share a common eigenspace. The collection of eigenvalues associated with one eigenstate is the assignment
+% to the whole equation when this eigenstate is measured in a projective measurement strategy \cite{cleve2014}.
 
-%It has been shown in Ref.~\cite{cleve2014} that the linear system game has a perfect strategy 
-%satisfying conditions in \cref{def:q_strat} if and only if the linear system has a finite-dimensional
-%operator solution in the following sense.  \carl{There's a missing reference here?}
-%\begin{definition}[Operator solution of a linear system]
-%\label{def:op_sol}
-%	An operator solution to a linear system $Hx =c$ over $\Z_2$ is a sequence of \hf{finite-dimensional} Hermitian 
-%	operators \hf{with finite entries}: $A_1, A_2, \dots A_n$ on a Hilbert space $\calH$ such that \carl{(What does the word ``bounded'' mean here?  It might
-%	be best to just state the definition for finite dimensions only.)}
-%	\begin{enumerate}
-%		\item $A_i^2 = \1$, i.e. $A_i$ is a binary observable, for all $1 \leq i \leq n$;
-%		\item If $x_l$ and $x_k$ appear in the same equation, then $A_l$ and $A_k$ commute;
-%		\item for all $1 \leq i \leq m$,
-%		\begin{align*}
-%			\Pi_{k=1}^n A_k^{H(i,k)} = (-1)^{c(i)}\1.
-%		\end{align*}
-%	\end{enumerate}
-%	A finite dimensional operator solution to a linear system $Hx = c$ over $\Z_2$ is an operator
-%	solution in which the Hilbert space is finite-dimensional.
-%\end{definition}
-%Perfect quantum strategies can be extracted from operator solutions and vice versa.
-A quantum strategy using binary observables for the linear system game associated with $Hx = c$ can be constructed from
+A \hf{perfect} binary observable strategy for the linear system game associated with $Hx = c$, which always wins the game, can be constructed from
 a finite-dimensional representation of a finitely presentable group
 over $\Z_2$, called the solution group. 
 \begin{definition}[Solution group of a linear system game]
@@ -597,20 +621,16 @@ over $\Z_2$, called the solution group.
 				}.
 	\end{align*}
 \end{definition}
-The element $e$ is the identity element, so the relation $J^2 = x_i^2 = e$ means that all the generators are 
-of order $2$.
-
-
-Let $\Psi$ be a finite-dimensional representation of $\Gamma(H, c)$ such that $\Psi(J) = -\1$ on the carrier space $\C^d$. Then a perfect strategy for 
+The relation $J^2 = x_i^2 = e$ means that all the generators are of order $2$.
+Let $\Psi$ be a finite-dimensional representation of $\Gamma(H, c)$ such that $\Psi(J) = -\1$ on the carrier space $\C^d$. 
+Then a perfect strategy for 
 the linear system game ($Hx = c$) is given by 
 \begin{enumerate}
 	\item $M_{ij} = \Psi(x_j)$ for all $ 1 \leq i \leq m$ and $1 \leq j \leq n$,
 	\item $N_j = \Psi(x_j)\tp$ for all $1 \leq j \leq n$, 
 	\item the maximally entangled state $\ket{\psi} = \frac{1}{\sd} \sum_{k=1}^d \ket{k}\ket{k}$.
 \end{enumerate}
-Later, the quantum strategy of our linear system game is based on a representation of its solution group,
-but our strategy uses a different maximally entangled state,
-so we justify our strategy more carefully.
+
 
 %-------------------------------------------------------------------------------
 \subsection{The weighted CHSH inequality \cite{acin2012}.}
@@ -767,383 +787,315 @@ In the rest of the paper, we use the following approximation results implicitly 
 	where we used the fact that $\norm{U} = 1$ and $\norm{a} \leq 1$.
 \end{proof}
 
-%=======================================
-\section{The linear system game $\LS(r)$}
+%===============================================
+\section{The binary linear system game $\LS(r)$}
 \label{sec:lsg}
-%=======================================
-In this section, we introduce a linear system game which is a component of the full test.
+%===============================================
+In this section, we introduce a binary linear system game which is a component of the full test.
 This game is designed to enforce relations that should be satisfied by 
-Alice and Bob's observables. The inspiration comes from 
+Alice and Bob's observables. 
+
+The inspiration comes from 
 Slofstra's seminal work~\cite{slofstra2017}, in which he
-embeds the group
+embeds a group with generators $x$ and $y$ satisfying the relation $xyx^{-1}=y^2$
+into the solution group of a binary linear system game.  
+We generalize the relation $xyx^{-1} = y^2$ and embed the 
+following group
 \begin{align}
-	K = \ip{ x,y,a,b:a^2=b^2=e, ab=ba, yay^{-1} = a, yby^{-1} = ab, xyx^{-1}=y^2},
+    \Pg = \ip{u,o:uou^{-1} = o^r},
+\label{pgroup}
 \end{align}
-into a linear system game such that 
-\hf{there exists an injective homomorphism $\phi: K \rightarrow \Gamma$, where $\Gamma$ is
-the solution group of the linear system game.}
-\hf{In other words, the relations in the definition of $K$ can be derived from the
-combination of the linear equations of $\Gamma$.} Then he shows the difference between exact representations
-and approximate representations of $K$, which implies that the set of quantum correlation is not closed.
-\hf{We generalize the relation $xyx^{-1} = y^2$ and embed the 
-following relation
-$
-uou^{-1} = o^r 
-$
-for some $r \in \N$ into a linear system game, denoted by $\LS(r)$.}
+for some $r \in \N$ into the solution group, denoted by $\Gamma$, of a binary linear system game, denoted by $\LS(r)$.
+Since the steps to embed $\Pg$ into $\Gamma$ follows the procedure detailed in the proofs of Proposition~$33$, Lemma~$29$ and
+Proposition $27$ of Ref.~\cite{slofstra2017}, 
+we defer the formal statements of the embedding procedure till \cref{sec:embedding},
+but give the idea behind this procedure in \cref{sec:embed_idea}. 
+In \cref{sec:lsg_def}, we define $\Gamma$ and introduce how to
+construct $\LS(r)$ from $\Gamma$.
+We also highlight a few operators from a finite-dimensional representation of $\Gamma$.
+The representation will be used later to build the ideal strategy.
 
-%------------------------------------------------------------------------
-\subsection{The embedding of $uou^{-1} = o^r$}
-%------------------------------------------------------------------------
-The main result of this subsection is summarized in the following theorem.
-\begin{theorem}
-	The relation $uou^{-1} = o^r$ can be embedded in a binary linear system game which has
-	$n(r) := 18r+85$ variables and $m(r) := 17r + 77$ equations, where each equation has $3$ variables.
-\end{theorem}
-We prove this by constructing the solution group $\Gamma(\LS(r))$ of the linear system game.
-\hfc{Do you prefer $\Gamma_r$ or $\Gamma(r)$? Or you have any suggestion about a symbol for this group?} \carl{The notation that you're using seems backwards -- I think we should express the solution group as a function of the linear system, not the other way around.}
-We also prove some properties of the generators of $\Gamma(\LS(r))$ along the way.
-
-We embed $uou^{-1}= o^r$ into $\Gamma(\LS(r))$ in three steps, which introduce two intermediate groups $G_0$ and $G_1$ defined below.
-\begin{definition}	
-\label{def:g0}
-	The presentation of $G_0$ has order-$2$ generators:
-	\begin{align*}
-		\{o_i\}_{i=1}^{r} \cup \{u_i\}_{i=1}^5
-	\end{align*}
-	and relations:
-	\begin{align*}
-	&u_3 = u_2o_1u_2 && u_4 = u_2o_2u_2 \\
-	&u_5 = u_1u_3u_1 && o_2 = u_1u_4u_1\\
-	&u_5 = o_1 o_r o_1,
-	\end{align*}
-	and when $r$ is even
-	\begin{align*}
-	&o_{1+2j} = o_1o_{2j}o_1 && o_{2+2j} = o_2o_{1+2j}o_2&& \text{ for } j = 1 \dots r/2 - 1;
-	\end{align*}
-	when $r$ is odd
-	\begin{align*}
-	&o_3 = o_2o_1o_2 &&
-	 o_{2+2j} =o_1o_{1+2j}o_1 && o_{3+2j} = o_2o_{2j+2}o_2 &&\text{ for } j = 1 \dots (r-3)/2.
-	\end{align*}
-\end{definition}
-\begin{proposition}
-	The group $G_0$ embeds the relation 
-	\begin{align}
-		(u_1u_2)^j o_1o_2 (u_2u_1)^j = (o_1o_2)^{r^j}, 
-	\end{align}
-	for any $ j \in \N$.
-\end{proposition}
-The proof follows the proof of Proposition~$4.8$ of Ref.~\cite{slofstra2017}
-\begin{proof}
-	We prove it by induction.
-	Direct calculation gives us that
-	\begin{align*} 
-		u_1u_2 o_1o_2 u_2u_1 = &u_1 (u_2 o_1u_2) (u_2o_2 u_2) u_1 \\
-	=& (u_1 u_3 u_1) (u_1 u_4 u_1)\\
-	=& u_5 o_2\\
-	=& o_1o_ro_1 o_2.
-	\end{align*}
-	Then we substitute the definitions of $o_k$ for $k = r \dots 3$ into the equation above and
-	prove the $j=1$ case.
-	
-	Now assume the statement is true for $j = n$, then for $j = n+1$
-	\begin{align*}
-		(u_1u_2)^{n+1} o_1o_2 (u_2u_1)^{n+1} =& u_1u_2 (o_1o_2)^{r^n} u_2u_1 \\ 
-		 =& (u_1u_2 o_1o_2 u_2u_1)^{r^n} \\
-		 =& (o_1o_2)^{r^{n+1}},
-	\end{align*}
-	where from the first line to the second line, we insert $(u_2u_1)(u_1u_2)$ between every pair of $o_1o_2$.
-	Hence, the statement is true.
-\end{proof}
-To better characterize all the conjugation relations above and simplify the form of $G_1$ defined below, 
-we relabel $u_i$ and $o_i$'s
-as $a_i$'s such that
+%----------------------------------------
+\subsection{A sketch of the procedure
+for constructing $\LS ( r )$}
+\label{sec:embed_idea}
+%----------------------------------------
+The group $\Pg$ (see equation (\ref{pgroup} above) is first embedded into $\Pg_0$ (\cref{def:g0}), then $\Pg_1$ (\cref{def:g1}), and finally into the group $\Gamma$ (\cref{def:gamma}), which is the
+solution group of $\LS ( r )$.  
+Thus we obtain a chain of embeddings:
 \begin{align}
-	a_j := 
-	\begin{cases}
-	 o_j \text{ for } j = 1,2 \\
-	 u_{j-2} \text{ for } j = 3\dots 7 \\
-	o_{j- 5} \text{ for } j = 8 \dots r+5.
-	\end{cases}
+\Pg \hookrightarrow \Pg_0 \hookrightarrow \Pg_1 \hookrightarrow
+\Gamma.
 \end{align}
-Then we define the set $C(r)$ of tuples $(i,j,k)$ such that
-\begin{align*}
-	(i,j,k) \in C(r) \iff a_ia_ja_i = a_k.
-\end{align*}
-The size of $C(r)$ is $r+3$. 
-%We can also employ some ordering of $C(r)$ such that $C(r,j)$ is a unique tuple for 
-%$j = 1 \dots r+3$.
-In this way, the group $G_0$ can be presented by
-$
-G_0  = \ip{ \{a_i\}_{i=1}^{r+5} : C(r) }.
-$
-Then we define the group $G_1$.
-\begin{definition}
-The presentation of $G_1$ has order-$2$ generators:
-\begin{align*}
-	\{a_i, b_i, c_i, d_i, v_i\}_{i=1}^{r+5}, f_0, g_0, \{h_{jk}\}_{(i,j,k) \in C(r)};
-\end{align*}
-and relations:
-\begin{align*}
-	&a_i = b_ic_i = f_0d_i = g_0v_i,&& f_0b_if_0 =c_i &&\text{ for } i= 1 \dots r+5 \\
-	&h_{jk}b_j c_k = e,&& d_ib_jd_i = c_k &&\text{ for all } (i,j,k) \in C(r).
-\end{align*}
-\end{definition}
-\carl{At this point I think we are overloading the reader
-with technical material.  This stuff needs to be broken up into
-smaller pieces, and perhaps explained intuitively.}
-Note that the group $G_1$ is slightly different from the group $K$ used in the proof of Lemma~$4.4$ of Ref.~\cite{slofstra2017}.
-We introduce the generator $g_0$ so that later we can associate $f_0$ with $g_0$ in linear relations of the Magic Square game.
-Such relations are important for the self-testing proof.
-Two important properties of $G_1$ are given in propositions below.
-The first property of $G_1$ was first proved in Lemma~$4.4$ of \cite{slofstra2017}.
-\begin{proposition}
-	The group $G_1$ embeds relation $x_ix_jx_i = x_k$ for all $(i,j,k) \in C(r)$.
-\end{proposition}
-\begin{proof}
-	We first show that $d_i c_j d_i = b_k$, which is because
-	\begin{align*}
-		d_i c_j d_i = d_i (f_0 b_j f_0) d_i = f_0 (d_i b_j d_i) f_0 = f_0 c_k f_0 = b_k.
-	\end{align*}
-	Then, we can prove that 
-	\begin{align*}
-		a_i a_j a_i = f_0 d_i b_j c_j f_0 d_i = (f_0 d_i b_j d_i f_0)(f_0 d_i c_j d_i f_0) = (f_0 c_k f_0)(f_0 b_k f_0) = b_k c_k = a_k. 
-	\end{align*}
-\end{proof}
-\begin{proposition}
-	In the group $G_1$, the generators $f_0$ and $g_0$ commute with $a_i$ for all $i = 1 \dots r+5$.
-\end{proposition}
-\begin{proof}
-	We can check that
-	\begin{align*}
-		f_0a_i f_0 a_i = d_i d_i = e && g_0 a_i g_0 a_i = v_i v_i  = e,
-	\end{align*}
-	for all $i = 1 \dots r+5$.
-\end{proof}
-Note that there are two types of conjugacy relations in $G_1$. One is of the form
-$f b_i f = c_i$ for all $i = 1 \dots r+5$. The other one is of the form 
-$d_ib_jd_i = c_k$ for all $(i,j,k) \in C(r)$. For each type of the conjugacy relations, 
-we are going to embed it into a different set of linear relations in $\Gamma(\LS(r))$.
+The purposes of introducing each intermediate
+group are explained below.
 
+First observe that the generators $u$ and $o$ have arbitrary order in $\Pg$. However, all the generator of a solution
+group are of order-$2$, so it is impossible to find a homomorphism from $\Pg$ to a solution group that maps $u$ or $o$
+to a single generator. 
+\hf{This is the reason why we first embed $\Pg$ into $\Pg_0 := \ip{S_0:R_0}$, where all the generators in $S_0$ are of 
+order-$2$ and all the relations in $R_0$ are conjugacy relations.
+The generators in $S_0$ are $a_i$ for $i=1 \dots r+5$.
+The special generators are $a_1, a_2, a_3$ and $a_4$ because the product $a_1a_2$ behaves similarly as $o$
+and the product $a_3a_4$ behaves similarly as $u$.}
+\carl{[You should probably
+say somewhere that $\mathcal{P}_0$ is defined
+by conjugacy relations (since it seems like you're assuming that the reader knows that).]}
+\hfc{Fixed.}
+Moreover, the conjugacy relations in $R_0$ can be combined to recover the relation $uou^{-1} = o^r$ (see \cref{prop:g0}), so
+a homomorphism: $\Pg \rightarrow\Pg_0$  that maps $o$ to $a_1a_2$ and $u$ to $a_3a_4$ is an embedding of $\Pg$ into $\Pg_0$
+by Proposition $33$ of Ref.~\cite{slofstra2017}.
+To better characterize the conjugacy relations in $R_0$, we introduce $C(r)$ defined in \cref{eq:cr}
+of tuples $(i,j,k)$ such that $(i,j,k) \in C(r)$ if and only if $a_ia_ja_i = a_k$ is in $R_0$. 
+
+\hf{Next, we introduce group $\Pg_1 := \ip{S_1: R_1}$ where $S_0 \subset S_1$
+and $R_1$ consists of both linear relations and conjugacy relations.
+The special properties of $S_1$ and $R_1$ are
+\begin{enumerate}
+    \item $s_is_js_i = s_k \in R_1$ implies that there exists a generator
+$s' \in S_1$ such that $s' s_j s_k = e \in R_1$;
+    \item every relation in $R_0$ can be derived from $R_1$.
+\end{enumerate}
+Note that $s'$ can be seen as an auxiliary generator such that
+its existence implies that $s_j$ and $s_k$ commute, because
+\begin{align*}
+    [s_j, s_k] = s_j s_k s_j s_k = (s')^2 = e.
+\end{align*}
+Ensuring the conjugacy relations are associating one generator to another one which 
+commutes with it is the purpose of introducing $\Pg_1$. 
+It makes the construction of a finite-dimension representation of $\Gamma$ from
+a finite-dimension representation of $\Pg_1$ easier.}
+\carl{[that's vague -- either explain it or don't say it]}
+\hfc{How about now?} 
+Specifically, in this step, we introduce generators $a_i, b_i, c_i, d_i \in S_1$
+for each generator $a_i \in S_0$.
+There is also a special generator $f_0 \in S_1$ such that
+\begin{align*}
+    a_i = b_ic_i = f_0d_i. 
+\end{align*}
+The relation $a_i = b_ic_i$ guarantees that $b_i$ commutes
+with $c_i$.
+The generators $b_i$ and $c_i$ are also related by a conjugacy relation
+\begin{align*}
+    c_i = f_0 b_i f_0. 
+\end{align*}
+For each $(i,j,k) \in C(r)$, 
+$S_1$ contains an auxiliary generator $h_{jk}$, and
+$R_1$ 
+contains a conjugacy relation 
+\begin{align*}
+    d_ib_jd_i = c_k,
+\end{align*}
+and a linear relation
+\begin{align*}
+    h_{jk}b_jc_k = e.
+\end{align*}
+The introduction of $h_{jk}$ helps us to deduce that 
+$b_j$ commutes with $c_k$.
+Hence, every conjugacy relation in $R_1$ is either of the form
+$f_0b_if_0 = c_i$ for $1 \leq i \leq r+5$, or
+$d_ib_jd_i = c_k$ for $(i,j,k) \in C(r)$.
+\hf{From the conjugacy relations in $R_1$, it can be proven that
+\begin{align*}
+    d_ic_jd_i = b_k \text{ for each } (i,j,k) \in C(r).
+\end{align*}
+Then we can expand $a_ia_ja_i$ by first substituting in $a_i = f_0 d_i$ and $a_j = b_jc_j$ and then repeatedly substituting in the conjugacy relations in $R_1$ and 
+the conjugacy relations deduced above. For details, we refer to the 
+proof of \cref{prop:g0g1}.}
+\carl{It would be good to explain (or at least reiterate) that these relations allow us to recover the conjugacy relations in $\mathcal{R}_0$.}
+\hfc{How about now?}
+
+
+A representation of $\Pg_1$ can also be built upon a representation of $\Pg_0$.
+Suppose $\Psi_0$ is a representation of $\Pg_0$ on some Hilbert space $\calH$, then 
+ a representation of $\Pg_1$, $\Psi_1$, on the Hilbert space $\C^2 \x \calH$ can
+ be constructed such that
+\begin{align*}
+    &\Psi_1(a_i) = \1_{\C^2} \x \Psi_0(a_i).
+\end{align*}
+For more details of $\Psi_1$, we refer to \cref{sec:rep_gamma}.
+Hence, a homomorphism $\phi: \Pg_0 \rightarrow \Pg_1$ that 
+maps $a_i$ to $a_i$ is an embedding of $\Pg_0$ into $\Pg_1$
+by Lemma $15$ of Ref.~\cite{slofstra2017}.
+
+
+
+In the last step, we can construct $\Gamma:= \ip{S:R}$ with $S_1 \subset S$, in a way such that
+$\Gamma$ only has linear relations, and the linear relations can be combined
+to recover the conjugacy relations in $R_1$.
+We demonstrate how relation $f_0 b_1 f_0 = c_1$ is embedded in
+$6$ linear relations of $R$ as an example. 
+The other conjugacy relations of $\Pg_1$ are embedded in linear relations in a similar way.
+We introduce auxiliary generators $f_1, f_2$ and $\{p_{1,j}\}_{j=1}^5$ and they satisfy the linear relations:
+\begin{align*}
+    &f_0 f_1 f_2 = e && b_1 f_2 p_{1,1} = e && p_{1,1} p_{1,2} p_{1,3} = e\\
+	&f_0 p_{1,3} p_{1,4} = e && c_1 p_{1,4} p_{1,5} = e \quad f_1 p_{1,2} p_{1,5} = e.
+\end{align*}
+For details about how the linear relations above
+can be combined to recover $f_0b_1f_0 = c_1$, we refer to \cref{sec:embedding}.
+A representation of $\Gamma$ can also be built upon
+the representation $\Psi_1$ of $\Pg_1$.
+We denote the representation of $\Gamma$ by $\Psi$ and
+it is defined on $\C^2 \x \C^2 \x \calH$ such that
+\begin{align*}
+    \Psi(s) = \1_{\C^2} \x \Psi_1(s) \text{ for each }
+    s \in S_1.
+\end{align*}
+In particular, it means that for each $a_i \in S_0$
+\begin{align*}
+    \Psi(a_i) = \1_{\C^2} \x \1_{\C^2} \x \Psi_0(a_i).
+\end{align*}
+Hence, a homomorphism $\phi: \Pg_1 \rightarrow \Gamma$ that 
+maps $s$ to $s$ for each $s \in S_1$ is an embedding of $\Pg_1$ into $\Gamma$
+by Lemma $15$ of Ref.~\cite{slofstra2017}.
+
+
+%----------------------------------------
+\subsection{Formal definitions}
+\label{sec:lsg_def}
+%----------------------------------------
+We define the solution group of the linear system game $\LS(r)$ first, which is constructed following the steps
+described in the previous subsection.
 \begin{definition}
 \label{def:gamma}
-The presentation of $\Gamma(\LS(r))$ has order-$2$ generators:
+Define the set $S$ to be 
 \begin{align*}
-	J, \{a_i, b_i, c_i, d_i, v_i,w_i,\{ k_{i,j} \}_{j=1}^5\}_{i=1}^{r+5}, \{f_i,g_i,m_i\}_{i=0}^2, \{h_{jk}\}_{(i,j,k) \in C(r)}, 
-	\{\{ k_{l,j} \}_{j=1}^6\}_{l \in C(r)},
+	S = \{J\} \cup \{a_i, b_i, c_i, d_i,\{ p_{i,j} \}_{j=1}^5\}_{i=1}^{r+5} \cup \{f_i,g_i,m_i\}_{i=0}^2 \cup \{h_{jk}\}_{(i,j,k) \in C(r)} \cup 
+	\{\{q_{\bc,j} \}_{j=1}^6\}_{\bc \in C(r)},
 \end{align*}
-and relations:
+and the set $R$ to be the union of the following
+set of linear relations:
 \begin{itemize}
-\item for all $i = 1 \dots r+5$:
+\item for each $i = 1 \dots r+5$:
 \begin{align*}
-	&a_i = b_ic_i = f_0d_i = g_0v_i \\
-	&g_2 a_i w_i = e \\
-	&f_0 f_1 f_2 = e && b_i f_2 k_{i,1} = e && k_{i,1} k_{i,2} k_{i,3} = e\\
-	&f_0 k_{i,3} k_{i,4} = e && c_i k_{i,4} k_{i,5} =e && f_1 k_{i,2} k_{i,5} = e,
+	R_i =  \{ &a_i = b_ic_i = f_0d_i\quad
+	%&g_2 a_i w_i = e \\
+	f_0 f_1 f_2 = e \quad b_i f_2 p_{i,1} = e \quad p_{i,1} p_{i,2} p_{i,3} = e\\
+	&f_0 p_{i,3} p_{i,4} = e \quad c_i p_{i,4} p_{i,5} =e \quad f_1 p_{i,2} p_{i,5} = e\},
 \end{align*}
-which embed $f_0 b_i f_0 = c_i$;
-\item for all $ l = (i,j,k) \in C(r)$:
+\item for each $ \bc = (i,j,k) \in C(r)$:
 \begin{align*}
-	&h_{jk}b_j c_k = e\\
-	&d_i k_{l,1} f_2 = e && b_j f_2 k_{l,2} = e && k_{l,2} k_{l,3} k_{l,4} = e\\
-	&d_i k_{l,4} k_{l,5} = e && c_k k_{l,5} k_{l,6} =e && k_{l,1} k_{l,3} k_{l,6} = e,
+	R_{\bc} = \{&h_{jk}b_j c_k = e \quad
+	d_i q_{\bc,1} f_2 = e \quad b_j f_2 q_{\bc,2} = e \quad q_{\bc,2} q_{\bc,3} q_{\bc,4} = e\\
+	&d_i q_{\bc,4} q_{\bc,5} = e \quad c_k q_{\bc,5} q_{\bc,6} =e \quad q_{\bc,1} q_{\bc,3} q_{\bc,6} = e\},
 \end{align*}
-which embed $d_i b_j d_i = c_k$;
-\item relations of a Magic Square game:
-\begin{align*}
-	&f_0 f_1 f_2 = e && g_0 g_1 g_2 = e &&m_0 m_1 m_2 = e \\
-	&f_0 g_2 m_0 = e && f_2 g_0 m_1 = e && f_1 g_1 m_2 = J,
-\end{align*}
-which embed $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$;
-\item $J$ commutes with all the other generators.
+\item 
+$
+	R_{MS} = \{f_0 f_1 f_2 = e,\quad g_0 g_1 g_2 = e,\quad m_0 m_1 m_2 = e,\quad
+	f_0 g_2 m_0 = e, \quad f_2 g_0 m_1 = e \quad f_1 g_1 m_2 = J\},
+$
+\item $R_J = \{ JsJs = e \vert s \in S\}$,
+\item $R_{base} = \{ s^2 = e \vert s \in S\}$.
 \end{itemize}
+The group $\Gamma$ is a group with the presentation
+$\ip{S:R}$.
+\carl{[If you're really going to claim
+that this is a complete definition, maybe you should write out the set $C$ somewhere as well?]}
 \end{definition}
-Note that $\Gamma(\LS(r))$ has all the generators of $G_1$ but all the conjugacy relations 
-from $G_1$ are broken into linear relations.
-Formal statements of the properties of $\Gamma(\LS(r))$ are summarized in the two propositions below.
-\begin{proposition}
-	The group $\Gamma(\LS(r))$ embeds all the conjugacy relations of $G_1$.
-	It also embeds the relations: $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$.
-\end{proposition}
-The proof of the proposition above follows the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017}.
-\begin{proposition}
-	In the group $\Gamma(\LS(r))$, the generator $f_2$ commutes with $f_0$ and $a_i$ for all $i = 1 \dots r+5$;
-	the generator $g_2$ commutes with $g_0$ and $a_i$ for all $i = 1 \dots r+5$.
-\end{proposition}
-\begin{proof}
-	We show the commutativity property of $f_2$ as an example. The proof for $g_2$ is very similar.
-	The commutativity between $f_0$ and $f_2$ is immediate from the relations.
-	From the relation, we can also deduce that $f_2$ commutes with $b_i$ for all $i$.
-	Since $a_i =b_ic_i = b_i f_0 b_i f_0$, we know $f_2$ commutes with $a_i$.
-\end{proof}
+\hfc{I pointed out in the previous subsection that the definition of $C(r)$ is in the Appendix along with the definition of $\Pg_0$. 
+Since $C(r)$ is defined by $\Pg_0$, a stand-alone definition of $C(r)$
+will only confuse the reader. Are you suggesting that we don't make this a definition?}
 
-%------------------------------------------------------------------------
-\subsection{A representation of $\Gamma(\LS(r))$}
-%------------------------------------------------------------------------
-In this section we give a representation of $\Gamma(\LS(r))$ which is built upon the representation 
-$\Psi_0$ of $G_0$ and $\Psi_1$ of $G_1$. We need the representation of $\Gamma(\LS(r))$ to construct the
-ideal strategy of $\LS(r)$.
+\hf{From the group $\Gamma$ we can construct the binary linear system game $\LS(r)$ (defined in \cref{def:lsg}). Basically,
+we associate a variable $x(s)$ to each generator $s \in S$.
+Then each linear relation in $R$ can be translated to a linear equation.
+For example, the linear relation $f_0f_1f_2 = e$ is translated to the equation $x(f_0) + x(f_1) + x(f_2) = 0$.
+The construction of $\LS(r)$ proves the following theorem.}
+\begin{theorem}
+	The group $\Pg$ can be embedded in the solution group of a binary linear system game which has
+	$n(r) := 16r+75$ variables and $m(r) := 14r + 62$ equations, where each equation has $3$ variables.
+\end{theorem}
+\hf{Note that when $\LS(r)$ is played between Alice and Bob, the total
+number of equation and variable pairs is $N(r) := 157r + 685$.}
 
-Before giving the representations, we define two Hilbert spaces $W_{d-1}$ and $W_2$, which will form the carrier spaces
-of the representations,
-\begin{align}
-	\label{eq:w_subspace}
-	W_{d-1} := \spn(\{\ket{x_j}\}_{j=1}^{d-1}) && W_2 = \spn(\ket{x_1}, \ket{x_2}).
-\end{align}
-The basis of $W_{d-1}$ is the eigenbasis of an operator $O = \sum_{j=1}^{d-1} \omega_d^j \ketbra{x_j}{x_j}$.
+\hf{If Alice and Bob has a strategy that can win the game $\LS(r)$
+almost perfectly, then Alice and Bob has operators satisfy the 
+relation in the presentation of $\Pg$ approximately on their shared state. 
+We give the formal statement of this observation in \cref{sec:imp_lct}. }
+\carl{[This comment seems out of place.]}
+\hfc{We just delete the comment?}
+
+\hf{Since the construction of a representation of $\Gamma$ also follows the procedures detailed in Slofstra's work, 
+we defer the full definitions 
+of our representation $\Psi$ of $\Gamma$, i.e. \cref{def:rep_gamma}, till \cref{sec:rep_gamma}. 
+Instead, we present what $a_1, a_2, a_3$ and $a_4$ are mapped to by the representation $\Psi$.
+}  \carl{[The reader may be a little lost when you refer to ``the representation of $\Gamma$.''  A reminder of what that means would be in order.]}
+\hfc{How about now?}
+
+The representation $\Psi$ is defined on the Hilbert space
+$W_2 \x W_2 \x W_{d-1}$,
+where $W_k$ denotes a Hilbert space of
+dimension $k$.  We denote the
+standard basis of $W_k$
+by $\{\ket{x_j}\}_{j=1}^{k}$.
+The standard basis of $W_{d-1}$ is the eigenbasis of an operator $O = \sum_{j=1}^{d-1} \omega_d^j \ketbra{x_j}{x_j}$.
 Note that another form of the basis of $W_{d-1}$ is $\{\ket{x_{r^j}}\}_{j=0}^{d-2}$, where the subscript $r^j$ is taken
 modulo $d$ implicitly,
 because another form of $O$ is $\sum_{j=0}^{d-2} \omega_d^{r^j} \ketbra{x_{r^j}}{x_{r^j}}$.
 We use the second form of the basis when it is convenient.
-We denote the identity operator for these two spaces by $\1_{W_{d-1}}$ and $\1_{W_2}$.
-On the Hilbert space $W_2$, we define
-\begin{align*}
-	X_{W_2} = \ketbra{x_1}{x_2} + \ketbra{x_2}{x_1} &&
-	Y_{W_2} = i\ketbra{x_1}{x_2} - i \ketbra{x_2}{x_1} &&
-	Z_{W_2} = \ketbra{x_1}{x_1} - \ketbra{x_2}{x_2},
-\end{align*}
-\begin{definition}
-The representation, $\Psi_0$, of $G_0$ on $W_{d-1}$ is defined by
-\begin{align*}
-	\Psi_0(a_1) =&\sum_{j=1}^{(d-1)/2} \omega_d^j \ketbra{x_j}{x_{d-j}} + \omega_d^{-j} \ketbra{x_{d-j}}{x_{j}} \\
-	\Psi_0(a_2) = &\sum_{j=1}^{d-1} \ketbra{x_j}{x_{d-j}}\\
-	\Psi_0(a_3) = &\ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}}\\ + 
-	&\sum_{k=1}^{(d-3)/2}\left( \omega_{d-1}^k\ketbra{u_k}{u_{d-1-k}} + \omega_{d-1}^{-k}\ketbra{x_{d-1-k}}{x_k}\right)\\ 
-	\Psi_0(a_4) = &\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\+
-	 &\sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right),
-\end{align*}
-where $\{ \ket{u_j} \}_{j=0}^{d-2}$ is a another basis of $W_{d-1}$ given by
+The other basis of $W_{d-1}$ that we use is $\{ \ket{u_j} \}_{j=0}^{d-2}$ given by
 \begin{align*}
 	\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{x_{r^j}}.
 \end{align*}
-The representation of the rest of the generators
-can be constructed from $\Psi_0(a_1)$, $\Psi_0(a_2)$, $\Psi_0(a_3)$ and $\Psi_0(a_4)$ following the 
-conjugacy relations.
-\end{definition}
-We can check that
+We denote the identity operator for the subspace $W_k$ by $\1_{W_k}$.
+Consequently, the representations of $a_1, a_2, a_3$ and $a_4$ are 
 \begin{align*}
-	\Psi_0(a_1a_2) =  \sum_{j=0}^{d-2} \omega_d^{r^j} \ketbra{x_{r^j}}{x_{r^j}} &&
-	\Psi_0(a_3a_4) =  \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}},
+    \Psi(a_1) &= \1_{W_2} \x \1_{W_2} \x \left(\sum_{j=1}^{(d-1)/2} \omega_d^j \ketbra{x_j}{x_{d-j}} + \omega_d^{-j} \ketbra{x_{d-j}}{x_{j}}\right) \\
+    \Psi(a_2) &= \1_{W_2} \x \1_{W_2} \x \left(\sum_{j=1}^{d-1} \ketbra{x_j}{x_{d-j}} \right)\\
+    \Psi(a_3) &= \1_{W_2} \x \1_{W_2} \x \Big[\ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}}\\ 
+    &+ \sum_{k=1}^{(d-3)/2}\left( \omega_{d-1}^k\ketbra{u_k}{u_{d-1-k}} + \omega_{d-1}^{-k}\ketbra{x_{d-1-k}}{x_k}\right) \Big]\\
+	\Psi(a_4) &= \1_{W_2} \x \1_{W_2} \x \Big[\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\
+	& + \sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right)\Big].
 \end{align*}
-which satisfy the relation $\Psi_0(a_3a_4) \Psi_0(a_1a_2) \Psi_0(a_4a_3) = \Psi_0(a_1a_2)^r$ and
-$[\Psi_0(a_3a_4), \Psi_0(a_2)] = \1_{W_{d-1}}$. 
+The tensor structure of the representations come from the construction of $\Psi$.
+These operators are important because they give representations of generators 
+$u$ and $o$ of $\Pg$ as $\Psi(a_1a_2) = \1_{W_2} \x \1_{W_2} \x O$
+and $\Psi(a_3a_4) = \1_{W_2} \x \1_{W_2} \x U$ where
+\begin{align}
+    &O = \sum_{j=1}^{d-1} \omega_d^{r^j} \ketbra{x_{r^j}}{x_{r^j}}, \\
+    &U = \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}}.
+\end{align}
+The operators $U$ and $O$ satisfy the relation $UOU\ct = O^r$.
 
-Following the proof of Lemma~$4.4$ of Ref.~\cite{slofstra2017}, we construct a representation of $G_1$.
-\begin{definition}
-The representation $\Psi_1$ of $G_1$ on $W_2 \x W_{d-1}$ is defined by
-\begin{itemize}
-\item for $f_0$ and $g_0$
-\begin{align*}
-	&\Psi_1(f_0) = X_{W_2} \x \1_{W_{d-1}} \\
-	&\Psi_1(g_0) = Z_{W_2} \x \1_{W_{d-1}},
-\end{align*}
-\item
-for $i = 1 \dots r+5$,
-\begin{align*}
-	&\Psi_1(a_i) = \1_{W_2} \x \Psi_0(a_i) \\
-	&\Psi_1(b_i) = \ketbra{x_1}{x_1} \x \Psi_1(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} \\
-	&\Psi_1(c_i) =\ketbra{x_1}{x_1} \x \1_{W_{d-1}} + \ketbra{x_2}{x_2} \x \Psi_1(a_i) \\
-	&\Psi_1(d_i) =  X_{W_2} \x \Psi_0(a_i)\\
-	&\Psi_1(v_i) = Z_{W_2} \x \Psi_0(a_i).
-\end{align*}
-\item for $(i,j,k) \in C(r)$,
-\begin{align*}
-	\Psi_1(h_{jk}) = \ketbra{x_1}{x_1} \x \Psi_1(a_j) + \ketbra{x_2}{x_2} \x \Psi_1(a_k).
-\end{align*}
-\end{itemize}
-\end{definition}
 
-Finally, we follow the proof of Proposition $4.2$ of Ref.~\cite{slofstra2017} to construct the 
-representation of $\Gamma(\LS(r))$.
-\begin{definition}
-\label{def:rep_gamma}
-The representation $\Psi$ of $\Gamma(\LS(r))$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
-\begin{itemize}
-\item for any $x$ which is also a generator of $G_1$,
-\begin{align*}
-	\Psi(x) = \1_{W_2} \x \Psi_1(x);
-\end{align*}
-\item for the generators involved in the Magic square game
-\begin{align*}
-	&\Psi(f_1) = X_{W_2} \x X_{W_2} \x \1_{W_{d-1}} \\
-	&\Psi(g_1) = Z_{W_2} \x Z_{W_2} \x \1_{W_{d-1}} \\
-	&\Psi(f_2) = X_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
-	&\Psi(g_2) = Z_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
-	& \Psi(m_0) = Z_{W_2} \x X_{W_2} \x \1_{W_{d-1}}\\
-	& \Psi(m_1) = X_{W_2} \x Z_{W_2} \x \1_{W_{d-1}}\\
-	& \Psi(m_2) = Y_{W_2} \x Y_{W_2} \x \1_{W_{d-1}}\\
-	& \Psi(J) = - \1_{W_2} \x \1_{W_2} \x \1_{W_{d-1}};
-\end{align*}
-\item for the generators $\{ w_i \}_{i=1}^{r+5}$:
-\begin{align*}
-	\Psi(w_i) = Z_{W_2} \x \1_{W_{d-1}} \x \Psi_0(a_i);
-\end{align*}
-\item for the generators to embed the relation $f b_i f = c_i$:
-\begin{align*}
-	\Psi(k_{i,1}) &= X_{W_2} \x \Psi_1(b_i) \\
-	%= X_{W_2} \x ( \ketbra{x_1}{x_1} \x \Psi_0(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} )\\
-	\Psi(k_{i,2}) &= \ketbra{x_1}{x_2} \x \Psi_1(b_if_0) + \ketbra{x_2}{x_1} \x \Psi_1(f_0b_i)\\
-%	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_2x_1}+\ketbra{x_2x_1}{x_1x_2})\x\1_{W_{d-1}}\\
-%	&+ \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_i)\\ 
-	\Psi(k_{i,3}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_if_0b_i) + \ketbra{x_2}{x_2} \x \Psi_1(f_0) \\
-	%&= \ketbra{x_1}{x_1} \x X_{W_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x X_{W_2} \x \1_{W_{d-1}}\\
-	\Psi(k_{i,4}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_ic_i) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	%&=\ketbra{x_1}{x_1} \x \1_{W_2} \x \Psi_0(a_i) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	\Psi(k_{i,5}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_i) + \ketbra{x_2}{x_2} \x \Psi_1(c_i) 
-%	&=\ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_i) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1}) \x \1_{W_{d-1}}\\
-%	&+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_0(a_i);
-\end{align*}
-\item for the generators to embed the relation $d_i b_j d_i = c_k$ with $l = (i,j,k)$:
-\begin{align*}
-	\Psi(k_{l,1}) &= X_{W_2} \x \Psi_1(d_i) \\
-	%= X_{W_2} \x X_{W_2} \x \Psi_0(a_{i}) \\
-	\Psi(k_{l,2}) &= X_{W_2} \x \Psi_1(b_j) \\
-	%= X_{W_2} \x (\ketbra{x_1}{x_1} \x \Psi_0(a_j) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}})\\
-	\Psi(k_{l,3}) &= \ketbra{x_1}{x_2} \x  \Psi_1(b_jd_i) + \ketbra{x_2}{x_1} \x \Psi_1(d_ib_j)\\
-%	&= \ketbra{x_1x_1}{x_2x_2} \x \Psi_0(a_{j}a_{i}) + (\ketbra{x_1x_2}{x_2x_1} + \ketbra{x_2x_1}{x_1x_2}) \x \Psi_0(a_i)\\
-%	&+  \ketbra{x_2x_2}{x_1x_1} \x \Psi_0(a_{i}a_{j}) \\
-	\Psi(k_{l,4}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_jd_ib_j) + \ketbra{x_2}{x_2} \x  \Psi_1(d_i)\\
-	%&= \ketbra{x_1}{x_1} \x (\ketbra{x_2}{x_1} \x \Psi_0(a_ia_j)+ \ketbra{x_1}{x_2} \x \Psi_0(a_ja_i)) + \ketbra{x_2}{x_2} \x X_{W_2} \x \Psi_0(a_i)\\
-	\Psi(k_{l,5}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_jc_k) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	%&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) +  \ketbra{x_1x_2}{x_1x_2} \x \Psi_0(a_{k}) +  \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
-	\Psi(k_{l,6}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_j) + \ketbra{x_2}{x_2} \x \Psi_1(c_{k})
-%	&=  \ketbra{x_1x_1}{x_1x_1} \x \Psi_0(a_{j}) + (\ketbra{x_1x_2}{x_1x_2} + \ketbra{x_2x_1}{x_2x_1})\x\1_{W_{d-1}}\\
-%	 &+ \ketbra{x_2x_2}{x_2x_2} \x \Psi_1(a_{k}).
-\end{align*}
-\end{itemize}
-\end{definition}
-The validation of $\Psi_1$ and $\Psi$ are done in the proofs of Lemma $4.4$ and Proposition $4.2$ in Ref.~\cite{slofstra2017}.
+% \begin{proposition}
+% 	In the group $\Gamma(\LS(r))$, the generator $f_2$ commutes with $f_0$ and $a_i$ for all $i = 1 \dots r+5$;
+% 	the generator $g_2$ commutes with $g_0$ and $a_i$ for all $i = 1 \dots r+5$.
+% \end{proposition}
+% \begin{proof}
+% 	We show the commutativity property of $f_2$ as an example. The proof for $g_2$ is very similar.
+% 	The commutativity between $f_0$ and $f_2$ is immediate from the relations.
+% 	From the relation, we can also deduce that $f_2$ commutes with $b_i$ for all $i$.
+% 	Since $a_i =b_ic_i = b_i f_0 b_i f_0$, we know $f_2$ commutes with $a_i$.
+% \end{proof}
 
 %====================================================
-\section{Robust self-testing of $\ket{\EPR{2}}$ \textit{via} $\I_\alpha$}
+\section{Robust self-testing of $\ket{EPR}$ \textit{via} $\I_\alpha$}
 \label{sec:chsh}
 %====================================================
-In this section, we show how the weighted CHSH inequality can be used to self-test $\ket{\EPR{2}}$ robustly.
-Intuitively, it means that if some quantum strategy achieves a value $\ip{\I_\alpha}$ that is close to $\ip{\I_\alpha}_{\max}$,
-then the shared state must be close to $\ket{\EPR{2}}$ and their observables are close to the rotated Pauli operators 
+In this section, we show how the weighted CHSH inequality can be used to self-test $\ket{EPR}$ and Pauli operators robustly.
+Intuitively, robust self-testing means that if some quantum strategy achieves a value $\I_\alpha$ that is close to $\I_\alpha^{\max}$,
+then the shared state must be close to $\ket{EPR}$ and their observables are close to the rotated Pauli operators 
 defined in \cref{def:ideal},
 up to some local isometry.
-The formal statement is given in the theorem below. Since the proof uses the same techniques as introduced in Ref.~\cite{bamps2015},
-we defer the proof till \cref{sec:selftest}. Instead, we only list the key relations used in the proof because they will be reused in 
-\cref{sec:main} where we prove our robust self-testing result.
+The formal statement is given in the theorem below. Since the proof uses the same techniques as in Ref.~\cite{bamps2015},
+we defer the proof till \cref{sec:selftest}, and we only list the key relations used in the proof because they will be reused in 
+\cref{sec:main}.
 \begin{theorem}
 \label{thm:selftest}
     Define $\mu := \arctan(1/\alpha)$.
 	If a quantum strategy $(\ket{\psi}, \{M_x:=M_x^0-M_x^1\}_{x=1,2}, \{N_y :=N_y^0-N_y^1\}_{y = 1,2} )$ achieves that
-	$\ip{\I_\alpha} \geq \ip{\I_\alpha}_{\max} - \epsilon$
+	$\I_\alpha \geq \I_\alpha^{\max} - \epsilon$
 	for some $\epsilon > 0$, then
-	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{aux}$  such that
+	there exists a local isometry $\Phi = \Phi_A \x \Phi_B$ and an auxiliary state $\ket{junk}$  such that
 	\begin{align*}
-		\| \Phi( M_x \x N_y \ket{\psi}) -\ket{aux} \x (\tM_x \x \tN_y) \ket{\EPR{2}}  \| = O(\frac{1}{\cos^2(\mu)\sin^{1/2}(\mu)}+
+		\| \Phi( M_x \x N_y \ket{\psi}) -\ket{junk} \x (\tM_x \x \tN_y) \ket{EPR}  \| = O(\frac{1}{\cos^2(\mu)\sin^{1/2}(\mu)}+
 		\frac{1}{\sin(\mu)^{3/2}})) \sqrt{\epsilon}
 	\end{align*}
 	for $x,y \in \{0, 1, 2\}$ where the subscript $0$ refers to the identity operator and $\tM_x, \tN_y$ are 
-	defined in \cref{def:ideal}.  \carl{You're using both ``aux'' and ``junk'' for the auxilliary state.  Also you need
-	to be clearer about what label you are using for Alice's and Bob's systems (see my previous comment on this).}
-	\hfc{This problem should be fixed now.}
+	defined in \cref{def:ideal}.  
 \end{theorem}
-We follow the convention and define $c := \cos(\mu)$, $s := \sin(\mu)$, and
+We follow the convention \carl{[What convention?  Be a little more specific about what papers this convention is used in.]} and define $c := \cos(\mu)$, $s := \sin(\mu)$, and
 \begin{align*}
 	&Z_A := M_1 && X_A := M_2\\
 	&Z_B := \frac{N_1+N_2}{2c} && X_B := \frac{N_1-N_2}{2s}.
@@ -1158,117 +1110,148 @@ The key relations that we will reuse are
 	\label{eq:zaxaxbzb}&X_AZ_A \ket{\psi} \appd{\frac{2s^2+cs+c+s}{cs\sqrt{s}} \sqrt{\epsilon}} -X_BZ_B \ket{\psi},
 \end{align}
 where \cref{eq:zaxaxbzb} can be derived from \cref{eq:za-zb}, \cref{eq:xa-xb} and \cref{eq:zaxa}.
+\carl{[I don't see a good reason to have such complicated error terms.  You might as well just express all error terms in terms of $\epsilon$ and $\mu$.]}  
 %==========================
 \section{The full test}
 \label{sec:full_test}
 %==========================
 The full test consists of three tests: the linear system game $\LS(r)$,
 the extended weighted CHSH test and a commutation test. We explain how the three tests are conducted and
-combined below.
+combined in \cref{sec:tests}. Then the ideal strategy that can pass
+the three tests is presented in \cref{sec:ideal_strat}. The full correlation, denoted by $\fC(r,d)$, is generated by the ideal strategy and presented in \cref{sec:cor}.
 
-Recall that the the linear system game with solution group $\Gamma(\LS(r))$ defined in \cref{def:gamma} has variables labelled by $j \in \{1,2,\dots,\nr\}$ and
-equations labelled by $i \in \{1, 2 \dots \mr\}$.
-We denote the associated linear system by $H\ux = \uc$ and
-define $X_i := \{ \ux : \sum_{k} H(i,k)\ux(k) = \uc(i) \}$, which is the answer set of equation $i$,
-and $I_i = \{ k : H(i,k) = 1\}$, which is the set of all the nonzero coefficient of equation $i$.
-From the construction of $\Gamma(\LS(r))$, we know that $| I_i| = 3$ for all $i$.
-The correspondence between $\ux$ and the generators of $\Gamma(\LS(r))$ is that
-\begin{align*}
-	&\ux(j) := a_j &&&&\text{ for } j = 1 \dots r+5 \\
-	&\ux(r+6+j) := f_j&& \ux(r+9+j) := g_j &&\text{ for } j = 0,1,2 
-\end{align*} 
-The correspondence can be arbitrary for $j > r+11$.
-We conduct the linear constraint test in a way such that Bob is always get a variable label
-but Alice gets either an equation label, in which case she needs to give the full assignment to the given equation,
-or a pair of equation label and variable label, in which case she only needs to give the assignment to the particular 
-variable in the given equation. In this way, we force Alice and Bob to use an binary observable strategy 
-for the linear system game. 
+%----------------------------
+\subsection{The three tests}
+\label{sec:tests}
+%----------------------------
+Recall that the linear system game, $\LS(r)$ defined in \cref{def:gamma}, has $|S| = \nr$ variables and $\mr$ equations.
+The variables are labelled by $x(s)$ for each $s \in S$ and
+the equations are labelled by $i \in \{1, 2 \dots \mr\}$.
+We denote the associated linear system by $Hx = c$ and
+define $X_i := \{ \ba : \sum_{s} H(i,s)a(s) = c(i) \}$, \carl{[This definition isn't clear --- what kind of object is $\ba$?]}
+\hfc{It is a bit string.} 
+which is the answer set of equation $i$,
+and $I_i = \{ s : H(i,s) = 1\}$, which is the set of all the nonzero coefficient of equation $i$.
+From the construction of $\LS(r)$, we know that $|I_i| = 3$ for all $i$.
+The way to conduct $\LS(r)$ is as introduced in \cref{sec:intro}.
 
 In the extended weighted CHSH test,
-all the question pairs are $\{ (\ast, \ast) \} \cup \{(\ast, y), (x, \ast)\}_{x,y = \nr+1, \nr+2} \cup 
-\{(x,y)\}_{x=y \in \{\nr+1, \nr+2\}} \cup
-\{(x,y)\}_{x = 1,2, y =\nr+1, \nr+2} \cup  \{(x,y)\}_{x = \nr+1,\nr+2, y =1, 2}$.
+the question sets are $\calX = \calY = \{\ast, x(a_1), x(a_2), x_{\nr+1}, x_{\nr+2}\}$
+% all the question pairs are $\{ (\ast, \ast) \} \cup \{(\ast, y), (x, \ast)\}_{x,y = \nr+1, \nr+2} \cup 
+% \{(x,y)\}_{x=y \in \{\nr+1, \nr+2\}} \cup
+% \{(x,y)\}_{x = 1,2, y =\nr+1, \nr+2} \cup  \{(x,y)\}_{x = \nr+1,\nr+2, y =1, 2}$.
 %the input alphabets are $\calX = \calY = \{\ast, 1, 2, \nr+1,\nr+2\}$.
+\carl{[I am pretty sure your notation here is more complicated than it needs to be -- why are you using both subscripts and functions to denote variables?]}
 For each question, there is an associated answer set:
 \begin{itemize}
 	\item when the question is $\ast$, the answer set is $\{\diamond, \perp\}$;
-	\item when the question is $1$ or $2$, the answer set is $\{0,1\}$;
-	\item when the question is $\nr+1$ or $\nr+2$, the answer set is $\{0, 1, \perp\}$.
+	\item when the question is $x(a_1)$ or $x(a_2)$, the answer set is $\{0,1\}$;
+	\item when the question is $x_{\nr+1}$ or $x_{\nr+2}$, the answer set is $\{0, 1, \perp\}$.
 \end{itemize}
-Note that when the referee wants to ask Alice $x = 1,2$, which also labels a variable of $\LS(r)$, 
-the referee gives Alice a pair $(i_x. x)$ where 
-$i_x$ labels an equation containing the variable labelled by $x$. 
-For simplicity we omit the $i_x$ part in the alphabet $\calX$.
-Later we will show that the $i_x$ part can be made implicit.
-The test is conducted in the following way:
+\carl{[This is not formal enough.  If you're going to define a test, then you need to do it in a way that matches your earlier definition of a test.  You should rewrite this section in a way that formally specifies each test: what its input and output alphabets are, and what its input probability distribution is.]}
+Note that when the referee wants to ask Alice $x(a_1)$ or $x(a_2)$, which also labels a variable of $\LS(r)$, 
+the referee gives Alice an equation label $i$ such that  
+the equation $i$ contains the variable $x(a_1)$ or $x(a_2)$. 
+For simplicity we omit the equation label in the alphabet $\calX$, and
+later we will show that the equation label can be made implicit.
+Only some of the question pairs of $\calX \times \calY$ are given to Alice and Bob.
+Alice and Bob's ideal behaviour to pass this test is summarized 
+below:
+\carl{[Does the phrase ``ideal behavior'' have a formal definition? This seems to be another case where are you are writing in a way that is sort of formal, and sort of just a sketch -- that's not a good way to write.  Do one or the other.]}
 \begin{enumerate}
 	\item if $x = y = \ast$, Alice and Bob should answer with $a = b \in \{\diamond, \perp\}$;
-	\item if $x = y \in \{n+1, n+2\}$, Alice and Bob should answer with $a = b \in \{0, 1, \perp\}$;
-	\item if $x \in \{1,2\}$ and $y \in \{n+1, n+2\}$, 
+	\item if $x = y \in \{x_{\nr+1}, x_{\nr+2}\}$, Alice and Bob should answer with $a = b \in \{0, 1, \perp\}$;
+	\item if $x \in \{x(a_1),x(a_2)\}$ and $y \in \{x_{\nr+1}, x_{\nr+2}\}$, 
 		\begin{enumerate}
 		\item if they answer with $a,b \in \{0,1\}$, then
-	they should maximize $\ip{\I_{\cot(-\pi/d)}}$ with Alice and Bob's roles flipped, 
+	they should maximize $\I_{\cot(-\pi/d)}$ with Alice and Bob's roles flipped, 
 		\item if Bob answers with $\perp$, then Alice's answer doesn't matter;
 		\end{enumerate}
-	\item if $x \in \{n+1, n+2\}$ and $y \in \{1,2\}$,
+	\item if $x \in \{x_{\nr+1}, x_{\nr+2}\}$ and $y \in \{x(a_1),x(a_2)\}$,
 	\begin{enumerate} 
 		\item if they answer with $a,b \in \{0,1\}$, then
-		they should maximize $\ip{\I_{\cot(-\pi/d)}}$, 
+		they should maximize $\I_{\cot(-\pi/d)}$, 
 		\item if Alice answers with $\perp$, then Bob's answer doesn't matter;
 	\end{enumerate}
-	\item $x \in \{n+1,n+2\}, y = \ast$ 
+	\item $x \in \{x_{\nr+1},x_{\nr+2}\}, y = \ast$ 
 		\begin{enumerate}
 		\item if Bob answers with $\diamond$, Alice should answer with $\{0.1\}$ but not $\perp$, 
 		\item if Bob answers with $\perp$ Alice should answer with $\perp$ too;
 		\end{enumerate}
-	\item $x = \ast, y \in \{n+1, n+2\}$
+	\item $x = \ast, y \in \{x_{\nr+1}, x_{\nr+2}\}$
 	\begin{enumerate}
 		\item if Alice answers with $\diamond$, Bob should answer with $\{0.1\}$ but not $\perp$, 
 		\item if Alice answers $\perp$, Bob should answer $\perp$ too.
 	\end{enumerate}
 \end{enumerate}
+Only the question pairs mentioned in the list above are given to Alice and Bob.
 
-Our commutation test is slightly different from the one used in Ref.~\cite{coladan2017verifier}.
-The commutation relations that we test are
-\begin{align*}
-    [M_{\nr+1}, M_j] = [M_{\nr+2}, M_j] = \1,
-\end{align*}
-where $j = r+6, r+8, r+9, r+11$.
-The difference is that we will examine the probability distribution 
-generated by this test and conclude that $M_{\nr+1}^0$ and $M_{\nr+1}^1$ commute with
-$M_j$ for $j = r+6, r+8, r+9, r+11$.
-we reuse questions from the two other tests so the answer
-set for each question is the same across the tests.
-There are $8$ test cases, one for each commutation relation.
-In each test case, Alice is given one of the two questions involved.
+Our commutation test is the same as the one used in Ref.~\cite{coladan2017verifier}.
+The goal of the commutation test is to make sure that some
+of Alice's binary observables for the other two tests 
+commute with each other when acting on the shared state
+so we reuse questions and answers from the two other tests.
+There are $8$ test cases, where each test case has two questions. 
+In each test case, Alice is given one of the two questions.
 If her question is to assign a value to some variable of $\LS(r)$,
 the equation label is implicit.
 Bob is given both of the question so he needs to give answers to both questions.
 Their answers should agree on the question that is given to both.
+The $8$ question pairs are $(x_{\nr+1}, x(s))$ and $(x(\nr+2), x(s))$ for
+$s = f_0, f_2, g_0, g_2$.
+What we conclude is slightly different from the original claim
+in Ref.~\cite{coladan2017verifier}.
+Instead of just proving the binary observables commute,
+we prove that the projective measurements
+for question $x_{\nr+1}$ commute with the binary observables for question
+$x(s)$ with $s = f_0, f_2, g_0, g_2$ 
+by examining the probability distribution generated by this test.
+
 %The $\calY$ has $8$ pairs, $\calY = \{ (\nr+1, j), (\nr+2, j) \}_{j = r+6, r+8, r+9, r+11}$.
 %Alice's input is determined by the pair so she receives one of the two questions of a given pair with equal probability.
 
-In the full test, the question pairs from the three sub-tests are given to Alice and Bob with equal probability.
-The full correlation, denoted by $\fC(d,r)$, is generated by the ideal strategy that can pass all the three sub-tests. We give the ideal strategy first and then $\fC(d,r)$.
+In the full test, the three tests are conducted with equal probability.
+The full correlation, denoted by $\fC(d,r)$, is generated by the ideal strategy that can pass all the three tests. We give the ideal strategy first and then $\fC(d,r)$.
 %--------------------------------------------
 \subsection{The ideal strategy}
+\label{sec:ideal_strat}
 %--------------------------------------------
-Recall the two subspaces $W_{d-1}$ and $W_2$ defined in \cref{eq:w_subspace}. 
+Recall the two Hilbert spaces $W_{d-1}$ and $W_2$ defined in \cref{eq:w_subspace}. 
 In the ideal strategy Alice and Bob share the state 
-\begin{align*}
-\ket{\tpsi} = &\frac{1}{2} (\ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}\right)\\
-=&\frac{1}{2} (\ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(1/\sqrt{d-1} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})\right).
-\end{align*}
-Here we introduce the second basis $\{ \ket{j} \}_{j=1}^{d-1}$ of $W_{d-1}$ so that
+\begin{equation}
+    \label{eq:tpsi}
+    \begin{aligned}
+        \ket{\tpsi} = &\frac{1}{2} (\ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(\frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}\right)\\
+        =&\frac{1}{2} (\ket{x_1}\ket{x_1} + \ket{x_2}\ket{x_2})^{\x 2} \x \left(1/\sqrt{d-1} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j})\right).
+    \end{aligned}
+\end{equation}
+Here we introduce the third basis $\{ \ket{j} \}_{j=1}^{d-1}$ of $W_{d-1}$ so that
 the observables used in the extended weighted CHSH test have a simpler form.
 The two basis are related by
 \begin{align*}
 	\ket{x_j} = \frac{-1}{\sqrt{2}}(\ket{j} + i\ket{d-j}), &&
 	\ket{x_{d-j}} = \frac{-e^{ij\pi/d}}{\sqrt{2}}(\ket{j} - i\ket{d-j}) && \text{for } j = 1 \dots \frac{d-1}{2}.
 \end{align*}
-We define two subspaces $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = W_{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$ on
-$W_{d-1}$ and
-define $\Pi_V$ and $\Pi_{V^\perp}$ to be the corresponding projectors. Note that $V$ is the subspace on which they should maximize $\ip{\I_{\cot(-\pi/d)}}$.
+
+Alice and Bob's observables to win $\LS(r)$ are representing operators of
+the generators of $\Gamma$. The way they pick the representing operators
+is based on the correspondence between the generators of $\Gamma$ and the
+variables of $\LS(r)$. We list some of the key binary observables here:
+\begin{align}
+	\tM_i = \tN_i = 
+	\begin{cases}
+	\Psi(a_i) \quad \text{ for } 1 \leq i \leq r+5\\
+	\Psi(f_{i-r-6}) \quad \text{ for } r+6 \leq i \leq r+8\\
+	\Psi(g_{i-r-9}) \quad \text{ for } r+9 \leq i \leq r+11\\
+	\Psi(m_{i-r-12}) \quad \text{ for } r+12 \leq i \leq r+14,
+	\end{cases}
+\end{align}
+where the representation $\Psi$ is defined in \cref{def:rep_gamma}.
+Note that Alice uses the same observable for the same variable appearing in different equations.
+
+In order to present the ideal strategy to pass the extended weighted CHSH test,
+we define two subspaces of $W_{d-1}$: $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = W_{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$,
+and corresponding projective measurements $\Pi_V$ and $\Pi_{V^\perp}$. Note that $V$ is the subspace on which they should maximize $\I_{\cot(-\pi/d)}$.
 We define the states for the measurements used in the extended weighted CHSH test as follows
 \begin{align*}
 	&\ket{1_+} = \cos(-\frac{\pi}{2d})\ket{1} + \sin(-\frac{\pi}{2d})\ket{d-1}
@@ -1278,20 +1261,14 @@ We define the states for the measurements used in the extended weighted CHSH tes
 	&\ket{1_{\times}} = \frac{1}{\sqrt{2}}\ket{1} + \frac{1}{\sqrt{2}}\ket{d-1}
 	&&\ket{(d-1)_{\times}} = \frac{1}{\sqrt{2}}\ket{1} - \frac{1}{\sqrt{2}}\ket{d-1}.
 \end{align*}
-Then the measurements are
+The measurements for questions $\ast, \nr+1$ and $\nr+2$ are
 \begin{align*}
 	&\tM_\ast^\diamond =(\1_{W_2})^{\x 2} \x \Pi_V && \tM_\ast^\perp = \tM_{\nr+1}^\perp = \tM_{\nr+2}^\perp = (\1_{W_2})^{\x 2} \x \Pi_{V^\perp}\\
 	&\tN_\ast^\diamond = (\1_{W_2})^{\x 2} \x \Pi_V && \tN_\ast^\perp = \tN_{\nr+1}^\perp = \tN_{\nr+2}^\perp = (\1_{W_2})^{\x 2} \x \Pi_{V^\perp}\\
 	&\tM_{\nr+1}^0 =\tN_{\nr+1}^0=(\1_{W_2})^{\x 2} \x  \ketbra{1}{1} && \tM_{\nr+1}^1=\tN_{\nr+1}^1 = (\1_{W_2})^{\x 2} \x \ketbra{d-1}{d-1}\\
 	&\tM_{\nr+2}^0 =\tN_{\nr+2}^0=(\1_{W_2})^{\x 2} \x  \ketbra{1_{\times}}{1_{\times}} && \tM_{\nr+2}^1= \tN_{\nr+2}^1 = (\1_{W_2})^{\x 2} \x \ketbra{(d-1)_{\times}}{(d-1)_{\times}}.
 \end{align*}
-The observables for $\LS(r)$ are
-\begin{align}
-	\tM_i = \tN_i = \Psi(x_i),
-\end{align}
-where the representation $\Psi$ is defined in \cref{def:rep_gamma}.
-Note that Alice uses the same observable for the same variable appearing in different equations.
-In particular, the action of $\tM_1, \tN_1$ and $\tM_2, \tN_2$ on the subspace $V$ can be expressed as
+When Alice and Bob gets question $1$ or $2$, what they measure on $V$ are
 \begin{align*}
 	&\tM_1^0 = \tN_1^0 =  \ketbra{1_+}{1_+} && \tM_1^1 = \tN_1^1 =  \ketbra{(d-1)_+}{(d-1)_+}\\
 	&\tM_2^0 = \tN_2^0 =  \ketbra{1_-}{1_-} && \tM_1^1 = \tN_1^1 =  \ketbra{(d-1)_-}{(d-1)_-}.
@@ -1299,10 +1276,10 @@ In particular, the action of $\tM_1, \tN_1$ and $\tM_2, \tN_2$ on the subspace $
 
 To make sure the strategy is correct, we need to check a few properties of it.
 \begin{proposition}
-The observables $\tM_1 = \tN_1 :=\Psi(a_1)$, $\tM_2 = \tN_2 := \Psi(a_2)$, $\tM_3 = \tN_3 := \Psi(a_3)$
-and $\tM_4 = \tN_4 := \Psi(a_4)$ satisfy the relations
+The observables $\tM_j = \tN_j = \Psi(a_j)$ for $1 \leq j \leq 4$ and the shared state $\ket{\tpsi}$ defined in \cref{eq:tpsi}
+satisfy the relations
 \begin{align}
-	\label{eq:mn_preserve} &\tM_i \tN_i \ket{\psi} = \ket{\psi} && \text{for } i = 1 \dots 4,\\
+	\label{eq:mn_preserve} &\tM_j \tN_j \ket{\tpsi} = \ket{\tpsi} && \text{for } j = 1 \dots 4,\\
 	\label{eq:o2_comm} &(\tM_3\tM_4)\tM_2(\tM_4\tM_3) = \tM_2,
 \end{align}
 and similar commutation relations on Bob's side.
@@ -1313,8 +1290,7 @@ and similar commutation relations on Bob's side.
 	
 	We prove \cref{eq:o2_comm} first. It is simple to check that
 	\begin{align*}
-		&\tM_1\tM_2= \sum_{j=1}^{d-1} \omega_d^{j} \ketbra{x_j}{x_j},
-		&&\tM_3\tM_4= \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}},
+		\tM_3\tM_4= \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}},
 	\end{align*}
 	and that 
 	\begin{align*}
@@ -1322,55 +1298,45 @@ and similar commutation relations on Bob's side.
 		=& \sum_{j=0}^{(d-3)/2} \ketbra{x_{r^{j-1}}}{x_{r^{d-2-j}}}+\ketbra{x_{r^{d-2-j}}}{x_{r^{j-1}}} = \tM_2.
 	\end{align*}
 	
-	Next we prove \cref{eq:mn_preserve}. It is straightforward to see that $\tM_i\tN_i \ket{\tpsi} = \ket{\tpsi}$ for $i = 1,2$.
-	Before checking the two cases $i=3$ and $i=4$, we first observe that
+	Next we prove \cref{eq:mn_preserve}. It is straightforward to see that $\tM_j\tN_j \ket{\tpsi} = \ket{\tpsi}$ for $j = 1,2$.
+	Before checking the two cases $j=3$ and $j=4$, we first observe that
 	\begin{align*}
 		\tM_3\tM_4 \tN_3 \tN_4 \ket{\tpsi} = \ket{\tpsi}.
 	\end{align*}
 	The eigenvectors of $\tM_3\tM_4$ and $\tN_3\tN_4$ are 
-        \begin{align*}
-        		\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{x_{r^j}}.
-        \end{align*}
-        Hence we can express $\ket{x_{r^j}}$ in terms of $\ket{u_k}$ as 
-        \begin{align*}
-        		\ket{x_{r^j}} = \frac{1}{\sqrt{d-1}} \sum_{k=0}^{d-2} \omega_{d-1}^{-jk} \ket{u_k}.
-        \end{align*}
-        Then $\tM_4$ acts on $\ket{x_{r^j}}$ by
-        \begin{align*}
-        		\tM_4 \ket{x_{r^j}} =& \frac{1}{\sqrt{d-1}} M_4\left(\ket{u_0} + \omega_{d-1}^{-j(d-1)/2}\ket{u_{(d-1)/2}}  + 
-        	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_k} + \omega_{d-1}^{jk} \ket{u_{d-1-k}})\right) \\
-        	=&\frac{1}{\sqrt{d-1}} \left(\ket{u_0} + (-1)^j\ket{u_{(d-1)/2}}  + 
-        	\sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_{d-1-k}} + \omega_{d-1}^{jk} \ket{u_{k}})\right) \\
-        	=& \ket{x_{r^{d-1-j}}}.
-        \end{align*}
-        Then we can show that $\tM_4  \tN_4 \ket{\tpsi} = \ket{\tpsi}$ because 
-        \begin{align*}
-        	\tM_4 \tN_4 \ket{\tpsi} = \frac{1}{\sqrt{d-1}}  \sum_{j=0}^{d-2} \tM_4  \tN_4 \ket{x_{r^j}} \ket{x_{r^{d-1-j}}} 
-        	= \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{x_{r^{d-1-j}}} \ket{x_{r^{j}}} =\ket{\psi},
-        \end{align*}
+    \begin{align*}
+        \ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{x_{r^j}}.
+    \end{align*}
+    Hence we can express $\ket{x_{r^j}}$ in terms of $\ket{u_k}$ as 
+    \begin{align*}
+        \ket{x_{r^j}} = \frac{1}{\sqrt{d-1}} \sum_{k=0}^{d-2} \omega_{d-1}^{-jk} \ket{u_k}.
+    \end{align*}
+    Then $\tM_4$ acts on $\ket{x_{r^j}}$ by
+    \begin{align*}
+        \tM_4 \ket{x_{r^j}} =& \frac{1}{\sqrt{d-1}} M_4\left(\ket{u_0} + \omega_{d-1}^{-j(d-1)/2}\ket{u_{(d-1)/2}}  + 
+        \sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_k} + \omega_{d-1}^{jk} \ket{u_{d-1-k}})\right) \\
+        =&\frac{1}{\sqrt{d-1}} \left(\ket{u_0} + (-1)^j\ket{u_{(d-1)/2}}  + 
+        \sum_{k=1}^{(d-3)/2} (\omega_{d-1}^{-jk} \ket{u_{d-1-k}} + \omega_{d-1}^{jk} \ket{u_{k}})\right) \\
+        =& \ket{x_{r^{d-1-j}}}.
+    \end{align*}
+    Consequently, we can show that $\tM_4  \tN_4 \ket{\tpsi} = \ket{\tpsi}$ because
+    \begin{align*}
+        \tM_4 \tN_4 \ket{\tpsi} = \frac{1}{\sqrt{d-1}}  \sum_{j=0}^{d-2} \tM_4  \tN_4 \ket{x_{r^j}} \ket{x_{r^{d-1-j}}} 
+        = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \ket{x_{r^{d-1-j}}} \ket{x_{r^{j}}} =\ket{\psi},
+    \end{align*}
 	Combining it with the fact that $\tM_3\tM_4 \tN_3\tN_4 \ket{\tpsi} = \ket{\tpsi}$, we can conclude that
 	$\tM_3\tN_3 \ket{\tpsi} = \ket{\tpsi}$.
 \end{proof}
 The similar result, i.e., $\tM_j\tN_j \ket{\tpsi} = \ket{\tpsi}$ for $j = 1 \dots \nr$, are easy to check because all the other observables are defined by $\tM_j, \tN_j$ for $j=1,2,3,4$.
-An interesting property of $U_A := \tM_3\tM_4$ and $O_A := \tM_1\tM_2$ is summarized in the proposition below. 
-\begin{lemma}
-	\label{lm:uo_independ}
-	The unitaries $O$ and $U$ of the form
-	\begin{align}
-		O = \sum_{j=1}^{d-1} \omega_d^j \ketbra{x_j}{x_j} && U = \sum_{j=1}^{d-1}\ketbra{x_{j r^{-1}}}{x_j},
-	\end{align}
-	where $d$ is an odd prime number with primitive root $r$, generates
-	the ring of $(d-1)\times (d-1)$ matrices over $\C$.
-\end{lemma}
-The proof of this lemma is provided in \cref{sec:u_and_o}.
-Our self-test argument certifies that Alice and Bob has such $O$ and $U$ in their hands, so
-this proposition provides another angle to justify our self-testing argument.
+
 
 %---------------------------------------------------
 \subsection{The correlation $\fC(d,r)$}
+\label{sec:cor}
 %---------------------------------------------------
 The full correlation is generated by the ideal strategy presented in the previous subsection.
-To help readers understanding the proofs in \cref{sec:main} of this paper better, 
+We denote the full correlation by $\fC(d,r) = ( \tpr{ab}{xy} )$.
+To help readers understanding the proofs in \cref{sec:main} better, 
 parts of the full correlation is given in the tables below.
 \begin{table}[H]
 \begin{center}
@@ -1509,134 +1475,235 @@ The correlation table for the other $7$ commutation tests are similar.
 \section{Robust self-testing with $\fC(d,r)$}
 \label{sec:main}
 %=====================================
-In this section, we examine the properties of a strategy $S$ that can reproduce the
+In this section, we examine the properties of a strategy $\bS$ that can reproduce the
 correlation $\fC(d,r)$ approximately and 
-prove that the strategy $S$ must contain the state $\ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}$
+prove that the strategy $\bS$ must contain the state $\ket{EPR}^{\x 2} \x \ket{\EPR{d-1}}$
 up to some local isometry.
 
-Let us denote the full correlation by $\fC(d,r) = ( \tpr{ab}{xy} )$, then the formal statement of an approximate strategy is given below.
+We first give the definition of an approximate strategy of a fixed correlation.
 \begin{definition}
 	For a correlation $\tilde{C} = (\tpr{ab}{xy})$,
-	we say a quantum strategy $S = (\ket{\psi}, \{M_x^a\}, \{N_y^b\})$
+	we say a quantum strategy $\bS = (\ket{\psi}, \{M_x^a\}, \{N_y^b\})$
 	is an $\ep$-approximate quantum strategy of $\tilde{C}$, 
 	if it produces the correlation
 	$( \pr{ab}{xy} = \bra{\psi} M_x^a N_y^b \ket{\psi} )$ such that
 	\begin{align}
+	\label{eq:expect}
 	E_{(x,y)} \sum_{ab} |\pr{ab}{xy} - \tpr{ab}{xy}| \leq \ep.
 	\end{align}
 \end{definition}
 In our full test, the probability distribution over all the question pairs $(x,y)$ is uniform.
-Since the number of all the possible question pairs is $\Theta(r^2)$ and 
+The number of all the possible question pairs is determined by
+the number of equation and variable pair of $\LS(r)$, which is
+$N(r) = \Theta(r)$.
+Considering that
 the number of possible output pairs is constant for each question pair $(x,y)$, 
-the approximate condition directly implies that, if $S$ is an $\ep$-approximate strategy
+the approximate condition in \cref{eq:expect} directly implies that, if $\bS$ is an $\ep$-approximate strategy
 of $\fC(d,r)$, then
 \begin{align*}
-    \pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy},
+    \pr{ab}{xy} \appd{O(r\ep)} \tpr{ab}{xy},
 \end{align*}
-for all $(a,b,x,y)$.
+for all $(a,b,x,y)$ of the full test.
 
 In the next three subsections, we analyze the implication of an approximate strategy to pass the 
-three subtests given in \cref{sec:full_test}.
+three tests given in \cref{sec:full_test}.
 
 %------------------------------------------------------------------------------------------
 \subsection{Implication of winning $\LS(r)$}
 \label{sec:imp_lct}
 %------------------------------------------------------------------------------------------
-In this subsection, we use $(i,j)$ to denote the question pair so that Alice gets equation number $i$, 
-sometimes with a variable label $j$, and Bob gets a variable label $j$.
-The way we conduct the linear constraint test forces Alice to have binary observables $\{M_{ij}\}$ that satisfy 
-\cref{def:q_strat}.
+In the first half of this subsection, we use $(i,s)$ to denote the question pair so that Alice gets equation number $i$ and Bob gets a variable label $x(s)$ for some $s \in S$. For simplicity, we let Bob get the generator $s$ instead. 
+
+The first implication of an approximate winning strategy is given in the proposition below.
 \begin{proposition}
 	\label{prop:lct_base}
-	Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$.
-	Then there exist binary observables $\{ M_j \}_{j=1}^{\nr} $, such that
+	Let $\bS$ be an $\ep$-approximate strategy of $\fC(d,r)$.
+	Then there exist binary observables $\{ M(s) \}_{s \in S} $, such that
 	\begin{align}
-		&M_j N_j \ket{\psi} \appd{O(r\se)} \ket{\psi} \\
-		&\Pi_{j \in I_i} M_j \ket{\psi} \appd{O(r\se)}(-1)^{\uc(i)} \ket{\psi}.
+		&M(s) N(s) \ket{\psi} \appd{O(\sr\se)} \ket{\psi} \\
+		&\Pi_{s \in I_i} M(s) \ket{\psi} \appd{O(\sr\se)}(-1)^{\uc(i)} \ket{\psi}.
 	\end{align}
 \end{proposition}
 \begin{proof}
-The condition that $(\tpr{\ux b}{ij})$ of $\fC(d,r)$ wins the linear system game optimally is equivalent to
+The condition that $(\tpr{\ba b}{is})$ of $\fC(d,r)$ wins the linear system game optimally is equivalent to
 \begin{align*}
-\sum_{\ux,b: \ux \in X_i, \ux(j) = b} \tpr{\ux b}{ij} = 1
+\sum_{\ba,b: \ba \in X_i, a(j) = b} \tpr{\ba b}{is} = 1
 \end{align*}
 for all $i = 1 \dots \mr$.
 It has been shown in Ref.~\cite{slofstra2017} that 
 \begin{align*}
-	\bra{\psi} M_{ij} N_j \ket{\psi} = 2 \sum_{\ux,b: \ux \in X_i, \ux(j) = b} \pr{\ux b}{ij} -1 \appd{O(r^2 \ep)} 1.
+	\bra{\psi} M_i(s) N(s) \ket{\psi} = 2 \sum_{\ba,b: \ba \in X_i, a(s) = b} \pr{\ba b}{ij} -1 \appd{O(r \ep)} 1.
 \end{align*}
-Since $M_{ij}$ and $N_j$ are unitaries, we know that
+Since $M_i(s)$ and $N(s)$ are unitaries, we know that
 \begin{align*}
-	M_{ij} \ket{\psi} \appd{O(r\se)} N_j \ket{\psi} \quad \text{ for all } i \leq \mr \text{ and } j \leq \nr.
+    \norm{M_i(s)\ket{\psi} - N(s)\ket{\psi}}^2 
+    = 2 - 2 \bra{\psi}M_i(s)N(s) \ket{\psi} 
+    \leq 2 - 2(1 - O(r\ep)) = O(r\ep),
 \end{align*}
-We define $M_j := M_{ij}$ for the smallest $i$ such that $ j \in I_i$ then 
-\begin{align*}
-	M_j N_j \ket{\psi} \appd{O(r\se)} M_{ij}N_j\ket{\psi} \appd{O(r\se)} \ket{\psi} \quad \text{ for all } j \leq \nr.
-\end{align*}
-
-The definition of $M_{ij}$ tells us that 
-$
-\bra{\psi} \Pi_{j \in I_i} M_{ij} \ket{\psi} = (-1)^{\uc(i)}
-$
 or equivalently,
 \begin{align*}
-	\Pi_{j \in I_i} M_{ij} \ket{\psi} = (-1)^{b_i} \ket{\psi}\quad\text{ for all } i \leq \mr.
-\end{align*}	
-If we replace each $M_{ij}$ with $M_j$ in the equation above, we demonstrate the effect on a
-general case that $I_i = \{j_1, j_2, j_3\}$,
+	M_{i}(s) \ket{\psi} \appd{O(\sr\se)} N(s) \ket{\psi},
+\end{align*}
+for all $1 \leq i \leq \mr$ and $s \in S$.
+We define $M(s) := M_{i}(s)$ for the smallest $i$ such that $ s \in I_i$, then 
 \begin{align*}
-	&\norm{ M_{ij_1}M_{ij_2}M_{ij_3} \ket{\psi} - M_{j_1}M_{j_2}M_{j_3} \ket{\psi}}\\
-	\leq & \norm{M_{ij_1}M_{ij_2}M_{ij_3} \ket{\psi} - M_{j_1}M_{ij_2}M_{ij_3} \ket{\psi}}+
-	\norm{M_{j_1}M_{ij_2}M_{ij_3} \ket{\psi} - M_{j_1}M_{j_2}M_{ij_3} \ket{\psi}} +\\
-	&\norm{M_{j_1}M_{j_2}M_{ij_3} \ket{\psi} - M_{j_1}M_{j_2}M_{j_3} \ket{\psi}}\\
-	\leq &3O(r\se) = O(r\se).
+	M(s) N(s) \ket{\psi} \appd{O(\sr\se)} M_{i}(s)N(s)\ket{\psi} \appd{O(\sr\se)} \ket{\psi} \quad \text{ for all } s \leq S.
+\end{align*}
+
+The fact that $\bS$ is an $\ep$-approximate strategy also tells us that
+Alice gives satisfying assignment for each equation with probability $1 - O(r\ep)$,
+or equivalently,
+\begin{align*}
+	\Pi_{s \in I_i} M_{i}(s) \ket{\psi} \appd{O(\sr\se)} (-1)^{c(i)} \ket{\psi}
+\end{align*}
+for $1 \leq i \leq \mr$.
+If we replace each $M_{i}(s)$ with $M(s)$ in the equation above, we demonstrate the effect on a
+general case that $I_i = \{s_1, s_2, s_3\}$,
+\begin{align*}
+	&\norm{ M_{i}(s_1)M_{i}(s_2)M_{i}(s_3) \ket{\psi} - M(s_1)M(s_2)M(s_3) \ket{\psi}}\\
+	\leq & \norm{M_{i}(s_1)M_{i}(s_2)M_{i}(s_3)\ket{\psi} - M(s_1)M_{i}(s_2)M_{i}(s_3) \ket{\psi}}+
+	\norm{M(s_1)M_{i}(s_2)M_{i}(s_3) \ket{\psi} - M(s_1)M(s_2)M_{i}(s_3) \ket{\psi}} +\\
+	&\norm{M(s_1)M(s_2)M_{i}(s_3) \ket{\psi} - M(s_1)M(s_2)M(s_3) \ket{\psi}}\\
+	\leq &3O(\sr\se) = O(\sr\se).
 \end{align*}
 Hence we can conclude that 
 \begin{align*}
-	\Pi_{j \in I_i} M_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} \quad \text{ for all } i \leq \mr.
+	\Pi_{s \in I_i} M(s) \ket{\psi} \appd{O(\sr\se)} (-1)^{c(i)}\ket{\psi}
 \end{align*}
+for $1 \leq i \leq \mr$.
 \end{proof}
 Note that with the same technique, we can prove that 
 \begin{align*}
-	\Pi_{j \in I_i} N_j \ket{\psi} \appd{O(r\se)} (-1)^{\uc(i)}\ket{\psi} \quad \text{ for all } i \leq \mr.
+	\Pi_{s \in I_i} N(s) \ket{\psi} \appd{O(\sr\se)} (-1)^{c(i)}\ket{\psi} \quad \text{ for all } i \leq \mr.
 \end{align*}
 
-Following the steps of the embedding of $(a_3a_4)^l a_1a_2(a_4a_3)^l = (a_1a_2)^{r^l}$ into $\Gamma(\LS(r))$,
+To make the following derivations easier to follow, we define the meaning
+for some operators to approximately satisfy some group relation.
+\begin{definition}
+    Let $S$ be a set of generators, and $\{s_i\}_{i=1}^n$ and $\{s'_j\}_{j=1}^m$
+    be two sequences of $S$.
+    Define a relation $\Pi_{i=1}^n s_i = \Pi_{j=1}^m s'_j$, denoted by $r$.
+    We say operators $\{M(s) : s \in S\}$ $\ep$-approximately satisfy the relation
+    $r$ on the state $\ket{\psi}$ if 
+    \begin{align*}
+        \Pi_{i=1}^n M(s_i)\ket{\psi} \appd{\ep} \Pi_{j=1}^m M(s'_j) \ket{\psi}. 
+    \end{align*}
+\end{definition}
+In other words, \cref{prop:lct_base} is equivalent to the following proposition.
+\begin{proposition}
+    \label{prop:lct_group}
+    Let $\bS$ be an $\ep$-approximate strategy of $\fC(d,r)$.
+	Then the observables $\{ M(s) \}_{s \in S}$ and
+	$\{N(s)\}_{s \in S}$ $O(\sr \se)$-approximately satisfy
+	each relation $r \in R$ on the shared state $\ket{\psi}$, 
+	where $S$ is the generator set of $\Gamma$
+    and $R$ is the relation set of $\Gamma$.	
+\end{proposition}
+Recall that the group $\Pg_1$ is embedded in $\Gamma$.
+Following the embedding procedure, we can prove the next proposition.
+\begin{proposition}
+    \label{prop:lct_pg1}
+    Let $\bS$ be an $\ep$-approximate strategy of $\fC(d,r)$.
+	Then the observables $\{ M(s) \}_{s \in S_1}$ and
+	$\{N(s)\}_{s \in S_1}$ $O(\sr\se)$-approximately satisfy
+	each relation $r \in R_1$ on $\ket{\psi}$, 
+	where $S_1$ is the generator set of $\Pg_1$
+    and $R_1$ is the relation set of $\Pg_1$.	
+\end{proposition}
+\begin{proof}
+    First, we prove 
+    \begin{align}
+        \label{eq:f0b1}
+        M(f_0)M(b_1)M(f_0) \ket{\psi} \appd{O(\sr\se)} M(c_1)\ket{\psi}
+    \end{align}
+    to demonstrate the techniques.
+    From the fact that Alice's observables $O(r\se)$-approximately satisfy the linear equations, we can get that
+    \begin{align*}
+        &M(f_0) \ket{\psi} \appd{O(\sr \se)} M(f_1)M(f_2)\ket{\psi} \\
+        &M(b_1) \ket{\psi} \appd{O(\sr \se)} M(f_2)M(p_{1,1}) \ket{\psi}\\
+        &M(f_0) \ket{\psi} \appd{O(\sr \se)} M(p_{1,3})M(p_{1,4}) \ket{\psi}
+    \end{align*}
+    Then we show how to expand $M(f_0)M(b_1)M(f_0)\ket{\psi}$
+    with the three equations above. The trick is to flip some 
+    operators to Bob's side using the relation $M(s) \ket{\psi} \appd{O(\sr \se)} N(s)\ket{\psi}$.
+    \begin{align*}
+        M(f_0)M(b_1)M(f_0) \ket{\psi} 
+        &\appd{O(\sr \se)}M(f_0)M(b_1)M(p_{1,3})M(p_{1,4}) \ket{\psi} \\
+        &\appd{O(\sr \se)} N(p_{1,4})N(p_{1,3})M(f_0)M(f_2)M(p_{1,1}) \ket{\psi} \\
+        &\appd{O(\sr \se)} N(p_{1,4})N(p_{1,3})N(p_{1,1})N(f_2)M(f_0) \ket{\psi} \\
+        &\appd{O(\sr \se)} N(p_{1,4})N(p_{1,3})N(p_{1,1})N(f_2)M(f_1)M(f_2) \ket{\psi} \\
+        & \appd{O(\sr \se)} N(p_{1,4})N(p_{1,3})N(p_{1,1})N(f_2)N(f_2)N(f_1) \ket{\psi} \\
+        &= N(p_{1,4})N(p_{1,3})N(p_{1,1})N(f_1) \ket{\psi} \\
+        & \appd{O(\sr \se)} M(f_1)M(p_{1,1})M(p_{1,3})M(p_{1,4}) \ket{\psi}
+    \end{align*}
+    In the rest of the proof, we skip the steps of flipping observables from Alice to Bob's side and then back.
+    \begin{align*}
+        M(f_0)M(b_1)M(f_0) \ket{\psi}
+        &\appd{O(\sr \se)} M(f_1)M(p_{1,1})M(p_{1,3})M(p_{1,4}) \ket{\psi}\\
+        &\appd{O(\sr \se)} M(f_1)M(p_{1,2})M(p_{1,4})\ket{\psi} \\
+        &\appd{O(\sr \se)} M(p_{1,5})M(p_{1,4})\ket{\psi} \\
+        & \appd{O(\sr \se)} M(c_1) \ket{\psi},
+    \end{align*}
+    where from the second line to the third line, we used
+    the relation $M(p_{1,1})M(p_{1,2})M(p_{1,3})\ket{\psi} \appd{O(\sr \se)} \ket{\psi}$, and from the third line to the
+    fourth line, we used the relation 
+    $M(c_1)M(p_{1,4})M(p_{1,5})\ket{\psi} \appd{O(\sr \se)} \ket{\psi}$.
+    The proof for the other relations are similar.
+\end{proof}
+Note that essentially the proof above follows the proof of 
+\cref{prop:g1gamma}. Then we can follow the proof of \cref{prop:g0g1}
+to prove the next proposition.
+\begin{proposition}
+    \label{prop:lct_pg0}
+    Let $\bS$ be an $\ep$-approximate strategy of $\fC(d,r)$.
+	Then the observables $\{ M(s) \}_{s \in S_0}$ and 
+	$\{N(s)\}_{s \in S_0}$ $O(\sr \se)$-approximately satisfy
+	each relation $r \in R_0$ on the shared state $\ket{\psi}$, 
+	where $S_0$ is the generator set of $\Pg_0$
+    and $R_0$ is the relation set of $\Pg_0$.	
+\end{proposition}
+Following the steps of the embedding of $(a_3a_4)^l a_1a_2(a_4a_3)^l = (a_1a_2)^{r^l}$ into $\Gamma$ presented in
+the proof of \cref{prop:g0},
 we can prove the following proposition.
 \begin{proposition}
 \label{prop:lct_adv}
-Let $S$ be an $\ep$-approximate strategy of $\fC(d,r)$ and $\{M_j, N_j\}_{j \in \nr}$ be the observables defined in 
-\cref{prop:lct_base}. 
+Let $\bS$ be an $\ep$-approximate strategy of $\fC(d,r)$ and $\{M(s), N(s)\}_{s \in S}$ be the observables defined in 
+\cref{prop:lct_group}. 
 Then,
 \begin{align}
-	&M_1M_2 (M_4M_3)^l \ket{\psi}\appd{O(r^{l+1} \se)} (M_4M_3)^l (M_1M_2)^{r^l} \ket{\psi}, \\
-	&N_1N_2 (N_4N_3)^l \ket{\psi}\appd{O(r^{l+1} \se)} (N_4N_3)^l (N_1N_2)^{r^l} \ket{\psi}, 
+	&M(a_1)M(a_2) (M(a_4)M(a_3))^l \ket{\psi}\appd{O(r^{l+1/2} \se)} (M(a_4)M(a_3))^l (M(a_1)M(a_2))^{r^l} \ket{\psi}, \\
+	&N(a_1)N(a_2) (N(a_4)N(a_3))^l \ket{\psi}\appd{O(r^{l+1/2} \se)} (N(a_4)N(a_3))^l (N(a_1)N(a_2))^{r^l} \ket{\psi}, 
 \end{align}
 for all $l \geq 1$.
 \end{proposition}
 \begin{proof}
-The $l = 1$ case follows from the fact that $\Gamma(\LS(r))$ embeds $O(r)$ conjugacy relations and 
-all the $O(r)$ conjugacy relations are used in the derivation of $(a_3a_4)a_1a_2(a_4a_3) = (a_1a_2)^r$, so we 
-have
+Proving the $l=1$ case is essentially proving that observables 
+$\{M(a_i)\}_{i=1}^4$ and $\{N(a_i)\}_{i=1}^4$
+$O(r^{3/2} \se)$-approximately satisfy the relation 
+$(a_3a_4)(a_1a_2)(a_4a_3) = (a_1a_2)^r$ on the shared state $\ket{\psi}$.
+The derivation follows the proof of \cref{prop:g0}.
+The $O(r^{3/2}\se)$ approximation error comes from the fact that 
+the derivation uses $r+3$ conjugacy relations of $R_0$, 
+so we have
 \begin{align}
 	\label{eq:ls_comm_rel}
-	M_1M_2 (M_4M_3) \ket{\psi} \appd{O(r^2\se)} (M_4M_3)(M_1M_2)^r \ket{\psi}.
+	M(a_1)M(a_2) (M(a_4)M(a_3)) \ket{\psi} \appd{O(r^{3/2}\se)} (M(a_4)M(a_3))(M(a_1)M(a_2))^r \ket{\psi}.
 \end{align}
 Assume the statement is true for $l = n$ and consider the case that $l = n+1$,
 \begin{align*}
-	M_1M_2 (M_4M_3)^{n+1} \ket{\psi}  &\appd{O(r\se)} (N_3N_4) M_1M_2(M_4M_3)^n \ket{\psi} \\
-	&\appd{O(r^{n+1}\se)} (N_3N_4) (M_4M_3)^n (M_1M_2)^{r^n} \ket{\psi}\\
-	&\appd{O(r\se)} (M_4M_3)^n (M_1M_2)^{r^n} (M_4M_3) \ket{\psi} \\
-	& \appd{O(r^{n+2} \se)} (M_4M_3)^{n+1} (M_1M_2)^{r^{n+1}} \ket{\psi},
+	M(a_1)M(a_2) (M(a_4)M(a_3))^{n+1} \ket{\psi}  &\appd{O(\sr \se)} (N(a_3)N(a_4)) M(a_1)M(a_2)(M(a_4)M(a_3))^n \ket{\psi} \\
+	&\appd{O(r^{n+1/2}\se)} (N(a_3)N(a_4)) (M(a_4)M(a_3))^n (M(a_1)M(a_2))^{r^n} \ket{\psi}\\
+	&\appd{O(\sr \se)} (M(a_4)M(a_3))^n (M(a_1)M(a_2))^{r^n} (M(a_4)M(a_3)) \ket{\psi} \\
+	& \appd{O(r^{n+3/2} \se)} (M(a_4)M(a_3))^{n+1} (M(a_1)M(a_2))^{r^{n+1}} \ket{\psi},
 \end{align*}
 where from the second to the last line we repeat the process of applying \cref{eq:ls_comm_rel} 
-and the relation $(M_1M_2)^r \ket{\psi} \appd{O(r^2\se)} (N_1N_2)^r \ket{\psi}$, $r^n$ times.
+and the relation $(M(a_1)M(a_2))^r \ket{\psi} \appd{O(r^{3/2}\se)} (N(a_1)N(a_2))^r \ket{\psi}$, $r^n$ times.
 In summary, we have 
 \begin{align}
-	M_1M_2(M_4M_3)^{n+1} \ket{\psi} \appd{O(r^{n+2} \se)} (M_4M_3)^{n+1} (M_1M_2)^{r^{n+1}}\ket{\psi}.
+	M(a_1)M(a_2)(M(a_4)M(a_3))^{n+1} \ket{\psi} \appd{O(r^{n+3/2} \se)} (M(a_4)M(a_3)^{n+1} (M(a_1)M(a_2))^{r^{n+1}}\ket{\psi}.
 \end{align}
-By the principal of proof by induction, the proof is complete.
-The proof for Bob's observables $\{ N_j \}_{j=1}^{\nr}$ is similar.
+By the principal of induction, the proof is complete.
+The proof for Bob's observables $\{ N(s) \}_{s \in S}$ is similar.
 \end{proof}
 %An informal justification of the corollary is the following calculation
 %\begin{align}
@@ -1652,39 +1719,28 @@ The proof for Bob's observables $\{ N_j \}_{j=1}^{\nr}$ is similar.
 %	\sum_{j=0}^{k-1} O(r^j \se) = O(r^k \se).
 %\end{align}
 
-Recall that we define $O_A = M_1M_2$ and $U_A=M_3M_4$, then
+If we define $O_A := M(a_1)M(a_2)$ and $U_A := M(a_3)M(a_4)$, then
 the conclusion of \cref{prop:lct_adv} can be rewritten as 
 \begin{align*}
-	 O_A (U_A\ct)^n \ket{\psi} \appd{O(r^{n+1} \se)} (U_A\ct)^n O_A^{r^n} \ket{\psi}.
+	 O_A (U_A\ct)^n \ket{\psi} \appd{O(r^{n+1/2} \se)} (U_A\ct)^n O_A^{r^n} \ket{\psi}.
 \end{align*}
-On Bob's side, we also define $O_B = N_1N_2$ and $U_B = N_3N_4$ 
+On Bob's side, we also define $O_B = N(a_1)N(a_2)$ and $U_B = N(a_3)N(a_4)$, 
 and the similar relation holds.
 
-The other relations that are embedded in $\Gamma_r$ are 
-\begin{align}
-	\label{eq:comm}&[f_0, a_i] = [f_2, a_i] = [g_0, a_i] = [g_2, a_i] = e \text{ for all } i = 1 \dots r+5 \\
-	\label{eq:mg1}&f_0g_0 = Jg_0f_0 \\
-	\label{eq:mg2}&f_2g_2 = J g_2 f_2.
-\end{align}
+The other relations that are embedded in $\Gamma$ are 
+$f_0g_0 = Jg_0f_0$ and $f_2g_2 = Jg_2 f_2$.
 We summarize the implications in the following proposition.
 \begin{proposition}
 	\label{prop:lct_comm}
-	Let $S$, $\{M_j, N_j\}_{j=1}^{\nr}$ be the strategy and observables defined in \cref{prop:lct_base}.
+	Let $\bS$, $\{M(s), N(s)\}_{s \in S}$ be the strategy and observables defined in \cref{prop:lct_group}.
 	Then,
 	\begin{align}
-		&M_{r+6} M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+6} \ket{\psi} && 
-		M_{r+8}M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+8} \ket{\psi} \\
-		&M_{r+9} M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+9} \ket{\psi} && 
-		M_{r+11}M_j \ket{\psi} \appd{O(r\se)} M_j M_{r+11} \ket{\psi} 
-	\end{align}
-	for all $j = 1 \dots r+5$, and
-	\begin{align}
-		&M_{r+6}M_{r+9} \ket{\psi} \appd{O(r\se)} -M_{r+9}M_{r+6} \ket{\psi} \\
-		&M_{r+8}M_{r+11} \ket{\psi} \appd{O(r\se)} -M_{r+11}M_{r+8} \ket{\psi}.
+		&M(f_0)M(g_0) \ket{\psi} \appd{O(\sr \se)} -M(g_0)M(f_0) \ket{\psi} \\
+		&M(f_2)M(g_2) \ket{\psi} \appd{O(\sr \se)} -M(g_2)M(f_2) \ket{\psi}.
 	\end{align}
 \end{proposition}
-Recall all the relations in \cref{eq:comm,eq:mg1,eq:mg2} are embedded in constant number of linear relations in $\Gamma(\LS(r))$,
-so this proposition can be proved with the same techniques used in the proof of \cref{prop:lct_base}.
+Recall all the relations in \cref{eq:comm,eq:mg1,eq:mg2} are embedded in constant number of linear relations in $\Gamma$,
+so this proposition can be proved with the same techniques used in the proof of \cref{prop:lct_group}.
 %------------------------------------------------------------------------------------------
 \subsection{Implication of passing the extended weighted CHSH test}
 \label{sec:imp_chsh}
@@ -1722,7 +1778,8 @@ We prove $(M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi} \appd{O(r\se)} N_\ast^\diamond \ke
 The rest of the relations follow the same line of argument.
 
 Recall that the implication of $S$ being an $\ep$-approximate strategy is that 
-$\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$ for all question and answer pairs $(x,y)$ and $(a,b)$.
+$\pr{ab}{xy} \appd{O(r^2\ep)} \tpr{ab}{xy}$ for all question 
+pair $(x,y)$ and answer pair $(a,b)$.
 From the correlation, we can observe that
 \begin{align*}
  \bra{\psi} (M_{\nr+1}^0+M_{\nr+1}^1)N_\ast^\diamond \ket{\psi} = \frac{2}{d-1} - O(r^2 \epsilon).
@@ -2878,6 +2935,323 @@ The analysis for $\Phi_{A,1} \x\Phi_{B,1} (U_B \ket{\psi})$ is very similar.
 \bibliographystyle{alphaurl}
 \bibliography{quantum_correlation}
 \appendix
+
+%===========================================
+\section{Embedding $\Pg$ into $\Gamma$}
+\label{sec:embedding}
+%===========================================
+This section supports \cref{sec:embed_idea} by giving the definitions
+of $\Pg_0$ and $\Pg_1$.
+We also prove some properties of the generators of $\Pg_0$, $\Pg_1$ and 
+$\Gamma$ along the way.
+
+Recall that the goal of introducing $\Pg_0$ is to embed
+$\Pg$ in a group with only order-$2$ generators,
+so that it is easier to embed $\Pg$ into a solution group.
+\begin{definition}	
+\label{def:g0}
+	Let the set $S_0$ be 
+	\begin{align*}
+		S_0 = \{o_i\}_{i=1}^{r} \cup \{u_i\}_{i=1}^5,
+	\end{align*}
+	and the set $R_0$ be the union of 
+	\begin{align*}
+	&R_{base} = \{s^2 = e | s \in S\},\\
+	&R_{u} = \{ u_3 = u_2o_1u_2 \quad u_4 = u_2o_2u_2 \quad 
+	u_5 = u_1u_3u_1 \quad o_2 = u_1u_4u_1 \quad u_5 = o_1 o_r o_1\},
+	\end{align*}
+	and 
+	\begin{align*}
+	R_o = 
+	\begin{cases} 
+	\bigcup_{j=1}^{r/2-1}\{ o_{1+2j} = o_1o_{2j}o_1 \quad o_{2+2j} = o_2o_{1+2j}o_2\} \quad \text{ if $r$ is even },\\
+	\{o_3 = o_2o_1o_2\} \cup \bigcup_{j=1}^{(r-3)/2}\{
+	 o_{2+2j} =o_1o_{1+2j}o_1 \quad o_{3+2j} = o_2o_{2j+2}o_2 \}\quad\text{ if $r$ is odd }.
+	\end{cases}
+	\end{align*}
+	The group $\Pg_0$ is a group with presentation $\ip{R_0:S_0}$.
+\end{definition}
+\begin{proposition}
+    \label{prop:g0}
+	The group $\Pg$ is embedded in $\Pg_0$.
+	Furthermore, the generators of $\Pg_0$ satisfy the relation 
+	\begin{align}
+	    \label{eq:uo_rel}
+		(u_1u_2)^j o_1o_2 (u_2u_1)^j = (o_1o_2)^{r^j}, 
+	\end{align}
+	for any $ j \in \N$.
+\end{proposition}
+\begin{proof}
+    We prove that $\Pg$ is embedded in $\Pg_0$ by prove the $j = 1$ case of \cref{eq:uo_rel}.
+    After it is proven, a homomorphism $\phi: \Pg \rightarrow \Pg_0$ such that $\phi(u) = u_1u_2$ and $\phi(o) = o_1o_2$ is injective by Proposition $33$
+    and Lemma $15$ of Ref.~\cite{slofstra2017}.
+    
+	We prove \cref{eq:uo_rel} by induction.
+	The base case follows the direct calculation given below
+	\begin{align*} 
+		u_1u_2 o_1o_2 u_2u_1 = &u_1 (u_2 o_1u_2) (u_2o_2 u_2) u_1 \\
+	=& (u_1 u_3 u_1) (u_1 u_4 u_1)\\
+	=& u_5 o_2\\
+	=& o_1o_ro_1 o_2.
+	\end{align*}
+	Then we substitute the definitions of $o_k$ for $k = r \dots 3$ into the equation above, which 
+	proves the $j=1$ case.
+	
+	Now assume the statement is true for $j = n$, then for $j = n+1$
+	\begin{align*}
+		(u_1u_2)^{n+1} o_1o_2 (u_2u_1)^{n+1} =& u_1u_2 (o_1o_2)^{r^n} u_2u_1 \\ 
+		 =& (u_1u_2 o_1o_2 u_2u_1)^{r^n} \\
+		 =& (o_1o_2)^{r^{n+1}},
+	\end{align*}
+	where from the first line to the second line, we insert $(u_2u_1)(u_1u_2)$ between every pair of $o_1o_2$, and
+	from the second line to the third line, we applied the $j=1$ case. Hence, the statement is true.
+\end{proof}
+To better characterize all the conjugacy
+relations of $\Pg_0$ and simplify the form of $\Pg_0$, 
+we relabel $u_i$ and $o_i$'s
+as $a_i$'s such that
+\begin{align}
+	a_j := 
+	\begin{cases}
+	 o_j \text{ for } j = 1,2 \\
+	 u_{j-2} \text{ for } j = 3\dots 7 \\
+	 o_{j-5} \text{ for } j = 8 \dots r+5.
+	\end{cases}
+\end{align}
+Then we define the set $C(r)$ of tuples $(i,j,k)$ such that
+\begin{align}
+\label{eq:cr}
+	C(r) = \{ (i,j,k) |  (a_ia_ja_i = a_k) \in R_0 \}.
+\end{align}
+The size of $C(r)$ is $r+3$. 
+A presentation of the group $\Pg_0$ is
+\begin{align*}
+    \Pg_0 = \ip{ \{a_i\}_{i=1}^{r+5} : \{a_i^2 =e \}_{i=1}^{r+5} \cup \{ a_ia_ja_i = a_k \vert (i,j,k) \in C(r)\}}.
+\end{align*}
+
+
+Next we define the group $\Pg_1$.
+\begin{definition}
+\label{def:g1}
+Define the set $S_1$ to be
+\begin{align*}
+	S_1 = \{a_i, b_i, c_i, d_i\}_{i=1}^{r+5} \cup \{ f_0 \} \cup \{h_{jk}\}_{(i,j,k) \in C(r)},
+\end{align*}
+and the set $R_1$ to be
+\begin{align*}
+	R_1 = &\{ s^2 = e \vert s \in S_1\}\\ 
+	&\cup 
+	\{a_i = b_ic_i = f_0d_i, \quad f_0b_if_0 =c_i\}_{i= 1}^{r+5} \\ 
+	&\cup
+	\{h_{jk}b_j c_k = e, \quad d_ib_jd_i = c_k\}_{(i,j,k) \in C(r)}.
+\end{align*}
+The group $\Pg_1$ is a group with the presentation $\ip{S_1 : R_1}$.
+\end{definition}
+Note that the group $\Pg_1$ is the same as the group $K$ used in the proof of Lemma $29$ of Ref.~\cite{slofstra2017}.
+
+The relation between $\Pg_0$ and $\Pg_1$ is summarized in the propositions below, which was first proved in Lemma $29$ of \cite{slofstra2017}.
+\begin{proposition}
+    \label{prop:g0g1}
+	The group $\Pg_0$ is embedded in $\Pg_1$. 
+\end{proposition}
+\begin{proof}
+    We prove this proposition by showing that generators $a_i$'s in $S_1$
+    satisfy the relation $a_i a_j a_i = a_k$ for all $(i,j,k) \in C(r)$.
+    This means the homomorphism $\phi: \Pg_0 \rightarrow \Pg_1$ that maps $a_i$
+    to $a_i$ is homomorphism from $\Pg_0$ to $\Pg_1$. 
+    The injectivity of $\phi$ follows Lemma $29$ and Lemma $15$ of Ref.~\cite{slofstra2017}.
+    
+	We first show that $d_i c_j d_i = b_k$, which is because
+	\begin{align*}
+		d_i c_j d_i = d_i (f_0 b_j f_0) d_i = f_0 (d_i b_j d_i) f_0 = f_0 c_k f_0 = b_k.
+	\end{align*}
+	Then, we can prove that 
+	\begin{align*}
+		a_i a_j a_i = f_0 d_i b_j c_j f_0 d_i 
+		= (f_0 d_i b_j d_i f_0)(f_0 d_i c_j d_i f_0) 
+		= (f_0 c_k f_0)(f_0 b_k f_0) 
+		= b_k c_k = a_k,
+	\end{align*}
+	where we use the fact that $f_0$ commutes with $d_i$.
+\end{proof}
+The consequence of this proposition is that $\Pg$ can be embedded in $\Pg_1$.
+
+Recall the definition of $\Gamma$ in \cref{def:gamma}. We prove a property of it.
+\begin{proposition}
+    \label{prop:g1gamma}
+	The group $\Pg_1$ can be embedded in $\Gamma$.
+	The generators of $\Gamma$ also satisfy the relations: $f_0 g_0 f_0 g_0 = J$ and $f_2 g_2 f_2 g_2 = J$.
+\end{proposition}
+\begin{proof}
+    To prove the first claim, we show that the generators
+    $b_i$, $c_i$, $d_i$ satisfy the relations
+    $d_ib_jd_i = c_k$ for each $\bc = (i,j,k) \in C(r)$.
+    \begin{align*}
+        d_ib_jd_i =& (k_{\bc 1} f_2)(f_2 k_{\bc 2})(k_{\bc 4} k_{\bc 5})\\ 
+        =& k_{\bc 1}(k_{\bc 2}k_{\bc 4})k_{\bc 5} \\
+        =& (k_{\bc 1} k_{\bc 3}) k_{\bc 5} \\
+        =& k_{\bc 6} k_{\bc 5} \\
+        =& c_k.
+    \end{align*}
+    The derivation of $f_0 b_i f_0 = c_i$ is similar for $1 \leq i \leq r+5$, so we omit it here.
+    A map $\phi:\Pg_1 \rightarrow \Gamma$ that maps $s$
+    to $s$ for each $s \in S_1$ is a homomorphism between $Pg_1$ and 
+    $Gamma$. It is also injective by Proposition $27$ and Lemma $15$ of 
+    Ref.~\cite{slofstra2017}.
+    
+    The second claim follows a similar derivation, so we omit it here too.
+\end{proof}
+Since $\Pg$ is embedded in $\Pg_1$, we can conclude that
+$\Pg$ is embedded in $\Gamma$ as well.
+%========================================
+\section{Definition of $\LS(r)$}
+\label{sec:lsg_def}
+%========================================
+\begin{definition}
+    \label{def:lsg}
+    The linear system game $\LS(r)$ has 
+    variables $x(s)$ for each $s \in S$, and equations:
+    \begin{itemize}
+        \item for each $1 \leq i \leq r+5$:
+        \begin{align*}
+            & x(a_i) + x(b_i) + x(c_i) = 0
+            && x(a_i) + x(f_0) + x(d_i) = 0 \\
+            & x(b_i) + x(f_2) + x(p_{i,1}) = 0 
+            && x(p_{i,2}) + x(p_{i,3}) + x(p_{i,4}) = 0 
+            && x(f_0) + x(p_{i,3}) + x(p_{i,4}) = 0\\
+            & x(c_i) + x(p_{i,4})+x(p_{i,5}) = 0
+            && x(f_1) + x(p_{i,2}) + x(p_{i,3}) = 0; 
+        \end{align*}
+        \item for each $\bc = (i,j,k) \in C(r)$:
+        \begin{align*}
+            & x(h_{jk}) + x(b_j) + x(c_k) = 0 \\
+            & x(d_i) + x(q_{\bc, 1}) + x(f_2) = 0 
+            && x(b_j) + x(f_2) + x(q_{\bc, 2}) = 0 
+            && x(q_{\bc, 2}) + x(q_{\bc, 3}) + x(q_{\bc, 4}) = 0 \\
+            & x(d_i) + x(q_{\bc, 4}) + x(q_{\bc, 5}) = 0 
+            && x(c_k) + x(q_{\bc, 5}) + x(q_{\bc, 6}) = 0 
+            && x(q_{\bc, 1}) + x(q_{\bc, 3}) + x(q_{\bc, 6}) = 0;
+        \end{align*}
+        \item Magic Square equations:
+        \begin{align*}
+            &x(f_0) + x(f_1) + x(f_2) = 0 &&
+            x(g_0) + x(g_1) + x(g_2) = 0 &&
+            x(m_0) + x(m_1) + x(m_2) = 0 \\
+            &x(f_0) + x(g_2) + x(m_0) = 0 &&
+            x(f_2) + x(g_0) + x(m_1) = 0 &&
+            x(f_1) + x(g_1) + x(m_2) = 1.
+        \end{align*} 
+    \end{itemize}
+\end{definition}
+%================================================
+\section{A representation of $\Gamma$}
+\label{sec:rep_gamma}
+%================================================
+In this section we give the full description of a representation of $\Gamma$, 
+which is built upon representations 
+of $\Pg_0$ and $\Pg_1$. We need the representation of $\Gamma$ to construct the
+ideal strategy of $\LS(r)$.
+
+Recall the two Hilbert spaces $W_{d-1}$ and $W_2$ defined in \cref{eq:w_subspace}, which are the carrier spaces
+of the representations given below,
+On the Hilbert space $W_2$, we define
+\begin{align*}
+	X_{W_2} = \ketbra{x_1}{x_2} + \ketbra{x_2}{x_1} &&
+	Y_{W_2} = i\ketbra{x_1}{x_2} - i \ketbra{x_2}{x_1} &&
+	Z_{W_2} = \ketbra{x_1}{x_1} - \ketbra{x_2}{x_2},
+\end{align*}
+\begin{definition}
+\label{def:rep_g0}
+The representation, $\Psi_0$, of $\Pg_0$ on $W_{d-1}$ is defined by
+\begin{align*}
+	\Psi_0(a_1) =&\sum_{j=1}^{(d-1)/2} \omega_d^j \ketbra{x_j}{x_{d-j}} + \omega_d^{-j} \ketbra{x_{d-j}}{x_{j}} \\
+	\Psi_0(a_2) = &\sum_{j=1}^{d-1} \ketbra{x_j}{x_{d-j}}\\
+	\Psi_0(a_3) = &\ketbra{u_0}{u_0} +\omega_{d-1}^{(d-1)/2}\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}}\\ + 
+	&\sum_{k=1}^{(d-3)/2}\left( \omega_{d-1}^k\ketbra{u_k}{u_{d-1-k}} + \omega_{d-1}^{-k}\ketbra{x_{d-1-k}}{x_k}\right)\\ 
+	\Psi_0(a_4) = &\ketbra{u_0}{u_0} +\ketbra{u_{(d-1)/2}}{u_{(d-1)/2}} \\+
+	 &\sum_{k=1}^{(d-3)/2}\left(\ketbra{u_{d-1-k}}{u_k} + \ketbra{u_k}{u_{d-1-k}}\right),
+\end{align*}
+The representation of the rest of the generators
+can be constructed from $\Psi_0(a_1)$, $\Psi_0(a_2)$, $\Psi_0(a_3)$ and $\Psi_0(a_4)$ following the defining 
+conjugacy relations of $\Pg_0$.
+\end{definition}
+We can check that
+\begin{align*}
+	\Psi_0(a_1a_2) =  \sum_{j=0}^{d-2} \omega_d^{r^j} \ketbra{x_{r^j}}{x_{r^j}} &&
+	\Psi_0(a_3a_4) =  \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}},
+\end{align*}
+which satisfy the relation $\Psi_0(a_3a_4) \Psi_0(a_1a_2) \Psi_0(a_4a_3) = \Psi_0(a_1a_2)^r$ and
+$[\Psi_0(a_3a_4), \Psi_0(a_2)] = \1_{W_{d-1}}$. 
+
+Following the proof of Lemma $29$ of Ref.~\cite{slofstra2017}, we construct a representation of $\Pg_1$.
+\begin{definition}
+\label{def:rep_g1}
+The representation $\Psi_1$ of $\Pg_1$ on $W_2 \x W_{d-1}$ is defined by
+\begin{itemize}
+\item for $f_0$
+\begin{align*}
+	&\Psi_1(f_0) = X_{W_2} \x \1_{W_{d-1}};
+\end{align*}
+\item
+for $i = 1 \dots r+5$,
+\begin{align*}
+	&\Psi_1(a_i) = \1_{W_2} \x \Psi_0(a_i) \\
+	&\Psi_1(b_i) = \ketbra{x_1}{x_1} \x \Psi_1(a_i) + \ketbra{x_2}{x_2} \x \1_{W_{d-1}} \\
+	&\Psi_1(c_i) =\ketbra{x_1}{x_1} \x \1_{W_{d-1}} + \ketbra{x_2}{x_2} \x \Psi_1(a_i) \\
+	&\Psi_1(d_i) =  X_{W_2} \x \Psi_0(a_i);
+\end{align*}
+\item for $(i,j,k) \in C(r)$,
+\begin{align*}
+	\Psi_1(h_{jk}) = \ketbra{x_1}{x_1} \x \Psi_1(a_j) + \ketbra{x_2}{x_2} \x \Psi_1(a_k).
+\end{align*}
+\end{itemize}
+\end{definition}
+
+Finally, we follow the proof of Proposition $27$ of Ref.~\cite{slofstra2017} to construct the 
+representation of $\Gamma$.
+\begin{definition}
+\label{def:rep_gamma}
+The representation $\Psi$ of $\Gamma$ on $W_2 \x W_2 \x W_{d-1}$ is defined by:
+\begin{itemize}
+\item for $s \in \{a_i, b_i, c_i, d_i\}_{i=1}^{r+5}$,
+\begin{align*}
+	\Psi(s) = \1_{W_2} \x \Psi_1(s);
+\end{align*}
+\item for $f_i$, $g_i$, $m_i$ with $i = 0,1,2$ and $J$
+\begin{align*}
+    &\Psi(f_0) = \1 \x X_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi(f_1) = X_{W_2} \x X_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi(f_2) = X_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi(g_0) = \1 \x Z_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi(g_1) = Z_{W_2} \x Z_{W_2} \x \1_{W_{d-1}} \\
+	&\Psi(g_2) = Z_{W_2} \x \1_{W_2} \x \1_{W_{d-1}} \\
+	& \Psi(m_0) = Z_{W_2} \x X_{W_2} \x \1_{W_{d-1}}\\
+	& \Psi(m_1) = X_{W_2} \x Z_{W_2} \x \1_{W_{d-1}}\\
+	& \Psi(m_2) = Y_{W_2} \x Y_{W_2} \x \1_{W_{d-1}}\\
+	& \Psi(J) = - \1_{W_2} \x \1_{W_2} \x \1_{W_{d-1}};
+\end{align*}
+\item for the generators involved in $R_i$
+with $1 \leq i \leq r+5$ :
+\begin{align*}
+	\Psi(p_{i,1}) &= X_{W_2} \x \Psi_1(b_i) \\
+	\Psi(p_{i,2}) &= \ketbra{x_1}{x_2} \x \Psi_1(b_if_0) + \ketbra{x_2}{x_1} \x \Psi_1(f_0b_i)\\
+	\Psi(p_{i,3}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_if_0b_i) + \ketbra{x_2}{x_2} \x \Psi_1(f_0) \\
+	\Psi(p_{i,4}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_ic_i) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+    \Psi(p_{i,5}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_i) + \ketbra{x_2}{x_2} \x \Psi_1(c_i);
+\end{align*}
+\item for the generators involved in $R_{\bc}$ with $\bc = (i,j,k) \in C(r)$:
+\begin{align*}
+	\Psi(q_{\bc, 1}) &= X_{W_2} \x \Psi_1(d_i) \\
+	\Psi(q_{\bc, 2}) &= X_{W_2} \x \Psi_1(b_j) \\
+	\Psi(q_{\bc, 3}) &= \ketbra{x_1}{x_2} \x  \Psi_1(b_jd_i) + \ketbra{x_2}{x_1} \x \Psi_1(d_ib_j)\\
+	\Psi(q_{\bc, 4}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_jd_ib_j) + \ketbra{x_2}{x_2} \x  \Psi_1(d_i)\\
+	\Psi(q_{\bc, 5}) &=  \ketbra{x_1}{x_1} \x \Psi_1(b_jc_k) + \ketbra{x_2}{x_2} \x \1_{W_2} \x \1_{W_{d-1}}\\
+	\Psi(q_{\bc, 6}) &= \ketbra{x_1}{x_1} \x \Psi_1(b_j) + \ketbra{x_2}{x_2} \x \Psi_1(c_{k}).
+\end{align*}
+\end{itemize}
+\end{definition}
+The validation of $\Psi_1$ and $\Psi$ were done in the proofs of 
+Lemma $29$ and Proposition $27$ in Ref.~\cite{slofstra2017}.
 %========================================
 \section{The proof of \cref{thm:selftest} }
 \label{sec:selftest}
@@ -3056,91 +3430,6 @@ so an upper bound of the error is that
 \begin{align}
 	\forall x,y \in \{0,1,2\}, e_{xy} \in O((\frac{1}{c^2s^{1/2}} + \frac{1}{s^{3/2}})\sqrt{\epsilon}).
 \end{align}
-\end{proof}
-%%=====================================
-\section{The proof of \cref{lm:uo_independ}}
-\label{sec:u_and_o}
-%%=====================================
-
-We are going to prove 
-the set $\{U^k O^l\}$ for $k=0,1\dots d-2$ and $l = 1,2\dots d-1$ forms a basis of the ring of $(d-1)\times (d-1)$ matrices over $\C$
-Note that the unitaries $U$ and $O$ defined in the lemma above satisfy the condition $UOU^\dagger = O^r$.
-In this proof, we denote the set $\{0,1,2\dots d-2\}$ by $[d-1]$ and the set $\{1,2 \dots d-1\}$ by $[d-1]+1$.
-\begin{proof}
-We are going to show the $(d-1)^2$ matrices from the set $\{U^k O^l\}_{k \in[d-1], l \in [d-1]+1}$ are linearly independent.
-Suppose there exists a set of complex numbers $\{ x_{k,l} \}_{k \in[d-1], l \in [d-1]+1}$
-such that 
-\begin{align}
-	M = \sum_{k=0}^{d-2} \sum_{l=1}^{d-1} x_{k,l} U^k O^l = 0. 
-\end{align}
-We \hf{define} a set of integers $\{ k_i \}_{i=1}^{d-1}$ such that $r^{k_i} \equiv i \pmod{d}$.
-\carl{We shouldn't be making extra assumptions that are not stated in the lemma.  This looks to me more like
-a definition of the variables $\{ k_i \}$, rather than an assumption.}
-The fact that $r$ is a primitive root of $d$ guarantees that $k_i$'s are distinct.
-Then we can group $\{x_{k,l}\}$ into vectors: $\ket{x_{k_1}}, \ket{x_{k_2}} \dots \ket{x_{k_{d-1}}}$,
-where $\ket{x_{k_i}}= (x_{k_i, 1}, x_{k_i, 2} \dots x_{k_i, d-1})^\intercal$.
-Our goal is equivalent to proving that $\ket{x_{k_i}} = 0$ for all $i$.
-
-We start with proving that $\ket{x_{k_1}} = 0$.
-Proving $\ket{x_{k_i}} = 0$ for other $i$ follows a similar argument, so we briefly
-discuss about it in the end.
-The entry $\bra{1}M\ket{1}$ can be expressed as  
-\begin{align}
-	\bra{1}M\ket{1} = \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{1}{i (r^{-1})^k}\braket{i}{1}.
-\end{align}
-For the term $\braket{1}{i (r^{-1})^k}\braket{i}{1} \neq 0$ we must have $i = 1$ and $r^k \equiv 1 \pmod{d}$, or equivalently,
-$k = k_1$. We can conclude that 
-\begin{align}
-	\bra{1}M\ket{1} = \sum_{l = 1}^{d-1} x_{k_1,l}\omega_d^l = 0. 
-\end{align}
-Similarly we can determine that for all $j = 1,2\dots d-1$,
-\begin{align}
-	\bra{j}M\ket{j} 
-	=  \sum_{k=0}^{d-2}\sum_{l = 1}^{d-1}\sum_{i=1}^{d-1} x_{k, l}\omega_d^{il}\braket{j}{i (r^{-1})^k}\braket{i}{j} 
-	= \sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl} = 0.
-\end{align}
-Hence we get $d-1$ equations with $d-1$ variables, and the linear system is
-\begin{align}
-	W \ket{x_{k_1}} = 0,
-\end{align}
-where $W(m,n) = \omega_d^{mn}$. Then we define
-\begin{align}
-	\tW = 
-	\begin{pmatrix}
-	1 & 1 \\
-	1 & W
-	\end{pmatrix}.
-\end{align}
-First observe that $\tW$ is a Vandermonde matrix, hence it is non-singular.
-Next, we define $\ket{\tx_{k_1}} = (0, x_{k_1,1}, \dots x_{k_1,d-1})^\intercal$ 
-and prove that it satisfies the condition
-that 
-\begin{align}
-	\tW \ket{\tx_{k_1}} = 0,
-\end{align}
-which involves $d$ equations. The last $d-1$ equations are given by the assumption and $M$.
-We only need to prove that $\sum_{l=1}^d x_{k_1, l} = 0$, which is required by the first row of $\tW$.
-It can be proved by summing the known $d-1$ equations as follows
-\begin{align}
-	0=\sum_{j = 1}^{d-1} \bra{j}M\ket{j}  
-	=  \sum_{j=1}^{d-1}\sum_{l = 1}^{d-1}x_{k_1,l}\omega_d^{jl}
-	=\sum_{l = 1}^{d-1}x_{k_1,l} (\sum_{j=1}^{d-1} \omega_d^{jl})
-	= \sum_{l = 1}^{d-1}- x_{k_1,l}
-\end{align}
-where we have used the fact that $\sum_{j=1}^{d-1} \omega_d^{jl} =-1$ for all $l = 1,2\dots d-1$.
-Since $\tW$ is non-singluar, we know $\ket{\tx_{k_1}} = 0$ which implies that $\ket{x_{k_1}} = 0$.
-
-For $\ket{x_{k_a}}$, we look at entries $\{\bra{j}M\ket{aj}\}_{j=1}^{d-1}$ for $a = 2 \dots d-1$ and get equations
-of the form
-\begin{align}
-	0 = \bra{j}M\ket{aj} = \sum_{l=1}^{d-1} x_{k_a, l} \omega_d^{ajl} 
-\end{align}
-The corresponding coefficient matrix has value $\omega_d^{amn}$ at coordinate $(m,n)$,
-so it is also a submatrix of a Vandermonde matrix. Similar argument gives us that $\ket{x_{k_a}} = 0$.
-
-To summarize, we have proven that $x_{k,l} = 0$ for all $k$ and $l$, which implies that the elements of the set
-$\{ U^k X^l \}$ are linearly independent and forms a basis for the ring of all the $(d-1)\times(d-1)$ matrices over $\C$.
-\carl{Nice proof.  I like the use of the Vandermonde matrix.  We can think a little about possible simplifications.}
 \end{proof}
 
 
