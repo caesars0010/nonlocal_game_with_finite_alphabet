@@ -310,51 +310,63 @@ robustly self-test maximally entangled states with unbounded dimension}
 \section{Introduction}
 \label{sec:intro}
 %========================================
-Self-testing is a unique phenomenon of quantum mechanics. It has many applications in quantum
+Self-testing is a unique phenomenon of quantum mechanics.
+It is also powerful because only classical interactions are required.
+It has many applications in quantum
 delegated computation \cite{ruv2013,coladan2017verifier} and device independent quantum cryptography
 \cite{mayersyao,vv2014,miller2017,fu2018,eat2018}.
-\carl{Two possible papers that you could cite are Mayer Yao 1998 (which originated the idea of self-testing as far as I know, and mentions QKD) and my paper (miller2017, which you've already cited --- indeed it uses the concept of self-testing).  Also you should check Vazirani-Vidick's 2014 PRL paper to see if it mentions self-testing at all.  (It was the first to fully prove DI-QKD.)}
-\hfc{checked.}
 
-The case of self-testing $2$-dimensional EPR pair is fully understood.
-The techniques for robustly self-testing one EPR pair is 
+The case of self-testing $2$-dimensional EPR pair, which is defined by
+\begin{align*}
+    \ket{EPR} = \frac{1}{\sqrt{2}}(\ket{00}+\ket{11}),
+\end{align*}
+is fully understood.
+The techniques for robustly self-testing $\ket{EPR}$ is 
 first introduced in Ref.~\cite{mckague2012}, then improved in Ref.~\cite{bamps2015}. 
-Ref.~\cite{yang2013} started to think about how to robustly self-testing large dimensional maxially entangled states.
-Its ideas are realized later in Ref.~\cite{coladan2017all}, which proved that all pure bipartite entangled state 
+Ref.~\cite{yang2013} proved an generalized swap-isometry
+that can be used to robustly self-test large dimensional maxially entangled states.
+Its ideas are realized later in Ref.~\cite{coladan2017all}, 
+which proved that all pure bipartite entangled state 
 can be self-tested.
-One can also self-test many copies of the $2$-dimensional EPR
-pair in parallel \cite{mckague2016,natarajan2017,coladan2016parallel}.
-The most efficient way uses $O(\log n)$ bits question and
-answers to self-test $n$ copies of $2$-dimensional EPR
-pair \cite{lowdegree}.
-\carl{I believe the first to prove robust self-testing of a single EPR pair was McKague-Yang-Scarani 2012.}
-\hfc{Got it.}
-Self-testing general $d$-dimensional EPR pairs is a harder task.
-Coladangelo, Goh and Scarani has shown that all pure bipartite entangled states can be self-tested \cite{coladan2017all}
-by constructing an explicit correlation of size $\Theta(d^2)$ that can be used for self-testing,
-which is the only result about the general $d$-dimensional case so far.
-However, proving the robustness of the correlation remains an open problem. 
+The authors constructed a family of correlations such
+that each partially or maximally entangled state of any local dimension has
+a self-testing correlation in this family.
+% One can also self-test many copies of the $2$-dimensional EPR
+% pair in parallel \cite{mckague2016,natarajan2017,coladan2016parallel}.
+% The most efficient way uses $O(\log n)$ bits question and
+% answers to self-test $n$ copies of $2$-dimensional EPR
+% pair \cite{lowdegree}.
+% Self-testing general $d$-dimensional EPR pairs is a harder task.
+% Coladangelo, Goh and Scarani has shown that all pure bipartite entangled states can be self-tested \cite{coladan2017all}
+To generate a correlation in the family, Alice and Bob
+have constant number of measurement settings but each 
+measurement setting has the same number of outcomes as
+the local dimension of the entangled state to be self-tested. 
+In other words, their correlation is of size $\Theta(d^2)$,
+where $d$ is the local dimension of the entangled state.
+This is the only result about self-testing the general $d$-dimensional entangled state so far.
+However, proving the robustness of the family of correlations remains an open problem. 
 Without robustness, we cannot infer anything about a quantum strategy if
 the produced correlation deviates from the ideal correlation, no matter how small the 
 deviation is. 
  
 A natural question to ask is whether maximally entangled states with large local dimension
-can be self-tested with constant-sized correlations. 
+can be robustly self-tested with constant-sized correlations. 
 In this paper, we give an affirmative answer to this question by proving the following theorem.
 \begin{theorem}[Informal]
 \label{thm:inf}
 	There exists an infinite-sized set $D$ of odd prime numbers such that, for any $d \in D$, 
-	the maximally entangled state of local dimension $4d-4$ can be robustly self-tested 
+	the maximally entangled state of local dimension $4(d-1)$ can be robustly self-tested 
 	with constant-sized question and answer alphabets.
 \end{theorem}
 The formal statement of this theorem is given in \cref{thm:self-test} and \cref{thm:infty}.
 
-The set $D$ is, \carl{
-specifically, the set of all 
-odd prime numbers whose smallest primitive root is either $2$, $3$,
-or $5$}.  It has been shown that \carl{this set} has infinitely many elements \cite{murty1988}.
-To prove \cref{thm:inf}, we construct a correlation of size $\Theta(r^2)$ for each $d \in D$ whose primitive
-root is $r$. This correlation is denoted by $\fC(d,r)$.
+The set $D$ is, specifically, the set of all 
+odd prime numbers whose smallest primitive root is either $2$, $3$, or $5$.  
+It has been shown that this set has infinitely many elements \cite{murty1988}.
+To prove \cref{thm:inf}, we construct a correlation of size $\Theta(r)$ 
+for each $d \in D$ whose smallest primitive root is $r$.
+This correlation is denoted by $\fC(d,r)$.
 Note that although the size of $\fC(d,r)$ does not depend on $d$, the entries of $\fC(d,r)$ do.
 Then we prove the robust self-testing property of $\fC(d,r)$ by showing 
 that if some quantum strategy can approximate $\fC(d,r)$, then
@@ -368,49 +380,174 @@ can produce the desired maximally entangled states when applied to the unknown s
 %	primitive root $r \in \{2, 3, 5\}$, can be self-tested by a constant-sized correlation.
 %\end{theorem}
 \carl{The paper \cite{bamps2015} says that the earlier paper \cite{yang2013} has ``flaws.'' Check what those flaws are, and make sure that they won't put a shadow on anything that you're discussing when you cite \cite{yang2013}.} 
+\hfc{The flaws are in the self-testing proof, not in the 
+proof about the generalized isometry.}
 
-In order to accomplish our goal, we first design a linear system game to enforce the 
-relation $UOU\ct = O^r$, which is a generalization of a relation in Ref.~\cite{slofstra2017}.  \carl{A reader may get lost at the last sentence -- you're jumping into the material too quickly without enough explanation.}
-The number of variables and the number of equations of the linear system game depend linearly on $r$,
-which makes our correlation of size $\Theta(r^2)$.
-Unlike previous self-testing proofs, which try to enforce the anti-commutation relation
-$XZ = \omega_d^{-1} ZX$ between Pauli operators of dimension $d \geq 2$, 
-our approach is more succinct in terms of the size of the correlation but at a cost that
-it only works for odd prime $d$.
-The reason why we focus on this relation is that if we can certify that $O$ has one eigenvalue $\omega_d$
-for some $d$ with primitive $r$,
-then it guarantees that $O$ has eigenvalues $\omega_d^j$ for $j = 1 \dots d-1$ and $U$ only
-permutes the eigenvectors of $O$ in certain way.
-After knowing the eigenvalues of $O$, we can use infer the structure of the shared state $\ket{\psi}$
-based on the two relation of $\ket{\psi}$ imposed by the linear system game --
-$U_A \x U_B \ket{\psi} = \ket{\psi}$ and $O_A \x O_B \ket{\psi} = \ket{\psi}$.
-The two relations imply that $\ket{\psi}$ is spanned by eigenvectors of $O$ and its
-Schmidt coefficient follows some pattern that is invariant under the permutation by $U$.
-At this point, we can use the generalized swap isometry \cite{yang2013} to extract a copy of the 
-$(d-1)$-dimensional maximally entangled state. Note that our robust self-testing proof 
-follows a different line of arguments from what was originally
-proposed in Ref.~\cite{yang2013}.
-Our self-testing proof actually certifies $\ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}$. 
-The self-testing of $\ket{\EPR{2}}^{\x 2}$ follows a known result \cite{wu2016}.
+The correlation $\fC(d,r)$ contains the ideal correlation of a specially-designed binary linear system game.
+In a general linear system game, Alice is given a random equation 
+from a linear system and she
+should give an assignment of the equation.
+Bob is asked to assign a value to a random variable of that equation.
+They win the game if Alice's assignment satisfies the equation and Bob's
+assignment to the variable matches Alice's assignment.
+A widely-used and thoroughly-studied example of a linear system game is
+the Magic Square game \cite{magic_square}.
+In this game, the linear system is
+\begin{align*}
+    &x_1 + x_2 + x_3 = 0 && x_4 + x_5 + x_6 = 0 &&
+    x_7 + x_8 + x_9 = 0 \\
+    &x_1 + x_4 + x_7 = 0 && x_2 + x_5 + x_8 = 1 &&
+    x_3 + x_6 + x_9 = 0.
+\end{align*}
+Using two copies of the maximally entangled state
+\begin{align*}
+    \ket{EPR} = \frac{1}{\sqrt{2}}(\ket{00}+\ket{11}),
+\end{align*}
+the Magic square game can be won
+with certainty.
+It has been shown that if a strategy that can win this game almost perfectly, the shared state must be close to $\ket{EPR}^{\x 2}$ up to some local isometry \cite{wu2016}, 
+so we can say that the Magic Square game can robustly self-test $\ket{EPR}^{\x 2}$.
+The key observation that leads to the self-testing proof is that 
+a winning strategy must contain observables $X$ and $Z$ that 
+satisfy the anti-commutation relation 
+\begin{align*}
+    X Z = - Z X.
+\end{align*}
+Intuitively, we can think of the Magic Square game as a way to enforce the
+anti-commutation relation.
 
-The remaining question is how to certify a particular eigenvalue of $O$. Before going to the answer,
-we remark that 
-the other specialty of the linear system game is that it forces Alice and Bob to have binary observables
-whose products are the special unitaries $U$ and $O$, because the answers to the questions of the 
-linear system games are binary. 
-The idea of decompose the unitaries of arbitrary order into binary observables was also first introduced by Slofstra \cite{slofstra2017}.
-We use a different way to decompose the unitaries, which can be seen as the inverse of Jordan's lemma, 
-The fact that Alice and Bob only have binary observables make it easier for us 
-to compose the linear system game with another nonlocal test, which we call the extended weighted CHSH test.
+Our linear system game is designed to enforce the relation 
+\begin{align*}
+    U O U\ct = O^r,
+\end{align*}
+for some integer $r$,
+in the sense that the winning strategy contains binary observables
+$M_1, M_2, M_3, M_4$ on Alice's side and 
+$N_1, N_2, N_3, N_4$ on Bob's side such that 
+\begin{align*}
+    U = M_3M_4 = N_3N_4 && O = M_1M_2 = N_1N_2.
+\end{align*}
+This relation implies the eigenvalue of $O$ must be $\omega_d^j = e^{ij2\pi/d}$ for some $j \neq 0$ and some prime $d$ whose primitive root
+is $r$. It also implies that $U$ is a permutation of the eigenbasis of $O$.
+Winning this linear system game implies that Alice and Bob share a state
+$\ket{\psi}$ such that
+\begin{align*}
+    O \x O \ket{\psi} = \ket{\psi}, && 
+    U \x U \ket{\psi} = \ket{\psi}.
+\end{align*}
+These two relations are important for the self-testing argument
+because
+the relation $O \x O \ket{\psi} = \ket{\psi}$ implies that $\ket{\psi}$
+is spanned by tensor products of states in the eigenbasis of $O$;
+and $U \x U \ket{\psi} = \ket{\psi}$ implies that $\ket{\psi}$ is invariant
+under the permutation induced by $U$. 
+At this point, the eigenvalues of $O$ are unknown, so
+further restricting the eigenvalues of $O$ requires another test, 
+which will be introduced later.
+
+The special feature of our linear system game is that the sizes
+of the question sets for Alice and Bob are of order $\Theta(r)$,
+and the answer sets are of size $\Theta(1)$.
+Restricting $r \leq 5$ in our theorem implies that our linear system 
+game only uses constant-sized question sets and constant-sized answer sets.
+\carl{A reader may get lost at the last sentence -- you're jumping into the material too quickly without enough explanation.}
+\hfc{Rewritten.}
+% The number of variables and the number of equations of the linear system game depend linearly on $r$,
+% which makes our correlation of size $\Theta(r^2)$.
+% Unlike previous self-testing proofs, which try to enforce the anti-commutation relation
+% $XZ = \omega_d^{-1} ZX$ between Pauli operators of dimension $d \geq 2$, 
+% our approach is more succinct in terms of the size of the correlation but at a cost that
+% it only works for odd prime $d$.
+% The reason why we focus on this relation is that if we can certify that $O$ has one eigenvalue $\omega_d$
+% for some $d$ with primitive $r$,
+% then it guarantees that $O$ has eigenvalues $\omega_d^j$ for $j = 1 \dots d-1$ and $U$ only
+% permutes the eigenvectors of $O$ in certain way.
+% After knowing the eigenvalues of $O$, we can use infer the structure of the shared state $\ket{\psi}$
+% based on the two relation of $\ket{\psi}$ imposed by the linear system game --
+% $U_A \x U_B \ket{\psi} = \ket{\psi}$ and $O_A \x O_B \ket{\psi} = \ket{\psi}$.
+% The two relations imply that $\ket{\psi}$ is spanned by eigenvectors of $O$ and its
+% Schmidt coefficient follows some pattern that is invariant under the permutation by $U$.
+% At this point, we can use the generalized swap isometry \cite{yang2013} to extract a copy of the 
+% $(d-1)$-dimensional maximally entangled state. Note that our robust self-testing proof 
+% follows a different line of arguments from what was originally
+% proposed in Ref.~\cite{yang2013}.
+
+
+The remaining question is how to certify a particular eigenvalue of $O$, so we
+design a nonlocal test called the extended weighted CHSH test.
+% Before going to the answer,
+% we remark that 
+% the other specialty of the linear system game is that it forces Alice and Bob to have binary observables
+% whose products are the special unitaries $U$ and $O$, because the answers to the questions of the 
+% linear system games are binary. 
+% The idea of decompose the unitaries of arbitrary order into binary observables was also first introduced by Slofstra \cite{slofstra2017}.
+% We use a different way to decompose the unitaries, which can be seen as the inverse of Jordan's lemma, 
+% The fact that Alice and Bob only have binary observables make it easier for us 
+% to compose the linear system game with another nonlocal test, which we call the extended weighted CHSH test.
 The difference between a nonlocal game and a nonlocal test will be discussed later.
-The core idea of the extended weighted CHSH test is to certify that Alice and Bob's observables and state 
-for the linear system game can also be used to violate the weighted CHSH inequality \cite{acin2012} maximally.
-We find that the maximal violation of the weighted CHSH inequality can certify the eigenvalues of the product
-of Bob's observables. 
-At this point, we fix a prime $d$ by picking the weight in the weighted CHSH inequality and 
-use the extended weighted CHSH test to certify that
-$O$ has eigenvalue $\omega_d$.
+It is designed based on the $\alpha$-weighted CHSH inequality, which is defined by
+\begin{align*}
+    \I_\alpha = \alpha\ip{M_1N_1}+\alpha\ip{M_1N_2} + \ip{M_2N_1} - \ip{M_2N_2}\leq 2|\alpha|,
+\end{align*}
+where $M_x$ and $N_y$ for $x,y \in \{1, 2\}$ are some binary observables.
+Define $\mu = \arctan(1/\alpha)$,
+\begin{align*}
+    \pauliz = \ketbra{0}{0} - \ketbra{1}{1} && \paulix = \ketbra{0}{1} + \ketbra{1}{0},
+\end{align*}
+which are the Pauli-Z and Pauli-X operators.
+This inequality is maximally violated when the shared state is $\ket{EPR}$,
+Alice's binary observables are
+\begin{align*}
+    M_1 = \pauliz && M_2 = \paulix,
+\end{align*}
+and Bob's binary observables are
+\begin{align*}
+    N_1 = \cos(\mu) \pauliz+ \sin(\mu) \paulix  && N_2 = \cos(\mu) \pauliz - \sin(\mu) \paulix。
+\end{align*}
+We first prove that the maximal violation of $\I_\alpha$ can robustly self-test the shared
+state $\ket{\psi}$ and the observables $M_1, M_2$ and $N_1, N_2$.
+Then we noticed that 
+\begin{align*}
+    N_1N_2 = \cos(2\mu) \1  - \sin(2 \mu) \pauliz \paulix 
+\end{align*}
+has eigenvalues $e^{i 2\mu}$ and $e^{-i 2\mu}$.
+Hence, in the extended weighted CHSH test, we set $\alpha = \cot( -\pi/d )$
+for some odd prime $d$ whose primitive root is $r$,
+and ask Alice and Bob
+to reuse the observables $M_1, M_2$ and $N_1, N_2$，then we can certify that
+the unitary $O = M_1M_2 = N_1N_2$ has eigenvalues $e^{i2\pi/d}$ and $e^{-i2\pi/d}$.
+Combining this observation with the fact that $O$ satisfy the relation $UOU\ct = O^r$,
+we can conclude that all the eigenvalues of $O$ are $\{ e^{ij 2\pi /d} \}_{j=1}^{d-1}$,
+and the eigenspaces of all the eigenvalues have the same cardinality.
+At this point, we has the explicit structure of $O$, so we 
+can use the relations $U \x U \ket{\psi} = \ket{\psi}$ and $ O \x O \ket{\psi} = \ket{\psi}$
+to prove the correlation $\fC(r, d)$ can robustly self-test 
+a maximally entangled state of dimension $4(d-1)$.
+
 \carl{This paragraph (also) will need more context.}
+\hfc{Rewritten.}
+
+Our contributions are four-fold.
+\begin{enumerate}
+    \item We identify the constant-sized question and answer sets that can be used to robustly self-test
+    maximally entangled states with unbounded dimensions. Before our work, the most efficient way
+    was to use $O(\log d)$-sized question and answer sets to robustly self-test
+    the maximally entangled state of dimension $d = 2^n$ \cite{lowdegree}.
+    \item Our self-testing proof demonstrate a new way to apply the generalized swap-isometry
+    proposed in Ref.~\cite{yang2013} to robustly self-test a maximally entangled state of large lcoal
+    dimension. This is the first application of the generalized swap-isometry in the robust self-testing proof.
+    We believe it can be applied to prove the family of correlations proposed in Ref.~\cite{coladan2017all}
+    are also robust.
+    \item We demonstrate how to enforce relations between operators of large but fixed dimension in a 
+    binary linear system game. Before our work, only the anti-commutation relation between $2$-dimensional
+    Pauli operators can be enforced in a binary linear system game.
+    \item Our result gives us deeper understanding of the set of quantum correlations.
+    In previous works that proved the non-closeness of the set of quantum correlations
+    \cite{slofstra2017}, 
+    lower bounds of the entanglement required to achieve certain correlations are identified.
+    Our work discovers a large family of correlations where we know exactly the amount of entanglement
+    required to achieve each of the correlations in this family. 
+\end{enumerate}
 
 \textbf{Structure of the paper}.
 We start with notations and background information in \cref{sec:prelim}.
@@ -595,8 +732,8 @@ A particular type of nonlocal games that we are interested in is called binary l
  players Alice and Bob. 
  The input and output alphabets are 
  \begin{align*}
-     \calX = \{I_i\}_{i=1}^m && \calY = \{1 \dots n\} \\
-     \calA_{I_i} = \Z_2^{|I_i|} && \calB = \Z_2,
+     \calX = \{I_i\}_{i=1}^m && &\calY = \{1 \dots n\} \\
+     \calA_{I_i} = (\Z_2)^{I_i} && &\calB = \Z_2,
  \end{align*}
  where $I_i = \{j : H(i,j) = 1\}$.
  When Alice and Bob answer with $\ba$ and $b$ for questions $I_i$ and
@@ -610,8 +747,7 @@ A particular type of nonlocal games that we are interested in is called binary l
 	\end{cases}
 \end{align}
 \end{definition}
-\hfc{I think the order of the variables given to Alice doesn't matter, because
-the linear system is binary.}
+
 A widely-used example of a linear system game is the Magic Square game introduced in Ref.~\cite{magic_square}, which 
 have equations
 \begin{align*}
@@ -1080,7 +1216,7 @@ I have moved $J$ out of $S$.}
 Details of $I_i$ for $1 \leq i \leq \mr$ can be found in \cref{def:lsg_eq}.
 The answer sets are 
 \begin{align*}
-    \calA^{\LS} = \Z_2^{3} && \calB^{\LS} = \Z_2,
+    \calA^{\LS} = (\Z_2)^{I_i} && \calB^{\LS} = \Z_2,
 \end{align*}
 because $|I_i| = 3$ for all $i$.
 The probability distribution is uniform over all the pairs $(I_i, x(s))$ such that $s \in I_i$, so
@@ -1092,18 +1228,19 @@ The probability distribution is uniform over all the pairs $(I_i, x(s))$ such th
     \end{cases}
 \end{align*}
 where $N(r) := 157r + 685$ is the total number of valid question pairs.
-We define $X_i := \{ \ba \in \Z_2^3: \sum_{j=1}^3 a(j) = c(i) \}$, which is the set of all the valid answers of equation $i$.
+We define $X_i := \{ \ba \in (\Z_2)^{I_i}: \sum_{s \in I_i} a(s) = c(i) \}$, which is the set of all the valid answers of equation $i$.
 Given an answer $(\ba,b)$ for question $(I_i,x(s))$, 
 the score function is
 \begin{align*}
-    V^{\LS}(\ba, b, I_i, x(s)) = 
+    V^{\LS}_{I_i, x(s)}(\ba, b) = 
     \begin{cases}
         1 \text{, if } \ba \in X_i \text{ and } a(s) = b\\
         0 \text{, otherwise}.
     \end{cases}
 \end{align*}
 \end{definition}
-\hfc{Rewritten.}
+\carl{This definition does not seem consistent.  You are using $a$ both as a function on $\{ 1, 2, 3 \}$ and as a function on $S$.}
+\hfc{Fixed.}
 The construction of $\LS(r)$ proves the following theorem.
 \begin{theorem}
 	The group $\Pg$ can be embedded in the solution group of a binary linear system game which has
@@ -1120,8 +1257,6 @@ Here we only highlight what $a_1, a_2, a_3$ and $a_4$ are mapped to by the repre
 with the important properties of the representation of these four generators,
 since they are the key generators of $\Gamma$.
 }
-\carl{This is a meandering paragraph.  Rewrite.}
-\hfc{How about now?}
 
 The representation $\Psi$ is defined on the Hilbert space
 $W_2 \x W_2 \x W_{d-1}$,
@@ -1254,11 +1389,11 @@ where \cref{eq:zaxaxbzb} can be derived from \cref{eq:za-zb}, \cref{eq:xa-xb} an
     In the extended weighted CHSH test, the input alphabets and output alphabets for Alice and Bob are
     \begin{align*}
         &\calX^{\EXT} = \calY^{\EXT} = \{0, 1, 2, \nr+1, \nr+2\}, \\
-        &\calA_x^{\EXT} = \calB_y^{\EXT} =
+        &\calA_z^{\EXT} = \calB_z^{\EXT} =
         \begin{cases}
-            \{0,2\} &\text{ if } x = y = 0, \\
-            \{0,1\} &\text{ if } x,y \in \{1, 2\} \\
-            \{0,1,2\} &\text{ if } x,y \in \{\nr+1, \nr+2\}. 
+            \{0,2\} &\text{ if } z = 0, \\
+            \{0,1\} &\text{ if } z \in \{1, 2\} \\
+            \{0,1,2\} &\text{ if } z \in \{\nr+1, \nr+2\}. 
         \end{cases}
     \end{align*}
     The probability distribution over the question pairs is uniform.
@@ -1289,8 +1424,7 @@ Note that in the standard basis of $W_{d-1}$,
 \begin{align*}
     \ket{\tpsi}^{\EXT} = \frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}.
 \end{align*}
-\carl{The indirect way that you start to use $\left| j \right>$ in your explanation here is confusing.  If you're going to introduce a new mathematical object, then define it explicitly at the outset.}
-\hfc{Fixed.}
+
 
 We define two subspaces of $W_{d-1}$: $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = W_{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$.
 The corresponding projective measurements are $\Pi_V$ and $\Pi_{V^\perp}$. Note that $V$ is the subspace on which they should maximize $\I_{\cot(-\pi/d)}$.
@@ -1487,13 +1621,25 @@ strategy to pass the two tests above can pass this test as well.
 \label{sec:ideal_strat}
 %-----------------------------------------------
 \begin{definition}[The full test]
+\label{def:full_test}
+Define 
+\begin{align*}
+    \calX^{\EXT'} = \calY^{\EXT'} = \{0, x(a_1), x(a_2), \nr+1, \nr+2\}.
+\end{align*}
 The question sets of the full test are
 \begin{align*}
     \calX = \calX^{\LS} \cup \calX^{\EXT'} \cup \calX^{\COMM} \\
     \calY = \calY^{\LS} \cup \calY^{\EXT'} \cup \calY^{\COMM},
 \end{align*}
-where $\calX^{\EXT'}$ is obtained from $\calX^{\EXT}$ by replacing 
-$1$ by $x(a_1)$ and $2$ by $x(a_2)$, and similarly for $\calY^{\EXT'}$.
+Define answer sets $\calA_x^{\EXT'}$ for each $x \in \calX^{\EXT'}$
+by setting 
+\begin{align*}
+    &\calA_{x(a_1)}^{\EXT'} =\calA_{1}^{\EXT} \\
+    &\calA_{x(a_2)}^{\EXT'} =\calA_{2}^{\EXT} \\
+    &\calA_{x}^{\EXT'} = \calA_{x}^{\EXT} 
+    \quad \text{ for } x \neq x(a_1), x(a_2)
+\end{align*}
+The answer sets $\calB_y^{\EXT'}$ are defined analogously.
 The answer sets of the full test are
 \begin{align*}
     \calA_x = 
@@ -1510,15 +1656,6 @@ The answer sets of the full test are
     \calB_y^{\COMM} & \text{ if } y \in \calY^{\COMM}.
     \end{cases}
 \end{align*}
-The answer sets $\calA_x^{\EXT'}$ are obtained from $\calA_x^{\EXT}$
-by setting 
-\begin{align*}
-    \calA_{x(a_1)}^{\EXT'} =\calA_{1}^{\EXT} &&
-    \calA_{x(a_2)}^{\EXT'} =\calA_{2}^{\EXT},
-\end{align*}
-and $\calA_x^{\EXT'} = \calA_x^{\EXT}$ for the other $x \in \calX^{\EXT}$.
-Bob's answer sets $\calB_y^{\EXT'}$ are obtained from $\calB_y^{\EXT}$
-analogously.
 Define $N$ to be the total number of question pairs with nonzero probability 
 of the three components of the full test.
 The question distribution of the full test, $\pi: \calX \times \calY \rightarrow \R$ is defined by
@@ -1532,7 +1669,10 @@ The question distribution of the full test, $\pi: \calX \times \calY \rightarrow
     \end{cases}
 \end{align*}
 \end{definition}
-
+Note that $\calX^{\EXT'}$ is obtained from $\calX^{\EXT}$ by replacing 
+$1$ by $x(a_1)$ and $2$ by $x(a_2)$, and similarly for $\calY^{\EXT'}$.
+The answer sets $\calA_x^{\EXT'}$ are constructed from $\calA_x^{\EXT}$
+in a similar way.
 
 The ideal strategy for the full test is an extension of the ideal strategy of $\LS(r)$ to make it able to produce the ideal correlation of 
 the extended weighted CHSH test.
@@ -1556,12 +1696,16 @@ Alice's and Bob's observables for question $x(a_1)$ and $x(a_2)$ of $\calX^{\EXT
     \tM(a_j) = \tN(a_j) = \Psi(a_j) 
 \end{align*}
 for $j= 1,2$.
-It can be checked that 
+They can reproduce the ideal correlation because
 \begin{align*}
     &(\1_{W_2} \x \1_{W_2} \x \Pi_V) \tM(a_1) (\1_{W_2} \x \1_{W_2} \x \Pi_V) = \1_{W_2} \x \1_{W_2} \x (\tP_1^0|_V - \tP_1^1|_V) \\
     &(\1_{W_2} \x \1_{W_2} \x \Pi_V) \tM(a_2) (\1_{W_2} \x \1_{W_2} \x \Pi_V) = \1_{W_2} \x \1_{W_2} \x (\tP_2^0|_V - \tP_2^1|_V),
 \end{align*}
 and similarly on Bob's side.
+In other words, the observables $\tM(a_j)$ and $\tN(a_j)$ are 
+measuring the same state on the subspace $V$ as $\tP_j$ and $\tQ_j$
+for $j = 1,2$.
+
 Alice's projectors for the other questions of $\calX^{\EXT'}$ are
 \begin{align*}
     \tM_x^a = \1_{W_2} \x \1_{W_2} \x \tP_x^a
@@ -1610,6 +1754,7 @@ for each $s \in S$.
 	    \Psi_0(a_j) \x \Psi_0(a_j) \ket{\tpsi}^{\EXT} = \ket{\tpsi}^{\EXT}.
 	\end{align*}
 	for $1 \leq j \leq 4$.
+	
 	
 	Using \cref{eq:o1,eq:o2}, it is straightforward to see that $\Psi_0(a_j)\x \Psi_0(a_j) \ket{\tpsi}^{\EXT} = \ket{\tpsi}^{\EXT}$ for $j = 1,2$.
 	Before checking the two cases $j=3$ and $j=4$, we can use \cref{eq:u1u2} to derive that
@@ -1807,7 +1952,8 @@ We first give the definition of an approximate strategy of a fixed correlation.
 	E_{(x,y)} \sum_{ab} \abs{\pr{ab}{xy} - \tpr{ab}{xy}} \leq \ep.
 	\end{align}
 \end{definition}
-In our full test, the probability distribution over all the question pairs $(x,y)$ is uniform.
+In our full test, the probability distribution over all the question pairs $(x,y)$ is uniform.  \carl{[You need to address that in the definition itself (otherwise it's not a complete definition).]}
+\hfc{I think I did define the question distribution in \cref{def:full_test}. }
 The number of all the possible question pairs is 
 $N = \Theta(r)$.
 Considering that
@@ -1823,10 +1969,15 @@ In the next three subsections, we analyze the implication of an approximate stra
 three components introduced in \cref{sec:full_test}.
 
 %------------------------------------------------------------------------------------------
-\subsection{Implication of winning $\LS(r)$}
+\subsection{Implication of approximately winning $\LS(r)$}
 \label{sec:imp_lct}
 %------------------------------------------------------------------------------------------
-In the first half of this subsection, we use $(I_i,x(s))$ to denote the question pair so that Alice gets equation label $I_i$ and Bob gets a variable label $x(s)$ for some $s \in S$. For simplicity, we denote 
+\carl{[Regarding the title of this subsection: Technically, you are only assuming that the correlation approximately wins $LS ( r )$.]}
+\hfc{Fixed.}
+
+In the first half of this subsection, we use $(I_i,x(s))$ to denote the question pair so that Alice gets equation label $I_i$ and Bob gets a variable label $x(s)$ for some $s \in S$. 
+\carl{[This last sentence is kind of vague.  If you're recalling notation from a previous subsection, you can just say that.]}
+For simplicity, we denote 
 Alice's observable for variable $x(s)$ in equation $i$ by $M_i(s)$ and
 Bob's observable for variable $x(s)$ by $N(s)$. 
 
@@ -1834,12 +1985,19 @@ The first implication of an approximate winning strategy is given in the proposi
 \begin{proposition}
 	\label{prop:lct_base}
 	Let $\bS$ be an $\ep$-approximate strategy of $\fC(d,r)$.
-	Then there exist binary observables $\{ M(s) \}_{s \in S} $, such that
+	\hf{Define $M(s) := M_i(s)$ where 
+	$i$ is the smallest among all $i$'s
+	such that $x(s) \in I_i$.}
+	Then, 
 	\begin{align}
 		&M(s) N(s) \ket{\psi} \appd{O(\sr\se)} \ket{\psi} \\
 		&\Pi_{s \in I_i} M(s) \ket{\psi} \appd{O(\sr\se)}(-1)^{c(i)} \ket{\psi}.
 	\end{align}
 \end{proposition}
+\carl{[This proposition doesn't seem well-phrased --- it doesn't seem useful  to simply claim the existence of binary observables $M ( s )$ without specifying how they are related to the strategy $S$.]}
+\hfc{How about now?}
+
+
 \begin{proof}
 The condition that $(\tpr{\ba b}{i s})$ of $\fC(d,r)$ wins the linear system game optimally is equivalent to
 \begin{align*}
@@ -1851,6 +2009,7 @@ It has been shown in Ref.~\cite{slofstra2017} that
 	\bra{\psi} M_i(s) N(s) \ket{\psi} &= 2 \sum_{\ba,b: \ba \in X_i, a(s) = b} \pr{\ba b}{ij} -1 \\
 	&\appd{O(r \ep)} 2\sum_{\ba,b: \ba \in X_i, a(j) = b} \tpr{\ba b}{is} - 1 = 1.
 \end{align*}
+\carl{[The previous sentence \& equation do not make sense to me.]}
 Since $M_i(s)$ and $N(s)$ are binary observables, we know that
 \begin{align*}
     \norm{M_i(s)\ket{\psi} - N(s)\ket{\psi}}^2 
@@ -1899,17 +2058,18 @@ Note that with the same technique, we can prove that
 for $1 \leq i \leq \mr$.
 \end{proof}
 
-To make the following derivations easier to follow, we define the meaning
-for some operators to approximately satisfy some group relation.
+To make the following derivations easier, we introduce the following terminology.
 \begin{definition}
     Let $S$ be a set of generators, and $\{s_i\}_{i=1}^n$ and $\{s'_j\}_{j=1}^m$
     be two sequences of $S$.
-    Define a relation $r$, which is $\Pi_{i=1}^n s_i = \Pi_{j=1}^m s'_j$.
+    Define a relation $r$, \hf{whose equation form} is $\Pi_{i=1}^n s_i = \Pi_{j=1}^m s'_j$.
     We say operators $\{M(s) : s \in S\}$ $\ep$-approximately satisfy the relation
     $r$ on the state $\ket{\psi}$ if 
     \begin{align*}
         \Pi_{i=1}^n M(s_i)\ket{\psi} \appd{\ep} \Pi_{j=1}^m M(s'_j) \ket{\psi}. 
     \end{align*}
+\carl{[Technically, the word ``relation'' refers to an element of the free group, not to an equation between elements of the free group, so you need to write this in a way that accounts for that.  It's a minor issue but worth addressing.]}
+\hfc{How about this way?}
 \end{definition}
 In other words, \cref{prop:lct_base} is equivalent to the following proposition.
 \begin{proposition}
@@ -1921,7 +2081,7 @@ In other words, \cref{prop:lct_base} is equivalent to the following proposition.
 	where $S$ and $R$ are defined in the definition of $\Gamma$ 
 	(\cref{def:gamma}).	
 \end{proposition}
-Recall that the group $\Pg_1$ is embedded in $\Gamma$.
+Recall that the group $\Pg_1$ (\cref{def:g1}) is embedded in $\Gamma$.  \carl{[You need to tell the reader where they can find a full definition of $\Pg_1$. (Always do so when you reintroduce a mathematical object.)]}
 Following the embedding procedure, we can prove the next proposition.
 \begin{proposition}
     \label{prop:lct_pg1}
@@ -1933,6 +2093,15 @@ Following the embedding procedure, we can prove the next proposition.
 	where $S_1$ is the generator set of $\Pg_1$
     and $R_1$ is the relation set of $\Pg_1$.	
 \end{proposition}
+
+\carl{[I don't think it's helpful
+to the reader to phrase this result in terms of $\Pg_1$, given that you never wrote out $\Pg_1$ in the main text.  I think you should write this in such a way that a reader who hasn't read the appendix can follow what you're doing.  (One possibility is to just prove the relations that you need, step by step, and then just add comments referring to how what you are doing parallels your proofs in the appendix.]}
+\hfc{We need all the relations from $\Pg_1$ (\cref{def:g1}) to recover relations of $\Pg_0$ (\cref{def:g0})
+so it is not possible to write out each one of them. 
+What I am doing is proving one of them and comment that the rest of them require the same argument.
+On the other hand, I don't think it is important for the reader to know the relations of $\Pg_1$
+or $\Pg_0$. The only relation that will feature in the self-test proof is the relation $UOU\ct = O^r$.}
+
 \begin{proof}
     First, we prove 
     \begin{align}
