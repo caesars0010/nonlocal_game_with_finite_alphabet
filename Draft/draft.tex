@@ -1009,152 +1009,218 @@ following group
 \label{eq:pgroup}
 \end{align}
 for some $r \in \N$ into the solution group, denoted by $\Gamma$, of a binary linear system game, denoted by $\LS(r)$.
-Since the steps to embed $\Pg$ into $\Gamma$ follows the procedure detailed in the proofs of Proposition~$33$, Lemma~$29$ and
-Proposition $27$ of Ref.~\cite{slofstra2017}, 
-we defer the formal statements of the embedding procedure till \cref{sec:embedding},
-but sketch this procedure in \cref{sec:embed_idea}. 
-In \cref{sec:gamma_def}, we define $\Gamma$ and introduce how to
-construct $\LS(r)$ from $\Gamma$.
-We also highlight a few operators from a finite-dimensional representation of $\Gamma$.
-The representation will be used later to build the ideal strategy.
-
-%----------------------------------------
-\subsection{A sketch of the procedure
-for constructing $\LS ( r )$}
-\label{sec:embed_idea}
-%----------------------------------------
-The group $\Pg$ (\cref{eq:pgroup}) is first embedded into $\Pg_0$ (\cref{def:g0}), then $\Pg_1$ (\cref{def:g1}), and finally into the group $\Gamma$ (\cref{def:gamma}), which is the
-solution group of $\LS ( r )$.  
-Thus we obtain a chain of embeddings:
+The steps to embed $\Pg$ into $\Gamma$ follows the procedure detailed 
+in the proofs of Proposition~$33$, Lemma~$29$ and Proposition $27$ of Ref.~\cite{slofstra2017}, 
+so the group $\Pg$ (\cref{eq:pgroup}) is first embedded into $\Pg_0$ (\cref{def:g0}), then $\Pg_1$ (\cref{def:g1}), and finally into the group $\Gamma$ (\cref{def:gamma}),
+and we obtain a chain of embeddings:
 \begin{align}
-\Pg \hookrightarrow \Pg_0 \hookrightarrow \Pg_1 \hookrightarrow
-\Gamma.
+\Pg \hookrightarrow \Pg_0 \hookrightarrow \Pg_1 \hookrightarrow \Gamma.
 \end{align}
+
+This section is structured as follows.
+In \cref{sec:g0}, we define the group $\Pg_0$ and prove that $\Pg$ is embedded in $\Pg_0$.
+In \cref{sec:g1}, we define the group $\Pg_1$ and prove that $\Pg_0$ is embedded in $\Pg_1$.
+\Cref{sec:gamma} contains the definition of the group $\Gamma$ and the proof that $\Pg_1$
+is embedded in $\Gamma$.
 The purposes of introducing each intermediate
-group are explained below.
+group are explained along the definition.
+Note that, we defer the full definitions of the representations of $\Pg_0$, $\Pg_1$ and $\Gamma$
+until \cref{sec:rep_gamma}. 
+Instead, We only highlight a few operators from a finite-dimensional representation of $\Gamma$.
+The representation will be used later to build the ideal strategy.
+In \cref{sec:gamma_def}, we construct $\LS(r)$ from $\Gamma$ and give the 
+formal definition of $\LS( r )$.
 
 
-The group $\Pg_0 := \ip{S_0:R_0}$ is a 
-conjugacy group, which is defined in \cref{def:spe_conj_grp}. 
-The generators in $S_0$ are $a_i$ for $i=1 \dots r+5$.
+
+%----------------------------------------
+\subsection{The group $\Pg_0$}
+\label{sec:g0}
+%----------------------------------------
+
+The group $\Pg_0$ is a conjugacy group (\cref{def:spe_conj_grp}), and is defined below.
 The purpose of this step is to embed $\Pg$ into a group where all the
 generators are of order-$2$, because
 it is impossible to find a homomorphism from $\Pg$ to a solution group that maps $u$ or $o$, which can have arbitrary order, to a single generator. On the other hand, 
 a homomorphism from $\Pg_0$ to a solution group can be easier to find.
-The special generators of $\Pg_0$ are $a_1, a_2, a_3$ and $a_4$ because the product $a_1a_2$ behaves similarly as $o$
-and the product $a_3a_4$ behaves similarly as $u$.
-Moreover, the conjugacy relations in $R_0$ can be combined to recover the relation $uou^{-1} = o^r$ (see \cref{prop:g0}), so
-a homomorphism: $\Pg \rightarrow\Pg_0$  that maps $o$ to $a_1a_2$ and $u$ to $a_3a_4$ is an embedding of $\Pg$ into $\Pg_0$
-by Proposition $33$ of Ref.~\cite{slofstra2017}.
-To better characterize the conjugacy relations in $R_0$, we introduce $C(r)$ defined in \cref{eq:cr}
-of tuples $(i,j,k)$ such that $(i,j,k) \in C(r)$ if and only if $a_ia_ja_i = a_k$ is in $R_0$. 
+\begin{definition}	
+\label{def:g0}
+	Let the set $S_0$ be 
+	\begin{align*}
+		S_0 = \{o_i\}_{i=1}^{r} \cup \{u_i\}_{i=1}^5,
+	\end{align*}
+	and the set $R_0$ be the union of 
+	\begin{align*}
+	&R_{base} = \{s^2 = e | s \in S\},\\
+	&R_{u} = \{ u_3 = u_2o_1u_2 \quad u_4 = u_2o_2u_2 \quad 
+	u_5 = u_1u_3u_1 \quad o_2 = u_1u_4u_1 \quad u_5 = o_1 o_r o_1\},
+	\end{align*}
+	and 
+	\begin{align*}
+	R_o = 
+	\begin{cases} 
+	\bigcup_{j=1}^{r/2-1}\{ o_{1+2j} = o_1o_{2j}o_1 \quad o_{2+2j} = o_2o_{1+2j}o_2\} \quad \text{ if $r$ is even },\\
+	\{o_3 = o_2o_1o_2\} \cup \bigcup_{j=1}^{(r-3)/2}\{
+	 o_{2+2j} =o_1o_{1+2j}o_1 \quad o_{3+2j} = o_2o_{2j+2}o_2 \}\quad\text{ if $r$ is odd }.
+	\end{cases}
+	\end{align*}
+	The group $\Pg_0$ is a group with presentation $\ip{R_0:S_0}$.
+\end{definition}
+The special generators of $\Pg_0$ are $o_1, o_2, u_1$ and $u_2$ because the product $o_1o_2$ behaves similarly as $o$
+and the product $u_1u_2$ behaves similarly as $u$.
+Moreover, the conjugacy relations in $R_0$ can be combined to recover the relation $uou^{-1} = o^r$,
+as proved in the next proposition.
+\begin{proposition}
+    \label{prop:g0}
+	The group $\Pg$ is embedded in $\Pg_0$.
+	Furthermore, the generators of $\Pg_0$ satisfy the relation 
+	\begin{align}
+	    \label{eq:uo_comm}
+	    &(u_1u_2) o_2 (u_2u_1) = o_2 \\ 
+	    \label{eq:uo_rel}
+		&(u_1u_2)^j o_1o_2 (u_2u_1)^j = (o_1o_2)^{r^j}, 
+	\end{align}
+	for any $ j \in \N$.
+\end{proposition}
+\begin{proof}
+    We prove \cref{eq:uo_comm} first. It is easy to see that
+    \begin{align}
+        u_1 (u_2o_2u_2) u_1 = u_1u_4u_1 =o_2.
+    \end{align}
+    
+    Next, we prove that $\Pg$ is embedded in $\Pg_0$ by prove the $j = 1$ case of \cref{eq:uo_rel}.
+    The proof of Proposition $33$ of Ref.~\cite{slofstra2017} gives the recipe about
+    how to construct a finite-dimensional representation of $\Pg_0$ from a 
+    finite-dimensional representation of $\Pg$, so Lemma $15$ of Ref.~\cite{slofstra2017}
+    proves that a homomorphism $\phi: \Pg \rightarrow \Pg_0$ such that $\phi(u) = u_1u_2$ and 
+    $\phi(o) = o_1o_2$ is injective.
+    
+	We prove \cref{eq:uo_rel} by induction.
+	The base case follows the direct calculation given below
+	\begin{align*} 
+		u_1u_2 o_1o_2 u_2u_1 = &u_1 (u_2 o_1u_2) (u_2o_2 u_2) u_1 \\
+	=& (u_1 u_3 u_1) (u_1 u_4 u_1)\\
+	=& u_5 o_2\\
+	=& o_1o_ro_1 o_2.
+	\end{align*}
+	Then we substitute the definitions of $o_k$ for $k = r \dots 3$ into the equation above, which 
+	proves the $j=1$ case.
+	
+	Now assume the statement is true for $j = n$, then for $j = n+1$
+	\begin{align*}
+		(u_1u_2)^{n+1} o_1o_2 (u_2u_1)^{n+1} =& u_1u_2 (o_1o_2)^{r^n} u_2u_1 \\ 
+		 =& (u_1u_2 o_1o_2 u_2u_1)^{r^n} \\
+		 =& (o_1o_2)^{r^{n+1}},
+	\end{align*}
+	where from the first line to the second line, we insert $(u_2u_1)(u_1u_2)$ between every pair of $o_1o_2$, and
+	from the second line to the third line, we applied the $j=1$ case. Hence, the statement is true.
+\end{proof}
+Note that our representation $\Psi_0$ of $\Pg_0$ is different from the representation
+constructed in the proof of Proposition $33$ of Ref.~\cite{slofstra2017}.
+We give the formal definition of $\Psi_0$ (\cref{def:rep_g0}) in \cref{sec:rep_gamma}.
 
-Next, we introduce group $\Pg_1 := \ip{S_1: R_1}$ where $S_0 \subset S_1$, which is a nice conjugacy group defined in \cref{def:nice_conj_grp}.
-The special property of $R_1$ is that every relation in $R_0$ can be recovered from $R_1$.
-Ensuring that every conjugacy relation is associating two commuting operators is the purpose of introducing $\Pg_1$. \carl{I think a reader would find that last statement unclear.}
-\hfc{Maybe we just remove it?}
-It makes the construction of a finite-dimension representation of $\Gamma$ from
+To better characterize all the conjugacy
+relations of $\Pg_0$ and simplify the form of $\Pg_0$, 
+we relabel $u_i$ and $o_i$'s as $a_i$'s such that
+\begin{align}
+	a_j := 
+	\begin{cases}
+	 o_j \text{ for } j = 1,2 \\
+	 u_{j-2} \text{ for } j = 3\dots 7 \\
+	 o_{j-5} \text{ for } j = 8 \dots r+5.
+	\end{cases}
+\end{align}
+Then we define the set $C(r)$ of tuples $(i,j,k)$ such that
+\begin{align}
+\label{eq:cr}
+	C(r) = \{ (i,j,k) |  (a_ia_ja_i = a_k) \in R_0 \}.
+\end{align}
+The size of $C(r)$ is $r+3$. 
+Hence, another presentation of the group $\Pg_0$ is
+\begin{align*}
+    \Pg_0 = \ip{ \{a_i\}_{i=1}^{r+5} : \{a_i^2 =e \}_{i=1}^{r+5} \cup \{ a_ia_ja_i = a_k \vert (i,j,k) \in C(r)\}},
+\end{align*}
+and we will construct $\Pg_1$ based on this presentation of $\Pg_0$.
+
+%---------------------------------
+\subsection{The group $\Pg_1$}
+\label{sec:g1}
+%---------------------------------
+The group $\Pg_1$ is a nice conjugacy group (\cref{def:nice_conj_grp}).
+We embed $\Pg_0$ into $\Pg_1$ to
+make the construction of a finite-dimension representation of $\Gamma$ from
 a finite-dimension representation of $\Pg_1$ easier.
-Specifically, in this step, we introduce generators $a_i, b_i, c_i, d_i \in S_1$
-for each generator $a_i \in S_0$.
-There is also a special generator $f_0 \in S_1$ such that
+\begin{definition}
+\label{def:g1}
+Define the set $S_1$ to be
 \begin{align*}
-    a_i = b_ic_i = f_0d_i. 
+	S_1 = \{a_i, b_i, c_i, d_i\}_{i=1}^{r+5} \cup \{ f_0 \} \cup \{h_{jk}\}_{(i,j,k) \in C(r)},
 \end{align*}
-The relation $a_i = b_ic_i$ guarantees that $b_i$ commutes
-with $c_i$.
-The generators $b_i$ and $c_i$ are also related by a conjugacy relation
+and the set $R_1$ to be
 \begin{align*}
-    c_i = f_0 b_i f_0. 
+	R_1 = &\{ s^2 = e \vert s \in S_1\}\\ 
+	&\cup 
+	\{a_i = b_ic_i = f_0d_i, \quad f_0b_if_0 =c_i\}_{i= 1}^{r+5} \\ 
+	&\cup
+	\{h_{jk}b_j c_k = e, \quad d_ib_jd_i = c_k\}_{(i,j,k) \in C(r)}.
 \end{align*}
-For each $(i,j,k) \in C(r)$, 
-$S_1$ contains an auxiliary generator $h_{jk}$, and
-$R_1$ 
-contains a conjugacy relation 
-\begin{align*}
-    d_ib_jd_i = c_k,
-\end{align*}
-and a linear relation
-\begin{align*}
-    h_{jk}b_jc_k = e.
-\end{align*}
-The introduction of $h_{jk}$ helps us to deduce that 
+The group $\Pg_1$ is a group with the presentation $\ip{S_1 : R_1}$.
+\end{definition}
+Note that the group $\Pg_1$ is the same as the group $K$ used in the proof of Lemma $29$ of Ref.~\cite{slofstra2017}.
+For each $1 \leq i \leq r+5$, the relation $a_i = b_ic_i$ guarantees that $b_i$ commutes with $c_i$.
+For each $(i,j,k) \in C(r)$, the linear relation $h_{jk} b_j c_k = e$ guarantees that
 $b_j$ commutes with $c_k$.
-Hence, every conjugacy relation in $R_1$ is either of the form
-$f_0b_if_0 = c_i$ for $1 \leq i \leq r+5$, or
-$d_ib_jd_i = c_k$ for $(i,j,k) \in C(r)$.
-From the conjugacy relations in $R_1$, it can be proven that
-\begin{align*}
-    d_ic_jd_i = b_k \text{ for each } (i,j,k) \in C(r).
-\end{align*}
-Then we can expand $a_ia_ja_i$ by first substituting in $a_i = f_0 d_i$ and $a_j = b_jc_j$ and then repeatedly substituting in the conjugacy relations in $R_1$ and 
-the conjugacy relations deduced above, so we can get
-\begin{align*}
-    a_ia_ja_i = f_0 d_i b_jc_j f_0 d_i
+
+The relation between $\Pg_0$ and $\Pg_1$ is summarized in the propositions below, which 
+is a specific case of Lemma $29$ of \cite{slofstra2017}.
+\begin{proposition}
+    \label{prop:g0g1}
+	The group $\Pg_0$ is embedded in $\Pg_1$. 
+\end{proposition}
+\begin{proof}
+    We prove this proposition by showing that generators $a_i$'s in $S_1$
+    satisfy the relation $a_i a_j a_i = a_k$ for all $(i,j,k) \in C(r)$.
+    This means the homomorphism $\phi: \Pg_0 \rightarrow \Pg_1$ that maps $a_i$
+    to $a_i$ is homomorphism from $\Pg_0$ to $\Pg_1$. 
+   
+	We first show that $d_i c_j d_i = b_k$, which is because
+	\begin{align*}
+		d_i c_j d_i = d_i (f_0 b_j f_0) d_i = f_0 (d_i b_j d_i) f_0 = f_0 c_k f_0 = b_k.
+	\end{align*}
+	Then, we can prove that 
+	\begin{align*}
+		a_i a_j a_i = f_0 d_i b_j c_j f_0 d_i 
 		= (f_0 d_i b_j d_i f_0)(f_0 d_i c_j d_i f_0) 
 		= (f_0 c_k f_0)(f_0 b_k f_0) 
-		= b_k c_k = a_k.
-\end{align*}
+		= b_k c_k = a_k,
+	\end{align*}
+	where we use the fact that $f_0$ commutes with $d_i$.
+	
+	A representation of $\Pg_1$ can also be built upon a representation of $\Pg_0$.
+    Suppose $\Psi_0$ is a representation of $\Pg_0$ on some Hilbert space $\calH$, then 
+    a representation of $\Pg_1$, $\Psi_1$, on the Hilbert space $\C^2 \x \calH$ can
+    be constructed such that
+    \begin{align*}
+        &\Psi_1(a_i) = \1_{\C^2} \x \Psi_0(a_i)
+    \end{align*}
+    as proved in Lemma $29$ of Ref.~\cite{slofstra2017}.
+    Then, the injectivity of $\phi$ follows Lemma $15$ of Ref.~\cite{slofstra2017}.
+\end{proof}
+The consequence of this proposition is that $\Pg$ can be embedded in $\Pg_1$.
+We give the formal definition of the represention $\Psi_1$ of $\Pg_1$ 
+(\cref{def:rep_g1}) in \cref{sec:rep_gamma}.
 
 
-A representation of $\Pg_1$ can also be built upon a representation of $\Pg_0$.
-Suppose $\Psi_0$ is a representation of $\Pg_0$ on some Hilbert space $\calH$, then 
- a representation of $\Pg_1$, $\Psi_1$, on the Hilbert space $\C^2 \x \calH$ can
- be constructed such that
-\begin{align*}
-    &\Psi_1(a_i) = \1_{\C^2} \x \Psi_0(a_i).
-\end{align*}
-For more details of $\Psi_1$, we refer to \cref{sec:rep_gamma}.
-Hence, a homomorphism $\phi: \Pg_0 \rightarrow \Pg_1$ that 
-maps $a_i$ to $a_i$ is an embedding of $\Pg_0$ into $\Pg_1$
-by Lemma $15$ of Ref.~\cite{slofstra2017}.
 
-
-
-In the last step, we can construct $\Gamma:= \ip{S:R}$ with $S_1 \subset S$, in a way such that
-$\Gamma$ only has linear relations, and the linear relations can be combined
+%-------------------------------------
+\subsection{The group $\Gamma$}
+\label{sec:gamma}
+%-------------------------------------
+The group $\Gamma$ is a solution group,
+so all the generators of $\Gamma$ are of order-$2$
+and all the relations are linear relations.
+Moreover, the linear relations can be combined
 to recover the conjugacy relations in $R_1$.
-We demonstrate how relation $f_0 b_1 f_0 = c_1$ is embedded in
-$6$ linear relations of $R$ as an example. 
-We introduce auxiliary generators $f_1, f_2$ and $\{p_{1,j}\}_{j=1}^5$ such that they satisfy the linear relations:
-\begin{align*}
-    &f_0 f_1 f_2 = e && b_1 f_2 p_{1,1} = e && p_{1,1} p_{1,2} p_{1,3} = e\\
-	&f_0 p_{1,3} p_{1,4} = e && c_1 p_{1,4} p_{1,5} = e \quad f_1 p_{1,2} p_{1,5} = e.
-\end{align*}
-Then, we expand $f_0b_1f_0$ by substituting in the equations above and
-get
-\begin{align*}
-    f_0b_1f_0 = (f_1f_2)(f_2p_{1,1})(p_{1,3}p_{1,4}) =
-    f_1 p_{1,2}p_{1,4} = p_{1,5}p_{1,4} = c_1.
-\end{align*}
-The other conjugacy relations of $\Pg_1$ are embedded in linear relations analogously.
-
-A representation of $\Gamma$ can also be built from
-a representation $\Psi_1$ of $\Pg_1 \circlearrowleft \mathbb{C}^2 \otimes \mathcal{H}$
-that was constructed above. \carl{At this point the reader may be losing track of the precise meaning of what you're saying.  Perhaps you could simply say, ``A representation of $\Gamma$ can also be built from the
-representation $\Psi_1 \circlearrowleft \mathbb{C}^2 \otimes \mathcal{H}$ that was constructed above.''}
-\hfc{Fixed, but I worry about the symbol $\circlearrowleft$.}
-We denote the representation of $\Gamma$ by $\Psi$ and
-it is defined on $\C^2 \x \C^2 \x \calH$ such that
-\begin{align*}
-    \Psi(s) = \1_{\C^2} \x \Psi_1(s) \text{ for each }
-    s \in S_1.
-\end{align*}
-In particular, it means that for each $a_i \in S_0$
-\begin{align*}
-    \Psi(a_i) = \1_{\C^2} \x \1_{\C^2} \x \Psi_0(a_i).
-\end{align*}
-Hence, a homomorphism $\phi: \Pg_1 \rightarrow \Gamma$ that 
-maps $s$ to $s$ for each $s \in S_1$ is an embedding of $\Pg_1$ into $\Gamma$
-by Lemma $15$ of Ref.~\cite{slofstra2017}.
-
-
-%---------------------------------------------------
-\subsection{Formal definitions}
-\label{sec:gamma_def}
-%---------------------------------------------------
-We define the solution group of the linear system game $\LS(r)$ first, following the steps described in the previous subsection.
-Then we define the game $\LS(r)$.
 \begin{definition}
 \label{def:gamma}
 Define the set $S$ to be 
@@ -1190,89 +1256,60 @@ $
 $\ip{S \cup \{J\} : R}$.}
 \end{definition}
 
-From the group $\Gamma$ we can construct the binary linear system game $\LS(r)$. Basically,
-we associate a variable $x(s)$ to each generator $s \in S$.
-Then each linear relation in $R$ can be translated to a linear equation.
-For example, the linear relation $f_0f_1f_2 = e$ is translated to the equation $x(f_0) + x(f_1) + x(f_2) = 0$, and the relation 
-$f_1g_1m_2 = J$ is translated to the equation
-$x(f_1) + x(g_1) + x(m_2) = 1$. 
-The complete list of the equations is given in \cref{def:lsg_eq}.
-\begin{definition}
-\label{def:lsg}
-The linear system game $\LS(r)$ consists of
-\begin{align*}
-    & \calX^{\LS} = \{I_i\}_{i=1}^{\mr}, \\
-    & \calY^{\LS} = \{ x(s) : s \in S \},
-\end{align*}
-where $I_i = \{ s : H(i,s) = 1\}$ is the set of all the nonzero coefficient of equation $i$
-and $\mr := 14r + 62$ is the number of equations.  
-\carl{Since you are defining Alice's inputs to be subsets of S, why don't you just define Bob's inputs to be elements of S? Also, again you need to account that
-$J$ is an element of $S$.}
-\hfc{I think setting $\calY = S$ will cause confusion.
-You can see the forms of the equations in \cref{def:lsg_eq}.
-If I set the question set to be $S$, the reader will confuse the 
-linear equations with linear relation.
-I have moved $J$ out of $S$.}
-Details of $I_i$ for $1 \leq i \leq \mr$ can be found in \cref{def:lsg_eq}.
-The answer sets are 
-\begin{align*}
-    \calA^{\LS} = (\Z_2)^{I_i} && \calB^{\LS} = \Z_2,
-\end{align*}
-because $|I_i| = 3$ for all $i$.
-The probability distribution is uniform over all the pairs $(I_i, x(s))$ such that $s \in I_i$, so
-\begin{align*}
-    \pi^{\LS}(I_i, x(s)) = 
-    \begin{cases}
-        1/N(r) & \text{ if } s \in I_i \\
-        0 & \text{otherwise,}
-    \end{cases}
-\end{align*}
-where $N(r) := 157r + 685$ is the total number of valid question pairs.
-We define $X_i := \{ \ba \in (\Z_2)^{I_i}: \sum_{s \in I_i} a(s) = c(i) \}$, which is the set of all the valid answers of equation $i$.
-Given an answer $(\ba,b)$ for question $(I_i,x(s))$, 
-the score function is
-\begin{align*}
-    V^{\LS}_{I_i, x(s)}(\ba, b) = 
-    \begin{cases}
-        1 \text{, if } \ba \in X_i \text{ and } a(s) = b\\
-        0 \text{, otherwise}.
-    \end{cases}
-\end{align*}
-\end{definition}
-\carl{This definition does not seem consistent.  You are using $a$ both as a function on $\{ 1, 2, 3 \}$ and as a function on $S$.}
-\hfc{Fixed.}
-The construction of $\LS(r)$ proves the following theorem.
-\begin{theorem}
-	The group $\Pg$ can be embedded in the solution group of a binary linear system game which has
-	$\nr := 16r+75$ variables and $\mr := 14r + 62$ equations, where each equation has $3$ variables.
-\end{theorem}
-\hf{Note that when $\LS(r)$ is played between Alice and Bob, the total
-number of equation and variable pairs is $N(r)$ is of order $\Theta(r)$.}
+In the next proposition, we prove that the group $\Pg_1$ is embedded in $\Gamma$.
+\begin{proposition}
+    \label{prop:g1gamma}
+	The group $\Pg_1$ can be embedded in $\Gamma$.
+	The generators of $\Gamma$ also satisfy the relations: 
+	\begin{align}
+	    \label{eq:mg1} &f_0 g_0 f_0 g_0 = J,\\
+	    \label{eq:mg2} &f_2 g_2 f_2 g_2 = J.
+	\end{align}
+\end{proposition}
+\begin{proof}
+    To prove the first claim, we show that the generators
+    $b_i$, $c_i$, $d_i$ satisfy the relations
+    $d_ib_jd_i = c_k$ for each $\bc = (i,j,k) \in C(r)$.
+    \begin{align*}
+        d_ib_jd_i =& (k_{\bc 1} f_2)(f_2 k_{\bc 2})(k_{\bc 4} k_{\bc 5})\\ 
+        =& k_{\bc 1}(k_{\bc 2}k_{\bc 4})k_{\bc 5} \\
+        =& (k_{\bc 1} k_{\bc 3}) k_{\bc 5} \\
+        =& k_{\bc 6} k_{\bc 5} \\
+        =& c_k.
+    \end{align*}
+    The derivation of $f_0 b_i f_0 = c_i$ is similar for $1 \leq i \leq r+5$, so we omit it here.
+    Hence, a map $\phi:\Pg_1 \rightarrow \Gamma$ that maps $s$
+    to $s$ for each $s \in S_1$ is a homomorphism between $Pg_1$ and 
+    $Gamma$. 
+    A representation of $\Gamma$ can be constructed from a representation 
+    of $\Pg_1$ as shown in the proof of Proposition $27$ of Ref.~\cite{slofstra2017},
+    so Lemma $15$ of Ref.~\cite{slofstra2017} proves the homomorphism $\phi$
+    is injective.
+    
+    The second claim follows a similar derivation
+    using linear relations in $R_{MS}$, so we omit it here.
+\end{proof}
+Since $\Pg$ is embedded in $\Pg_1$, we can conclude that
+$\Pg$ is embedded in $\Gamma$ as well.
 
-\hf{The ideal strategy of $\LS(r)$ is based on
-the representation $\Psi$ of $\Gamma$ defined in \cref{def:rep_gamma}
-of \cref{sec:rep_gamma}.
-We discuss the ideal strategy in in \cref{sec:tests}.
-Here we only highlight what $a_1, a_2, a_3$ and $a_4$ are mapped to by the representation $\Psi$, along
-with the important properties of the representation of these four generators,
-since they are the key generators of $\Gamma$.
-}
-
-The representation $\Psi$ is defined on the Hilbert space
+The representation $\Psi$ of $\Gamma$ is defined on the Hilbert space
 $W_2 \x W_2 \x W_{d-1}$,
 where $W_k$ denotes a Hilbert space of
-dimension $k$.  We denote the
+dimension $k$. 
+The formal definition of $\Gamma$ is defined in \cref{def:rep_gamma}
+in \cref{sec:rep_gamma}.
+We denote the
 standard basis of $W_k$ by $\{\ket{x_j}\}_{j=1}^{k}$.
 We define an operator $O$ on $W_{d-1}$ as
 \begin{align*}
     O = \sum_{j=1}^{d-1} \omega_d^j \ketbra{x_j}{x_j}.
 \end{align*}
-Note that another form of the basis of $W_{d-1}$ is $\{\ket{x_{r^j}}\}_{j=0}^{d-2}$, where the subscript $r^j$ is taken
-modulo $d$ implicitly,
+Note that another form of the basis of $W_{d-1}$ is $\{\ket{x_{r^j}}\}_{j=0}^{d-2}$, 
+where the subscript $r^j$ is taken modulo $d$ implicitly,
 because another form of $O$ is 
 \begin{align}
     \label{eq:O}
-    \sum_{j=0}^{d-2} \omega_d^{r^j} \ketbra{x_{r^j}}{x_{r^j}}.
+    O = \sum_{j=0}^{d-2} \omega_d^{r^j} \ketbra{x_{r^j}}{x_{r^j}}.
 \end{align}
 We use the second form of the basis when it is convenient.
 The other basis of $W_{d-1}$ that we use is $\{ \ket{u_j} \}_{j=0}^{d-2}$ given by
@@ -1280,8 +1317,7 @@ The other basis of $W_{d-1}$ that we use is $\{ \ket{u_j} \}_{j=0}^{d-2}$ given 
 	\ket{u_k} = \frac{1}{\sqrt{d-1}} \sum_{j=0}^{d-2} \omega_{d-1}^{jk} \ket{x_{r^j}}.
 \end{align*}
 We denote the identity operator for the subspace $W_k$ by $\1_{W_k}$.
-The representations of $a_1, a_2, a_3$ and
-$a_4$ are 
+The representations of $a_1, a_2, a_3$ and $a_4$ are 
 \begin{align}
     \label{eq:o1} \Psi(a_1) &= \1_{W_2} \x \1_{W_2} \x \left(\sum_{j=1}^{(d-1)/2} \omega_d^j \ketbra{x_j}{x_{d-j}} + \omega_d^{-j} \ketbra{x_{d-j}}{x_{j}}\right) \\
     \label{eq:o2} \Psi(a_2) &= \1_{W_2} \x \1_{W_2} \x \left(\sum_{j=1}^{d-1} \ketbra{x_j}{x_{d-j}} \right).
@@ -1309,6 +1345,100 @@ and $\Psi(a_3a_4) = \1_{W_2} \x \1_{W_2} \x U$ where $O$ is defined in \cref{eq:
     U = \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}}.
 \end{align}
 The operators $U$ and $O$ satisfy the relation $UOU\ct = O^r$.
+
+% A representation of $\Gamma$ can also be built from
+% a representation $\Psi_1$ of $\Pg_1 \circlearrowleft \mathbb{C}^2 \otimes \mathcal{H}$
+% that was constructed above.
+% We denote the representation of $\Gamma$ by $\Psi$ and
+% it is defined on $\C^2 \x \C^2 \x \calH$ such that
+% \begin{align*}
+%     \Psi(s) = \1_{\C^2} \x \Psi_1(s) \text{ for each }
+%     s \in S_1.
+% \end{align*}
+% In particular, it means that for each $a_i \in S_0$
+% \begin{align*}
+%     \Psi(a_i) = \1_{\C^2} \x \1_{\C^2} \x \Psi_0(a_i).
+% \end{align*}
+% Hence, a homomorphism $\phi: \Pg_1 \rightarrow \Gamma$ that 
+% maps $s$ to $s$ for each $s \in S_1$ is an embedding of $\Pg_1$ into $\Gamma$
+% by Lemma $15$ of Ref.~\cite{slofstra2017}.
+
+
+%---------------------------------------------------
+\subsection{Formal definitions}
+\label{sec:gamma_def}
+%---------------------------------------------------
+We define the solution group of the linear system game $\LS(r)$ first, following the steps described in the previous subsection.
+Then we define the game $\LS(r)$.
+
+
+From the group $\Gamma$ we can construct the binary linear system game $\LS(r)$. Basically,
+we associate a variable $x(s)$ to each generator $s \in S$.
+Then each linear relation in $R$ can be translated to a linear equation.
+For example, the linear relation $f_0f_1f_2 = e$ is translated to the equation $x(f_0) + x(f_1) + x(f_2) = 0$, and the relation 
+$f_1g_1m_2 = J$ is translated to the equation
+$x(f_1) + x(g_1) + x(m_2) = 1$. 
+The complete list of the equations is given in \cref{def:lsg_eq}.
+\begin{definition}
+\label{def:lsg}
+The linear system game $\LS(r)$ consists of
+\begin{align*}
+    & \calX^{\LS} = \{I_i\}_{i=1}^{\mr}, \\
+    & \calY^{\LS} = \{ x(s) : s \in S \},
+\end{align*}
+where $I_i = \{ s : H(i,s) = 1\}$ is the set of all the nonzero coefficient of equation $i$
+and $\mr := 14r + 62$ is the number of equations.  
+\carl{Since you are defining Alice's inputs to be subsets of S, why don't you just define Bob's inputs to be elements of S? Also, again you need to account that
+$J$ is an element of $S$.}
+\hfc{I think setting $\calY = S$ will cause confusion.
+You can see the forms of the equations in \cref{def:lsg_eq}.
+If I set the question set to be $S$, the reader will confuse the 
+linear equations with linear relation.
+I have moved $J$ out of $S$.}
+Details of $I_i$ for $1 \leq i \leq \mr$ can be found in \cref{def:lsg_eq}.
+The answer sets are 
+\begin{align*}
+    \calA^{\LS} = (\Z_2)^{I_i} && \calB^{\LS} = \Z_2.
+\end{align*}
+The probability distribution is uniform over all the pairs $(I_i, x(s))$ such that $s \in I_i$, so
+\begin{align*}
+    \pi^{\LS}(I_i, x(s)) = 
+    \begin{cases}
+        1/N(r) & \text{ if } s \in I_i \\
+        0 & \text{otherwise,}
+    \end{cases}
+\end{align*}
+where $N(r) := 157r + 685$ is the total number of valid question pairs.
+We define $X_i := \{ \ba \in (\Z_2)^{I_i}: \sum_{s \in I_i} a(s) = c(i) \}$, which is the set of all the valid answers of equation $i$.
+Given an answer $(\ba,b)$ for question $(I_i,x(s))$, 
+the score function is
+\begin{align*}
+    V^{\LS}_{I_i, x(s)}(\ba, b) = 
+    \begin{cases}
+        1 \text{, if } \ba \in X_i \text{ and } a(s) = b\\
+        0 \text{, otherwise}.
+    \end{cases}
+\end{align*}
+\end{definition}
+
+The construction of $\LS(r)$ proves the following theorem.
+\begin{theorem}
+	The group $\Pg$ can be embedded in the solution group of a binary linear system game which has
+	$\nr := 16r+75$ variables and $\mr := 14r + 62$ equations, where each equation has $3$ variables.
+\end{theorem}
+\hf{Note that when $\LS(r)$ is played between Alice and Bob, the total
+number of equation and variable pairs is $N(r)$ is of order $\Theta(r)$.}
+
+\hf{The ideal strategy of $\LS(r)$ is based on
+the representation $\Psi$ of $\Gamma$ defined in \cref{def:rep_gamma}
+of \cref{sec:rep_gamma}.
+We discuss the ideal strategy in in \cref{sec:tests}.
+Here we only highlight what $a_1, a_2, a_3$ and $a_4$ are mapped to by the representation $\Psi$, along
+with the important properties of the representation of these four generators,
+since they are the key generators of $\Gamma$.
+}
+
+
 
 
 % \begin{proposition}
@@ -1972,11 +2102,13 @@ three components introduced in \cref{sec:full_test}.
 \subsection{Implication of approximately winning $\LS(r)$}
 \label{sec:imp_lct}
 %------------------------------------------------------------------------------------------
-\carl{[Regarding the title of this subsection: Technically, you are only assuming that the correlation approximately wins $LS ( r )$.]}
-\hfc{Fixed.}
+\hf{In this subsection, we study the implications of a strategy that can win $\LS(r)$ with probability close to $1$. We prove a series of 
+propositions, which lead us to \cref{prop:lct_adv}.
+\Cref{prop:lct_adv} is a key step of the self-testing proof in \cref{sec:self-test}.}
 
-In the first half of this subsection, we use $(I_i,x(s))$ to denote the question pair so that Alice gets equation label $I_i$ and Bob gets a variable label $x(s)$ for some $s \in S$. 
-\carl{[This last sentence is kind of vague.  If you're recalling notation from a previous subsection, you can just say that.]}
+
+Recall that in $\LS(r)$ the question pair is denoted by $(I_i,x(s))$ where $I_i$ 
+labels an equation and $x(s)$ is a variable for some $s \in I_i$. 
 For simplicity, we denote 
 Alice's observable for variable $x(s)$ in equation $i$ by $M_i(s)$ and
 Bob's observable for variable $x(s)$ by $N(s)$. 
@@ -2006,10 +2138,15 @@ The condition that $(\tpr{\ba b}{i s})$ of $\fC(d,r)$ wins the linear system gam
 for all $i = 1 \dots \mr$.
 It has been shown in Ref.~\cite{slofstra2017} that 
 \begin{align*}
-	\bra{\psi} M_i(s) N(s) \ket{\psi} &= 2 \sum_{\ba,b: \ba \in X_i, a(s) = b} \pr{\ba b}{ij} -1 \\
-	&\appd{O(r \ep)} 2\sum_{\ba,b: \ba \in X_i, a(j) = b} \tpr{\ba b}{is} - 1 = 1.
+	\bra{\psi} M_i(s) N(s) \ket{\psi} &= 2 \sum_{\ba,b: \ba \in X_i, a(s) = b} \pr{\ba b}{ij} -1.
+\end{align*}
+Using the fact that $\bS$ approximates the winning correlation of $\LS(r)$, 
+we can get that
+\begin{align*}
+	\bra{\psi} M_i(s) N(s) \ket{\psi} \appd{O(r \ep)} 2\sum_{\ba,b: \ba \in X_i, a(j) = b} \tpr{\ba b}{is} - 1 = 1.
 \end{align*}
 \carl{[The previous sentence \& equation do not make sense to me.]}
+\hfc{Fixed.}
 Since $M_i(s)$ and $N(s)$ are binary observables, we know that
 \begin{align*}
     \norm{M_i(s)\ket{\psi} - N(s)\ket{\psi}}^2 
@@ -2081,7 +2218,8 @@ In other words, \cref{prop:lct_base} is equivalent to the following proposition.
 	where $S$ and $R$ are defined in the definition of $\Gamma$ 
 	(\cref{def:gamma}).	
 \end{proposition}
-Recall that the group $\Pg_1$ (\cref{def:g1}) is embedded in $\Gamma$.  \carl{[You need to tell the reader where they can find a full definition of $\Pg_1$. (Always do so when you reintroduce a mathematical object.)]}
+\hf{Recall that the group $\Pg_1$ (\cref{def:g1}) is embedded in $\Gamma$.  
+For details of the embedding, we refer to \cref{sec:embedding}.}
 Following the embedding procedure, we can prove the next proposition.
 \begin{proposition}
     \label{prop:lct_pg1}
@@ -2158,7 +2296,7 @@ to prove the next proposition.
 Following the steps of the embedding of $(a_3a_4)^l a_1a_2(a_4a_3)^l = (a_1a_2)^{r^l}$ into $\Gamma$ presented in
 the proof of \cref{prop:g0},
 we can prove the following proposition.
-\begin{proposition}
+\begin{lemma}
 \label{prop:lct_adv}
 Let $\bS$ be an $\ep$-approximate strategy of $\fC(d,r)$ and $\{M(s), N(s)\}_{s \in S}$ be the observables defined in 
 \cref{prop:lct_group}. 
@@ -2168,7 +2306,7 @@ Then,
 	&N(a_1)N(a_2) (N(a_4)N(a_3))^l \ket{\psi}\appd{O(r^{l+1/2} \se)} (N(a_4)N(a_3))^l (N(a_1)N(a_2))^{r^l} \ket{\psi}, 
 \end{align}
 for all $l \geq 1$.
-\end{proposition}
+\end{lemma}
 \begin{proof}
 Proving the $l=1$ case is essentially proving that observables 
 $\{M(a_i)\}_{i=1}^4$ and $\{N(a_i)\}_{i=1}^4$
@@ -3448,172 +3586,14 @@ $\Gamma$ along the way.
 Recall that the goal of introducing $\Pg_0$ is to embed
 $\Pg$ in a group with only order-$2$ generators,
 so that it is easier to embed $\Pg$ into a solution group.
-\begin{definition}	
-\label{def:g0}
-	Let the set $S_0$ be 
-	\begin{align*}
-		S_0 = \{o_i\}_{i=1}^{r} \cup \{u_i\}_{i=1}^5,
-	\end{align*}
-	and the set $R_0$ be the union of 
-	\begin{align*}
-	&R_{base} = \{s^2 = e | s \in S\},\\
-	&R_{u} = \{ u_3 = u_2o_1u_2 \quad u_4 = u_2o_2u_2 \quad 
-	u_5 = u_1u_3u_1 \quad o_2 = u_1u_4u_1 \quad u_5 = o_1 o_r o_1\},
-	\end{align*}
-	and 
-	\begin{align*}
-	R_o = 
-	\begin{cases} 
-	\bigcup_{j=1}^{r/2-1}\{ o_{1+2j} = o_1o_{2j}o_1 \quad o_{2+2j} = o_2o_{1+2j}o_2\} \quad \text{ if $r$ is even },\\
-	\{o_3 = o_2o_1o_2\} \cup \bigcup_{j=1}^{(r-3)/2}\{
-	 o_{2+2j} =o_1o_{1+2j}o_1 \quad o_{3+2j} = o_2o_{2j+2}o_2 \}\quad\text{ if $r$ is odd }.
-	\end{cases}
-	\end{align*}
-	The group $\Pg_0$ is a group with presentation $\ip{R_0:S_0}$.
-\end{definition}
-\begin{proposition}
-    \label{prop:g0}
-	The group $\Pg$ is embedded in $\Pg_0$.
-	Furthermore, the generators of $\Pg_0$ satisfy the relation 
-	\begin{align}
-	    \label{eq:uo_comm}
-	    &(u_1u_2) o_2 (u_2u_1) = o_2 \\ 
-	    \label{eq:uo_rel}
-		&(u_1u_2)^j o_1o_2 (u_2u_1)^j = (o_1o_2)^{r^j}, 
-	\end{align}
-	for any $ j \in \N$.
-\end{proposition}
-\begin{proof}
-    We prove \cref{eq:uo_comm} first. It is easy to see that
-    \begin{align}
-        u_1 (u_2o_2u_2) u_1 = u_1u_4u_1 =o_2.
-    \end{align}
-    
-    Next, we prove that $\Pg$ is embedded in $\Pg_0$ by prove the $j = 1$ case of \cref{eq:uo_rel}.
-    After it is proven, a homomorphism $\phi: \Pg \rightarrow \Pg_0$ such that $\phi(u) = u_1u_2$ and $\phi(o) = o_1o_2$ is injective by Proposition $33$
-    and Lemma $15$ of Ref.~\cite{slofstra2017}.
-    
-	We prove \cref{eq:uo_rel} by induction.
-	The base case follows the direct calculation given below
-	\begin{align*} 
-		u_1u_2 o_1o_2 u_2u_1 = &u_1 (u_2 o_1u_2) (u_2o_2 u_2) u_1 \\
-	=& (u_1 u_3 u_1) (u_1 u_4 u_1)\\
-	=& u_5 o_2\\
-	=& o_1o_ro_1 o_2.
-	\end{align*}
-	Then we substitute the definitions of $o_k$ for $k = r \dots 3$ into the equation above, which 
-	proves the $j=1$ case.
-	
-	Now assume the statement is true for $j = n$, then for $j = n+1$
-	\begin{align*}
-		(u_1u_2)^{n+1} o_1o_2 (u_2u_1)^{n+1} =& u_1u_2 (o_1o_2)^{r^n} u_2u_1 \\ 
-		 =& (u_1u_2 o_1o_2 u_2u_1)^{r^n} \\
-		 =& (o_1o_2)^{r^{n+1}},
-	\end{align*}
-	where from the first line to the second line, we insert $(u_2u_1)(u_1u_2)$ between every pair of $o_1o_2$, and
-	from the second line to the third line, we applied the $j=1$ case. Hence, the statement is true.
-\end{proof}
-To better characterize all the conjugacy
-relations of $\Pg_0$ and simplify the form of $\Pg_0$, 
-we relabel $u_i$ and $o_i$'s
-as $a_i$'s such that
-\begin{align}
-	a_j := 
-	\begin{cases}
-	 o_j \text{ for } j = 1,2 \\
-	 u_{j-2} \text{ for } j = 3\dots 7 \\
-	 o_{j-5} \text{ for } j = 8 \dots r+5.
-	\end{cases}
-\end{align}
-Then we define the set $C(r)$ of tuples $(i,j,k)$ such that
-\begin{align}
-\label{eq:cr}
-	C(r) = \{ (i,j,k) |  (a_ia_ja_i = a_k) \in R_0 \}.
-\end{align}
-The size of $C(r)$ is $r+3$. 
-A presentation of the group $\Pg_0$ is
-\begin{align*}
-    \Pg_0 = \ip{ \{a_i\}_{i=1}^{r+5} : \{a_i^2 =e \}_{i=1}^{r+5} \cup \{ a_ia_ja_i = a_k \vert (i,j,k) \in C(r)\}}.
-\end{align*}
+
 
 
 Next we define the group $\Pg_1$.
-\begin{definition}
-\label{def:g1}
-Define the set $S_1$ to be
-\begin{align*}
-	S_1 = \{a_i, b_i, c_i, d_i\}_{i=1}^{r+5} \cup \{ f_0 \} \cup \{h_{jk}\}_{(i,j,k) \in C(r)},
-\end{align*}
-and the set $R_1$ to be
-\begin{align*}
-	R_1 = &\{ s^2 = e \vert s \in S_1\}\\ 
-	&\cup 
-	\{a_i = b_ic_i = f_0d_i, \quad f_0b_if_0 =c_i\}_{i= 1}^{r+5} \\ 
-	&\cup
-	\{h_{jk}b_j c_k = e, \quad d_ib_jd_i = c_k\}_{(i,j,k) \in C(r)}.
-\end{align*}
-The group $\Pg_1$ is a group with the presentation $\ip{S_1 : R_1}$.
-\end{definition}
-Note that the group $\Pg_1$ is the same as the group $K$ used in the proof of Lemma $29$ of Ref.~\cite{slofstra2017}.
 
-The relation between $\Pg_0$ and $\Pg_1$ is summarized in the propositions below, which was first proved in Lemma $29$ of \cite{slofstra2017}.
-\begin{proposition}
-    \label{prop:g0g1}
-	The group $\Pg_0$ is embedded in $\Pg_1$. 
-\end{proposition}
-\begin{proof}
-    We prove this proposition by showing that generators $a_i$'s in $S_1$
-    satisfy the relation $a_i a_j a_i = a_k$ for all $(i,j,k) \in C(r)$.
-    This means the homomorphism $\phi: \Pg_0 \rightarrow \Pg_1$ that maps $a_i$
-    to $a_i$ is homomorphism from $\Pg_0$ to $\Pg_1$. 
-    The injectivity of $\phi$ follows Lemma $29$ and Lemma $15$ of Ref.~\cite{slofstra2017}.
-    
-	We first show that $d_i c_j d_i = b_k$, which is because
-	\begin{align*}
-		d_i c_j d_i = d_i (f_0 b_j f_0) d_i = f_0 (d_i b_j d_i) f_0 = f_0 c_k f_0 = b_k.
-	\end{align*}
-	Then, we can prove that 
-	\begin{align*}
-		a_i a_j a_i = f_0 d_i b_j c_j f_0 d_i 
-		= (f_0 d_i b_j d_i f_0)(f_0 d_i c_j d_i f_0) 
-		= (f_0 c_k f_0)(f_0 b_k f_0) 
-		= b_k c_k = a_k,
-	\end{align*}
-	where we use the fact that $f_0$ commutes with $d_i$.
-\end{proof}
-The consequence of this proposition is that $\Pg$ can be embedded in $\Pg_1$.
 
 Recall the definition of $\Gamma$ in \cref{def:gamma}. We prove a property of it.
-\begin{proposition}
-    \label{prop:g1gamma}
-	The group $\Pg_1$ can be embedded in $\Gamma$.
-	The generators of $\Gamma$ also satisfy the relations: 
-	\begin{align}
-	    \label{eq:mg1} &f_0 g_0 f_0 g_0 = J,\\
-	    \label{eq:mg2} &f_2 g_2 f_2 g_2 = J.
-	\end{align}
-\end{proposition}
-\begin{proof}
-    To prove the first claim, we show that the generators
-    $b_i$, $c_i$, $d_i$ satisfy the relations
-    $d_ib_jd_i = c_k$ for each $\bc = (i,j,k) \in C(r)$.
-    \begin{align*}
-        d_ib_jd_i =& (k_{\bc 1} f_2)(f_2 k_{\bc 2})(k_{\bc 4} k_{\bc 5})\\ 
-        =& k_{\bc 1}(k_{\bc 2}k_{\bc 4})k_{\bc 5} \\
-        =& (k_{\bc 1} k_{\bc 3}) k_{\bc 5} \\
-        =& k_{\bc 6} k_{\bc 5} \\
-        =& c_k.
-    \end{align*}
-    The derivation of $f_0 b_i f_0 = c_i$ is similar for $1 \leq i \leq r+5$, so we omit it here.
-    A map $\phi:\Pg_1 \rightarrow \Gamma$ that maps $s$
-    to $s$ for each $s \in S_1$ is a homomorphism between $Pg_1$ and 
-    $Gamma$. It is also injective by Proposition $27$ and Lemma $15$ of 
-    Ref.~\cite{slofstra2017}.
-    
-    The second claim follows a similar derivation, so we omit it here too.
-\end{proof}
-Since $\Pg$ is embedded in $\Pg_1$, we can conclude that
-$\Pg$ is embedded in $\Gamma$ as well.
+
 %========================================
 \section{The linear system of $\LS(r)$}
 \label{sec:lsg_eq}
