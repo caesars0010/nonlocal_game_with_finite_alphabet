@@ -1,0 +1,544 @@
+\documentclass[11pt,letterpaper]{article}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                      {1ex \@plus1ex \@minus.2ex}%
+                                      {-1em}%
+                                      {\normalfont\normalsize\bfseries}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%
+%  P A C K A G E S  %
+%%%%%%%%%%%%%%%%%%%%%
+
+% Authors
+\usepackage{authblk}
+
+% Page margins
+\usepackage[margin=1in]{geometry}
+
+% Nicer math font
+\usepackage{mathpazo}
+
+% More fancy lists
+\usepackage{enumerate}
+
+% Microtype
+\usepackage{microtype}
+
+% TikZ
+\usepackage{tikz}
+%\usetikzlibrary{calc,shapes.geometric}
+\usetikzlibrary{backgrounds,fit,decorations.pathreplacing,calc}
+
+% Highlights
+\usepackage{soul}
+
+
+% Figure
+\usepackage{float}
+
+% Hypertext package
+\usepackage[colorlinks = true]{hyperref}
+% Title and authors
+%\hypersetup{
+%  pdftitle = {},
+%  pdfauthor = {}
+%}
+% Color definitions
+\definecolor{darkred}  {rgb}{0.5,0,0}
+\definecolor{darkblue} {rgb}{0,0,0.5}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+% Color links
+\hypersetup{
+  urlcolor   = blue,         % color of external links
+  linkcolor  = darkblue,     % color of internal links
+  citecolor  = darkgreen,    % color of links to bibliography
+  filecolor  = darkred       % color of file links
+}
+
+% AMS
+\usepackage{amsmath,amssymb,amsfonts,amsthm,amstext}
+
+%% Restating theorems
+%\usepackage{thm-restate}
+
+% Powerful macros
+\usepackage{etoolbox}
+
+% Fixes for amsmath
+\usepackage{mathtools}
+\mathtoolsset{centercolon}
+\makeatletter
+\protected\def\tikz@nonactivecolon{\ifmmode\mathrel{\mathop\ordinarycolon}\else:\fi}
+\makeatother
+
+% Daw boxes
+\usepackage{tcolorbox}
+
+% Code
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
+
+% Clever references
+
+\usepackage{cleveref}%[nameinlink]
+
+
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{definition}{Definition}{Definitions}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{claim}{Claim}{Claims}
+\crefname{section}{Section}{Sections}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{figure}{Fig.}{Figs.}
+\crefname{table}{Table}{Tables}
+
+
+% \crefname{algorithm}{Algorithm}{Algorithms}
+
+% IEEE tools
+\usepackage[retainorgcmds]{IEEEtrantools}
+
+% table of contents
+\usepackage{tocloft}
+
+% Table with multi-row
+\usepackage{multirow}
+
+% TikZ
+\usepackage{tikz}	
+\usetikzlibrary{backgrounds,fit,decorations.pathreplacing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  N E W C O M M A N D  %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Standard quantum notation
+
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\bra}[1]{\langle#1|}
+\newcommand{\braket}[2]{\langle#1|#2\rangle}
+\newcommand{\ketbra}[2]{|#1\rangle\langle#2|}
+\newcommand{\proj}[1]{|#1\rangle\langle#1|}
+
+\newcommand{\x}{\otimes}
+\newcommand{\xp}[1]{^{\otimes #1}}
+\newcommand{\op}{\oplus}
+
+\newcommand{\ct}{^{\dagger}}
+\newcommand{\tp}{^\intercal}
+
+% Linear algebra
+
+%\newcommand{\1}{\mathbb{1}} % identity matrix
+%\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+%\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Lin}{L} % all linear maps
+\newcommand{\Mat}[1]{\mathrm{M}(#1)} % all matrices
+%\newcommand{\Mat}[1]{\mathrm{M}_{#1}(\C)}
+
+% Paired delimiters
+
+\DeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\cnorm}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\of}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\sof}{\lbrack}{\rbrack}
+\DeclarePairedDelimiter{\ip}{\langle}{\rangle}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+% Operators
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\vc}{vec}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\hook}{hook}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\supp}{supp}
+
+
+% Sets
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+
+% Group
+\newcommand{\Zd}{\Z_d^{\times}}
+
+
+% Identity operator
+\newcommand{\1}{\mathbb{1}}
+
+% Pauli Group
+\newcommand{\Pg}{\mathcal{P}}
+\newcommand{\J}{\mathcal{J}}
+
+% Special notation
+
+\newcommand{\CHSH}{CHSH^{(d)}}
+\newcommand{\MS}{MS}
+\newcommand{\EXT}{EXT}
+\newcommand{\LS}{LS}
+\newcommand{\COMM}{COMM}
+\newcommand{\EPR}[1]{\Sigma^{(#1)}}
+\newcommand{\paulix}{\sigma_x}
+\newcommand{\pauliz}{\sigma_z}
+\newcommand{\tP}{\tilde{P}}
+\newcommand{\tQ}{\tilde{Q}}
+\newcommand{\tM}{\tilde{M}}
+\newcommand{\tN}{\tilde{N}}
+\newcommand{\tA}{\tilde{A}}
+\newcommand{\tB}{\tilde{B}}
+\newcommand{\tX}{\tilde{X}}
+\newcommand{\tZ}{\tilde{Z}}
+\newcommand{\tU}{\tilde{U}}
+\newcommand{\tW}{\tilde{W}}
+\newcommand{\tx}{\tilde{x}}
+\newcommand{\tpsi}{\tilde{\psi}}
+\newcommand{\tri}{\Delta}
+\newcommand{\lB}{\overline{B}}
+\newcommand{\dr}[1]{d^{(#1)}}
+\newcommand{\nr}{n(r)}
+\newcommand{\mr}{m(r)}
+\newcommand{\ux}{\underline{x}}
+\newcommand{\uc}{\underline{c}}
+\newcommand{\ua}{\underline{a}}
+\newcommand{\ub}{\underline{b}}
+\newcommand{\fC}{\mathfrak{C}}
+\newcommand{\ba}{\pmb{a}}
+\newcommand{\bb}{\pmb{b}}
+\newcommand{\bc}{\pmb{c}}
+\newcommand{\bS}{\mathrm{S}}
+
+% Probabilities
+\newcommand{\pr}[2]{P(#1|#2)}
+\newcommand{\pa}[2]{P_A(#1|#2)}
+\newcommand{\pb}[2]{P_B(#1|#2)}
+\newcommand{\tpr}[2]{\tilde{P}(#1|#2)}
+
+% Bell Ineqaulities
+\newcommand{\I}{\mathcal{I}}
+
+% Square root of epsilon
+\newcommand{\ep}{\epsilon}
+\newcommand{\se}{\sqrt{\epsilon}}
+\newcommand{\qe}{\epsilon^{1/4}}
+\newcommand{\sd}{\sqrt{d}}
+\newcommand{\sr}{\sqrt{r}}
+\newcommand{\qr}{r^{1/4}}
+\newcommand{\qd}{d^{1/4}}
+
+% Approximately equatli
+\newcommand{\appd}[1]{\simeq_{#1}}
+
+% Comments
+\def\carl#1{{\color{blue} #1}}
+\newcommand{\hf}[1]{\textcolor{red}{#1}}
+\newcommand{\hfc}[1]{\textcolor{red}{#1 -H.F.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  N E W T H E O R E M  %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{problem}{Problem}
+\newtheorem*{example}{Example}
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+
+
+%%%%%%%%%%%%%%%%
+%   Document   %
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Extending the correlation}
+
+\author[1]{Honghao Fu}
+
+
+\renewcommand\Affilfont{\itshape\small}
+
+
+
+\affil[1]{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA}
+
+\maketitle
+
+In this report, we try to extend the definition of $\fC(d,r)$ to non-prime $d$.
+That is, we would like to consider $(r,d)$ such that $r$ generates a cyclic subgroup
+of $\Zd$. We assume that 
+\begin{align*}
+   r^k \equiv 1 \pmod{d},
+\end{align*}
+and $k < d/2$.
+For example, we can pick $r = 2$ and $d = 2^k - 1$.
+
+The game $\LS(r)$ is the same as before.
+We would like to force Alice and Bob to use operators
+\begin{align*}
+    &U_A = U_B = \ketbra{x_{r^{k-1}}}{x_{r^0}}
+    + \ketbra{x_{-r^{k-1}}}{x_{-r^0}}+
+    \sum_{j=1}^{k-1} \left(\ketbra{x_{r^{j-1}}}{x_{r^j}} + \ketbra{x_{-r^{j-1}}}{x_{-r^j}}\right)\\
+    &O_A = O_B = \sum_{j=0}^{k-1} \left(\omega_d^{r^j}\ketbra{x_{r^j}}{x_{r^j}} + \omega_d^{-r^j} \ketbra{x_{-r^j}}{x_{-r^j}}\right)
+\end{align*}
+Note that $O_A^d = O_B^d = \1$ and $U_A^k = U_B^k = \1$.
+The operator $O_A$ can be split into two binary observables
+\begin{align*}
+    &M_1 = \sum_{j=0}^{k-1} \left( \omega_d^{r^j}\ketbra{x_{r^j}}{x_{-r^j}} +\omega_d^{-r^j} \ketbra{x_{-r^j}}{x_{r^j}}\right) \\
+    &M_2 = \sum_{j=0}^{k-1} \left( \ketbra{x_{r^j}}{x_{-r^j}} + \ketbra{x_{-r^j}}{x_{r^j}}\right),
+\end{align*}
+and similarly on Bob's side.
+Let the eigendecomposition of $U$ be 
+\begin{align*}
+    U = \sum_{j=0}^{k-1} \omega_k^j \left(\ketbra{u_j}{u_j}
+    + \ketbra{u_{-j}}{u_{-j}}\right),
+\end{align*}
+then $U_A := U$ can be decomposed into
+\begin{align*}
+    &M_3 = \ketbra{u_0}{u_0} + 
+    \ketbra{u_{-0}}{u_{-0}} +
+    \sum_{j=1}^{(k-1)/2} \omega_k^j\left(\ketbra{u_j}{u_{k-j}} +  \ketbra{u_{-j}}{u_{j-k}}\right)
+    +\omega_k^{-j}\left(\ketbra{u_{k-j}}{u_{j}} + \ketbra{u_{j-k}}{u_{-j}}\right) \\
+    &M_4 = \ketbra{u_0}{u_0} + 
+    \ketbra{u_{-0}}{u_{-0}} +
+    \sum_{j=1}^{(k-1)/2} \ketbra{u_j}{u_{k-j}} +  
+    \ketbra{u_{k-j}}{u_{j}} + 
+    \ketbra{u_{-j}}{u_{j-k}} +  
+    \ketbra{u_{j-k}}{u_{-j}}
+\end{align*}
+Note that here we assume $k$ is odd.
+The shared state is
+\begin{align*}
+    \ket{\psi} = \frac{1}{\sqrt{2k}} \sum_{j=0}^{k-1}
+    \left(\ket{x_{r^j}}\ket{x_{-r^j}} + \ket{x_{-r^j}}\ket{x_{r^j}}\right).
+\end{align*}
+
+In the extended weighted CHSH test, the special subspace is
+$V = \spn\{ \ket{x_1}, \ket{x_{-1}}\} =
+\spn\{\ket{1}, \ket{-1}\}$.
+The computational basis $\{ \ket{r^j}, \ket{-r^j} \}_{j=0}^{k-1}$ are related to the basis
+$
+\{ \ket{x_{r^j}}, \ket{x_{-r^j}} \}_{j=0}^{k-1}
+$
+by
+\begin{align*}
+    &\ket{r^j} = -\frac{1}{\sqrt{2}}(\ket{x_{r^j}} + e^{-ir^j\pi/d}\ket{x_{-r^j}}) \\
+    &\ket{-r^j} = \frac{i}{\sqrt{2}}(\ket{x_{r^j}} - e^{-ir^j\pi/d}\ket{x_{-r^j}}).
+	%\ket{x_j} = \frac{-1}{\sqrt{2}}(\ket{j} + i\ket{d-j}), \\
+	%\ket{x_{d-j}} = \frac{-e^{ij\pi/d}}{\sqrt{2}}(\ket{j} - i\ket{d-j})
+\end{align*}
+
+In the rest of the work, we follow the 
+convention $\ket{1} \equiv \ket{r^0}$
+and $\ket{-1} \equiv \ket{-r^0}$.
+Alice and Bob get the same question from the set $\{0,\nr+1,\nr+2\}$, they always give the same answer.
+Alice's and Bob's measurements for questions $0, \nr+1$ and $\nr+2$ are
+\begin{align*}
+	&\tP_0^0 = \tQ_0^0 = \Pi_V && \tP_0^2 = \tQ_0^2 = \Pi_{V^\perp} \\
+	&\tP_{\nr+1}^0 = \tQ_{\nr+1}^0 = \ketbra{1}{1} &&
+	\tP_{\nr+1}^1 = \tQ_{\nr+1}^1 = \ketbra{-1}{-1} \\
+	&\tP_{\nr+2}^0 = \tQ_{\nr+2}^0 = \ketbra{1_{\times}}{1_{\times}} && \tP_{\nr+2}^1 = \tQ_{\nr+2}^1 = \ketbra{(-1)_{\times}}{(-1)_{\times}} \\
+	&\tP_{\nr+1}^2 = \tQ_{\nr+1}^2 = \Pi_{V^\perp} &&
+	 \tP_{\nr+2}^2 = \tQ_{\nr+2}^2 = \Pi_{V^\perp},
+\end{align*}
+where
+\begin{align*}
+    \ket{1_{\times}} = \frac{1}{\sqrt{2}}(\ket{1} + \ket{-1})
+	&&\ket{(-1)_{\times}} = \frac{1}{\sqrt{2}}(\ket{1} - \ket{-1}).
+\end{align*}
+Intuitively, these questions force Alice and Bob to agree on the subspace $V$ and
+on the basis of $V$ that they will measure.
+
+The ideal strategy also ensures that 
+when Alice gets $x \in \{1,2\}$ and Bob gets $y \in \{\nr+1, \nr+2\}$, 
+their answers $a,b \in \{0,1\}$ should maximize $\I_{\cot(-\pi/d)}$ with Alice and Bob's roles flipped;
+and when Alice gets $x \in \{\nr+1,\nr+2\}$ and Bob gets $y \in \{1, 2\}$,
+their answers $a,b \in \{0,1\}$ should maximize $\I_{\cot(-\pi/d)}$.
+This is the reason behind naming this test the extended weighted CHSH test.
+It is also the reason behind having Alice and Bob agreeing on the subspace $V$ 
+by using the other three questions.
+Before introducing the measurements, 
+we define some basis states of $V$
+\begin{align*}
+	&\ket{1_+} = \cos(-\frac{\pi}{2d})\ket{1} + \sin(-\frac{\pi}{2d})\ket{-1}
+	&&\ket{(d-1)_+} = \sin(-\frac{\pi}{2d})\ket{1} - \cos(-\frac{\pi}{2d})\ket{-1}\\
+	&\ket{1_-} = \cos(-\frac{\pi}{2d})\ket{1} - \sin(-\frac{\pi}{2d})\ket{-1}
+	&&\ket{(d-1)_-} = \sin(-\frac{\pi}{2d})\ket{1} + \cos(-\frac{\pi}{2d})\ket{-1},
+\end{align*}
+so that $\{\ket{1_+}, \ket{(-1)}_+\}$ and $\{\ket{1_-}, \ket{(-1)_-}\}$ are two basis
+of $V$.
+When Alice and Bob gets question $1$ or $2$, what they measure on $V$ are
+\begin{align*}
+	&\tP_1^0 = \tQ_1^0 =  \ketbra{1_+}{1_+} && \tP_1^1 = \tQ_1^1 =  \ketbra{(-1)_+}{(-1)_+}\\
+	&\tP_2^0 = \tQ_2^0 =  \ketbra{1_-}{1_-} && \tP_1^1 = \tQ_1^1 =  \ketbra{(-1)_-}{(-1)_-}.
+\end{align*}
+Notice that their measurements on $V$ follow the measurements to achieve $\I_{\cot(-\pi/d)}^{\max}$.
+What they measure on $V^\perp$ is irrelevant for this test.
+
+The generated correlation is given below.
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{2}{|c|}{$x=0$}\\
+\cline{3-4}
+\multicolumn{2}{|c|}{} &$a = 0$ & $a = 2$ \\
+\hline
+\hline
+\multirow{2}{*}{$y = 0$} & $b = 0$ & $1/k$ & $0$ \\
+\cline{2-4}
+&$b=2$ & $0$ & $(k-1)/k$ \\
+\hline
+\end{tabular}
+\caption{The correlation for $x=y=0$.}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{3}{|c|}{$x=\nr+1$}&
+\multicolumn{3}{|c|}{$x=\nr+2$} \\
+\cline{3-8}
+\multicolumn{2}{|c|}{} &
+$a = 0$ & $a=1$ & $a=2$ &
+$a = 0$ & $a=1$ & $a=2$\\
+\hline
+\hline
+\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{\sin^2(\pi/2d)}{2k}$ & \small $\pr{\perp0}{00}$ 
+& $\frac{1+\sin(\pi/d)}{4k}$ & $\frac{1-\sin(\pi/d)}{4k}$ & \small  $\pr{\perp0}{10}$ \\
+\cline{2-8}
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{2k}$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{k-1}{k}-\pr{\perp0}{00}$ 
+&  $\frac{1-\sin(\pi/d)}{4k}$ & $\frac{1+\sin(\pi/d)}{4k}$ & \small $\frac{d-3}{d-1} - \pr{\perp0}{10}$  \\
+\hline
+\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{\sin^2(\pi/2d)}{2k}$ & \small $\pr{\perp0}{01}$ & 
+$ \frac{1-\sin(\pi/d)}{4k}$ & $ \frac{1+\sin(\pi/d)}{4k}$ & \small $\pr{\perp 0}{11}$  \\
+\cline{2-8}
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{2k}$ & $\frac{\cos^2(\pi/2d)}{2k}$ & \small $\frac{k-1}{k}-\pr{\perp0}{01}$ &  
+$ \frac{1+\sin(\pi/d)}{4k}$ & $ \frac{1-\sin(\pi/d)}{4k}$ & \small $\frac{d-3}{d-1}- \pr{\perp 0}{11}$ \\
+\hline
+\end{tabular}
+\end{center}
+\caption{The correlation for $x \in \{n+1, n+2\}$ and $y \in \{1,2\}$.}
+\label{tb:chsh}
+\end{table}
+We don't explicitly calculate the conditional probabilities of the form $\pr{\perp 0}{xy}$ for all possible $x$,$y$ 
+because they are irrelevant.
+Note that when $x \in \{1,2\}$ and $y \in \{\nr+1, \nr+2\}$, the correlation table is 
+the transpose of Table~\ref{tb:chsh}, so we omit it here.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{3}{|c|}{$x=\nr+1$}&
+\multicolumn{3}{|c|}{$x=\nr+2$}&
+\multicolumn{2}{|c|}{$x=0$}\\
+\cline{3-10}
+\multicolumn{2}{|c|}{} &
+$a = 0$ & $a=1$ & $a=2$ &
+$a = 0$ & $a=1$ & $a=2$ &
+$a = 0$ & $a =2 $\\
+\hline
+\hline
+\multirow{3}{*}{$y = \nr+1$} & $b=0$ & $\frac{1}{2k}$ & $0$ & 0 
+& $\frac{1}{4k}$ & $\frac{1}{4k}$ & 0 & $\frac{1}{2k}$ & 0 \\
+\cline{2-10}
+&$b=1$ & 0 & $\frac{1}{2k}$ & $0$ 
+&  $\frac{1}{4k}$ & $\frac{1}{4k}$ & 0 &$\frac{1}{2k}$ & 0 \\
+\cline{2-10}
+&$b=2$ & 0 & 0 & $\frac{k-1}{k}$ 
+&  0 & 0 &  $\frac{k-1}{k} $ &0 & $\frac{k-1}{k}$ \\
+\hline
+\multirow{3}{*}{$y = \nr+2$} & $b=0$ & $\frac{1}{4k}$ & $\frac{1}{4k}$ & 0 
+& $\frac{1}{2k}$ & $0$ & 0 & $\frac{1}{2k}$ & 0 \\
+\cline{2-10}
+&$b=1$ & $\frac{1}{4k}$ & $\frac{1}{4k}$ & $0$ 
+&  0 & $\frac{1}{2k}$ & $0$ &$\frac{1}{2k}$ & 0 \\
+\cline{2-10}
+&$b=2$ & 0 & 0 & \small $\frac{k-1}{k}$ 
+&  0 & 0 & \small $\frac{k-1}{k} $ &0 &\small $\frac{k-1}{k}$ \\
+\hline
+\multirow{2}{*}{$y = 0$} & $b=0$ & $\frac{1}{2k}$ & $\frac{1}{2k}$ & 0 
+& $\frac{1}{2k}$ & $\frac{1}{2k}$ & 0 & $\frac{1}{k}$ & 0 \\
+\cline{2-10}
+&$b=2$ & 0 & 0 & $\frac{k-1}{k}$ 
+&  0 & 0 & \small $\frac{k-1}{k} $ &0 & \small $\frac{k-1}{k}$ \\
+\hline
+\end{tabular}
+\end{center}
+\caption{The correlation for $x ,y\in\{\nr+1,\nr+2, \ast\} $.}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} &
+\multicolumn{6}{|c|}{$y=(\nr+1, f_0)$}\\
+\cline{3-8}
+\multicolumn{2}{|c|}{} &
+$b = (0,0)$ & $b=(0,1)$ & 
+$b = (1,0)$ & $b=(1,1)$ &
+$b = (2,0)$ & $b=(2,1)$   \\
+\hline
+\hline
+\multirow{3}{*}{$x = \nr+1$} & $a=0$ & $\frac{1}{2d-2}$ & $\frac{1}{2d-2}$ &  $0$
+& $0$ & $0$ & $0$  \\
+\cline{2-8}
+&$a=1$ & $0$ & $0 $ & $\frac{1}{2d-2}$ 
+&  $\frac{1}{2d-2}$ & $0$ & $0$  \\
+\cline{2-8}
+&$a=2$ & 0 & 0 & $0$ 
+&  0 & $\frac{d-3}{2d-2}$ & $\frac{d-3}{2d-2} $  \\
+\hline
+\multirow{2}{*}{$x = f_0$} & $a=0$ & $\frac{1}{2d-2}$ & $0$ & $\frac{1}{2d-2}$ 
+& $0$ & $\frac{d-3}{2d-2}$ & 0  \\
+\cline{2-8}
+&$a=1$ & $0$ & $\frac{1}{2d-2}$ & $0$ 
+&  $\frac{1}{2d-2}$ & $0$ & $\frac{d-3}{2d-2}$  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{The correlation for the commutation test between $f_0$ and $\nr+1$.}
+\label{tbl:comm}
+\end{table}
+
+
+
+\end{document}
