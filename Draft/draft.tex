@@ -302,12 +302,12 @@ robustly self-test maximally entangled states with unbounded dimension}
 	that can robustly self-test a maximally entangled state of dimension $4d-4$,
 	where $r$ is the smallest multiplicative generator of $\Zd$.
 	The construction of the correlation uses the embedding procedure
-	proposed by Slofstra (\textit{Forum of Mathematics, Pi.} Vol.~$7$ Cambridge University Press, $2019$).
+	proposed by Slofstra (\textit{Forum of Mathematics, Pi.} Vol.~$7$, ($2019$)).
 	Since there are 
-	infinitely many prime numbers whose smallest multiplicative generator
-	is at most $5$ (\textit{The Mathematical Intelligencer} $10.4$ ($1988$)), 
+	infinitely many prime numbers whose smallest multiplicative generators
+	are at most $5$ (\textit{The Mathematical Intelligencer} $10.4$ ($1988$)), 
 	our result implies that constant-sized correlations are sufficient for robust self-testing of maximally entangled states
-	with unbounded local dimensions.
+	with unbounded local dimension.
 \end{abstract}
 %========================================
 \section{Introduction}
@@ -1056,7 +1056,7 @@ In the rest of the paper, we use the following approximation results implicitly 
     Then,
     \begin{align*}
         V\Pi_{i=1}^n M_i \ket{\psi} 
-        \appd{(2n\ep_1 + \ep_2} \left(\Pi_{i=1}^k V_i\right) 
+        \appd{2n\ep_1 + \ep_2} \left(\Pi_{i=1}^k V_i\right) 
         \left(\Pi_{i=1}^n M_i \right)\ket{\psi}.
     \end{align*}
 \end{lemma}
@@ -1147,16 +1147,16 @@ On the other hand, a homomorphism from $\Pg_0$ to a solution group can be easier
 	and the set $R_0$ be the union of 
 	\begin{align*}
 	&R_{base} = \{s^2 = e | s \in S\},\\
-	&R_{u} = \{ u_3 = u_2o_1u_2 \quad u_4 = u_2o_2u_2 \quad 
-	u_5 = u_1u_3u_1 \quad o_2 = u_1u_4u_1 \quad u_5 = o_1 o_r o_1\},
+	&R_{u} = \{ u_3 = u_2o_1u_2, \quad u_4 = u_2o_2u_2, \quad 
+	u_5 = u_1u_3u_1, \quad o_2 = u_1u_4u_1, \quad u_5 = o_1 o_r o_1\},
 	\end{align*}
 	and 
 	\begin{align*}
 	R_o = 
 	\begin{cases} 
-	\bigcup_{j=1}^{r/2-1}\{ o_{1+2j} = o_1o_{2j}o_1 \quad o_{2+2j} = o_2o_{1+2j}o_2\} \quad \text{ if $r$ is even },\\
+	\bigcup_{j=1}^{r/2-1}\{ o_{1+2j} = o_1o_{2j}o_1, \quad o_{2+2j} = o_2o_{1+2j}o_2\}  &\text{ if $r$ is even },\\
 	\{o_3 = o_2o_1o_2\} \cup \bigcup_{j=1}^{(r-3)/2}\{
-	 o_{2+2j} =o_1o_{1+2j}o_1 \quad o_{3+2j} = o_2o_{2j+2}o_2 \}\quad\text{ if $r$ is odd }.
+	 o_{2+2j} =o_1o_{1+2j}o_1, \quad o_{3+2j} = o_2o_{2j+2}o_2 \} &\text{ if $r$ is odd }.
 	\end{cases}
 	\end{align*}
 	The group $\Pg_0$ is a group with presentation $\ip{R_0:S_0}$.
@@ -1331,21 +1331,21 @@ sets of linear relations:
 \begin{itemize}
 \item for each $i = 1 \dots r+5$:
 \begin{align*}
-	R_i =  \{ &a_i = b_ic_i = f_0d_i\quad
+	R_i =  \{ &a_i = b_ic_i = f_0d_i,\quad
 	%&g_2 a_i w_i = e \\
-	f_0 f_1 f_2 = e \quad b_i f_2 p_{i,1} = e \quad p_{i,1} p_{i,2} p_{i,3} = e\\
-	&f_0 p_{i,3} p_{i,4} = e \quad c_i p_{i,4} p_{i,5} =e \quad f_1 p_{i,2} p_{i,5} = e\},
+	f_0 f_1 f_2 = e, \quad b_i f_2 p_{i,1} = e, \quad p_{i,1} p_{i,2} p_{i,3} = e,\\
+	&f_0 p_{i,3} p_{i,4} = e, \quad c_i p_{i,4} p_{i,5} =e, \quad f_1 p_{i,2} p_{i,5} = e\},
 \end{align*}
 \item for each $ \bc = (i,j,k) \in C(r)$:
 \begin{align*}
-	R_{\bc} = \{&h_{jk}b_j c_k = e \quad
-	d_i q_{\bc,1} f_2 = e \quad b_j f_2 q_{\bc,2} = e \quad q_{\bc,2} q_{\bc,3} q_{\bc,4} = e\\
-	&d_i q_{\bc,4} q_{\bc,5} = e \quad c_k q_{\bc,5} q_{\bc,6} =e \quad q_{\bc,1} q_{\bc,3} q_{\bc,6} = e\},
+	R_{\bc} = \{&h_{jk}b_j c_k = e, \quad
+	d_i q_{\bc,1} f_2 = e, \quad b_j f_2 q_{\bc,2} = e, \quad q_{\bc,2} q_{\bc,3} q_{\bc,4} = e,\\
+	&d_i q_{\bc,4} q_{\bc,5} = e, \quad c_k q_{\bc,5} q_{\bc,6} =e, \quad q_{\bc,1} q_{\bc,3} q_{\bc,6} = e\},
 \end{align*}
 \item 
 $
-	R_{MS} = \{f_0 f_1 f_2 = e,\quad g_0 g_1 g_2 = e,\quad m_0 m_1 m_2 = e,\quad
-	f_0 g_2 m_0 = e, \quad f_2 g_0 m_1 = e \quad f_1 g_1 m_2 = J\},
+	R_{MS} = \{f_0 f_1 f_2 = e,\quad g_0 g_1 g_2 = e, \quad m_0 m_1 m_2 = e, \quad
+	f_0 g_2 m_0 = e, \\ \indent f_2 g_0 m_1 = e, \quad f_1 g_1 m_2 = J\},
 $
 \item $R_J = \{ J s J s = e \vert s \in S\} \cup \{J^2 = e\}$,
 \item $R_{base} = \{ s^2 = e \vert s \in S\}$.
@@ -2024,7 +2024,7 @@ for each $s \in S$.
 	
 	
 	Using \cref{eq:o1,eq:o2}, it is straightforward to see that $\Psi_0(a_j)\x \Psi_0(a_j) \ket{\tpsi}^{\EXT} = \ket{\tpsi}^{\EXT}$ for $j = 1,2$.
-	Before checking the two cases $j=3$ and $j=4$, we can use \cref{eq:u1u2} to derive that
+	Before checking the two cases $j=3$ and $j=4$, we can use \cref{eq:u1,eq:u2} to derive that
 	\begin{align*}
 		\Psi_0(a_3 a_4) \x\Psi_0(a_3 a_4) \ket{\tpsi}^{\EXT} = \ket{\tpsi}^{\EXT}.
 	\end{align*}
@@ -3858,7 +3858,7 @@ The analysis for $\Phi_{A,1} \x\Phi_{B,1} (U_B \ket{\psi})$ is very similar.
 
 \section*{Acknowledgment}
 The author is deeply grateful to his PhD advisor, Carl Miller, for the enlightening discussions with him, his patient guidance and useful critiques through this
-project. His original idea about 
+project. His original ideas about 
 combining a linear system game with a Bell inequality and characterizing prime numbers
 by their primitive roots are invaluable to
 this work. He also helped the author with the design
