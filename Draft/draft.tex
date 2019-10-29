@@ -287,13 +287,16 @@
 \title{Constant-sized correlations are sufficient to 
 robustly self-test maximally entangled states with unbounded dimension}
 
-\author[1]{Honghao Fu}
+\author{Honghao Fu
+\footnote{\href{mailto:h7fu@umd.edu}{h7fu@umd.edu}}}
 
 \renewcommand\Affilfont{\itshape\small}
 
 
-
-\affil[1]{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA}
+\date{}
+\affil{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA
+\break
+}
 %\affil[2]{National Institute of Standards and Technology, 100 Bureau Dr., Gaithersbug, MD 20899, USA}
 \maketitle
 
@@ -305,7 +308,7 @@ robustly self-test maximally entangled states with unbounded dimension}
 	proposed by Slofstra (\textit{Forum of Mathematics, Pi.} Vol.~$7$, ($2019$)).
 	Since there are 
 	infinitely many prime numbers whose smallest multiplicative generators
-	are at most $5$ (\textit{The Mathematical Intelligencer} $10.4$ ($1988$)), 
+	are at most $5$ (M. Murty \textit{The Mathematical Intelligencer} $10.4$ ($1988$)), 
 	our result implies that constant-sized correlations are sufficient for robust self-testing of maximally entangled states
 	with unbounded local dimension.
 \end{abstract}
@@ -327,16 +330,20 @@ a particular entangled state up to some local isometry.
 This phenomenon is referred to as self-testing.  
 If we can further prove that, when the observed correlation deviates 
 from the ideal one to some extent, 
-the shared state is close to the ideal state up to some local isometry,
+the shared state is still close to the ideal state up to some local isometry,
 then we say the self-test is robust. 
 
-Self-testing is powerful because only classical interactions are performed.
-Hence, it allows a classical party to delegate quantum computations to some untrusted service provider
+The fact that the verifier only interacts classically with the unknown device
+makes self-testing a powerful tool 
+for applications in 
+quantum cryptography and computational
+complexity theory.
+It allows a classical party to delegate quantum computations to some untrusted service provider
 and verify that the computations are performed
 honestly and correctly \cite{ruv2013,coladan2017verifier}.
 It also becomes a critical component of the security proofs of device-independent quantum cryptographic protocols
-\cite{mayersyao,vv2014,miller2017,fu2018,eat2018}.
-Since the setting of interactive proof systems is similar to a self-test, self-testing arguments also help to prove
+\cite{mayersyao,vv2014,fu2018}.
+Since the setting of multi-prover interactive proof systems is similar to a self-test, self-testing arguments also help to prove
 lower bounds of the computational power of entanglement-assisted
 multiprover interactive proof systems \cite{fitzsimons2019, neexp}.
 
@@ -348,13 +355,13 @@ is fully understood.
 The techniques for this case are 
 first introduced in \cite{mckague2012}, then improved in \cite{bamps2015}. 
 Robust self-testing of partially entangled qubits is proved later in
-\cite{yang2013}, which also proposed an generalized swap-isometry
+\cite{yang2013}, the authors of which also propose an generalized swap-isometry
 that can be used to robustly self-test large dimensional maximally entangled states.
 Robust self-testings of tensor product of maximally and partially entangled qubits 
 are proved in \cite{coladan2016parallel,natarajan2017,lowdegree},
 with the last one being the one with the smallest input and output alphabets.
 Self-testing of all pure bipartite entangled states is proved in \cite{coladan2017all}.
-The authors in \cite{coladan2017all} constructed a family of correlations such
+The authors of \cite{coladan2017all} construct a family of correlations such
 that an entangled state of any local dimension has
 a self-testing correlation in this family.
 % One can also self-test many copies of the $2$-dimensional EPR
@@ -365,25 +372,20 @@ a self-testing correlation in this family.
 % Self-testing general $d$-dimensional EPR pairs is a harder task.
 % Coladangelo, Goh and Scarani has shown that all pure bipartite entangled states can be self-tested \cite{coladan2017all}
 To generate a correlation in the family, Alice and Bob
-use constant-sized input alphabets but $\Theta(d)$-sized output alphabets, 
+use constant-sized input alphabets but size-$d$ output alphabets, 
 where $d$ is the local dimension of the entangled state. 
-This is the only result about self-testing the general $d$-dimensional entangled state so far.
-However, proving the robustness of this family of correlations remains an open problem. 
+The robustness of this family of correlations is proved in \cite{inf_sep}.
 
 
  
-Our work aims at answering two open questions.
-The first one is whether maximally entangled states with large local dimension
-can be self-tested with constant-sized input and output alphabets, 
-which are independent of the local dimension of the self-tested state.
+Our work aims at minimizing the sizes of the input 
+and output alphabets of a correlation that can self-test
+a maximally entangled states with large local dimension.
+% that are independent of the local dimension of the self-tested state.
 For comparisons, all the correlations used in the results listed above
 have either input or output alphabets with sizes dependent on the
 local dimension of the entangled state.
-The second one is how to robustly self-test maximally entangled states
-with large local dimension and no tensor product structure. 
-We give an affirmative answers to the first question and
-make significant progress in answering the second question
-by proving the following theorem.
+Our progress is summarized in the following theorem.
 \begin{theorem}[Informal]
 \label{thm:inf}
 	There exists an infinite-sized set $D$ of odd prime numbers such that, for any $d \in D$, 
@@ -399,12 +401,14 @@ We say that $r$ is a primitive root of $d$ if $r$ is the
 multiplicative generator of the group $\Zd$.
 It has been shown that $D$ has infinitely many elements \cite{murty1988}.
 
+\subsection{Proof overview}
+
 To prove \cref{thm:inf}, we construct a correlation with $\Theta(r)$-sized
 input and constant-sized output alphabets
 for each odd prime number $d$ whose smallest primitive root is $r$.
 This correlation is denoted by $\fC(d,r)$.
-Note that although the size of the input or output alphabet of $\fC(d,r)$ does not depend on $d$, 
-the distributions in $\fC(d,r)$ do. 
+Note that the sizes of the input or output alphabet of $\fC(d,r)$ is independent of $d$. 
+% the distributions in $\fC(d,r)$ do. 
 Once we prove $\fC(d,r)$ can robustly self-test a maximally entangled
 state of dimension $4(d-1)$, we apply it to all $d \in D$
 and prove \cref{thm:inf}.
@@ -447,39 +451,58 @@ satisfy the anti-commutation relation
 Intuitively, we can think of the Magic Square game as a way to enforce the
 anti-commutation relation \cite{coladan2017}.
 
-Our linear system game is designed to enforce the relation 
-\begin{align*}
+Our linear system game, $\LS(r)$, is designed to enforce the relation 
+\begin{align}
+\label{eq:uor}
     U O U\ct = O^r,
-\end{align*}
+\end{align}
 for unitaries $U$ and $O$, and some integer $r$.
-It implies that the winning strategy contains binary observables
+The inspiration comes from Slofstra's seminal work \cite{slofstra2017},
+where he proves that 
+there exists a binary linear system game that cannot be won by 
+any finite-dimensional quantum strategy but a limit of 
+finite-dimensional strategies can win it perfectly.
+It implies that the set of quantum correlations generated by
+finite-dimensional strategies is not closed.
+In the proof, he proposes and validates a new way 
+to design binary linear system games to enforce conjugacy relations of the
+form $X Y X\ct = Z$ for unitaries $X, Y$ and $Z$.
+
+Following Slofstra's design, 
+the game $\LS(r)$ is constructed so that the sizes
+of the input alphabets for Alice and Bob are of order $\Theta(r)$,
+and the answer sets are of size $\Theta(1)$.
+Restricting $r \leq 5$ as in \cref{thm:inf} implies that 
+$\LS(r)$ only uses constant-sized input and output alphabets.
+
+The reason that we choose \cref{eq:uor} to be the relation enforced
+by $\LS(r)$ is the following.
+Winning $\LS(r)$ implies that the winning strategy contains binary observables
 $M_1, M_2, M_3, M_4$ on Alice's side and 
 $N_1, N_2, N_3, N_4$ on Bob's side such that 
 \begin{align*}
-    U = M_3M_4 = N_3N_4 && O = M_1M_2 = N_1N_2.
+    U = M_3M_4 = N_3N_4 && O = M_1M_2 = N_1N_2
 \end{align*}
-This relation implies the eigenvalues of $O$ must be $\omega_d^j = e^{ij2\pi/d}$ for some $j \neq 0$ and some prime $d$ whose primitive root is $r$. 
-It also implies that $U$ is a permutation of the eigenbasis of $O$.
-Winning this linear system game implies that Alice and Bob share a state
-$\ket{\psi}$ such that
-\begin{align*}
-    O \x O \ket{\psi} = \ket{\psi}, && 
-    U \x U \ket{\psi} = \ket{\psi}.
-\end{align*}
-These two relations are important for the self-testing argument.
-The relation $O \x O \ket{\psi} = \ket{\psi}$ implies that $\ket{\psi}$
-is spanned by tensor products of states in the eigenbasis of $O$.
-The relation $U \x U \ket{\psi} = \ket{\psi}$ implies that $\ket{\psi}$ is invariant
-under the permutation induced by $U$. 
+with $U$ and $O$ satisfying \cref{eq:uor}.
+Then we can deduce that the eigenvalues of $O$ must be
+of the form $\omega_d^j = e^{i 2j\pi/d}$ for some $j \neq 0$ and some prime $d$ whose primitive root is $r$. 
+We can also deduce that $U$ is a permutation of the eigenbasis of $O$.
+Winning this linear system game also implies that Alice and Bob share a state
+$\ket{\psi}$ such that $\ket{\psi}$
+is spanned by tensor products of states in the eigenbasis of $O$,
+and is invariant under the permutation induced by $U$
+% \begin{align*}
+%     O \x O \ket{\psi} = \ket{\psi}, && 
+%     U \x U \ket{\psi} = \ket{\psi}.
+% \end{align*}
+% The relation $O \x O \ket{\psi} = \ket{\psi}$ implies that $\ket{\psi}$
+% is spanned by tensor products of states in the eigenbasis of $O$.
+% The relation $U \x U \ket{\psi} = \ket{\psi}$ implies that $\ket{\psi}$ is invariant
+% under the permutation induced by $U$. 
 At this point, the eigenvalues of $O$ are unknown, so
-certifying the eigenvalues of $O$ requires another test, 
-which will be introduced later.
+certifying the eigenvalues of $O$ requires another test.
 
-The special feature of our linear system game is that the sizes
-of the question sets for Alice and Bob are of order $\Theta(r)$,
-and the answer sets are of size $\Theta(1)$.
-Restricting $r \leq 5$ as in \cref{thm:inf} implies that our linear system 
-game only uses constant-sized question sets and constant-sized answer sets.
+
 
 % The number of variables and the number of equations of the linear system game depend linearly on $r$,
 % which makes our correlation of size $\Theta(r^2)$.
@@ -563,11 +586,9 @@ a maximally entangled state of dimension $4(d-1)$,
     \left(\frac{1}{\sqrt{d}} \sum_{j=1}^{d-1}\ket{j}\ket{d-j}\right)\x 
     \ket{EPR}^{\x 2}.
 \end{align*}
-
-
-In the proof, we demonstrate a new way to apply the generalized swap-isometry
+In this proof, we demonstrate a new way to apply the generalized swap-isometry
 proposed in \cite{yang2013} to robustly self-test a maximally entangled state of large local
-dimension. This is the first application of the generalized swap-isometry in the robust self-testing proof.
+dimension. 
 
 
 Our contributions are:
@@ -754,7 +775,7 @@ By projective measurements, we mean that
 $(M_x^a)^2 = M_x^a = (M_x^a)^\dagger$ and $(N_y^b)^2 = N_y^b = (N_y^b)^\dagger$.
 Then Alice and Bob's quantum strategy produces the conditional probability distribution
 \begin{align}
-	\pr{ab}{xy} = \bra{\psi} M_x^a \x N_y^b \ket{\psi},
+	\pr{a,b}{x,y} = \bra{\psi} M_x^a \x N_y^b \ket{\psi},
 \end{align}
 for each $(x,y) \in \calX \times \calY$ and $(a,b) \in \calA_x \times \calB_y$.
 Note that the tensor product structure indicates that the
@@ -768,7 +789,7 @@ then $M_x^a N_y^b: \calH_A\x \calH_B \rightarrow \calH_A \x \calH_B$.
 \begin{definition}
 	Given input alphabets: $\calX$ and $\calY$, and families of output
 	alphabets: $\{\calA_x\}_{x \in \calX}$ and $\{\calB_y\}_{y \in \calY}$, a correlation is a family of conditional probability distributions
-	$\{\pr{ab}{xy}: a \in \calA_x, b \in \calB_y\}_{x \in \calX, y \in \calY}$.  
+	$\{\pr{a,b}{x,y}: a \in \calA_x, b \in \calB_y\}_{x \in \calX, y \in \calY}$.  
 \end{definition}
 The size of a correlation is the sum of the sizes of the conditional probability distributions in the correlation.
 
@@ -1504,6 +1525,13 @@ to the equation $x(f_0) + x(f_1) + x(f_2) = 0$, and the relation
 $f_1g_1m_2 = J$ is translated to the equation
 $x(f_1) + x(g_1) + x(m_2) = 1$. 
 The complete list of the equations is given in \cref{def:lsg_eq}.
+The construction of $\LS(r)$ proves the following theorem.
+The definition of $\LS(r)$ follows this theorem.
+\begin{theorem}
+	The group $\Pg$ can be embedded in the solution group of a binary linear system game which has
+	$\nr := 16r+75$ variables and $\mr := 14r + 62$ equations, where each equation has $3$ variables.
+\end{theorem}
+
 \begin{definition}
 \label{def:lsg}
 The linear system game $\LS(r)$ consists of
@@ -1514,7 +1542,7 @@ The linear system game $\LS(r)$ consists of
 where $I_i = \{ s : H(i,s) = 1\}$ is the set of all the nonzero coefficient of equation $i$
 and $\mr := 14r + 62$ is the number of equations.  
 Details of $I_i$ for $1 \leq i \leq \mr$ can be found in \cref{def:lsg_eq}.
-Alice answer sets are 
+Alice's answer sets are 
 \begin{align*}
     \calA^{\LS}_{I_i} = (\Z_2)^{I_i}
 \end{align*}
@@ -1548,12 +1576,8 @@ the score function is
 \end{align*}
 \end{definition}
 
-The construction of $\LS(r)$ proves the following theorem.
-\begin{theorem}
-	The group $\Pg$ can be embedded in the solution group of a binary linear system game which has
-	$\nr := 16r+75$ variables and $\mr := 14r + 62$ equations, where each equation has $3$ variables.
-\end{theorem}
-As indicated in \cref{def:lsg}, the total
+
+As indicated above, the total
 number of question pairs is $N(r) = 157r + 685 = \Theta(r)$.
 
 The ideal strategy of $\LS(r)$ is based on
@@ -1580,8 +1604,8 @@ In this section, we introduce the extended weighted CHSH test,
 which is going to be a component of the full test introduced in \cref{sec:full_test}.
 The ideal correlation for this test contains the ideal correlation that 
 achieves $\I_{-\cot(\pi/d)}^{\max}$. 
-To make the study of the implication of a strategy that realize 
-the ideal correlation of the extended weighted CHSH test easier,
+To ease the study of the implication of a strategy that realize 
+the ideal correlation of the extended weighted CHSH test,
 we fill in the background of the robust self-testing property of the
 general weighted CHSH inequality, $\I_\alpha$, first.
 
@@ -1632,9 +1656,7 @@ The key relations that will be reused are
 	\label{eq:zaxa}&Z_AX_A\ket{\psi} \appd{\frac{1+c+s}{c\sqrt{s}} \se} -X_AZ_A \ket{\psi},\\
 	\label{eq:zaxaxbzb}&X_AZ_A \ket{\psi} \appd{\frac{2s^2+cs+c+s}{cs\sqrt{s}} \sqrt{\epsilon}} -X_BZ_B \ket{\psi}.
 \end{align}
-We keep the exact error terms so that some
-of the substitution steps in \cref{sec:main} are 
-easier to follow.
+We keep the exact error terms for the substitution steps in \cref{sec:main}.
 
 %-------------------------------------------
 \subsection{The extended weighted CHSH test}
@@ -1661,53 +1683,85 @@ as it will be presented as a part of the ideal correlation of the full test.
 \end{definition}
 The reason why this test is called the extended weighted CHSH test will be clear 
 after we introduce the ideal strategy.
+The superscript $\EXT$ stresses the fact 
+the labeled object is for the extended weighted CHSH test.
 
 Recall the Hilbert space $W_{d-1}$ defined in \cref{eq:basis}. 
-To make the shared state and the observables of the ideal strategy have
-simpler forms, we introduce the third basis of $W_{d-1}$: $\{ \ket{j} \}_{j=1}^{d-1}$, which is defined by
-\begin{align*}
+To better characterize the shared state and the observables of the ideal strategy, we need to decompose $W_{d-1}$ into $2$-dimensional
+orthogonal subspaces.
+In order to do it, we introduce the third basis of $W_{d-1}$: $\{ \ket{j} \}_{j=1}^{d-1}$ defined by
+\begin{align}
+    \label{eq:ketj}
     &\ket{j} = -\frac{1}{\sqrt{2}}(\ket{x_j} + e^{-ij\pi/d}\ket{x_{d-j}}) \\
+    \label{eq:ketd-j}
     &\ket{d-j} = \frac{i}{\sqrt{2}}(\ket{x_j} - e^{-ij\pi/d}\ket{x_{d-j}})
 	%\ket{x_j} = \frac{-1}{\sqrt{2}}(\ket{j} + i\ket{d-j}), \\
 	%\ket{x_{d-j}} = \frac{-e^{ij\pi/d}}{\sqrt{2}}(\ket{j} - i\ket{d-j})
-\end{align*}
+\end{align}
 for $1 \leq j \leq \frac{d-1}{2}$.
+Then the $2$-dimensional subspaces are
+\begin{align}
+    \label{eq:vj}
+    V_j = \spn( \ket{j}, \ket{d-j})
+\end{align}
+for $1 \leq j \leq \frac{d-1}{2}$.
+The projector onto $V_j$ is denoted by $\Pi_{V_j}$. 
+On each subspace $V_j$, we define quantum states 
+\begin{align}
+    \ket{j_{\times}} = \frac{1}{\sqrt{2}}(\ket{j} + \ket{d-j}) &&
+    \ket{(d-j)_{\times}} = \frac{1}{\sqrt{2}}(\ket{j} - \ket{d-j})
+\end{align}
+and
+\begin{align}
+    \label{eq:ketj+}
+    &\ket{j_+} = \cos(-\frac{j\pi}{2d})\ket{j} + \sin(-\frac{j\pi}{2d})\ket{d-j}
+	&&\ket{(d-j)_+} = \sin(-\frac{j\pi}{2d})\ket{j} - \cos(-\frac{j\pi}{2d})\ket{d-j}\\
+	\label{eq:ketj-}
+	&\ket{j_-} = \cos(-\frac{j\pi}{2d})\ket{j} - \sin(-\frac{j\pi}{2d})\ket{d-j}
+	&&\ket{(d-j)_-} = \sin(-\frac{j\pi}{2d})\ket{j} + \cos(-\frac{j\pi}{2d})\ket{d-j}.
+\end{align}
+Note that $\{\ket{j_{\times}}, \ket{(d-j)_{\times}}\}$,
+$\{\ket{j_+}, \ket{(d-j)}_+\}$ and $\{\ket{j_-}, \ket{(d-j)_-}\}$ are three sets of basis states of $V_j$.
+These are the states that the ideal strategy measures.
+
+
 The shared state of the ideal strategy is 
 \begin{equation}
     \label{eq:tpsi}
     \begin{aligned}
         \ket{\tpsi}^{\EXT}
-         =& \frac{1}{\sqrt{d-1}} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j}),
+         =& \frac{1}{\sqrt{d-1}} \sum_{j=1}^{(d-1)/2} e^{ij\pi/d}(\ket{j}\ket{j} + \ket{d-j}\ket{d-j}).
     \end{aligned}
 \end{equation}
-where the superscript $\EXT$ stresses the fact this state is for the extended weighted CHSH test.
 Note that in the standard basis of $W_{d-1}$,
 \begin{align*}
     \ket{\tpsi}^{\EXT} = \frac{1}{\sqrt{d-1}} \sum_{j=1}^{d-1} \ket{x_j}\ket{x_{d-j}}.
 \end{align*}
 
-To introduce the projectors, 
-we first define two subspaces of $W_{d-1}$: $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = W_{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$.
-The corresponding projective measurements are $\Pi_V$ and $\Pi_{V^\perp}$. Note that $V$ is the subspace on which they should maximize $\I_{\cot(-\pi/d)}$.
+% To introduce the projectors of the ideal strategy, we
+% define $V_1^\perp := \bigoplus_{j=2}^{(d-1)/2} V_j$
+% and denote the corresponding projector by $\Pi_{V_1}^{\perp}$.
+% we first define two subspaces of $W_{d-1}$: $V = \spn\{\ket{1}, \ket{d-1}\}$ and $V^\perp = W_{d-1} \setminus\spn\{\ket{1}, \ket{d-1}\}$.
+% The corresponding projective measurements are $\Pi_V$ and $\Pi_{V^\perp}$. 
+% Note that $V_1$ is the subspace on which they should maximize $\I_{\cot(-\pi/d)}$. We also need to define 
 
 First of all, the ideal strategy ensures that when 
 Alice and Bob get the same question from the set $\{0,\nr+1,\nr+2\}$, they always give the same answer.
 Alice's and Bob's measurements for questions $0, \nr+1$ and $\nr+2$ are
 \begin{align*}
-	&\tP_0^0 = \tQ_0^0 = \Pi_V && \tP_0^2 = \tQ_0^2 = \Pi_{V^\perp} \\
+	&\tP_0^0 = \tQ_0^0 = \Pi_{V_1} && \tP_0^2 = \tQ_0^2 = \Pi_{V_1}^\perp \\
 	&\tP_{\nr+1}^0 = \tQ_{\nr+1}^0 = \ketbra{1}{1} &&
 	\tP_{\nr+1}^1 = \tQ_{\nr+1}^1 = \ketbra{d-1}{d-1} \\
 	&\tP_{\nr+2}^0 = \tQ_{\nr+2}^0 = \ketbra{1_{\times}}{1_{\times}} && \tP_{\nr+2}^1 = \tQ_{\nr+2}^1 = \ketbra{(d-1)_{\times}}{(d-1)_{\times}} \\
-	&\tP_{\nr+1}^2 = \tQ_{\nr+1}^2 = \Pi_{V^\perp} &&
-	 \tP_{\nr+2}^2 = \tQ_{\nr+2}^2 = \Pi_{V^\perp},
+	&\tP_{\nr+1}^2 = \tQ_{\nr+1}^2 = \Pi_{V_1}^\perp &&
+	 \tP_{\nr+2}^2 = \tQ_{\nr+2}^2 = \Pi_{V_1}^\perp,
 \end{align*}
 where
 \begin{align*}
-    \ket{1_{\times}} = \frac{1}{\sqrt{2}}\ket{1} + \frac{1}{\sqrt{2}}\ket{d-1}
-	&&\ket{(d-1)_{\times}} = \frac{1}{\sqrt{2}}\ket{1} - \frac{1}{\sqrt{2}}\ket{d-1}.
+    \Pi_{V_1}^{\perp} = \1 - \Pi_{V_1}.
 \end{align*}
-Intuitively, these questions force Alice and Bob to agree on the subspace $V$ and
-on the basis of $V$ that they will measure.
+Intuitively, these questions force Alice and Bob to agree on the subspace $V_1$ and
+on the basis of $V_1$ that they measure.
 
 The ideal strategy also ensures that 
 when Alice gets $x \in \{1,2\}$ and Bob gets $y \in \{\nr+1, \nr+2\}$, 
@@ -1715,24 +1769,21 @@ their answers $a,b \in \{0,1\}$ should maximize $\I_{\cot(-\pi/d)}$ with Alice a
 and when Alice gets $x \in \{\nr+1,\nr+2\}$ and Bob gets $y \in \{1, 2\}$,
 their answers $a,b \in \{0,1\}$ should maximize $\I_{\cot(-\pi/d)}$.
 This is the reason behind naming this test the extended weighted CHSH test.
-It is also the reason behind having Alice and Bob agreeing on the subspace $V$.
-Before introducing the measurements, 
-we need to define some basis states of $V$
+It is also the reason behind having Alice and Bob agreeing on the subspace $V_1$.
+
+When Alice and Bob gets question $1$ or $2$, what they measure are
 \begin{align*}
-	&\ket{1_+} = \cos(-\frac{\pi}{2d})\ket{1} + \sin(-\frac{\pi}{2d})\ket{d-1}
-	&&\ket{(d-1)_+} = \sin(-\frac{\pi}{2d})\ket{1} - \cos(-\frac{\pi}{2d})\ket{d-1}\\
-	&\ket{1_-} = \cos(-\frac{\pi}{2d})\ket{1} - \sin(-\frac{\pi}{2d})\ket{d-1}
-	&&\ket{(d-1)_-} = \sin(-\frac{\pi}{2d})\ket{1} + \cos(-\frac{\pi}{2d})\ket{d-1},
+	&\tP_1^0 = \tQ_1^0 =  \sum_{j=1}^{(d-1)/2}\ketbra{j_+}{j_+} && \tP_1^1 = \tQ_1^1 = \sum_{j=1}^{(d-1)/2} \ketbra{(d-j)_+}{(d-j)_+}\\
+	&\tP_2^0 = \tQ_2^0 = \sum_{j=1}^{(d-1)/2} \ketbra{j_-}{j_-} && \tP_1^1 = \tQ_1^1 = \sum_{j=1}^{(d-1)/2} \ketbra{(d-j)_-}{(d-j)_-}.
 \end{align*}
-so that $\{\ket{1_+}, \ket{(d-1)}_+\}$ and $\{\ket{1_-}, \ket{(d-1)_-}\}$ are two basis
-of $V$.
-When Alice and Bob gets question $1$ or $2$, what they measure on $V$ are
-\begin{align*}
-	&\tP_1^0 = \tQ_1^0 =  \ketbra{1_+}{1_+} && \tP_1^1 = \tQ_1^1 =  \ketbra{(d-1)_+}{(d-1)_+}\\
-	&\tP_2^0 = \tQ_2^0 =  \ketbra{1_-}{1_-} && \tP_1^1 = \tQ_1^1 =  \ketbra{(d-1)_-}{(d-1)_-}.
-\end{align*}
-Notice that their measurements on $V$ follow the measurements to achieve $\I_{\cot(-\pi/d)}^{\max}$.
-What they measure on $V^\perp$ is irrelevant for this test. 
+In particular, their measurements on $V_1$  
+for question $1$ and $2$,
+follow the measurements to achieve $\I_{\cot(-\pi/d)}^{\max}$.
+What they measure on the complementary of $V_1$ 
+in $W_{d-1}$
+is irrelevant for this test,
+but important for the full test introduced 
+in the next section.
 %Later we will see that their measurements on $V^\perp$ are determined by their observables for variables $x(a_1)$ and $x(a_2)$ of $\LS(r)$.
 
 
@@ -1938,7 +1989,7 @@ $1$ by $x(a_1)$ and $2$ by $x(a_2)$, and similarly for $\calY^{\EXT'}$.
 The answer sets $\calA_x^{\EXT'}$ are constructed from $\calA_x^{\EXT}$
 in a similar way.
 
-The ideal strategy for the full test is an extension of the ideal strategy of $\LS(r)$ to make it able to produce the ideal correlation of 
+The ideal strategy for the full test is an extension of the ideal strategy of $\LS(r)$ to make it generate the ideal correlation of 
 the extended weighted CHSH test.
 Recall the subspace $W_{d-1}$ and $W_2$ defined in \cref{eq:basis}.
 The shared state of the ideal strategy is
@@ -1962,12 +2013,13 @@ Alice's and Bob's observables for question $x(a_1)$ and $x(a_2)$ of $\calX^{\EXT
 for $j= 1,2$.
 They can reproduce the ideal correlation because
 \begin{align*}
-    &(\1_{W_2} \x \1_{W_2} \x \Pi_V) \tM(a_1) (\1_{W_2} \x \1_{W_2} \x \Pi_V) = \1_{W_2} \x \1_{W_2} \x (\tP_1^0 - \tP_1^1) \\
-    &(\1_{W_2} \x \1_{W_2} \x \Pi_V) \tM(a_2) (\1_{W_2} \x \1_{W_2} \x \Pi_V) = \1_{W_2} \x \1_{W_2} \x (\tP_2^0 - \tP_2^1),
+    & \tM(a_j)  = \1_{W_2} \x \1_{W_2} \x (\tP_j^0 - \tP_j^1) \\
+    & \tN(a_j)  = \1_{W_2} \x \1_{W_2} \x (\tQ_j^0 - \tQ_j^1),
 \end{align*}
-and similarly on Bob's side.
-In other words, the observables $\tM(a_j)$ and $\tN(a_j)$ are 
-measuring the same state on the subspace $V$ as $\tP_j$ and $\tQ_j$
+for $j = 1,2$,
+which can be checked using \cref{eq:ketj,eq:ketd-j,eq:ketj+,eq:ketj-}.
+In particular, the observables $\tM(a_j)$ and $\tN(a_j)$ are 
+measuring the same state on the subspace $V_1$ as $\tP_j$ and $\tQ_j$
 for $j = 1,2$.
 
 Recall the ideal projectors $\tP_x^a$ and $\tQ_y^b$ for the extended 
@@ -2065,7 +2117,7 @@ for each $s \in S$.
 \label{sec:cor}
 %---------------------------------------------------
 The full correlation is generated by the ideal strategy presented in the previous subsection.
-We denote the full correlation by $\fC(d,r) = \{( \tpr{ab}{xy} )_{a,b}\}_{x,y}$.
+We denote the full correlation by $\fC(d,r) = \{( \tpr{a,b}{x,y} )_{a,b}\}_{x,y}$.
 To help readers to understand the proofs in \cref{sec:main} better, 
 parts of the full correlation are given in the tables below.
 
@@ -2083,24 +2135,24 @@ $a = 0$ & $a=1$ & $a=2$ &
 $a = 0$ & $a=1$ & $a=2$\\
 \hline
 \hline
-\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{20}{00}$ 
-& $\frac{1+\sin(\pi/d)}{2(d-1)}$ & $\frac{1-\sin(\pi/d)}{2(d-1)}$ & \small  $\pr{20}{10}$ \\
+\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{2,0}{0,0}$ 
+& $\frac{1+\sin(\pi/d)}{2(d-1)}$ & $\frac{1-\sin(\pi/d)}{2(d-1)}$ & \small  $\pr{2,0}{1,0}$ \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{20}{00}$ 
-&  $\frac{1-\sin(\pi/d)}{2(d-1)}$ & $\frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1} - \pr{20}{10}$  \\
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{d-3}{d-1}-\pr{2,0}{0,0}$ 
+&  $\frac{1-\sin(\pi/d)}{2(d-1)}$ & $\frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1} - \pr{2,0}{1,0}$  \\
 \hline
-\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{20}{01}$ & 
-$ \frac{1-\sin(\pi/d)}{2(d-1)}$ & $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\pr{2 0}{11}$  \\
+\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & \small $\pr{2,0}{0,1}$ & 
+$ \frac{1-\sin(\pi/d)}{2(d-1)}$ & $ \frac{1+\sin(\pi/d)}{2(d-1)}$ & \small $\pr{2, 0}{1,1}$  \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{20}{01}$ &  
-$ \frac{1+\sin(\pi/d)}{2(d-1)}$ & $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1}- \pr{20}{11}$ \\
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{d-1}$ & $\frac{\cos^2(\pi/2d)}{d-1}$ & \small $\frac{d-3}{d-1}-\pr{2,0}{0,1}$ &  
+$ \frac{1+\sin(\pi/d)}{2(d-1)}$ & $ \frac{1-\sin(\pi/d)}{2(d-1)}$ & \small $\frac{d-3}{d-1}- \pr{2,0}{1,1}$ \\
 \hline
 \end{tabular}
 \end{center}
 \caption{The correlation for $x \in \{\nr+1, \nr+2\}$ and $y \in \{1,2\}$.}
 \label{tb:chsh}
 \end{table}
-We don't explicitly calculate the conditional probabilities of the form $\pr{20}{xy}$ when $x \in \{\nr+1, \nr+2\}$ and $y \in \{1, 2\}$ 
+We don't explicitly calculate the conditional probabilities of the form $\pr{2,0}{x,y}$ when $x \in \{\nr+1, \nr+2\}$ and $y \in \{1, 2\}$ 
 because they are irrelevant.
 Note that when $x \in \{1,2\}$ and $y \in \{\nr+1, \nr+2\}$, the correlation table is 
 very similar to Table~\ref{tb:chsh}, so we omit it here.
@@ -2183,7 +2235,7 @@ $b = (2,0)$ & $b=(2,1)$   \\
 \label{tbl:comm}
 \end{table}
 The correlation tables for the other seven pairs
-of questions are similar.
+of questions of the commutation game are similar.
 
 %=====================================
 \section{Robust self-testing with $\fC(d,r)$}
@@ -2199,17 +2251,17 @@ We first give the definition of an approximate strategy of a fixed correlation.
     Let $\calX, \calY$ be input alphabets,
     $\{\calA_x\}_{x \in \calX}, \{\calB_y\}_{y \in \calY}$
     be families of output alphabets.
-	For a correlation $\tilde{C} = (\tpr{ab}{xy})$
+	For a correlation $\tilde{C} = (\tpr{a,b}{x,y})$
 	with $(a,b) \in \calA_x \times \calB_y$ and $(x,y) \in \calX \times \calY$,
 	and a distribution $\pi$ over all the $(x,y) \in \calX \times \calY$,
 	we say a quantum strategy $\bS = (\ket{\psi}, \{M_x^a\}, \{N_y^b\})$
 	is an $\ep$-approximate quantum strategy of $\tilde{C}$
 	with respect to the distribution $\pi$, 
 	if it produces the correlation
-	$( \pr{ab}{xy} = \bra{\psi} M_x^a N_y^b \ket{\psi} )$ such that
+	$( \pr{a,b}{x,y} = \bra{\psi} M_x^a N_y^b \ket{\psi} )$ such that
 	\begin{align}
 	\label{eq:expect}
-	\E_{(x,y) \sim \pi} \left[\sum_{ab} \abs{\pr{ab}{xy} - \tpr{ab}{xy}}\right] \leq \ep.
+	\E_{(x,y) \sim \pi} \left[\sum_{ab} \abs{\pr{a,b}{x,y} - \tpr{a,b}{x,y}}\right] \leq \ep.
 	\end{align}
 \end{definition}
 In our full test, the probability distribution over question pairs is $\pi$ given in 
@@ -2226,7 +2278,7 @@ the number of possible output pairs is constant for each question pair $(x,y)$,
 the approximate condition in \cref{eq:expect} directly implies that, if $\bS$ is an $\ep$-approximate strategy
 of $\fC(d,r)$, then
 \begin{align*}
-    \pr{ab}{xy} \appd{O(r\ep)} \tpr{ab}{xy},
+    \pr{a,b}{x,y} \appd{O(r\ep)} \tpr{a,b}{x,y},
 \end{align*}
 for all valid $(a,b,x,y)$ of the full test.
 
@@ -2266,21 +2318,21 @@ The first implication of an approximate winning strategy is given in the proposi
 
 
 \begin{proof}
-The condition that $(\tpr{\ba b}{I_i s})$ of $\fC(d,r)$ wins the linear system game optimally is equivalent to
+The condition that $(\tpr{\ba, b}{I_i, s})$ of $\fC(d,r)$ wins the linear system game optimally is equivalent to
 \begin{align*}
-\sum_{\ba,b: \ba \in X_i, a(j) = b} \tpr{\ba b}{I_i s} = 1
+\sum_{\ba,b: \ba \in X_i, a(j) = b} \tpr{\ba, b}{I_i, s} = 1
 \end{align*}
 for all $i = 1 \dots \mr$.
 We also know that the shared state $\ket{\psi}$ and observables $M_i(s)$
 and $N(s)$ of $\bS$ satisfy the relation
 \begin{align*}
-	\bra{\psi} M_i(s) N(s) \ket{\psi} &= 2 \sum_{\ba,b: \ba \in X_i, a(s) = b} \pr{\ba b}{I_i s} -1,
+	\bra{\psi} M_i(s) N(s) \ket{\psi} &= 2 \sum_{\ba,b: \ba \in X_i, a(s) = b} \pr{\ba, b}{I_i, s} -1,
 \end{align*}
 as proved in \cite{slofstra2017}.
 Using the fact that $\bS$ approximates the winning correlation of $\LS(r)$, 
 we can further see that
 \begin{align*}
-	\bra{\psi} M_i(s) N(s) \ket{\psi} \appd{O(r \ep)} 2\sum_{\ba,b: \ba \in X_i, a(j) = b} \tpr{\ba b}{is} - 1 = 1.
+	\bra{\psi} M_i(s) N(s) \ket{\psi} \appd{O(r \ep)} 2\sum_{\ba,b: \ba \in X_i, a(j) = b} \tpr{\ba, b}{I_i, s} - 1 = 1.
 \end{align*}
 Since $M_i(s)$ and $N(s)$ are binary observables, the equation above
 implies that
@@ -2530,11 +2582,11 @@ We will work with a strategy $\bS$ that can approximate
 $\fC(d,r)$, which contains
 the ideal correlation of the extended weighted CHSH test.
 About the notation,
-for $(x,y) \in \calX^{\EXT} \times \calY^{\EXT}$ and $(a,b) \in \calA_x^{\EXT} times \calB_y^{\EXT}$, 
+for $(x,y) \in \calX^{\EXT} \times \calY^{\EXT}$ and $(a,b) \in \calA_x^{\EXT} \times \calB_y^{\EXT}$, 
 Alice and Bob's projectors are denoted 
 by $M_x^a$ and $N_y^b$,
 as illustrated in \cref{sec:prelim}.
-Since the two answers for question $1$ and $2$ are $0$ and $1$, 
+Since the two answers for questions $1$ and $2$ are $0$ and $1$, 
 we denote Alice and Bob's binary observables for these two questions
 by $M_1, M_2$ and $N_1, N_2$ respectively.
 Note that the observables $M_1 \equiv M(a_1)$ and $M_2 \equiv M(a_2)$,
@@ -2576,7 +2628,7 @@ We prove $(M_{\nr+1}^0+M_{\nr+1}^1)\ket{\psi} \appd{O(\sr \se)} N_0^0 \ket{\psi}
 The rest of the relations follow the same line of argument.
 
 Recall that the implication of $\bS$ being an $\ep$-approximate strategy is that 
-$\pr{ab}{xy} \appd{O(r \ep)} \tpr{ab}{xy}$ for each question 
+$\pr{a,b}{x,y} \appd{O(r \ep)} \tpr{a,b}{x,y}$ for each question 
 pair $(x,y)$ and its associating answer pair $(a,b)$.
 From the correlation, we can observe that
 \begin{align*}
@@ -2641,13 +2693,13 @@ This step requires examining the terms of the form
 $\bra{\psi} M_0^0 M_{x}^a N_y^b M_0^0\ket{\psi}$ for $x = \nr+1,\nr+2$, $y=1,2$ and $a,b = 0,1$.
 We find that these terms relate to $\bra{\psi} M_x^a N_y^b \ket{\psi}$ by
 \begin{align*}
-	   \bra{\psi} M_{x}^aN_y^b \ket{\psi} 
-	&= \bra{\psi}(M_0^0 + M_0^2) M_x^a N_y^b (M_0^0 + M_0^2)\ket{\psi} \\
-	&=  \bra{\psi}M_0^0 M_x^aN_y^b M_0^0\ket{\psi} + \bra{\psi}M_0^0 M_x^aN_y^b M_0^2\ket{\psi}\\
-	&\quad\quad+\bra{\psi}M_0^2 M_x^aN_y^b M_0^0\ket{\psi} + \bra{\psi}M_0^2 M_x^aN_y^b M_0^2\ket{\psi}\\
-	&\appd{O(\sr\se)}  \bra{\psi}M_0^0 M_x^aN_y^b M_0^0\ket{\psi} + \bra{\psi}M_0^0 M_x^aN_y^b M_x^2\ket{\psi} \\
-	&\quad \quad +\bra{\psi}M_x^2 M_x^aN_y^b M_0^0\ket{\psi} + \bra{\psi}M_x^2 M_x^aN_y^b M_x^2\ket{\psi}\\
-	&=\bra{\psi}M_0^0 M_x^aN_y^b M_0^0\ket{\psi},
+	   &\bra{\psi} M_{x}^aN_y^b \ket{\psi} \\
+	= &\bra{\psi}(M_0^0 + M_0^2) M_x^a N_y^b (M_0^0 + M_0^2)\ket{\psi} \\
+	=  &\bra{\psi}M_0^0 M_x^aN_y^b M_0^0\ket{\psi} + \bra{\psi}M_0^0 M_x^aN_y^b M_0^2\ket{\psi}
+	+\bra{\psi}M_0^2 M_x^aN_y^b M_0^0\ket{\psi} + \bra{\psi}M_0^2 M_x^aN_y^b M_0^2\ket{\psi}\\
+	\appd{O(\sr\se)} & \bra{\psi}M_0^0 M_x^aN_y^b M_0^0\ket{\psi} + \bra{\psi}M_0^0 M_x^aN_y^b M_x^2\ket{\psi} 
+	+\bra{\psi}M_x^2 M_x^aN_y^b M_0^0\ket{\psi} + \bra{\psi}M_x^2 M_x^aN_y^b M_x^2\ket{\psi}\\
+	=&\bra{\psi}M_0^0 M_x^aN_y^b M_0^0\ket{\psi},
 \end{align*}
 where we use the facts that $M_0^2 \ket{\psi} \appd{O(\sr \se)} M_x^2 \ket{\psi}$ and that 
 $M_x^0 M_x^2 = 0$ for the relevant values of $(x,y,a,b)$.
@@ -2690,7 +2742,7 @@ in \cref{lm:decomp_psi}.
 	 %\text{ and } \ket{\psi_2} \appd{O(\sd \sr\qe)} \ket{\psi_4}, \\
 	 %\label{eq:psi1_sum} &M_\ast^0 \ket{\psi} \appd{O( r\se)} \ket{\psi_1}+\ket{\psi_2}, \\
 	 %\label{eq:psi1_orth} &\braket{\psi_2}{\psi_1} \appd{O( r\se)} 0,\\
-	 \label{eq:psi1_norm} &\norm{\ket{\psi_1}}^2 \appd{O(\sr\se)} 1/(d-1).
+	 \label{eq:psi1_norm} &\norm{\ket{\psi_1}}^2 \appd{O(\sr\se)} \frac{1}{d-1}.
 	\end{align}
 \end{proposition}
 \begin{proof}
@@ -3051,8 +3103,9 @@ Then,
     With similar derivation, we can also get
     \begin{align}
     \label{eq:A_omega}
-        O_A (U_A\ct)^j \ket{\psi_1} \appd{O(\sd r^{j} \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1}.
+        O_A (U_A\ct)^j \ket{\psi_1} \appd{O(\sd r^{j} \qe)}\omega_d^{-r^j}  (U_A\ct)^j \ket{\psi_1},
     \end{align}
+    which will be used in \cref{sec:self-test}.
 	Hence for $j \neq j'$, $(U_A\ct U_B\ct)^{j} \ket{\psi_1}$ and $(U_A\ct U_B\ct)^{ j'} \ket{\psi_1}$ are close to eigenvectors
 	of the unitary $O_B$ with different eigenvalues.
 	Applying \cref{prop:orthog} to \cref{eq:B_omega} gives us that  
@@ -3151,14 +3204,14 @@ Based on the propositions and lemmas proved so far, we can prove the self-testin
 	$\Phi_A \x \Phi_B = (\Phi_{A,2} \x \Phi_{B,2})(\Phi_{A,1}\x\Phi_{B,1})$ and a state $\ket{junk}$
 	such that $\norm{\ket{junk}} \appd{O(\sd \qr \qe)} 1$ and 
 	\begin{align}
-		&\Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d r^{d} \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}\\	
-		&\Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d r^{d}\ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^{5/2} r^{d} \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}\\	
+		&\Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{5/2} r^{d}\ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{d-j}\ket{x_{d-j}}_{A'}\ket{x_j}_{B'} \\
-		&\Phi_A \x \Phi_B (O_B\ket{\psi}) \appd{O(d r^{d} \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (O_B\ket{\psi}) \appd{O(d^{5/2} r^{d} \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{j}\ket{x_{d-j}}_{A'}\ket{x_j}_{B'}\\
-		&\Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d r^{d}  \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^{5/2} r^{d}  \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{(d-j)r^{-1}}}_{A'}\ket{x_j}_{B'} \\
-		&\Phi_A \x \Phi_B (U_B\ket{\psi}) \appd{O(d r^{d}\ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (U_B\ket{\psi}) \appd{O(d^{5/2} r^{d}\ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_{j r^{-1}}}_{B'}.
 	\end{align}
 \end{theorem}
@@ -3392,7 +3445,7 @@ The only thing to note is that the state $\ket{reuse}$, which is on the same Hil
 The proof takes two steps. 
 We first show that 
 \begin{align}
-	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d r^{d} \ep^{1/8})} \sqrt{d-1}\ket{\psi_1} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'}.
+	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d^{5/2} r^{d} \ep^{1/8})} \sqrt{d-1}\ket{\psi_1} \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'}.
 \end{align}
 Then we show that there exists a state $\ket{junk}$ such that  
 \begin{align}
@@ -3402,7 +3455,7 @@ Then we show that there exists a state $\ket{junk}$ such that
 Combining the two equations above we get that 
 \begin{align*}
 	&\quad\Phi_{A,2} \x \Phi_{B,2}( \Phi_{A,1} \x \Phi_{B,1} (\ket{\psi})) \\
-	&\appd{O(d r^d \ep^{1/8})} \left[\Phi_{A,2} \x \Phi_{B,2}
+	&\appd{O(d^{5/2} r^d \ep^{1/8})} \left[\Phi_{A,2} \x \Phi_{B,2}
 	(\sqrt{d-1} \ket{\psi_1})\right] \x \frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'} \\
 	&\appd{O(\sr\se)} \ket{junk} \x \ket{EPR}^{\x 2} \x\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'},
 \end{align*}
@@ -3419,7 +3472,7 @@ The evolution is summarized below.
 		\xrightarrow[]{QFT_d}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}  \ket{\psi_1}\ket{x_{k_1}}_{A'}\ket{x_{k_2}}_{B'}\\
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} O_A^{k_1}(U_A\ct)^{\log_r j} O_B^{k_2}(U_B\ct)^{\log_r j}
 		\ket{\psi_1} \ket{x_{k_1}}_{A'}\ket{x_{k_2}}_{B'}\\
-		\appd{O(\sd r^{d} \qe)}&\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}\omega_d^{(k_2-k_1)j}\ket{\psi_1} \ket{x_{k_1}}_{A'}\ket{x_{k_2}}_{B'}\\
+		\appd{O(d^{5/2} r^{d} \qe)}&\frac{1}{d} \sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}\omega_d^{(k_2-k_1)j}\ket{\psi_1} \ket{x_{k_1}}_{A'}\ket{x_{k_2}}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}} &\frac{1}{d^2}\sum_{l_1,l_2 = 0}^{d-1}\sum_{k_1,k_2 = 0}^{d-1}\sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j} 
 		\omega_d^{k_1(d-j-l_1)}\omega_d^{k_2(j-l_2)}\ket{\psi_1} \ket{x_{l_1}}_{A'}\ket{x_{l_2}}_{B'}\\
 		= &\sum_{j=1}^{d-1}(U_A\ct U_B\ct)^{\log_r j} \ket{\psi_1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'} \\
@@ -3429,10 +3482,10 @@ The evolution is summarized below.
 When we analyze the effect of the controlled-$O_{A/B}$, we applied \cref{eq:A_omega,eq:B_omega} repeatedly.
 In summary, we have shown that
 \begin{align}
-	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d r^{d} \ep^{1/8})} \left(\sqrt{d-1} \ket{\psi_1}\right) \x \left(\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'}\right),
+	\Phi_{A,1}\x\Phi_{B,1}(\ket{\psi}) \appd{O(d^{5/2} r^{d} \ep^{1/8})} \left(\sqrt{d-1} \ket{\psi_1}\right) \x \left(\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_j}_{B'}\right),
 \end{align}
-where we use the fact that $O(d r^{d} \ep^{1/8})$ dominates both $O(d r^{d/2+1/4} \ep^{1/8})$ and 
-$O(\sd r^{d} \qe)$.
+where we use the fact that $O(d^{5/2} r^{d} \ep^{1/8})$ dominates both $O(d r^{d/2+1/4} \ep^{1/8})$ and 
+$O(d^{5/2} r^{d} \qe)$.
 The relation $ \sqrt{d-1} \norm{\ket{\psi_1}} \appd{O(\sd \qr\qe)} 1$ is derived from the fact that
 $\norm{\ket{\psi_1}}^2 \appd{O(\sr \se)} 1/(d-1)$.
 
@@ -3501,7 +3554,7 @@ and then we calculate $\Phi_{A,1} \x \Phi_{B,1} (O_A\ket{\psi'})$ as
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}&\frac{1}{d}\sum_{j=1}^{d-1}\sum_{k_1,k_2 = 0}^{d-1} 
 		 O_A^{k_1}(U_A\ct)^{\log_r j} O_B^{k_2}(U_B\ct)^{\log_r j} \omega_d^{-j} \ket{\psi_1} 
 		 \ket{x_{k_1}}_{A'}\ket{x_{k_2}}_{B'}\\
-		\appd{O(d r^{d}  \ep^{1/4})}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}
+		\appd{O(d^{5/2} r^{d}  \ep^{1/4})}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct U_B\ct)^{\log_r j}
 		\omega_d^{-j}\omega_d^{(k_2-k_1)j}\ket{\psi_1}
 		 \ket{x_{k_1}}_{A'}\ket{x_{k_2}}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}}& \sum_{j=1}^{d-1}  (U_A\ct U_B\ct)^{\log_r j}  
@@ -3522,7 +3575,7 @@ and then we calculate $\Phi_{A,1} \x \Phi_{B,1} (U_A\ket{\psi'})$.
 		\xrightarrow[]{\text{Controlled-}O_{A/B}}&\frac{1}{d}\sum_{j=1}^{d-1}\sum_{k_1,k_2 = 0}^{d-1} 
 		 O_A^{k_1}(U_A\ct)^{\log_r j-1} O_B^{k_2}(U_B\ct)^{\log_r j} \ket{\psi_1} 
 		 \ket{x_{k_1}}_{A'}\ket{x_{k_2}}_{B'}\\
-		\appd{O(d r^{d} \qe)}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}
+		\appd{O(d^{5/2} r^{d} \qe)}& \frac{1}{d}\sum_{k_1,k_2 = 0}^{d-1} \sum_{j=1}^{d-1} (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}
 		\omega_d^{k_2j-k_1jr^{-1}}\ket{\psi_1}
 		 \ket{x_{k_1}}_{A'}\ket{x_{k_2}}_{B'}\\
 		\xrightarrow[]{QFT_d^{-1}}& \sum_{j=1}^{d-1}  (U_A\ct)^{\log_r j-1} (U_B\ct)^{\log_r j}  
