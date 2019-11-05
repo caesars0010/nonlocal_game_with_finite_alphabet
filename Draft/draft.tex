@@ -288,14 +288,16 @@
 robustly self-test maximally entangled states with unbounded dimension}
 
 \author{Honghao Fu
-\footnote{\href{mailto:h7fu@umd.edu}{h7fu@umd.edu}}}
+\footnote{Email: \href{mailto:h7fu@umd.edu}{h7fu@umd.edu}}}
 
 \renewcommand\Affilfont{\itshape\small}
 
 
 \date{}
-\affil{Department of Computer Science, Institute for Advanced Computer Studies, and Joint Center for Quantum \break Information and Computer Science, University of Maryland, College Park, MD 20742, USA
-\break
+\affil{
+Joint Center for Quantum Information and Computer Science, \break
+Institute for Advanced Computer Studies and Department of Computer Science,\break 
+University of Maryland, College Park, MD 20742, USA
 }
 %\affil[2]{National Institute of Standards and Technology, 100 Bureau Dr., Gaithersbug, MD 20899, USA}
 \maketitle
@@ -307,8 +309,8 @@ robustly self-test maximally entangled states with unbounded dimension}
 	The construction of the correlation uses the embedding procedure
 	proposed by Slofstra (\textit{Forum of Mathematics, Pi.} Vol.~$7$, ($2019$)).
 	Since there are 
-	infinitely many prime numbers whose smallest multiplicative generators
-	are at most $5$ (M. Murty \textit{The Mathematical Intelligencer} $10.4$ ($1988$)), 
+	infinitely many prime numbers whose smallest multiplicative generator
+	is at most $5$ (M. Murty \textit{The Mathematical Intelligencer} $10.4$ ($1988$)), 
 	our result implies that constant-sized correlations are sufficient for robust self-testing of maximally entangled states
 	with unbounded local dimension.
 \end{abstract}
@@ -341,8 +343,8 @@ complexity theory.
 It allows a classical party to delegate quantum computations to some untrusted service provider
 and verify that the computations are performed
 honestly and correctly \cite{ruv2013,coladan2017verifier}.
-It also becomes a critical component of the security proofs of device-independent quantum cryptographic protocols
-\cite{mayersyao,vv2014,fu2018}.
+Self-testing also becomes a critical component of the security proofs of device-independent quantum cryptographic protocols
+\cite{mayersyao,fu2018}.
 Since the setting of multi-prover interactive proof systems is similar to a self-test, self-testing arguments also help to prove
 lower bounds of the computational power of entanglement-assisted
 multiprover interactive proof systems \cite{fitzsimons2019, neexp}.
@@ -390,7 +392,7 @@ Our progress is summarized in the following theorem.
 \label{thm:inf}
 	There exists an infinite-sized set $D$ of odd prime numbers such that, for any $d \in D$, 
 	the maximally entangled state of local dimension $4(d-1)$ can be robustly self-tested 
-	with constant-sized question and answer alphabets.
+	with constant-sized input and output alphabets.
 \end{theorem}
 The formal statement of this theorem is given in \cref{thm:self-test} and \cref{thm:infty}.
 
@@ -407,7 +409,7 @@ To prove \cref{thm:inf}, we construct a correlation with $\Theta(r)$-sized
 input and constant-sized output alphabets
 for each odd prime number $d$ whose smallest primitive root is $r$.
 This correlation is denoted by $\fC(d,r)$.
-Note that the sizes of the input or output alphabet of $\fC(d,r)$ is independent of $d$. 
+Note that the size of neither the input nor the output alphabet of $\fC(d,r)$ depends on $d$. 
 % the distributions in $\fC(d,r)$ do. 
 Once we prove $\fC(d,r)$ can robustly self-test a maximally entangled
 state of dimension $4(d-1)$, we apply it to all $d \in D$
@@ -425,7 +427,7 @@ The correlation $\fC(d,r)$ contains a winning correlation of a specially-designe
 In a general linear system game, Alice is given a random equation 
 from a linear system and she
 should give an assignment to each variable of the equation.
-Bob is asked to assign a value to a random variable of that equation.
+Bob is asked to assign a value to a random variable of the chosen equation.
 They win the game if Alice's assignment satisfies the equation and Bob's
 assignment to the variable matches Alice's assignment.
 A widely-used and thoroughly-studied example of a linear system game is
@@ -437,11 +439,11 @@ In this game, the linear system is
     &x_1 + x_4 + x_7 = 0 && x_2 + x_5 + x_8 = 1 &&
     x_3 + x_6 + x_9 = 0.
 \end{align*}
-Using two copies of $\ket{EPR}$
+Using two copies of $\ket{EPR}$,
 the Magic square game can be won with certainty.
-It has been shown that if a strategy that can win this game almost perfectly, 
-the shared state must be close to $\ket{EPR}^{\x 2}$ up to some local isometry \cite{wu2016}, 
-so we can say that the Magic Square game can robustly self-test $\ket{EPR}^{\x 2}$.
+It has been shown that if a strategy can win this game almost perfectly, 
+the shared state must be close to $\ket{EPR}^{\x 2}$ up to some local isometry \cite{wu2016}.
+So we say that the Magic Square game can robustly self-test $\ket{EPR}^{\x 2}$.
 The key observation that leads to the self-testing proof is that 
 a winning strategy must contain binary observables $X$ and $Z$ that 
 satisfy the anti-commutation relation 
@@ -469,38 +471,46 @@ to design binary linear system games to enforce conjugacy relations of the
 form $X Y X\ct = Z$ for unitaries $X, Y$ and $Z$.
 
 Following Slofstra's design, 
-the game $\LS(r)$ is constructed so that the sizes
-of the input alphabets for Alice and Bob are of order $\Theta(r)$,
-and the answer sets are of size $\Theta(1)$.
-Restricting $r \leq 5$ as in \cref{thm:inf} implies that 
-$\LS(r)$ only uses constant-sized input and output alphabets.
+the sizes of the input alphabets for Alice and Bob are of order $\Theta(r)$,
+and the answer sets are of size $\Theta(1)$ in $\LS(r)$.
+%Restricting $r \leq 5$ as in \cref{thm:inf} implies that 
+%$\LS(r)$ only uses constant-sized input and output alphabets.
 
 The reason that we choose \cref{eq:uor} to be the relation enforced
 by $\LS(r)$ is the following.
-Winning $\LS(r)$ implies that the winning strategy contains binary observables
+Winning $\LS(r)$ guarantees that the winning strategy contains binary observables
 $M_1, M_2, M_3, M_4$ on Alice's side and 
 $N_1, N_2, N_3, N_4$ on Bob's side such that 
 \begin{align*}
     U = M_3M_4 = N_3N_4 && O = M_1M_2 = N_1N_2
 \end{align*}
 with $U$ and $O$ satisfying \cref{eq:uor}.
-Then we can deduce that the eigenvalues of $O$ must be
-of the form $\omega_d^j = e^{i 2j\pi/d}$ for some $j \neq 0$ and some prime $d$ whose primitive root is $r$. 
-We can also deduce that $U$ is a permutation of the eigenbasis of $O$.
-Winning this linear system game also implies that Alice and Bob share a state
-$\ket{\psi}$ such that $\ket{\psi}$
-is spanned by tensor products of states in the eigenbasis of $O$,
-and is invariant under the permutation induced by $U$
+%Then we can deduce that the eigenvalues of $O$ must be
+%of the form $\omega_d^j = e^{i 2j\pi/d}$ for some $j \neq 0$ and some prime $d$ whose primitive root is $r$. 
+Moreover, if we can certify that the unitary $O$
+has the eigenvalue $\omega_d := e^{i 2\pi /d }$
+where $r$ is a primitive root of $d$, \cref{eq:uor}
+automatically guarantees that the spectrum of $O$ contains 
+$\{ \omega_d^j \}_{j=1}^{d-1}$.
+It also guarantees that the eigenspace of each distinct eigenvalue
+has the same dimension. 
+%We can also deduce that $U$ is a permutation of the eigenbasis of $O$.
+%Winning this linear system game also guarantees that Alice and Bob share a state
+%$\ket{\psi}$ such that 
 % \begin{align*}
 %     O \x O \ket{\psi} = \ket{\psi}, && 
 %     U \x U \ket{\psi} = \ket{\psi}.
 % \end{align*}
+%From the equations above, we can deduce that
+%$\ket{\psi}$ is spanned by tensor products of states in the eigenbasis of $O$,
+%and is invariant under the permutation induced by $U$.
+
 % The relation $O \x O \ket{\psi} = \ket{\psi}$ implies that $\ket{\psi}$
 % is spanned by tensor products of states in the eigenbasis of $O$.
 % The relation $U \x U \ket{\psi} = \ket{\psi}$ implies that $\ket{\psi}$ is invariant
 % under the permutation induced by $U$. 
-At this point, the eigenvalues of $O$ are unknown, so
-certifying the eigenvalues of $O$ requires another test.
+%At this point, the eigenvalues of $O$ are unknown, so
+%certifying the eigenvalues of $O$ requires another test.
 
 
 
@@ -525,8 +535,6 @@ certifying the eigenvalues of $O$ requires another test.
 % proposed in Ref.~\cite{yang2013}.
 
 
-The remaining question is how to certify eigenvalues of $O$, so we
-design a nonlocal test called the extended weighted CHSH test.
 % Before going to the answer,
 % we remark that 
 % the other specialty of the linear system game is that it forces Alice and Bob to have binary observables
@@ -536,13 +544,15 @@ design a nonlocal test called the extended weighted CHSH test.
 % We use a different way to decompose the unitaries, which can be seen as the inverse of Jordan's lemma, 
 % The fact that Alice and Bob only have binary observables make it easier for us 
 % to compose the linear system game with another nonlocal test, which we call the extended weighted CHSH test.
-The difference between a nonlocal game and a nonlocal test will be discussed later.
-The combination of a linear system game with 
-a nonlocal test in the construction of $\fC(d,r)$ 
-is a new way to use a linear system game for robust self-testing.
-It distinguishes our approach from all the previous ones.
+%The difference between a nonlocal game and a nonlocal test will be discussed later.
 
-The extended weighted CHSH test is designed based on the $\alpha$-weighted CHSH inequality, 
+The strong guarantee of \cref{eq:uor} is built on the assumption of an eigenvalue
+of the unitary $O$, so the next problem is how to certify that $O$ has eigenvalue $\omega_d$.
+In order to solve it, we design $\fC(d,r)$ to contain 
+an extension of the optimal correlation 
+that achieves the maximal violation of the weighted
+CHSH inequality.
+The $\alpha$-weighted CHSH inequality is defined by
 \begin{align*}
     \I_\alpha = \alpha\ip{M_1N_1}+\alpha\ip{M_1N_2} + \ip{M_2N_1} - \ip{M_2N_2}\leq 2|\alpha|,
 \end{align*}
@@ -569,51 +579,65 @@ Then we notice that
 \end{align*}
 has eigenvalues $e^{i 2\mu}$ and $e^{-i 2\mu}$.
 
-Therefore, in the extended weighted CHSH test, we set $\alpha = \cot( -\pi/d )$
+Therefore, in the extended correlation, we set $\alpha = \cot( -\pi/d )$
 for some odd prime $d$ whose primitive root is $r$,
 and ask Alice and Bob
-to reuse the observables $M_1, M_2$ and $N_1, N_2$ defined in $\LS(r)$. Then we can certify that
-the unitary $O = M_1M_2 = N_1N_2$ has eigenvalues $e^{i2\pi/d}$ and $e^{-i2\pi/d}$.
-Combining this observation with the fact that $O$ satisfy the relation $UOU\ct = O^r$,
-we can conclude that all the eigenvalues of $O$ are $\{ e^{ij 2\pi /d} \}_{j=1}^{d-1}$,
-and the eigenspaces of all the eigenvalues have the same cardinality.
+to reuse the observables $M_1, M_2$ and $N_1, N_2$ from a winning strategy of $\LS(r)$. Then we can certify that
+the unitary $O = M_1M_2 = N_1N_2$ has eigenvalues $\omega_d$ and $\omega_d^{-1}$.
+Combining this observation with the fact that $O$ satisfy the relation \cref{eq:uor},
+we can conclude that all the eigenvalues of $O$ contains $\{ \omega_d^j \}_{j=1}^{d-1}$,
+and the eigenspaces of all such eigenvalues have the same dimension.
 
-At this point, we have the explicit structure of $O$, so we 
-can use the relations $U \x U \ket{\psi} = \ket{\psi}$ and $ O \x O \ket{\psi} = \ket{\psi}$
-to prove the correlation $\fC(r, d)$ can robustly self-test 
-a maximally entangled state of dimension $4(d-1)$,
+%At this point, we have the explicit structure of $O$, so we 
+%can use the relations $U \x U \ket{\psi} = \ket{\psi}$ and $ O \x O \ket{\psi} = \ket{\psi}$
+%to prove the correlation $\fC(r, d)$ can robustly self-test 
+%a maximally entangled state of dimension $4(d-1)$,
+%\begin{align*}
+%    \left(\frac{1}{\sqrt{d}} \sum_{j=1}^{d-1}\ket{j}\ket{d-j}\right)\x 
+%    \ket{EPR}^{\x 2}.
+%\end{align*}
+%In this proof, we demonstrate a new way to apply the generalized swap-isometry
+%proposed in \cite{yang2013} to robustly self-test a maximally entangled state of large local
+%dimension. 
+
+The full correlation $\fC(r, d)$ is produced by an ideal strategy
+that can win $\LS(r)$ perfectly and 
+can reproduce the aforementioned extended correlation perfectly.
+Combining the implications of a quantum strategy to win $\LS(r)$
+and reproduce the extended correlation, we 
+can prove that the correlation $\fC(r, d)$ can robustly self-test the state
+$\ket{\tpsi}$ defined by
 \begin{align*}
-    \left(\frac{1}{\sqrt{d}} \sum_{j=1}^{d-1}\ket{j}\ket{d-j}\right)\x 
-    \ket{EPR}^{\x 2}.
+	\ket{\tpsi} = \frac{1}{\sqrt{d-1}} \left( \sum_{j=1}^{d-1} \ket{j}\ket{d-j} \right) \x \ket{EPR}^{\x 2}.
 \end{align*}
-In this proof, we demonstrate a new way to apply the generalized swap-isometry
-proposed in \cite{yang2013} to robustly self-test a maximally entangled state of large local
-dimension. 
+More precisely, we prove that if some quantum strategy using the shared state
+$\ket{\psi}$ can produce a correlation that is within trace distance
+$\ep$ to $\fC(d,r)$, then there exist an local isometry
+$\Phi_A \x \Phi_B$ and a state $\ket{junk}$ such that
+\begin{align}
+    \label{eq:distance}
+    \norm{\Phi_A\x\Phi_B(\ket{\psi}) - \ket{junk}\x \ket{\tpsi}} = O(d^{5/2} r^d \ep^{1/8}).
+\end{align}
+Note that the isometry $\Phi_A \x \Phi_B$ only involves local operations
+on Alice's and Bob's side.
+The isometry $\Phi_A \x \Phi_B$ captures the essence of the generalized 
+swap-isometry proposed in \cite{yang2013}, but it is constructed in a different way.
+
+As mentioned at the start of this subsection, the last step of proving \cref{thm:inf} is to apply the general self-testing result of
+$\fC(d,r)$ to the prime numbers with a primitive root $2$, $3$ or $5$.
+The theorem follows naturally from the fact that there are infinitely many such
+prime numbers \cite{murty1988}.
 
 
-Our contributions are:
-\begin{enumerate}
-\item We identify a family of correlations with constant-sized input and output alphabets that can be used to robustly self-test
-maximally entangled states with unbounded local dimensions. Before our work, the most efficient way 
-was to use $O(\log d)$-sized input and $O(\log \log d)$-sized output alphabets to robustly self-test
-the maximally entangled state of dimension $d = 2^n$ \cite{lowdegree}.
 
-
-
-\item Our result gives us deeper understandings of the set of quantum correlations.
-In previous works that proved the non-closeness of the set of quantum correlations \cite{slofstra2017, slofstra2018}, 
-lower bounds of the entanglement required to achieve certain correlations are identified.
-We discover a large family of correlations such that we know exactly the entangled state
-required to achieve each of the correlations in this family. 
-\end{enumerate}
-
-\textbf{Structure of the paper}.
+\subsection{Structure of the paper}
 We start with notations and background information in \cref{sec:prelim}.
 Since the correlation we designed can win a special linear system game and satisfy
 an extended weighted CHSH test, we introduce the linear system game
 in \cref{sec:lsg} and the extended weighted CHSH test in \cref{sec:ext_chsh}. 
 Then we give the correlation $\fC(d,r)$ and the ideal strategy to generate it in \cref{sec:full_test}.
-In the end, we give the robust self-testing proof in \cref{sec:main}. 
+\Cref{sec:main} is devoted to the robust self-testing proof. We end this paper with conclusions
+in \cref{sec:conclu}. 
 
 %========================================
 \section{Preliminaries and notations}
@@ -622,14 +646,14 @@ In the end, we give the robust self-testing proof in \cref{sec:main}.
 %-----------------------------------
 \subsection{Notations and mathematical background}
 %-----------------------------------
-The maximally entangled state of local dimension $d-1$ for some odd prime $d$ that we self-test is denoted by
-\begin{align}
-\ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{j = 1}^{d-1} \ket{j}\ket{d-j}.
-\end{align}
-The superscript $(d-1)$ stresses the dimension of the local Hilbert space and we follow this convention through this paper.
-The $d$-th root of unity is denoted by $\omega_d:=e^{2\pi i/d}$. 
+%The maximally entangled state of local dimension $d-1$ for some odd prime $d$ that we self-test is denoted by
+%\begin{align}
+%\ket{\EPR{d-1}} = \frac{1}{\sqrt{d-1}} \sum_{j = 1}^{d-1} \ket{j}\ket{d-j}.
+%\end{align}
+%The superscript $(d-1)$ stresses the dimension of the local Hilbert space and we follow this convention through this paper.
 
-In the qubit case, the EPR pair is denoted by 
+
+The EPR pair is denoted by 
 \begin{align}
 	\ket{EPR} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}),
 \end{align}
@@ -637,6 +661,7 @@ and the Pauli operators are denoted by
 \begin{align}
 	\paulix = \ketbra{0}{1}+\ketbra{1}{0} && \pauliz = \ketbra{0}{0} - \ketbra{1}{1}.
 \end{align}
+The $d$-th root of unity is denoted by $\omega_d:=e^{2\pi i/d}$. 
 Note that we only work with finite Hilbert spaces in our work.
 
 For quantum states and operators on different Hilbert spaces, we use subscripts to label them.
@@ -733,7 +758,6 @@ because
 \begin{align*}
     [s_j, s_k] = s_js_ks_js_k = s_{jk}^2 = e.
 \end{align*}
-
 Next we give the definition of a group representation. 
 \begin{definition}
     A representation of a group $G$ on the finite Hilbert space $\calH$ is a homomorphism from $G$ to the group of invertible linear operators on $\calH$. 
@@ -915,9 +939,9 @@ The scoring function for the $\alpha$-weighted CHSH test, when $|\alpha|\geq 1$,
 \begin{align}
 	V(a,b,x,y)_{\alpha-CHSH} = 
 	\begin{cases}
-		\alpha (-1)^{a + b}, \quad \text{if } x = 1 \\
-		(-1)^{a + b}, \quad \text{if } x = 2,\; y = 1 \\
-		(-1)^{1 + a + b}, \quad \text{if } x = y = 2.
+		\alpha (-1)^{a + b}, & \text{if } x = 1, \\
+		(-1)^{a + b},  &\text{if } x = 2,\; y = 1, \\
+		(-1)^{1 + a + b},  &\text{if } x = y = 2.
 	\end{cases}
 \end{align}
 The input distribution is $\pi(x,y) = 1/4$ for all $(x,y) \in \calX \times \calY$.
@@ -931,7 +955,7 @@ The weighted CHSH inequality states that
 \end{align}
 where $\ip{M_x N_y} := \bra{\psi} M_x N_y \ket{\psi}$ is the expectation value of the observables. 
 The weighted CHSH inequality is true 
-if Alice and Bob share product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$.
+if Alice and Bob share some product state $\ket{\phi} = \ket{\phi_A} \x \ket{\phi_B}$.
 However, if they share an entangled state $\ket{\psi}$, the value of $\I_\alpha$ can be as large as
 $ \I_\alpha^{\max} = 2\sqrt{1+\alpha^2}$ \cite{acin2012}.
 \begin{definition}[Ideal strategy to achieve $\I_\alpha^{\max}$ \cite{acin2012}]
@@ -1398,12 +1422,11 @@ In the next proposition, we prove that the group $\Pg_1$ is embedded in $\Gamma$
     \end{align*}
     The derivation of $f_0 b_i f_0 = c_i$ is similar for $1 \leq i \leq r+5$, so we omit it here.
     Hence, a map $\phi:\Pg_1 \rightarrow \Gamma$ that maps $s$
-    to $s$ for each $s \in S_1$ is a homomorphism between $Pg_1$ and 
-    $Gamma$. 
+    to $s$ for each $s \in S_1$ is a homomorphism between $\Pg_1$ and 
+    $\Gamma$. 
     A representation of $\Gamma$ can be constructed from a representation 
     of $\Pg_1$ as shown in the proof of Proposition $27$ of \cite{slofstra2017},
-    so Lemma $15$ of \cite{slofstra2017} proves that
-    the homomorphism $\phi$ is injective.
+    so the injectivity of homomorphism $\phi$ follows Lemma $15$ of \cite{slofstra2017}.
     
     \Cref{eq:mg1} can be proved by
     \begin{align*}
@@ -1456,7 +1479,7 @@ The basis $\{\ket{u_j}\}$ is the eigen-basis of operator $\tU$ defined by
 \begin{align*}
     \tU = \sum_{j=0}^{d-2} \omega_{d-1}^j \ketbra{u_j}{u_j}.
 \end{align*}
-Note that in the standard basis, $\tU$ is
+Note that in the standard basis, 
 \begin{align}
     \label{eq:U}
     \tU = \sum_{j=0}^{d-2} \ketbra{x_{r^{j-1}}}{x_{r^j}}.
@@ -1706,7 +1729,7 @@ Then the $2$-dimensional subspaces are
 \end{align}
 for $1 \leq j \leq \frac{d-1}{2}$.
 The projector onto $V_j$ is denoted by $\Pi_{V_j}$. 
-On each subspace $V_j$, we define quantum states 
+On each subspace $V_j$, we define states 
 \begin{align}
     \ket{j_{\times}} = \frac{1}{\sqrt{2}}(\ket{j} + \ket{d-j}) &&
     \ket{(d-j)_{\times}} = \frac{1}{\sqrt{2}}(\ket{j} - \ket{d-j})
@@ -1940,8 +1963,8 @@ Define
 \end{align*}
 The question sets of the full test are
 \begin{align*}
-    \calX = \calX^{\LS} \cup \calX^{\EXT'} \cup \calX^{\COMM} \\
-    \calY = \calY^{\LS} \cup \calY^{\EXT'} \cup \calY^{\COMM},
+    \calX = \calX^{\LS} \cup \calX^{\EXT'} \cup \calX^{\COMM}, \\
+    \calY = \calY^{\LS} \cup \calY^{\EXT'} \cup \calY^{\COMM}.
 \end{align*}
 Define answer sets $\calA_x^{\EXT'}$ for each $x \in \calX^{\EXT'}$
 by 
@@ -1993,10 +2016,11 @@ The ideal strategy for the full test is an extension of the ideal strategy of $\
 the extended weighted CHSH test.
 Recall the subspace $W_{d-1}$ and $W_2$ defined in \cref{eq:basis}.
 The shared state of the ideal strategy is
-\begin{align*}
+\begin{align}
+	\label{eq:tpsi_full}
     \ket{\tpsi} = \ket{\tpsi}^{\LS} = \frac{1}{2}(\ket{x_1}\ket{x_1} + 
     \ket{x_2}\ket{x_2})^{\x 2} \x \ket{\tpsi}^{\EXT}.
-\end{align*}
+\end{align}
 Alice and Bob's observables for each variable in the linear system of 
 $\LS(r)$ are 
 \begin{align*}
@@ -2959,7 +2983,7 @@ $\ket{\psi_1}$ is also close to an eigenstate of $M_1M_2$.
 	and $M_{\nr+1}^1 \ket{\psi} \appd{O(\sr \se)} N_{\nr+1}^1 \ket{\psi}$ from \cref{prop:chsh_base},
 	then 
 	\begin{align*}
-	    \ket{\psi_2} - &\ket{\psi_1} \\
+	    &\ket{\psi_2} - \ket{\psi_1} \\
 	    &\appd{O(\sr \se)}
 	    (- N_{\nr+2}N_{\nr+1}^1+N_{\nr+2}N_{\nr+1}^0)\ket{\psi}
 	    - (M_{\nr+2}M_{\nr+1}^1 - M_{\nr+2}M_{\nr+1}^0) \ket{\psi}.
@@ -3204,17 +3228,19 @@ Based on the propositions and lemmas proved so far, we can prove the self-testin
 	$\Phi_A \x \Phi_B = (\Phi_{A,2} \x \Phi_{B,2})(\Phi_{A,1}\x\Phi_{B,1})$ and a state $\ket{junk}$
 	such that $\norm{\ket{junk}} \appd{O(\sd \qr \qe)} 1$ and 
 	\begin{align}
-		&\Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^{5/2} r^{d} \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x \ket{\EPR{d-1}}\\	
-		&\Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{5/2} r^{d}\ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (\ket{\psi}) \appd{O(d^{5/2} r^{d} \ep^{1/8}))} \ket{junk} \x \ket{\tpsi}\\	
+		&\Phi_A \x \Phi_B (O_A\ket{\psi}) \appd{O(d^{5/2} r^{d}\ep^{1/8}))} \ket{junk} \x \ket{EPR}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{d-j}\ket{x_{d-j}}_{A'}\ket{x_j}_{B'} \\
-		&\Phi_A \x \Phi_B (O_B\ket{\psi}) \appd{O(d^{5/2} r^{d} \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (O_B\ket{\psi}) \appd{O(d^{5/2} r^{d} \ep^{1/8}))} \ket{junk} \x \ket{EPR}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \omega_d^{j}\ket{x_{d-j}}_{A'}\ket{x_j}_{B'}\\
-		&\Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^{5/2} r^{d}  \ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (U_A\ket{\psi}) \appd{O(d^{5/2} r^{d}  \ep^{1/8}))} \ket{junk} \x \ket{EPR}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{(d-j)r^{-1}}}_{A'}\ket{x_j}_{B'} \\
-		&\Phi_A \x \Phi_B (U_B\ket{\psi}) \appd{O(d^{5/2} r^{d}\ep^{1/8}))} \ket{junk} \x \ket{\EPR{2}}^{\x 2} \x
+		&\Phi_A \x \Phi_B (U_B\ket{\psi}) \appd{O(d^{5/2} r^{d}\ep^{1/8}))} \ket{junk} \x \ket{EPR}^{\x 2} \x
 		\frac{1}{\sqrt{d-1}}\sum_{j=1}^{d-1} \ket{x_{d-j}}_{A'}\ket{x_{j r^{-1}}}_{B'}.
 	\end{align}
 \end{theorem}
+The state $\ket{\tpsi}$ is defined in \cref{eq:tpsi_full}.
+
 Before proving \cref{thm:self-test}, we state the consequence of it.
 It implies that,
 for any odd prime number $d$ whose primitive root is $r$, 
@@ -3310,7 +3336,7 @@ $M(g_0)$ acts as $\1 \x \pauliz$ and $M(g_2)$ acts as $\pauliz \x \1$; and simil
         \draw[loosely dotted] (0,-1.5) -- (5,-1.5);
         % Bracket
         \draw[decorate,decoration={brace},thick,] (6.5,-0.5) to
-    	node[midway,right] (bracket2) {$\sum_{j=1}^{d-1}\ket{x_j}\ket{x_{d-j}}$}
+    	node[midway,right] (bracket2) {$\ket{\tpsi}^{\EXT}$}
     	(6.5,-2.5);
         %
         % Background Box
@@ -3586,6 +3612,22 @@ and then we calculate $\Phi_{A,1} \x \Phi_{B,1} (U_A\ket{\psi'})$.
 where we use the fact that $(d-j)r^{-1} \equiv d -jr^{-1} \pmod{d}$.
 The analysis for $\Phi_{A,1} \x\Phi_{B,1} (U_B \ket{\psi})$ is very similar.
 \end{proof}
+
+%=============================
+\section{Conclusions}
+\label{sec:conclu}
+%=============================
+In summary, we identify a family of correlations with constant-sized input and output alphabets that can be used to robustly self-test
+maximally entangled states with unbounded local dimension.
+Before our work, the most efficient way 
+was to use $O(\log d)$-sized input and $O(\log \log d)$-sized output alphabets to robustly self-test
+the maximally entangled state of dimension $d = 2^n$ \cite{lowdegree}.
+
+Our result gives us deeper understandings of the set of quantum correlations.
+In previous works that proved the non-closeness of the set of quantum correlations \cite{slofstra2017, slofstra2018}, 
+lower bounds of the entanglement required to achieve certain correlations are identified.
+We discover a large family of correlations such that we know exactly the entangled state
+required to achieve each of the correlations in this family. 
 
 %%-----------------------------------------------------------------
 %\subsection{Self-test}
