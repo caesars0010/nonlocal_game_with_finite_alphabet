@@ -338,6 +338,10 @@ then $U_A := U$ can be decomposed into
     \ketbra{u_{j-k}}{u_{-j}}
 \end{align*}
 Note that here we assume $k$ is odd.
+In the basis $\{ \ket{x_{r^j}}, \ket{x_{-r^j}}\}_j$, the form of $U$ is
+\begin{align}
+    U = \sum_{j=0}^{k-1}\left(\ketbra{x_{r^{j-1}}}{x_{r^j}}+\ketbra{x_{-r^{j-1}}}{x_{-r^j}}\right).
+\end{align}
 The shared state is
 \begin{align*}
     \ket{\psi} = \frac{1}{\sqrt{2k}} \sum_{j=0}^{k-1}
@@ -358,6 +362,11 @@ by
 	%\ket{x_j} = \frac{-1}{\sqrt{2}}(\ket{j} + i\ket{d-j}), \\
 	%\ket{x_{d-j}} = \frac{-e^{ij\pi/d}}{\sqrt{2}}(\ket{j} - i\ket{d-j})
 \end{align*}
+In the basis $\{ \ket{r^j}, \ket{-r^j} \}_j$, 
+\begin{align}
+    \ket{\psi} = \frac{1}{\sqrt{2k}} \sum_{j=0}^{k-1}
+    e^{ir^j\pi/d}(\ket{r^j}\ket{r^j} + \ket{-r^j}\ket{-r^j}).
+\end{align}
 
 In the rest of the work, we follow the 
 convention $\ket{1} \equiv \ket{r^0}$
@@ -392,39 +401,21 @@ Before introducing the measurements,
 we define some basis states of $V$
 \begin{align*}
 	&\ket{1_+} = \cos(-\frac{\pi}{2d})\ket{1} + \sin(-\frac{\pi}{2d})\ket{-1}
-	&&\ket{(d-1)_+} = \sin(-\frac{\pi}{2d})\ket{1} - \cos(-\frac{\pi}{2d})\ket{-1}\\
+	&&\ket{(-1)_+} = \sin(-\frac{\pi}{2d})\ket{1} - \cos(-\frac{\pi}{2d})\ket{-1}\\
 	&\ket{1_-} = \cos(-\frac{\pi}{2d})\ket{1} - \sin(-\frac{\pi}{2d})\ket{-1}
-	&&\ket{(d-1)_-} = \sin(-\frac{\pi}{2d})\ket{1} + \cos(-\frac{\pi}{2d})\ket{-1},
+	&&\ket{(-1)_-} = \sin(-\frac{\pi}{2d})\ket{1} + \cos(-\frac{\pi}{2d})\ket{-1},
 \end{align*}
 so that $\{\ket{1_+}, \ket{(-1)}_+\}$ and $\{\ket{1_-}, \ket{(-1)_-}\}$ are two basis
 of $V$.
 When Alice and Bob gets question $1$ or $2$, what they measure on $V$ are
 \begin{align*}
 	&\tP_1^0 = \tQ_1^0 =  \ketbra{1_+}{1_+} && \tP_1^1 = \tQ_1^1 =  \ketbra{(-1)_+}{(-1)_+}\\
-	&\tP_2^0 = \tQ_2^0 =  \ketbra{1_-}{1_-} && \tP_1^1 = \tQ_1^1 =  \ketbra{(-1)_-}{(-1)_-}.
+	&\tP_2^0 = \tQ_2^0 =  \ketbra{1_-}{1_-} && \tP_2^1 = \tQ_2^1 =  \ketbra{(-1)_-}{(-1)_-}.
 \end{align*}
 Notice that their measurements on $V$ follow the measurements to achieve $\I_{\cot(-\pi/d)}^{\max}$.
 What they measure on $V^\perp$ is irrelevant for this test.
 
 The generated correlation is given below.
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{|c|c||c|c|}
-\hline
-\multicolumn{2}{|c|}{} &
-\multicolumn{2}{|c|}{$x=0$}\\
-\cline{3-4}
-\multicolumn{2}{|c|}{} &$a = 0$ & $a = 2$ \\
-\hline
-\hline
-\multirow{2}{*}{$y = 0$} & $b = 0$ & $1/k$ & $0$ \\
-\cline{2-4}
-&$b=2$ & $0$ & $(k-1)/k$ \\
-\hline
-\end{tabular}
-\caption{The correlation for $x=y=0$.}
-\end{center}
-\end{table}
 
 \begin{table}[H]
 \begin{center}
@@ -439,17 +430,17 @@ $a = 0$ & $a=1$ & $a=2$ &
 $a = 0$ & $a=1$ & $a=2$\\
 \hline
 \hline
-\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{\sin^2(\pi/2d)}{2k}$ & \small $\pr{\perp0}{00}$ 
-& $\frac{1+\sin(\pi/d)}{4k}$ & $\frac{1-\sin(\pi/d)}{4k}$ & \small  $\pr{\perp0}{10}$ \\
+\multirow{2}{*}{$y = 1$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{\sin^2(\pi/2d)}{2k}$ & \small $\pr{2,0}{\nr+1,1}$ 
+& $\frac{1-\sin(\pi/d)}{4k}$ & $\frac{1+\sin(\pi/d)}{4k}$ & \small  $\pr{2,0}{\nr+2,1}$ \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/2d)}{2k}$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{k-1}{k}-\pr{\perp0}{00}$ 
-&  $\frac{1-\sin(\pi/d)}{4k}$ & $\frac{1+\sin(\pi/d)}{4k}$ & \small $\frac{d-3}{d-1} - \pr{\perp0}{10}$  \\
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{2k}$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{k-1}{k}-\pr{2,0}{\nr+1,1}$ 
+&  $\frac{1+\sin(\pi/d)}{4k}$ & $\frac{1-\sin(\pi/d)}{4k}$ & \small $\frac{k-1}{k} - \pr{2,0}{\nr+2,1}$  \\
 \hline
-\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{\sin^2(\pi/2d)}{2k}$ & \small $\pr{\perp0}{01}$ & 
-$ \frac{1-\sin(\pi/d)}{4k}$ & $ \frac{1+\sin(\pi/d)}{4k}$ & \small $\pr{\perp 0}{11}$  \\
+\multirow{2}{*}{$y = 2$} & $b=0$ & $\frac{\cos^2(\pi/2d)}{2k}$ & $\frac{\sin^2(\pi/2d)}{2k}$ & \small $\pr{2,0}{\nr+1,2}$ & 
+$ \frac{1+\sin(\pi/d)}{4k}$ & $ \frac{1-\sin(\pi/d)}{4k}$ & \small $\pr{2, 0}{\nr+2,2}$  \\
 \cline{2-8}
-&$b=1$ & $\frac{\sin^2(\pi/2d)}{2k}$ & $\frac{\cos^2(\pi/2d)}{2k}$ & \small $\frac{k-1}{k}-\pr{\perp0}{01}$ &  
-$ \frac{1+\sin(\pi/d)}{4k}$ & $ \frac{1-\sin(\pi/d)}{4k}$ & \small $\frac{d-3}{d-1}- \pr{\perp 0}{11}$ \\
+&$b=1$ & $\frac{\sin^2(\pi/2d)}{2k}$ & $\frac{\cos^2(\pi/2d)}{2k}$ & \small $\frac{k-1}{k}-\pr{2,0}{\nr+1,2}$ &  
+$ \frac{1-\sin(\pi/d)}{4k}$ & $ \frac{1+\sin(\pi/d)}{4k}$ & \small $\frac{k-1}{k}- \pr{2, 0}{\nr+2,2}$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -502,7 +493,7 @@ $a = 0$ & $a =2 $\\
 \hline
 \end{tabular}
 \end{center}
-\caption{The correlation for $x ,y\in\{\nr+1,\nr+2, \ast\} $.}
+\caption{The correlation for $x ,y\in\{\nr+1,\nr+2, 0\} $.}
 \end{table}
 
 \begin{table}[H]
